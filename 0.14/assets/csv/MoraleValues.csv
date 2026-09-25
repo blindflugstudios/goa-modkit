@@ -1,0 +1,10 @@
+Name,Value
+BaseMoraleBufferDays,5
+MoraleLevelMin,-100
+MoraleLevelMax,100
+LeisureThreshold,50
+MoraleTrendTreshold,10
+MoraleBreakingThreshold,-90
+MoraleEffectPositiveThreshold,50
+MoraleEffectNegativeThreshold,-50
+AirBaseMoraleGameOverThreshold,-70

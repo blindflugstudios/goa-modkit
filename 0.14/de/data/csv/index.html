@@ -1,0 +1,4925 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Build missions, quests, scripts, maps and more for Ground of Aces - with or without an AI agent.">
+      
+      
+      
+        <link rel="canonical" href="https://blindflugstudios.github.io/goa-modkit/0.14/de/data/csv/">
+      
+      
+        <link rel="prev" href="../../scripting/localization/">
+      
+      
+        <link rel="next" href="../table-editor/">
+      
+      
+        
+          <link rel="alternate" href="../../../data/csv/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="de">
+        
+      
+      
+      <link rel="icon" href="../../../assets/logos/blindflug-mark.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>CSV-Tabellen - Ground of Aces Modkit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#csv-tabellen" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+
+<strong>Developer Preview</strong> - kann sich jederzeit ändern. Nutzung <strong>auf eigene Gefahr</strong>. Lesen darf jeder, mitmachen zurzeit nur auf Einladung - Zugang per Mail an <a href="mailto:nuria@blindflugstudios.com">nuria@blindflugstudios.com</a> oder <a href="mailto:moritz@blindflugstudios.com">moritz@blindflugstudios.com</a>.
+
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="../../" title="Ground of Aces Modkit" class="md-header__button md-logo" aria-label="Ground of Aces Modkit" data-md-component="logo">
+      
+  <img src="../../../assets/logos/goa-logo-colored.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ground of Aces Modkit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CSV-Tabellen
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Sprache wechseln">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../data/csv/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/blindflugstudios/goa-modkit" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    blindflugstudios/goa-modkit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Hauptnavigation" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Start
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../start/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Loslegen
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../basics/mods/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Grundlagen
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../missions/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Missionen
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../quests/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Quests
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../scripting/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Scripting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Spieldaten
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../content/maps/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Karten und Grafik
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../sharing/workshop/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Teilen
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ai/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  KI-Agenten
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../examples/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Beispiele
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Ground of Aces Modkit" class="md-nav__button md-logo" aria-label="Ground of Aces Modkit" data-md-component="logo">
+      
+  <img src="../../../assets/logos/goa-logo-colored.png" alt="logo">
+
+    </a>
+    Ground of Aces Modkit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/blindflugstudios/goa-modkit" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    blindflugstudios/goa-modkit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../start/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loslegen
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Loslegen
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/install-windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation unter Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/install-mac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation auf dem Mac
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/first-mod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deine erste Mod in 10 Minuten
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/without-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ohne KI-Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wenn nichts passiert
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grundlagen
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Grundlagen
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/mods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    So funktionieren Mods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testen und neu laden
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/cheats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat-Konsole
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python-Mods und Sicherheit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../missions/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Missionen
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Missionen
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../missions/first-mission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deine erste Mission
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../missions/chains/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ketten und Kampagnen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../missions/locations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Einsatzorte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../missions/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referenz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../quests/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quests
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Quests
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../scripting/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Events
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/localization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lokalisierung
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spieldaten
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spieldaten
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSV-Tabellen
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSV-Tabellen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-mod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deine erste Mod
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-two-file-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Die beiden Dateiformate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Die beiden Dateiformate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-cells-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Einzelne Zellen - &lt;Table&gt;.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whole-rows-csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ganze Zeilen - &lt;Table&gt;.csv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rules-that-apply-everywhere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regeln, die überall gelten
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Regeln, die überall gelten">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#columns-only-take-the-kind-of-value-they-already-hold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spalten nehmen nur die Art von Wert, die sie schon enthalten
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#empty-cells" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leere Zellen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-and-removing-rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zeilen hinzufügen und entfernen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rows-that-take-up-several-lines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zeilen, die mehrere Zeilen belegen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-what-happened" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nachsehen, was passiert ist
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nachsehen, was passiert ist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finding-a-tables-column-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Die Spaltenüberschriften einer Tabelle finden
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#load-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ladereihenfolge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-changes-take-effect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wann Änderungen wirken
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Die Tabellen
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Die Tabellen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aircraft-and-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flugzeuge und Basis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Flugzeuge und Basis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vehicledata-aircraft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VehicleData - Flugzeuge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#airbasedata-the-hq-rank-ladder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AirBaseData - die Rangleiter des HQ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#airstriptiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AirstripTiers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Biomes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrambledata-enemy-aircraft-in-a-scramble" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ScrambleData - feindliche Flugzeuge beim Alarmstart
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attackscomposition-what-an-air-raid-is-made-of" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AttacksComposition - woraus ein Luftangriff besteht
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equipmentdata-aa-guns-searchlights-towers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EquipmentData - Flak, Suchscheinwerfer, Türme
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-and-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bauen und Objekte
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bauen und Objekte">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#buildingcomponents-objects-and-building-parts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BuildingComponents - Objekte und Gebäudeteile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resourcecost-what-something-costs-to-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ResourceCost - was der Bau von etwas kostet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propsinfluence-the-mood-effect-an-object-radiates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PropsInfluence - der Stimmungseffekt, den ein Objekt ausstrahlt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapobjects-trees-rocks-ponds-and-other-harvestables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MapObjects - Bäume, Felsen, Teiche und andere Rohstoffquellen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#growingdata-saplings-becoming-trees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GrowingData - Setzlinge werden zu Bäumen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gardeningdata-the-four-crops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GardeningData - die vier Feldfrüchte
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources-and-crafting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ressourcen und Herstellung
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ressourcen und Herstellung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resourcedata-what-a-resource-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ResourceData - was eine Ressource ist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workbenchprojectdata-crafting-recipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WorkbenchProjectData - Herstellungsrezepte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shipmentdata-the-supply-catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ShipmentData - der Nachschubkatalog
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crew" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crew
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crew">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#charactersinitialstats-starting-skills-per-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CharactersInitialStats - Startfähigkeiten pro Beruf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charactersstatsrankprogression-points-per-rank" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CharactersStatsRankProgression - Punkte pro Rang
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#characterstatscheck-what-a-rank-is-worth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CharacterStatsCheck - was ein Rang wert ist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#characterjobpriority-what-each-job-is-willing-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CharacterJobPriority - was jeder Beruf zu tun bereit ist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charactersdata-names-nicknames-and-ranks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CharactersData - Namen, Spitznamen und Ränge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moralevalues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MoraleValues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moraleinfluencevalues-what-changes-a-crew-members-mood" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MoraleInfluenceValues - was die Stimmung eines Crewmitglieds verändert
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missions-and-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missionen und Zeit
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Missionen und Zeit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flightmissiondata-the-mission-modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FlightMissionData - die Missionsmodifikatoren
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#taskvalues-durations-and-thresholds-per-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TaskValues - Dauern und Schwellenwerte pro Aufgabe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dayschedule-the-phases-of-a-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DaySchedule - die Phasen eines Tages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#daynightsystemdata-sun-and-shadows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DayNightSystemData - Sonne und Schatten
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gamegoalalerts-when-the-game-warns-the-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GameGoalAlerts - wann das Spiel den Spieler warnt
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Allgemein
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Allgemein">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables-the-global-number-bag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables - der globale Zahlensack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feedbackvariables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FeedbackVariables
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ausführliches Beispiel
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../table-editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tabellen-Befehlsdateien
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Karten und Grafik
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Karten und Grafik
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Karten
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objekte und Modelle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/terrain-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gelände-Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/biomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teilen
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Teilen
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sharing/workshop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steam Workshop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../ai/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KI-Agenten
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    KI-Agenten
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/claude-code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Claude Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/codex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skills und Agenten
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beispiele
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-mod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deine erste Mod
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-two-file-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Die beiden Dateiformate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Die beiden Dateiformate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-cells-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Einzelne Zellen - &lt;Table&gt;.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whole-rows-csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ganze Zeilen - &lt;Table&gt;.csv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rules-that-apply-everywhere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regeln, die überall gelten
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Regeln, die überall gelten">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#columns-only-take-the-kind-of-value-they-already-hold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spalten nehmen nur die Art von Wert, die sie schon enthalten
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#empty-cells" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leere Zellen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-and-removing-rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zeilen hinzufügen und entfernen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rows-that-take-up-several-lines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zeilen, die mehrere Zeilen belegen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-what-happened" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nachsehen, was passiert ist
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nachsehen, was passiert ist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finding-a-tables-column-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Die Spaltenüberschriften einer Tabelle finden
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#load-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ladereihenfolge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-changes-take-effect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wann Änderungen wirken
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Die Tabellen
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Die Tabellen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aircraft-and-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flugzeuge und Basis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Flugzeuge und Basis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vehicledata-aircraft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VehicleData - Flugzeuge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#airbasedata-the-hq-rank-ladder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AirBaseData - die Rangleiter des HQ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#airstriptiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AirstripTiers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Biomes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrambledata-enemy-aircraft-in-a-scramble" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ScrambleData - feindliche Flugzeuge beim Alarmstart
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attackscomposition-what-an-air-raid-is-made-of" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AttacksComposition - woraus ein Luftangriff besteht
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equipmentdata-aa-guns-searchlights-towers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EquipmentData - Flak, Suchscheinwerfer, Türme
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-and-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bauen und Objekte
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bauen und Objekte">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#buildingcomponents-objects-and-building-parts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BuildingComponents - Objekte und Gebäudeteile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resourcecost-what-something-costs-to-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ResourceCost - was der Bau von etwas kostet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propsinfluence-the-mood-effect-an-object-radiates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PropsInfluence - der Stimmungseffekt, den ein Objekt ausstrahlt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapobjects-trees-rocks-ponds-and-other-harvestables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MapObjects - Bäume, Felsen, Teiche und andere Rohstoffquellen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#growingdata-saplings-becoming-trees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GrowingData - Setzlinge werden zu Bäumen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gardeningdata-the-four-crops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GardeningData - die vier Feldfrüchte
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources-and-crafting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ressourcen und Herstellung
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ressourcen und Herstellung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resourcedata-what-a-resource-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ResourceData - was eine Ressource ist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workbenchprojectdata-crafting-recipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WorkbenchProjectData - Herstellungsrezepte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shipmentdata-the-supply-catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ShipmentData - der Nachschubkatalog
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crew" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crew
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crew">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#charactersinitialstats-starting-skills-per-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CharactersInitialStats - Startfähigkeiten pro Beruf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charactersstatsrankprogression-points-per-rank" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CharactersStatsRankProgression - Punkte pro Rang
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#characterstatscheck-what-a-rank-is-worth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CharacterStatsCheck - was ein Rang wert ist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#characterjobpriority-what-each-job-is-willing-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CharacterJobPriority - was jeder Beruf zu tun bereit ist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charactersdata-names-nicknames-and-ranks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CharactersData - Namen, Spitznamen und Ränge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moralevalues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MoraleValues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moraleinfluencevalues-what-changes-a-crew-members-mood" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MoraleInfluenceValues - was die Stimmung eines Crewmitglieds verändert
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missions-and-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missionen und Zeit
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Missionen und Zeit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flightmissiondata-the-mission-modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FlightMissionData - die Missionsmodifikatoren
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#taskvalues-durations-and-thresholds-per-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TaskValues - Dauern und Schwellenwerte pro Aufgabe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dayschedule-the-phases-of-a-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DaySchedule - die Phasen eines Tages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#daynightsystemdata-sun-and-shadows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DayNightSystemData - Sonne und Schatten
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gamegoalalerts-when-the-game-warns-the-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GameGoalAlerts - wann das Spiel den Spieler warnt
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Allgemein
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Allgemein">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables-the-global-number-bag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables - der globale Zahlensack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feedbackvariables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FeedbackVariables
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ausführliches Beispiel
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/blindflugstudios/goa-modkit/edit/main/docs/de/data/csv.md" title="Seite editieren" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="csv-tabellen">CSV-Tabellen<a class="headerlink" href="#csv-tabellen" title="Permanent link">&para;</a></h1>
+<p>Die meisten Zahlen, die Ground of Aces antreiben - was ein Gebäude kostet, wie schnell ein Flugzeug fliegt, wie sehr eine Mahlzeit die Laune eines Crewmitglieds hebt - stehen in Datentabellen. Eine Mod kann jede davon ändern, ohne den Code des Spiels anzufassen: Du legst einfach eine kleine Datei in ihren Ordner.</p>
+<p>Diese Seite ist die vollständige Referenz: wohin die Dateien gehören, wie die beiden Dateiformate aussehen, was das Spiel prüft, bevor es einen Wert annimmt, und was jede Tabelle und jede Spalte bedeutet. Jeder Tabellenabschnitt unter <a href="#the-tables">Die Tabellen</a> beginnt mit einem Link zur eingebauten Datei, sodass du das Original öffnen oder speichern und seine Kopfzeile kopieren kannst.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Nichts hiervon kann dein Spiel dauerhaft beschädigen. Einen Wert, mit dem das Spiel nichts anfangen kann, lehnt es ab und schreibt den Grund ins Log; der eingebaute Wert bleibt. Wenn du den Mod-Ordner entfernst, ist alles wieder wie vorher.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Die <code>&lt;Table&gt;.json</code>-Befehlsdateien für einzelne Zellen werden Schritt für Schritt und mit mehr Beispielen unter <a href="../table-editor/">Tabellen-Befehlsdateien</a> erklärt.</p>
+</div>
+<p>Eine Mod ist ein Ordner in deinem <code>Mods</code>-Ordner, und die Datentabellen kommen in dessen Unterordner <code>CSV/</code>:</p>
+<div class="highlight"><pre><span></span><code>Mods/
+  my_balance_mod/
+    config.json          optional
+    CSV/
+      VehicleData.csv    whole rows
+      Variables.json     single cells
+</code></pre></div>
+<p>Wo der <code>Mods</code>-Ordner liegt, was in <code>config.json</code> stehen darf und in welcher Reihenfolge mehrere Mods angewendet werden, wird einmal zentral unter <a href="../../basics/mods/">So funktionieren Mods</a> erklärt. Der Ordner selbst darf beliebig heißen. Die eine Regel, die hier zählt: Wenn du der Mod in <code>config.json</code> eine <code>Id</code> gibst, muss sie 3–64 Zeichen lang sein und aus Kleinbuchstaben, Ziffern, <code>_</code>, <code>.</code> oder <code>-</code> bestehen, beginnend mit einem Buchstaben oder einer Ziffer. Alles andere wird ohne Meldung ignoriert, und stattdessen wird der Ordnername in Kleinbuchstaben verwendet.</p>
+<p>Gelesen werden nur Dateien direkt in <code>CSV/</code> - Unterordner werden ignoriert.</p>
+<h2 id="your-first-mod">Deine erste Mod<a class="headerlink" href="#your-first-mod" title="Permanent link">&para;</a></h2>
+<p>Die Holzwand soll eine Planke statt zwei kosten. Leg <code>Mods/my_balance_mod/CSV/ResourceCost.json</code> mit diesem Inhalt an:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"Commands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Replace"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wall_wood"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Cells"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Planks"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Starte das Spiel, lade ein Level, und die Wand kostet eine Planke. Das ist schon die ganze Mod - kein Manifest, keine Registrierung.</p>
+<h2 id="the-two-file-formats">Die beiden Dateiformate<a class="headerlink" href="#the-two-file-formats" title="Permanent link">&para;</a></h2>
+<p>Eine Datei ist nach der Tabelle benannt, die sie ändert, und zwar <strong>exakt</strong>, inklusive Großbuchstaben: <code>VehicleData.csv</code>, niemals <code>vehicledata.csv</code>. Eine Datei, deren Name keine existierende Tabelle ist, wird übersprungen, und das Log sagt dir das.</p>
+<p>Du kannst eines der beiden Formate verwenden oder beide. Innerhalb einer Mod werden zuerst die <code>.csv</code>-Dateien angewendet und danach die <code>.json</code>-Dateien, sodass ein Befehl eine Zeile verfeinern kann, die eine CSV-Datei hinzugefügt hat.</p>
+<h3 id="single-cells-json">Einzelne Zellen - <code>&lt;Table&gt;.json</code><a class="headerlink" href="#single-cells-json" title="Permanent link">&para;</a></h3>
+<p>Eine Liste von Befehlen, die von oben nach unten ausgeführt wird. Zu diesem Format solltest du greifen: Es ändert nur die Werte, die du nennst, und lässt alles andere in Ruhe.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"Commands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Replace"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gladiator"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Cells"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Fuel Capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">350</span><span class="p">,</span><span class="w"> </span><span class="nt">"Movement Speed"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Add"</span><span class="p">,</span><span class="w">     </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"storage_box"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Cells"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Planks"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">"Metal"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Remove"</span><span class="p">,</span><span class="w">  </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chair"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"Tarp"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Remove"</span><span class="p">,</span><span class="w">  </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drawer"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Befehl</th>
+<th>Felder</th>
+<th>Was er macht</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Replace</code></td>
+<td><code>Id</code>, <code>Cells</code></td>
+<td>Ändert nur die aufgelisteten Zellen einer bestehenden Zeile. Alles andere behält seinen Wert.</td>
+</tr>
+<tr>
+<td><code>Add</code></td>
+<td><code>Id</code>, <code>Cells</code></td>
+<td>Fügt eine neue Zeile hinzu. Nur in <code>ResourceCost</code> und <code>PropsInfluence</code> möglich (siehe <a href="#adding-and-removing-rows">Zeilen hinzufügen und entfernen</a>).</td>
+</tr>
+<tr>
+<td><code>Remove</code> mit <code>Columns</code></td>
+<td><code>Id</code>, <code>Columns</code></td>
+<td>Leert die aufgelisteten Zellen einer Zeile.</td>
+</tr>
+<tr>
+<td><code>Remove</code> ohne <code>Columns</code></td>
+<td><code>Id</code></td>
+<td>Entfernt die ganze Zeile. Nur in <code>ResourceCost</code> und <code>PropsInfluence</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Regeln des Formats:</p>
+<ul>
+<li>Reines JSON - keine Kommentare, keine abschließenden Kommas.</li>
+<li>Bei <code>Command</code> und <code>Id</code> ist die Groß- und Kleinschreibung egal. Die Schlüssel in <code>Cells</code> und die Einträge in <code>Columns</code> sind Spaltenüberschriften und müssen <strong>exakt</strong> passen, inklusive Leerzeichen.</li>
+<li>Werte dürfen als JSON-Strings, Zahlen oder Booleans geschrieben werden - <code>300</code>, <code>1.5</code>, <code>true</code> und <code>"300"</code> funktionieren alle.</li>
+<li>Ein leerer String, ein String nur aus Leerzeichen oder <code>null</code> in <code>Cells</code> leert diese Zelle, genauso als würdest du sie in einem <code>Remove</code> unter <code>Columns</code> aufführen.</li>
+<li><code>Remove</code> nimmt kein <code>Cells</code>; liste die zu leerenden Zellen in <code>Columns</code> auf.</li>
+<li>Höchstens 200 Befehle pro Datei. Eine Datei, die sich nicht lesen lässt oder kein <code>Commands</code> hat, wird komplett übersprungen.</li>
+<li>Jeder Befehl wird für sich beurteilt - ein fehlerhafter wird mit einer Warnung übersprungen, der Rest gilt trotzdem.</li>
+</ul>
+<h3 id="whole-rows-csv">Ganze Zeilen - <code>&lt;Table&gt;.csv</code><a class="headerlink" href="#whole-rows-csv" title="Permanent link">&para;</a></h3>
+<p>Eine Tabellendatei mit vollständigen Zeilen. Nimm sie, wenn du eine Tabelle lieber in einem Tabellenkalkulationsprogramm bearbeitest und die fertigen Zeilen mitlieferst.</p>
+<div class="highlight"><pre><span></span><code>Name,Value
+TurboTimeScaleMultiplier,20
+RandomActionChatProbability,0.6
+</code></pre></div>
+<ul>
+<li>Die Kopfzeile muss <strong>exakt</strong> die Spalten der Tabelle aufführen: zuerst die Id-Spalte, dann jede Wertspalte, in beliebiger Reihenfolge, keine fehlt und keine zu viel. Die Überschrift der Id-Spalte selbst wird ignoriert, also müssen nur die Wertspalten passen.</li>
+<li>Nimm nur die Zeilen auf, die du ändern willst - eine Datei muss nicht die ganze Tabelle abdecken.</li>
+<li>Eine Zeile, deren Id zu einer eingebauten Zeile passt, ersetzt diese Zeile vollständig. Bei Ids ist die Groß- und Kleinschreibung egal.</li>
+<li>Gib jeder Zeile genauso viele Zellen wie der Kopfzeile. Eine zu kurze Zeile macht die Datei unlesbar, und die ganze Datei wird übersprungen; zusätzliche Zellen hinter der Kopfzeile werden stillschweigend ignoriert.</li>
+<li>Eine Zelle, die ein Komma enthält, muss in Anführungszeichen stehen, so wie es ein Tabellenkalkulationsprogramm macht: <code>"Sleep,Chill"</code>. Ein Zeilenumbruch innerhalb einer Zelle in Anführungszeichen wird nicht unterstützt - er beendet die Zeile.</li>
+<li>Höchstens 200 Zeilen pro Datei. Komplett leere Zeilen und Zeilen, die mit <code>#</code> beginnen, werden ignoriert, du kannst also Notizen hinterlassen. Eine Zeile, die mit einer leeren Id-Zelle beginnt, aber weitere Zellen hat, wird als Fortsetzung der Zeile darüber gelesen, und diese Zeile wird dann abgelehnt, weil sie sich über mehrere Zeilen erstreckt.</li>
+<li>Dieselbe Id auf zwei getrennten Zeilen macht die Datei unlesbar; auf zwei benachbarten Zeilen wird sie als eine Zeile behandelt und abgelehnt.</li>
+<li>Jede Zeile wird für sich beurteilt - eine fehlerhafte wird übersprungen und die eingebaute Zeile bleibt.</li>
+</ul>
+<h2 id="rules-that-apply-everywhere">Regeln, die überall gelten<a class="headerlink" href="#rules-that-apply-everywhere" title="Permanent link">&para;</a></h2>
+<h3 id="columns-only-take-the-kind-of-value-they-already-hold">Spalten nehmen nur die Art von Wert, die sie schon enthalten<a class="headerlink" href="#columns-only-take-the-kind-of-value-they-already-hold" title="Permanent link">&para;</a></h3>
+<p>Eine Spalte, die in jeder eingebauten Zeile Zahlen enthält, nimmt nur Zahlen; eine mit <code>TRUE</code>/<code>FALSE</code> nimmt nur diese. <code>Movement Speed = fast</code> wird abgelehnt. Textspalten sind freier, aber die meisten haben trotzdem eine eigene Regel - die Tabellen weiter unten sagen dir, welche Werte jede Spalte akzeptiert.</p>
+<h3 id="empty-cells">Leere Zellen<a class="headerlink" href="#empty-cells" title="Permanent link">&para;</a></h3>
+<p>Eine Zelle darf nur in einer Spalte leer bleiben, in der das Spiel schon selbst irgendeine Zeile leer lässt. Überall sonst wird das Leeren einer Zelle abgelehnt, weil das Spiel dort keinen Fall "kein Wert" kennt.</p>
+<p>Zwei Spalten sind besonders und werden für dich ausgefüllt, statt leer zu bleiben:</p>
+<ul>
+<li>Jede <code>ResourceCost</code>-Zelle, die du weglässt, leerst oder auf <code>""</code> setzt, wird zu <code>0</code>. Ein <code>Add</code> braucht also nur die Ressourcen, die wirklich etwas kosten.</li>
+<li><code>Associated Task</code> in <code>BuildingComponents</code> wird zu <code>None</code>, was bedeutet "dieses Objekt vergibt keine Aufgabe".</li>
+</ul>
+<h3 id="adding-and-removing-rows">Zeilen hinzufügen und entfernen<a class="headerlink" href="#adding-and-removing-rows" title="Permanent link">&para;</a></h3>
+<p>Normalerweise änderst du Zellen von Zeilen, die schon existieren. Ganze Zeilen lassen sich nur in zwei Tabellen hinzufügen oder entfernen, weil das Spiel und deine Spielstände überall sonst eine feste Menge an Ids erwarten:</p>
+<table>
+<thead>
+<tr>
+<th>Tabelle</th>
+<th>Zeilen können hinzugefügt oder entfernt werden</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ResourceCost</code></td>
+<td>ja, für jede eingebaute Objekt- oder Flugzeug-Id</td>
+</tr>
+<tr>
+<td><code>PropsInfluence</code></td>
+<td>ja, für jede eingebaute Objekt- oder Flugzeug-Id</td>
+</tr>
+<tr>
+<td>jede andere Tabelle</td>
+<td>nein</td>
+</tr>
+</tbody>
+</table>
+<p>Eine hinzugefügte Zeile muss eine Id verwenden, die es schon als Bauobjekt oder Flugzeug gibt - du gibst einem vorhandenen Ding Baukosten oder einen Stimmungseffekt, den es vorher nicht hatte, du erfindest kein neues Ding.</p>
+<h3 id="rows-that-take-up-several-lines">Zeilen, die mehrere Zeilen belegen<a class="headerlink" href="#rows-that-take-up-several-lines" title="Permanent link">&para;</a></h3>
+<p>Einige Tabellen verteilen eine Zeile auf mehrere Zeilen, weil diese Zeile eine Liste enthält - eine Aufgabe mit mehreren Einstellungen, ein Stimmungseffekt mit einer Variante pro Bettart. Eine einzelne Mod-Zeile kann keine Liste ausdrücken, deshalb werden solche Zeilen abgelehnt. Die Tabellenabschnitte weiter unten nennen sie.</p>
+<p>Nur in <code>ResourceCost</code> tragen einige Zeilen eine übrig gebliebene Überschrift in ihrer <code>Money</code>-Zelle und zählen deshalb als mehrere Zeilen. Dort hilft eine CSV mit der ganzen Zeile: Sie schreibt jede Zelle neu und räumt die Zeile dabei gleich auf. Betroffen sind die Ids <code>KickstarterCustomMonument</code>, <code>RadioTower</code>, <code>window_wood</code>, <code>window_tent</code>, <code>window_brick</code>, <code>window_hangar</code>, <code>window_concrete</code>, <code>Distillery</code>, <code>ParkingLarge</code> und <code>gravel</code>.</p>
+<h2 id="checking-what-happened">Nachsehen, was passiert ist<a class="headerlink" href="#checking-what-happened" title="Permanent link">&para;</a></h2>
+<p>Jede angenommene Änderung und jede Ablehnung ist eine Zeile im Log des Spiels, <code>Player.log</code> (wo du es findest: <a href="../../basics/mods/#seeing-your-changes">So funktionieren Mods</a>). Unter Windows gibt es im selben Ordner auch eine HTML-Version, die sich leichter lesen lässt. Die Kennung am Anfang jeder Zeile ist die Id der Mod.</p>
+<div class="highlight"><pre><span></span><code>[Mod my_balance_mod] CSV/ResourceCost.json command 1 replaced cells Planks of row 'wall_wood'.
+[Mod my_balance_mod] CSV/VehicleData.csv overrides built-in row 'gladiator'.
+[Mod my_balance_mod] CSV/PropsInfluence.json command 4 removed row 'Drawer'.
+</code></pre></div>
+<p>Eine Ablehnung nennt die Datei, die Zeilen- oder Befehlsnummer und den Grund:</p>
+<div class="highlight"><pre><span></span><code>[Mod my_balance_mod] CSV/VehicleData.json command 3 rejected: 'Fight Power' exceeds 2x the highest built-in value (60).
+[Mod my_balance_mod] CSV/AirBaseData.json command 1 rejected: 'Missions Per Week' holds numbers in every built-in row; 'seven' is not one.
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Diese Zeilen werden als Informationen und Warnungen geschrieben. Das veröffentlichte Spiel schreibt hauptsächlich Fehler in sein Log, deshalb siehst du sie dort vielleicht nicht. Prüf dann stattdessen die Wirkung im Spiel - lade ein Level und schau dir den geänderten Wert an.</p>
+</div>
+<p>Ein falsch geschriebener Tabellenname oder eine nicht passende Kopfzeile erzeugt trotzdem eine <code>skipped:</code>-Zeile mit dem Dateinamen. <strong>Wenn du gar keine <code>[Mod ...]</code>-Zeilen siehst und die Änderung nicht auftaucht</strong>, hat das Spiel die Mod nicht erkannt: Der <code>CSV/</code>-Ordner war beim Spielstart noch leer (drück <strong>Refresh</strong> im Mods-Fenster), die Mod ist im Mods-Fenster ausgeschaltet, oder der Mod-Ordner ist ein symbolischer Link oder eine Junction, denen das Spiel nie folgt.</p>
+<h3 id="finding-a-tables-column-headers">Die Spaltenüberschriften einer Tabelle finden<a class="headerlink" href="#finding-a-tables-column-headers" title="Permanent link">&para;</a></h3>
+<p>Das Spiel liefert Kopfzeilen-Vorlagen für vier Tabellen (<code>BuildingComponents</code>, <code>PropsInfluence</code>, <code>ResourceCost</code> und <code>VehicleData</code>) in <code>GroundOfAces_Data/StreamingAssets/Modding/Templates/</code> im Installationsordner mit (unter macOS: <code>GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/</code>). Für den Rest steht die Spaltenliste auf dieser Seite, und jeder Tabellenabschnitt verlinkt die eingebaute Datei. Oder frag das Spiel: Schreib absichtlich eine falsche Kopfzeile, lade einmal, und das Log gibt die erwarteten Spalten aus.</p>
+<h2 id="load-order">Ladereihenfolge<a class="headerlink" href="#load-order" title="Permanent link">&para;</a></h2>
+<p>Mods werden in der Reihenfolge angewendet, die unter <a href="../../basics/mods/#which-mod-wins">Welche Mod gewinnt</a> beschrieben ist - zuerst Workshop, dann deine eigenen, niedrigere <code>LoadOrder</code> zuerst. Wenn zwei Mods dieselbe Zeile ändern, gewinnt die spätere bei den Zellen, die sie anfasst: Eine CSV mit der ganzen Zeile ersetzt alles, was eine frühere Mod an dieser Zeile gemacht hat, ein <code>Replace</code> nur die Zellen, die es nennt. Eine im Mods-Fenster ausgeschaltete Mod trägt nichts bei.</p>
+<h2 id="when-changes-take-effect">Wann Änderungen wirken<a class="headerlink" href="#when-changes-take-effect" title="Permanent link">&para;</a></h2>
+<p>CSV-Tabellen werden bei jedem Laden eines Levels neu aufgebaut - geh zurück ins Hauptmenü (Main Menu) und lade erneut. Dasselbe passiert, wenn sich das Hauptmenü oder der Karteneditor öffnet. Bearbeitest du eine Datei, während ein Level läuft, erscheint die Änderung beim nächsten Laden, du kannst also Werte ausprobieren, ohne neu zu starten. Eine Datei, die du in einem Tabellenkalkulationsprogramm offen hast, wird trotzdem gelesen.</p>
+<p>Ein ganz neuer Mod-Ordner, ein <code>CSV/</code>-Ordner, der beim Spielstart noch leer war, oder eine geänderte <code>config.json</code> erfordern, dass das Spiel die Mod-Liste neu einliest: Drück <strong>Refresh</strong> im Mods-Fenster (Hauptmenü → Mods) und lade dann ein Level, oder starte das Spiel neu.</p>
+<h2 id="the-tables">Die Tabellen<a class="headerlink" href="#the-tables" title="Permanent link">&para;</a></h2>
+<p>Dreißig Tabellen lassen sich modden. Drei Dateien, die es im Spiel gibt, die aber nicht geladen werden - <code>ResourceDegradation</code>,
+<code>StartTimeValues</code> und <code>StateInfluence</code> - lassen sich nicht modden.</p>
+<p>Jeder Abschnitt listet die Spalten auf, welche Werte sie nehmen und was die eingebauten Zeilen verwenden. Wo eine Spalte keine
+besondere Regel hat, gelten nur die allgemeinen Regeln von oben.</p>
+<h3 id="aircraft-and-base">Flugzeuge und Basis<a class="headerlink" href="#aircraft-and-base" title="Permanent link">&para;</a></h3>
+<h4 id="vehicledata-aircraft"><code>VehicleData</code> - Flugzeuge<a class="headerlink" href="#vehicledata-aircraft" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/VehicleData.csv">VehicleData.csv</a></p>
+<p>Eine Zeile pro Flugzeug. Zeilen können nicht hinzugefügt oder entfernt werden.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebauter Bereich</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Name</code></td>
+<td>Lokalisierungsschlüssel</td>
+<td><code>airplane/spitfire</code></td>
+<td>darf nicht leer sein</td>
+</tr>
+<tr>
+<td><code>Type</code></td>
+<td><code>Fighter</code>, <code>Bomber</code>, <code>MultiRole</code>, <code>Special</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Crew</code></td>
+<td>Kommaliste der Sitze; wiederhole eine Rolle für zwei Sitze</td>
+<td><code>Pilot</code>, <code>"Pilot,Gunner,Navigator"</code></td>
+<td>Rollen: <code>Pilot</code>, <code>Gunner</code>, <code>Navigator</code>, <code>BombAimer</code>, <code>FlightEngineer</code>, <code>RadioOperator</code></td>
+</tr>
+<tr>
+<td><code>Runway Tier</code></td>
+<td>ganze Zahl</td>
+<td>1–5</td>
+<td>über 5 kann keine Startbahn es bedienen</td>
+</tr>
+<tr>
+<td><code>Parking Size</code></td>
+<td>ganze Zahl</td>
+<td>0–2</td>
+<td>über 2 kann es nie parken</td>
+</tr>
+<tr>
+<td><code>Victory Points Cost</code></td>
+<td>ganze Zahl</td>
+<td>0–12</td>
+<td>0 macht es kostenlos</td>
+</tr>
+<tr>
+<td><code>Movement Speed</code></td>
+<td>ganze Zahl</td>
+<td>5</td>
+<td>Rollgeschwindigkeit; bei 0 erreicht es nie die Startbahn</td>
+</tr>
+<tr>
+<td><code>Landing Length</code></td>
+<td>ganze Zahl</td>
+<td>60–170</td>
+<td>länger als jede baubare Bahn, und es kann nie landen</td>
+</tr>
+<tr>
+<td><code>Health</code></td>
+<td>ganze Zahl</td>
+<td>100</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Initial Integrity</code></td>
+<td>ganze Zahl</td>
+<td>1000</td>
+<td>Stunden Verschleiß, die das Flugzeug aushält, bevor es verbraucht ist (1000 h ≈ 41 Tage)</td>
+</tr>
+<tr>
+<td><code>Fuel Capacity</code></td>
+<td>ganze Zahl</td>
+<td>200–1260</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Voxel Size</code></td>
+<td><code>AxBxC</code></td>
+<td><code>10x0x10</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Fight Power</code></td>
+<td><code>min-max</code></td>
+<td><code>0-0</code> … <code>43-60</code></td>
+<td><code>0 ≤ min ≤ max</code>, und <code>max</code> höchstens <strong>doppelt so hoch wie der höchste eingebaute Wert</strong></td>
+</tr>
+<tr>
+<td><code>Bomb Power</code></td>
+<td><code>min-max</code></td>
+<td><code>0-0</code> … <code>50-80</code></td>
+<td>ebenso</td>
+</tr>
+<tr>
+<td><code>Recon Power</code></td>
+<td><code>min-max</code></td>
+<td><code>5-10</code> … <code>42-60</code></td>
+<td>ebenso</td>
+</tr>
+<tr>
+<td><code>Manoeuvrability</code></td>
+<td><code>min-max</code></td>
+<td><code>2-10</code> … <code>28-50</code></td>
+<td>ebenso</td>
+</tr>
+<tr>
+<td><code>Transport Capacity</code></td>
+<td><code>min-max</code></td>
+<td><code>1-5</code> … <code>60-90</code></td>
+<td>ebenso</td>
+</tr>
+<tr>
+<td><code>Stealthiness</code></td>
+<td><code>min-max</code></td>
+<td><code>10-48</code> … <code>88-98</code></td>
+<td>ebenso</td>
+</tr>
+<tr>
+<td><code>Wreck Resource Type</code></td>
+<td><code>/</code>-Liste von Ressourcen</td>
+<td><code>Metal/RepairParts</code></td>
+<td>beide Wrack-Spalten gesetzt oder beide leer</td>
+</tr>
+<tr>
+<td><code>Wreck Resource Amount</code></td>
+<td><code>/</code>-Liste ganzer Zahlen</td>
+<td><code>10/5</code></td>
+<td>gleiche Länge wie die Typliste</td>
+</tr>
+<tr>
+<td><code>Low Caliber Ammo Capacity</code></td>
+<td>ganze Zahl</td>
+<td>0–3300</td>
+<td>mitgeführte <code>GunAmmo</code>; 0 = keine</td>
+</tr>
+<tr>
+<td><code>High Caliber Ammo Capacity</code></td>
+<td>ganze Zahl</td>
+<td>0–300</td>
+<td><code>AntiAirAmmo</code>; 0 = keine</td>
+</tr>
+<tr>
+<td><code>Plane Bombs Capacity</code></td>
+<td>ganze Zahl</td>
+<td>0–32</td>
+<td><code>PlaneBombs</code>; 0 = keine</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ein Flugzeug, das schon auf deiner Basis steht, behält die Gesundheit, Integrität und Treibstoffkapazität, mit der es gebaut wurde.
+Nur neu gelieferte Flugzeuge übernehmen geänderte Werte - ein Spielstand, der mit aktiver Mod gespeichert wurde, behält also
+die Zahlen dieser Mod, auch nachdem du sie entfernt hast.</p>
+</div>
+<h4 id="airbasedata-the-hq-rank-ladder"><code>AirBaseData</code> - die Rangleiter des HQ<a class="headerlink" href="#airbasedata-the-hq-rank-ladder" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/AirBaseData.csv">AirBaseData.csv</a></p>
+<p>Zeilen <code>1</code>–<code>6</code>, eine pro Basiskategorie. Alle sechs müssen existieren, und ihre Ids können nicht geändert werden.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Airstrip Tier</code></td>
+<td>ganze Zahl</td>
+<td>1,2,3,4,5,5</td>
+<td>nötig, um den Rang zu erreichen</td>
+</tr>
+<tr>
+<td><code>Minimum Airstrip Count</code></td>
+<td>ganze Zahl</td>
+<td>1–5</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Minimum Parking Count</code></td>
+<td>ganze Zahl</td>
+<td>1–20</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Missions Per Week</code></td>
+<td>ganze Zahl</td>
+<td>6–18</td>
+<td>Plätze, die die Woche anbietet; bei 0 werden keine Missionen geplant</td>
+</tr>
+<tr>
+<td><code>Minimum Missions Per Week</code></td>
+<td>ganze Zahl</td>
+<td>2–10</td>
+<td>über <code>Missions Per Week</code> ist die Quote unerfüllbar</td>
+</tr>
+<tr>
+<td><code>Minimum Success Rate</code></td>
+<td>Bruchteil, kein Prozentwert</td>
+<td>0.4–0.8</td>
+<td>über 1 ist unerreichbar</td>
+</tr>
+<tr>
+<td><code>Available Shipment Slots</code></td>
+<td>ganze Zahl</td>
+<td>4–8</td>
+<td>0 schaltet den Nachschub ab</td>
+</tr>
+</tbody>
+</table>
+<h4 id="airstriptiers"><code>AirstripTiers</code><a class="headerlink" href="#airstriptiers" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/AirstripTiers.csv">AirstripTiers.csv</a></p>
+<p>Zeilen <code>1</code>–<code>5</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Length</code></td>
+<td>ganze Zahl</td>
+<td>80,120,140,160,200</td>
+<td>Stufen gelten nach "Länge oder mehr", halte sie also aufsteigend</td>
+</tr>
+<tr>
+<td><code>Width</code></td>
+<td>ganze Zahl</td>
+<td>12,14,18,22,26</td>
+<td>ebenso</td>
+</tr>
+<tr>
+<td><code>Material</code></td>
+<td>Text</td>
+<td><code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code>, <code>tarmac</code></td>
+<td><strong>darf das Material einer anderen Stufe nicht wiederholen</strong>; es benennt auch die <code>ResourceCost</code>-Zeile, die den Belag bepreist</td>
+</tr>
+<tr>
+<td><code>Biome Id</code></td>
+<td>ganze Zahl</td>
+<td>6,20,22,15,13</td>
+<td>Boden, der unter die fertige Bahn gemalt wird</td>
+</tr>
+<tr>
+<td><code>Build Time</code></td>
+<td>ganze Zahl</td>
+<td>5,2,2,2,2</td>
+<td>Spielminuten Arbeit pro Kachel für ein Crewmitglied; zwei Arbeiter halbieren sie</td>
+</tr>
+</tbody>
+</table>
+<h4 id="biomes"><code>Biomes</code><a class="headerlink" href="#biomes" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/Biomes.csv">Biomes.csv</a></p>
+<p>Zeilen <code>0</code>–<code>23</code>, die Bodenarten. Alle Spalten sind Zahlen, daher lässt sich diese Tabelle gefahrlos anpassen.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Airstrip Tier</code></td>
+<td>0–5</td>
+<td>Stufe, als die eine Startbahn auf diesem Boden zählt</td>
+</tr>
+<tr>
+<td><code>Character Speed Modifier</code></td>
+<td>1 … 1.2</td>
+<td>0 friert jeden ein, der darauf steht</td>
+</tr>
+<tr>
+<td><code>Airplane Speed Modifier</code></td>
+<td>0.5 … 1.2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Degradation Penalty</code></td>
+<td>0 … 0.2</td>
+<td>zusätzlicher Verschleiß für hier gelagerte Güter</td>
+</tr>
+<tr>
+<td><code>Fire Spread Modifier</code></td>
+<td>0.5 oder 1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="scrambledata-enemy-aircraft-in-a-scramble"><code>ScrambleData</code> - feindliche Flugzeuge beim Alarmstart<a class="headerlink" href="#scrambledata-enemy-aircraft-in-a-scramble" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/ScrambleData.csv">ScrambleData.csv</a></p>
+<p>Zeilen <code>Fighter</code>, <code>Diver</code>, <code>Bomber</code>. Die Namen können nicht geändert werden. Alle Spalten sind ganze Zahlen.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Eingebaut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PlaneHealth</code></td>
+<td>18, 26, 34</td>
+</tr>
+<tr>
+<td><code>PlanePower</code></td>
+<td>23, 17, 14</td>
+</tr>
+<tr>
+<td><code>PlaneWinDealDamageMin</code> / <code>Max</code></td>
+<td>15–120 - Schaden an deinem Flugzeug, wenn der Feind gewinnt</td>
+</tr>
+<tr>
+<td><code>PlaneLooseDealDamageMin</code> / <code>Max</code></td>
+<td>5–25 - Schaden, wenn der Feind verliert</td>
+</tr>
+</tbody>
+</table>
+<h4 id="attackscomposition-what-an-air-raid-is-made-of"><code>AttacksComposition</code> - woraus ein Luftangriff besteht<a class="headerlink" href="#attackscomposition-what-an-air-raid-is-made-of" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/AttacksComposition.csv">AttacksComposition.csv</a></p>
+<p>Die Zeilen-Id ist die Schwere des Angriffs. Im normalen Spiel werden <strong>1–25</strong> erreicht; die Zeilen <code>99</code>, <code>101</code>, <code>200</code> und <code>300</code> erreicht
+die normale Schwereleiter nicht, sie sind für besondere Angriffe reserviert. Die Bereiche unten beschreiben die Zeilen 1–25;
+die vier Sonderzeilen gehen darüber hinaus (<code>9-9</code> Bomber, <code>10-10</code> Sturzkampfflugzeuge, <code>0-0</code> Jäger) und verweisen in den letzten
+beiden Spalten auf sich selbst.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut (Zeilen 1–25)</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Bombers</code></td>
+<td><code>min-max</code></td>
+<td><code>0-0</code> … <code>4-6</code></td>
+<td>ganze Zahlen, <code>0 ≤ min ≤ max</code></td>
+</tr>
+<tr>
+<td><code>Divers</code></td>
+<td><code>min-max</code></td>
+<td><code>0-0</code> … <code>6-6</code></td>
+<td>ebenso</td>
+</tr>
+<tr>
+<td><code>Fighters</code></td>
+<td><code>min-max</code></td>
+<td><code>1-2</code> … <code>8-8</code></td>
+<td>ebenso</td>
+</tr>
+<tr>
+<td><code>LowAttacks</code></td>
+<td>ganze Zahl</td>
+<td>1–14</td>
+<td>Schwere, die stattdessen verwendet wird, wenn die Karte auf leichtere Angriffe eingestellt ist - <strong>muss eine Zeile dieser Tabelle nennen</strong></td>
+</tr>
+<tr>
+<td><code>HighAttacks</code></td>
+<td>ganze Zahl</td>
+<td>2–25</td>
+<td>Schwere, wenn die Karte auf härtere Angriffe eingestellt ist - ebenso</td>
+</tr>
+</tbody>
+</table>
+<h4 id="equipmentdata-aa-guns-searchlights-towers"><code>EquipmentData</code> - Flak, Suchscheinwerfer, Türme<a class="headerlink" href="#equipmentdata-aa-guns-searchlights-towers" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/EquipmentData.csv">EquipmentData.csv</a></p>
+<p>Die Zeilen sind Ausrüstungs-Ids: <code>Bofors40mm</code>, <code>Searchlight</code>, <code>RadioTower</code>, <code>VickersGunAA</code>, <code>OerlikonGun</code>, <code>Lookout</code>,
+<code>ControlTowerMetal</code>, <code>ControlTowerBrick</code>, <code>ControlTowerConcrete</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Range</code></td>
+<td>Zahl</td>
+<td>10–70</td>
+<td>0 macht das Teil nutzlos</td>
+</tr>
+<tr>
+<td><code>Damage</code></td>
+<td>Zahl</td>
+<td>0–6</td>
+<td><strong><code>0</code> schaltet die ganze Waffe ab</strong> - Feuerrate, Munition und Zielen werden dann ignoriert</td>
+</tr>
+<tr>
+<td><code>Fire Rate</code></td>
+<td>ganze Zahl</td>
+<td>0–720</td>
+<td>Schuss pro Minute</td>
+</tr>
+<tr>
+<td><code>Ammo Type</code></td>
+<td>Ressourcenname oder <code>None</code></td>
+<td><code>GunAmmo</code>, <code>AntiAirAmmo</code>, <code>None</code>, <code>0</code></td>
+<td>alles, was kein Ressourcenname ist (<code>None</code>, <code>0</code>), bedeutet, dass das Teil keine Munition lagert</td>
+</tr>
+<tr>
+<td><code>Ammo Capacity</code></td>
+<td>ganze Zahl</td>
+<td>0–80</td>
+<td>auf einmal geladene Schuss</td>
+</tr>
+<tr>
+<td><code>Ammo Load Time</code></td>
+<td>Zahl</td>
+<td>0–6.5</td>
+<td>Sekunden zum Nachladen</td>
+</tr>
+<tr>
+<td><code>Ammo Storage</code></td>
+<td>ganze Zahl</td>
+<td>0–500</td>
+<td><strong><code>0</code> bedeutet, dass es nie Munition holt</strong></td>
+</tr>
+<tr>
+<td><code>Damage Bonus</code></td>
+<td>Zahl</td>
+<td>0 oder 0.25</td>
+<td>wird anderen in Reichweite gewährt (Suchscheinwerfer)</td>
+</tr>
+<tr>
+<td><code>Firing Angle</code></td>
+<td>Zahl</td>
+<td>0, 140, 360</td>
+<td><code>0</code> wird als Vollkreis gelesen</td>
+</tr>
+<tr>
+<td><code>Aiming Speed</code></td>
+<td>Zahl</td>
+<td>0–170</td>
+<td>Grad pro Sekunde</td>
+</tr>
+<tr>
+<td><code>Range Bonus</code></td>
+<td>Zahl</td>
+<td>0 oder 16</td>
+<td>wird anderen in Reichweite gewährt (Ausguck)</td>
+</tr>
+<tr>
+<td><code>Attacker Priority</code></td>
+<td><code>Bombers</code>, <code>Divers</code>, <code>Fighters</code>, <code>Nearest</code>, <code>None</code></td>
+<td></td>
+<td>alles andere fällt auf <code>None</code> zurück</td>
+</tr>
+</tbody>
+</table>
+<h3 id="building-and-objects">Bauen und Objekte<a class="headerlink" href="#building-and-objects" title="Permanent link">&para;</a></h3>
+<h4 id="buildingcomponents-objects-and-building-parts"><code>BuildingComponents</code> - Objekte und Gebäudeteile<a class="headerlink" href="#buildingcomponents-objects-and-building-parts" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/BuildingComponents.csv">BuildingComponents.csv</a></p>
+<p>Eine Zeile pro Objekt, Wandteil, Boden, Dach, Werkbank und Ausrüstungsteil. Zeilen können nicht hinzugefügt oder
+entfernt werden.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Dimensions</code></td>
+<td><code>WxHxD</code>, oder <code>dynamic/1x0x1</code> für Dächer</td>
+<td><code>1x3x1</code>, <code>1x0x1</code>, <code>2x2x2</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Build Time</code></td>
+<td>ganze Zahl</td>
+<td>0–420</td>
+<td>Spielminuten Arbeit für ein Crewmitglied; zwei Arbeiter halbieren sie</td>
+</tr>
+<tr>
+<td><code>Health</code></td>
+<td>ganze Zahl</td>
+<td>0–10000</td>
+<td>der riesige Wert kennzeichnet die unzerstörbaren Teile</td>
+</tr>
+<tr>
+<td><code>Associated Task</code></td>
+<td>Aufgabenname oder <code>None</code></td>
+<td><code>Sleep</code>, <code>Chill</code>, <code>UseEquipment</code>, <code>PlayPiano</code>, <code>UseTrainingObject</code>, <code>MonitorAirspace</code>, <code>UseRadio</code>, <code>SaluteTheFlag</code>, <code>Grieve</code>, <code>ListenToMusic</code>, <code>PlayDartboard</code>, <code>PlayGuitar</code>, <code>PlayBilliardTable</code>, <code>UsePlanningBoard</code></td>
+<td>ein Objekt auf eine Aufgabe zu setzen, zu der seine Grafik nicht passt, ist erlaubt und sieht falsch aus</td>
+</tr>
+<tr>
+<td><code>Users Limit</code></td>
+<td>ganze Zahl</td>
+<td>0–5</td>
+<td>0 bei einem benutzbaren Objekt bedeutet, dass niemand es benutzen kann</td>
+</tr>
+<tr>
+<td><code>Is Wall Deco</code></td>
+<td><code>TRUE</code>/<code>FALSE</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Is Floor Deco</code></td>
+<td><code>TRUE</code>/<code>FALSE</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Is Fireproof</code></td>
+<td><code>TRUE</code>/<code>FALSE</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Placement Requirement</code></td>
+<td><code>None</code>, <code>Indoors</code>, <code>Outdoors</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ein <code>Replace</code> wird gegen die fertige Zeile geprüft. Eine Zeile, die <code>Dimensions</code> oder <code>Users Limit</code> leer lässt,
+kannst du also nur ändern, wenn du diese Zelle im selben Befehl mit setzt - oder die Zeile als CSV mitlieferst.
+Leere <code>Dimensions</code>: <code>PropagandaPoster</code>, <code>MusicPoster</code>, <code>AirplanePoster</code>, <code>CompanyMascotPoster</code>,
+<code>CurtainsClosed</code>, <code>CurtainsOpen</code>, <code>EntranceSign</code>, <code>tombstone</code>, <code>storage_box</code>.
+Leeres <code>Users Limit</code>: die Werkbänke und die drei Parkplatzgrößen.</p>
+</div>
+<h4 id="resourcecost-what-something-costs-to-build"><code>ResourceCost</code> - was der Bau von etwas kostet<a class="headerlink" href="#resourcecost-what-something-costs-to-build" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/ResourceCost.csv">ResourceCost.csv</a></p>
+<p>Eine Zeile pro Objekt- oder Flugzeug-Id, eine Spalte pro Ressource. <strong>Zeilen können hinzugefügt und entfernt werden.</strong> Eine entfernte Zeile
+bedeutet "keine Baukosten". Kosten von <code>0</code> bedeuten "nicht benötigt", jede Spalte auf null zu setzen hat also dieselbe Wirkung. Die Id
+einer hinzugefügten Zeile muss eine vorhandene <code>BuildingComponents</code>- oder <code>VehicleData</code>-Id sein; alles andere wird abgelehnt als
+"neither a built-in prop nor a built-in plane".</p>
+<p>Jede Zelle ist eine ganze Zahl, null oder mehr. Die Spalten sind:</p>
+<div class="highlight"><pre><span></span><code>Money  VictoryPoints  Trash  Wood  Clay  Sandbags  Stone  Food  RawWater  Herbs  Metal  Bricks
+Planks  Tarp  Cement  Fuel  PurifiedWater  Meals  SimpleMedicine  Intel  Machinery  Electronics
+LuxuryGoods  MilitaryConstruction  Camouflage  FoodRations  StrongMedicine  RepairParts  GunAmmo
+AntiAirAmmo  PlaneBombs
+</code></pre></div>
+<p>Auch die Startbahnbeläge sind hier Zeilen - <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code>, <code>tarmac</code> - wenn du also <code>gravel</code> änderst,
+änderst du, was eine Startbahn der Stufe 3 pro Kachel kostet.</p>
+<h4 id="propsinfluence-the-mood-effect-an-object-radiates"><code>PropsInfluence</code> - der Stimmungseffekt, den ein Objekt ausstrahlt<a class="headerlink" href="#propsinfluence-the-mood-effect-an-object-radiates" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/PropsInfluence.csv">PropsInfluence.csv</a></p>
+<p>Eine Zeile pro Objekt, das die Stimmung der Crew in der Nähe hebt oder senkt. <strong>Zeilen können hinzugefügt und entfernt werden</strong>; ein Objekt
+ohne Zeile hat einfach keine Wirkung.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Buff Name</code></td>
+<td>Lokalisierungsschlüssel</td>
+<td><code>prop_effects/organised_sleep</code></td>
+<td>darf nicht leer sein</td>
+</tr>
+<tr>
+<td><code>Radius</code></td>
+<td>Zahl</td>
+<td>0.5–50</td>
+<td>in Kacheln; die Kontrolltürme reichen 20, 30 und 50 weit</td>
+</tr>
+<tr>
+<td><code>Associated Tasks Or Action</code></td>
+<td>Kommaliste von Aufgabennamen</td>
+<td><code>Sleep</code>, <code>"Sleep,Chill"</code>, <code>UseEquipment</code></td>
+<td>darf nicht leer sein. Ein Name, der zu keiner Aufgabe passt, wird angenommen, und der Effekt <strong>greift einfach nie</strong></td>
+</tr>
+<tr>
+<td><code>Effect 1</code></td>
+<td><code>&lt;Zahl mit Vorzeichen&gt; &lt;Name&gt;</code></td>
+<td><code>+0.5 Mood</code> … <code>+10 Mood</code>, <code>-1 Mood</code>, <code>-1.5 Energy</code>, <code>+2 Energy</code>, <code>+1 Confidence</code></td>
+<td>Namen: <code>Mood</code>, <code>Confidence</code>, <code>Energy</code>; die eingebauten Zeilen reichen von <code>-1.5</code> bis <code>+10</code></td>
+</tr>
+<tr>
+<td><code>Effect 2</code></td>
+<td>ebenso, oder leer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Effect 3</code></td>
+<td>ebenso, oder leer</td>
+<td></td>
+<td>keine eingebaute Zeile verwendet ihn</td>
+</tr>
+</tbody>
+</table>
+<p>Das Vorzeichen gehört zur Zahl, <code>1 Mood</code> bedeutet also <code>+1</code>. Namen werden locker abgeglichen, <code>+1 mood</code> funktioniert also. Ein anderer Name
+als die drei oben wird als Spezialeffekt gespeichert (das Spiel verwendet <code>-1 Accident</code> bei den drei Kontrolltürmen);
+ein erfundener Name wird angenommen und bewirkt nichts.</p>
+<h4 id="mapobjects-trees-rocks-ponds-and-other-harvestables"><code>MapObjects</code> - Bäume, Felsen, Teiche und andere Rohstoffquellen<a class="headerlink" href="#mapobjects-trees-rocks-ponds-and-other-harvestables" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/MapObjects.csv">MapObjects.csv</a></p>
+<p>Eine Zeile pro Weltobjekt. Die Ids werden von Kartendateien verwendet und können nicht geändert werden.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LocKey_Name</code></td>
+<td>Lokalisierungsschlüssel</td>
+<td><code>map.obj.tree.name</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>LocKey_Description</code></td>
+<td>Lokalisierungsschlüssel</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Dimensions</code></td>
+<td><code>WxHxD</code></td>
+<td><code>1x4x1</code>, <code>2x2x2</code>, <code>3x1x3</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Resource Harvested</code></td>
+<td>Ressourcenname oder leer</td>
+<td><code>Wood</code>, <code>Stone</code>, <code>Herbs</code>, <code>Food</code>, <code>RawWater</code>, <code>Clay</code>, <code>Sandbags</code>, <code>Metal</code>, <code>Planks</code>, <code>Fuel</code>, Saatgut</td>
+<td>leer bedeutet, dass es nichts zu ernten gibt</td>
+</tr>
+<tr>
+<td><code>Farming Time</code></td>
+<td>ganze Zahl</td>
+<td>0–400</td>
+<td>Spielminuten Arbeit pro Ernte für ein Crewmitglied; zwei Arbeiter halbieren sie</td>
+</tr>
+<tr>
+<td><code>Resource Amount</code></td>
+<td>ganze Zahl</td>
+<td>0–50</td>
+<td>Ertrag pro Ernte</td>
+</tr>
+<tr>
+<td><code>Resource Total</code></td>
+<td>ganze Zahl</td>
+<td>0–500</td>
+<td>Gesamtmenge, bevor die Quelle erschöpft ist</td>
+</tr>
+<tr>
+<td><code>Limited Harvest Amount</code></td>
+<td>ganze Zahl</td>
+<td>0, 20, 30, 100</td>
+<td>Obergrenze für endlose Quellen; 0 = unbegrenzt</td>
+</tr>
+<tr>
+<td><code>Destroyed On Depletion</code></td>
+<td><code>TRUE</code>/<code>FALSE</code></td>
+<td></td>
+<td><code>FALSE</code> mit <code>Refresh Time</code> 0 hinterlässt etwas, das nie wieder geerntet werden kann</td>
+</tr>
+<tr>
+<td><code>Refresh Time</code></td>
+<td>ganze Zahl</td>
+<td>0–21600</td>
+<td>Minuten, bis es nachwächst</td>
+</tr>
+<tr>
+<td><code>Health</code></td>
+<td>ganze Zahl</td>
+<td>1–2147483647</td>
+<td>der riesige Wert kennzeichnet die unzerstörbaren</td>
+</tr>
+<tr>
+<td><code>Is Fireproof</code></td>
+<td><code>TRUE</code>/<code>FALSE</code></td>
+<td></td>
+<td>Bäume feuerfest zu machen, verhindert, dass sich Feuer auf der Karte ausbreitet</td>
+</tr>
+</tbody>
+</table>
+<h4 id="growingdata-saplings-becoming-trees"><code>GrowingData</code> - Setzlinge werden zu Bäumen<a class="headerlink" href="#growingdata-saplings-becoming-trees" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/GrowingData.csv">GrowingData.csv</a></p>
+<p>Zwei Zeilen, <code>young_tree</code> und <code>young_tree_big</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>To</code></td>
+<td>eine <code>MapObjects</code>-Id</td>
+<td><code>tree</code>, <code>tree_big</code></td>
+</tr>
+<tr>
+<td><code>Min Hours</code></td>
+<td>ganze Zahl</td>
+<td>672</td>
+</tr>
+<tr>
+<td><code>Max Hours</code></td>
+<td>ganze Zahl</td>
+<td>840</td>
+</tr>
+</tbody>
+</table>
+<p>Ein Setzling, der beim Laden eines Spielstands schon auf der Karte steht, würfelt seine Restzeit zwischen der Hälfte von
+<code>Min Hours</code> und <code>Max Hours</code>; nur frisch gepflanzte verwenden das volle Minimum.</p>
+<h4 id="gardeningdata-the-four-crops"><code>GardeningData</code> - die vier Feldfrüchte<a class="headerlink" href="#gardeningdata-the-four-crops" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/GardeningData.csv">GardeningData.csv</a></p>
+<p>Zeilen <code>grain</code>, <code>beans</code>, <code>potato</code>, <code>tomato</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Growth</code></td>
+<td>3, 6, 15, 10</td>
+<td>gegossene Tage bis zur Ernte - die Pflanze gewinnt um Mitternacht einen Punkt für jeden Tag, an dem ihre Kachel gegossen wurde; bei 0 ist sie sofort erntereif</td>
+</tr>
+<tr>
+<td><code>Food</code></td>
+<td>3, 4, 20, 7</td>
+<td>Nahrung pro Ernte</td>
+</tr>
+<tr>
+<td><code>Seeds</code></td>
+<td>2, 5, 3, 1</td>
+<td>Saatgut pro Ernte; 0 macht die Feldfrucht nicht nachhaltig</td>
+</tr>
+<tr>
+<td><code>Regrowth</code></td>
+<td>nur <code>tomato</code> ist <code>TRUE</code></td>
+<td>wächst nach, statt verbraucht zu werden</td>
+</tr>
+</tbody>
+</table>
+<h3 id="resources-and-crafting">Ressourcen und Herstellung<a class="headerlink" href="#resources-and-crafting" title="Permanent link">&para;</a></h3>
+<h4 id="resourcedata-what-a-resource-is"><code>ResourceData</code> - was eine Ressource ist<a class="headerlink" href="#resourcedata-what-a-resource-is" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/ResourceData.csv">ResourceData.csv</a></p>
+<p>Eine Zeile pro Ressource, exakt so benannt, wie das Spiel sie nennt.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Initial Integrity</code></td>
+<td>ganze Zahl</td>
+<td>0–50000</td>
+<td>Stunden, bevor ein Stapel verdirbt; 0 verrottet sofort</td>
+</tr>
+<tr>
+<td><code>Carry Limit</code></td>
+<td>ganze Zahl</td>
+<td>0–250</td>
+<td>wie viel eine Person trägt; 0 bedeutet, dass es nie bewegt werden kann</td>
+</tr>
+<tr>
+<td><code>Stack Limit</code></td>
+<td>ganze Zahl</td>
+<td>0–2000</td>
+<td>Stapelgrenze im Freien</td>
+</tr>
+<tr>
+<td><code>Double Stack Limit</code></td>
+<td>ganze Zahl</td>
+<td>0–3000</td>
+<td>Stapelgrenze in einem richtigen Lager; unter <code>Stack Limit</code> verkleinert es das Lager</td>
+</tr>
+<tr>
+<td><code>Resource Tier</code></td>
+<td><code>Meta</code>, <code>Basic</code>, <code>Advanced</code>, <code>Military</code>, <code>Trash</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Category</code></td>
+<td><code>Food</code>, <code>Seeds</code> oder leer</td>
+<td></td>
+<td>wenn du <code>Food</code> bei allem Essbaren entfernst, kann die Crew nie essen</td>
+</tr>
+<tr>
+<td><code>Always Degrades</code></td>
+<td><code>TRUE</code>/<code>FALSE</code></td>
+<td></td>
+<td>verdirbt sogar unter einem Dach</td>
+</tr>
+<tr>
+<td><code>Explosiveness</code></td>
+<td>ganze Zahl</td>
+<td>0, 2, 3</td>
+<td>0 ist harmlos</td>
+</tr>
+<tr>
+<td><code>Flammable</code></td>
+<td><code>TRUE</code>/<code>FALSE</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>VariantAmountMapping</code></td>
+<td><code>/</code>-Liste ganzer Zahlen</td>
+<td><code>1/2</code>, <code>1</code></td>
+<td>wählt das Aussehen des Stapels</td>
+</tr>
+</tbody>
+</table>
+<h4 id="workbenchprojectdata-crafting-recipes"><code>WorkbenchProjectData</code> - Herstellungsrezepte<a class="headerlink" href="#workbenchprojectdata-crafting-recipes" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/WorkbenchProjectData.csv">WorkbenchProjectData.csv</a></p>
+<p>Die Zeilen-Id ist <code>&lt;Workbench&gt;.&lt;Output&gt;</code>. Zeilen können nicht hinzugefügt werden, hiermit änderst du also bestehende Rezepte, statt
+neue einzuführen.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Workbench Type</code></td>
+<td>Werkbankname</td>
+<td><code>FieldKitchen</code>, <code>IndoorKitchen</code>, <code>SawStation</code>, <code>Brickstation</code>, <code>CementMixer</code>, <code>MetalworksWorkbench</code>, <code>CanningStation</code>, <code>ElectronicsWorkbench</code>, <code>TailorStation</code>, <code>EspionageRadio</code>, <code>WaterCooker</code>, <code>HerbDryer</code>, <code>Distillery</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Output Resource Type</code></td>
+<td>Ressourcenname</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Output Resource Amount</code></td>
+<td>ganze Zahl</td>
+<td>1–200</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Input Resource Type</code></td>
+<td><code>/</code>-Liste von Ressourcen oder <code>None</code></td>
+<td><code>Food/RawWater</code>, <code>Metal</code>, <code>None</code></td>
+<td><code>None</code> bedeutet: aus nichts hergestellt</td>
+</tr>
+<tr>
+<td><code>Input Resource Amount</code></td>
+<td><code>/</code>-Liste ganzer Zahlen</td>
+<td><code>2/2</code>, <code>0</code></td>
+<td><strong>muss genauso viele Einträge haben wie die Typliste</strong></td>
+</tr>
+<tr>
+<td><code>Time To Craft</code></td>
+<td>ganze Zahl</td>
+<td>10–180</td>
+<td>Spielminuten Arbeit für ein Crewmitglied; zwei Arbeiter halbieren sie</td>
+</tr>
+<tr>
+<td><code>Valid Entry</code></td>
+<td><code>TRUE</code>/<code>FALSE</code></td>
+<td><code>TRUE</code></td>
+<td>Überbleibsel; das Spiel liest es nicht</td>
+</tr>
+</tbody>
+</table>
+<h4 id="shipmentdata-the-supply-catalogue"><code>ShipmentData</code> - der Nachschubkatalog<a class="headerlink" href="#shipmentdata-the-supply-catalogue" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/ShipmentData.csv">ShipmentData.csv</a></p>
+<p>Eine Zeile pro bestellbarem Artikel.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Shipment Type</code></td>
+<td><code>Resource</code> oder <code>Prop</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Category</code></td>
+<td><code>Military</code>, <code>Miscellaneous</code> oder <code>Large</code></td>
+<td><strong>Groß- und Kleinschreibung zählt</strong> - <code>military</code> wird abgelehnt</td>
+</tr>
+<tr>
+<td><code>Amount</code></td>
+<td>ganze Zahl, 1–5000</td>
+<td>gelieferte Einheiten pro Platz</td>
+</tr>
+<tr>
+<td><code>Slots</code></td>
+<td>ganze Zahl, 1–4</td>
+<td>mehr Plätze, als irgendein Rang bietet, machen den Artikel unbestellbar</td>
+</tr>
+</tbody>
+</table>
+<h3 id="crew">Crew<a class="headerlink" href="#crew" title="Permanent link">&para;</a></h3>
+<h4 id="charactersinitialstats-starting-skills-per-job"><code>CharactersInitialStats</code> - Startfähigkeiten pro Beruf<a class="headerlink" href="#charactersinitialstats-starting-skills-per-job" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/CharactersInitialStats.csv">CharactersInitialStats.csv</a></p>
+<p>Die Zeilen sind Berufe und Crewrollen: <code>Pilot</code>, <code>Gunner</code>, <code>BombAimer</code>, <code>FlightEngineer</code>, <code>Navigator</code>,
+<code>RadioOperator</code>, <code>RAFAirCrew</code>, <code>AAFCook</code>, <code>FieldMechanic</code>, <code>FieldEngineer</code>, <code>RAFMedic</code>, <code>AAFLabour</code>, <code>None</code>,
+<code>Custom</code>.</p>
+<p>Die Spalten sind die sechs Fähigkeiten - <code>Flying</code>, <code>Shooting</code>, <code>Bombing</code>, <code>Endurance</code>, <code>Engineering</code>, <code>Navigating</code> - und
+der Wert ist ein <strong>Rang von 0 bis 6</strong>, keine Punktzahl. <code>0</code> ist Untrained und <code>6</code> ist Ace. Bleib innerhalb dieses
+Bereichs. <code>Endurance</code> legt auch die maximale Gesundheit fest, deshalb hat jede Zeile dort mindestens <code>1</code>.</p>
+<h4 id="charactersstatsrankprogression-points-per-rank"><code>CharactersStatsRankProgression</code> - Punkte pro Rang<a class="headerlink" href="#charactersstatsrankprogression-points-per-rank" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/CharactersStatsRankProgression.csv">CharactersStatsRankProgression.csv</a></p>
+<p>Die Zeilen müssen <code>Untrained</code>, <code>Rank1</code> … <code>Rank5</code>, <code>Ace</code> bleiben. <code>LevelUpPoints</code> (0, 10, 14, 22, 36, 58, 90) ist die
+Punktzahl, bei der dieser Rang erreicht wird, und gewählt wird der höchste Rang, den ein Charakter überschritten hat
+- also <strong>müssen die Werte aufsteigen</strong>. Außer der Reihe bleibt die Crew niedrig hängen oder springt direkt zu Ace.</p>
+<h4 id="characterstatscheck-what-a-rank-is-worth"><code>CharacterStatsCheck</code> - was ein Rang wert ist<a class="headerlink" href="#characterstatscheck-what-a-rank-is-worth" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/CharacterStatsCheck.csv">CharacterStatsCheck.csv</a></p>
+<p>Die Zeilen sind dieselben sieben Ränge. Für jede der sechs Fähigkeiten gibt es zwei Spalten: <code>&lt;Skill&gt;Value</code> ist ein fester
+Bonus auf einen Missionswurf, <code>&lt;Skill&gt;Percentage</code> ist ein <strong>Bruchteil</strong> - <code>0.25</code> bedeutet 25 %. Schreibst du <code>25</code>, ergibt das
+einen Bonus von 2500 %. Die Spaltennamen können nicht umbenannt werden.</p>
+<h4 id="characterjobpriority-what-each-job-is-willing-to-do"><code>CharacterJobPriority</code> - was jeder Beruf zu tun bereit ist<a class="headerlink" href="#characterjobpriority-what-each-job-is-willing-to-do" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/CharacterJobPriority.csv">CharacterJobPriority.csv</a></p>
+<p>Die Zeilen sind die Berufsnamen: <code>None</code>, <code>Custom</code>, <code>AAFCook</code>, <code>FieldMechanic</code>, <code>FieldEngineer</code>, <code>RAFMedic</code>,
+<code>AAFLabour</code>, <code>RAFAircrew</code>.</p>
+<p>Es gibt eine Spalte pro Arbeitsart - <code>Building</code>, <code>Gardening</code>, <code>CraftingAndRepairs</code>, <code>Labor</code>, <code>Cooking</code>,
+<code>Medicine</code>, <code>PlaneWork</code>, <code>Harvest</code>, <code>BaseSafety</code>, <code>Leisure</code>, <code>UseRecreationalItem</code>, <code>Socialize</code>,
+<code>ConsumeLuxuryGood</code>, <code>Train</code>, <code>Sleep</code>, <code>PilotPlane</code>, <code>FunctionalGroup</code>, <code>Emergency</code> - mit einer Priorität:
+<code>0</code> bedeutet, dass der Beruf diese Arbeit nie macht, <code>1</code> ist die höchste Priorität und <code>3</code> die niedrigste. (Ein Sanitäter hat
+<code>Building 0</code> und <code>Medicine 1</code>.) Keine Spalte darf wegfallen oder umbenannt werden.</p>
+<p>Diese Zahlen <strong>bestimmen</strong> auch einen Beruf: Ein Crewmitglied, dessen Prioritäten genau zu einer Zeile passen, hat diesen Beruf, und eines,
+das zu keiner passt, ist <code>Custom</code>. Gibst du zwei Berufen identische Prioritäten, kann das Spiel sie nicht mehr unterscheiden.</p>
+<h4 id="charactersdata-names-nicknames-and-ranks"><code>CharactersData</code> - Namen, Spitznamen und Ränge<a class="headerlink" href="#charactersdata-names-nicknames-and-ranks" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/CharactersData.csv">CharactersData.csv</a></p>
+<p>Sechs der acht Zeilen sind lange Listen - Vornamen, Nachnamen, Spitznamen, Ränge der Bodencrew, Pilotenränge - und
+können nicht geändert werden.</p>
+<p>Ändern kannst du die beiden Pilotenränge selbst, wobei <code>Goal</code> angibt, wie viele erfolgreiche Missionen die
+Beförderung bringen:</p>
+<table>
+<thead>
+<tr>
+<th>Zeile</th>
+<th><code>Value</code></th>
+<th><code>Goal</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OfficerCadet</code></td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>PilotOfficer</code></td>
+<td>3</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<h4 id="moralevalues"><code>MoraleValues</code><a class="headerlink" href="#moralevalues" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/MoraleValues.csv">MoraleValues.csv</a></p>
+<p>Name und Wert, alles Zahlen: <code>BaseMoraleBufferDays</code>, <code>MoraleLevelMin</code> (-100), <code>MoraleLevelMax</code> (100),
+<code>LeisureThreshold</code>, <code>MoraleTrendTreshold</code>, <code>MoraleBreakingThreshold</code>, <code>MoraleEffectPositiveThreshold</code>,
+<code>MoraleEffectNegativeThreshold</code>, <code>AirBaseMoraleGameOverThreshold</code>.</p>
+<p>Setzt du <code>AirBaseMoraleGameOverThreshold</code> über <code>MoraleLevelMax</code>, ist das Spiel sofort verloren; setzt du
+<code>MoraleLevelMin</code> über <code>MoraleLevelMax</code>, sind alle Grenzen vertauscht.</p>
+<h4 id="moraleinfluencevalues-what-changes-a-crew-members-mood"><code>MoraleInfluenceValues</code> - was die Stimmung eines Crewmitglieds verändert<a class="headerlink" href="#moraleinfluencevalues-what-changes-a-crew-members-mood" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/MoraleInfluenceValues.csv">MoraleInfluenceValues.csv</a></p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Itentifier</code></td>
+<td>Zeilen-Id (beachte die Schreibweise)</td>
+<td><code>Sleep</code>, <code>Chill</code>, <code>Panic</code>, <code>BaseAttacked</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>IdentifierType</code></td>
+<td><code>Task</code>, <code>TaskGroup</code>, <code>TaskCategory</code>, <code>WarPhase</code>, <code>GameEvent</code>, <code>-</code></td>
+<td></td>
+<td>ein Typ, der nicht zur Id passt, bedeutet, dass die Zeile ignoriert wird</td>
+</tr>
+<tr>
+<td><code>Parameter</code></td>
+<td>der Variantenschlüssel; Aliase durch Kommas getrennt</td>
+<td><code>default</code>, <code>Prop.Bed</code>, <code>ResourceType.Meals</code></td>
+<td><strong>kein Alias darf doppelt vorkommen</strong></td>
+</tr>
+<tr>
+<td><code>Raw Parameter</code></td>
+<td>eine Notiz</td>
+<td></td>
+<td>wird vom Spiel nicht gelesen</td>
+</tr>
+<tr>
+<td><code>Confidence</code> / <code>Mood</code> / <code>Energy</code></td>
+<td>Zahlen</td>
+<td>-30 … 50</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Influence Type</code></td>
+<td><code>Timed</code> oder <code>OnEventTrigger</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><code>Timed</code>-Werte wirken bei jedem Tick und sind deshalb viel kleiner als <code>OnEventTrigger</code>-Werte. Kopierst du einen Ereigniswert von <code>+20</code>
+in eine <code>Timed</code>-Zeile, klebt die Stimmung eines Crewmitglieds innerhalb einer Minute an der Obergrenze.</p>
+<p>Sechs Zeilen enthalten eine Variante pro Zeile und können überhaupt nicht geändert werden: <code>Sleep</code>, <code>Eat</code>, <code>WorkOnWorkbench</code>,
+<code>UseRecreationalItem</code>, <code>MissionCompleted</code>, <code>Death</code>.</p>
+<h3 id="missions-and-time">Missionen und Zeit<a class="headerlink" href="#missions-and-time" title="Permanent link">&para;</a></h3>
+<h4 id="flightmissiondata-the-mission-modifiers"><code>FlightMissionData</code> - die Missionsmodifikatoren<a class="headerlink" href="#flightmissiondata-the-mission-modifiers" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/FlightMissionData.csv">FlightMissionData.csv</a></p>
+<p>Die Zeilen-Id benennt, was gemessen wird: <code>AirplaneIntegrity</code>, <code>AirplaneHealth</code>, <code>AirplaneFuel</code>, <code>Mood</code>,
+<code>Energy</code>, <code>Confidence</code>, <code>SeatsConfiguration</code>, <code>CrewHealth</code>, <code>CrewOnFire</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ModifierCategory</code></td>
+<td>eine Bezeichnung</td>
+<td><code>low</code>, <code>high</code>, <code>zero</code>, <code>critical</code>, <code>mismatch</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ModifierType</code></td>
+<td><code>SkillRollModifier</code> oder <code>NoFlightModifier</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ModifierRange</code></td>
+<td><code>min/max</code> ganze Zahlen</td>
+<td><code>0/-5</code>, <code>2/0</code></td>
+<td>Bonus auf den Wurf</td>
+</tr>
+<tr>
+<td><code>Parameter</code></td>
+<td>durch Leerzeichen getrennte Crewrollen oder <code>Default</code></td>
+<td><code>Default</code>, <code>CrewRole.Pilot</code></td>
+<td>jede Rolle braucht das Präfix <code>CrewRole.</code> - ein bloßes <code>Pilot</code> passt nie, eine unbekannte Rolle ebenso wenig</td>
+</tr>
+<tr>
+<td><code>ThresholdRange</code></td>
+<td><code>min/max</code> ganze Zahlen</td>
+<td><code>1/40</code>, <code>-100/-90</code>, <code>50/100</code></td>
+<td>der Bereich gemessener Werte, den diese Zeile abdeckt</td>
+</tr>
+</tbody>
+</table>
+<p><code>NoFlightModifier</code> ist die harte Sperre, die ein Flugzeug am Boden hält - kein Treibstoff mehr oder ein Crewmitglied mit Stimmung am
+Tiefpunkt. Erweiterst du seine <code>ThresholdRange</code>, bleibt deine ganze Staffel am Boden; setzt du sie auf etwas Unerreichbares wie
+<code>-1000/-999</code>, schaltest du sie praktisch ab.</p>
+<p>Zeilen, die sich über mehrere Zeilen erstrecken und deshalb nicht änderbar sind: <code>AirplaneIntegrity</code>, <code>AirplaneHealth</code>, <code>Mood</code>,
+<code>Energy</code>, <code>Confidence</code>.</p>
+<h4 id="taskvalues-durations-and-thresholds-per-task"><code>TaskValues</code> - Dauern und Schwellenwerte pro Aufgabe<a class="headerlink" href="#taskvalues-durations-and-thresholds-per-task" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/TaskValues.csv">TaskValues.csv</a></p>
+<p>Drei Spalten: die Aufgaben-Id, ein <code>Variable Name</code> und ein <code>Value</code>.</p>
+<p><code>Variable Name</code> ist der Schlüssel, unter dem das Spiel die Einstellung nachschlägt, deshalb <strong>kann nur <code>Value</code> geändert werden</strong>. Verwendete
+Namen sind <code>Duration</code> (Minuten), <code>Distance</code>, <code>Chance</code>, <code>ExperienceGain</code>, <code>HealthAmount</code>, <code>IntegrityAmount</code>,
+<code>IntegrityPenalty</code>, <code>ScheduleThreshold</code>, <code>ScheduleThresholdPercentage</code>, <code>ResourceToFuelRatio</code>, <code>Targets</code>,
+<code>Initiation</code> und <code>Active</code>.</p>
+<p>Aufgaben mit mehreren Einstellungen belegen mehrere Zeilen und können nicht geändert werden. Das sind: <code>Chat</code>, <code>Chill</code>, <code>Panic</code>,
+<code>AirAttackPanic</code>, <code>CelebrateSuccessfulMission</code>, <code>BreakThings</code>, <code>RepairAirplane</code>, <code>MaintainAirplane</code>, <code>Refuel</code>,
+<code>RepairEquipment</code>, <code>RefillAirplaneAmmo</code>, <code>UseTrainingObject</code>, die sechs <code>…Simple…</code>- und sechs <code>…Advanced…</code>-Trainingsaufgaben
+und <code>BeOnFire</code>. Alles andere - <code>UseRadio</code>, <code>Eat</code>, <code>Salute</code>, <code>Bury</code>, <code>Recover</code>, <code>MonitorAirspace</code> und
+der Rest - hat eine einzige Einstellung, fast immer <code>Duration</code> (<code>RefillEquipmentAmmo</code> hat nur
+<code>ScheduleThresholdPercentage</code>), und kann ganz normal geändert werden.</p>
+<p><code>Value</code> akzeptiert auch Text (eine eingebaute Zeile nennt einen Stuhl), deshalb wird eine Nicht-Zahl in einer Zahleneinstellung angenommen
+und schlägt erst fehl, wenn die Aufgabe läuft. Das ist die einzige Stelle in dieser Tabelle, an der du noch Unsinn schreiben kannst.</p>
+<h4 id="dayschedule-the-phases-of-a-day"><code>DaySchedule</code> - die Phasen eines Tages<a class="headerlink" href="#dayschedule-the-phases-of-a-day" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/DaySchedule.csv">DaySchedule.csv</a></p>
+<p>Vier Zeilen, <code>0</code>–<code>3</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Spalte</th>
+<th>Wert</th>
+<th>Eingebaut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Phase</code></td>
+<td><code>Work</code>, <code>Leisure</code>, <code>Sleep</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>StartHour</code></td>
+<td>ganze Zahl, einschließlich</td>
+<td>0, 5, 7, 22</td>
+</tr>
+<tr>
+<td><code>EndHour</code></td>
+<td>ganze Zahl, ausschließlich</td>
+<td>5, 7, 22, 24</td>
+</tr>
+</tbody>
+</table>
+<p>Die vier Zeitspannen werden Stunde für Stunde aufgeschlüsselt, deshalb <strong>zählen Lücken und Überschneidungen</strong>: Eine Stunde, die keine Zeile
+abdeckt, hat überhaupt keine Phase, und die Crew trödelt sie durch. Halte die Spannen lückenlos von 0 bis 24.</p>
+<h4 id="daynightsystemdata-sun-and-shadows"><code>DayNightSystemData</code> - Sonne und Schatten<a class="headerlink" href="#daynightsystemdata-sun-and-shadows" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/DayNightSystemData.csv">DayNightSystemData.csv</a></p>
+<p>Name und Wert, alles Zahlen, rein optisch.</p>
+<table>
+<thead>
+<tr>
+<th>Zeile</th>
+<th>Bedeutung</th>
+<th>Eingebaut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Morning Time</code>, <code>Dawn Time</code>, <code>Day Time</code>, <code>Evening Time</code>, <code>Dusk Time</code>, <code>Night Time</code></td>
+<td>Stunde, in der jede Lichtstufe beginnt</td>
+<td>4, 7, 10, 17, 22, 23</td>
+</tr>
+<tr>
+<td><code>Sun Min Rotation</code> / <code>Sun Max Rotation</code></td>
+<td>Bogen der Sonnenhöhe, Grad</td>
+<td>15 / 165</td>
+</tr>
+<tr>
+<td><code>Sun Yaw Offset</code></td>
+<td>Kompassdrehung</td>
+<td>-90</td>
+</tr>
+<tr>
+<td><code>Sun Tilt</code></td>
+<td>Grad</td>
+<td>10</td>
+</tr>
+<tr>
+<td><code>Shadow Day Intens</code> / <code>Shadow Night Intens</code></td>
+<td>Schattenstärke</td>
+<td>0.85 / 0</td>
+</tr>
+</tbody>
+</table>
+<p>Halte die sechs Zeitzeilen aufsteigend und innerhalb von 0–23, sonst springen die Lichtstufen hin und her.</p>
+<h4 id="gamegoalalerts-when-the-game-warns-the-player"><code>GameGoalAlerts</code> - wann das Spiel den Spieler warnt<a class="headerlink" href="#gamegoalalerts-when-the-game-warns-the-player" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/GameGoalAlerts.csv">GameGoalAlerts.csv</a></p>
+<p>Name und Wert, alles Zahlen, nur Warnungen: <code>LowMoraleThreshold</code> (-50), <code>CriticalMoraleThreshold</code> (-65),
+<code>LowFoodThreshold</code> (20), <code>FewLeisureItemsThreshold</code> (5), <code>MissionTimerMinutesThreshold</code> (150),
+<code>LowWaterThreshold</code> (20).</p>
+<h3 id="general">Allgemein<a class="headerlink" href="#general" title="Permanent link">&para;</a></h3>
+<h4 id="variables-the-global-number-bag"><code>Variables</code> - der globale Zahlensack<a class="headerlink" href="#variables-the-global-number-bag" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/Variables.csv">Variables.csv</a></p>
+<p>Name und Wert, 86 Einträge, jeder gelesen von dem Teil des Spiels, der ihn braucht.</p>
+<p>Diese Spalte akzeptiert <strong>alles</strong>, weil ein paar Einträge Text oder einen <code>min-max</code>-Bereich statt einer Zahl enthalten.
+Schreibst du <code>abc</code>, wo eine Zahl hingehört, wird das angenommen und dann als <code>0</code> gelesen - die Funktion hört still auf zu arbeiten,
+und im Log steht ein Fehler. Bei dieser Tabelle solltest du am vorsichtigsten sein.</p>
+<p>Einträge, die du kennen solltest, bevor du sie änderst:</p>
+<ul>
+<li><code>TimeTickInterval</code> (0.6666) - echte Sekunden pro Spielminute. Halbierst du den Wert, läuft das ganze Spiel doppelt so schnell,
+  inklusive jedes Timers, der darauf abgestimmt ist.</li>
+<li><code>AirplanesLimit</code> (24) - wie viele Flugzeuge eine Basis besitzen darf.</li>
+<li><code>CharacterBaseHealth</code> (7) - plus der Endurance-Rang ergibt das die maximale Gesundheit eines Crewmitglieds. Unter
+  <code>CharacterHeavyInjuryThreshold</code> (3) startet jeder schwer verletzt.</li>
+<li><code>MaxVictoryPoints</code> (12) - das Budget für Flugzeugbestellungen.</li>
+<li><code>ScrambleFuelNeeded</code> (80) - pauschaler Treibstoff pro Alarmstart, egal welches Flugzeug.</li>
+<li><code>AttackHourMin</code> / <code>AttackHourMax</code> (12/23) - werden in 1–23 zurückgeholt, wenn du diesen Bereich verlässt.</li>
+<li><code>DiverBombFiresCount</code>, <code>BomberBombFiresCount</code>, <code>CharredTerrainRevertTimeDays</code> - diese drei sind <code>min-max</code>-Bereiche,
+  keine einzelnen Zahlen.</li>
+</ul>
+<p>Acht Einträge sind Überbleibsel, und <strong>nichts liest sie</strong>, sie zu ändern bewirkt also überhaupt nichts:
+<code>AttackedCharacterId</code>, <code>BikeMovementSpeedMultiplier</code>, <code>LichfieldIntroCrewMembersCount</code>,
+<code>AirplaneIntegrityModifierTreshold</code>, <code>AirplaneHealthModifierTreshold</code>, <code>AirAttackFighterHealth</code>,
+<code>AirAttackDiverHealth</code>, <code>AirAttackBomberHealth</code>.</p>
+<h4 id="feedbackvariables"><code>FeedbackVariables</code><a class="headerlink" href="#feedbackvariables" title="Permanent link">&para;</a></h4>
+<p>Das Feedback-Formular im Spiel: <code>API Endpoint</code>, <code>Feedback Character Limit</code>, <code>Screenshot Height</code>, <code>Survey Link</code>,
+<code>Survey Link Demo</code>, <code>Survey Opened Player Prefs</code>. Eine Gameplay-Mod hat keinen Grund, das anzufassen, und wenn du
+<code>API Endpoint</code> woandershin zeigen lässt, geht das Feedback der Spieler an diese Adresse.</p>
+<hr />
+<h2 id="worked-example">Ausführliches Beispiel<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h2>
+<p><code>Mods/my_balance_mod/CSV/ResourceCost.json</code> - gib der Lagerkiste Baukosten, mach Holzwände billiger und
+streich die Planenkosten des Stuhls:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"Commands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Add"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"storage_box"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Cells"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Planks"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">"Metal"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Replace"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wall_wood"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Cells"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Planks"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Remove"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chair"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"Tarp"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>Mods/my_balance_mod/CSV/Variables.json</code> - beschleunige den Turbo-Modus und lass die Crew häufiger plaudern. <code>Value</code>
+nimmt in dieser Tabelle jeden Text, ein Tippfehler wie <code>0,6</code> wird also still angenommen und dann als <code>0</code> gelesen - prüf die
+Zahl doppelt:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"Commands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Replace"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TurboTimeScaleMultiplier"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Cells"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Value"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Replace"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RandomActionChatProbability"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Cells"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Value"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Dieselben zwei Änderungen als <code>Mods/my_balance_mod/CSV/Variables.csv</code>:</p>
+<div class="highlight"><pre><span></span><code>Name,Value
+TurboTimeScaleMultiplier,20
+RandomActionChatProbability,0.6
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zurück zum Seitenanfang
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Fußzeile" >
+        
+          
+          <a href="../../scripting/localization/" class="md-footer__link md-footer__link--prev" aria-label="Zurück: Lokalisierung">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Zurück
+              </span>
+              <div class="md-ellipsis">
+                Lokalisierung
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../table-editor/" class="md-footer__link md-footer__link--next" aria-label="Weiter: Tabellen-Befehlsdateien">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Weiter
+              </span>
+              <div class="md-ellipsis">
+                Tabellen-Befehlsdateien
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Documentation CC-BY 4.0 - Ground of Aces and Blindflug Studios logos and names are trademarks and not covered by any license.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://discord.com/channels/1006159027157356587/1551969822911242240" target="_blank" rel="noopener" title="Modding channel on Discord" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/blindflugstudios/goa-modkit" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://steamcommunity.com/app/2308690/workshop/" target="_blank" rel="noopener" title="Steam Workshop" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M504 256c0 137-111.2 248-248.4 248-113.8 0-209.6-76.3-239-180.4l95.2 39.3c6.4 32.1 34.9 56.4 68.9 56.4 39.2 0 71.9-32.4 70.2-73.5l84.5-60.2c52.1 1.3 95.8-40.9 95.8-93.5 0-51.6-42-93.5-93.7-93.5s-93.7 42-93.7 93.5v1.2L184.6 279c-15.5-.9-30.7 3.4-43.5 12.1L8 236.1C18.2 108.4 125.1 8 255.6 8 392.8 8 504 119 504 256M163.7 384.3l-30.5-12.6c5.6 11.6 15.3 20.8 27.2 25.8 26.9 11.2 57.8-1.6 69-28.4 5.4-13 5.5-27.3.1-40.3S214 305.6 201 300.2c-12.9-5.4-26.7-5.2-38.9-.6l31.5 13c19.8 8.2 29.2 30.9 20.9 50.7-8.3 19.9-31 29.2-50.8 21m173.8-254.5a62.3 62.3 0 1 1 0 124.6 62.3 62.3 0 1 1 0-124.6m.1 109a46.8 46.8 0 1 0 0-93.6 46.8 46.8 0 1 0 0 93.6"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "navigation.indexes", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

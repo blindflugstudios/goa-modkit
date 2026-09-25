@@ -1,0 +1,5 @@
+ID,Growth,Food,Seeds,Regrowth
+grain,3,3,2,FALSE
+beans,6,4,5,FALSE
+potato,15,20,3,FALSE
+tomato,10,7,1,TRUE

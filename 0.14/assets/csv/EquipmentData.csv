@@ -1,0 +1,10 @@
+ID,Range,Damage,Fire Rate,Ammo Type,Ammo Capacity,Ammo Load Time,Ammo Storage,Damage Bonus,Firing Angle,Aiming Speed,Range Bonus,Attacker Priority
+Bofors40mm,70,6,140,AntiAirAmmo,4,1,100,0,360,100,0,Bombers
+Searchlight,30,0,0,None,0,0,0,0.25,0,0,0,None
+RadioTower,40,0,0,None,0,0,0,0,0,0,0,None
+VickersGunAA,45,0.6,720,GunAmmo,80,3,500,0,140,170,0,Fighters
+OerlikonGun,52,1.2,450,AntiAirAmmo,60,6.5,240,0,360,150,0,Divers
+Lookout,10,0,0,None,0,0,0,0,0,0,16,None
+ControlTowerMetal,20,0,0,0,0,0,0,0,0,0,0,None
+ControlTowerBrick,30,0,0,0,0,0,0,0,0,0,0,None
+ControlTowerConcrete,50,0,0,0,0,0,0,0,0,0,0,None

@@ -1,0 +1,2720 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Build missions, quests, scripts, maps and more for Ground of Aces - with or without an AI agent.">
+      
+      
+      
+        <link rel="canonical" href="https://blindflugstudios.github.io/goa-modkit/0.14/scripting/">
+      
+      
+        <link rel="prev" href="../quests/">
+      
+      
+        <link rel="next" href="events/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../de/scripting/" hreflang="de">
+        
+      
+      
+      <link rel="icon" href="../assets/logos/blindflug-mark.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Scripting - Ground of Aces Modkit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#scripting" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+
+<strong>Developer Preview</strong> - subject to change. Use <strong>at your own risk</strong>. Anyone can read, the kit itself is invitation only for now - to get access, email <a href="mailto:nuria@blindflugstudios.com">nuria@blindflugstudios.com</a> or <a href="mailto:moritz@blindflugstudios.com">moritz@blindflugstudios.com</a>.
+
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Ground of Aces Modkit" class="md-header__button md-logo" aria-label="Ground of Aces Modkit" data-md-component="logo">
+      
+  <img src="../assets/logos/goa-logo-colored.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ground of Aces Modkit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Scripting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../de/scripting/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/blindflugstudios/goa-modkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    blindflugstudios/goa-modkit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../start/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Get started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../basics/mods/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Basics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../missions/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Missions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../quests/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Quests
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Scripting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../data/csv/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Game data
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../content/maps/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Maps and art
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../sharing/workshop/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Sharing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ai/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  AI agents
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../examples/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Ground of Aces Modkit" class="md-nav__button md-logo" aria-label="Ground of Aces Modkit" data-md-component="logo">
+      
+  <img src="../assets/logos/goa-logo-colored.png" alt="logo">
+
+    </a>
+    Ground of Aces Modkit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/blindflugstudios/goa-modkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    blindflugstudios/goa-modkit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../start/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get started
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Get started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/install-windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install on Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/install-mac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install on Mac
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/first-mod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your first mod in 10 minutes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/without-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Without an AI agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    When nothing happens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/mods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How mods work
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and reloading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/cheats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat console
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python mods and safety
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../missions/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Missions
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Missions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../missions/first-mission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write your first mission
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../missions/chains/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chains and campaigns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../missions/locations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Locations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../missions/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../quests/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quests
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Quests
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Events
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="localization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Game data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Game data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/csv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSV tables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/table-editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Table command files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maps and art
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maps and art
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objects and models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/terrain-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terrain objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/biomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sharing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sharing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sharing/workshop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steam Workshop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../ai/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI agents
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI agents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai/claude-code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Claude Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai/codex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai/skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skills and agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-scripts-live" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where scripts live
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-scripts-are-loaded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How scripts are loaded
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How scripts are loaded">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seeing-your-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seeing your changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scripts-in-a-mod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts in a mod
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mission-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mission scripts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-event-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your first event script
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Your first event script">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-more-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding more logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chance-and-maximum-number-of-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chance and maximum number of runs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-translations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding translations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-finished-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The finished script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#global-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Global variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Global variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#event-log-entries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event log entries
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-handler-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event handler functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string-formatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        String formatting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/blindflugstudios/goa-modkit/edit/main/docs/en/scripting/index.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="scripting">Scripting<a class="headerlink" href="#scripting" title="Permanent link">&para;</a></h1>
+<p>The game runs Python scripts for random events and mission logic, and your mod can add its own. A script can react to things that happen on the base - a day phase changing, a building being finished, a mission coming back - and change the game in return: lift the crew's mood, write an entry to the event log, put a mission on the map.</p>
+<p>Scripts run on <strong>IronPython 3.4</strong>, a version of Python 3.4 that runs inside the game. Everyday Python works, including f-strings (the game's own scripts use them). Avoid syntax that came after Python 3.6 - no walrus operator <code>:=</code>, no <code>match</code>, no positional-only <code>/</code> parameters - and packages built for regular Python with compiled parts (numpy and the like) do not work. The standard library that ships with the game is in its <code>Scripts/Lib</code> folder; not every module is there, so stick to what the examples use.</p>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="events/">Events</a></td>
+<td>every event a script can subscribe to, with its arguments</td>
+</tr>
+<tr>
+<td><a href="api/">API</a></td>
+<td>the objects a script uses to talk to the game (<code>characters_api</code>, <code>missions_api</code>, ...)</td>
+</tr>
+<tr>
+<td><a href="localization/">Localization</a></td>
+<td>adding and changing text with <code>localization.SetTerm</code></td>
+</tr>
+<tr>
+<td><a href="../missions/">Missions</a></td>
+<td>mission scripts and their handlers</td>
+</tr>
+<tr>
+<td><a href="../basics/security/">Python mods and safety</a></td>
+<td>what scripts in a mod can do, and what to check before installing one</td>
+</tr>
+</tbody>
+</table>
+<h2 id="where-scripts-live">Where scripts live<a class="headerlink" href="#where-scripts-live" title="Permanent link">&para;</a></h2>
+<p><strong>Your own scripts belong in a mod</strong>, in its <code>Missions/</code> folder:</p>
+<div class="highlight"><pre><span></span><code>Mods/
+  my_mod/
+    Missions/
+      morale_boost.py
+</code></pre></div>
+<p>The game's own scripts sit in the installation folder, under <code>GroundOfAces_Data/StreamingAssets/Scripts</code> (on macOS: <code>GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Scripts</code>). That is read-only shipped content - read it for ideas, but do not change it, because a game update overwrites it. The shipped folders are:</p>
+<table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Default</code></td>
+<td>the random events (<code>random_events.py</code>, <code>random_health_events.py</code>)</td>
+</tr>
+<tr>
+<td><code>Mission</code></td>
+<td>the mission scripts, including the shared <code>default_mission.py</code></td>
+</tr>
+<tr>
+<td><code>Lib</code></td>
+<td>the Python standard library - not a script folder</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-scripts-are-loaded">How scripts are loaded<a class="headerlink" href="#how-scripts-are-loaded" title="Permanent link">&para;</a></h2>
+<p>Scripts are loaded every time a level is loaded, in this order:</p>
+<ol>
+<li>the game's <code>Scripts/Default</code> folder</li>
+<li>the Supporter Pack's event scripts, if you own it</li>
+<li>the game's <code>Scripts/Mission</code> folder</li>
+<li>the Supporter Pack's mission scripts</li>
+<li>the <code>Missions/</code> folder of every enabled mod, in mod load order (see <a href="../basics/mods/#which-mod-wins">Which mod wins</a>)</li>
+<li>your own <code>Missions</code> folder next to <code>Mods</code> (on Windows <code>%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Missions\</code>; the other platforms are on <a href="../missions/#where-missions-come-from">Missions</a>)</li>
+</ol>
+<p>Rules worth knowing:</p>
+<ul>
+<li>Only <code>.py</code> files directly inside a folder are read - subfolders are ignored.</li>
+<li>Each file becomes a Python module named after the file.</li>
+<li>A file with a <strong>syntax error</strong> is skipped, with the error in the game's log, and the other files still load.</li>
+<li>Any <strong>other error at the top level</strong> of a file (a failing import, an exception while the file runs) is not caught and can stop the folders after it from loading - including other mods' scripts. Wrap risky top-level code in <code>try</code>/<code>except</code>.</li>
+</ul>
+<p>Every handler is identified by <code>&lt;module&gt;.&lt;function&gt;</code>, that is the file name plus the function name. If two files define a handler with the same module and function name, the one loaded <strong>later</strong> replaces the earlier one. This is how a mod can override one of the game's random events: copy <code>random_events.py</code> into your mod's <code>Missions/</code> folder and change the functions you want changed.</p>
+<h3 id="seeing-your-changes">Seeing your changes<a class="headerlink" href="#seeing-your-changes" title="Permanent link">&para;</a></h3>
+<p>Edit your script, return to the main menu and load a level again - loading a save is enough. If the mod folder itself is new, press <strong>Refresh</strong> in the Mods window first (see <a href="../basics/mods/#seeing-your-changes">How mods work</a>). More in <a href="../basics/testing/">Testing and reloading</a>.</p>
+<h2 id="scripts-in-a-mod">Scripts in a mod<a class="headerlink" href="#scripts-in-a-mod" title="Permanent link">&para;</a></h2>
+<p>Every <code>.py</code> file in a mod's <code>Missions/</code> folder is a full event script, not only mission logic: it can subscribe to any event exactly like the game's own <code>random_events.py</code>. The scripts of every enabled mod are loaded. A player who does not want a mod's scripts to run disables the mod in the Mods window; the per-mod <strong>Scripting</strong> switch there does not change this at the moment. See <a href="../basics/security/">Python mods and safety</a>.</p>
+<h2 id="mission-scripts">Mission scripts<a class="headerlink" href="#mission-scripts" title="Permanent link">&para;</a></h2>
+<p>Mission scripts are a special kind of script that decides how a mission plays out. They are covered on <a href="../missions/">Missions</a>, together with the in-game Mission Editor and the JSON file behind every mission. Mission handlers use the same <code>event_handler</code> decorator as the scripts on this page, with the constants from <code>MissionEvent</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.FlightMission</span><span class="w"> </span><span class="kn">import</span> <span class="n">MissionEvent</span>
+
+<span class="nd">@event_handler</span><span class="p">(</span><span class="n">MissionEvent</span><span class="o">.</span><span class="n">GET_MISSION_ID</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_mission_id</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">"mymod_coastal_patrol"</span>
+</code></pre></div>
+<p>The full list of mission handlers is on <a href="../missions/reference/">Reference</a>.</p>
+<h2 id="your-first-event-script">Your first event script<a class="headerlink" href="#your-first-event-script" title="Permanent link">&para;</a></h2>
+<p>Let's write a script that runs every time a day phase changes and lifts the whole crew's mood by 10.</p>
+<p>To do this, we subscribe to the <code>DAY_PHASE_CHANGE</code> event. This is just one of the events you can use - the full list is on <a href="events/">Events</a>.</p>
+<p>Create a mod folder (see <a href="../basics/mods/">How mods work</a>), give it a <code>Missions/</code> subfolder and create a new file named <code>morale_boost.py</code> in it. Paste the following code into it:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Import MinorEvent to have access to built-in event names</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.MinorEvents</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinorEvent</span>
+<span class="c1"># Import MoraleCategory to have access to morale type constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.Game.Characters.Morale</span><span class="w"> </span><span class="kn">import</span> <span class="n">MoraleCategory</span>
+
+<span class="c1"># Define a localization term that can be displayed in the game.</span>
+<span class="c1"># This term contains a single placeholder value named "MOOD".</span>
+<span class="c1"># Since this is outside any function, it runs when the script is loaded.</span>
+<span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"mymod/morale_up"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"New day phase, [morale:</span><span class="si">{</span><span class="n">MoraleCategory</span><span class="o">.</span><span class="n">Mood</span><span class="si">}</span><span class="s2">] improves by </span><span class="se">{{</span><span class="s2">[MOOD]</span><span class="se">}}</span><span class="s2">!"</span><span class="p">)</span>
+
+<span class="c1"># Use a decorator to mark the function `on_day_phase` as an event handler.</span>
+<span class="c1"># The function is called when the event happens.</span>
+<span class="c1"># The arguments are specific to the day phase change event:</span>
+<span class="c1"># the previous and the current phase.</span>
+<span class="nd">@event_handler</span><span class="p">(</span><span class="n">MinorEvent</span><span class="o">.</span><span class="n">DAY_PHASE_CHANGE</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on_day_phase</span><span class="p">(</span><span class="n">previous_phase</span><span class="p">,</span> <span class="n">current_phase</span><span class="p">):</span>
+
+    <span class="c1"># The amount of mood to add</span>
+    <span class="n">mood_boost</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="c1"># Change the mood of all characters</span>
+    <span class="n">characters_api</span><span class="o">.</span><span class="n">ModifyMorale</span><span class="p">(</span><span class="n">MoraleCategory</span><span class="o">.</span><span class="n">Mood</span><span class="p">,</span> <span class="n">mood_boost</span><span class="p">)</span>
+
+    <span class="c1"># Create an event log entry, using the localization term defined above.</span>
+    <span class="c1"># The "MOOD" placeholder is replaced with the value of str(mood_boost).</span>
+    <span class="n">event_log</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="s2">"mymod/morale_up"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"MOOD"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">mood_boost</span><span class="p">)})</span>
+</code></pre></div>
+<p>Now launch the game (or press <strong>Refresh</strong> in the Mods window if the game was already running when you made the folder), load a level and wait until a day phase changes. You should see the message in the event log, and the mood of the whole crew should go up by 10. Congratulations - you have written your first script!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>DAY_PHASE_CHANGE</code> is not fired for the very first phase of a game, nor while an air-raid alert is running.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">What is <code>@event_handler</code>?</p>
+<p><code>event_handler</code> is a <em>decorator</em>, marked by the <code>@</code> sign in front of it. A decorator changes the function written right after it - here, it registers the function so the game calls it when the event happens. You do not need to understand more than that to use it.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Why the doubled braces?</p>
+<p>In an f-string, <code>{MoraleCategory.Mood}</code> is replaced by Python right away, while <code>{{</code> and <code>}}</code> produce single braces. So the term ends up containing <code>{[MOOD]}</code>, which is the placeholder the game fills in later.</p>
+</div>
+<h3 id="adding-more-logic">Adding more logic<a class="headerlink" href="#adding-more-logic" title="Permanent link">&para;</a></h3>
+<p>Everyone at the base likes their work, but they probably enjoy a well-deserved break more. Let's make the effect depend on which day phase has just started.</p>
+<p>First, import <code>DayPhase</code> to have access to the day phase constants:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.DayPhases</span><span class="w"> </span><span class="kn">import</span> <span class="n">DayPhase</span>
+</code></pre></div>
+<p>Inside the <code>on_day_phase</code> function, change the value assigned to <code>mood_boost</code>:</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">mood_boost</span> <span class="o">=</span> <span class="mi">10</span> <span class="k">if</span> <span class="n">current_phase</span> <span class="o">==</span> <span class="n">DayPhase</span><span class="o">.</span><span class="n">Leisure</span> <span class="k">else</span> <span class="mi">5</span> <span class="k">if</span> <span class="n">current_phase</span> <span class="o">==</span> <span class="n">DayPhase</span><span class="o">.</span><span class="n">Sleep</span> <span class="k">else</span> <span class="mi">0</span>
+</code></pre></div>
+<p>If the day phase is neither leisure nor sleep, we do not want to do anything, so add an early return:</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">if</span> <span class="n">mood_boost</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
+<p>The returned value matters: <code>False</code> means this run does not count towards the maximum number of runs (see below). Returning nothing, or <code>True</code>, counts it normally.</p>
+<h3 id="chance-and-maximum-number-of-runs">Chance and maximum number of runs<a class="headerlink" href="#chance-and-maximum-number-of-runs" title="Permanent link">&para;</a></h3>
+<p>Without further settings, the handler runs every time the event happens, as often as it happens. That is great for testing, but for real use some randomness is a good idea. This gives the function a 10 % chance to run when the day phase changes, at most 4 times in one game:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">MinorEvent</span><span class="o">.</span><span class="n">DAY_PHASE_CHANGE</span><span class="p">,</span> <span class="n">chance</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_occurrences</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on_day_phase</span><span class="p">(</span><span class="n">previous_phase</span><span class="p">,</span> <span class="n">current_phase</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div>
+<p>Only the decorator line changes; the body of the function (shown here as <code>...</code>) stays as it is.</p>
+<h3 id="adding-translations">Adding translations<a class="headerlink" href="#adding-translations" title="Permanent link">&para;</a></h3>
+<p>If you want your script to support several languages, register the term for each of them. Here is the message in Polish:</p>
+<div class="highlight"><pre><span></span><code><span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"pl"</span><span class="p">,</span> <span class="s2">"mymod/morale_up"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Nowa faza dnia, [morale:</span><span class="si">{</span><span class="n">MoraleCategory</span><span class="o">.</span><span class="n">Mood</span><span class="si">}</span><span class="s2">] wzrasta o </span><span class="se">{{</span><span class="s2">[MOOD]</span><span class="se">}}</span><span class="s2">!"</span><span class="p">)</span>
+</code></pre></div>
+<p>Switch the game language between English and Polish, and the message in the event log follows. The language code must be one the game offers in its options (<code>pl</code> is).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A language you leave out shows the text of a language you did register, so always register <code>en</code>. A key registered in no language at all is shown as the raw key in the event log.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>SetTerm</code> on a key the game already ships - a building name, a menu label - <strong>replaces the game's own text</strong> for that language. That is a useful way to retext the game, and an easy way to break it by accident. Prefix your own keys with your mod's name, as in <code>mymod/morale_up</code>. More on <a href="localization/">Localization</a>.</p>
+</div>
+<h3 id="the-finished-script">The finished script<a class="headerlink" href="#the-finished-script" title="Permanent link">&para;</a></h3>
+<p>After all the changes above, the script looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.MinorEvents</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinorEvent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.Game.Characters.Morale</span><span class="w"> </span><span class="kn">import</span> <span class="n">MoraleCategory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.DayPhases</span><span class="w"> </span><span class="kn">import</span> <span class="n">DayPhase</span>
+
+<span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"mymod/morale_up"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"New day phase, [morale:</span><span class="si">{</span><span class="n">MoraleCategory</span><span class="o">.</span><span class="n">Mood</span><span class="si">}</span><span class="s2">] improves by </span><span class="se">{{</span><span class="s2">[MOOD]</span><span class="se">}}</span><span class="s2">!"</span><span class="p">)</span>
+<span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"pl"</span><span class="p">,</span> <span class="s2">"mymod/morale_up"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Nowa faza dnia, [morale:</span><span class="si">{</span><span class="n">MoraleCategory</span><span class="o">.</span><span class="n">Mood</span><span class="si">}</span><span class="s2">] wzrasta o </span><span class="se">{{</span><span class="s2">[MOOD]</span><span class="se">}}</span><span class="s2">!"</span><span class="p">)</span>
+
+<span class="nd">@event_handler</span><span class="p">(</span><span class="n">MinorEvent</span><span class="o">.</span><span class="n">DAY_PHASE_CHANGE</span><span class="p">,</span> <span class="n">chance</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_occurrences</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on_day_phase</span><span class="p">(</span><span class="n">previous_phase</span><span class="p">,</span> <span class="n">current_phase</span><span class="p">):</span>
+
+    <span class="n">mood_boost</span> <span class="o">=</span> <span class="mi">10</span> <span class="k">if</span> <span class="n">current_phase</span> <span class="o">==</span> <span class="n">DayPhase</span><span class="o">.</span><span class="n">Leisure</span> <span class="k">else</span> <span class="mi">5</span> <span class="k">if</span> <span class="n">current_phase</span> <span class="o">==</span> <span class="n">DayPhase</span><span class="o">.</span><span class="n">Sleep</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="n">mood_boost</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">characters_api</span><span class="o">.</span><span class="n">ModifyMorale</span><span class="p">(</span><span class="n">MoraleCategory</span><span class="o">.</span><span class="n">Mood</span><span class="p">,</span> <span class="n">mood_boost</span><span class="p">)</span>
+
+    <span class="n">event_log</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="s2">"mymod/morale_up"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"MOOD"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">mood_boost</span><span class="p">)})</span>
+</code></pre></div>
+<h3 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h3>
+<p>A good way to get a feeling for what is possible is to read the game's own scripts: <code>random_events.py</code> and <code>random_health_events.py</code> in <code>Scripts/Default</code> (the second one shows event log types, icons and the health API), and <code>default_mission.py</code> in <code>Scripts/Mission</code>. The <a href="../examples/">Examples</a> page has complete mods to copy, including an event script.</p>
+<h2 id="global-variables">Global variables<a class="headerlink" href="#global-variables" title="Permanent link">&para;</a></h2>
+<p>Every script can use a few ready-made objects, without importing anything, to talk to the game:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>What it is for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>logger</code></td>
+<td>the game's logger; <code>logger.Log("text")</code> writes a line to the game's log file</td>
+</tr>
+<tr>
+<td><code>event_log</code></td>
+<td>create event log entries</td>
+</tr>
+<tr>
+<td><code>localization</code></td>
+<td>add or change localization terms</td>
+</tr>
+<tr>
+<td><code>resources_api</code></td>
+<td>spawn a resource pile next to an object, or spoil a pile</td>
+</tr>
+<tr>
+<td><code>characters_api</code></td>
+<td>read and change crew state: health, morale, carried resources, fire, breaking-point effects</td>
+</tr>
+<tr>
+<td><code>missions_api</code></td>
+<td>manage missions</td>
+</tr>
+<tr>
+<td><code>airplanes_api</code></td>
+<td>manage airplanes</td>
+</tr>
+<tr>
+<td><code>game_api</code></td>
+<td>get general game data</td>
+</tr>
+</tbody>
+</table>
+<p>Every function of these objects is described on <a href="api/">API</a>.</p>
+<p>These names are available everywhere, so they also work inside any helper module your script imports. The game's own types are available to Python as well, so any public enum or type can be imported by its full name, for example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.GameResources</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.Tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.Game.Characters.Morale</span><span class="w"> </span><span class="kn">import</span> <span class="n">MoraleCategory</span>
+</code></pre></div>
+<p><code>eval</code> is removed and cannot be used.</p>
+<h3 id="event-log-entries">Event log entries<a class="headerlink" href="#event-log-entries" title="Permanent link">&para;</a></h3>
+<p><code>event_log.Create(term, parameters=None, event_log_type=EventLogType.Default)</code> takes an optional third argument that colours the entry: <code>from Blindflug.MinorEvents import EventLogType</code> gives <code>Default</code>, <code>Warning</code>, <code>Error</code> and <code>Success</code>. The parameter key <code>"icon"</code> is reserved: its value names a picture from the game's generic icon set (for example <code>"ui_health"</code>) shown next to the entry. <code>random_health_events.py</code> uses both:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.MinorEvents</span><span class="w"> </span><span class="kn">import</span> <span class="n">EventLogType</span>
+
+<span class="n">event_log</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="s2">"random_events/"</span> <span class="o">+</span> <span class="nb">id</span><span class="p">,</span> <span class="p">{</span><span class="s2">"CHARACTER"</span><span class="p">:</span> <span class="n">character</span><span class="p">,</span> <span class="s2">"icon"</span><span class="p">:</span> <span class="s2">"ui_health"</span><span class="p">},</span> <span class="n">EventLogType</span><span class="o">.</span><span class="n">Warning</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h2>
+<p>The events a script can subscribe to, and the arguments each one passes to your function, are listed on <a href="events/">Events</a>. Character arguments are character ids (text), resource arguments are <code>ResourceType</code> values, and task arguments are <code>Task</code> values (<code>from Blindflug.Tasks import Task</code>). Some events are fired without arguments; a few exist only for the game's interface and tutorial.</p>
+<h2 id="event-handler-functions">Event handler functions<a class="headerlink" href="#event-handler-functions" title="Permanent link">&para;</a></h2>
+<p>Event handlers are normal Python functions, marked with the <code>event_handler</code> decorator:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">event_name</span><span class="p">,</span> <span class="n">chance</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">max_occurrences</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">handler_function</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+    <span class="k">pass</span>
+</code></pre></div>
+<ul>
+<li><code>event_name</code> - the name of the event to handle. This can be any text that matches an existing event, but the easier way is <code>from Blindflug.MinorEvents import MinorEvent</code> and the constants defined there, such as <code>MinorEvent.DAY_PHASE_CHANGE</code>.</li>
+<li><code>chance</code> - the chance, from <code>0.0</code> to <code>1.0</code>, that the handler is called when the event happens. <code>0.5</code> gives it a 50 % chance. The default is <code>1.0</code> (always).</li>
+<li><code>max_occurrences</code> - the maximum number of times the handler can run in one save game. The count is stored in the save, keyed by the handler's <code>&lt;module&gt;.&lt;function&gt;</code> name, so renaming the file or the function resets it. A negative value means "no limit" and is the default (<code>-1</code>); <code>0</code> means the handler never runs. The chance roll and the limit check both happen before the handler is called.</li>
+</ul>
+<p>The name of the function can be any valid Python name. Together with the file name, it identifies the handler when the game counts how often it ran.</p>
+<p>The function's arguments depend on the event (see <a href="events/">Events</a>). The function can return <code>False</code> so that this run does not count towards <code>max_occurrences</code>. That is useful when a handler should run a limited number of times, but only under certain conditions. Returning nothing, or <code>True</code>, counts the run normally.</p>
+<h2 id="string-formatting">String formatting<a class="headerlink" href="#string-formatting" title="Permanent link">&para;</a></h2>
+<p>Text in the event log (and other terms you register) understands a few tags that turn a name into a coloured link or icon:</p>
+<table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>What it shows</th>
+<th>Where the names come from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[character:&lt;id&gt;]</code></td>
+<td>a clickable link to the crew member with that id</td>
+<td>character ids, as passed to your handler</td>
+</tr>
+<tr>
+<td><code>[resource:&lt;name&gt;]</code></td>
+<td>the resource's icon and colour</td>
+<td><code>from Blindflug.GameResources import ResourceType</code></td>
+</tr>
+<tr>
+<td><code>[morale:&lt;name&gt;]</code></td>
+<td>the morale category's icon and colour</td>
+<td><code>from Blindflug.Game.Characters.Morale import MoraleCategory</code></td>
+</tr>
+<tr>
+<td><code>[CharacterStat:&lt;name&gt;]</code></td>
+<td>a crew skill's icon and colour (<code>Flying</code>, <code>Shooting</code>, <code>Bombing</code>, <code>Endurance</code>, <code>Engineering</code>, <code>Navigating</code>)</td>
+<td><code>from BlindGame.CharacterStats.Data import CharacterStatType</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>CharacterStat</code> is written with a capital <code>C</code> and <code>S</code> - this tag is case-sensitive.</p>
+<p>The name inside a tag must be the exact name of the enum member; a name the game does not know is left in the text as it is. Writing the enum value into an f-string, as the examples above do, produces exactly that name.</p>
+<p>Tags are resolved after the term's placeholders are filled in, so a tag can wrap a placeholder:</p>
+<div class="highlight"><pre><span></span><code><span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"mymod/found"</span><span class="p">,</span> <span class="s2">"Found some [resource:{[RESOURCE]}]!"</span><span class="p">)</span>
+<span class="n">event_log</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="s2">"mymod/found"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"RESOURCE"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">resource</span><span class="p">)})</span>
+</code></pre></div>
+<p>Here <code>resource</code> is a <code>ResourceType</code> value your handler received, for example from the <code>resource_gained</code> event.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../quests/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Quests">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Quests
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="events/" class="md-footer__link md-footer__link--next" aria-label="Next: Events">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Events
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Documentation CC-BY 4.0 - Ground of Aces and Blindflug Studios logos and names are trademarks and not covered by any license.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://discord.com/channels/1006159027157356587/1551969822911242240" target="_blank" rel="noopener" title="Modding channel on Discord" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/blindflugstudios/goa-modkit" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://steamcommunity.com/app/2308690/workshop/" target="_blank" rel="noopener" title="Steam Workshop" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M504 256c0 137-111.2 248-248.4 248-113.8 0-209.6-76.3-239-180.4l95.2 39.3c6.4 32.1 34.9 56.4 68.9 56.4 39.2 0 71.9-32.4 70.2-73.5l84.5-60.2c52.1 1.3 95.8-40.9 95.8-93.5 0-51.6-42-93.5-93.7-93.5s-93.7 42-93.7 93.5v1.2L184.6 279c-15.5-.9-30.7 3.4-43.5 12.1L8 236.1C18.2 108.4 125.1 8 255.6 8 392.8 8 504 119 504 256M163.7 384.3l-30.5-12.6c5.6 11.6 15.3 20.8 27.2 25.8 26.9 11.2 57.8-1.6 69-28.4 5.4-13 5.5-27.3.1-40.3S214 305.6 201 300.2c-12.9-5.4-26.7-5.2-38.9-.6l31.5 13c19.8 8.2 29.2 30.9 20.9 50.7-8.3 19.9-31 29.2-50.8 21m173.8-254.5a62.3 62.3 0 1 1 0 124.6 62.3 62.3 0 1 1 0-124.6m.1 109a46.8 46.8 0 1 0 0-93.6 46.8 46.8 0 1 0 0 93.6"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "navigation.indexes", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

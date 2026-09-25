@@ -1,0 +1,34 @@
+ID,LocKey_Name,LocKey_Description,Dimensions,Resource Harvested,Farming Time,Resource Amount,Resource Total,Limited Harvest Amount,Destroyed On Depletion,Refresh Time,Health,Is Fireproof
+tree,map.obj.tree.name,map.obj.tree.description,1x4x1,Wood,120,3,3,0,TRUE,0,7,FALSE
+tree_big,map.obj.tree_big.name,map.obj.tree_big.description,2x4x2,Wood,400,21,21,0,TRUE,0,15,FALSE
+young_tree,map.obj.young_tree.name,map.obj.young_tree.description,1x2x1,,60,0,0,0,FALSE,0,6,FALSE
+young_tree_big,map.obj.young_tree_big.name,map.obj.young_tree_big.description,2x2x2,,60,0,0,0,FALSE,0,9,FALSE
+bush,map.obj.bush.name,map.obj.bush.description,1x1x1,,30,0,0,0,TRUE,0,3,FALSE
+bush_big,map.obj.bush_big.name,map.obj.bush_big.description,2x2x2,,60,0,0,0,TRUE,0,7,FALSE
+small_rock,map.obj.small_rock.name,map.obj.small_rock.description,1x1x1,Stone,120,10,10,0,TRUE,0,15,TRUE
+large_rock,map.obj.large_rock.name,map.obj.large_rock.description,2x2x2,Stone,400,50,50,0,TRUE,0,35,TRUE
+long_rock,map.obj.long_rock.name,map.obj.long_rock.description,1x1x2,Stone,200,25,25,0,TRUE,0,20,TRUE
+herbs_plant,map.obj.herbs_plant.name,map.obj.herbs_plant.description,1x1x1,Herbs,30,1,4,0,FALSE,8640,4,FALSE
+berry_bush,map.obj.berry_bush.name,map.obj.berry_bush.description,1x1x1,Food,30,1,3,0,FALSE,10080,4,FALSE
+mushroom_patch,map.obj.mushroom_patch.name,map.obj.mushroom_patch.description,1x1x1,Food,30,1,5,0,TRUE,0,4,FALSE
+sand_pit,map.obj.sand_pit.name,map.obj.sand_pit.description,2x1x2,Sandbags,15,5,500,100,TRUE,0,2147483647,TRUE
+clay_pit,map.obj.clay_pit.name,map.obj.clay_pit.description,2x1x2,Clay,40,5,100,20,TRUE,0,2147483647,TRUE
+water_pond,map.obj.water_pond.name,map.obj.water_pond.description,3x1x3,RawWater,20,2,30,30,FALSE,4320,2147483647,TRUE
+damaged_car,map.obj.damaged_car,map.obj.damaged_car,2x1x4,Metal,60,10,60,0,TRUE,0,20,FALSE
+old_fence,map.obj.old_fence,map.obj.old_fence,1x1x5,Planks,20,4,12,0,TRUE,0,6,FALSE
+ocean,map.obj.ocean ,map.obj.ocean ,1x1x1,,0,0,0,0,FALSE,0,2147483647,TRUE
+wild_grain,map.obj.wild_grain,map.obj.wild_grain,1x1x1,GrainSeeds,15,1,3,0,FALSE,4320,5,FALSE
+wild_beans,map.obj.wild_beans,map.obj.wild_beans,1x1x1,BeansSeeds,15,1,5,0,FALSE,8640,5,FALSE
+wild_potato,map.obj.wild_potato,map.obj.wild_potato,1x1x1,PotatoSeeds,15,1,3,0,FALSE,14400,5,FALSE
+wild_tomato,map.obj.wild_tomato,map.obj.wild_tomato,1x1x1,TomatoSeeds,15,1,4,0,FALSE,21600,5,FALSE
+WaterPump,map.obj.water_pump,map.obj.water_pump,2x2x2,RawWater,20,5,30,0,FALSE,4320,1,TRUE
+FuelTank,map.obj.fuel_tank,map.obj.fuel_tank,3x3x6,Fuel,20,2,10,0,FALSE,10080,1,FALSE
+Crate,map.obj.crate,map.obj.crate,1x1x1,,20,0,0,0,TRUE,0,1,FALSE
+tree_big_log,map.obj.tree_big_log.name,map.obj.tree_big_log.description,1x1x5,Wood,45,2,2,0,TRUE,0,12,FALSE
+tree_big_stump,map.obj.tree_big_stump.name,map.obj.tree_big_stump.description,2x1x2,Wood,45,1,1,0,TRUE,0,12,FALSE
+flowers,map.obj.flowers.name,map.obj.flowers.description,1x1x1,,10,0,0,0,TRUE,0,2,FALSE
+old_fence_pole,map.obj.old_fence_pole,map.obj.old_fence_pole,1x1x1,Planks,10,4,4,0,TRUE,0,2,FALSE
+old_grave,map.obj.old_grave.name,map.obj.old_grave,1x1x2,,10,0,0,0,TRUE,0,20,FALSE
+old_headstone,map.obj.old_headstone.name,map.obj.old_headstone,1x1x1,,10,0,0,0,TRUE,0,20,FALSE
+SmallFuelTank,map.obj.small_fuel_tank,map.obj.small_fuel_tank,2x3x4,Fuel,20,1,3,0,FALSE,4032,1,FALSE
+WaterTower,map.obj.water_tower,map.obj.water_tower,4x6x4,RawWater,30,20,300,0,FALSE,10800,1,TRUE

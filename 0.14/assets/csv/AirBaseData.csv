@@ -1,0 +1,7 @@
+Category,Airstrip Tier,Minimum Airstrip Count,Minimum Parking Count,Missions Per Week,Minimum Missions Per Week,Minimum Success Rate,Available Shipment Slots
+1,1,1,1,6,2,0.4,4
+2,2,2,3,9,4,0.5,5
+3,3,3,6,12,5,0.6,6
+4,4,3,10,14,6,0.7,7
+5,5,4,15,16,8,0.75,8
+6,5,5,20,18,10,0.8,8

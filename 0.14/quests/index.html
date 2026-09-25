@@ -1,0 +1,3555 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Build missions, quests, scripts, maps and more for Ground of Aces - with or without an AI agent.">
+      
+      
+      
+        <link rel="canonical" href="https://blindflugstudios.github.io/goa-modkit/0.14/quests/">
+      
+      
+        <link rel="prev" href="../missions/reference/">
+      
+      
+        <link rel="next" href="../scripting/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../de/quests/" hreflang="de">
+        
+      
+      
+      <link rel="icon" href="../assets/logos/blindflug-mark.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Quests - Ground of Aces Modkit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#quests" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+
+<strong>Developer Preview</strong> - subject to change. Use <strong>at your own risk</strong>. Anyone can read, the kit itself is invitation only for now - to get access, email <a href="mailto:nuria@blindflugstudios.com">nuria@blindflugstudios.com</a> or <a href="mailto:moritz@blindflugstudios.com">moritz@blindflugstudios.com</a>.
+
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Ground of Aces Modkit" class="md-header__button md-logo" aria-label="Ground of Aces Modkit" data-md-component="logo">
+      
+  <img src="../assets/logos/goa-logo-colored.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ground of Aces Modkit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Quests
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../de/quests/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/blindflugstudios/goa-modkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    blindflugstudios/goa-modkit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../start/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Get started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../basics/mods/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Basics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../missions/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Missions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Quests
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../scripting/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Scripting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../data/csv/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Game data
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../content/maps/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Maps and art
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../sharing/workshop/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Sharing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ai/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  AI agents
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../examples/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Ground of Aces Modkit" class="md-nav__button md-logo" aria-label="Ground of Aces Modkit" data-md-component="logo">
+      
+  <img src="../assets/logos/goa-logo-colored.png" alt="logo">
+
+    </a>
+    Ground of Aces Modkit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/blindflugstudios/goa-modkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    blindflugstudios/goa-modkit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../start/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get started
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Get started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/install-windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install on Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/install-mac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install on Mac
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/first-mod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your first mod in 10 minutes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/without-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Without an AI agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    When nothing happens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/mods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How mods work
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and reloading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/cheats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat console
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python mods and safety
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../missions/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Missions
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Missions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../missions/first-mission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write your first mission
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../missions/chains/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chains and campaigns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../missions/locations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Locations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../missions/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quests
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Quests
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../scripting/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Events
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/localization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Game data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Game data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/csv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSV tables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/table-editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Table command files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maps and art
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maps and art
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objects and models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/terrain-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terrain objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/biomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sharing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sharing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sharing/workshop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steam Workshop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../ai/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI agents
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI agents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai/claude-code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Claude Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai/codex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai/skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skills and agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-quests-come-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where quests come from
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-first-quest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A first quest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-file-field-by-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The file, field by field
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The file, field by field">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#icons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Icons
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-a-step-can-wait-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a step can wait for
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What a step can wait for">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#all-types-at-a-glance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        All types at a glance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-the-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building the base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aircraft-and-missions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aircraft and missions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crew" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crew
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-button-on-the-quest-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A button on the quest card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#types-that-do-nothing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Types that do nothing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-a-quest-starts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How a quest starts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How a quest starts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quests-and-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quests and maps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-a-shipped-quest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changing a shipped quest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quest-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quest types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-quests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example quests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-a-quest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing a quest
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing a quest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checklist-before-you-ship" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist before you ship
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saves-and-removing-a-mod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Saves and removing a mod
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-a-quest-cannot-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a quest cannot do
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/blindflugstudios/goa-modkit/edit/main/docs/en/quests/index.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="quests">Quests<a class="headerlink" href="#quests" title="Permanent link">&para;</a></h1>
+<p>A quest is a list of goals the player sees in the quest panel: <em>build an airstrip, order an aircraft, fly five missions</em>. Each goal (a <strong>step</strong>) is a counter that fills up as the player does the thing, and when every required step is full the quest is complete and the next one in the chain can start.</p>
+<p>Quests are not missions. A mission is a flight with dice rolls and a script; a quest is a checklist that watches the game and ticks boxes. There is no Python in a quest and nothing to "run" - a quest is a single <code>.json</code> file, and everything it can watch for is built into the game.</p>
+<div class="admonition note">
+<p class="admonition-title">No quest editor</p>
+<p>Quests are written and changed in a text editor only. The Mission Editor does not open them, and the game does not check them before loading - the <a href="#checklist-before-you-ship">checklist</a> near the end of this page is your check.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../missions/">Missions</a></td>
+<td>missions, and the events a quest can wait for when a mission returns</td>
+</tr>
+<tr>
+<td><a href="../missions/locations/">Locations</a></td>
+<td>the location flags a mission step can filter on (<code>sea</code>, <code>enemyterritory</code>, ...)</td>
+</tr>
+<tr>
+<td><a href="../data/csv/">CSV tables</a></td>
+<td>the data tables that hold the ids you use in quests - buildings, aircraft, resources, plants</td>
+</tr>
+<tr>
+<td><a href="#example-quests">Example quests</a></td>
+<td>complete quest files to copy</td>
+</tr>
+</tbody>
+</table>
+<h2 id="where-quests-come-from">Where quests come from<a class="headerlink" href="#where-quests-come-from" title="Permanent link">&para;</a></h2>
+<p>The game reads quests from two places, and the later one wins when both carry the same id:</p>
+<ol>
+<li><strong>Shipped quests</strong> - inside the game, read-only. You can override one by re-using its file name, but you cannot edit it in place.</li>
+<li><strong>Mods</strong> - <code>Mods/&lt;your mod&gt;/Quests/</code>, holding <code>.json</code> files. Only files directly inside <code>Quests/</code> are read; subfolders are ignored. Only <em>enabled</em> mods are read - a mod switched off in the Mods window contributes no quests.</li>
+</ol>
+<p>Unlike missions, there is <strong>no personal quests folder</strong> outside a mod. To try a quest, put it in a mod folder (<a href="../basics/mods/">How mods work</a> explains where that folder is and how the Mods window works). The quests go into a <code>Quests</code> subfolder next to the other content types:</p>
+<div class="highlight"><pre><span></span><code>Mods/
+  my_campaign/
+    config.json                  optional
+    Quests/
+      mycampaign_first_steps.json
+      mycampaign_first_patrol.json
+    Missions/                    optional - mission files, and the .py that holds your quest text
+    Maps/                        optional - the map that starts your quest line
+</code></pre></div>
+<p>Two rules follow from how the files are read:</p>
+<ul>
+<li><strong>The file name is the quest id.</strong> <code>mycampaign_first_steps.json</code> is the quest <code>mycampaign_first_steps</code>, whatever the <code>_questId</code> field inside says. Keep the two identical: the game checks whether a quest already exists in the save by its <em>file name</em> but stores the <em>field</em> in the save, so if they differ the quest is handed out again every time the game loads, and chains (requirement type 1) refer to the field.</li>
+<li><strong>Prefix your ids with your mod name.</strong> A file called <code>quest3.json</code> silently <em>replaces</em> the shipped <code>quest3</code>. Between two mods with the same file name, the one loaded later wins (see <a href="../basics/mods/#which-mod-wins">Which mod wins</a>).</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">When changes show up</p>
+<p>Quest files are re-read every time a level is loaded - return to the main menu and load again (loading a save is enough). A brand-new mod folder, or a <code>Quests/</code> folder that was still empty when the game started, needs <strong>Refresh</strong> in the Mods window first, or a restart.</p>
+</div>
+<h2 id="a-first-quest">A first quest<a class="headerlink" href="#a-first-quest" title="Permanent link">&para;</a></h2>
+<p>This is a complete, working quest. Save it as <code>Mods/my_campaign/Quests/mycampaign_first_steps.json</code>, start the game, and load or start any map: it appears in the quest panel right away.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">"_questId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycampaign_first_steps"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_questTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycampaign/first_steps/title"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_questDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_subQuests"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"_subQuestTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycampaign/first_steps/step0_title"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycampaign/first_steps/step0_description"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_isOptional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestRequirement"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_parameter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"building_finished,Sickbed"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"_genericIconKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui_health"</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"_subQuestTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycampaign/first_steps/step1_title"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_isOptional"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestRequirement"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_parameter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bed"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"_genericIconKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui_bed"</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nt">"_isHiddenInUI"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_questType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Reading it top to bottom: the quest has two steps. The first waits until a sickbed has been <em>finished</em> building - once. The second counts beds standing on the base and is full at four, but it is optional, so the quest completes as soon as the sickbed is done. <code>_requirements</code> is empty, which means the quest starts on every map the moment the game loads.</p>
+<p>The titles are <strong>localization keys</strong>, not text - until you register them, the player sees no title at all. The section <a href="#text">Text</a> explains how to give them words.</p>
+<h2 id="the-file-field-by-field">The file, field by field<a class="headerlink" href="#the-file-field-by-field" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_questId</code></td>
+<td>The quest's id. Keep it equal to the file name.</td>
+</tr>
+<tr>
+<td><code>_questTitle</code></td>
+<td>Localization key of the title shown in the quest panel.</td>
+</tr>
+<tr>
+<td><code>_questDescription</code></td>
+<td>Localization key of a longer text under the title. Leave <code>""</code> for none - shipped quests do.</td>
+</tr>
+<tr>
+<td><code>_subQuests</code></td>
+<td>The steps, in the order they are listed in the panel. At least one.</td>
+</tr>
+<tr>
+<td><code>_requirements</code></td>
+<td>When the quest is handed out - see <a href="#how-a-quest-starts">How a quest starts</a>. Not progress.</td>
+</tr>
+<tr>
+<td><code>_isHiddenInUI</code></td>
+<td><code>true</code> hides the quest from the panel while it still runs. Used by the shipped skin-unlock quests.</td>
+</tr>
+<tr>
+<td><code>_questType</code></td>
+<td><code>0</code> a normal quest, <code>1</code> an aircraft-skin quest, <code>2</code> a tutorial quest. Use <code>0</code> - see <a href="#quest-types">Quest types</a>.</td>
+</tr>
+<tr>
+<td><code>_highlightedUIElements</code></td>
+<td>Tutorial quests only: buttons the tutorial points at. Ignored for type <code>0</code>.</td>
+</tr>
+<tr>
+<td><code>_cheatsOnStart</code>, <code>_completionCheats</code></td>
+<td>Tutorial quests only, and <strong>ignored in every mod quest</strong> - see <a href="#quest-types">Quest types</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>Fields you leave out take their default: <code>false</code>, <code>0</code>, or empty. Extra fields (the shipped files carry a <code>"Name"</code> the game no longer reads) are ignored. There is no tags field: quests are tied to maps differently from missions, see <a href="#quests-and-maps">Quests and maps</a>.</p>
+<p>Each entry of <code>_subQuests</code> is one step:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_subQuestTitle</code></td>
+<td>Localization key of the step's title. Also the name the game uses for the step (other quests can wait for it through <code>sub_quest_completed</code>).</td>
+</tr>
+<tr>
+<td><code>_subQuestDescription</code></td>
+<td>Localization key of the step's tooltip. <code>""</code> for none.</td>
+</tr>
+<tr>
+<td><code>_isOptional</code></td>
+<td><code>true</code> - the quest can complete without this step.</td>
+</tr>
+<tr>
+<td><code>_subQuestRequirement</code></td>
+<td><em>What</em> is counted: a <code>_type</code>, a <code>_parameter</code> and an <code>_amount</code>. Exactly one per step.</td>
+</tr>
+<tr>
+<td><code>_genericIconKey</code></td>
+<td>Which icon the step shows. See <a href="#icons">Icons</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>And the requirement inside it:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_type</code></td>
+<td>A number picking the kind of condition - the full table is under <a href="#what-a-step-can-wait-for">What a step can wait for</a>.</td>
+</tr>
+<tr>
+<td><code>_parameter</code></td>
+<td>A comma-separated list whose meaning depends on the type. <strong>No spaces</strong> around the commas.</td>
+</tr>
+<tr>
+<td><code>_amount</code></td>
+<td>The count at which the step is complete. <strong>At least 1.</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title"><code>_amount</code> must be at least 1</p>
+<p>A step with <code>_amount: 0</code> behaves inconsistently: depending on whether the quest was created while a save loaded or later in the running game, it either completes instantly or never completes - and in the second case, unless it is optional, it blocks its quest forever. If you want a step the map already satisfies (a "you are here" step), give it a real, already-true condition instead: <code>_type: 1</code>, <code>_parameter: "0"</code>, <code>_amount: 1</code> is complete as soon as the base has any parking spot.</p>
+</div>
+<h3 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h3>
+<p>Every text field of a quest is a <strong>localization key</strong> - a name the game looks up in its translation table when the panel is drawn. A key that is registered in no language is not shown at all: the quest card keeps the text it had before (a placeholder, or the text of the quest that last used that card) and the tooltip stays empty. Register every key.</p>
+<p>Missions can carry their text directly in the JSON. <strong>Quests cannot</strong> - there are no raw-text fields, and a quest has no script of its own. You have two options:</p>
+<p><strong>Reuse a shipped key.</strong> The tutorial and main-line quests already have translated titles for things like "Build an airstrip" or "Order an aircraft". Open the matching shipped quest and copy its key. This costs nothing and is translated into every language the game ships, but you are limited to sentences that already exist.</p>
+<p><strong>Register your own keys from a script.</strong> A <code>.py</code> file in your mod's <code>Missions/</code> folder runs when a level loads, for every enabled mod, and its top level can register terms:</p>
+<div class="highlight"><pre><span></span><code><span class="n">TERMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"mycampaign/first_steps/title"</span><span class="p">:</span>             <span class="s2">"First steps"</span><span class="p">,</span>
+    <span class="s2">"mycampaign/first_steps/step0_title"</span><span class="p">:</span>       <span class="s2">"Build a sickbed"</span><span class="p">,</span>
+    <span class="s2">"mycampaign/first_steps/step0_description"</span><span class="p">:</span> <span class="s2">"Injured crew recover faster in a bed of their own."</span><span class="p">,</span>
+    <span class="s2">"mycampaign/first_steps/step1_title"</span><span class="p">:</span>       <span class="s2">"Build four beds"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">TERMS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"MyCampaign: could not register quest terms: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">error</span><span class="p">)</span>
+</code></pre></div>
+<p>The file needs no mission handlers; it exists only to run this block. Put it in <code>Missions/</code>, not in <code>Quests/</code> - <code>Quests/</code> is read for <code>.json</code> only, and <code>Missions/</code> is the one folder the game loads scripts from. Call <code>SetTerm</code> once per language you want to support (<code>"de"</code>, <code>"fr"</code>, ...). A language you leave out shows the text of a language you did register, so always register <code>en</code>. The <code>try</code>/<code>except</code> matters: a syntax error skips only your script, but any other error at the top level of a script can stop the loading of every script after it - yours and other mods'.</p>
+<p>Registering a key the game already ships - a building name, a shipped quest title - <em>replaces</em> the game's own text for that language. Prefix your keys with your mod name so this can never happen by accident. Shipped quests name their keys <code>quest/&lt;questId&gt;/title</code>, <code>quest/&lt;questId&gt;/subQuest0_title</code> and <code>quest/&lt;questId&gt;/subQuest0_description</code>; nothing enforces that shape for your quests. More on terms: <a href="../scripting/localization/">Localization</a>.</p>
+<h3 id="icons">Icons<a class="headerlink" href="#icons" title="Permanent link">&para;</a></h3>
+<p><code>_genericIconKey</code> picks the step's icon from a fixed set built into the game. A key the game does not know simply shows no icon; nothing is logged. There is no way to add your own icons from a mod.</p>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Keys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base</td>
+<td><code>ui_path_runway</code>, <code>ui_runway</code>, <code>ui_path_cars</code>, <code>ui_functionarea_runway</code>, <code>ui_functionarea_parking</code>, <code>ui_functionarea_parking_1</code>, <code>ui_functionarea_parking_2</code>, <code>ui_functionarea_resources</code>, <code>ui_functionarea_safety</code>, <code>ui_functionarea_gardening</code>, <code>ui_hangar_roof</code>, <code>roof</code>, <code>wall</code>, <code>floor</code>, <code>door</code>, <code>house</code>, <code>ui_decoration_wall</code>, <code>ui_decoration_poster</code>, <code>ui_props_kitchen</code>, <code>ui_props_social</code></td>
+</tr>
+<tr>
+<td>Aircraft</td>
+<td><code>ui_plane</code>, <code>ui_plane_GlosterGladiator_MKI</code>, <code>ui_scramble</code>, <code>ui_aagun</code>, <code>ui_alarm</code>, <code>ui_radio</code></td>
+</tr>
+<tr>
+<td>Resources</td>
+<td><code>ui_resource_wood</code>, <code>ui_resource_planks</code>, <code>ui_resource_metal</code>, <code>ui_resource_bricks</code>, <code>ui_resource_cement</code>, <code>ui_resource_fuel</code>, <code>ui_resource_gunAmmo</code>, <code>ui_resource_repairParts</code>, <code>ui_resource_trash</code>, <code>ui_resource_rubble</code>, <code>ui_resource_victoryPoints</code>, <code>ui_seeds_beans</code>, <code>ui_harvesting</code>, <code>ui_tool_gathering</code>, <code>ui_fire</code></td>
+</tr>
+<tr>
+<td>Crew</td>
+<td><code>ui_crew_person_single</code>, <code>ui_crew_people_multiple</code>, <code>ui_crewjob_cook</code>, <code>ui_crewjob_medic</code>, <code>ui_health</code>, <code>ui_morale</code>, <code>ui_bed</code>, <code>ui_prop_bed</code>, <code>ui_prestige_full</code>, <code>Endurance</code></td>
+</tr>
+<tr>
+<td>Interface</td>
+<td><code>ui_camera</code>, <code>ui_move_tool</code>, <code>ui_pause</code>, <code>ui_speed_1</code>, <code>ui_speed_2</code>, <code>ui_speed_3</code>, <code>ui_timer_clock</code>, <code>ui_clock</code>, <code>ui_schedule</code>, <code>ui_eventlog</code>, <code>ui_notifications_all</code>, <code>ui_attention</code>, <code>ui_search_looking_glass</code>, <code>ui_lock_open</code>, <code>ui_headquarters</code>, <code>ui_stamp_headquarters_approved</code>, <code>ui_repairandcrafting</code>, <code>ui_cogwheel</code>, <code>ui_crown</code>, <code>ui_mark_exclamation</code>, <code>ui_assigned</code>, <code>ui_trash</code>, <code>plus</code></td>
+</tr>
+<tr>
+<td>Workbenches</td>
+<td><code>SawStation</code>, <code>FieldKitchen</code>, <code>IndoorKitchen</code>, <code>ElectronicsWorkbench</code>, <code>BrickStation</code>, <code>CementMixer</code></td>
+</tr>
+<tr>
+<td>Prop thumbnails</td>
+<td><code>PP0151_SickBed_thumbnail</code>, <code>PP1101_Bofors40mm_thumbnail</code>, <code>PP1002_SirenOnAPole_thumbnail</code>, <code>PP1006_LargeFuelTankWithConnector_thumbnail</code>, <code>PP1020_Flagpole5m_thumbnail</code>, <code>PP1030_Water_Pump_thumbnail</code>, <code>PP1000_RadioTower_thumbnail</code>, <code>PP0101_WoodenChair_thumbnail</code>, <code>PP0102_BarStool_thumbnail</code>, <code>PP0911_BarCounter_thumbnail</code>, <code>PP0956_DividerCurtains_thumbnail</code>, <code>BB0900_Sandbag1mStraightVarA_thumbnail</code>, <code>BB1300_Table1x2_thumbnail</code>, <code>Simple-Rack_thumbnail</code>, <code>GraveStoneWhite_thumbnail</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>""</code> is fine and means no icon. When in doubt, copy the key from a shipped step that shows the picture you want.</p>
+<h2 id="what-a-step-can-wait-for">What a step can wait for<a class="headerlink" href="#what-a-step-can-wait-for" title="Permanent link">&para;</a></h2>
+<p>Each step has one requirement, and its <code>_type</code> decides what the game counts. There are two kinds:</p>
+<ul>
+<li><strong>Counted state (polled)</strong> - every couple of seconds the game counts something on the base (airstrips, beds, storage zones) and writes the count into the step. The count can go <em>down</em> again if the player demolishes things, right up until the step completes.</li>
+<li><strong>Counted events</strong> - the step adds one each time something <em>happens</em> (a building is finished, an aircraft returns from a mission). These never go down.</li>
+</ul>
+<p>Progress is capped at <code>_amount</code>, and a completed step stays complete.</p>
+<h3 id="all-types-at-a-glance">All types at a glance<a class="headerlink" href="#all-types-at-a-glance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><code>_type</code></th>
+<th>Name</th>
+<th>Kind</th>
+<th>Section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Airstrip</td>
+<td>polled</td>
+<td><a href="#building-the-base">Building the base</a></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Parking</td>
+<td>polled</td>
+<td><a href="#building-the-base">Building the base</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Airplane</td>
+<td>polled</td>
+<td><a href="#aircraft-and-missions">Aircraft and missions</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>PropCategory</td>
+<td>- does nothing</td>
+<td><a href="#types-that-do-nothing">Types that do nothing</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Prop</td>
+<td>polled</td>
+<td><a href="#building-the-base">Building the base</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>SimpleEvent</td>
+<td>event</td>
+<td><a href="#events">Events</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Workbench</td>
+<td>polled</td>
+<td><a href="#building-the-base">Building the base</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>AnyAttributeEvent</td>
+<td>event</td>
+<td><a href="#events">Events</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>AllAttributesEvent</td>
+<td>event</td>
+<td><a href="#events">Events</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>FunctionArea (zone)</td>
+<td>polled</td>
+<td><a href="#building-the-base">Building the base</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>ShelteredStorage</td>
+<td>polled</td>
+<td><a href="#building-the-base">Building the base</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>TrashStorage</td>
+<td>polled</td>
+<td><a href="#building-the-base">Building the base</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>SuccessfulMission</td>
+<td>event</td>
+<td><a href="#aircraft-and-missions">Aircraft and missions</a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>FlownMission</td>
+<td>event</td>
+<td><a href="#aircraft-and-missions">Aircraft and missions</a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>UnluckyMission</td>
+<td>- does nothing</td>
+<td><a href="#types-that-do-nothing">Types that do nothing</a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>TakePartInScramble</td>
+<td>event</td>
+<td><a href="#aircraft-and-missions">Aircraft and missions</a></td>
+</tr>
+<tr>
+<td>17</td>
+<td>FailedMission</td>
+<td>event</td>
+<td><a href="#aircraft-and-missions">Aircraft and missions</a></td>
+</tr>
+<tr>
+<td>18</td>
+<td>ScramblePlaneDestroyed</td>
+<td>event</td>
+<td><a href="#aircraft-and-missions">Aircraft and missions</a></td>
+</tr>
+<tr>
+<td>19</td>
+<td>ScrambleToSafety</td>
+<td>event</td>
+<td><a href="#aircraft-and-missions">Aircraft and missions</a></td>
+</tr>
+<tr>
+<td>20</td>
+<td>CoveredFunctionArea</td>
+<td>polled</td>
+<td><a href="#building-the-base">Building the base</a></td>
+</tr>
+<tr>
+<td>21</td>
+<td>PlannedAirstrip</td>
+<td>polled</td>
+<td><a href="#building-the-base">Building the base</a></td>
+</tr>
+<tr>
+<td>22</td>
+<td>CharacterJob</td>
+<td>polled</td>
+<td><a href="#crew">Crew</a></td>
+</tr>
+<tr>
+<td>23</td>
+<td>QuestDismissed (button)</td>
+<td>event</td>
+<td><a href="#a-button-on-the-quest-card">A button on the quest card</a></td>
+</tr>
+<tr>
+<td>24</td>
+<td>GardeningZone</td>
+<td>polled</td>
+<td><a href="#building-the-base">Building the base</a></td>
+</tr>
+<tr>
+<td>25</td>
+<td>StorageAllResourcesEnabled</td>
+<td>event</td>
+<td><a href="#building-the-base">Building the base</a></td>
+</tr>
+</tbody>
+</table>
+<p>There is no type 14.</p>
+<h3 id="building-the-base">Building the base<a class="headerlink" href="#building-the-base" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><code>_type</code></th>
+<th>Counts</th>
+<th><code>_parameter</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Finished, unobstructed airstrips of at least this tier</td>
+<td>The tier as a number: <code>"1"</code> ... <code>"5"</code>. Required.</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Airstrips at any stage - planned, under construction or finished - whose planned length, width and material all reach this tier</td>
+<td>The tier as a number. Required.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Usable parking spots of at least this size</td>
+<td>The size as a number; <code>"0"</code> is any parking spot. Required.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Finished props with one of these ids</td>
+<td>Prop ids, e.g. <code>"Bed"</code> or <code>"Flagpole5,Flagpole10"</code>. Planned or unbuilt props do not count.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Usable workbenches with one of these ids</td>
+<td>Workbench ids, e.g. <code>"SawStation"</code>, <code>"FieldKitchen"</code>.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Zones of a type, optionally of a size</td>
+<td><code>"&lt;Zone&gt;"</code>, or <code>"&lt;Zone&gt;,&lt;min tiles&gt;"</code>, or <code>"&lt;Zone&gt;,&lt;min&gt;,&lt;max&gt;"</code>. Zones: <code>Airstrip</code>, <code>Parking</code>, <code>SafetyZone</code>, <code>Storage</code>, <code>GardeningZone</code>. Example <code>"Storage,20"</code> - a storage zone of at least 20 tiles.</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Zones whose <em>every</em> tile is covered by a given building</td>
+<td><code>"&lt;Zone&gt;,&lt;building id&gt;"</code>, optionally <code>,&lt;min&gt;,&lt;max&gt;</code> tiles. Example <code>"Storage,roof_tent"</code> - a storage zone entirely under tent roof.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>1 if at least one storage zone has floor <strong>and</strong> roof over every tile, else 0</td>
+<td>Leave empty. A size in here does not restrict which storage counts - it only decides whether the check runs at all. Use <code>_amount: 1</code>.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Storage zones that accept trash and rubble</td>
+<td>Empty - any storage that lets trash and rubble in. <code>"true"</code> - only storages set up for <em>nothing but</em> trash and rubble.</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Completes when every listed resource is allowed in at least one storage zone</td>
+<td>Resource names, e.g. <code>"GunAmmo,AntiAirAmmo,PlaneBombs"</code>. Re-checked whenever the player changes a storage's settings or places a zone. Use <code>_amount: 1</code>.</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Gardening zones growing a plant for a purpose</td>
+<td><code>"&lt;plant&gt;,&lt;Seeds or Food&gt;"</code>, optionally <code>,&lt;min tiles&gt;,&lt;max tiles&gt;</code>. Example <code>"beans,Food,10"</code>. Plant ids are those of the gardening data table.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">The one mistake that hurts other quests too</p>
+<p>Types 0, 1 and 21 <strong>must</strong> have a number in <code>_parameter</code>, and types 20 and 24 <strong>must</strong> have their second part (the building id, the <code>Seeds</code>/<code>Food</code> purpose). Anything else - including an empty string - is an error inside the game every time the step is checked, and it stalls every other counted-state step that is checked in the same batch until the save is reloaded.</p>
+</div>
+<h3 id="aircraft-and-missions">Aircraft and missions<a class="headerlink" href="#aircraft-and-missions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><code>_type</code></th>
+<th>Counts</th>
+<th><code>_parameter</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>Aircraft the player owns</td>
+<td>One or more aircraft ids, comma-separated - <code>"spitfire"</code> or <code>"spitfire,hurricane"</code> - or empty for any aircraft.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Aircraft that returned from a <em>successful</em> mission</td>
+<td>See below.</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Aircraft that returned from any mission, won or lost</td>
+<td>See below.</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Aircraft that returned from a <em>failed</em> mission</td>
+<td>See below.</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Aircraft that took part in a scramble</td>
+<td>Aircraft ids, or empty for any.</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Enemy aircraft shot down during a scramble</td>
+<td>Aircraft ids of the <em>defending</em> aircraft that scored, or empty for any.</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Aircraft that scrambled to safety</td>
+<td>Aircraft ids, or empty for any.</td>
+</tr>
+</tbody>
+</table>
+<p>Types 12, 13, 16, 17, 18 and 19 add one <strong>per aircraft</strong>, not per mission. A three-aircraft mission that succeeds adds three to a type-12 step. For "fly one mission", keep <code>_amount: 1</code> and accept that the step completes when the first aircraft is home.</p>
+<p><strong>Filters for 12, 13 and 17.</strong> An empty <code>_parameter</code> accepts every returning aircraft. Otherwise the list is read as a bag of words, and the aircraft must satisfy all of them:</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Types</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>an aircraft id - <code>spitfire</code>, <code>blenheim</code>, ...</td>
+<td>all three</td>
+<td>the returning aircraft must be one of the listed ids. <strong>Required</strong> whenever the list is not empty - a filter with no aircraft id in it matches nothing.</td>
+</tr>
+<tr>
+<td>a skill - <code>fight</code>, <code>bomb</code>, <code>recon</code>, <code>transport</code>, <code>maneuverability</code>, <code>stealthiness</code> - or <code>any_skill_type</code></td>
+<td>12, 17</td>
+<td>the mission was rolled on that skill. <strong>One of these is required</strong> for types 12 and 17.</td>
+</tr>
+<tr>
+<td><code>gone_wrong</code></td>
+<td>12, 17</td>
+<td>only missions that did <em>not</em> go as planned</td>
+</tr>
+<tr>
+<td><code>location</code> followed by <code>land</code>, <code>sea</code>, <code>ownterritory</code> or <code>enemyterritory</code></td>
+<td>12, 13</td>
+<td>the mission's location must carry every listed flag (see <a href="../missions/locations/#location-flags">Locations</a>)</td>
+</tr>
+<tr>
+<td><code>low_hp</code></td>
+<td>13</td>
+<td>the aircraft came back with a quarter of its health or less</td>
+</tr>
+<tr>
+<td><code>high_success_rate</code></td>
+<td>17</td>
+<td>the mission failed although the forecast was above 90 %</td>
+</tr>
+</tbody>
+</table>
+<p>Aircraft ids are the first column of the <code>VehicleData</code> table: <code>gladiator</code>, <code>hurricane</code>, <code>spitfire</code>, <code>meteor</code>, <code>mustangmk1</code>, <code>vampire</code>, <code>beaufighter</code>, <code>typhoon</code>, <code>tempest</code>, <code>kittyhawk</code>, <code>blenheim</code>, <code>hampden</code>, <code>stirling</code>, <code>lancaster</code>, <code>b17raf</code>, <code>mosquito</code>, <code>defiant</code>, <code>flamingo</code>, <code>lysander</code>.</p>
+<p>Examples that work in a normal quest:</p>
+<div class="highlight"><pre><span></span><code>"spitfire,hurricane,any_skill_type"                  type 12 - a Spitfire or Hurricane won any mission
+"blenheim,bomb,location,enemyterritory"              type 12 - a Blenheim won a bombing mission over enemy land
+"lysander,any_skill_type,gone_wrong"                 type 12 - a Lysander pulled through a mission that went wrong
+"spitfire,low_hp"                                    type 13 - a Spitfire limped home
+""                                                   type 13 - any aircraft flew any mission
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The shipped skin-unlock quests write a role - <code>fighter</code>, <code>bomber</code>, <code>multirole</code> or <code>special</code> - where the aircraft id goes. That works <strong>only</strong> for <code>_questType: 1</code>, where the game makes one copy of the quest per matching aircraft and fills the real id in. In a <code>_questType: 0</code> quest a role name matches nothing - list the aircraft ids.</p>
+</div>
+<p><strong>Waiting for one particular mission.</strong> Types 12, 13 and 17 cannot name a mission. Use type 7 with the mission's return event instead - see <a href="#events">Events</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">"_parameter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"airplane_on_mission_succeed,mycampaign_channel_sweep"</span><span class="p">,</span><span class="w"> </span><span class="nt">"_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>This is how a quest follows a chain of your own missions, one step per mission.</p>
+<h3 id="crew">Crew<a class="headerlink" href="#crew" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><code>_type</code></th>
+<th>Counts</th>
+<th><code>_parameter</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22</td>
+<td>Living, not heavily injured crew members with a job</td>
+<td>One job: <code>RAFAircrew</code>, <code>AAFCook</code>, <code>FieldMechanic</code>, <code>FieldEngineer</code>, <code>RAFMedic</code>, <code>AAFLabour</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<p>Three types watch the stream of things that happen on the base (the game's minor events, listed in full on <a href="../scripting/events/">Events</a>). Each adds one per matching event - with one exception: <code>resource_gained</code> carries the number of units gained and adds that number, so <code>"resource_gained,Metal"</code> with <code>_amount: 20</code> means twenty metal, not twenty deliveries.</p>
+<table>
+<thead>
+<tr>
+<th><code>_type</code></th>
+<th>Adds one when...</th>
+<th><code>_parameter</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td>the named event fires, whatever its details</td>
+<td><code>"&lt;event&gt;"</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>the named event fires and <strong>any</strong> of its details is one of the listed values</td>
+<td><code>"&lt;event&gt;,&lt;value&gt;,&lt;value&gt;,..."</code>. With no values listed, every occurrence counts.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>the named event fires and <strong>every</strong> listed value is among its details</td>
+<td><code>"&lt;event&gt;,&lt;value&gt;,&lt;value&gt;,..."</code></td>
+</tr>
+</tbody>
+</table>
+<p>Type 7 is the workhorse - "a specific building was finished", "a specific resource arrived":</p>
+<div class="highlight"><pre><span></span><code>"building_finished,Sickbed"                          a sickbed finished building
+"building_finished,Flagpole5,Flagpole10"             either flagpole finished
+"building_type_finished,PropSocial"                  any social prop finished
+"project_finished,SawStation.Planks"                 planks came off the saw station
+"harvesting_finished,tree,tree_big"                  a tree was felled
+"resource_gained,Metal"                              metal arrived by any route - harvest, workbench, delivery
+"shipment_received,Bofors40mm"                       a shipment containing a Bofors gun arrived
+"assigned_to_equipment,Bofors40mm"                   someone was posted to a Bofors gun
+"airplane_on_mission_succeed,mycampaign_sweep"       your mission "mycampaign_sweep" came back a success
+</code></pre></div>
+<p>Type 8 narrows to combinations, and is rarely needed:</p>
+<div class="highlight"><pre><span></span><code>"project_finished,SawStation,SawStation.Planks"      planks finished, and at a saw station
+"harvesting_finished,bs_owen_m,tree"                 one particular crew member felled a tree
+</code></pre></div>
+<p>Type 8 has two limits type 7 does not have. It compares the listed values against the event's details as <strong>text only</strong>: details that are names (crew ids, building ids, project ids, mission ids) match, but details the game carries as numbers or as types - the resource of <code>harvesting_finished</code> and <code>resource_gained</code>, the category of <code>building_type_finished</code>, the zone of <code>function_area_placed</code> - never do. Use type 7 for those. And a type-8 step with listed values on an event that carries no details at all (<code>victory_points_added</code>, <code>quest_dismissed</code>) is an error every time that event fires. When one value is enough, use type 7.</p>
+<p>Events available in normal play, with the details each one carries:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>building_started</code>, <code>building_finished</code>, <code>deconstruction_finished</code></td>
+<td>worker, building id (e.g. <code>Sickbed</code>, <code>roof_concrete</code>, <code>wall_tent</code>)</td>
+</tr>
+<tr>
+<td><code>building_type_finished</code></td>
+<td>worker, building category (e.g. <code>PropSocial</code>, <code>PropPosters</code>)</td>
+</tr>
+<tr>
+<td><code>project_started</code>, <code>project_finished</code></td>
+<td>worker, workbench id, project id (as <code>SawStation.Planks</code>)</td>
+</tr>
+<tr>
+<td><code>harvesting_started</code>, <code>harvesting_finished</code></td>
+<td>worker, harvested object (e.g. <code>tree</code>, <code>tree_big</code>, <code>berry_bush</code>), resource</td>
+</tr>
+<tr>
+<td><code>resource_gained</code></td>
+<td>resource name</td>
+</tr>
+<tr>
+<td><code>resource_picked_up</code>, <code>resouce_consumed</code></td>
+<td>crew member, resource name (the second is spelt that way in the game)</td>
+</tr>
+<tr>
+<td><code>shipment_received</code></td>
+<td>the ids in the delivery</td>
+</tr>
+<tr>
+<td><code>victory_points_added</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>assigned_to_equipment</code></td>
+<td>crew member, equipment id</td>
+</tr>
+<tr>
+<td><code>training_started</code>, <code>training_finished</code></td>
+<td>crew member, training object</td>
+</tr>
+<tr>
+<td><code>task_started</code>, <code>task_completed</code></td>
+<td>crew member, task name (e.g. <code>Harvest</code>, <code>Build</code>, <code>Repair</code>, <code>RepairAirplane</code>, <code>Refuel</code>, <code>Recover</code>)</td>
+</tr>
+<tr>
+<td><code>chat_started</code>, <code>chat_finished</code></td>
+<td>the two crew members</td>
+</tr>
+<tr>
+<td><code>mission_started</code>, <code>mission_success</code>, <code>mission_failed</code></td>
+<td>the mission's location name</td>
+</tr>
+<tr>
+<td><code>airplane_on_mission_succeed</code>, <code>airplane_on_mission_failed</code></td>
+<td>aircraft id, aircraft, <strong>mission id</strong>, skill, went-as-planned, location name, forecast</td>
+</tr>
+<tr>
+<td><code>airplane_took_part_in_scramble</code>, <code>airplane_scramble_fly_to_safety</code>, <code>airplane_scramble_airplane_destroyed</code></td>
+<td>aircraft id</td>
+</tr>
+<tr>
+<td><code>plane_takeoff</code>, <code>plane_landing</code></td>
+<td>the aircraft's internal number (not its id - you cannot filter for <code>spitfire</code> here), pilot</td>
+</tr>
+<tr>
+<td><code>storage_resource_enabled</code>, <code>function_area_placed</code></td>
+<td>resource name / zone type</td>
+</tr>
+<tr>
+<td><code>day_phase_change</code></td>
+<td>previous phase, current phase</td>
+</tr>
+<tr>
+<td><code>midnight</code>, <code>midday</code></td>
+<td>year, month, day</td>
+</tr>
+<tr>
+<td><code>sub_quest_completed</code></td>
+<td>the completed step's <code>_subQuestTitle</code> key - a quest can wait for a step of another quest</td>
+</tr>
+<tr>
+<td><code>quest_dismissed</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>dog_sleep</code>, <code>dog_walk_started</code>, <code>dog_walk_finished</code>, <code>dog_sniff_wait</code></td>
+<td>the dog</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Tutorial-only events</p>
+<p>A second group of events exists <strong>only while the tutorial is running</strong>: <code>camera_moved</code>, <code>camera_zoomed</code>, <code>camera_rotated</code>, <code>character_selected</code>, <code>task_created</code>, <code>tooltip_shown</code>, <code>preview_created</code>, <code>building_placed</code>, <code>state_entered</code>, <code>time_scale_changed</code>, <code>window_opened</code>, <code>character_job_assigned</code>, <code>day_phase_ended</code>, <code>plane_ordered</code>, <code>plane_selected</code>, <code>plane_assigned_to_mission</code>, <code>shipment_item_added</code>, <code>scramble_started</code>, <code>attack_finished</code>, <code>storage_resource_disabled</code>, <code>button_clicked</code>, <code>plane_back_from_mission</code>, <code>hour_changed</code>, <code>workbench_selected</code>, <code>project_planned</code>.</p>
+<p>The shipped tutorial quests use them freely, which makes them tempting to copy. Outside the tutorial they are switched off and a step waiting for one never moves. Prefer <code>building_finished</code> over <code>building_placed</code>, and <code>airplane_on_mission_succeed</code> over <code>plane_back_from_mission</code>.</p>
+</div>
+<h3 id="a-button-on-the-quest-card">A button on the quest card<a class="headerlink" href="#a-button-on-the-quest-card" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><code>_type</code></th>
+<th>Completes when...</th>
+<th><code>_parameter</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>23</td>
+<td>the player clicks the button this step puts on the quest card</td>
+<td>The localization key of the button label, e.g. <code>"basic_ui/ok"</code> or <code>"basic_ui/start"</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>The button is drawn on the quest card of the quest that owns the step. Note that <em>any</em> such button on <em>any</em> quest advances every type-23 step that is currently open, so keep to one at a time. With an empty <code>_parameter</code> no button is drawn, but the step still completes when a button on another quest is clicked.</p>
+<h3 id="types-that-do-nothing">Types that do nothing<a class="headerlink" href="#types-that-do-nothing" title="Permanent link">&para;</a></h3>
+<p><code>_type: 3</code> and <code>_type: 15</code> exist in old files but have no logic behind them; a step using either never progresses and nothing is logged. The same goes for any number outside the table. If a step sits at zero forever, check its <code>_type</code> first.</p>
+<h2 id="how-a-quest-starts">How a quest starts<a class="headerlink" href="#how-a-quest-starts" title="Permanent link">&para;</a></h2>
+<p><code>_requirements</code> decides <em>when the quest is handed to the player</em>. It has nothing to do with progress. All entries must pass (they are combined with AND). The check runs when a game is loaded or started, and again every time any quest completes - at that point only quests with a type-1 entry are checked again.</p>
+<table>
+<thead>
+<tr>
+<th><code>_requirementType</code></th>
+<th>Name</th>
+<th>Meaning</th>
+<th><code>_value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>None</td>
+<td>No condition.</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td>CompletedQuestId</td>
+<td>Start once the named quest is complete.</td>
+<td>the other quest's id</td>
+</tr>
+<tr>
+<td>2</td>
+<td>MinimumDate</td>
+<td><strong>Not implemented.</strong> The entry is skipped, so the quest starts as if it were not there. Do not use it.</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>MapDependent</td>
+<td>Start <strong>only</strong> when the loaded map names this quest in <code>StartingQuestIds</code> - see <a href="#quests-and-maps">Quests and maps</a>.</td>
+<td><code>""</code></td>
+</tr>
+</tbody>
+</table>
+<p>With an <strong>empty list</strong>, the quest starts on every map as soon as the game loads. That is right for a side quest or an achievement-like quest, and wrong for anything that belongs to a story or a map.</p>
+<p>A <strong>chain</strong> is a series of quests, each requiring the one before it:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycampaign_first_steps"</span><span class="w"> </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>A quest is handed out at most once per playthrough - once it exists in the save, complete or not, it is not created again, and a completed quest stays completed. Requiring a quest that never starts on this map (because that quest carries requirement type 3 and the map does not list it) is a convenient way to keep a whole chain off a map: only the first link needs the map, the rest follow through requirement type 1.</p>
+<h3 id="quests-and-maps">Quests and maps<a class="headerlink" href="#quests-and-maps" title="Permanent link">&para;</a></h3>
+<p>Every map names the quests it starts, in the <code>Metadata.json</code> inside its <code>.goamap</code> file:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">"StartingQuestIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"mycampaign_first_steps"</span><span class="p">]</span>
+</code></pre></div>
+<p>Those quests are handed out when the map is loaded, whatever their <code>_requirements</code> say. A map that names none - an older map, or one whose field was left empty - starts the game's default quest line, <code>quest0</code>, so no map is ever without quests.</p>
+<p>The shipped <code>quest0</code> carries requirement type 3, and every later <code>questN</code> requires the one before it. So the moment a map lists <em>your</em> quest instead of <code>quest0</code>, the whole shipped main line stays away from that map - which is usually what a campaign wants. If you want both, list both: <code>["quest0", "mycampaign_first_steps"]</code>.</p>
+<p>To make a quest belong to a map, and <em>only</em> to that map, do both halves:</p>
+<ol>
+<li>Put the quest id in the map's <code>StartingQuestIds</code>.</li>
+<li>Give the quest the requirement <code>{ "_requirementType": 3, "_value": "" }</code> so no other path - not an empty requirement list, not another quest completing - can start it elsewhere.</li>
+</ol>
+<p>A quest with an empty requirement list still starts everywhere, listed or not. A quest with only type 1 still starts wherever its predecessor completes. Type 3 is the only thing that says "here and nowhere else".</p>
+<div class="admonition note">
+<p class="admonition-title">Missions use tags, quests do not</p>
+<p>Missions are tied to maps through <strong>tags</strong> (the <code>_tags</code> field, see <a href="../missions/">Missions</a>). Quests are not: a quest has no tags field, and the map's <code>StartingQuestIds</code> list is the whole story. The two mechanisms are independent - a campaign map typically uses both, tags for its missions and <code>StartingQuestIds</code> for its quests.</p>
+</div>
+<p><strong>Editing the map's list in the game.</strong> Open the map in the map editor and find the <em>Starting quest</em> field in the map settings, next to the tags. Type the quest ids separated by commas - <code>quest0, mycampaign_first_steps</code> - and save the map. Maps you save this way land in your <code>Maps</code> folder (next to the <code>Mods</code> folder); copy the <code>.goamap</code> into your mod's <code>Maps/</code> folder to ship it. A map that already lives inside a mod folder cannot be saved over from the editor - edit the copy in <code>Maps</code>, then replace the one in the mod. More on maps: <a href="../content/maps/">Maps</a>.</p>
+<p><strong>Editing it in a text editor.</strong> A <code>.goamap</code> is an ordinary zip archive with a different file extension. Open it with any archive tool, edit <code>Metadata.json</code>, and put it back with the same name. Everything else in the archive stays as it is. <code>StartingQuestIds</code> sits at the end of the file, next to <code>_tags</code>; add the key if it is missing.</p>
+<p>An id in the list that no quest file provides is skipped without a message in the released game; the map still loads.</p>
+<h2 id="changing-a-shipped-quest">Changing a shipped quest<a class="headerlink" href="#changing-a-shipped-quest" title="Permanent link">&para;</a></h2>
+<p>To change a quest the game ships with, drop a file with <strong>the same name</strong> into your mod's <code>Quests/</code>. Your copy replaces the shipped one entirely, so start from a full copy of the original and change what you need: an <code>_amount</code>, a <code>_parameter</code>, a step made optional, a step added or removed.</p>
+<p>The shipped files are plain JSON inside the game's installation folder, under <code>GroundOfAces_Data/StreamingAssets/Scripts/Quest/</code> (on macOS: <code>GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Scripts/Quest/</code>) - <code>quest0</code> to <code>quest14</code>, the <code>tutorial_*</code> quests and the <code>*_skin_unlock</code> quests. Copy from there; never edit them in place, because a game update overwrites that folder. The shipped maps sit nearby in <code>StreamingAssets/Maps/</code>, which is also the place to look at a real <code>Metadata.json</code>.</p>
+<p>Changes reach <strong>existing saves</strong> too. When a save is loaded, every quest already in it is compared with the current file: step titles, step descriptions, requirement types, parameters and amounts are updated in place, steps you added are appended, steps you removed are deleted, and a step whose progress already meets the new amount completes right away. Steps are matched <strong>by position</strong>, so inserting a step in the middle re-labels everything after it in a running save - append new steps at the end when a quest is already out in the wild. Not updated in a running save: the quest's own <code>_questTitle</code>, <code>_questDescription</code> and <code>_isHiddenInUI</code>, and a step's <code>_isOptional</code> and <code>_genericIconKey</code> - those are fixed when the quest is first handed out.</p>
+<h2 id="quest-types">Quest types<a class="headerlink" href="#quest-types" title="Permanent link">&para;</a></h2>
+<p><code>_questType: 0</code> is a normal quest and the one you want. The other two exist for the game's own content, and both come with strings attached.</p>
+<p><strong>Tutorial quests (<code>2</code>)</strong> additionally point the tutorial highlight at the buttons listed in <code>_highlightedUIElements</code>, one after the other, and can run console commands from <code>_cheatsOnStart</code> and <code>_completionCheats</code>. In a mod:</p>
+<ul>
+<li>The <strong>commands are removed</strong>. A mod quest with either list still loads, but the lists are ignored (with a warning in the log) and nothing runs.</li>
+<li>The highlight ids are a fixed list inside the game - the ids in the shipped tutorial quests (<code>SawStation</code>, <code>Sickbed</code>, <code>ParkingSmall</code>, <code>CrewRoleDropdown</code>, ...) are the vocabulary. An unknown id does nothing.</li>
+<li>The tutorial-only events (see <a href="#events">Events</a>) fire only while the tutorial itself is running, which only the player can switch on (the checkbox in the new-game window), not a mod.</li>
+</ul>
+<p><strong>Aircraft-skin quests (<code>1</code>)</strong> are created once per aircraft whose role or id appears in the first step's <code>_parameter</code>, and the aircraft's id is appended to every step's parameter. On completion they unlock a skin - but <em>which</em> skin is a table inside the game keyed by the shipped quest ids, so a new quest of this type unlocks nothing.</p>
+<p>The same table is what makes completing <code>quest2</code> unlock new buildings: <strong>rewards are not part of the quest file</strong>. A mod quest cannot unlock a building, an aircraft or a skin. What it can do is <em>gate</em>: requirement type 1 chains quests behind each other, and a quest step can wait for a mission chain. The reverse is not available - a mission can be gated by map tags, runway tier, a day window or a <em>completed mission</em>, but not by a quest (see <a href="../missions/">Missions</a>).</p>
+<h2 id="example-quests">Example quests<a class="headerlink" href="#example-quests" title="Permanent link">&para;</a></h2>
+<p>Three complete quest files to open, copy and change. They live in the modkit repository as a small mod: <a href="https://github.com/blindflugstudios/goa-modkit/tree/main/examples/quests">examples/quests</a> (the files themselves are in its <code>Quests/</code> folder). Each one goes into <code>Mods/&lt;your mod&gt;/Quests/</code> under its file name; the titles are localization keys you give words to as described in <a href="#text">Text</a>.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>example_first_steps.json</code></td>
+<td>The quest from <a href="#a-first-quest">A first quest</a>: one required step waiting for a finished sickbed, one optional step counting beds. Starts on every map.</td>
+</tr>
+<tr>
+<td><code>example_patrol_chain.json</code></td>
+<td>A follow-up quest. It starts once <code>example_first_steps</code> is complete, waits for a Spitfire to be owned, then for the shipped mission <code>calm_supply_drop</code> to come back a success, and optionally counts three winning sorties by Spitfires or Hurricanes. <code>calm_supply_drop</code> only appears from day 20 with a tier-3 runway, so the mission step cannot progress before that.</td>
+</tr>
+<tr>
+<td><code>example_map_campaign.json</code></td>
+<td>A quest that belongs to one map. Requirement type 3 keeps it off every other map; the map lists it in <code>StartingQuestIds</code> (see <a href="#quests-and-maps">Quests and maps</a>). Its steps use the counted-state types: an airstrip of tier 1, two parking spots, a storage zone of twenty tiles.</td>
+</tr>
+</tbody>
+</table>
+<p>Install all three together and you have a two-quest chain plus a map-bound quest to compare against. Rename the ids before you build on them - <code>example_</code> is only a placeholder prefix.</p>
+<p>Here is the chained quest in full:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">"_questId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_patrol_chain"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_questTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/patrol_chain/title"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_questDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/patrol_chain/description"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_subQuests"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"_subQuestTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/patrol_chain/step0_title"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/patrol_chain/step0_description"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_isOptional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestRequirement"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_parameter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spitfire"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"_genericIconKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui_plane"</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"_subQuestTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/patrol_chain/step1_title"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/patrol_chain/step1_description"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_isOptional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestRequirement"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_parameter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"airplane_on_mission_succeed,calm_supply_drop"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"_genericIconKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui_plane"</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"_subQuestTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/patrol_chain/step2_title"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_isOptional"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestRequirement"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_parameter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spitfire,hurricane,any_skill_type"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"_genericIconKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui_plane"</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_first_steps"</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"_isHiddenInUI"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_questType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_highlightedUIElements"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nt">"_cheatsOnStart"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nt">"_completionCheats"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>And the map-bound one:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">"_questId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_map_campaign"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_questTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/map_campaign/title"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_questDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/map_campaign/description"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_subQuests"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"_subQuestTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/map_campaign/step0_title"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/map_campaign/step0_description"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_isOptional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestRequirement"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_parameter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"_genericIconKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui_path_runway"</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"_subQuestTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/map_campaign/step1_title"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/map_campaign/step1_description"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_isOptional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestRequirement"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_parameter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"_genericIconKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui_functionarea_parking"</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"_subQuestTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/map_campaign/step2_title"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example/map_campaign/step2_description"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_isOptional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_subQuestRequirement"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_parameter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Storage,20"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"_genericIconKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui_functionarea_resources"</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"_isHiddenInUI"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_questType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"_highlightedUIElements"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nt">"_cheatsOnStart"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nt">"_completionCheats"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The game's own quest files (<code>quest0.json</code>, <code>quest1.json</code>, the <code>*_skin_unlock</code> and <code>tutorial_*</code> quests) are worth reading too; find them in the installation folder as described in <a href="#changing-a-shipped-quest">Changing a shipped quest</a>.</p>
+<h2 id="testing-a-quest">Testing a quest<a class="headerlink" href="#testing-a-quest" title="Permanent link">&para;</a></h2>
+<p>Load a level again after every edit (a new folder needs <strong>Refresh</strong> in the Mods window first), then use the <a href="../basics/cheats/">cheat console</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>quest &lt;id&gt;</code></td>
+<td>Hands out the quest right now, whatever its requirements or map say. The console suggests loaded quest ids as you type - if yours is never suggested, the file was not read. Running it twice creates a second copy of the quest.</td>
+</tr>
+<tr>
+<td><code>complete_current_quests</code></td>
+<td>Completes every open normal quest, so the next links in a chain start.</td>
+</tr>
+<tr>
+<td><code>go_to_quest &lt;id&gt;</code></td>
+<td>Completes every quest the named one requires (through requirement type 1, following the chain back), so the named quest is handed out. It does not complete the named quest itself, and it works for mod quests too.</td>
+</tr>
+<tr>
+<td><code>start_shipment &lt;Resource&gt; &lt;amount&gt; ...</code></td>
+<td>Puts resources on the base - <code>start_shipment Wood 12</code>.</td>
+</tr>
+<tr>
+<td><code>create_mission &lt;mission id&gt;</code></td>
+<td>Puts a mission on the map to test a mission-return step.</td>
+</tr>
+</tbody>
+</table>
+<p>When a quest does not show up, or a step does not move, read the game's log file <code>Player.log</code> (where it is: <a href="../basics/mods/#seeing-your-changes">How mods work</a>).</p>
+<ul>
+<li>A quest file with no JSON object in it at all is skipped, with an error in the log. A file that starts like JSON but is broken inside (a missing comma, an unclosed bracket) can break the loading of the level - check your JSON in an editor before you test.</li>
+<li>A map that lists an unknown quest id, and a step that never progresses because of a wrong <code>_type</code> or a misspelt id, get <strong>no</strong> line in the log - check the tables above.</li>
+</ul>
+<p>More testing tips: <a href="../basics/testing/">Testing and reloading</a>.</p>
+<h3 id="checklist-before-you-ship">Checklist before you ship<a class="headerlink" href="#checklist-before-you-ship" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Valid JSON: every <code>{</code> and <code>[</code> closed, a comma between entries and none after the last one.</li>
+<li>File name equals <code>_questId</code>, and both carry your mod's prefix.</li>
+<li>Every <code>_amount</code> is at least 1.</li>
+<li>Types 0, 1 and 21 have a number in <code>_parameter</code>; types 20 and 24 have their second part.</li>
+<li>Types 12 and 17 include a skill or <code>any_skill_type</code>; any of 12, 13, 17 that is not empty includes at least one aircraft <strong>id</strong>.</li>
+<li>No tutorial-only event outside a tutorial.</li>
+<li>No <code>_requirementType: 2</code>.</li>
+<li>Story quests carry <code>_requirementType: 3</code> and the map lists them; side quests that should start everywhere have an empty list on purpose.</li>
+<li>Every localization key is either a shipped key or registered by your script - load the game and look at the panel.</li>
+<li>No spaces inside <code>_parameter</code>.</li>
+</ul>
+<h2 id="saves-and-removing-a-mod">Saves and removing a mod<a class="headerlink" href="#saves-and-removing-a-mod" title="Permanent link">&para;</a></h2>
+<p>A quest that has been handed out lives in the savegame - name, progress and requirement - independently of your file. Saving and loading with the mod installed is uneventful. A quest you <em>add</em> in an update appears in existing saves the next time they are loaded, as long as its requirements pass.</p>
+<p><strong>Remove the mod and the quest stays in the save</strong>, still visible, frozen where it was. Nothing removes a quest because its file is gone, and the text your script registered goes away with the script, so the card shows the bare keys. Steps that wait for your missions can never move, because those missions no longer exist. Putting the mod back restores everything - text, progress, no duplicates.</p>
+<p>For the player this means: a quest that can be finished leaves a tidy save behind; one that strands them halfway through a chain does not, and there is nothing they can do about it from inside the game. Prefer quests that reach an end, and treat removing a quest from a published mod as a breaking change for anyone in the middle of a playthrough.</p>
+<h2 id="what-a-quest-cannot-do">What a quest cannot do<a class="headerlink" href="#what-a-quest-cannot-do" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Invent a new condition.</strong> The types in the table are everything. If what you want to count is not there, it cannot be expressed - but a script can watch for it and hand out a mission, and a quest can wait for that mission's return.</li>
+<li><strong>Run logic.</strong> No Python, no branching, no reading of game state beyond the counters above.</li>
+<li><strong>Show text without a key.</strong> See <a href="#text">Text</a>.</li>
+<li><strong>Give a reward.</strong> See <a href="#quest-types">Quest types</a>.</li>
+<li><strong>Reload inside a running level.</strong> Changes show after the next level load.</li>
+</ul>
+<p>For anything that has to <em>decide</em>, use a mission or an event script (see <a href="../missions/">Missions</a> and <a href="../scripting/">Scripting</a>) and let the quest report where the player has got to.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../missions/reference/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Reference">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Reference
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../scripting/" class="md-footer__link md-footer__link--next" aria-label="Next: Scripting">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Scripting
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Documentation CC-BY 4.0 - Ground of Aces and Blindflug Studios logos and names are trademarks and not covered by any license.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://discord.com/channels/1006159027157356587/1551969822911242240" target="_blank" rel="noopener" title="Modding channel on Discord" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/blindflugstudios/goa-modkit" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://steamcommunity.com/app/2308690/workshop/" target="_blank" rel="noopener" title="Steam Workshop" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M504 256c0 137-111.2 248-248.4 248-113.8 0-209.6-76.3-239-180.4l95.2 39.3c6.4 32.1 34.9 56.4 68.9 56.4 39.2 0 71.9-32.4 70.2-73.5l84.5-60.2c52.1 1.3 95.8-40.9 95.8-93.5 0-51.6-42-93.5-93.7-93.5s-93.7 42-93.7 93.5v1.2L184.6 279c-15.5-.9-30.7 3.4-43.5 12.1L8 236.1C18.2 108.4 125.1 8 255.6 8 392.8 8 504 119 504 256M163.7 384.3l-30.5-12.6c5.6 11.6 15.3 20.8 27.2 25.8 26.9 11.2 57.8-1.6 69-28.4 5.4-13 5.5-27.3.1-40.3S214 305.6 201 300.2c-12.9-5.4-26.7-5.2-38.9-.6l31.5 13c19.8 8.2 29.2 30.9 20.9 50.7-8.3 19.9-31 29.2-50.8 21m173.8-254.5a62.3 62.3 0 1 1 0 124.6 62.3 62.3 0 1 1 0-124.6m.1 109a46.8 46.8 0 1 0 0-93.6 46.8 46.8 0 1 0 0 93.6"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "navigation.indexes", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
