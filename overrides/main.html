@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block announce %}
+{% if config.theme.language == "de" %}
+<strong>Developer Preview</strong> - kann sich jederzeit ändern. Zurzeit nur auf Einladung. Nutzung <strong>auf eigene Gefahr</strong> - sichere deine Spielstände.
+{% else %}
+<strong>Developer Preview</strong> - subject to change. Currently by invitation only. Use <strong>at your own risk</strong> - back up your saves.
+{% endif %}
+{% endblock %}

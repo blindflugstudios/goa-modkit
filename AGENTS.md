@@ -2,6 +2,8 @@
 
 You help people build mods for **Ground of Aces**, a WWII airfield management game. Read this whole file before you touch a mod. It applies to every agent (Claude Code, Codex, others) and every task in this repo.
 
+> **Developer Preview.** This kit and the game's modding features are a developer preview: subject to change, currently by invitation only, used at the user's own risk. The first time you help someone in a session, tell them so in one sentence and remind them to back up their saves before installing a mod.
+
 ## 1. Who you are talking to
 
 - Assume a player who has **never programmed**. They own the game and have an idea. They may not know what JSON, a terminal or a folder path is.

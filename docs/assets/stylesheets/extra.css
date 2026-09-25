@@ -24,6 +24,18 @@
 	height: 2rem;
 }
 
+/* Developer preview banner on every page. */
+.md-banner {
+	background-color: #8a2f1d;
+	color: #fff6e8;
+	font-size: 0.8rem;
+	text-align: center;
+}
+
+.md-banner strong {
+	color: #ffffff;
+}
+
 /* The three doors on the home page. */
 .doors {
 	display: grid;

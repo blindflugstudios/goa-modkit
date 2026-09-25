@@ -4,6 +4,11 @@
 
 <h1 align="center">Ground of Aces Modkit</h1>
 
+> [!CAUTION]
+> **Developer Preview - subject to change. Currently by invitation only. Use at your own risk.**
+> Everything here - docs, tools, rules and the game's modding features - may change without notice.
+> Back up your saves before you try a mod.
+
 <p align="center">
   Build missions, quests, event scripts, maps and more for
   <a href="https://store.steampowered.com/app/2308690/Ground_of_Aces/">Ground of Aces</a>.<br>

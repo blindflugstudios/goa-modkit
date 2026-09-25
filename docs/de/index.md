@@ -6,6 +6,13 @@ hide:
 
 # Ground of Aces Modkit
 
+!!! danger "Developer Preview - Nutzung auf eigene Gefahr"
+    Dieses Modkit ist eine **Developer Preview**. Alles hier - die Doku, die Werkzeuge, die Regeln
+    und die Modding-Funktionen des Spiels selbst - **kann sich jederzeit ohne Ankündigung ändern**.
+    Der Zugang ist zurzeit **nur auf Einladung** möglich. Du nutzt es **auf eigene Gefahr**: Sichere
+    deine Spielstände, bevor du eine Mod ausprobierst, und verlass dich nicht darauf, dass etwas so
+    bleibt, wie es ist.
+
 <div class="hero" markdown>
 
 ![Ground of Aces](assets/logos/goa-logo-colored.png)

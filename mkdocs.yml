@@ -8,6 +8,7 @@ copyright: Documentation CC-BY 4.0 - Ground of Aces and Blindflug Studios logos 
 
 theme:
   name: material
+  custom_dir: overrides
   logo: assets/logos/goa-logo-colored.png
   favicon: assets/logos/blindflug-mark.png
   font:
