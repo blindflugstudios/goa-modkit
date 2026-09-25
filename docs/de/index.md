@@ -9,7 +9,7 @@ hide:
 !!! danger "Developer Preview - Nutzung auf eigene Gefahr"
     Dieses Modkit ist eine **Developer Preview**. Alles hier - die Doku, die Werkzeuge, die Regeln
     und die Modding-Funktionen des Spiels selbst - **kann sich jederzeit ohne Ankündigung ändern**.
-    Der Zugang ist zurzeit **nur auf Einladung** möglich. Du nutzt es **auf eigene Gefahr**: Sichere
+    Lesen darf jeder, das Kit selbst gibt es zurzeit **nur auf Einladung** - siehe "Zugang bekommen" unten. Du nutzt es **auf eigene Gefahr**: Sichere
     deine Spielstände, bevor du eine Mod ausprobierst, und verlass dich nicht darauf, dass etwas so
     bleibt, wie es ist.
 
@@ -40,6 +40,15 @@ Klone dieses Repository, starte deinen Agenten darin und beschreib den Mod, den 
 </a>
 
 </div>
+
+## Zugang bekommen { #get-access }
+
+Die Doku ist für alle offen. Das Modkit selbst - das Repository mit Beispielen, Vorlagen,
+Validator und KI-Regeln - ist während der Preview privat. Für einen Zugang schick eine kurze Mail
+mit deinem **GitHub-Benutzernamen** an
+[nuria@blindflugstudios.com](mailto:nuria@blindflugstudios.com) oder
+[moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com). Erzähl uns gern, was du bauen
+möchtest - wir freuen uns darauf.
 
 ## Was du bauen kannst { #what-you-can-build }
 

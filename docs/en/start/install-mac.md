@@ -144,6 +144,10 @@ It then shows a **one-time code** like `ABCD-1234`. Press **Return**, your brows
 
 ## 7. Get the modkit
 
+!!! warning "Invitation needed"
+    During the developer preview the modkit is private. This step only works once you have
+    accepted the GitHub invitation - see [Get access first](index.md#get-access-first).
+
 This downloads the modkit into a folder called `goa-modkit` in your home folder. You do this once.
 
 ```bash

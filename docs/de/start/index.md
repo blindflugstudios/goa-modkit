@@ -10,6 +10,15 @@ Willkommen an der Startbahn. Dieser Abschnitt bringt dich von "Ich habe Ground o
 | **Lust, direkt loszulegen.** Du kennst dich mit Dateien und einem Texteditor aus. | [Ohne KI-Agent](without-ai.md): Beispiel kopieren, JSON bearbeiten, prüfen, laden. Danach [So funktionieren Mods](../basics/mods.md). |
 | **Schon Claude oder Codex.** Du hast bereits einen KI-Coding-Agenten. | Klone das Kit (Schritt 3 der Installationsseiten), starte deinen Agenten im Ordner und geh zu [Dein erster Mod in 10 Minuten](first-mod.md). |
 
+## Zuerst Zugang holen { #get-access-first }
+
+Während der Developer Preview ist das Modkit privat. Bevor du etwas installierst, schick deinen
+**GitHub-Benutzernamen** per Mail an [nuria@blindflugstudios.com](mailto:nuria@blindflugstudios.com)
+oder [moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com) (noch kein GitHub-Konto?
+Die Installationsseiten zeigen, wie du eins anlegst - es ist kostenlos). Du bekommst dann eine
+Einladung von GitHub per Mail; nimm sie an, und der Download-Schritt auf den Installationsseiten
+funktioniert. Ohne Einladung antwortet GitHub mit "Could not resolve to a Repository".
+
 ## Was du brauchst { #what-you-need }
 
 - **Ground of Aces** auf Steam, unter Windows oder auf dem Mac.

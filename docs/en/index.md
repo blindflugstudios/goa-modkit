@@ -8,8 +8,8 @@ hide:
 
 !!! danger "Developer Preview - use at your own risk"
     This modkit is a **developer preview**. Everything here - the docs, the tools, the rules and
-    the modding features of the game itself - is **subject to change** without notice. Access is
-    currently **by invitation only**. You use it **at your own risk**: back up your saves before
+    the modding features of the game itself - is **subject to change** without notice. Anyone can read
+    this site, but the kit itself is currently **by invitation only** - see "Get access" below. You use it **at your own risk**: back up your saves before
     you try a mod, and do not rely on anything here staying the way it is.
 
 <div class="hero" markdown>
@@ -39,6 +39,15 @@ Clone this repository, start your agent in it, and describe the mod you want. Th
 </a>
 
 </div>
+
+## Get access
+
+The documentation is open to everyone. The modkit itself - the repository with the examples,
+templates, validator and AI rules - is private during the preview. To get access, send a short
+email with your **GitHub username** to
+[nuria@blindflugstudios.com](mailto:nuria@blindflugstudios.com) or
+[moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com). Tell us what you would like to
+build - we love to hear it.
 
 ## What you can build
 

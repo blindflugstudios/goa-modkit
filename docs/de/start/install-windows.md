@@ -142,6 +142,10 @@ Danach zeigt es einen **Einmal-Code** wie `ABCD-1234`. Drück **Enter**, dein Br
 
 ## 8. Hol dir das Modkit { #8-get-the-modkit }
 
+!!! warning "Einladung nötig"
+    Während der Developer Preview ist das Modkit privat. Dieser Schritt klappt erst, wenn du die
+    Einladung von GitHub angenommen hast - siehe [Zuerst Zugang holen](index.md#get-access-first).
+
 Damit lädst du das Modkit in einen Ordner namens `goa-modkit` in deinem Benutzerordner. Das machst du einmal.
 
 ```powershell

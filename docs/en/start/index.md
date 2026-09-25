@@ -10,6 +10,15 @@ Welcome to the flight line. This section takes you from "I own Ground of Aces on
 | **Want to dive in.** You know your way around files and a text editor. | [Without an AI agent](without-ai.md): copy an example, edit the JSON, validate, load it. Then [How mods work](../basics/mods.md). |
 | **Using Claude or Codex.** You already have an AI coding agent. | Clone the kit (step 3 of the install pages), start your agent in the folder, and go to [Your first mod in 10 minutes](first-mod.md). |
 
+## Get access first
+
+During the developer preview the modkit is private. Before you install anything, email your
+**GitHub username** to [nuria@blindflugstudios.com](mailto:nuria@blindflugstudios.com) or
+[moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com) (no GitHub account yet? The
+install pages show how to make one - it is free). You will get an invitation email from GitHub;
+accept it, and the download step on the install pages works. Without the invitation, GitHub
+answers "Could not resolve to a Repository".
+
 ## What you need
 
 - **Ground of Aces** on Steam, on Windows or Mac.
