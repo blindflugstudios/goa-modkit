@@ -11,6 +11,9 @@ Most mod problems come from a handful of causes. Find your symptom, then try the
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
+| **`gh repo clone` says "To get started with GitHub CLI, please run: gh auth login"** | The GitHub login was not finished - usually the terminal was closed or used before it showed `✓ Logged in`. No `goa-modkit` folder was created, so `cd goa-modkit` fails too. | Run `gh auth login` again and follow the browser steps on the install page to the end. `gh auth status` shows whether you are logged in. |
+| **`gh repo clone` says "Could not resolve to a Repository"** | You are logged in, but you have no access to the private modkit yet, or you have not accepted the invitation. | Accept it at [github.com/blindflugstudios/goa-modkit/invitations](https://github.com/blindflugstudios/goa-modkit/invitations). No invitation? See [Get access first](index.md#get-access-first). |
+| **"Python was not found" although Python is installed (Windows)** | A fake `python` from the Microsoft Store hides the real one. | Use `py` instead of `python`, or switch off the App execution aliases - see [Install on Windows](install-windows.md). |
 | **My mod is not in the Mods window** | The mod is not where the game looks, or its content is not in a content folder. The game only sees `Mods/<your mod>/Missions/...` (or `Quests/`, `Maps/`, `CSV/` ...). A `Missions` folder with nothing in it counts as empty. | Open **Mods → Open folder** and check the structure. The mod folder must sit directly in `Mods`, and the files inside a folder named exactly `Missions`. |
 | **My mod is listed but switched off** | It was switched off in the Mods window. | Switch it on, then load your save again. |
 | **My mod folder is there but ignored** | It is a shortcut, alias or linked folder. The game skips those on purpose. | Copy the real folder into `Mods`. The agent's `install-mod` skill always copies. |

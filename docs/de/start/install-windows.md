@@ -155,11 +155,25 @@ Es stellt dir ein paar Fragen (auf Englisch). Nutze die Pfeiltasten und **Enter*
 | Authenticate Git with your GitHub credentials? | **Yes** |
 | How would you like to authenticate GitHub CLI? | **Login with a web browser** |
 
-Danach zeigt es einen **Einmal-Code** wie `ABCD-1234`. Drück **Enter**, dein Browser öffnet sich, füg den Code ein und klick auf **Authorize**.
+Dann kommt der Teil im Browser. Lass dir Zeit - das Terminal wartet auf dich:
+
+1. Das Terminal zeigt einen **Einmal-Code**, zum Beispiel `ABCD-1234`, und schreibt *"Press Enter to open github.com in your browser"*. **Schreib dir den Code auf** (oder lass das Terminal sichtbar) und drück dann **Enter**.
+2. Dein Browser öffnet eine GitHub-Seite mit dem Titel **Device Activation**. Falls GitHub dich zuerst anmelden will, tu das.
+3. Tipp den Code aus dem Terminal in die Kästchen und klick auf **Continue**.
+4. GitHub zeigt jetzt **Authorize GitHub CLI**. Damit darf das Werkzeug `gh` auf deinem Rechner für dein GitHub-Konto handeln, um das Modkit herunterzuladen. Klick auf **Authorize github** (eventuell fragt GitHub noch einmal nach deinem Passwort).
+5. Der Browser meldet *"Congratulations, you're all set!"*. Jetzt **zurück ins Terminal und warten**, bis dort `✓ Logged in as YourName` steht. Erst dann weitermachen - wenn du vorher das Terminal schließt oder etwas anderes tippst, ist die Anmeldung nicht fertig.
 
 <!-- screenshot: gh auth login in the terminal showing the one-time code -->
 
-**Das solltest du sehen:** `✓ Logged in as YourName` im Terminal.
+**Kontrollieren** kannst du das jederzeit:
+
+```
+gh auth status
+```
+
+**Das solltest du sehen:** `✓ Logged in to github.com account YourName`. Steht dort *"You are not logged into any GitHub hosts"*, führ `gh auth login` noch einmal aus.
+
+**Nimm deine Einladung an.** Während der Developer Preview ist das Modkit privat, du brauchst also auch die Einladung von Blindflug Studios (siehe [Zuerst Zugang holen](index.md#get-access-first)). GitHub schickt sie per Mail; du kannst auch angemeldet [github.com/blindflugstudios/goa-modkit/invitations](https://github.com/blindflugstudios/goa-modkit/invitations) öffnen und auf **Accept invitation** klicken. Mach das einmal, vor dem nächsten Schritt.
 
 ## 8. Hol dir das Modkit { #8-get-the-modkit }
 

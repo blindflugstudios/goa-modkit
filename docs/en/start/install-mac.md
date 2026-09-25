@@ -136,11 +136,25 @@ It asks a few questions. Use the arrow keys and **Return**:
 | Authenticate Git with your GitHub credentials? | **Yes** |
 | How would you like to authenticate GitHub CLI? | **Login with a web browser** |
 
-It then shows a **one-time code** like `ABCD-1234`. Press **Return**, your browser opens, paste the code, and click **Authorize**.
+Then comes the part in the browser. Take it slowly - the terminal waits for you:
+
+1. The terminal shows a **one-time code**, for example `ABCD-1234`, and says *"Press Return to open github.com in your browser"*. **Write the code down** (or leave the terminal visible), then press **Return**.
+2. Your browser opens a GitHub page titled **Device Activation**. If GitHub asks you to sign in first, do that.
+3. Type the code from the terminal into the boxes and click **Continue**.
+4. GitHub now shows **Authorize GitHub CLI**. This lets the `gh` tool on your computer act for your GitHub account, so it can download the modkit. Click **Authorize github** (GitHub may ask for your password once more).
+5. The browser says *"Congratulations, you're all set!"*. Now **go back to the terminal and wait** until it shows `✓ Logged in as YourName`. Only then go on - if you close the terminal or type something else before that, the login is not finished.
 
 <!-- screenshot: gh auth login in the terminal showing the one-time code -->
 
-**You should see** `✓ Logged in as YourName` in the terminal.
+**Check it** at any time:
+
+```
+gh auth status
+```
+
+**You should see** `✓ Logged in to github.com account YourName`. If it says *"You are not logged into any GitHub hosts"*, run `gh auth login` again.
+
+**Accept your invitation.** During the developer preview the modkit is private, so you also need the invitation from Blindflug Studios (see [Get access first](index.md#get-access-first)). GitHub sends it by email; you can also open [github.com/blindflugstudios/goa-modkit/invitations](https://github.com/blindflugstudios/goa-modkit/invitations) while logged in and click **Accept invitation**. Do this once, before the next step.
 
 ## 7. Get the modkit
 
