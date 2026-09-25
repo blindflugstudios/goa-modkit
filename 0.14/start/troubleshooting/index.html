@@ -2252,6 +2252,21 @@
 </thead>
 <tbody>
 <tr>
+<td><strong><code>gh repo clone</code> says "To get started with GitHub CLI, please run: gh auth login"</strong></td>
+<td>The GitHub login was not finished - usually the terminal was closed or used before it showed <code>✓ Logged in</code>. No <code>goa-modkit</code> folder was created, so <code>cd goa-modkit</code> fails too.</td>
+<td>Run <code>gh auth login</code> again and follow the browser steps on the install page to the end. <code>gh auth status</code> shows whether you are logged in.</td>
+</tr>
+<tr>
+<td><strong><code>gh repo clone</code> says "Could not resolve to a Repository"</strong></td>
+<td>You are logged in, but you have no access to the private modkit yet, or you have not accepted the invitation.</td>
+<td>Accept it at <a href="https://github.com/blindflugstudios/goa-modkit/invitations">github.com/blindflugstudios/goa-modkit/invitations</a>. No invitation? See <a href="../#get-access-first">Get access first</a>.</td>
+</tr>
+<tr>
+<td><strong>"Python was not found" although Python is installed (Windows)</strong></td>
+<td>A fake <code>python</code> from the Microsoft Store hides the real one.</td>
+<td>Use <code>py</code> instead of <code>python</code>, or switch off the App execution aliases - see <a href="../install-windows/">Install on Windows</a>.</td>
+</tr>
+<tr>
 <td><strong>My mod is not in the Mods window</strong></td>
 <td>The mod is not where the game looks, or its content is not in a content folder. The game only sees <code>Mods/&lt;your mod&gt;/Missions/...</code> (or <code>Quests/</code>, <code>Maps/</code>, <code>CSV/</code> ...). A <code>Missions</code> folder with nothing in it counts as empty.</td>
 <td>Open <strong>Mods → Open folder</strong> and check the structure. The mod folder must sit directly in <code>Mods</code>, and the files inside a folder named exactly <code>Missions</code>.</td>

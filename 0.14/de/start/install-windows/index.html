@@ -2493,10 +2493,21 @@ dieser Seite <code>python</code> steht. Der KI-Agent weiß das auch.</p>
 </tr>
 </tbody>
 </table>
-<p>Danach zeigt es einen <strong>Einmal-Code</strong> wie <code>ABCD-1234</code>. Drück <strong>Enter</strong>, dein Browser öffnet sich, füg den Code ein und klick auf <strong>Authorize</strong>.</p>
+<p>Dann kommt der Teil im Browser. Lass dir Zeit - das Terminal wartet auf dich:</p>
+<ol>
+<li>Das Terminal zeigt einen <strong>Einmal-Code</strong>, zum Beispiel <code>ABCD-1234</code>, und schreibt <em>"Press Enter to open github.com in your browser"</em>. <strong>Schreib dir den Code auf</strong> (oder lass das Terminal sichtbar) und drück dann <strong>Enter</strong>.</li>
+<li>Dein Browser öffnet eine GitHub-Seite mit dem Titel <strong>Device Activation</strong>. Falls GitHub dich zuerst anmelden will, tu das.</li>
+<li>Tipp den Code aus dem Terminal in die Kästchen und klick auf <strong>Continue</strong>.</li>
+<li>GitHub zeigt jetzt <strong>Authorize GitHub CLI</strong>. Damit darf das Werkzeug <code>gh</code> auf deinem Rechner für dein GitHub-Konto handeln, um das Modkit herunterzuladen. Klick auf <strong>Authorize github</strong> (eventuell fragt GitHub noch einmal nach deinem Passwort).</li>
+<li>Der Browser meldet <em>"Congratulations, you're all set!"</em>. Jetzt <strong>zurück ins Terminal und warten</strong>, bis dort <code>✓ Logged in as YourName</code> steht. Erst dann weitermachen - wenn du vorher das Terminal schließt oder etwas anderes tippst, ist die Anmeldung nicht fertig.</li>
+</ol>
 <!-- screenshot: gh auth login in the terminal showing the one-time code -->
 
-<p><strong>Das solltest du sehen:</strong> <code>✓ Logged in as YourName</code> im Terminal.</p>
+<p><strong>Kontrollieren</strong> kannst du das jederzeit:</p>
+<div class="highlight"><pre><span></span><code>gh auth status
+</code></pre></div>
+<p><strong>Das solltest du sehen:</strong> <code>✓ Logged in to github.com account YourName</code>. Steht dort <em>"You are not logged into any GitHub hosts"</em>, führ <code>gh auth login</code> noch einmal aus.</p>
+<p><strong>Nimm deine Einladung an.</strong> Während der Developer Preview ist das Modkit privat, du brauchst also auch die Einladung von Blindflug Studios (siehe <a href="../#get-access-first">Zuerst Zugang holen</a>). GitHub schickt sie per Mail; du kannst auch angemeldet <a href="https://github.com/blindflugstudios/goa-modkit/invitations">github.com/blindflugstudios/goa-modkit/invitations</a> öffnen und auf <strong>Accept invitation</strong> klicken. Mach das einmal, vor dem nächsten Schritt.</p>
 <h2 id="8-get-the-modkit">8. Hol dir das Modkit<a class="headerlink" href="#8-get-the-modkit" title="Permanent link">&para;</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Einladung nötig</p>

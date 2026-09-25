@@ -2484,10 +2484,21 @@ gh<span class="w"> </span>--version
 </tr>
 </tbody>
 </table>
-<p>It then shows a <strong>one-time code</strong> like <code>ABCD-1234</code>. Press <strong>Return</strong>, your browser opens, paste the code, and click <strong>Authorize</strong>.</p>
+<p>Then comes the part in the browser. Take it slowly - the terminal waits for you:</p>
+<ol>
+<li>The terminal shows a <strong>one-time code</strong>, for example <code>ABCD-1234</code>, and says <em>"Press Return to open github.com in your browser"</em>. <strong>Write the code down</strong> (or leave the terminal visible), then press <strong>Return</strong>.</li>
+<li>Your browser opens a GitHub page titled <strong>Device Activation</strong>. If GitHub asks you to sign in first, do that.</li>
+<li>Type the code from the terminal into the boxes and click <strong>Continue</strong>.</li>
+<li>GitHub now shows <strong>Authorize GitHub CLI</strong>. This lets the <code>gh</code> tool on your computer act for your GitHub account, so it can download the modkit. Click <strong>Authorize github</strong> (GitHub may ask for your password once more).</li>
+<li>The browser says <em>"Congratulations, you're all set!"</em>. Now <strong>go back to the terminal and wait</strong> until it shows <code>✓ Logged in as YourName</code>. Only then go on - if you close the terminal or type something else before that, the login is not finished.</li>
+</ol>
 <!-- screenshot: gh auth login in the terminal showing the one-time code -->
 
-<p><strong>You should see</strong> <code>✓ Logged in as YourName</code> in the terminal.</p>
+<p><strong>Check it</strong> at any time:</p>
+<div class="highlight"><pre><span></span><code>gh auth status
+</code></pre></div>
+<p><strong>You should see</strong> <code>✓ Logged in to github.com account YourName</code>. If it says <em>"You are not logged into any GitHub hosts"</em>, run <code>gh auth login</code> again.</p>
+<p><strong>Accept your invitation.</strong> During the developer preview the modkit is private, so you also need the invitation from Blindflug Studios (see <a href="../#get-access-first">Get access first</a>). GitHub sends it by email; you can also open <a href="https://github.com/blindflugstudios/goa-modkit/invitations">github.com/blindflugstudios/goa-modkit/invitations</a> while logged in and click <strong>Accept invitation</strong>. Do this once, before the next step.</p>
 <h2 id="7-get-the-modkit">7. Get the modkit<a class="headerlink" href="#7-get-the-modkit" title="Permanent link">&para;</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Invitation needed</p>
