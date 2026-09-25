@@ -156,6 +156,15 @@ gh auth status
 
 **Accept your invitation.** During the developer preview the modkit is private, so you also need the invitation from Blindflug Studios (see [Get access first](index.md#get-access-first)). GitHub sends it by email; you can also open [github.com/blindflugstudios/goa-modkit/invitations](https://github.com/blindflugstudios/goa-modkit/invitations) while logged in and click **Accept invitation**. Do this once, before the next step.
 
+!!! note "Two-factor authentication is required"
+    Blindflug Studios requires **two-factor authentication (2FA)** on GitHub for everyone with
+    access. When you open the invitation, GitHub asks you to set it up first - that is expected and
+    takes about five minutes. The easiest way is an authenticator app on your phone (GitHub Mobile,
+    Microsoft Authenticator or Google Authenticator): scan the QR code GitHub shows, type the
+    6-digit code from the app, and **save the recovery codes** somewhere safe. Then accept the
+    invitation. GitHub's own guide:
+    [Configuring two-factor authentication](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication).
+
 ## 7. Get the modkit
 
 !!! warning "Invitation needed"

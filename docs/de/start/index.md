@@ -17,7 +17,8 @@ Während der Developer Preview ist das Modkit privat. Bevor du etwas installiers
 oder [moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com) (noch kein GitHub-Konto?
 Die Installationsseiten zeigen, wie du eins anlegst - es ist kostenlos). Du bekommst dann eine
 Einladung von GitHub per Mail; nimm sie an, und der Download-Schritt auf den Installationsseiten
-funktioniert. Ohne Einladung antwortet GitHub mit "Could not resolve to a Repository".
+funktioniert. Vor dem Annehmen verlangt GitHub, dass du die **Zwei-Faktor-Anmeldung**
+einschaltest - die Installationsseiten führen dich durch. Ohne Einladung antwortet GitHub mit "Could not resolve to a Repository".
 
 ## Was du brauchst { #what-you-need }
 

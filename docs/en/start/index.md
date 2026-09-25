@@ -16,7 +16,8 @@ During the developer preview the modkit is private. Before you install anything,
 **GitHub username** to [nuria@blindflugstudios.com](mailto:nuria@blindflugstudios.com) or
 [moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com) (no GitHub account yet? The
 install pages show how to make one - it is free). You will get an invitation email from GitHub;
-accept it, and the download step on the install pages works. Without the invitation, GitHub
+accept it, and the download step on the install pages works. GitHub asks you to switch on
+**two-factor authentication** before you can accept - the install pages walk you through it. Without the invitation, GitHub
 answers "Could not resolve to a Repository".
 
 ## What you need
