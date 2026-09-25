@@ -172,7 +172,7 @@ Reference: `docs/en/data/csv.md`. Template: `templates/csv-tweak/`.
 python tools/validator/goa_validate.py mods/<mod_id>
 ```
 
-Use `python3` on Mac/Linux if `python` is missing. Needs Python 3.9+. Exit code `0` = no errors (warnings only fail with `--strict`), `1` = errors, `2` = bad path. Aim for 0 errors; explain each warning to the user in plain words.
+Use `python3` on Mac/Linux if `python` is missing. **On Windows, try `py` before giving up:** a fake `python` from the Microsoft Store ("Python was not found" / "Python wurde nicht gefunden") often hides the real one; `py tools\validator\goa_validate.py mods\<mod_id>` works then. Tell the user about the fix in `docs/en/start/install-windows.md` (switch off the App execution aliases). Needs Python 3.9+. Exit code `0` = no errors (warnings only fail with `--strict`), `1` = errors, `2` = bad path. Aim for 0 errors; explain each warning to the user in plain words.
 
 **No Python?** Download the prebuilt checker once (needs `gh`, logged in):
 

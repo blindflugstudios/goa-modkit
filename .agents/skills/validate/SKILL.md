@@ -7,7 +7,7 @@ description: Check a Ground of Aces mod for mistakes that crash the game or stop
 
 ## 1. Pick the checker
 
-1. Try `python --version`, then `python3 --version`. Python 3.9 or newer: use
+1. Try `python --version`, then `python3 --version`, and on Windows also `py --version` (a fake `python` from the Microsoft Store answers "Python was not found" and hides the real one - then use `py` instead of `python` in every command below). Python 3.9 or newer: use
    ```bash
    python tools/validator/goa_validate.py mods/<mod_id>
    ```

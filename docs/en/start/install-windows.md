@@ -114,7 +114,28 @@ python --version
 
 **You should see** `Python 3.12.x`.
 
-**If the Microsoft Store opens instead**: close it, reopen the terminal and try again. If it keeps happening, open **Settings → Apps → Advanced app settings → App execution aliases** and switch off the two **python** entries.
+!!! warning "\"Python was not found\" or the Microsoft Store opens"
+    Windows ships a fake `python` that only points to the Microsoft Store, and it can hide the
+    real one. You see *"Python was not found; run without arguments to install from the
+    Microsoft Store..."* (German Windows: *"Python wurde nicht gefunden..."*), even though winget
+    says Python is already installed. Fix it like this:
+
+    1. Try the Python launcher, which comes with the same install:
+
+        ```powershell
+        py --version
+        ```
+
+        If this shows `Python 3.12.x`, Python works. You can type `py` wherever this site says
+        `python`. The AI agent knows this too.
+
+    2. To make `python` work as well, open **Settings → Apps → Advanced app settings → App
+       execution aliases** and switch off **App Installer python.exe** and **python3.exe**.
+       Close the terminal and open a new one.
+
+    3. Still not working? Type `where.exe python`. If it only lists a path containing
+       `WindowsApps`, that is still the fake one. Reinstall with
+       `winget install --id Python.Python.3.12 -e --force` and open a new terminal.
 
 ## 7. Create a GitHub account and log in
 

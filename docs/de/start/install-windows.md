@@ -114,7 +114,28 @@ python --version
 
 **Das solltest du sehen:** `Python 3.12.x`.
 
-**Falls sich stattdessen der Microsoft Store öffnet:** Schließ ihn, öffne das Terminal neu und versuch es noch einmal. Passiert das immer wieder, öffne **Einstellungen → Apps → Erweiterte App-Einstellungen → App-Ausführungsaliase** und schalte die beiden **python**-Einträge aus.
+!!! warning "\"Python wurde nicht gefunden\" oder der Microsoft Store öffnet sich"
+    Windows bringt ein falsches `python` mit, das nur auf den Microsoft Store verweist und das
+    echte verdecken kann. Du siehst dann *"Python wurde nicht gefunden; ohne Argumente ausführen,
+    um aus dem Microsoft Store zu installieren..."*, obwohl winget sagt, dass Python schon
+    installiert ist. So behebst du das:
+
+    1. Probier den Python-Launcher, der bei derselben Installation dabei ist:
+
+        ```powershell
+        py --version
+        ```
+
+        Zeigt er `Python 3.12.x`, funktioniert Python. Du kannst überall `py` tippen, wo auf
+        dieser Seite `python` steht. Der KI-Agent weiß das auch.
+
+    2. Damit auch `python` funktioniert, öffne **Einstellungen → Apps → Erweiterte
+       App-Einstellungen → App-Ausführungsaliase** und schalte **App-Installer python.exe** und
+       **python3.exe** aus. Schließ das Terminal und öffne ein neues.
+
+    3. Klappt es immer noch nicht? Tipp `where.exe python`. Steht dort nur ein Pfad mit
+       `WindowsApps`, ist das noch das falsche. Installier dann neu mit
+       `winget install --id Python.Python.3.12 -e --force` und öffne ein neues Terminal.
 
 ## 7. Leg ein GitHub-Konto an und melde dich an { #7-create-a-github-account-and-log-in }
 
