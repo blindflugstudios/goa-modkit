@@ -1,0 +1,7 @@
+{
+  "Id": "my_mod",
+  "Name": "My Mod",
+  "Author": "Your name",
+  "Version": "1.0.0",
+  "LoadOrder": 100
+}

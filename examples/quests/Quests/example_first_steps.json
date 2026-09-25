@@ -1,0 +1,35 @@
+{
+    "_questId": "example_first_steps",
+    "_questTitle": "example/first_steps/title",
+    "_questDescription": "",
+    "_subQuests": [
+        {
+            "_subQuestTitle": "example/first_steps/step0_title",
+            "_subQuestDescription": "example/first_steps/step0_description",
+            "_isOptional": false,
+            "_subQuestRequirement": {
+                "_type": 7,
+                "_parameter": "building_finished,Sickbed",
+                "_amount": 1
+            },
+            "_genericIconKey": "ui_health"
+        },
+        {
+            "_subQuestTitle": "example/first_steps/step1_title",
+            "_subQuestDescription": "",
+            "_isOptional": true,
+            "_subQuestRequirement": {
+                "_type": 4,
+                "_parameter": "Bed",
+                "_amount": 4
+            },
+            "_genericIconKey": "ui_bed"
+        }
+    ],
+    "_requirements": [],
+    "_isHiddenInUI": false,
+    "_questType": 0,
+    "_highlightedUIElements": [],
+    "_cheatsOnStart": [],
+    "_completionCheats": []
+}

@@ -1,0 +1,67 @@
+<p align="center">
+  <img src="docs/assets/logos/goa-logo-colored.png" alt="Ground of Aces" width="320">
+</p>
+
+<h1 align="center">Ground of Aces Modkit</h1>
+
+<p align="center">
+  Build missions, quests, event scripts, maps and more for
+  <a href="https://store.steampowered.com/app/2308690/Ground_of_Aces/">Ground of Aces</a>.<br>
+  By hand, or with an AI agent that knows the rules.
+</p>
+
+<p align="center">
+  <a href="https://blindflugstudios.github.io/goa-modkit/"><b>Read the manual</b></a> ·
+  <a href="https://discord.com/channels/1006159027157356587/1551969822911242240">Discord</a> ·
+  <a href="https://steamcommunity.com/app/2308690/workshop/">Steam Workshop</a>
+</p>
+
+---
+
+## Start here
+
+- **Never programmed?** Follow [Get started](https://blindflugstudios.github.io/goa-modkit/start/). We install everything step by step, and ten minutes after that your first mod is in the game.
+- **Know your way around files?** Pick one from [`examples/`](examples/), copy its files into `Mods/<your_mod>/Missions/` in the game's data folder, change them, and load your save again from the main menu. [Examples](https://blindflugstudios.github.io/goa-modkit/examples/) explains each one.
+- **Using Claude Code or Codex?**
+
+  ```bash
+  gh repo clone blindflugstudios/goa-modkit
+  cd goa-modkit
+  claude        # or: codex
+  ```
+
+  Then say what you want to build. The agent reads [`AGENTS.md`](AGENTS.md) and the skills, writes the mod into `mods/`, checks it and installs it.
+
+## What is in here
+
+| Folder | What it is |
+|---|---|
+| [`docs/`](docs/) | The manual, in English and German - also on the [website](https://blindflugstudios.github.io/goa-modkit/) |
+| [`examples/`](examples/) | Working mods, from a single mission to a whole campaign |
+| [`templates/`](templates/) | An empty, valid starting point for each kind of mod |
+| [`mods/`](mods/) | Where **your** mods go. Git ignores it, so updating the kit never touches your work |
+| [`tools/validator/`](tools/validator/) | Checks a mod for the mistakes that crash the game, before you start it |
+| [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md) | The rulebook for AI agents |
+| [`.agents/skills/`](.agents/skills/), [`.claude/`](.claude/) | Recipes and helper agents for Codex and Claude Code |
+| [`generated/`](generated/) | Reference data exported from the game (ids, events, locations) |
+
+## Keep it up to date
+
+```bash
+git pull
+```
+
+Your own mods in `mods/` stay exactly as they are.
+
+## Contributing
+
+Fixes, examples, skills and translations are welcome - see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Licenses
+
+- Tools: [MIT](LICENSE)
+- Documentation: [CC BY 4.0](LICENSE-docs)
+- Examples and templates: [CC0](LICENSE-examples) - copy them into your mods freely
+- The Ground of Aces and Blindflug Studios names and logos are trademarks and not covered by any of these. See [TRADEMARKS.md](TRADEMARKS.md).
+
+Made by [Blindflug Studios](https://www.blindflugstudios.com).

@@ -1,0 +1,51 @@
+{
+    "_questId": "example_map_campaign",
+    "_questTitle": "example/map_campaign/title",
+    "_questDescription": "example/map_campaign/description",
+    "_subQuests": [
+        {
+            "_subQuestTitle": "example/map_campaign/step0_title",
+            "_subQuestDescription": "example/map_campaign/step0_description",
+            "_isOptional": false,
+            "_subQuestRequirement": {
+                "_type": 0,
+                "_parameter": "1",
+                "_amount": 1
+            },
+            "_genericIconKey": "ui_path_runway"
+        },
+        {
+            "_subQuestTitle": "example/map_campaign/step1_title",
+            "_subQuestDescription": "example/map_campaign/step1_description",
+            "_isOptional": false,
+            "_subQuestRequirement": {
+                "_type": 1,
+                "_parameter": "0",
+                "_amount": 2
+            },
+            "_genericIconKey": "ui_functionarea_parking"
+        },
+        {
+            "_subQuestTitle": "example/map_campaign/step2_title",
+            "_subQuestDescription": "example/map_campaign/step2_description",
+            "_isOptional": false,
+            "_subQuestRequirement": {
+                "_type": 9,
+                "_parameter": "Storage,20",
+                "_amount": 1
+            },
+            "_genericIconKey": "ui_functionarea_resources"
+        }
+    ],
+    "_requirements": [
+        {
+            "_requirementType": 3,
+            "_value": ""
+        }
+    ],
+    "_isHiddenInUI": false,
+    "_questType": 0,
+    "_highlightedUIElements": [],
+    "_cheatsOnStart": [],
+    "_completionCheats": []
+}

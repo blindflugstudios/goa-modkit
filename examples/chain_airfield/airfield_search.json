@@ -1,0 +1,143 @@
+{
+    "_maxPlaneSlots": 2,
+    "_timeToStartRange": {
+        "x": 180.0,
+        "y": 360.0
+    },
+    "_timeToCompleteRange": {
+        "x": 140.0,
+        "y": 220.0
+    },
+    "_distanceLocationDependant": {
+        "x": 0,
+        "y": 0
+    },
+    "_missionRequirements": [
+        {
+            "Name": "CompletedMission",
+            "_requirementType": 3,
+            "_value": "airfield_pursuit,success"
+        }
+    ],
+    "_missionOutcomes": [
+        {
+            "Name": "Gone wrong, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "50-100",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 2,
+                    "_effectValue": "-30",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "Gone wrong, skill passed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 2,
+                    "_effectValue": "-25",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "-10",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 2,
+                    "_effectValue": "-25",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-10",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "6",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "15",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "15",
+                    "_effectIcon": ""
+                }
+            ]
+        }
+    ],
+    "_asPlannedChance": 45,
+    "_missionStats": [
+        {
+            "Name": "As planned",
+            "_missionSkillType": 2,
+            "_statRange": {
+                "x": 50.0,
+                "y": 85.0
+            }
+        },
+        {
+            "Name": "Gone wrong",
+            "_missionSkillType": 5,
+            "_statRange": {
+                "x": 60.0,
+                "y": 95.0
+            }
+        }
+    ],
+    "_enemyPlaneReport": 4,
+    "_missionIcon": "Recon",
+    "_potentialLocations": [
+        {
+            "_locationName": "amiens",
+            "_coordinates": {
+                "x": 49.89795,
+                "y": 2.32859
+            },
+            "_locationId": "amiens"
+        },
+        {
+            "_locationName": "lille",
+            "_coordinates": {
+                "x": 50.62518,
+                "y": 3.0551
+            },
+            "_locationId": "lille"
+        },
+        {
+            "_locationName": "calais",
+            "_coordinates": {
+                "x": 50.95873,
+                "y": 1.85522
+            },
+            "_locationId": "calais"
+        }
+    ],
+    "_difficultyRating": 2,
+    "_isHistoric": false,
+    "_tags": []
+}

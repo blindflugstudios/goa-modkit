@@ -1,0 +1,156 @@
+{
+    "_maxPlaneSlots": 2,
+    "_timeToStartRange": {
+        "x": 10.0,
+        "y": 25.0
+    },
+    "_timeToCompleteRange": {
+        "x": 40.0,
+        "y": 70.0
+    },
+    "_distanceLocationDependant": {
+        "x": 0,
+        "y": 0
+    },
+    "_missionRequirements": [
+        {
+            "_requirementType": 0,
+            "_value": "1"
+        }
+    ],
+    "_missionOutcomes": [
+        {
+            "Name": "Gone wrong, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 2,
+                    "_effectValue": "-35",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-20",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 6,
+                    "_effectValue": "-15",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "Gone wrong, skill passed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 2,
+                    "_effectValue": "-25",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-10",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 2,
+                    "_effectValue": "-30",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-15",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 2,
+                    "_effectValue": "-20",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "3",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "10",
+                    "_effectIcon": ""
+                }
+            ]
+        }
+    ],
+    "_asPlannedChance": 20,
+    "_missionStats": [
+        {
+            "Name": "As planned",
+            "_missionSkillType": 2,
+            "_statRange": {
+                "x": 30.0,
+                "y": 55.0
+            }
+        },
+        {
+            "Name": "Gone wrong",
+            "_missionSkillType": 2,
+            "_statRange": {
+                "x": 35.0,
+                "y": 60.0
+            }
+        }
+    ],
+    "_enemyPlaneReport": 0,
+    "_missionIcon": "Recon",
+    "_potentialLocations": [
+        {
+            "_locationName": "english_channel",
+            "_coordinates": {
+                "x": 50.16595,
+                "y": -1.701335
+            },
+            "_locationId": "english_channel"
+        },
+        {
+            "_locationName": "south_downs",
+            "_coordinates": {
+                "x": 50.94501,
+                "y": -0.664285
+            },
+            "_locationId": "south_downs"
+        },
+        {
+            "_locationName": "dover_strait",
+            "_coordinates": {
+                "x": 51.05976,
+                "y": 1.582498
+            },
+            "_locationId": "dover_strait"
+        }
+    ],
+    "_difficultyRating": 1,
+    "_isHistoric": false,
+    "_rawMissionName": "False Alarm",
+    "_rawMissionDescription": "Chain Home has plotted another raid inbound. It is the fourth today and the last three were nothing at all - the station has a fault the technicians have not found yet. Sector will not stand the squadron down on a maybe. Scramble, look, and come back tired.",
+    "_rawIntelThreatReport": "A plot on the screen and nothing behind it, most likely. Most likely is not certainly, which is the whole problem.",
+    "_rawApTransmission": "On the vector, climbing through eight thousand. Visibility good. Nothing on the horizon.",
+    "_rawGwTransmission": "Vectored into cloud at angels ten. Cannot see a thing and the plot has moved again.",
+    "_rawApSuccessTransmission": "Sector empty - but we swept it properly, and Sector has the report to prove the plot was false. That fault gets fixed tonight.",
+    "_rawApFailureTransmission": "Nothing there. Again. Two hours of fuel and four tired pilots for a ghost on a screen.",
+    "_rawGwSuccessTransmission": "Came down through the cloud in the wrong county, worked our way back, and confirmed the sector was clear. Something to show for it, at least.",
+    "_rawGwFailureTransmission": "Chased a phantom through cloud until the fuel ran low. The crews are past exhausted and Chain Home is still broken.",
+    "_tags": []
+}

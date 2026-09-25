@@ -1,0 +1,148 @@
+{
+    "_maxPlaneSlots": 3,
+    "_timeToStartRange": {
+        "x": 45.0,
+        "y": 90.0
+    },
+    "_timeToCompleteRange": {
+        "x": 110.0,
+        "y": 170.0
+    },
+    "_distanceLocationDependant": {
+        "x": 0,
+        "y": 0
+    },
+    "_missionRequirements": [
+        {
+            "Name": "CompletedMission",
+            "_requirementType": 3,
+            "_value": "airfield_raid,success"
+        }
+    ],
+    "_missionOutcomes": [
+        {
+            "Name": "Gone wrong, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "80-140",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "-25",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-20",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "Gone wrong, skill passed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "40-80",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "10",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "40-70",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "-10",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "8",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "30",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "20",
+                    "_effectIcon": ""
+                }
+            ]
+        }
+    ],
+    "_asPlannedChance": 50,
+    "_missionStats": [
+        {
+            "Name": "As planned",
+            "_missionSkillType": 0,
+            "_statRange": {
+                "x": 55.0,
+                "y": 90.0
+            }
+        },
+        {
+            "Name": "Gone wrong",
+            "_missionSkillType": 4,
+            "_statRange": {
+                "x": 60.0,
+                "y": 95.0
+            }
+        }
+    ],
+    "_enemyPlaneReport": 6,
+    "_missionIcon": "Fight",
+    "_potentialLocations": [
+        {
+            "_locationName": "calais",
+            "_coordinates": {
+                "x": 50.95873,
+                "y": 1.85522
+            },
+            "_locationId": "calais"
+        },
+        {
+            "_locationName": "boulogne-sur-mer",
+            "_coordinates": {
+                "x": 50.72455,
+                "y": 1.60192
+            },
+            "_locationId": "boulogne-sur-mer"
+        },
+        {
+            "_locationName": "dover_strait",
+            "_coordinates": {
+                "x": 51.05976,
+                "y": 1.582498
+            },
+            "_locationId": "dover_strait"
+        }
+    ],
+    "_difficultyRating": 3,
+    "_isHistoric": false,
+    "_tags": []
+}

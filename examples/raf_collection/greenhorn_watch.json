@@ -1,0 +1,156 @@
+{
+    "_maxPlaneSlots": 3,
+    "_timeToStartRange": {
+        "x": 240.0,
+        "y": 480.0
+    },
+    "_timeToCompleteRange": {
+        "x": 120.0,
+        "y": 200.0
+    },
+    "_distanceLocationDependant": {
+        "x": 0,
+        "y": 0
+    },
+    "_missionRequirements": [
+        {
+            "_requirementType": 0,
+            "_value": "1"
+        }
+    ],
+    "_missionOutcomes": [
+        {
+            "Name": "Gone wrong, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "80-150",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "-30",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-25",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "Gone wrong, skill passed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "40-80",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "10",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "30-60",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "-15",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "6",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "35",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "20",
+                    "_effectIcon": ""
+                }
+            ]
+        }
+    ],
+    "_asPlannedChance": 55,
+    "_missionStats": [
+        {
+            "Name": "As planned",
+            "_missionSkillType": 0,
+            "_statRange": {
+                "x": 40.0,
+                "y": 65.0
+            }
+        },
+        {
+            "Name": "Gone wrong",
+            "_missionSkillType": 4,
+            "_statRange": {
+                "x": 50.0,
+                "y": 80.0
+            }
+        }
+    ],
+    "_enemyPlaneReport": 5,
+    "_missionIcon": "Fight",
+    "_potentialLocations": [
+        {
+            "_locationName": "high_weald",
+            "_coordinates": {
+                "x": 51.05633,
+                "y": 0.439808
+            },
+            "_locationId": "high_weald"
+        },
+        {
+            "_locationName": "south_downs",
+            "_coordinates": {
+                "x": 50.94501,
+                "y": -0.664285
+            },
+            "_locationId": "south_downs"
+        },
+        {
+            "_locationName": "canterbury",
+            "_coordinates": {
+                "x": 51.27332,
+                "y": 1.085454
+            },
+            "_locationId": "canterbury"
+        }
+    ],
+    "_difficultyRating": 2,
+    "_isHistoric": false,
+    "_rawMissionName": "Greenhorn Watch",
+    "_rawMissionDescription": "A routine patrol, and nobody left to fly it but the new intake. Whoever goes up today comes back either a pilot or a name on the board. Send them and find out which.",
+    "_rawIntelThreatReport": "Light enemy activity reported over the Weald. On any other day this would be a training flight.",
+    "_rawApTransmission": "Angels one-five, formation tight, sector quiet so far. Continuing the sweep.",
+    "_rawGwTransmission": "Formation is all over the sky. Half of them have never done this without an instructor on the wing.",
+    "_rawApSuccessTransmission": "Patrol flown, sector clear, all aircraft accounted for. They held their own.",
+    "_rawApFailureTransmission": "We held formation and still came off worse. A bad day - it happens to good pilots too.",
+    "_rawGwSuccessTransmission": "It was a shambles from start to finish, and they still came back. Every one of them.",
+    "_rawGwFailureTransmission": "We sent boys up against professionals. That is on us, not on them.",
+    "_tags": []
+}

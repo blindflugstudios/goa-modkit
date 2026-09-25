@@ -1,0 +1,17 @@
+{
+	"_questId": "bad_type",
+	"_questTitle": "mymod/bad/title",
+	"_questDescription": "",
+	"_isHiddenInUI": false,
+	"_questType": 0,
+	"_requirements": [],
+	"_subQuests": [
+		{
+			"_subQuestTitle": "mymod/bad/subQuest0_title",
+			"_subQuestDescription": "",
+			"_isOptional": false,
+			"_genericIconKey": "",
+			"_subQuestRequirement": { "_type": 14, "_parameter": "", "_amount": 1 }
+		}
+	]
+}

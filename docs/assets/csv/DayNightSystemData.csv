@@ -1,0 +1,13 @@
+ID,Value
+Morning Time,4
+Dawn Time,7
+Day Time,10
+Evening Time,17
+Dusk Time,22
+Night Time,23
+Sun Min Rotation,15
+Sun Max Rotation,165
+Sun Yaw Offset,-90
+Sun Tilt,10
+Shadow Day Intens,0.85
+Shadow Night Intens,0

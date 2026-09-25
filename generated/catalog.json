@@ -1,0 +1,2043 @@
+{
+  "schema_version": 1,
+  "game_version": "0.14",
+  "generated_at": "2026-09-25",
+  "source_hashes": {
+    "mission_event": "a9fc8ac2b380cfdb",
+    "minor_event": "34961d4da460637c",
+    "icons": "4231bc84ec445d7a",
+    "locations": "92d410534808341f",
+    "skill_type": "d563648ffbb30ff6",
+    "outcome_effect": "462466b81c8024aa",
+    "mission_requirement": "49c5750583ef652a",
+    "location_flags": "df585efac13957a4",
+    "subquest_requirement": "e5129f06a6031b3b",
+    "project_settings": "608f8d6a4149c738"
+  },
+  "mission_handlers": [
+    {
+      "constant": "GET_MISSION_ID",
+      "event": "get_mission_id",
+      "dead": false
+    },
+    {
+      "constant": "GET_MISSION_NAME",
+      "event": "get_mission_name",
+      "dead": false
+    },
+    {
+      "constant": "GET_MISSION_DESCRIPTION_TEXT",
+      "event": "get_mission_description_text",
+      "dead": false
+    },
+    {
+      "constant": "GET_TIME_TO_START",
+      "event": "get_time_to_start",
+      "dead": false
+    },
+    {
+      "constant": "INITIALIZE_MISSION",
+      "event": "initialize_mission",
+      "dead": false
+    },
+    {
+      "constant": "GET_COMPLETION_TIME",
+      "event": "get_completion_time",
+      "dead": false
+    },
+    {
+      "constant": "GET_ENEMY_COUNT",
+      "event": "get_enemy_count",
+      "dead": false
+    },
+    {
+      "constant": "GET_FUEL_LEVEL",
+      "event": "get_fuel_level",
+      "dead": false
+    },
+    {
+      "constant": "GET_MISSION_EVENTS_COUNT",
+      "event": "get_mission_events_count",
+      "dead": false
+    },
+    {
+      "constant": "GET_THREAT_LEVEL",
+      "event": "get_threat_level",
+      "dead": false
+    },
+    {
+      "constant": "GET_MISSION_RESULT",
+      "event": "get_mission_result",
+      "dead": false
+    },
+    {
+      "constant": "SET_MISSION_IMPACT",
+      "event": "set_mission_impact",
+      "dead": false
+    },
+    {
+      "constant": "SEND_MISSION_EVENT",
+      "event": "send_mission_event",
+      "dead": false
+    },
+    {
+      "constant": "SEND_MISSION_RESULT_EVENT",
+      "event": "send_mission_result_text",
+      "dead": false
+    },
+    {
+      "constant": "SEND_MISSION_CANCELLED_EVENT",
+      "event": "send_mission_cancelled_text",
+      "dead": false
+    },
+    {
+      "constant": "GET_MISSION_RESULT_TEXT",
+      "event": "get_mission_result_text",
+      "dead": false
+    },
+    {
+      "constant": "CALCULATE_MISSION_MODIFIERS",
+      "event": "calculate_mission_modifiers",
+      "dead": true
+    },
+    {
+      "constant": "CALCULATE_AIRPLANE_MODIFIERS",
+      "event": "calculate_airplane_modifiers",
+      "dead": true
+    },
+    {
+      "constant": "CALCULATE_PILOT_MODIFIERS",
+      "event": "calculate_pilot_modifiers",
+      "dead": true
+    },
+    {
+      "constant": "GET_MISSION_ICON",
+      "event": "get_mission_icon",
+      "dead": true
+    }
+  ],
+  "minor_events": [
+    {
+      "constant": "DAY_PHASE_CHANGE",
+      "event": "day_phase_change",
+      "tutorial_only": false
+    },
+    {
+      "constant": "MIDNIGHT",
+      "event": "midnight",
+      "tutorial_only": false
+    },
+    {
+      "constant": "MIDDAY",
+      "event": "midday",
+      "tutorial_only": false
+    },
+    {
+      "constant": "BUILDING_STARTED",
+      "event": "building_started",
+      "tutorial_only": false
+    },
+    {
+      "constant": "BUILDING_FINISHED",
+      "event": "building_finished",
+      "tutorial_only": false
+    },
+    {
+      "constant": "DECONSTRUCTION_FINISHED",
+      "event": "deconstruction_finished",
+      "tutorial_only": false
+    },
+    {
+      "constant": "PROJECT_STARTED",
+      "event": "project_started",
+      "tutorial_only": false
+    },
+    {
+      "constant": "PROJECT_FINISHED",
+      "event": "project_finished",
+      "tutorial_only": false
+    },
+    {
+      "constant": "HARVESTING_STARTED",
+      "event": "harvesting_started",
+      "tutorial_only": false
+    },
+    {
+      "constant": "HARVESTING_FINISHED",
+      "event": "harvesting_finished",
+      "tutorial_only": false
+    },
+    {
+      "constant": "CHAT_STARTED",
+      "event": "chat_started",
+      "tutorial_only": false
+    },
+    {
+      "constant": "CHAT_FINISHED",
+      "event": "chat_finished",
+      "tutorial_only": false
+    },
+    {
+      "constant": "PLANE_TAKEOFF",
+      "event": "plane_takeoff",
+      "tutorial_only": false
+    },
+    {
+      "constant": "PLANE_LANDING",
+      "event": "plane_landing",
+      "tutorial_only": false
+    },
+    {
+      "constant": "RESOURCE_PICKED_UP",
+      "event": "resource_picked_up",
+      "tutorial_only": false
+    },
+    {
+      "constant": "DOG_SLEEP",
+      "event": "dog_sleep",
+      "tutorial_only": false
+    },
+    {
+      "constant": "DOG_WALK_STARTED",
+      "event": "dog_walk_started",
+      "tutorial_only": false
+    },
+    {
+      "constant": "DOG_WALK_FINISHED",
+      "event": "dog_walk_finished",
+      "tutorial_only": false
+    },
+    {
+      "constant": "DOG_SNIFF_WAIT",
+      "event": "dog_sniff_wait",
+      "tutorial_only": false
+    },
+    {
+      "constant": "MISSION_STARTED",
+      "event": "mission_started",
+      "tutorial_only": false
+    },
+    {
+      "constant": "MISSION_SUCCESS",
+      "event": "mission_success",
+      "tutorial_only": false
+    },
+    {
+      "constant": "MISSION_FAILED",
+      "event": "mission_failed",
+      "tutorial_only": false
+    },
+    {
+      "constant": "SHIPMENT_RECEIVED",
+      "event": "shipment_received",
+      "tutorial_only": false
+    },
+    {
+      "constant": "VICTORY_POINTS_ADDED",
+      "event": "victory_points_added",
+      "tutorial_only": false
+    },
+    {
+      "constant": "ASSIGNED_TO_EQUIPMENT",
+      "event": "assigned_to_equipment",
+      "tutorial_only": false
+    },
+    {
+      "constant": "TRAINING_STARTED",
+      "event": "training_started",
+      "tutorial_only": false
+    },
+    {
+      "constant": "TRAINING_FINISHED",
+      "event": "training_finished",
+      "tutorial_only": false
+    },
+    {
+      "constant": "TASK_STARTED",
+      "event": "task_started",
+      "tutorial_only": false
+    },
+    {
+      "constant": "TASK_COMPLETED",
+      "event": "task_completed",
+      "tutorial_only": false
+    },
+    {
+      "constant": "RESOURCE_CONSUMED",
+      "event": "resouce_consumed",
+      "tutorial_only": false
+    },
+    {
+      "constant": "AIRPLANE_ON_MISSION_SUCCEED",
+      "event": "airplane_on_mission_succeed",
+      "tutorial_only": false
+    },
+    {
+      "constant": "AIRPLANE_ON_MISSION_FAILED",
+      "event": "airplane_on_mission_failed",
+      "tutorial_only": false
+    },
+    {
+      "constant": "AIRPLANE_TOOK_PART_IN_SCRAMBLE",
+      "event": "airplane_took_part_in_scramble",
+      "tutorial_only": false
+    },
+    {
+      "constant": "AIRPLANE_SCRAMBLE_TO_SAFETY",
+      "event": "airplane_scramble_fly_to_safety",
+      "tutorial_only": false
+    },
+    {
+      "constant": "AIRPLANE_SCRAMBLE_AIRPLANE_DESTROYED",
+      "event": "airplane_scramble_airplane_destroyed",
+      "tutorial_only": false
+    },
+    {
+      "constant": "QUEST_DISMISSED",
+      "event": "quest_dismissed",
+      "tutorial_only": false
+    },
+    {
+      "constant": "SUB_QUEST_COMPLETED",
+      "event": "sub_quest_completed",
+      "tutorial_only": false
+    },
+    {
+      "constant": "RESOURCE_GAINED",
+      "event": "resource_gained",
+      "tutorial_only": false
+    },
+    {
+      "constant": "BUILDING_TYPE_FINISHED",
+      "event": "building_type_finished",
+      "tutorial_only": false
+    },
+    {
+      "constant": "STORAGE_RESOURCE_ENABLED",
+      "event": "storage_resource_enabled",
+      "tutorial_only": false
+    },
+    {
+      "constant": "FUNCTION_AREA_PLACED",
+      "event": "function_area_placed",
+      "tutorial_only": false
+    },
+    {
+      "constant": "CAMERA_MOVED",
+      "event": "camera_moved",
+      "tutorial_only": true
+    },
+    {
+      "constant": "CAMERA_ZOOMED",
+      "event": "camera_zoomed",
+      "tutorial_only": true
+    },
+    {
+      "constant": "CAMERA_ROTATED",
+      "event": "camera_rotated",
+      "tutorial_only": true
+    },
+    {
+      "constant": "CHARACTER_SELECTED",
+      "event": "character_selected",
+      "tutorial_only": true
+    },
+    {
+      "constant": "TASK_CREATED",
+      "event": "task_created",
+      "tutorial_only": true
+    },
+    {
+      "constant": "TOOLTIP_SHOWN",
+      "event": "tooltip_shown",
+      "tutorial_only": true
+    },
+    {
+      "constant": "PREVIEW_CREATED",
+      "event": "preview_created",
+      "tutorial_only": true
+    },
+    {
+      "constant": "BUILDING_PLACED",
+      "event": "building_placed",
+      "tutorial_only": true
+    },
+    {
+      "constant": "STATE_ENTERED",
+      "event": "state_entered",
+      "tutorial_only": true
+    },
+    {
+      "constant": "TIME_SCALE_CHANGED",
+      "event": "time_scale_changed",
+      "tutorial_only": true
+    },
+    {
+      "constant": "WINDOW_OPENED",
+      "event": "window_opened",
+      "tutorial_only": true
+    },
+    {
+      "constant": "CHARACTER_JOB_ASSIGNED",
+      "event": "character_job_assigned",
+      "tutorial_only": true
+    },
+    {
+      "constant": "DAY_PHASE_ENDED",
+      "event": "day_phase_ended",
+      "tutorial_only": true
+    },
+    {
+      "constant": "PLANE_ORDERED",
+      "event": "plane_ordered",
+      "tutorial_only": true
+    },
+    {
+      "constant": "PLANE_SELECTED",
+      "event": "plane_selected",
+      "tutorial_only": true
+    },
+    {
+      "constant": "PLANE_ASSIGNED_TO_MISSION",
+      "event": "plane_assigned_to_mission",
+      "tutorial_only": true
+    },
+    {
+      "constant": "SHIPMENT_ITEM_ADDED",
+      "event": "shipment_item_added",
+      "tutorial_only": true
+    },
+    {
+      "constant": "SCRAMBLE_STARTED",
+      "event": "scramble_started",
+      "tutorial_only": true
+    },
+    {
+      "constant": "ATTACK_FINISHED",
+      "event": "attack_finished",
+      "tutorial_only": true
+    },
+    {
+      "constant": "STORAGE_RESOURCE_DISABLED",
+      "event": "storage_resource_disabled",
+      "tutorial_only": true
+    },
+    {
+      "constant": "BUTTON_CLICKED",
+      "event": "button_clicked",
+      "tutorial_only": true
+    },
+    {
+      "constant": "PLANE_BACK_FROM_MISSION",
+      "event": "plane_back_from_mission",
+      "tutorial_only": true
+    },
+    {
+      "constant": "HOUR_CHANGED",
+      "event": "hour_changed",
+      "tutorial_only": true
+    },
+    {
+      "constant": "WORKBENCH_SELECTED",
+      "event": "workbench_selected",
+      "tutorial_only": true
+    },
+    {
+      "constant": "PROJECT_PLANNED",
+      "event": "project_planned",
+      "tutorial_only": true
+    }
+  ],
+  "icons": [
+    {
+      "name": "Success",
+      "result_marker": true
+    },
+    {
+      "name": "Failure",
+      "result_marker": true
+    },
+    {
+      "name": "Fight",
+      "result_marker": false
+    },
+    {
+      "name": "Recon",
+      "result_marker": false
+    },
+    {
+      "name": "Bomb",
+      "result_marker": false
+    },
+    {
+      "name": "Transport",
+      "result_marker": false
+    },
+    {
+      "name": "Maneuverability",
+      "result_marker": false
+    },
+    {
+      "name": "Stealth",
+      "result_marker": false
+    },
+    {
+      "name": "Luxury",
+      "result_marker": false
+    },
+    {
+      "name": "Cancel",
+      "result_marker": false
+    }
+  ],
+  "locations": [
+    {
+      "id": "london",
+      "name": "london",
+      "latitude": 51.509,
+      "longitude": -0.128,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "berlin",
+      "name": "berlin",
+      "latitude": 52.5217,
+      "longitude": 13.3958,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "north_wessex",
+      "name": "north_wessex",
+      "latitude": 51.448174,
+      "longitude": -1.493844,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "high_weald",
+      "name": "high_weald",
+      "latitude": 51.05633,
+      "longitude": 0.439808,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "dedham_vale",
+      "name": "dedham_vale",
+      "latitude": 51.98776,
+      "longitude": 0.909569,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "south_downs",
+      "name": "south_downs",
+      "latitude": 50.94501,
+      "longitude": -0.664285,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "guernsey",
+      "name": "guernsey",
+      "latitude": 49.44382,
+      "longitude": -2.557067,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "amiens",
+      "name": "amiens",
+      "latitude": 49.89795,
+      "longitude": 2.32859,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "le_havre",
+      "name": "le_havre",
+      "latitude": 49.50032,
+      "longitude": 0.135173,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "dover",
+      "name": "dover",
+      "latitude": 51.13512,
+      "longitude": 1.312756,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "canterbury",
+      "name": "canterbury",
+      "latitude": 51.27332,
+      "longitude": 1.085454,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "dover_strait",
+      "name": "dover_strait",
+      "latitude": 51.05976,
+      "longitude": 1.582498,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "outer_silver_pit",
+      "name": "outer_silver_pit",
+      "latitude": 54.02625,
+      "longitude": 2.086379,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "dogger_bank",
+      "name": "dogger_bank",
+      "latitude": 54.99522,
+      "longitude": 3.014277,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "english_channel",
+      "name": "english_channel",
+      "latitude": 50.16595,
+      "longitude": -1.701335,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "eastbourne_bay",
+      "name": "eastbourne_bay",
+      "latitude": 50.64318,
+      "longitude": 0.443505,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "dunkirk_bay",
+      "name": "dunkirk_bay",
+      "latitude": 51.30824,
+      "longitude": 2.183072,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "the_wash",
+      "name": "the_wash",
+      "latitude": 52.91586,
+      "longitude": 0.252993,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "bristol_channel",
+      "name": "bristol_channel",
+      "latitude": 51.36806,
+      "longitude": -4.230145,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "seine_bay",
+      "name": "seine_bay",
+      "latitude": 49.71539,
+      "longitude": -0.671988,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "great_yarmouth_bay",
+      "name": "great_yarmouth_bay",
+      "latitude": 52.5492,
+      "longitude": 2.297962,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "rotterdam_bay",
+      "name": "rotterdam_bay",
+      "latitude": 51.99395,
+      "longitude": 3.16664,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "dorchester",
+      "name": "dorchester",
+      "latitude": 50.71059,
+      "longitude": -2.44101,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "ipswich",
+      "name": "ipswich",
+      "latitude": 52.05241,
+      "longitude": 1.153236,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "maidstone",
+      "name": "maidstone",
+      "latitude": 51.27068,
+      "longitude": 0.520316,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "chelmsford",
+      "name": "chelmsford",
+      "latitude": 51.73518,
+      "longitude": 0.467335,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "cambridge",
+      "name": "cambridge",
+      "latitude": 52.19252,
+      "longitude": 0.133737,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "birmingham",
+      "name": "birmingham",
+      "latitude": 52.490734,
+      "longitude": -1.846571,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "raf_filton",
+      "name": "raf_filton",
+      "latitude": 51.52177,
+      "longitude": -2.574558,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "raf_tangmere",
+      "name": "raf_tangmere",
+      "latitude": 50.84637,
+      "longitude": -0.709534,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "raf_manston",
+      "name": "raf_manston",
+      "latitude": 51.34613,
+      "longitude": 1.348969,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "raf_duxford",
+      "name": "raf_duxford",
+      "latitude": 52.09333,
+      "longitude": 0.131094,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "lille",
+      "name": "lille",
+      "latitude": 50.62518,
+      "longitude": 3.0551,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "caen",
+      "name": "caen",
+      "latitude": 49.18565,
+      "longitude": -0.389409,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "dieppe",
+      "name": "dieppe",
+      "latitude": 49.918938,
+      "longitude": 1.074748,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "lannion",
+      "name": "lannion",
+      "latitude": 48.73724,
+      "longitude": -3.462516,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "dunkirk",
+      "name": "dunkirk",
+      "latitude": 51.03702,
+      "longitude": 2.378761,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "liege",
+      "name": "liege",
+      "latitude": 50.641254,
+      "longitude": 5.575164,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "cologne",
+      "name": "cologne",
+      "latitude": 50.93748,
+      "longitude": 6.951716,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "essen",
+      "name": "essen",
+      "latitude": 51.45351,
+      "longitude": 7.006022,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "bremen",
+      "name": "bremen",
+      "latitude": 53.08691,
+      "longitude": 8.797292,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "bremerhaven",
+      "name": "bremerhaven",
+      "latitude": 53.53522,
+      "longitude": 8.583773,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "leeuwarden",
+      "name": "leeuwarden",
+      "latitude": 53.20371,
+      "longitude": 5.791656,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "munster",
+      "name": "munster",
+      "latitude": 51.96449,
+      "longitude": 7.609877,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "hanover",
+      "name": "hanover",
+      "latitude": 52.373615,
+      "longitude": 9.740037,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "kassel",
+      "name": "kassel",
+      "latitude": 51.31271,
+      "longitude": 9.494781,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "brussels",
+      "name": "brussels",
+      "latitude": 50.855183,
+      "longitude": 4.355858,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "arras",
+      "name": "arras",
+      "latitude": 50.293324,
+      "longitude": 2.775786,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "krefeld",
+      "name": "krefeld",
+      "latitude": 51.33945,
+      "longitude": 6.552133,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "maastricht",
+      "name": "maastricht",
+      "latitude": 50.84739,
+      "longitude": 5.687036,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "rotterdam",
+      "name": "rotterdam",
+      "latitude": 51.930233,
+      "longitude": 4.475243,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "amsterdam",
+      "name": "amsterdam",
+      "latitude": 52.371284,
+      "longitude": 4.899516,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "aarhus",
+      "name": "aarhus",
+      "latitude": 56.15091,
+      "longitude": 10.179861,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "nantes",
+      "name": "nantes",
+      "latitude": 47.221577,
+      "longitude": -1.550055,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "paris",
+      "name": "paris",
+      "latitude": 48.853477,
+      "longitude": 2.31883,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "reims",
+      "name": "reims",
+      "latitude": 49.257023,
+      "longitude": 4.043769,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "compiegne",
+      "name": "compiegne",
+      "latitude": 49.399067,
+      "longitude": 2.827733,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "eindhoven",
+      "name": "eindhoven",
+      "latitude": 51.449734,
+      "longitude": 5.376971,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "malvern_hills",
+      "name": "malvern_hills",
+      "latitude": 52.103367,
+      "longitude": -2.351238,
+      "flags": 4,
+      "test_data": false
+    },
+    {
+      "id": "brest",
+      "name": "brest",
+      "latitude": 48.39117,
+      "longitude": -4.48511,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "bordeaux",
+      "name": "bordeaux",
+      "latitude": 44.8695,
+      "longitude": -0.55917,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "boulogne-sur-mer",
+      "name": "boulogne-sur-mer",
+      "latitude": 50.72455,
+      "longitude": 1.60192,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "la_rochelle",
+      "name": "la_rochelle",
+      "latitude": 46.15968,
+      "longitude": -1.15922,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "calais",
+      "name": "calais",
+      "latitude": 50.95873,
+      "longitude": 1.85522,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "rouen",
+      "name": "rouen",
+      "latitude": 49.43806,
+      "longitude": 1.0937,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "nancy",
+      "name": "nancy",
+      "latitude": 48.6921,
+      "longitude": 6.1844,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "metz",
+      "name": "metz",
+      "latitude": 48.960976,
+      "longitude": 6.130983,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "tours",
+      "name": "tours",
+      "latitude": 47.39326,
+      "longitude": 0.68253,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "stettin",
+      "name": "stettin",
+      "latitude": 53.4282,
+      "longitude": 14.55105,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "frankfurt",
+      "name": "frankfurt",
+      "latitude": 50.10279,
+      "longitude": 8.67912,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "hamburg",
+      "name": "hamburg",
+      "latitude": 53.53813,
+      "longitude": 9.96693,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "bergen",
+      "name": "bergen",
+      "latitude": 60.38289,
+      "longitude": 5.30417,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "telemark",
+      "name": "telemark",
+      "latitude": 59.37664,
+      "longitude": 8.306,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "hardangervidda",
+      "name": "hardangervidda",
+      "latitude": 60.03271,
+      "longitude": 7.42967,
+      "flags": 8,
+      "test_data": false
+    },
+    {
+      "id": "kristiansand",
+      "name": "kristiansand",
+      "latitude": 58.15808,
+      "longitude": 7.97663,
+      "flags": 10,
+      "test_data": false
+    },
+    {
+      "id": "test123",
+      "name": "ireland",
+      "latitude": 55.505787,
+      "longitude": -1.087641,
+      "flags": 0,
+      "test_data": true
+    },
+    {
+      "id": "test",
+      "name": "test1",
+      "latitude": 54.30419,
+      "longitude": -1.836393,
+      "flags": 0,
+      "test_data": true
+    },
+    {
+      "id": "north_channel",
+      "name": "north_channel",
+      "latitude": 55.1,
+      "longitude": -5.6,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "irish_sea",
+      "name": "irish_sea",
+      "latitude": 53.5,
+      "longitude": -4.8,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "cardigan_bay",
+      "name": "cardigan_bay",
+      "latitude": 52.5,
+      "longitude": -4.6,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "st_georges_channel",
+      "name": "st_georges_channel",
+      "latitude": 52.0,
+      "longitude": -5.8,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "celtic_sea",
+      "name": "celtic_sea",
+      "latitude": 50.8,
+      "longitude": -7.5,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "atlantic_ocean",
+      "name": "atlantic_ocean",
+      "latitude": 56.5,
+      "longitude": -9.0,
+      "flags": 2,
+      "test_data": false
+    },
+    {
+      "id": "north_sea",
+      "name": "north_sea",
+      "latitude": 56.5,
+      "longitude": 3.5,
+      "flags": 2,
+      "test_data": false
+    }
+  ],
+  "enums": {
+    "MissionSkillType": [
+      {
+        "name": "Fight",
+        "value": 0
+      },
+      {
+        "name": "Bomb",
+        "value": 1
+      },
+      {
+        "name": "Recon",
+        "value": 2
+      },
+      {
+        "name": "Transport",
+        "value": 3
+      },
+      {
+        "name": "Maneuverability",
+        "value": 4
+      },
+      {
+        "name": "Stealthiness",
+        "value": 5
+      }
+    ],
+    "OutcomeEffectType": [
+      {
+        "name": "CrewMood",
+        "value": 0
+      },
+      {
+        "name": "CrewConfidence",
+        "value": 1
+      },
+      {
+        "name": "CrewEnergy",
+        "value": 2
+      },
+      {
+        "name": "Damage",
+        "value": 3
+      },
+      {
+        "name": "BaseMood",
+        "value": 4
+      },
+      {
+        "name": "BaseConfidence",
+        "value": 5
+      },
+      {
+        "name": "BaseEnergy",
+        "value": 6
+      },
+      {
+        "name": "VictoryPoints",
+        "value": 7
+      },
+      {
+        "name": "MaxVictoryPoints",
+        "value": 8
+      }
+    ],
+    "MissionRequirementType": [
+      {
+        "name": "RunwayTier",
+        "value": 0
+      },
+      {
+        "name": "EarliestAppearanceDay",
+        "value": 1
+      },
+      {
+        "name": "LatestAppearanceDay",
+        "value": 2
+      },
+      {
+        "name": "CompletedMission",
+        "value": 3
+      }
+    ],
+    "LocationFlags": [
+      {
+        "name": "None",
+        "value": 0
+      },
+      {
+        "name": "Land",
+        "value": 1
+      },
+      {
+        "name": "Sea",
+        "value": 2
+      },
+      {
+        "name": "OwnTerritory",
+        "value": 4
+      },
+      {
+        "name": "EnemyTerritory",
+        "value": 8
+      }
+    ],
+    "SubQuestRequirementType": [
+      {
+        "name": "Airstrip",
+        "value": 0,
+        "has_validator": true
+      },
+      {
+        "name": "Parking",
+        "value": 1,
+        "has_validator": true
+      },
+      {
+        "name": "Airplane",
+        "value": 2,
+        "has_validator": true
+      },
+      {
+        "name": "PropCategory",
+        "value": 3,
+        "has_validator": false
+      },
+      {
+        "name": "Prop",
+        "value": 4,
+        "has_validator": true
+      },
+      {
+        "name": "SimpleEvent",
+        "value": 5,
+        "has_validator": true
+      },
+      {
+        "name": "Workbench",
+        "value": 6,
+        "has_validator": true
+      },
+      {
+        "name": "AnyAttributeEvent",
+        "value": 7,
+        "has_validator": true
+      },
+      {
+        "name": "AllAttributesEvent",
+        "value": 8,
+        "has_validator": true
+      },
+      {
+        "name": "FunctionArea",
+        "value": 9,
+        "has_validator": true
+      },
+      {
+        "name": "ShelteredStorage",
+        "value": 10,
+        "has_validator": true
+      },
+      {
+        "name": "TrashStorage",
+        "value": 11,
+        "has_validator": true
+      },
+      {
+        "name": "SuccessfulMission",
+        "value": 12,
+        "has_validator": true
+      },
+      {
+        "name": "FlownMission",
+        "value": 13,
+        "has_validator": true
+      },
+      {
+        "name": "UnluckyMission",
+        "value": 15,
+        "has_validator": false
+      },
+      {
+        "name": "TakePartInScramble",
+        "value": 16,
+        "has_validator": true
+      },
+      {
+        "name": "FailedMission",
+        "value": 17,
+        "has_validator": true
+      },
+      {
+        "name": "ScramblePlaneDestroyed",
+        "value": 18,
+        "has_validator": true
+      },
+      {
+        "name": "ScrambleToSafety",
+        "value": 19,
+        "has_validator": true
+      },
+      {
+        "name": "CoveredFunctionArea",
+        "value": 20,
+        "has_validator": true
+      },
+      {
+        "name": "PlannedAirstrip",
+        "value": 21,
+        "has_validator": true
+      },
+      {
+        "name": "CharacterJob",
+        "value": 22,
+        "has_validator": true
+      },
+      {
+        "name": "QuestDismissed",
+        "value": 23,
+        "has_validator": true
+      },
+      {
+        "name": "GardeningZone",
+        "value": 24,
+        "has_validator": true
+      },
+      {
+        "name": "StorageAllResourcesEnabled",
+        "value": 25,
+        "has_validator": true
+      }
+    ]
+  },
+  "mission_ids": [
+    "artillery_spotting_mission",
+    "behind_enemy_lines_drop",
+    "birthday_mission",
+    "calm_supply_drop",
+    "city_bombing_run",
+    "clear_sky_recon_mission",
+    "coordinated_port_strike",
+    "critical_assistance_run",
+    "dangerous_recon_mission",
+    "dangerous_supply_drop",
+    "deep_industrial_recon",
+    "depot_pillage_mission",
+    "explosive_goods_transport",
+    "face_the_ace",
+    "factory_bombing_run",
+    "fight_for_air_supremacy",
+    "fighter_theft_mission",
+    "find_enigma_mission",
+    "find_parachuted_pilot",
+    "friendly_skirmish_battle",
+    "general_assassination_mission",
+    "german_blitz_1_long_nights",
+    "german_blitz_2_aspirin",
+    "german_blitz_3_morning_after",
+    "german_blitz_4_answering_in_kind",
+    "great_sea_rescue_effort",
+    "heavy_bomber_interception",
+    "heavy_fighter_interception",
+    "informant_extraction_mission",
+    "large_troop_transport",
+    "lichfield_conversion_1_place",
+    "lichfield_conversion_2_leap",
+    "lichfield_conversion_3_abandoned",
+    "lichfield_conversion_4_command",
+    "lichfield_conversion_5_formality",
+    "light_bomber_interception",
+    "light_fighter_interception",
+    "medium_bomber_interception",
+    "medium_fighter_interception",
+    "officer_hostage_rescue_mission",
+    "pilot_competition",
+    "prototype_test_flight",
+    "radar_zone_crossing_mission",
+    "rainy_recon_mission",
+    "resistance_supply_run",
+    "scientist_extraction_mission",
+    "small_troop_transport",
+    "storm_escort_mission",
+    "structure_sabotage_mission",
+    "submarine_hunt",
+    "submarine_pen_bombing",
+    "tank_squad_bombing_run",
+    "test_historic_mission",
+    "training_facility_bombing_run",
+    "tutorial_mission",
+    "unknown_balloon_interception",
+    "urgent_ground_squadron_support",
+    "urgent_sky_squadron_support"
+  ],
+  "quest_ids": [
+    "beaufighter_get_ducked_skin_unlock",
+    "beaufighter_sea_skin_unlock",
+    "bomber_night_skin_unlock",
+    "bomber_sea_skin_unlock",
+    "bomber_temperature_land_skin_unlock",
+    "fighter_day_skin_unlock",
+    "fighter_night_skin_unlock",
+    "fighter_temperature_land_skin_unlock",
+    "hurricane_swiss_wings_skin_unlock",
+    "lancaster_london_sweetheart_skin_unlock",
+    "lancaster_special_delivery_skin_unlock",
+    "mosquito_glori_kernewek_skin_unlock",
+    "multirole_night_skin_unlock",
+    "multirole_temperature_land_skin_unlock",
+    "mustangmk1_killer_bunny_skin_unlock",
+    "mustangmk1_white_wolf_skin_unlock",
+    "quest0",
+    "quest1",
+    "quest10",
+    "quest11",
+    "quest12",
+    "quest13",
+    "quest14",
+    "quest2",
+    "quest3",
+    "quest4",
+    "quest5",
+    "quest6",
+    "quest7",
+    "quest8",
+    "quest9",
+    "special_day_skin_unlock",
+    "special_night_skin_unlock",
+    "special_temperature_land_skin_unlock",
+    "stirling_rainbow_tiger_skin_unlock",
+    "tutorial_attacks",
+    "tutorial_attacks_wait",
+    "tutorial_beds_and_sleep",
+    "tutorial_building",
+    "tutorial_building_defenses",
+    "tutorial_camera",
+    "tutorial_care_and_train",
+    "tutorial_crew_roles",
+    "tutorial_food",
+    "tutorial_gardening",
+    "tutorial_gathering",
+    "tutorial_good_luck",
+    "tutorial_health_and_recovery",
+    "tutorial_hq_deliveries",
+    "tutorial_keeping_people_safe",
+    "tutorial_long_term_goals",
+    "tutorial_maintain_plane",
+    "tutorial_manage_base",
+    "tutorial_mission",
+    "tutorial_morale",
+    "tutorial_order_plane",
+    "tutorial_phases",
+    "tutorial_place_storage",
+    "tutorial_repair_and_trash",
+    "tutorial_runway",
+    "tutorial_selecting",
+    "tutorial_shelter_storage",
+    "tutorial_time_controls",
+    "tutorial_welcome",
+    "tutorial_workbenches",
+    "typhoon_white_horse_skin_unlock"
+  ],
+  "loc_terms": [
+    "missions/artillery_spotting_mission/ap_failure_transmission",
+    "missions/artillery_spotting_mission/ap_success_transmission",
+    "missions/artillery_spotting_mission/ap_transmission",
+    "missions/artillery_spotting_mission/gw_failure_transmission",
+    "missions/artillery_spotting_mission/gw_success_transmission",
+    "missions/artillery_spotting_mission/gw_transmission",
+    "missions/artillery_spotting_mission/intel_threat_report",
+    "missions/artillery_spotting_mission/mission_description",
+    "missions/artillery_spotting_mission/mission_name",
+    "missions/behind_enemy_lines_drop/ap_failure_transmission",
+    "missions/behind_enemy_lines_drop/ap_success_transmission",
+    "missions/behind_enemy_lines_drop/ap_transmission",
+    "missions/behind_enemy_lines_drop/gw_failure_transmission",
+    "missions/behind_enemy_lines_drop/gw_success_transmission",
+    "missions/behind_enemy_lines_drop/gw_transmission",
+    "missions/behind_enemy_lines_drop/intel_threat_report",
+    "missions/behind_enemy_lines_drop/mission_description",
+    "missions/behind_enemy_lines_drop/mission_name",
+    "missions/birthday_mission/ap_failure_transmission",
+    "missions/birthday_mission/ap_success_transmission",
+    "missions/birthday_mission/ap_transmission",
+    "missions/birthday_mission/gw_failure_transmission",
+    "missions/birthday_mission/gw_success_transmission",
+    "missions/birthday_mission/gw_transmission",
+    "missions/birthday_mission/intel_threat_report",
+    "missions/birthday_mission/mission_description",
+    "missions/birthday_mission/mission_name",
+    "missions/calm_supply_drop/ap_failure_transmission",
+    "missions/calm_supply_drop/ap_success_transmission",
+    "missions/calm_supply_drop/ap_transmission",
+    "missions/calm_supply_drop/gw_failure_transmission",
+    "missions/calm_supply_drop/gw_success_transmission",
+    "missions/calm_supply_drop/gw_transmission",
+    "missions/calm_supply_drop/intel_threat_report",
+    "missions/calm_supply_drop/mission_description",
+    "missions/calm_supply_drop/mission_name",
+    "missions/city_bombing_run/ap_failure_transmission",
+    "missions/city_bombing_run/ap_success_transmission",
+    "missions/city_bombing_run/ap_transmission",
+    "missions/city_bombing_run/gw_failure_transmission",
+    "missions/city_bombing_run/gw_success_transmission",
+    "missions/city_bombing_run/gw_transmission",
+    "missions/city_bombing_run/intel_threat_report",
+    "missions/city_bombing_run/mission_description",
+    "missions/city_bombing_run/mission_name",
+    "missions/clear_sky_recon_mission/ap_failure_transmission",
+    "missions/clear_sky_recon_mission/ap_success_transmission",
+    "missions/clear_sky_recon_mission/ap_transmission",
+    "missions/clear_sky_recon_mission/gw_failure_transmission",
+    "missions/clear_sky_recon_mission/gw_success_transmission",
+    "missions/clear_sky_recon_mission/gw_transmission",
+    "missions/clear_sky_recon_mission/intel_threat_report",
+    "missions/clear_sky_recon_mission/mission_description",
+    "missions/clear_sky_recon_mission/mission_name",
+    "missions/coordinated_port_strike/ap_failure_transmission",
+    "missions/coordinated_port_strike/ap_success_transmission",
+    "missions/coordinated_port_strike/ap_transmission",
+    "missions/coordinated_port_strike/gw_failure_transmission",
+    "missions/coordinated_port_strike/gw_success_transmission",
+    "missions/coordinated_port_strike/gw_transmission",
+    "missions/coordinated_port_strike/intel_threat_report",
+    "missions/coordinated_port_strike/mission_description",
+    "missions/coordinated_port_strike/mission_name",
+    "missions/critical_assistance_run/ap_failure_transmission",
+    "missions/critical_assistance_run/ap_success_transmission",
+    "missions/critical_assistance_run/ap_transmission",
+    "missions/critical_assistance_run/gw_failure_transmission",
+    "missions/critical_assistance_run/gw_success_transmission",
+    "missions/critical_assistance_run/gw_transmission",
+    "missions/critical_assistance_run/intel_threat_report",
+    "missions/critical_assistance_run/mission_description",
+    "missions/critical_assistance_run/mission_name",
+    "missions/dangerous_recon_mission/ap_failure_transmission",
+    "missions/dangerous_recon_mission/ap_success_transmission",
+    "missions/dangerous_recon_mission/ap_transmission",
+    "missions/dangerous_recon_mission/gw_failure_transmission",
+    "missions/dangerous_recon_mission/gw_success_transmission",
+    "missions/dangerous_recon_mission/gw_transmission",
+    "missions/dangerous_recon_mission/intel_threat_report",
+    "missions/dangerous_recon_mission/mission_description",
+    "missions/dangerous_recon_mission/mission_name",
+    "missions/dangerous_supply_drop/ap_failure_transmission",
+    "missions/dangerous_supply_drop/ap_success_transmission",
+    "missions/dangerous_supply_drop/ap_transmission",
+    "missions/dangerous_supply_drop/gw_failure_transmission",
+    "missions/dangerous_supply_drop/gw_success_transmission",
+    "missions/dangerous_supply_drop/gw_transmission",
+    "missions/dangerous_supply_drop/intel_threat_report",
+    "missions/dangerous_supply_drop/mission_description",
+    "missions/dangerous_supply_drop/mission_name",
+    "missions/deep_industrial_recon/ap_failure_transmission",
+    "missions/deep_industrial_recon/ap_success_transmission",
+    "missions/deep_industrial_recon/ap_transmission",
+    "missions/deep_industrial_recon/gw_failure_transmission",
+    "missions/deep_industrial_recon/gw_success_transmission",
+    "missions/deep_industrial_recon/gw_transmission",
+    "missions/deep_industrial_recon/intel_threat_report",
+    "missions/deep_industrial_recon/mission_description",
+    "missions/deep_industrial_recon/mission_name",
+    "missions/depot_pillage_mission/ap_failure_transmission",
+    "missions/depot_pillage_mission/ap_success_transmission",
+    "missions/depot_pillage_mission/ap_transmission",
+    "missions/depot_pillage_mission/gw_failure_transmission",
+    "missions/depot_pillage_mission/gw_success_transmission",
+    "missions/depot_pillage_mission/gw_transmission",
+    "missions/depot_pillage_mission/intel_threat_report",
+    "missions/depot_pillage_mission/mission_description",
+    "missions/depot_pillage_mission/mission_name",
+    "missions/explosive_goods_transport/ap_failure_transmission",
+    "missions/explosive_goods_transport/ap_success_transmission",
+    "missions/explosive_goods_transport/ap_transmission",
+    "missions/explosive_goods_transport/gw_failure_transmission",
+    "missions/explosive_goods_transport/gw_success_transmission",
+    "missions/explosive_goods_transport/gw_transmission",
+    "missions/explosive_goods_transport/intel_threat_report",
+    "missions/explosive_goods_transport/mission_description",
+    "missions/explosive_goods_transport/mission_name",
+    "missions/face_the_ace/ap_failure_transmission",
+    "missions/face_the_ace/ap_success_transmission",
+    "missions/face_the_ace/ap_transmission",
+    "missions/face_the_ace/gw_failure_transmission",
+    "missions/face_the_ace/gw_success_transmission",
+    "missions/face_the_ace/gw_transmission",
+    "missions/face_the_ace/intel_threat_report",
+    "missions/face_the_ace/mission_description",
+    "missions/face_the_ace/mission_name",
+    "missions/factory_bombing_run/ap_failure_transmission",
+    "missions/factory_bombing_run/ap_success_transmission",
+    "missions/factory_bombing_run/ap_transmission",
+    "missions/factory_bombing_run/gw_failure_transmission",
+    "missions/factory_bombing_run/gw_success_transmission",
+    "missions/factory_bombing_run/gw_transmission",
+    "missions/factory_bombing_run/intel_threat_report",
+    "missions/factory_bombing_run/mission_description",
+    "missions/factory_bombing_run/mission_name",
+    "missions/fight_for_air_supremacy/ap_failure_transmission",
+    "missions/fight_for_air_supremacy/ap_success_transmission",
+    "missions/fight_for_air_supremacy/ap_transmission",
+    "missions/fight_for_air_supremacy/gw_failure_transmission",
+    "missions/fight_for_air_supremacy/gw_success_transmission",
+    "missions/fight_for_air_supremacy/gw_transmission",
+    "missions/fight_for_air_supremacy/intel_threat_report",
+    "missions/fight_for_air_supremacy/mission_description",
+    "missions/fight_for_air_supremacy/mission_name",
+    "missions/fighter_theft_mission/ap_failure_transmission",
+    "missions/fighter_theft_mission/ap_success_transmission",
+    "missions/fighter_theft_mission/ap_transmission",
+    "missions/fighter_theft_mission/gw_failure_transmission",
+    "missions/fighter_theft_mission/gw_success_transmission",
+    "missions/fighter_theft_mission/gw_transmission",
+    "missions/fighter_theft_mission/intel_threat_report",
+    "missions/fighter_theft_mission/mission_description",
+    "missions/fighter_theft_mission/mission_name",
+    "missions/find_enigma_mission/ap_failure_transmission",
+    "missions/find_enigma_mission/ap_success_transmission",
+    "missions/find_enigma_mission/ap_transmission",
+    "missions/find_enigma_mission/gw_failure_transmission",
+    "missions/find_enigma_mission/gw_success_transmission",
+    "missions/find_enigma_mission/gw_transmission",
+    "missions/find_enigma_mission/intel_threat_report",
+    "missions/find_enigma_mission/mission_description",
+    "missions/find_enigma_mission/mission_name",
+    "missions/find_parachuted_pilot/ap_failure_transmission",
+    "missions/find_parachuted_pilot/ap_success_transmission",
+    "missions/find_parachuted_pilot/ap_transmission",
+    "missions/find_parachuted_pilot/gw_failure_transmission",
+    "missions/find_parachuted_pilot/gw_success_transmission",
+    "missions/find_parachuted_pilot/gw_transmission",
+    "missions/find_parachuted_pilot/intel_threat_report",
+    "missions/find_parachuted_pilot/mission_description",
+    "missions/find_parachuted_pilot/mission_name",
+    "missions/friendly_skirmish_battle/ap_failure_transmission",
+    "missions/friendly_skirmish_battle/ap_success_transmission",
+    "missions/friendly_skirmish_battle/ap_transmission",
+    "missions/friendly_skirmish_battle/gw_failure_transmission",
+    "missions/friendly_skirmish_battle/gw_success_transmission",
+    "missions/friendly_skirmish_battle/gw_transmission",
+    "missions/friendly_skirmish_battle/intel_threat_report",
+    "missions/friendly_skirmish_battle/mission_description",
+    "missions/friendly_skirmish_battle/mission_name",
+    "missions/general_assassination_mission/ap_failure_transmission",
+    "missions/general_assassination_mission/ap_success_transmission",
+    "missions/general_assassination_mission/ap_transmission",
+    "missions/general_assassination_mission/gw_failure_transmission",
+    "missions/general_assassination_mission/gw_success_transmission",
+    "missions/general_assassination_mission/gw_transmission",
+    "missions/general_assassination_mission/intel_threat_report",
+    "missions/general_assassination_mission/mission_description",
+    "missions/general_assassination_mission/mission_name",
+    "missions/german_blitz_1_long_nights/ap_failure_transmission",
+    "missions/german_blitz_1_long_nights/ap_success_transmission",
+    "missions/german_blitz_1_long_nights/ap_transmission",
+    "missions/german_blitz_1_long_nights/gw_failure_transmission",
+    "missions/german_blitz_1_long_nights/gw_success_transmission",
+    "missions/german_blitz_1_long_nights/gw_transmission",
+    "missions/german_blitz_1_long_nights/intel_threat_report",
+    "missions/german_blitz_1_long_nights/mission_description",
+    "missions/german_blitz_1_long_nights/mission_name",
+    "missions/german_blitz_2_aspirin/ap_failure_transmission",
+    "missions/german_blitz_2_aspirin/ap_success_transmission",
+    "missions/german_blitz_2_aspirin/ap_transmission",
+    "missions/german_blitz_2_aspirin/gw_failure_transmission",
+    "missions/german_blitz_2_aspirin/gw_success_transmission",
+    "missions/german_blitz_2_aspirin/gw_transmission",
+    "missions/german_blitz_2_aspirin/intel_threat_report",
+    "missions/german_blitz_2_aspirin/mission_description",
+    "missions/german_blitz_2_aspirin/mission_name",
+    "missions/german_blitz_3_morning_after/ap_failure_transmission",
+    "missions/german_blitz_3_morning_after/ap_success_transmission",
+    "missions/german_blitz_3_morning_after/ap_transmission",
+    "missions/german_blitz_3_morning_after/gw_failure_transmission",
+    "missions/german_blitz_3_morning_after/gw_success_transmission",
+    "missions/german_blitz_3_morning_after/gw_transmission",
+    "missions/german_blitz_3_morning_after/intel_threat_report",
+    "missions/german_blitz_3_morning_after/mission_description",
+    "missions/german_blitz_3_morning_after/mission_name",
+    "missions/german_blitz_4_answering_in_kind/ap_failure_transmission",
+    "missions/german_blitz_4_answering_in_kind/ap_success_transmission",
+    "missions/german_blitz_4_answering_in_kind/ap_transmission",
+    "missions/german_blitz_4_answering_in_kind/gw_failure_transmission",
+    "missions/german_blitz_4_answering_in_kind/gw_success_transmission",
+    "missions/german_blitz_4_answering_in_kind/gw_transmission",
+    "missions/german_blitz_4_answering_in_kind/intel_threat_report",
+    "missions/german_blitz_4_answering_in_kind/mission_description",
+    "missions/german_blitz_4_answering_in_kind/mission_name",
+    "missions/great_sea_rescue_effort/ap_failure_transmission",
+    "missions/great_sea_rescue_effort/ap_success_transmission",
+    "missions/great_sea_rescue_effort/ap_transmission",
+    "missions/great_sea_rescue_effort/gw_failure_transmission",
+    "missions/great_sea_rescue_effort/gw_success_transmission",
+    "missions/great_sea_rescue_effort/gw_transmission",
+    "missions/great_sea_rescue_effort/intel_threat_report",
+    "missions/great_sea_rescue_effort/mission_description",
+    "missions/great_sea_rescue_effort/mission_name",
+    "missions/heavy_bomber_interception/ap_failure_transmission",
+    "missions/heavy_bomber_interception/ap_success_transmission",
+    "missions/heavy_bomber_interception/ap_transmission",
+    "missions/heavy_bomber_interception/gw_failure_transmission",
+    "missions/heavy_bomber_interception/gw_success_transmission",
+    "missions/heavy_bomber_interception/gw_transmission",
+    "missions/heavy_bomber_interception/intel_threat_report",
+    "missions/heavy_bomber_interception/mission_description",
+    "missions/heavy_bomber_interception/mission_name",
+    "missions/heavy_fighter_interception/ap_failure_transmission",
+    "missions/heavy_fighter_interception/ap_success_transmission",
+    "missions/heavy_fighter_interception/ap_transmission",
+    "missions/heavy_fighter_interception/gw_failure_transmission",
+    "missions/heavy_fighter_interception/gw_success_transmission",
+    "missions/heavy_fighter_interception/gw_transmission",
+    "missions/heavy_fighter_interception/intel_threat_report",
+    "missions/heavy_fighter_interception/mission_description",
+    "missions/heavy_fighter_interception/mission_name",
+    "missions/informant_extraction_mission/ap_failure_transmission",
+    "missions/informant_extraction_mission/ap_success_transmission",
+    "missions/informant_extraction_mission/ap_transmission",
+    "missions/informant_extraction_mission/gw_failure_transmission",
+    "missions/informant_extraction_mission/gw_success_transmission",
+    "missions/informant_extraction_mission/gw_transmission",
+    "missions/informant_extraction_mission/intel_threat_report",
+    "missions/informant_extraction_mission/mission_description",
+    "missions/informant_extraction_mission/mission_name",
+    "missions/large_troop_transport/ap_failure_transmission",
+    "missions/large_troop_transport/ap_success_transmission",
+    "missions/large_troop_transport/ap_transmission",
+    "missions/large_troop_transport/gw_failure_transmission",
+    "missions/large_troop_transport/gw_success_transmission",
+    "missions/large_troop_transport/gw_transmission",
+    "missions/large_troop_transport/intel_threat_report",
+    "missions/large_troop_transport/mission_description",
+    "missions/large_troop_transport/mission_name",
+    "missions/lichfield_conversion_1_place/ap_failure_transmission",
+    "missions/lichfield_conversion_1_place/ap_success_transmission",
+    "missions/lichfield_conversion_1_place/ap_transmission",
+    "missions/lichfield_conversion_1_place/gw_failure_transmission",
+    "missions/lichfield_conversion_1_place/gw_success_transmission",
+    "missions/lichfield_conversion_1_place/gw_transmission",
+    "missions/lichfield_conversion_1_place/intel_threat_report",
+    "missions/lichfield_conversion_1_place/mission_description",
+    "missions/lichfield_conversion_1_place/mission_name",
+    "missions/lichfield_conversion_2_leap/ap_failure_transmission",
+    "missions/lichfield_conversion_2_leap/ap_success_transmission",
+    "missions/lichfield_conversion_2_leap/ap_transmission",
+    "missions/lichfield_conversion_2_leap/gw_failure_transmission",
+    "missions/lichfield_conversion_2_leap/gw_success_transmission",
+    "missions/lichfield_conversion_2_leap/gw_transmission",
+    "missions/lichfield_conversion_2_leap/intel_threat_report",
+    "missions/lichfield_conversion_2_leap/mission_description",
+    "missions/lichfield_conversion_2_leap/mission_name",
+    "missions/lichfield_conversion_3_abandoned/ap_failure_transmission",
+    "missions/lichfield_conversion_3_abandoned/ap_success_transmission",
+    "missions/lichfield_conversion_3_abandoned/ap_transmission",
+    "missions/lichfield_conversion_3_abandoned/gw_failure_transmission",
+    "missions/lichfield_conversion_3_abandoned/gw_success_transmission",
+    "missions/lichfield_conversion_3_abandoned/gw_transmission",
+    "missions/lichfield_conversion_3_abandoned/intel_threat_report",
+    "missions/lichfield_conversion_3_abandoned/mission_description",
+    "missions/lichfield_conversion_3_abandoned/mission_name",
+    "missions/lichfield_conversion_4_command/ap_failure_transmission",
+    "missions/lichfield_conversion_4_command/ap_success_transmission",
+    "missions/lichfield_conversion_4_command/ap_transmission",
+    "missions/lichfield_conversion_4_command/gw_failure_transmission",
+    "missions/lichfield_conversion_4_command/gw_success_transmission",
+    "missions/lichfield_conversion_4_command/gw_transmission",
+    "missions/lichfield_conversion_4_command/intel_threat_report",
+    "missions/lichfield_conversion_4_command/mission_description",
+    "missions/lichfield_conversion_4_command/mission_name",
+    "missions/lichfield_conversion_5_formality/ap_failure_transmission",
+    "missions/lichfield_conversion_5_formality/ap_success_transmission",
+    "missions/lichfield_conversion_5_formality/ap_transmission",
+    "missions/lichfield_conversion_5_formality/gw_failure_transmission",
+    "missions/lichfield_conversion_5_formality/gw_success_transmission",
+    "missions/lichfield_conversion_5_formality/gw_transmission",
+    "missions/lichfield_conversion_5_formality/intel_threat_report",
+    "missions/lichfield_conversion_5_formality/mission_description",
+    "missions/lichfield_conversion_5_formality/mission_name",
+    "missions/light_bomber_interception/ap_failure_transmission",
+    "missions/light_bomber_interception/ap_success_transmission",
+    "missions/light_bomber_interception/ap_transmission",
+    "missions/light_bomber_interception/gw_failure_transmission",
+    "missions/light_bomber_interception/gw_success_transmission",
+    "missions/light_bomber_interception/gw_transmission",
+    "missions/light_bomber_interception/intel_threat_report",
+    "missions/light_bomber_interception/mission_description",
+    "missions/light_bomber_interception/mission_name",
+    "missions/light_fighter_interception/ap_failure_transmission",
+    "missions/light_fighter_interception/ap_success_transmission",
+    "missions/light_fighter_interception/ap_transmission",
+    "missions/light_fighter_interception/gw_failure_transmission",
+    "missions/light_fighter_interception/gw_success_transmission",
+    "missions/light_fighter_interception/gw_transmission",
+    "missions/light_fighter_interception/intel_threat_report",
+    "missions/light_fighter_interception/mission_description",
+    "missions/light_fighter_interception/mission_name",
+    "missions/medium_bomber_interception/ap_failure_transmission",
+    "missions/medium_bomber_interception/ap_success_transmission",
+    "missions/medium_bomber_interception/ap_transmission",
+    "missions/medium_bomber_interception/gw_failure_transmission",
+    "missions/medium_bomber_interception/gw_success_transmission",
+    "missions/medium_bomber_interception/gw_transmission",
+    "missions/medium_bomber_interception/intel_threat_report",
+    "missions/medium_bomber_interception/mission_description",
+    "missions/medium_bomber_interception/mission_name",
+    "missions/medium_fighter_interception/ap_failure_transmission",
+    "missions/medium_fighter_interception/ap_success_transmission",
+    "missions/medium_fighter_interception/ap_transmission",
+    "missions/medium_fighter_interception/gw_failure_transmission",
+    "missions/medium_fighter_interception/gw_success_transmission",
+    "missions/medium_fighter_interception/gw_transmission",
+    "missions/medium_fighter_interception/intel_threat_report",
+    "missions/medium_fighter_interception/mission_description",
+    "missions/medium_fighter_interception/mission_name",
+    "missions/officer_hostage_rescue_mission/ap_failure_transmission",
+    "missions/officer_hostage_rescue_mission/ap_success_transmission",
+    "missions/officer_hostage_rescue_mission/ap_transmission",
+    "missions/officer_hostage_rescue_mission/gw_failure_transmission",
+    "missions/officer_hostage_rescue_mission/gw_success_transmission",
+    "missions/officer_hostage_rescue_mission/gw_transmission",
+    "missions/officer_hostage_rescue_mission/intel_threat_report",
+    "missions/officer_hostage_rescue_mission/mission_description",
+    "missions/officer_hostage_rescue_mission/mission_name",
+    "missions/pilot_competition/ap_failure_transmission",
+    "missions/pilot_competition/ap_success_transmission",
+    "missions/pilot_competition/ap_transmission",
+    "missions/pilot_competition/gw_failure_transmission",
+    "missions/pilot_competition/gw_success_transmission",
+    "missions/pilot_competition/gw_transmission",
+    "missions/pilot_competition/intel_threat_report",
+    "missions/pilot_competition/mission_description",
+    "missions/pilot_competition/mission_name",
+    "missions/prototype_test_flight/ap_failure_transmission",
+    "missions/prototype_test_flight/ap_success_transmission",
+    "missions/prototype_test_flight/ap_transmission",
+    "missions/prototype_test_flight/gw_failure_transmission",
+    "missions/prototype_test_flight/gw_success_transmission",
+    "missions/prototype_test_flight/gw_transmission",
+    "missions/prototype_test_flight/intel_threat_report",
+    "missions/prototype_test_flight/mission_description",
+    "missions/prototype_test_flight/mission_name",
+    "missions/radar_zone_crossing_mission/ap_failure_transmission",
+    "missions/radar_zone_crossing_mission/ap_success_transmission",
+    "missions/radar_zone_crossing_mission/ap_transmission",
+    "missions/radar_zone_crossing_mission/gw_failure_transmission",
+    "missions/radar_zone_crossing_mission/gw_success_transmission",
+    "missions/radar_zone_crossing_mission/gw_transmission",
+    "missions/radar_zone_crossing_mission/intel_threat_report",
+    "missions/radar_zone_crossing_mission/mission_description",
+    "missions/radar_zone_crossing_mission/mission_name",
+    "missions/rainy_recon_mission/ap_failure_transmission",
+    "missions/rainy_recon_mission/ap_success_transmission",
+    "missions/rainy_recon_mission/ap_transmission",
+    "missions/rainy_recon_mission/gw_failure_transmission",
+    "missions/rainy_recon_mission/gw_success_transmission",
+    "missions/rainy_recon_mission/gw_transmission",
+    "missions/rainy_recon_mission/intel_threat_report",
+    "missions/rainy_recon_mission/mission_description",
+    "missions/rainy_recon_mission/mission_name",
+    "missions/resistance_supply_run/ap_failure_transmission",
+    "missions/resistance_supply_run/ap_success_transmission",
+    "missions/resistance_supply_run/ap_transmission",
+    "missions/resistance_supply_run/gw_failure_transmission",
+    "missions/resistance_supply_run/gw_success_transmission",
+    "missions/resistance_supply_run/gw_transmission",
+    "missions/resistance_supply_run/intel_threat_report",
+    "missions/resistance_supply_run/mission_description",
+    "missions/resistance_supply_run/mission_name",
+    "missions/scientist_extraction_mission/ap_failure_transmission",
+    "missions/scientist_extraction_mission/ap_success_transmission",
+    "missions/scientist_extraction_mission/ap_transmission",
+    "missions/scientist_extraction_mission/gw_failure_transmission",
+    "missions/scientist_extraction_mission/gw_success_transmission",
+    "missions/scientist_extraction_mission/gw_transmission",
+    "missions/scientist_extraction_mission/intel_threat_report",
+    "missions/scientist_extraction_mission/mission_description",
+    "missions/scientist_extraction_mission/mission_name",
+    "missions/small_troop_transport/ap_failure_transmission",
+    "missions/small_troop_transport/ap_success_transmission",
+    "missions/small_troop_transport/ap_transmission",
+    "missions/small_troop_transport/gw_failure_transmission",
+    "missions/small_troop_transport/gw_success_transmission",
+    "missions/small_troop_transport/gw_transmission",
+    "missions/small_troop_transport/intel_threat_report",
+    "missions/small_troop_transport/mission_description",
+    "missions/small_troop_transport/mission_name",
+    "missions/storm_escort_mission/ap_failure_transmission",
+    "missions/storm_escort_mission/ap_success_transmission",
+    "missions/storm_escort_mission/ap_transmission",
+    "missions/storm_escort_mission/gw_failure_transmission",
+    "missions/storm_escort_mission/gw_success_transmission",
+    "missions/storm_escort_mission/gw_transmission",
+    "missions/storm_escort_mission/intel_threat_report",
+    "missions/storm_escort_mission/mission_description",
+    "missions/storm_escort_mission/mission_name",
+    "missions/structure_sabotage_mission/ap_failure_transmission",
+    "missions/structure_sabotage_mission/ap_success_transmission",
+    "missions/structure_sabotage_mission/ap_transmission",
+    "missions/structure_sabotage_mission/gw_failure_transmission",
+    "missions/structure_sabotage_mission/gw_success_transmission",
+    "missions/structure_sabotage_mission/gw_transmission",
+    "missions/structure_sabotage_mission/intel_threat_report",
+    "missions/structure_sabotage_mission/mission_description",
+    "missions/structure_sabotage_mission/mission_name",
+    "missions/submarine_hunt/ap_failure_transmission",
+    "missions/submarine_hunt/ap_success_transmission",
+    "missions/submarine_hunt/ap_transmission",
+    "missions/submarine_hunt/gw_failure_transmission",
+    "missions/submarine_hunt/gw_success_transmission",
+    "missions/submarine_hunt/gw_transmission",
+    "missions/submarine_hunt/intel_threat_report",
+    "missions/submarine_hunt/mission_description",
+    "missions/submarine_hunt/mission_name",
+    "missions/submarine_pen_bombing/ap_failure_transmission",
+    "missions/submarine_pen_bombing/ap_success_transmission",
+    "missions/submarine_pen_bombing/ap_transmission",
+    "missions/submarine_pen_bombing/gw_failure_transmission",
+    "missions/submarine_pen_bombing/gw_success_transmission",
+    "missions/submarine_pen_bombing/gw_transmission",
+    "missions/submarine_pen_bombing/intel_threat_report",
+    "missions/submarine_pen_bombing/mission_description",
+    "missions/submarine_pen_bombing/mission_name",
+    "missions/tank_squad_bombing_run/ap_failure_transmission",
+    "missions/tank_squad_bombing_run/ap_success_transmission",
+    "missions/tank_squad_bombing_run/ap_transmission",
+    "missions/tank_squad_bombing_run/gw_failure_transmission",
+    "missions/tank_squad_bombing_run/gw_success_transmission",
+    "missions/tank_squad_bombing_run/gw_transmission",
+    "missions/tank_squad_bombing_run/intel_threat_report",
+    "missions/tank_squad_bombing_run/mission_description",
+    "missions/tank_squad_bombing_run/mission_name",
+    "missions/training_facility_bombing_run/ap_failure_transmission",
+    "missions/training_facility_bombing_run/ap_success_transmission",
+    "missions/training_facility_bombing_run/ap_transmission",
+    "missions/training_facility_bombing_run/gw_failure_transmission",
+    "missions/training_facility_bombing_run/gw_success_transmission",
+    "missions/training_facility_bombing_run/gw_transmission",
+    "missions/training_facility_bombing_run/intel_threat_report",
+    "missions/training_facility_bombing_run/mission_description",
+    "missions/training_facility_bombing_run/mission_name",
+    "missions/tutorial_mission/ap_failure_transmission",
+    "missions/tutorial_mission/ap_success_transmission",
+    "missions/tutorial_mission/ap_transmission",
+    "missions/tutorial_mission/gw_failure_transmission",
+    "missions/tutorial_mission/gw_success_transmission",
+    "missions/tutorial_mission/gw_transmission",
+    "missions/tutorial_mission/intel_threat_report",
+    "missions/tutorial_mission/mission_description",
+    "missions/tutorial_mission/mission_name",
+    "missions/unknown_balloon_interception/ap_failure_transmission",
+    "missions/unknown_balloon_interception/ap_success_transmission",
+    "missions/unknown_balloon_interception/ap_transmission",
+    "missions/unknown_balloon_interception/gw_failure_transmission",
+    "missions/unknown_balloon_interception/gw_success_transmission",
+    "missions/unknown_balloon_interception/gw_transmission",
+    "missions/unknown_balloon_interception/intel_threat_report",
+    "missions/unknown_balloon_interception/mission_description",
+    "missions/unknown_balloon_interception/mission_name",
+    "missions/urgent_ground_squadron_support/ap_failure_transmission",
+    "missions/urgent_ground_squadron_support/ap_success_transmission",
+    "missions/urgent_ground_squadron_support/ap_transmission",
+    "missions/urgent_ground_squadron_support/gw_failure_transmission",
+    "missions/urgent_ground_squadron_support/gw_success_transmission",
+    "missions/urgent_ground_squadron_support/gw_transmission",
+    "missions/urgent_ground_squadron_support/intel_threat_report",
+    "missions/urgent_ground_squadron_support/mission_description",
+    "missions/urgent_ground_squadron_support/mission_name",
+    "missions/urgent_sky_squadron_support/ap_failure_transmission",
+    "missions/urgent_sky_squadron_support/ap_success_transmission",
+    "missions/urgent_sky_squadron_support/ap_transmission",
+    "missions/urgent_sky_squadron_support/gw_failure_transmission",
+    "missions/urgent_sky_squadron_support/gw_success_transmission",
+    "missions/urgent_sky_squadron_support/gw_transmission",
+    "missions/urgent_sky_squadron_support/intel_threat_report",
+    "missions/urgent_sky_squadron_support/mission_description",
+    "missions/urgent_sky_squadron_support/mission_name"
+  ]
+}

@@ -1,0 +1,15 @@
+Documentation license
+
+The documentation in this repository (everything under docs/, except docs/assets/logos/,
+plus the Markdown files AGENTS.md, CLAUDE.md, README.md and the skill and agent files
+under .agents/ and .claude/) is licensed under the Creative Commons Attribution 4.0
+International License (CC BY 4.0).
+
+You may share and adapt it for any purpose, including commercially, as long as you give
+appropriate credit ("Ground of Aces Modkit by Blindflug Studios"), link to the license and
+indicate if changes were made.
+
+Full license text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+The Ground of Aces and Blindflug Studios names and logos are NOT covered by this license.
+See TRADEMARKS.md.

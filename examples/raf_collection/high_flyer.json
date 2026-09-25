@@ -1,0 +1,143 @@
+{
+    "_maxPlaneSlots": 2,
+    "_timeToStartRange": {
+        "x": 15.0,
+        "y": 30.0
+    },
+    "_timeToCompleteRange": {
+        "x": 60.0,
+        "y": 90.0
+    },
+    "_distanceLocationDependant": {
+        "x": 0,
+        "y": 0
+    },
+    "_missionRequirements": [
+        {
+            "_requirementType": 0,
+            "_value": "1"
+        }
+    ],
+    "_missionOutcomes": [
+        {
+            "Name": "Gone wrong, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 2,
+                    "_effectValue": "-30",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-25",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "Gone wrong, skill passed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 2,
+                    "_effectValue": "-20",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "-10",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 2,
+                    "_effectValue": "-25",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-15",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "10",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "30",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "25",
+                    "_effectIcon": ""
+                }
+            ]
+        }
+    ],
+    "_asPlannedChance": 25,
+    "_missionStats": [
+        {
+            "Name": "As planned",
+            "_missionSkillType": 4,
+            "_statRange": {
+                "x": 85.0,
+                "y": 120.0
+            }
+        },
+        {
+            "Name": "Gone wrong",
+            "_missionSkillType": 2,
+            "_statRange": {
+                "x": 70.0,
+                "y": 100.0
+            }
+        }
+    ],
+    "_enemyPlaneReport": 1,
+    "_missionIcon": "Maneuverability",
+    "_potentialLocations": [
+        {
+            "_locationName": "canterbury",
+            "_coordinates": {
+                "x": 51.27332,
+                "y": 1.085454
+            },
+            "_locationId": "canterbury"
+        },
+        {
+            "_locationName": "high_weald",
+            "_coordinates": {
+                "x": 51.05633,
+                "y": 0.439808
+            },
+            "_locationId": "high_weald"
+        }
+    ],
+    "_difficultyRating": 3,
+    "_isHistoric": false,
+    "_rawMissionName": "The High Flyer",
+    "_rawMissionDescription": "The same aircraft, the same hour, three days running. It comes over at thirty thousand feet, photographs this airfield, and goes home before anyone can reach it. Whatever it is carrying back, the next thing to arrive will be bombers. Climb early, wait high, and be there when it comes.",
+    "_rawIntelThreatReport": "One aircraft. Faster and higher than anything we have, and it will not fight - it will run. There is one pass, and no second chance.",
+    "_rawApTransmission": "In position, angels three-zero, engines protesting. Nothing but sky up here.",
+    "_rawGwTransmission": "Too low and too late - it is already above us and climbing away.",
+    "_rawApSuccessTransmission": "Got him. One pass, one burst, and he went down in a flat spin over the marshes. Whatever he photographed goes into the mud with him.",
+    "_rawApFailureTransmission": "We were there, we were close, and he simply out-ran us. He has our coordinates and we have nothing.",
+    "_rawGwSuccessTransmission": "Wrong height, wrong heading - and one lucky deflection shot. He will not be reporting anything.",
+    "_rawGwFailureTransmission": "Never got near him. He made his run, turned for France, and was gone. Expect company.",
+    "_tags": []
+}

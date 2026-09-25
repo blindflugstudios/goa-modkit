@@ -1,0 +1,8 @@
+StatRank,FlyingValue,ShootingValue,BombingValue,EnduranceValue,EngineeringValue,NavigatingValue,FlyingPercentage,ShootingPercentage,BombingPercentage,EndurancePercentage,EngineeringPercentage,NavigatingPercentage
+Untrained,0,0,0,0,0,0,0,0,0,0,0,0
+Rank1,1,1,1,1,1,1,0.02,0.02,0.05,0.02,0.05,0.02
+Rank2,2,2,2,2,2,2,0.05,0.05,0.1,0.04,0.1,0.05
+Rank3,3,3,3,3,3,3,0.1,0.1,0.15,0.06,0.15,0.1
+Rank4,4,4,4,4,4,4,0.15,0.15,0.2,0.08,0.2,0.15
+Rank5,5,5,5,5,5,5,0.2,0.2,0.25,0.1,0.25,0.2
+Ace,10,10,10,10,8,8,0.25,0.25,0.5,0.15,0.5,0.25

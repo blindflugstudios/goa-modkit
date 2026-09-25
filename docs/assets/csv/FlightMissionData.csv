@@ -1,0 +1,22 @@
+ModifierClass,ModifierCategory,ModifierType,ModifierRange,Parameter,ThresholdRange
+AirplaneIntegrity,low,SkillRollModifier,0/-5,Default,1/40
+AirplaneIntegrity,zero,NoFlightModifier,0/0,Default,0/0
+AirplaneHealth,low,SkillRollModifier,0/-10,Default,1/40
+AirplaneHealth,zero,NoFlightModifier,0/0,Default,0/0
+AirplaneFuel,zero,NoFlightModifier,0/0,Default,0/0
+Mood,high,SkillRollModifier,2/0,CrewRole.Pilot,50/100
+Mood,low,SkillRollModifier,0/-3,CrewRole.Pilot,-89/-50
+Mood,high,SkillRollModifier,1/0,CrewRole.Gunner CrewRole.Navigator CrewRole.BombAimer CrewRole.FlightEngineer CrewRole.RadioOperator,50/100
+Mood,low,SkillRollModifier,0/-2,CrewRole.Gunner CrewRole.Navigator CrewRole.BombAimer CrewRole.FlightEngineer CrewRole.RadioOperator,-89/-50
+Mood,critical,NoFlightModifier,0/0,CrewRole.Pilot CrewRole.Gunner CrewRole.Navigator CrewRole.BombAimer CrewRole.FlightEngineer CrewRole.RadioOperator,-100/-90
+Energy,low,SkillRollModifier,0/-3,CrewRole.Pilot,-89/-50
+Energy,low,SkillRollModifier,0/-2,CrewRole.Gunner CrewRole.Navigator CrewRole.BombAimer CrewRole.FlightEngineer CrewRole.RadioOperator,-89/-50
+Energy,critical,NoFlightModifier,0/0,CrewRole.Pilot CrewRole.Gunner CrewRole.Navigator CrewRole.BombAimer CrewRole.FlightEngineer CrewRole.RadioOperator,-100/-90
+Confidence,high,SkillRollModifier,2/0,CrewRole.Pilot,50/100
+Confidence,low,SkillRollModifier,0/-3,CrewRole.Pilot,-89/-50
+Confidence,high,SkillRollModifier,1/0,CrewRole.Gunner CrewRole.Navigator CrewRole.BombAimer CrewRole.FlightEngineer CrewRole.RadioOperator,50/100
+Confidence,low,SkillRollModifier,0/-2,CrewRole.Gunner CrewRole.Navigator CrewRole.BombAimer CrewRole.FlightEngineer CrewRole.RadioOperator,-89/-50
+Confidence,critical,NoFlightModifier,0/0,CrewRole.Pilot CrewRole.Gunner CrewRole.Navigator CrewRole.BombAimer CrewRole.FlightEngineer CrewRole.RadioOperator,-100/-90
+SeatsConfiguration,mismatch,SkillRollModifier,0/-5,Default,1/1
+CrewHealth,critical,NoFlightModifier,0/0,Default,1/1
+CrewOnFire,critical,NoFlightModifier,0/0,Default,1/1

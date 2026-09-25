@@ -1,0 +1,138 @@
+{
+    "_maxPlaneSlots": 3,
+    "_timeToStartRange": {
+        "x": 360.0,
+        "y": 720.0
+    },
+    "_timeToCompleteRange": {
+        "x": 300.0,
+        "y": 420.0
+    },
+    "_distanceLocationDependant": {
+        "x": 0,
+        "y": 0
+    },
+    "_missionRequirements": [
+        {
+            "Name": "CompletedMission",
+            "_requirementType": 3,
+            "_value": "convoy_spotted,failure"
+        }
+    ],
+    "_missionOutcomes": [
+        {
+            "Name": "0 - gone wrong, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "Name": "3:40-90",
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "40-90",
+                    "_effectIcon": "ui_health_poor_injured"
+                },
+                {
+                    "Name": "5:-30",
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "-30",
+                    "_effectIcon": "ui_confidence"
+                }
+            ]
+        },
+        {
+            "Name": "1 - gone wrong, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "Name": "7:1",
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "1",
+                    "_effectIcon": "ui_resource_victoryPoints"
+                },
+                {
+                    "Name": "4:10",
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "10",
+                    "_effectIcon": "ui_mood"
+                }
+            ]
+        },
+        {
+            "Name": "2 - as planned, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "Name": "5:-20",
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "-20",
+                    "_effectIcon": "ui_confidence"
+                },
+                {
+                    "Name": "4:-10",
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-10",
+                    "_effectIcon": "ui_mood"
+                }
+            ]
+        },
+        {
+            "Name": "3 - as planned, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "Name": "7:2",
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "2",
+                    "_effectIcon": "ui_resource_victoryPoints"
+                },
+                {
+                    "Name": "5:20",
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "20",
+                    "_effectIcon": "ui_confidence"
+                }
+            ]
+        }
+    ],
+    "_asPlannedChance": 70,
+    "_missionStats": [
+        {
+            "Name": "a",
+            "_missionSkillType": 2,
+            "_statRange": {
+                "x": 20.0,
+                "y": 60.0
+            }
+        },
+        {
+            "Name": "b",
+            "_missionSkillType": 4,
+            "_statRange": {
+                "x": 30.0,
+                "y": 70.0
+            }
+        }
+    ],
+    "_enemyPlaneReport": 0,
+    "_missionIcon": "Recon",
+    "_potentialLocations": [
+        {
+            "_locationId": "dover_strait",
+            "_locationName": "dover_strait",
+            "_coordinates": {
+                "x": 51.0,
+                "y": 1.5
+            },
+            "_flags": 0
+        }
+    ],
+    "_difficultyRating": 2,
+    "_isHistoric": true,
+    "_historicDay": {
+        "Year": 1,
+        "Month": 1,
+        "Day": 1,
+        "Hour": 1,
+        "Minute": 1
+    },
+    "_tags": []
+}

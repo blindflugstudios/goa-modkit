@@ -1,0 +1,11 @@
+{
+    "_maxPlaneSlots": 2,
+    "_missionRequirements": [
+        {
+            "Name": "RunwayTier",
+            "_requirementType": 0,
+            "_value": ""
+        }
+    ],
+    "_tags": []
+}

@@ -1,0 +1,5 @@
+{
+  "Commands": [
+    { "Command": "Replace", "Id": "wall_wood", "Cells": { "Planks": 1 } }
+  ]
+}

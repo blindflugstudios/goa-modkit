@@ -1,0 +1,63 @@
+name: Validator programs
+
+# Builds goa-validate as a single program for people without Python. Unsigned on purpose:
+# agents download it with `gh release download`, which does not set the macOS quarantine
+# flag, so Gatekeeper does not block it.
+
+on:
+  push:
+    tags: ["validator-v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            asset: goa-validate-windows-x64.exe
+          - os: macos-14
+            asset: goa-validate-macos-arm64
+          - os: macos-13
+            asset: goa-validate-macos-x64
+          - os: ubuntu-latest
+            asset: goa-validate-linux-x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyinstaller
+      - name: Build
+        shell: bash
+        run: |
+          pyinstaller --onefile --name goa-validate \
+            --add-data "generated/catalog.json${{ runner.os == 'Windows' && ';' || ':' }}generated" \
+            tools/validator/goa_validate.py
+          mkdir -p out
+          if [ "${{ runner.os }}" = "Windows" ]; then cp dist/goa-validate.exe "out/${{ matrix.asset }}"; else cp dist/goa-validate "out/${{ matrix.asset }}"; fi
+      - name: Smoke test
+        shell: bash
+        run: ./out/${{ matrix.asset }} examples
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset }}
+          path: out/${{ matrix.asset }}
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: assets
+          merge-multiple: true
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${{ github.ref_name }}" assets/* --repo "${{ github.repository }}" --title "${{ github.ref_name }}" --notes "Prebuilt goa-validate for people without Python. Download with: gh release download --repo ${{ github.repository }} --pattern 'goa-validate-<os>-<arch>*'"

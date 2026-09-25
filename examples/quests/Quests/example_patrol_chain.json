@@ -1,0 +1,51 @@
+{
+    "_questId": "example_patrol_chain",
+    "_questTitle": "example/patrol_chain/title",
+    "_questDescription": "example/patrol_chain/description",
+    "_subQuests": [
+        {
+            "_subQuestTitle": "example/patrol_chain/step0_title",
+            "_subQuestDescription": "example/patrol_chain/step0_description",
+            "_isOptional": false,
+            "_subQuestRequirement": {
+                "_type": 2,
+                "_parameter": "spitfire",
+                "_amount": 1
+            },
+            "_genericIconKey": "ui_plane"
+        },
+        {
+            "_subQuestTitle": "example/patrol_chain/step1_title",
+            "_subQuestDescription": "example/patrol_chain/step1_description",
+            "_isOptional": false,
+            "_subQuestRequirement": {
+                "_type": 7,
+                "_parameter": "airplane_on_mission_succeed,calm_supply_drop",
+                "_amount": 1
+            },
+            "_genericIconKey": "ui_plane"
+        },
+        {
+            "_subQuestTitle": "example/patrol_chain/step2_title",
+            "_subQuestDescription": "",
+            "_isOptional": true,
+            "_subQuestRequirement": {
+                "_type": 12,
+                "_parameter": "spitfire,hurricane,any_skill_type",
+                "_amount": 3
+            },
+            "_genericIconKey": "ui_plane"
+        }
+    ],
+    "_requirements": [
+        {
+            "_requirementType": 1,
+            "_value": "example_first_steps"
+        }
+    ],
+    "_isHiddenInUI": false,
+    "_questType": 0,
+    "_highlightedUIElements": [],
+    "_cheatsOnStart": [],
+    "_completionCheats": []
+}

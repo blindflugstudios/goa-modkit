@@ -1,0 +1,15 @@
+Job,Flying,Shooting,Bombing,Endurance,Engineering,Navigating
+Pilot,2,2,0,1,1,1
+Gunner,0,2,1,1,1,0
+BombAimer,0,1,2,1,1,0
+FlightEngineer,0,0,1,1,2,1
+Navigator,1,1,0,1,0,2
+RadioOperator,1,0,1,1,1,2
+RAFAirCrew,0,0,0,1,0,0
+AAFCook,0,0,0,1,0,0
+FieldMechanic,0,0,0,1,0,0
+FieldEngineer,0,0,0,1,0,0
+RAFMedic,0,0,0,1,0,0
+AAFLabour,0,0,0,1,0,0
+None,0,0,0,1,0,0
+Custom,0,0,0,1,0,0

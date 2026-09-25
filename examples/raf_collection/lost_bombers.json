@@ -1,0 +1,161 @@
+{
+    "_maxPlaneSlots": 3,
+    "_timeToStartRange": {
+        "x": 20.0,
+        "y": 45.0
+    },
+    "_timeToCompleteRange": {
+        "x": 90.0,
+        "y": 140.0
+    },
+    "_distanceLocationDependant": {
+        "x": 0,
+        "y": 0
+    },
+    "_missionRequirements": [
+        {
+            "_requirementType": 0,
+            "_value": "1"
+        }
+    ],
+    "_missionOutcomes": [
+        {
+            "Name": "Gone wrong, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "90-160",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-35",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-20",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "Gone wrong, skill passed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "50-90",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 1,
+                    "_effectValue": "-10",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "2",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "40-70",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-15",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "8",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "25",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "15",
+                    "_effectIcon": ""
+                }
+            ]
+        }
+    ],
+    "_asPlannedChance": 45,
+    "_missionStats": [
+        {
+            "Name": "As planned",
+            "_missionSkillType": 0,
+            "_statRange": {
+                "x": 55.0,
+                "y": 85.0
+            }
+        },
+        {
+            "Name": "Gone wrong",
+            "_missionSkillType": 4,
+            "_statRange": {
+                "x": 60.0,
+                "y": 95.0
+            }
+        }
+    ],
+    "_enemyPlaneReport": 7,
+    "_missionIcon": "Fight",
+    "_potentialLocations": [
+        {
+            "_locationName": "dover_strait",
+            "_coordinates": {
+                "x": 51.05976,
+                "y": 1.582498
+            },
+            "_locationId": "dover_strait"
+        },
+        {
+            "_locationName": "english_channel",
+            "_coordinates": {
+                "x": 50.16595,
+                "y": -1.701335
+            },
+            "_locationId": "english_channel"
+        },
+        {
+            "_locationName": "dover",
+            "_coordinates": {
+                "x": 51.13512,
+                "y": 1.312756
+            },
+            "_locationId": "dover"
+        }
+    ],
+    "_difficultyRating": 2,
+    "_isHistoric": false,
+    "_rawMissionName": "The Lost Bombers",
+    "_rawMissionDescription": "A flight of our own bombers is limping home from France, shot to pieces and running on fumes. Fighters are on their tail. Get up there and pull them off - every minute you spend on the ground is a crew that does not come home.",
+    "_rawIntelThreatReport": "Seven or more fighters in pursuit, closing over the Strait. The bombers cannot manoeuvre and cannot climb. They will not survive a second pass.",
+    "_rawApTransmission": "Tally-ho - bombers below, three of them, trailing smoke. Fighters above and behind. Going in.",
+    "_rawGwTransmission": "We are late. They have already made a pass - one bomber is down. Getting between them and the rest.",
+    "_rawApSuccessTransmission": "Pursuers broken off, scattered south. All three bombers over the coast and descending. That is the lot of them home.",
+    "_rawApFailureTransmission": "We drove them off, but not before they finished what they started. Two bombers went into the water. We got the third across.",
+    "_rawGwSuccessTransmission": "Bad start, better finish. Fighters driven off and what was left of the formation made the coast.",
+    "_rawGwFailureTransmission": "Too late and too few. The bombers went down in the Strait, and we came home with holes in us for nothing.",
+    "_tags": []
+}

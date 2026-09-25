@@ -1,0 +1,23 @@
+{
+    "_questId": "my_mod_campaign_next",
+    "_questTitle": "my_mod/campaign_next/title",
+    "_questDescription": "",
+    "_subQuests": [
+        {
+            "_subQuestTitle": "my_mod/campaign_next/step0_title",
+            "_subQuestDescription": "",
+            "_isOptional": false,
+            "_subQuestRequirement": {
+                "_type": 9,
+                "_parameter": "Storage,20",
+                "_amount": 1
+            },
+            "_genericIconKey": "ui_functionarea_resources"
+        }
+    ],
+    "_requirements": [
+        { "_requirementType": 1, "_value": "my_mod_campaign_start" }
+    ],
+    "_isHiddenInUI": false,
+    "_questType": 0
+}

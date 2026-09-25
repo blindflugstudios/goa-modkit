@@ -1,0 +1,27 @@
+name: My mod does not load
+description: Something you built does not show up or breaks the game
+labels: ["help"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What did you try to build, and what happens instead?
+    validations:
+      required: true
+  - type: textarea
+    id: validator
+    attributes:
+      label: Validator output
+      description: Run `python tools/validator/goa_validate.py mods/<your_mod>` (or ask your agent to) and paste the result.
+      render: text
+  - type: textarea
+    id: log
+    attributes:
+      label: The end of your Player.log
+      description: See "When nothing happens" on the website for where it lives.
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Game version
+      placeholder: "0.14"

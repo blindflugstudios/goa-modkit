@@ -1,0 +1,150 @@
+{
+    "_maxPlaneSlots": 4,
+    "_timeToStartRange": {
+        "x": 120.0,
+        "y": 240.0
+    },
+    "_timeToCompleteRange": {
+        "x": 150.0,
+        "y": 230.0
+    },
+    "_distanceLocationDependant": {
+        "x": 0,
+        "y": 0
+    },
+    "_missionRequirements": [
+        {
+            "Name": "CompletedMission",
+            "_requirementType": 3,
+            "_value": "airfield_search,success"
+        }
+    ],
+    "_missionOutcomes": [
+        {
+            "Name": "Gone wrong, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "120-200",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-40",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-25",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "Gone wrong, skill passed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "70-130",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "4",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-15",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "60-110",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-20",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "15",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "40",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "30",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "25",
+                    "_effectIcon": ""
+                }
+            ]
+        }
+    ],
+    "_asPlannedChance": 40,
+    "_missionStats": [
+        {
+            "Name": "As planned",
+            "_missionSkillType": 1,
+            "_statRange": {
+                "x": 70.0,
+                "y": 110.0
+            }
+        },
+        {
+            "Name": "Gone wrong",
+            "_missionSkillType": 0,
+            "_statRange": {
+                "x": 65.0,
+                "y": 100.0
+            }
+        }
+    ],
+    "_enemyPlaneReport": 8,
+    "_missionIcon": "Bomb",
+    "_potentialLocations": [
+        {
+            "_locationName": "amiens",
+            "_coordinates": {
+                "x": 49.89795,
+                "y": 2.32859
+            },
+            "_locationId": "amiens"
+        },
+        {
+            "_locationName": "lille",
+            "_coordinates": {
+                "x": 50.62518,
+                "y": 3.0551
+            },
+            "_locationId": "lille"
+        }
+    ],
+    "_difficultyRating": 3,
+    "_isHistoric": false,
+    "_tags": []
+}

@@ -1,0 +1,175 @@
+site_name: Ground of Aces Modkit
+site_description: Build missions, quests, scripts, maps and more for Ground of Aces - with or without an AI agent.
+site_url: https://blindflugstudios.github.io/goa-modkit/
+repo_url: https://github.com/blindflugstudios/goa-modkit
+repo_name: blindflugstudios/goa-modkit
+edit_uri: edit/main/docs/
+copyright: Documentation CC-BY 4.0 - Ground of Aces and Blindflug Studios logos and names are trademarks and not covered by any license.
+
+theme:
+  name: material
+  logo: assets/logos/goa-logo-colored.png
+  favicon: assets/logos/blindflug-mark.png
+  font:
+    text: Inter
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - content.action.edit
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra:
+  version:
+    provider: mike
+    default: latest
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.com/channels/1006159027157356587/1551969822911242240
+      name: Modding channel on Discord
+    - icon: fontawesome/brands/github
+      link: https://github.com/blindflugstudios/goa-modkit
+    - icon: fontawesome/brands/steam
+      link: https://steamcommunity.com/app/2308690/workshop/
+      name: Steam Workshop
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: de
+          name: Deutsch
+          build: true
+          nav_translations:
+            Home: Start
+            Get started: Loslegen
+            Basics: Grundlagen
+            Missions: Missionen
+            Quests: Quests
+            Scripting: Scripting
+            Game data: Spieldaten
+            Maps and art: Karten und Grafik
+            Sharing: Teilen
+            AI agents: KI-Agenten
+            Examples: Beispiele
+            Install on Windows: Installation unter Windows
+            Install on Mac: Installation auf dem Mac
+            Your first mod in 10 minutes: Deine erste Mod in 10 Minuten
+            Without an AI agent: Ohne KI-Agent
+            When nothing happens: Wenn nichts passiert
+            Glossary: Glossar
+            How mods work: So funktionieren Mods
+            Testing and reloading: Testen und neu laden
+            Cheat console: Cheat-Konsole
+            Python mods and safety: Python-Mods und Sicherheit
+            Write your first mission: Deine erste Mission
+            Chains and campaigns: Ketten und Kampagnen
+            Locations: Einsatzorte
+            Reference: Referenz
+            Events: Events
+            API: API
+            Localization: Lokalisierung
+            CSV tables: CSV-Tabellen
+            Table command files: Tabellen-Befehlsdateien
+            Maps: Karten
+            Objects and models: Objekte und Modelle
+            Terrain objects: Gelände-Objekte
+            Biomes: Biome
+            Steam Workshop: Steam Workshop
+            Claude Code: Claude Code
+            Codex: Codex
+            Skills and agents: Skills und Agenten
+
+# Markdown extensions in use. Keep this list short so the framework can be replaced later:
+# admonition (!!! note), pymdownx.tabbed (=== "Windows"), attr_list + md_in_html (home page,
+# heading anchors on translations). Everything else is standard Markdown.
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Get started:
+      - start/index.md
+      - Install on Windows: start/install-windows.md
+      - Install on Mac: start/install-mac.md
+      - Your first mod in 10 minutes: start/first-mod.md
+      - Without an AI agent: start/without-ai.md
+      - When nothing happens: start/troubleshooting.md
+      - Glossary: start/glossary.md
+  - Basics:
+      - How mods work: basics/mods.md
+      - Testing and reloading: basics/testing.md
+      - Cheat console: basics/cheats.md
+      - Python mods and safety: basics/security.md
+  - Missions:
+      - missions/index.md
+      - Write your first mission: missions/first-mission.md
+      - Chains and campaigns: missions/chains.md
+      - Locations: missions/locations.md
+      - Reference: missions/reference.md
+  - Quests:
+      - quests/index.md
+  - Scripting:
+      - scripting/index.md
+      - Events: scripting/events.md
+      - API: scripting/api.md
+      - Localization: scripting/localization.md
+  - Game data:
+      - CSV tables: data/csv.md
+      - Table command files: data/table-editor.md
+  - Maps and art:
+      - Maps: content/maps.md
+      - Objects and models: content/objects.md
+      - Terrain objects: content/terrain-objects.md
+      - Biomes: content/biomes.md
+  - Sharing:
+      - Steam Workshop: sharing/workshop.md
+  - AI agents:
+      - ai/index.md
+      - Claude Code: ai/claude-code.md
+      - Codex: ai/codex.md
+      - Skills and agents: ai/skills.md
+  - Examples: examples.md

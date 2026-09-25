@@ -1,0 +1,7 @@
+ID,Value
+LowMoraleThreshold,-50
+CriticalMoraleThreshold,-65
+LowFoodThreshold,20
+FewLeisureItemsThreshold,5
+MissionTimerMinutesThreshold,150
+LowWaterThreshold,20

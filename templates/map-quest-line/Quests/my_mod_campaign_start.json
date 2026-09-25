@@ -1,0 +1,34 @@
+{
+    "_questId": "my_mod_campaign_start",
+    "_questTitle": "my_mod/campaign_start/title",
+    "_questDescription": "",
+    "_subQuests": [
+        {
+            "_subQuestTitle": "my_mod/campaign_start/step0_title",
+            "_subQuestDescription": "",
+            "_isOptional": false,
+            "_subQuestRequirement": {
+                "_type": 0,
+                "_parameter": "1",
+                "_amount": 1
+            },
+            "_genericIconKey": "ui_runway"
+        },
+        {
+            "_subQuestTitle": "my_mod/campaign_start/step1_title",
+            "_subQuestDescription": "",
+            "_isOptional": false,
+            "_subQuestRequirement": {
+                "_type": 1,
+                "_parameter": "0",
+                "_amount": 2
+            },
+            "_genericIconKey": "ui_functionarea_parking"
+        }
+    ],
+    "_requirements": [
+        { "_requirementType": 3, "_value": "" }
+    ],
+    "_isHiddenInUI": false,
+    "_questType": 0
+}

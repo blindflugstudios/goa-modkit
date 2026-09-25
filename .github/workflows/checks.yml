@@ -1,0 +1,30 @@
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main, next]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-docs.txt pytest
+      - name: Validator tests
+        run: python -m pytest -q tools/validator/tests
+      - name: Examples and templates are clean
+        run: |
+          python tools/validator/goa_validate.py examples
+          python tools/validator/goa_validate.py templates
+      - name: Skills are mirrored for Claude Code
+        run: python tools/sync_skills.py --check
+      - name: No em dashes, translations in step
+        run: python tools/check_docs.py
+      - name: Translated headings keep their English anchors
+        run: python tools/sync_anchors.py --check
+      - name: Site builds without warnings
+        run: mkdocs build --strict

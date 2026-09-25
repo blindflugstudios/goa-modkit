@@ -1,0 +1,5 @@
+ID,Phase,StartHour,EndHour
+0,Sleep,0,5
+1,Leisure,5,7
+2,Work,7,22
+3,Leisure,22,24

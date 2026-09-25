@@ -1,0 +1,20 @@
+# Your own mods live here and never go into git - `git pull` will not touch them.
+/mods/*
+!/mods/README.md
+
+# Local settings of the agent (your game path etc.)
+.goa-modkit.local.json
+
+# Prebuilt validator downloaded by the agent
+/tools/bin/
+
+# Build output and tooling
+/site/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store
+/build/
+/dist/
+*.spec

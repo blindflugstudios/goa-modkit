@@ -1,0 +1,72 @@
+/* Ground of Aces palette: olive drab, brass, parchment. */
+:root,
+[data-md-color-scheme="default"] {
+	--md-primary-fg-color: #4a5a36;
+	--md-primary-fg-color--light: #6b7d52;
+	--md-primary-fg-color--dark: #333f25;
+	--md-primary-bg-color: #f6f1e4;
+	--md-accent-fg-color: #b7832f;
+	--md-default-bg-color: #fbf8f0;
+	--md-typeset-a-color: #7a5a1e;
+}
+
+[data-md-color-scheme="slate"] {
+	--md-primary-fg-color: #3a4629;
+	--md-primary-fg-color--light: #56663f;
+	--md-primary-fg-color--dark: #252d1a;
+	--md-primary-bg-color: #efe8d6;
+	--md-accent-fg-color: #d9a54a;
+	--md-default-bg-color: #1b1e17;
+	--md-typeset-a-color: #e0b765;
+}
+
+.md-header__button.md-logo img {
+	height: 2rem;
+}
+
+/* The three doors on the home page. */
+.doors {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+	gap: 1rem;
+	margin: 1.5rem 0 2rem;
+}
+
+.doors a.door {
+	display: block;
+	padding: 1.2rem 1.2rem 1rem;
+	border: 1px solid var(--md-default-fg-color--lightest);
+	border-top: 4px solid var(--md-accent-fg-color);
+	border-radius: 0.3rem;
+	color: inherit;
+	background: var(--md-code-bg-color);
+	transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.doors a.door:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.12);
+}
+
+.doors .door strong {
+	display: block;
+	font-size: 1.05rem;
+	margin-bottom: 0.3rem;
+	color: var(--md-typeset-a-color);
+}
+
+.hero {
+	text-align: center;
+	margin: 1rem 0 0.5rem;
+}
+
+.hero img {
+	max-width: 18rem;
+	width: 60%;
+}
+
+.hero p {
+	font-size: 1.15rem;
+	margin: 0.5rem auto 0;
+	max-width: 36rem;
+}

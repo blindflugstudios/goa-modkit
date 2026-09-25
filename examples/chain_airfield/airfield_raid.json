@@ -1,0 +1,153 @@
+{
+    "_maxPlaneSlots": 4,
+    "_timeToStartRange": {
+        "x": 10.0,
+        "y": 20.0
+    },
+    "_timeToCompleteRange": {
+        "x": 60.0,
+        "y": 100.0
+    },
+    "_distanceLocationDependant": {
+        "x": 0,
+        "y": 0
+    },
+    "_missionRequirements": [
+        {
+            "Name": "RunwayTier",
+            "_requirementType": 0,
+            "_value": "1"
+        }
+    ],
+    "_missionOutcomes": [
+        {
+            "Name": "Gone wrong, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "100-180",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-35",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-30",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "Gone wrong, skill passed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "60-110",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-20",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "2",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "50-90",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-15",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "7",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "25",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "20",
+                    "_effectIcon": ""
+                }
+            ]
+        }
+    ],
+    "_asPlannedChance": 40,
+    "_missionStats": [
+        {
+            "Name": "As planned",
+            "_missionSkillType": 0,
+            "_statRange": {
+                "x": 60.0,
+                "y": 95.0
+            }
+        },
+        {
+            "Name": "Gone wrong",
+            "_missionSkillType": 4,
+            "_statRange": {
+                "x": 65.0,
+                "y": 100.0
+            }
+        }
+    ],
+    "_enemyPlaneReport": 9,
+    "_missionIcon": "Fight",
+    "_potentialLocations": [
+        {
+            "_locationName": "dover_strait",
+            "_coordinates": {
+                "x": 51.05976,
+                "y": 1.582498
+            },
+            "_locationId": "dover_strait"
+        },
+        {
+            "_locationName": "canterbury",
+            "_coordinates": {
+                "x": 51.27332,
+                "y": 1.085454
+            },
+            "_locationId": "canterbury"
+        },
+        {
+            "_locationName": "dover",
+            "_coordinates": {
+                "x": 51.13512,
+                "y": 1.312756
+            },
+            "_locationId": "dover"
+        }
+    ],
+    "_difficultyRating": 3,
+    "_isHistoric": false,
+    "_tags": []
+}

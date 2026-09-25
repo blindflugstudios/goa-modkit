@@ -1,0 +1,14 @@
+name: Translation
+description: Offer or fix a translation
+labels: ["translation"]
+body:
+  - type: input
+    id: language
+    attributes:
+      label: Language
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What would you like to translate or fix?

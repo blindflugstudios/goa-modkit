@@ -1,0 +1,4 @@
+PlaneType,PlaneHealth,PlanePower,PlaneWinDealDamageMin,PlaneWinDealDamageMax,PlaneLooseDealDamageMin,PlaneLooseDealDamageMax
+Fighter,18,23,20,120,10,25
+Diver,26,17,20,70,5,20
+Bomber,34,14,15,50,5,15

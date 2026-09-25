@@ -1,0 +1,153 @@
+{
+    "_maxPlaneSlots": 4,
+    "_timeToStartRange": {
+        "x": 15.0,
+        "y": 30.0
+    },
+    "_timeToCompleteRange": {
+        "x": 70.0,
+        "y": 110.0
+    },
+    "_distanceLocationDependant": {
+        "x": 0,
+        "y": 0
+    },
+    "_missionRequirements": [
+        {
+            "Name": "RunwayTier",
+            "_requirementType": 0,
+            "_value": "1"
+        }
+    ],
+    "_missionOutcomes": [
+        {
+            "Name": "Gone wrong, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "90-160",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-30",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "-25",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "Gone wrong, skill passed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "50-100",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-15",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "2",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "40-80",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-10",
+                    "_effectIcon": ""
+                }
+            ]
+        },
+        {
+            "Name": "As planned, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "6",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "20",
+                    "_effectIcon": ""
+                },
+                {
+                    "_outcomeEffectType": 0,
+                    "_effectValue": "15",
+                    "_effectIcon": ""
+                }
+            ]
+        }
+    ],
+    "_asPlannedChance": 45,
+    "_missionStats": [
+        {
+            "Name": "As planned",
+            "_missionSkillType": 0,
+            "_statRange": {
+                "x": 55.0,
+                "y": 90.0
+            }
+        },
+        {
+            "Name": "Gone wrong",
+            "_missionSkillType": 4,
+            "_statRange": {
+                "x": 60.0,
+                "y": 95.0
+            }
+        }
+    ],
+    "_enemyPlaneReport": 8,
+    "_missionIcon": "Fight",
+    "_potentialLocations": [
+        {
+            "_locationName": "dover_strait",
+            "_coordinates": {
+                "x": 51.05976,
+                "y": 1.582498
+            },
+            "_locationId": "dover_strait"
+        },
+        {
+            "_locationName": "dover",
+            "_coordinates": {
+                "x": 51.13512,
+                "y": 1.312756
+            },
+            "_locationId": "dover"
+        },
+        {
+            "_locationName": "canterbury",
+            "_coordinates": {
+                "x": 51.27332,
+                "y": 1.085454
+            },
+            "_locationId": "canterbury"
+        }
+    ],
+    "_difficultyRating": 2,
+    "_isHistoric": false,
+    "_tags": []
+}

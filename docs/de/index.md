@@ -1,0 +1,61 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
+# Ground of Aces Modkit
+
+<div class="hero" markdown>
+
+![Ground of Aces](assets/logos/goa-logo-colored.png)
+
+Bau deine eigenen Missionen, Quests, Ereignisse, Karten und vieles mehr für Ground of Aces.
+Kein Unity, kein Compiler - ein Mod ist ein Ordner voller Textdateien. Und wenn du magst, schreibt ein KI-Agent sie für dich.
+
+</div>
+
+<div class="doors" markdown>
+
+<a class="door" href="start/">
+<strong>Ich habe noch nie programmiert</strong>
+Fang hier an. Wir installieren alles gemeinsam, Schritt für Schritt, und zehn Minuten später ist dein erster Mod im Spiel.
+</a>
+
+<a class="door" href="missions/first-mission/">
+<strong>Ich will direkt loslegen</strong>
+Du kennst dich mit Dateien und Ordnern aus. Beispiel kopieren, ändern, neu laden - fertig.
+</a>
+
+<a class="door" href="ai/">
+<strong>Ich nutze Claude Code oder Codex</strong>
+Klone dieses Repository, starte deinen Agenten darin und beschreib den Mod, den du willst. Der Agent kennt die Regeln.
+</a>
+
+</div>
+
+## Was du bauen kannst { #what-you-can-build }
+
+| | Was es ist | Einstieg |
+|---|---|---|
+| **Missionen** | Flüge, auf die der Spieler Flugzeuge schickt, mit vier möglichen Ausgängen | [Missionen](missions/index.md) |
+| **Ketten und Kampagnen** | Missionen, die sich gegenseitig freischalten, historische Operationen an ihrem echten Datum | [Ketten und Kampagnen](missions/chains.md) |
+| **Ereignis-Skripte** | Python, das auf das reagiert, was auf dem Stützpunkt und in der Luft passiert | [Scripting](scripting/index.md) |
+| **Quests** | Checklisten, die den Spieler anleiten | [Quests](quests/index.md) |
+| **Spieldaten** | Flugzeuge, Gebäude, Angriffe, Kosten - dreh an den Zahlen | [CSV-Tabellen](data/csv.md) |
+| **Karten und Grafik** | Eigene Karten, Modelle, Geländeobjekte und Biome | [Karten](content/maps.md) |
+| **Workshop** | Teil deinen Mod mit allen Spielern | [Steam Workshop](sharing/workshop.md) |
+
+## So funktioniert es in einer Minute { #how-it-works-in-one-minute }
+
+1. Öffne das Spiel und geh auf **Hauptmenü** (Main menu) **→ Mods → Open folder**.
+2. Leg dort einen Mod-Ordner ab - zum Beispiel eine Kopie eines der [Beispiele](examples.md).
+3. Zurück im Spiel: Geh ins Hauptmenü, öffne einmal **Mods** (dabei wird der Ordner neu eingelesen) und lade deinen Spielstand.
+
+Das ist schon die ganze Runde - die Details stehen unter [Testen und neu laden](basics/testing.md). Alles andere auf dieser Seite dreht sich darum, was du in diesen Ordner legst.
+
+## Komm zur Staffel { #join-the-squadron }
+
+- Fragen, Ideen, Angeben: der [Modding-Kanal auf Discord](https://discord.com/channels/1006159027157356587/1551969822911242240)
+- Einen Fehler auf dieser Seite gefunden? [Öffne ein Issue](https://github.com/blindflugstudios/goa-modkit/issues) oder verbessere die Seite selbst mit dem Stift-Symbol oben.
+- Mod fertig? Stell ihn in den [Steam Workshop](sharing/workshop.md).
