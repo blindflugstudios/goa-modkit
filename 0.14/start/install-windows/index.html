@@ -2433,7 +2433,32 @@
 <div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="p">-</span><span class="n">-version</span>
 </code></pre></div>
 <p><strong>You should see</strong> <code>Python 3.12.x</code>.</p>
-<p><strong>If the Microsoft Store opens instead</strong>: close it, reopen the terminal and try again. If it keeps happening, open <strong>Settings → Apps → Advanced app settings → App execution aliases</strong> and switch off the two <strong>python</strong> entries.</p>
+<div class="admonition warning">
+<p class="admonition-title">\"Python was not found\" or the Microsoft Store opens</p>
+<p>Windows ships a fake <code>python</code> that only points to the Microsoft Store, and it can hide the
+real one. You see <em>"Python was not found; run without arguments to install from the
+Microsoft Store..."</em> (German Windows: <em>"Python wurde nicht gefunden..."</em>), even though winget
+says Python is already installed. Fix it like this:</p>
+<ol>
+<li>
+<p>Try the Python launcher, which comes with the same install:</p>
+<div class="highlight"><pre><span></span><code><span class="n">py</span> <span class="p">-</span><span class="n">-version</span>
+</code></pre></div>
+<p>If this shows <code>Python 3.12.x</code>, Python works. You can type <code>py</code> wherever this site says
+<code>python</code>. The AI agent knows this too.</p>
+</li>
+<li>
+<p>To make <code>python</code> work as well, open <strong>Settings → Apps → Advanced app settings → App
+   execution aliases</strong> and switch off <strong>App Installer python.exe</strong> and <strong>python3.exe</strong>.
+   Close the terminal and open a new one.</p>
+</li>
+<li>
+<p>Still not working? Type <code>where.exe python</code>. If it only lists a path containing
+   <code>WindowsApps</code>, that is still the fake one. Reinstall with
+   <code>winget install --id Python.Python.3.12 -e --force</code> and open a new terminal.</p>
+</li>
+</ol>
+</div>
 <h2 id="7-create-a-github-account-and-log-in">7. Create a GitHub account and log in<a class="headerlink" href="#7-create-a-github-account-and-log-in" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Go to <a href="https://github.com/signup">github.com/signup</a> and create a free account. Confirm your email.</li>

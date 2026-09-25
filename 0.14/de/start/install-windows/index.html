@@ -2433,7 +2433,32 @@
 <div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="p">-</span><span class="n">-version</span>
 </code></pre></div>
 <p><strong>Das solltest du sehen:</strong> <code>Python 3.12.x</code>.</p>
-<p><strong>Falls sich stattdessen der Microsoft Store öffnet:</strong> Schließ ihn, öffne das Terminal neu und versuch es noch einmal. Passiert das immer wieder, öffne <strong>Einstellungen → Apps → Erweiterte App-Einstellungen → App-Ausführungsaliase</strong> und schalte die beiden <strong>python</strong>-Einträge aus.</p>
+<div class="admonition warning">
+<p class="admonition-title">\"Python wurde nicht gefunden\" oder der Microsoft Store öffnet sich</p>
+<p>Windows bringt ein falsches <code>python</code> mit, das nur auf den Microsoft Store verweist und das
+echte verdecken kann. Du siehst dann <em>"Python wurde nicht gefunden; ohne Argumente ausführen,
+um aus dem Microsoft Store zu installieren..."</em>, obwohl winget sagt, dass Python schon
+installiert ist. So behebst du das:</p>
+<ol>
+<li>
+<p>Probier den Python-Launcher, der bei derselben Installation dabei ist:</p>
+<div class="highlight"><pre><span></span><code><span class="n">py</span> <span class="p">-</span><span class="n">-version</span>
+</code></pre></div>
+<p>Zeigt er <code>Python 3.12.x</code>, funktioniert Python. Du kannst überall <code>py</code> tippen, wo auf
+dieser Seite <code>python</code> steht. Der KI-Agent weiß das auch.</p>
+</li>
+<li>
+<p>Damit auch <code>python</code> funktioniert, öffne <strong>Einstellungen → Apps → Erweiterte
+   App-Einstellungen → App-Ausführungsaliase</strong> und schalte <strong>App-Installer python.exe</strong> und
+   <strong>python3.exe</strong> aus. Schließ das Terminal und öffne ein neues.</p>
+</li>
+<li>
+<p>Klappt es immer noch nicht? Tipp <code>where.exe python</code>. Steht dort nur ein Pfad mit
+   <code>WindowsApps</code>, ist das noch das falsche. Installier dann neu mit
+   <code>winget install --id Python.Python.3.12 -e --force</code> und öffne ein neues Terminal.</p>
+</li>
+</ol>
+</div>
 <h2 id="7-create-a-github-account-and-log-in">7. Leg ein GitHub-Konto an und melde dich an<a class="headerlink" href="#7-create-a-github-account-and-log-in" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Geh auf <a href="https://github.com/signup">github.com/signup</a> und leg ein kostenloses Konto an. Bestätige deine E-Mail-Adresse.</li>
