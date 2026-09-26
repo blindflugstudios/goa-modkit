@@ -1851,6 +1851,8 @@
       
         
       
+        
+      
     
     
     
@@ -1951,6 +1953,34 @@
     
   
     Codex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="opencode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenCode
   
 
     
@@ -2112,14 +2142,18 @@
 
 <h1 id="ai-agents">AI agents<a class="headerlink" href="#ai-agents" title="Permanent link">&para;</a></h1>
 <p>You can build every mod on this site by hand. But you do not have to. This repository is set
-up so that an AI coding agent - <strong>Claude Code</strong> or <strong>Codex</strong> - can build mods for you: you
+up so that an AI coding agent - <strong>Claude Code</strong>, <strong>Codex</strong> or the open-source <strong>OpenCode</strong> - can build mods for you: you
 describe the idea in plain words, the agent writes the files, checks them and puts them into
 your game.</p>
 <div class="admonition warning">
-<p class="admonition-title">This costs money</p>
+<p class="admonition-title">AI agents cost money</p>
 <p>Claude Code needs a paid Claude subscription (Pro or higher). Codex needs a ChatGPT plan
-that includes it. Everything else here is free. If you do not want to pay, build your mod
-<a href="../start/without-ai/">without an AI agent</a> - the in-game Mission Editor is a good start.</p>
+that includes it. <strong>OpenCode</strong> is open source and free to install, but the AI model behind
+it is not always free: its free models are offered for a limited time, may use your prompts
+for training and are clearly weaker - for steady use you pay per use. Details on the
+<a href="opencode/">OpenCode</a> page. Everything else here is free. If you do not want to pay for an
+AI at all, build your mod <a href="../start/without-ai/">without an AI agent</a> - the in-game
+Mission Editor is a good start.</p>
 </div>
 <h2 id="why-it-works-well-here">Why it works well here<a class="headerlink" href="#why-it-works-well-here" title="Permanent link">&para;</a></h2>
 <p>A general AI knows nothing about Ground of Aces. This repository teaches it:</p>
@@ -2150,6 +2184,7 @@ that includes it. Everything else here is free. If you do not want to pay, build
 <th></th>
 <th>Claude Code</th>
 <th>Codex</th>
+<th>OpenCode</th>
 </tr>
 </thead>
 <tbody>
@@ -2157,25 +2192,41 @@ that includes it. Everything else here is free. If you do not want to pay, build
 <td>Made by</td>
 <td>Anthropic</td>
 <td>OpenAI</td>
+<td>an open-source project (<a href="https://github.com/anomalyco/opencode">anomalyco/opencode</a>)</td>
 </tr>
 <tr>
-<td>Needs</td>
+<td>Costs</td>
 <td>Claude Pro or higher</td>
 <td>a ChatGPT plan with Codex</td>
+<td>the program is free; the model is paid per use, or one of the free models (limited time, may train on your prompts)</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>Claude</td>
+<td>GPT</td>
+<td>your choice</td>
+</tr>
+<tr>
+<td>Quality for mods</td>
+<td>very good</td>
+<td>very good</td>
+<td>depends on the model; free models are clearly weaker</td>
 </tr>
 <tr>
 <td>Reads</td>
 <td><code>CLAUDE.md</code> (which loads <code>AGENTS.md</code>), <code>.claude/skills/</code>, <code>.claude/agents/</code></td>
 <td><code>AGENTS.md</code>, <code>.agents/skills/</code></td>
+<td><code>AGENTS.md</code>, <code>.agents/skills/</code>, <code>.opencode/agents/</code></td>
 </tr>
 <tr>
 <td>Setup</td>
 <td><a href="claude-code/">Claude Code</a></td>
 <td><a href="codex/">Codex</a></td>
+<td><a href="opencode/">OpenCode</a></td>
 </tr>
 </tbody>
 </table>
-<p>Both use the same rules and the same skills. See <a href="skills/">Skills and agents</a> for what is included.</p>
+<p>All three use the same rules and the same skills. See <a href="skills/">Skills and agents</a> for what is included.</p>
 
 
 

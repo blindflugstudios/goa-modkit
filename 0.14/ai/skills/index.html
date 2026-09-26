@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://blindflugstudios.github.io/goa-modkit/0.14/ai/skills/">
       
       
-        <link rel="prev" href="../codex/">
+        <link rel="prev" href="../opencode/">
       
       
         <link rel="next" href="../../examples/">
@@ -1851,6 +1851,8 @@
       
         
       
+        
+      
     
     
     
@@ -1968,6 +1970,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../opencode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenCode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -2042,10 +2072,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#agents-claude-code" class="md-nav__link">
+  <a href="#agents-claude-code-and-opencode" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Agents (Claude Code)
+        Agents (Claude Code and OpenCode)
       
     </span>
   </a>
@@ -2144,10 +2174,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#agents-claude-code" class="md-nav__link">
+  <a href="#agents-claude-code-and-opencode" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Agents (Claude Code)
+        Agents (Claude Code and OpenCode)
       
     </span>
   </a>
@@ -2195,8 +2225,8 @@
 skill until your request matches one, then follows it step by step. Every skill that builds
 something ends the same way: run the validator, fix what it reports, copy the mod into the game,
 and tell you how to see it in the game.</p>
-<p>The skills live in <code>.agents/skills/</code> (read by Codex) and are mirrored to <code>.claude/skills/</code> (read
-by Claude Code). They are identical.</p>
+<p>The skills live in <code>.agents/skills/</code> (read by Codex and OpenCode) and are mirrored to
+<code>.claude/skills/</code> (read by Claude Code). They are identical.</p>
 <h2 id="skills">Skills<a class="headerlink" href="#skills" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2269,7 +2299,9 @@ by Claude Code). They are identical.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="agents-claude-code">Agents (Claude Code)<a class="headerlink" href="#agents-claude-code" title="Permanent link">&para;</a></h2>
+<h2 id="agents-claude-code-and-opencode">Agents (Claude Code and OpenCode)<a class="headerlink" href="#agents-claude-code-and-opencode" title="Permanent link">&para;</a></h2>
+<p>In Claude Code, the agent calls these helpers on its own or when you ask. In OpenCode, call them
+with <code>@</code>, for example <code>@mod-reviewer review mods/channel_escort</code>.</p>
 <table>
 <thead>
 <tr>
@@ -2339,7 +2371,7 @@ Code, and try it. Good skills are welcome as a pull request - see
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../codex/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Codex">
+          <a href="../opencode/" class="md-footer__link md-footer__link--prev" aria-label="Previous: OpenCode">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2349,7 +2381,7 @@ Code, and try it. Good skills are welcome as a pull request - see
                 Previous
               </span>
               <div class="md-ellipsis">
-                Codex
+                OpenCode
               </div>
             </div>
           </a>

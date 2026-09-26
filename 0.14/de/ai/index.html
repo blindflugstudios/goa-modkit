@@ -1851,6 +1851,8 @@
       
         
       
+        
+      
     
     
     
@@ -1951,6 +1953,34 @@
     
   
     Codex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="opencode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenCode
   
 
     
@@ -2112,14 +2142,18 @@
 
 <h1 id="ki-agenten">KI-Agenten<a class="headerlink" href="#ki-agenten" title="Permanent link">&para;</a></h1>
 <p>Du kannst jeden Mod auf dieser Seite von Hand bauen. Du musst aber nicht. Dieses Repository ist
-so eingerichtet, dass ein KI-Coding-Agent - <strong>Claude Code</strong> oder <strong>Codex</strong> - Mods für dich bauen
+so eingerichtet, dass ein KI-Coding-Agent - <strong>Claude Code</strong>, <strong>Codex</strong> oder das quelloffene <strong>OpenCode</strong> - Mods für dich bauen
 kann: Du beschreibst die Idee in einfachen Worten, der Agent schreibt die Dateien, prüft sie und
 legt sie in dein Spiel.</p>
 <div class="admonition warning">
-<p class="admonition-title">Das kostet Geld</p>
+<p class="admonition-title">KI-Agenten kosten Geld</p>
 <p>Claude Code braucht ein bezahltes Claude-Abo (Pro oder höher). Codex braucht einen ChatGPT-Tarif,
-in dem es enthalten ist. Alles andere hier ist kostenlos. Wenn du nicht bezahlen willst, bau deinen
-Mod <a href="../start/without-ai/">ohne KI-Agent</a> - der Mission Editor im Spiel ist ein guter Anfang.</p>
+in dem es enthalten ist. <strong>OpenCode</strong> ist Open Source und kostenlos zu installieren, aber das
+KI-Modell dahinter ist nicht immer gratis: Die Gratis-Modelle gibt es nur für begrenzte Zeit,
+sie dürfen deine Eingaben zum Training verwenden und sind deutlich schwächer - für regelmäßige
+Nutzung zahlst du pro Nutzung. Details auf der Seite <a href="opencode/">OpenCode</a>. Alles andere hier
+ist kostenlos. Wenn du gar nicht für eine KI bezahlen willst, bau deinen Mod
+<a href="../start/without-ai/">ohne KI-Agent</a> - der Mission Editor im Spiel ist ein guter Anfang.</p>
 </div>
 <h2 id="why-it-works-well-here">Warum es hier so gut klappt<a class="headerlink" href="#why-it-works-well-here" title="Permanent link">&para;</a></h2>
 <p>Eine allgemeine KI weiß nichts über Ground of Aces. Dieses Repository bringt es ihr bei:</p>
@@ -2151,6 +2185,7 @@ Mod <a href="../start/without-ai/">ohne KI-Agent</a> - der Mission Editor im Spi
 <th></th>
 <th>Claude Code</th>
 <th>Codex</th>
+<th>OpenCode</th>
 </tr>
 </thead>
 <tbody>
@@ -2158,25 +2193,41 @@ Mod <a href="../start/without-ai/">ohne KI-Agent</a> - der Mission Editor im Spi
 <td>Hersteller</td>
 <td>Anthropic</td>
 <td>OpenAI</td>
+<td>ein Open-Source-Projekt (<a href="https://github.com/anomalyco/opencode">anomalyco/opencode</a>)</td>
 </tr>
 <tr>
-<td>Braucht</td>
+<td>Kosten</td>
 <td>Claude Pro oder höher</td>
 <td>einen ChatGPT-Tarif mit Codex</td>
+<td>das Programm ist gratis; das Modell zahlst du pro Nutzung, oder eins der Gratis-Modelle (befristet, darf mit deinen Eingaben trainieren)</td>
+</tr>
+<tr>
+<td>Modell</td>
+<td>Claude</td>
+<td>GPT</td>
+<td>frei wählbar</td>
+</tr>
+<tr>
+<td>Qualität für Mods</td>
+<td>sehr gut</td>
+<td>sehr gut</td>
+<td>hängt vom Modell ab; Gratis-Modelle sind deutlich schwächer</td>
 </tr>
 <tr>
 <td>Liest</td>
 <td><code>CLAUDE.md</code> (die <code>AGENTS.md</code> lädt), <code>.claude/skills/</code>, <code>.claude/agents/</code></td>
 <td><code>AGENTS.md</code>, <code>.agents/skills/</code></td>
+<td><code>AGENTS.md</code>, <code>.agents/skills/</code>, <code>.opencode/agents/</code></td>
 </tr>
 <tr>
 <td>Einrichtung</td>
 <td><a href="claude-code/">Claude Code</a></td>
 <td><a href="codex/">Codex</a></td>
+<td><a href="opencode/">OpenCode</a></td>
 </tr>
 </tbody>
 </table>
-<p>Beide nutzen dieselben Regeln und dieselben Skills. Was alles dabei ist, steht unter <a href="skills/">Skills und Agenten</a>.</p>
+<p>Alle drei nutzen dieselben Regeln und dieselben Skills. Was alles dabei ist, steht unter <a href="skills/">Skills und Agenten</a>.</p>
 
 
 

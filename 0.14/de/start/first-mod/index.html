@@ -859,10 +859,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-codex-instead" class="md-nav__link">
+  <a href="#using-codex-or-opencode-instead" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Codex statt Claude Code
+        Codex oder OpenCode statt Claude Code
       
     </span>
   </a>
@@ -1989,6 +1989,8 @@
       
         
       
+        
+      
     
     
     
@@ -2086,6 +2088,34 @@
     
   
     Codex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/opencode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenCode
   
 
     
@@ -2265,10 +2295,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-codex-instead" class="md-nav__link">
+  <a href="#using-codex-or-opencode-instead" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Codex statt Claude Code
+        Codex oder OpenCode statt Claude Code
       
     </span>
   </a>
@@ -2403,13 +2433,14 @@ claude
 <li>Die Mission taucht nicht auf, die Texte sehen aus wie <code>missions/...</code> oder das Spiel beschwert sich: siehe <a href="../troubleshooting/">Wenn nichts passiert</a>.</li>
 <li>Oder sag dem Agenten einfach: <code>read my Player.log and tell me what went wrong</code>. Er weiß, wo das Spiel auf deinem Computer sein Log schreibt.</li>
 </ul>
-<h2 id="using-codex-instead">Codex statt Claude Code<a class="headerlink" href="#using-codex-instead" title="Permanent link">&para;</a></h2>
-<p>Codex funktioniert genauso. Es liest die Datei <code>AGENTS.md</code> des Kits, in der dieselben Regeln stehen, denen auch die Skills folgen.</p>
+<h2 id="using-codex-or-opencode-instead">Codex oder OpenCode statt Claude Code<a class="headerlink" href="#using-codex-or-opencode-instead" title="Permanent link">&para;</a></h2>
+<p>Beide funktionieren genauso. Sie lesen die Datei <code>AGENTS.md</code> des Kits, in der dieselben Regeln stehen, denen auch die Skills folgen.</p>
 <ol>
-<li>Installier Codex und melde dich an (braucht einen bezahlten ChatGPT-Tarif). Siehe <a href="../../ai/codex/">Codex</a>.</li>
-<li>Im Terminal: mit <code>cd</code> in <code>goa-modkit</code> wechseln, dann <code>codex</code> tippen.</li>
-<li>Füg denselben Prompt ein. Codex baut, prüft und kopiert den Mod. Die Schritte 4 und 5 im Spiel sind dieselben.</li>
+<li>Installieren und anmelden: <a href="../../ai/codex/">Codex</a> (braucht einen bezahlten ChatGPT-Tarif) oder <a href="../../ai/opencode/">OpenCode</a> (Open Source; Modell mit <code>/models</code> wählen).</li>
+<li>Im Terminal: mit <code>cd</code> in <code>goa-modkit</code> wechseln, dann <code>codex</code> oder <code>opencode</code> tippen.</li>
+<li>Füg denselben Prompt ein. Der Agent baut, prüft und kopiert den Mod. Die Schritte 4 und 5 im Spiel sind dieselben.</li>
 </ol>
+<p>Mit einem der Gratis-Modelle von OpenCode klappt eine erste einfache Mission in der Regel, bei größeren Mods gibt es mehr Fehler - lies das Ergebnis und lass <code>@mod-reviewer</code> drüberschauen. Die Gratis-Modelle gibt es nur für begrenzte Zeit, und sie dürfen deine Eingaben zum Training verwenden.</p>
 
 
 

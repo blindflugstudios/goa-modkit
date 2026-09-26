@@ -859,10 +859,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-codex-instead" class="md-nav__link">
+  <a href="#using-codex-or-opencode-instead" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Using Codex instead
+        Using Codex or OpenCode instead
       
     </span>
   </a>
@@ -1989,6 +1989,8 @@
       
         
       
+        
+      
     
     
     
@@ -2086,6 +2088,34 @@
     
   
     Codex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/opencode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenCode
   
 
     
@@ -2265,10 +2295,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-codex-instead" class="md-nav__link">
+  <a href="#using-codex-or-opencode-instead" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Using Codex instead
+        Using Codex or OpenCode instead
       
     </span>
   </a>
@@ -2403,13 +2433,14 @@ claude
 <li>The mission does not show up, the texts look like <code>missions/...</code>, or the game complains: see <a href="../troubleshooting/">When nothing happens</a>.</li>
 <li>Or just tell the agent: <code>read my Player.log and tell me what went wrong</code>. It knows where the game writes its log on your computer.</li>
 </ul>
-<h2 id="using-codex-instead">Using Codex instead<a class="headerlink" href="#using-codex-instead" title="Permanent link">&para;</a></h2>
-<p>Codex works the same way. It reads the kit's <code>AGENTS.md</code>, which holds the same rules the skills follow.</p>
+<h2 id="using-codex-or-opencode-instead">Using Codex or OpenCode instead<a class="headerlink" href="#using-codex-or-opencode-instead" title="Permanent link">&para;</a></h2>
+<p>Both work the same way. They read the kit's <code>AGENTS.md</code>, which holds the same rules the skills follow.</p>
 <ol>
-<li>Install and log in to Codex (needs a paid ChatGPT plan). See <a href="../../ai/codex/">Codex</a>.</li>
-<li>In the terminal: <code>cd</code> into <code>goa-modkit</code>, then type <code>codex</code>.</li>
-<li>Paste the same prompt. Codex builds, validates and copies the mod. Steps 4 and 5 in the game are the same.</li>
+<li>Install and log in: <a href="../../ai/codex/">Codex</a> (needs a paid ChatGPT plan) or <a href="../../ai/opencode/">OpenCode</a> (open source; pick a model with <code>/models</code>).</li>
+<li>In the terminal: <code>cd</code> into <code>goa-modkit</code>, then type <code>codex</code> or <code>opencode</code>.</li>
+<li>Paste the same prompt. The agent builds, validates and copies the mod. Steps 4 and 5 in the game are the same.</li>
 </ol>
+<p>With one of OpenCode's free models, expect a first simple mission to work, but more mistakes on bigger mods - read the result and let <code>@mod-reviewer</code> check it. Free models are only offered for a limited time and may use your prompts for training.</p>
 
 
 
