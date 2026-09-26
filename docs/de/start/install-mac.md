@@ -88,6 +88,12 @@ gh --version
 
 **Claude Code** ist der KI-Agent, der deine Mods schreibt und prüft. Denk dran: Er braucht ein bezahltes Claude-Abo (Pro oder höher). Kein Abo? Spring zu Schritt 6 und nutze später [Ohne KI-Agent](without-ai.md).
 
+!!! tip "Lieber Open Source? OpenCode statt Claude Code"
+    [OpenCode](../ai/opencode.md) ist ein quelloffener Agent, der dieselben Regeln nutzt. Das
+    Programm ist gratis; das KI-Modell dahinter zahlst du pro Nutzung, oder du nimmst eins der
+    wenigen, schwächeren Gratis-Modelle, die es für begrenzte Zeit gibt. Installier ihn statt
+    dieses Schritts mit `brew install anomalyco/tap/opencode` und lies dann die Seite [OpenCode](../ai/opencode.md).
+
 ```bash
 brew install --cask claude-code
 ```

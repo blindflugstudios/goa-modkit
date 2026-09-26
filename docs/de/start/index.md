@@ -8,7 +8,7 @@ Willkommen an der Startbahn. Dieser Abschnitt bringt dich von "Ich habe Ground o
 |---|---|
 | **Noch nie programmiert.** Du hast noch nie ein Terminal geöffnet, und das ist völlig in Ordnung. | [Installation unter Windows](install-windows.md) oder [Installation auf dem Mac](install-mac.md), danach [Dein erster Mod in 10 Minuten](first-mod.md). Lass das [Glossar](glossary.md) in einem zweiten Tab offen. |
 | **Lust, direkt loszulegen.** Du kennst dich mit Dateien und einem Texteditor aus. | [Ohne KI-Agent](without-ai.md): Beispiel kopieren, JSON bearbeiten, prüfen, laden. Danach [So funktionieren Mods](../basics/mods.md). |
-| **Schon Claude oder Codex.** Du hast bereits einen KI-Coding-Agenten. | Klone das Kit (Schritt 3 der Installationsseiten), starte deinen Agenten im Ordner und geh zu [Dein erster Mod in 10 Minuten](first-mod.md). |
+| **Mit KI-Agent.** Claude Code, Codex oder das quelloffene OpenCode. | Klone das Kit (Schritt 3 der Installationsseiten), starte deinen Agenten im Ordner und geh zu [Dein erster Mod in 10 Minuten](first-mod.md). |
 
 ## Zuerst Zugang holen { #get-access-first }
 
@@ -33,7 +33,7 @@ Die Installationsseiten richten diese Werkzeuge für dich ein, einen Befehl nach
 |---|---|---|
 | Git | Lädt das Modkit herunter und hält es aktuell | Ja |
 | GitHub CLI (`gh`) | Meldet dich aus dem Terminal bei GitHub an | Ja |
-| Claude Code | Der KI-Agent, der deinen Mod baut | Ja, für den KI-Weg |
+| Claude Code (oder Codex, oder OpenCode) | Der KI-Agent, der deinen Mod baut | Ja, für den KI-Weg |
 | Python | Startet den Mod-Prüfer (Validator) direkt | Optional, empfohlen |
 
 ## Was es kostet { #what-it-costs }
@@ -43,6 +43,7 @@ Die Installationsseiten richten diese Werkzeuge für dich ein, einen Befehl nach
 
     - **Claude Code** braucht ein bezahltes Claude-Abo (**Pro oder höher**). Im kostenlosen Claude-Tarif ist es nicht enthalten.
     - **Codex** braucht einen bezahlten ChatGPT-Tarif.
+    - **OpenCode** ist Open Source und kostenlos zu installieren, aber **das KI-Modell dahinter ist nicht immer gratis**. Die Gratis-Modelle gibt es nur für begrenzte Zeit, sie dürfen deine Eingaben zum Training verwenden und sind deutlich schwächer als Claude oder GPT - genug für eine erste einfache Mission. Für regelmäßige Nutzung zahlst du pro Nutzung. Siehe [OpenCode](../ai/opencode.md).
 
     Du willst nicht für eine KI bezahlen? Alles funktioniert auch von Hand: siehe [Ohne KI-Agent](without-ai.md). Der **Mission Editor** im Spiel braucht überhaupt keine Werkzeuge.
 

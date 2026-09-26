@@ -28,7 +28,7 @@ Only install a mod that has passed `validate` with 0 errors.
 
 ## 2. Copy (never symlink)
 
-Replace only this one mod's folder, so files deleted in `mods/<mod_id>/` also disappear from the game:
+Replace only this one mod's folder, so files deleted in `mods/<mod_id>/` also disappear from the game. First delete any `__pycache__` folder or `.DS_Store` file inside `mods/<mod_id>/` - they do not belong in a mod:
 
 - Mac/Linux:
   ```bash

@@ -50,11 +50,15 @@ Jedes Fachwort aus diesem Handbuch, in einfacher Sprache.
 
 ## KI-Agenten { #ai-agents }
 
-**Agent** - Ein KI-Programm, das auf deinem Computer Dateien lesen, Dateien schreiben und Befehle ausführen kann, um eine Aufgabe zu erledigen, die du beschreibst. Claude Code und Codex sind Agenten.
+**Agent** - Ein KI-Programm, das auf deinem Computer Dateien lesen, Dateien schreiben und Befehle ausführen kann, um eine Aufgabe zu erledigen, die du beschreibst. Claude Code, Codex und OpenCode sind Agenten.
 
 **Claude Code** - Der Agent von Anthropic, der im Terminal läuft. Braucht ein bezahltes Claude-Abo (Pro oder höher).
 
 **Codex** - Der Agent von OpenAI, der im Terminal läuft. Braucht einen bezahlten ChatGPT-Tarif.
+
+**OpenCode** - Ein quelloffener Agent, der im Terminal läuft. Kostenlos zu installieren; das KI-Modell wählst du selbst, und es kostet meist Geld pro Nutzung. Einige Gratis-Modelle gibt es für begrenzte Zeit.
+
+**Modell** - Die KI, die in einem Agenten die Denkarbeit macht, zum Beispiel Claude oder GPT. Stärkere Modelle machen weniger Fehler; viele kosten Geld pro Nutzung.
 
 **Prompt (für einen Agenten)** - Das, was du dem Agenten schreibst: eine Bitte in ganz normaler Sprache, etwa "Mach mir eine Mission, in der...".
 

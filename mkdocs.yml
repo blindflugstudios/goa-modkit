@@ -111,6 +111,7 @@ plugins:
             Steam Workshop: Steam Workshop
             Claude Code: Claude Code
             Codex: Codex
+            OpenCode: OpenCode
             Skills and agents: Skills und Agenten
 
 # Markdown extensions in use. Keep this list short so the framework can be replaced later:
@@ -172,5 +173,6 @@ nav:
       - ai/index.md
       - Claude Code: ai/claude-code.md
       - Codex: ai/codex.md
+      - OpenCode: ai/opencode.md
       - Skills and agents: ai/skills.md
   - Examples: examples.md

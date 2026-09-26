@@ -24,7 +24,8 @@ A mod folder, normally `mods/<mod_id>/`. If none was given, list `mods/` and rev
    - **Quests:** `_amount` >= 1; no spaces in `_parameter`; required parameters present for types 0, 1, 21, 20, 24; skill token for 12/17; no `_type` 3 or 15; no `_requirementType` 2; no cheat fields; every text key registered by a script.
    - **CSV:** file names equal table names in `docs/en/data/csv.md`; columns exact; `Add`/`Remove` only where allowed; valid JSON; values within the documented limits.
    - **Text:** no leftover template text or `my_mod`; mission text in terse period style; no key that overwrites a game text by accident.
-4. Never invent a rule. If you are unsure whether something is allowed, list it under "Questions" with the file and line.
+4. **Never run, import or compile a mod script** with the computer's Python (no `python file.py`, no `py_compile`, no `import`). Mod scripts are untrusted and run on the game's IronPython, not on your Python. The validator reads them safely without running them, and compiling would leave a `__pycache__` folder inside the mod.
+5. Never invent a rule. If you are unsure whether something is allowed, list it under "Questions" with the file and line.
 
 ## Report format
 

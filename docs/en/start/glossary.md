@@ -50,11 +50,15 @@ Every technical word used in this handbook, in plain language.
 
 ## AI agents
 
-**Agent** - An AI program that can read files, write files and run commands on your computer to finish a task you describe. Claude Code and Codex are agents.
+**Agent** - An AI program that can read files, write files and run commands on your computer to finish a task you describe. Claude Code, Codex and OpenCode are agents.
 
 **Claude Code** - Anthropic's agent that runs in the terminal. Needs a paid Claude subscription (Pro or higher).
 
 **Codex** - OpenAI's agent that runs in the terminal. Needs a paid ChatGPT plan.
+
+**OpenCode** - An open-source agent that runs in the terminal. Free to install; you choose the AI model, which usually costs money per use. A few free models are offered for a limited time.
+
+**Model** - The AI that does the thinking inside an agent, for example Claude or GPT. Stronger models make fewer mistakes; many cost money per use.
 
 **Prompt (for an agent)** - What you type to the agent: a request in plain English, like "make me a mission where...".
 

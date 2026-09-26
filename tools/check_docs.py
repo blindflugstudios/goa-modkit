@@ -16,7 +16,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 EM_DASH = "—"
 
 # Everything a reader or an agent sees.
-EM_DASH_SCOPES = ["docs", "examples", "templates", ".agents", ".claude", "tools", "mods"]
+EM_DASH_SCOPES = ["docs", "examples", "templates", ".agents", ".claude", ".opencode", "tools", "mods"]
 EM_DASH_FILES = ["README.md", "AGENTS.md", "CLAUDE.md", "CONTRIBUTING.md", "TRADEMARKS.md", "mkdocs.yml"]
 TEXT_SUFFIXES = {".md", ".py", ".json", ".yml", ".yaml", ".txt", ".csv"}
 

@@ -28,12 +28,12 @@
 
 - **Never programmed?** Follow [Get started](https://blindflugstudios.github.io/goa-modkit/start/). We install everything step by step, and ten minutes after that your first mod is in the game.
 - **Know your way around files?** Pick one from [`examples/`](examples/), copy its files into `Mods/<your_mod>/Missions/` in the game's data folder, change them, and load your save again from the main menu. [Examples](https://blindflugstudios.github.io/goa-modkit/examples/) explains each one.
-- **Using Claude Code or Codex?**
+- **Using an AI agent?** Claude Code, Codex, or the open-source [OpenCode](https://blindflugstudios.github.io/goa-modkit/ai/opencode/) (free to install; its AI models are mostly paid per use, the few free ones are limited-time and weaker).
 
   ```bash
   gh repo clone blindflugstudios/goa-modkit
   cd goa-modkit
-  claude        # or: codex
+  claude        # or: codex, opencode
   ```
 
   Then say what you want to build. The agent reads [`AGENTS.md`](AGENTS.md) and the skills, writes the mod into `mods/`, checks it and installs it.
@@ -48,7 +48,7 @@
 | [`mods/`](mods/) | Where **your** mods go. Git ignores it, so updating the kit never touches your work |
 | [`tools/validator/`](tools/validator/) | Checks a mod for the mistakes that crash the game, before you start it |
 | [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md) | The rulebook for AI agents |
-| [`.agents/skills/`](.agents/skills/), [`.claude/`](.claude/) | Recipes and helper agents for Codex and Claude Code |
+| [`.agents/skills/`](.agents/skills/), [`.claude/`](.claude/), [`.opencode/`](.opencode/) | Recipes and helper agents for Claude Code, Codex and OpenCode |
 | [`generated/`](generated/) | Reference data exported from the game (ids, events, locations) |
 
 ## Keep it up to date

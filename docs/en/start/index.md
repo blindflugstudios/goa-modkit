@@ -8,7 +8,7 @@ Welcome to the flight line. This section takes you from "I own Ground of Aces on
 |---|---|
 | **Never programmed.** You have never opened a terminal and that is fine. | [Install on Windows](install-windows.md) or [Install on Mac](install-mac.md), then [Your first mod in 10 minutes](first-mod.md). Keep the [Glossary](glossary.md) open in a second tab. |
 | **Want to dive in.** You know your way around files and a text editor. | [Without an AI agent](without-ai.md): copy an example, edit the JSON, validate, load it. Then [How mods work](../basics/mods.md). |
-| **Using Claude or Codex.** You already have an AI coding agent. | Clone the kit (step 3 of the install pages), start your agent in the folder, and go to [Your first mod in 10 minutes](first-mod.md). |
+| **Using an AI agent.** Claude Code, Codex or the open-source OpenCode. | Clone the kit (step 3 of the install pages), start your agent in the folder, and go to [Your first mod in 10 minutes](first-mod.md). |
 
 ## Get access first
 
@@ -33,7 +33,7 @@ The install pages set up these tools for you, one command at a time:
 |---|---|---|
 | Git | Downloads the modkit and keeps it up to date | Yes |
 | GitHub CLI (`gh`) | Logs you in to GitHub from the terminal | Yes |
-| Claude Code | The AI agent that builds your mod | Yes, for the AI route |
+| Claude Code (or Codex, or OpenCode) | The AI agent that builds your mod | Yes, for the AI route |
 | Python | Runs the mod checker (validator) directly | Optional, recommended |
 
 ## What it costs
@@ -43,6 +43,7 @@ The install pages set up these tools for you, one command at a time:
 
     - **Claude Code** needs a paid Claude subscription (**Pro or higher**). The free Claude plan does not include it.
     - **Codex** needs a paid ChatGPT plan.
+    - **OpenCode** is open source and free to install, but **the AI model behind it is not always free**. Its free models are offered for a limited time, may use your prompts for training and are clearly weaker than Claude or GPT - enough for a first simple mission. For steady use you pay per use. See [OpenCode](../ai/opencode.md).
 
     Don't want to pay for an AI? Everything also works by hand: see [Without an AI agent](without-ai.md). The in-game **Mission Editor** needs no tools at all.
 

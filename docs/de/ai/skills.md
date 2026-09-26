@@ -5,8 +5,8 @@ kurze Beschreibung, bis deine Bitte zu einem passt, und folgt ihm dann Schritt f
 der etwas baut, endet gleich: Validator laufen lassen, Gemeldetes beheben, Mod ins Spiel kopieren und
 dir sagen, wie du ihn im Spiel zu sehen bekommst.
 
-Die Skills liegen in `.agents/skills/` (liest Codex) und werden nach `.claude/skills/` gespiegelt (liest
-Claude Code). Sie sind identisch.
+Die Skills liegen in `.agents/skills/` (lesen Codex und OpenCode) und werden nach `.claude/skills/`
+gespiegelt (liest Claude Code). Sie sind identisch.
 
 ## Skills
 
@@ -25,7 +25,10 @@ Claude Code). Sie sind identisch.
 | `read-log` | "Irgendwas stimmt nicht, schau ins Log" | Liest dein `Player.log` und erklärt, was schiefgegangen ist |
 | `update-kit` | "Aktualisier das Kit" | Holt die neuesten Regeln, Doku und Skills und sagt dir, was sich geändert hat |
 
-## Agenten (Claude Code) { #agents-claude-code }
+## Agenten (Claude Code und OpenCode) { #agents-claude-code-and-opencode }
+
+In Claude Code ruft der Agent diese Helfer selbst oder auf deinen Wunsch auf. In OpenCode rufst du
+sie mit `@` auf, zum Beispiel `@mod-reviewer review mods/channel_escort`.
 
 | Agent | Was er tut |
 |---|---|

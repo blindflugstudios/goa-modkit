@@ -111,10 +111,12 @@ Der Agent bearbeitet, prüft und kopiert den Mod erneut. Dann im Spiel: **Einste
 - Die Mission taucht nicht auf, die Texte sehen aus wie `missions/...` oder das Spiel beschwert sich: siehe [Wenn nichts passiert](troubleshooting.md).
 - Oder sag dem Agenten einfach: `read my Player.log and tell me what went wrong`. Er weiß, wo das Spiel auf deinem Computer sein Log schreibt.
 
-## Codex statt Claude Code { #using-codex-instead }
+## Codex oder OpenCode statt Claude Code { #using-codex-or-opencode-instead }
 
-Codex funktioniert genauso. Es liest die Datei `AGENTS.md` des Kits, in der dieselben Regeln stehen, denen auch die Skills folgen.
+Beide funktionieren genauso. Sie lesen die Datei `AGENTS.md` des Kits, in der dieselben Regeln stehen, denen auch die Skills folgen.
 
-1. Installier Codex und melde dich an (braucht einen bezahlten ChatGPT-Tarif). Siehe [Codex](../ai/codex.md).
-2. Im Terminal: mit `cd` in `goa-modkit` wechseln, dann `codex` tippen.
-3. Füg denselben Prompt ein. Codex baut, prüft und kopiert den Mod. Die Schritte 4 und 5 im Spiel sind dieselben.
+1. Installieren und anmelden: [Codex](../ai/codex.md) (braucht einen bezahlten ChatGPT-Tarif) oder [OpenCode](../ai/opencode.md) (Open Source; Modell mit `/models` wählen).
+2. Im Terminal: mit `cd` in `goa-modkit` wechseln, dann `codex` oder `opencode` tippen.
+3. Füg denselben Prompt ein. Der Agent baut, prüft und kopiert den Mod. Die Schritte 4 und 5 im Spiel sind dieselben.
+
+Mit einem der Gratis-Modelle von OpenCode klappt eine erste einfache Mission in der Regel, bei größeren Mods gibt es mehr Fehler - lies das Ergebnis und lass `@mod-reviewer` drüberschauen. Die Gratis-Modelle gibt es nur für begrenzte Zeit, und sie dürfen deine Eingaben zum Training verwenden.

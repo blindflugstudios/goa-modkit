@@ -5,8 +5,8 @@ skill until your request matches one, then follows it step by step. Every skill 
 something ends the same way: run the validator, fix what it reports, copy the mod into the game,
 and tell you how to see it in the game.
 
-The skills live in `.agents/skills/` (read by Codex) and are mirrored to `.claude/skills/` (read
-by Claude Code). They are identical.
+The skills live in `.agents/skills/` (read by Codex and OpenCode) and are mirrored to
+`.claude/skills/` (read by Claude Code). They are identical.
 
 ## Skills
 
@@ -25,7 +25,10 @@ by Claude Code). They are identical.
 | `read-log` | "Something is wrong, look at the log" | Reads your `Player.log` and explains what failed |
 | `update-kit` | "Update the kit" | Pulls the newest rules, docs and skills, and tells you what changed |
 
-## Agents (Claude Code)
+## Agents (Claude Code and OpenCode)
+
+In Claude Code, the agent calls these helpers on its own or when you ask. In OpenCode, call them
+with `@`, for example `@mod-reviewer review mods/channel_escort`.
 
 | Agent | What it does |
 |---|---|

@@ -111,10 +111,12 @@ The agent edits, checks and copies the mod again. Then in the game: **Options â†
 - The mission does not show up, the texts look like `missions/...`, or the game complains: see [When nothing happens](troubleshooting.md).
 - Or just tell the agent: `read my Player.log and tell me what went wrong`. It knows where the game writes its log on your computer.
 
-## Using Codex instead
+## Using Codex or OpenCode instead
 
-Codex works the same way. It reads the kit's `AGENTS.md`, which holds the same rules the skills follow.
+Both work the same way. They read the kit's `AGENTS.md`, which holds the same rules the skills follow.
 
-1. Install and log in to Codex (needs a paid ChatGPT plan). See [Codex](../ai/codex.md).
-2. In the terminal: `cd` into `goa-modkit`, then type `codex`.
-3. Paste the same prompt. Codex builds, validates and copies the mod. Steps 4 and 5 in the game are the same.
+1. Install and log in: [Codex](../ai/codex.md) (needs a paid ChatGPT plan) or [OpenCode](../ai/opencode.md) (open source; pick a model with `/models`).
+2. In the terminal: `cd` into `goa-modkit`, then type `codex` or `opencode`.
+3. Paste the same prompt. The agent builds, validates and copies the mod. Steps 4 and 5 in the game are the same.
+
+With one of OpenCode's free models, expect a first simple mission to work, but more mistakes on bigger mods - read the result and let `@mod-reviewer` check it. Free models are only offered for a limited time and may use your prompts for training.

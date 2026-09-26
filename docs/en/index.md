@@ -34,8 +34,8 @@ You know your way around files and folders. Copy an example, change it, reload -
 </a>
 
 <a class="door" href="ai/">
-<strong>I use Claude Code or Codex</strong>
-Clone this repository, start your agent in it, and describe the mod you want. The agent knows the rules.
+<strong>I use an AI agent</strong>
+Claude Code, Codex or the open-source OpenCode: clone this repository, start your agent in it, and describe the mod you want. The agent knows the rules.
 </a>
 
 </div>

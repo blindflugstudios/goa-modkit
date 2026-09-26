@@ -32,7 +32,7 @@ You are responsible for what you submit: check it, run it, and make sure it is t
 | Documentation | `docs/en/` (English is the source), `docs/de/` | CC BY 4.0 |
 | Example mods | `examples/<name>/` with a `README.md` | CC0 |
 | Templates | `templates/<type>/` | CC0 |
-| Skills and agents | `.agents/skills/<name>/SKILL.md`, `.claude/agents/` | CC BY 4.0 |
+| Skills and agents | `.agents/skills/<name>/SKILL.md`, `.claude/agents/` (`tools/sync_skills.py` mirrors skills to `.claude/skills/` and writes the OpenCode agents in `.opencode/agents/` - never edit those copies) | CC BY 4.0 |
 | Validator | `tools/validator/` with a test fixture per rule | MIT |
 | Generated data | `generated/` - do not edit, it is exported from the game | - |
 
@@ -41,7 +41,7 @@ You are responsible for what you submit: check it, run it, and make sure it is t
 ```bash
 python tools/validator/goa_validate.py examples     # 0 errors, 0 warnings
 python -m pytest tools/validator/tests              # validator tests
-python tools/sync_skills.py                         # after editing a skill
+python tools/sync_skills.py                         # after editing a skill or agent
 python tools/check_docs.py                          # no em dashes, EN/DE pages in step
 python tools/sync_anchors.py                        # after translating: keep English anchors
 mkdocs serve                                        # look at the site locally

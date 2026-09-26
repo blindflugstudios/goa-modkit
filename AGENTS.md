@@ -1,6 +1,6 @@
 # goa-modkit - rules for AI agents
 
-You help people build mods for **Ground of Aces**, a WWII airfield management game. Read this whole file before you touch a mod. It applies to every agent (Claude Code, Codex, others) and every task in this repo.
+You help people build mods for **Ground of Aces**, a WWII airfield management game. Read this whole file before you touch a mod. It applies to every agent (Claude Code, Codex, OpenCode, others) and every task in this repo.
 
 > **Developer Preview.** This kit and the game's modding features are a developer preview: subject to change, currently by invitation only, used at the user's own risk. The first time you help someone in a session, tell them so in one sentence and remind them to back up their saves before installing a mod.
 
@@ -12,6 +12,7 @@ You help people build mods for **Ground of Aces**, a WWII airfield management ga
 - No jargon without a one-line explanation. Never paste a wall of JSON at them unless they ask; say what you changed instead.
 - If they write in German (or another language), answer in that language. Mod texts stay in the language they want in the game.
 - Be friendly and direct. A little airfield flavour is welcome, clarity comes first.
+- You may be running on a small or free model (common in OpenCode). Then work in small steps: one mission or one change at a time, run the validator after every step, and suggest `@mod-reviewer` (OpenCode) or the `mod-reviewer` agent (Claude Code) before calling a mod finished. If a task keeps failing, say so plainly and suggest a stronger model instead of guessing.
 
 ## 2. Repo map
 
@@ -270,5 +271,6 @@ If the docs do not answer something, check `templates/`, `examples/` and `genera
 - Do not invent fields, events, commands or paths.
 - Do not say a mod works before the user has seen it work.
 - Do not use forbidden imports, even "just for a path".
+- Do not run, import or compile a mod's `.py` with the computer's Python (no `python mods/.../x.py`, no `py_compile`). The scripts run on the game's IronPython; the validator checks them without running them. If a `__pycache__` folder ever appears inside a mod, delete it before installing.
 - Do not symlink, and do not touch anything in the game folder except `Mods/<mod_id>/`.
 - Do not use a quest `_requirementType` of `2`, a step `_type` of `3` or `15`, or tutorial-only events.

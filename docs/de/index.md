@@ -35,8 +35,8 @@ Du kennst dich mit Dateien und Ordnern aus. Beispiel kopieren, ändern, neu lade
 </a>
 
 <a class="door" href="ai/">
-<strong>Ich nutze Claude Code oder Codex</strong>
-Klone dieses Repository, starte deinen Agenten darin und beschreib den Mod, den du willst. Der Agent kennt die Regeln.
+<strong>Ich nutze einen KI-Agenten</strong>
+Claude Code, Codex oder das quelloffene OpenCode: Klone dieses Repository, starte deinen Agenten darin und beschreib den Mod, den du willst. Der Agent kennt die Regeln.
 </a>
 
 </div>
