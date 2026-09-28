@@ -1578,8 +1578,6 @@
       
         
       
-        
-      
     
     
     
@@ -1668,34 +1666,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -2307,12 +2277,14 @@
 </table>
 <p>Dieser dritte Ordner gewinnt immer. Das macht ihn zu einem guten Ort, um Änderungen auszuprobieren - und zu einem Ort, den du leeren solltest, wenn eine deiner Missionen die Kopie in deinem Mod-Ordner scheinbar ignoriert.</p>
 <h2 id="the-mission-editor">Der Mission Editor<a class="headerlink" href="#the-mission-editor" title="Permanent link">&para;</a></h2>
-<p>Starte das Spiel und wähle im Hauptmenü <strong>Mission Editor</strong>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Der Editor öffnet immer eine einzige Arbeitsmission namens <code>new_mission</code>. Hast du eine unter dieser Id gespeichert, lädt er sie, sonst beginnt er eine neue. Benenne sie vor dem Speichern im Feld <strong>Mission Id</strong> um, dann beginnt der nächste Besuch mit einer frischen <code>new_mission</code>. So kannst du eine Mission nach der anderen schreiben.</p>
-<p>Einen Missions-Browser gibt es noch nicht. Der Editor kann also weder eine mitgelieferte Mission öffnen noch eine, die du umbenannt und gespeichert hast, wieder aufrufen. Um an einer gespeicherten Mission weiterzuarbeiten, bearbeite ihre <code>.json</code> im Missions-Ordner oben oder fang mit einer Kopie neu an.</p>
-</div>
+<p>Starte das Spiel und wähle im Hauptmenü <strong>Mission Editor</strong>. Das öffnet die Missionsliste: jede mitgelieferte Mission, jede Mission aus einem aktivierten Mod und jede Mission, die du selbst gespeichert hast. <strong>Create</strong> beginnt eine neue Mission mit der Id <code>new_mission</code> - benenne sie vor dem Speichern im Feld <strong>Mission Id</strong> um. <strong>Edit</strong> öffnet jede Mission aus der Liste, auch mitgelieferte. Eine mitgelieferte Mission lässt sich nicht unter ihrer eigenen Id speichern; gib ihr also eine neue Id, dann wird sie als deine eigene Kopie gespeichert. Deine eigenen gespeicherten Missionen haben einen Löschen-Knopf, und <strong>Refresh</strong> liest die Liste neu ein.</p>
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
+!!! note
+    Der Editor öffnet immer eine einzige Arbeitsmission namens `new_mission`. Hast du eine unter dieser Id gespeichert, lädt er sie, sonst beginnt er eine neue. Benenne sie vor dem Speichern im Feld **Mission Id** um, dann beginnt der nächste Besuch mit einer frischen `new_mission`. So kannst du eine Mission nach der anderen schreiben.
+
+    Einen Missions-Browser gibt es noch nicht. Der Editor kann also weder eine mitgelieferte Mission öffnen noch eine, die du umbenannt und gespeichert hast, wieder aufrufen. Um an einer gespeicherten Mission weiterzuarbeiten, bearbeite ihre `.json` im Missions-Ordner oben oder fang mit einer Kopie neu an.
+-->
+
 <h3 id="what-you-fill-in">Was du ausfüllst<a class="headerlink" href="#what-you-fill-in" title="Permanent link">&para;</a></h3>
 <p><strong>Identität.</strong> Die Missions-Id und die Tags, die entscheiden, auf welchen Karten die Mission erscheinen kann. Eine Id darf nur Kleinbuchstaben, Ziffern und Unterstriche enthalten.</p>
 <p><strong>Tags.</strong> Tags sind frei wählbare Etiketten, keine Kartennamen. Eine Karte listet die Tags, die sie unterstützt, in ihrer <code>Metadata.json</code> (das Feld <code>_tags</code> in der <code>.goamap</code>-Datei). Eine Mission listet die Tags, für die sie geschrieben ist (das Feld <code>_tags</code> im Missions-JSON). Die Mission kann nur auf dieser Karte auftauchen, wenn beide Listen mindestens einen Tag gemeinsam haben. Mehrere Tags an einer Mission bedeuten "einer davon" - ein Treffer genügt.</p>
@@ -2324,13 +2296,13 @@
 </div>
 <p><strong>Validate</strong> warnt dich, wenn eine Mission einen Tag trägt, den keine bekannte Karte angibt. Eine solche Mission kann nirgends erscheinen - das willst du nur, wenn ein Skript sie direkt vergibt.</p>
 <p><strong>Zeit und Größe.</strong> Wie viele Flugzeuge der Spieler schicken darf, wie lange die Mission auf der Karte wartet, bevor sie verfällt, und wie lange der Flug selbst dauert. Beide Zeiten sind Bereiche - das Spiel würfelt einen Wert zwischen den beiden Zahlen.</p>
-<p><strong>Schwierigkeit.</strong> Die Chance, dass die Mission nach Plan läuft, eine Schwierigkeitsstufe von 1 bis 3 und die Feindstärke, die der Aufklärungsbericht dem Spieler zeigt.</p>
-<p><strong>Text.</strong> Missionsname und Beschreibung, der Bedrohungsbericht der Aufklärung und die Funksprüche für jedes Ende. Tipp sie einfach direkt ein. Eine im Editor geschriebene Mission braucht kein Skript, denn jede Mission ohne eigenes Skript läuft mit dem gemeinsamen Standard-Missionsskript des Spiels.</p>
+<p><strong>Schwierigkeit.</strong> Die Chance, dass die Mission nach Plan läuft, und eine Schwierigkeitsstufe von 1 bis 3.</p>
+<p><strong>Text.</strong> Missionsname und Beschreibung, der Bedrohungsbericht der Aufklärung mit der Feindstärke, die er dem Spieler zeigt (reine Atmosphäre - sie beeinflusst das Ergebnis nicht), und die Funksprüche für jedes Ende. Tipp sie einfach direkt ein. Eine im Editor geschriebene Mission braucht kein Skript, denn jede Mission ohne eigenes Skript läuft mit dem gemeinsamen Standard-Missionsskript des Spiels.</p>
 <p><strong>Orte.</strong> Wo auf der Kriegskarte die Mission erscheinen kann. Wähle aus der Liste und füge so viele hinzu, wie du willst; das Spiel sucht einen aus, wenn die Mission erstellt wird. Die vollständige Liste mit Koordinaten steht unter <a href="locations/">Orte</a>.</p>
 <p><strong>Voraussetzungen.</strong> Bedingungen, die erfüllt sein müssen, bevor die Mission überhaupt auftaucht - eine Startbahnstufe, ein Datumsfenster oder eine andere abgeschlossene Mission.</p>
 <p><strong>Werte.</strong> Die Fähigkeiten, gegen die die Mission würfelt. Du brauchst genau zwei: Die erste zählt, wenn der Flug nach Plan läuft, die zweite, wenn nicht.</p>
-<p><strong>Ergebnisse.</strong> Genau vier Enden und was jedes davon bringt oder kostet - Moral, Siegpunkte, Schaden.</p>
-<p><strong>Historischer Tag.</strong> Setz hier einen Haken, damit die Mission Teil der Geschichte wird: Sie erscheint an oder nach einem Datum deiner Wahl, belegt einen festen Platz, wenn sie fällig ist, und verschwindet für immer, sobald sie erfolgreich war.</p>
+<p><strong>Ergebnisse.</strong> Genau vier Enden und was jedes davon bringt oder kostet - Moral, Siegpunkte, Schaden. Welches Ende als Erfolg zählt, ist durch seine Position festgelegt und lässt sich nicht ändern: Platz 1 (schiefgelaufen, Fähigkeitswurf gescheitert) ist ein Fehlschlag, Platz 2 (schiefgelaufen, Fähigkeitswurf bestanden) ein Erfolg, Platz 3 (nach Plan, Fähigkeitswurf gescheitert) ein Fehlschlag, Platz 4 (nach Plan, Fähigkeitswurf bestanden) ein Erfolg.</p>
+<p><strong>Is Historic.</strong> Setz hier einen Haken, damit die Mission Teil der Geschichte wird. Mit Datum erscheint sie genau an diesem Tag; ohne Datum erscheint sie zusammen mit der nächsten Wochenmission und belegt keinen der Plätze dieser Woche. Sobald sie erfolgreich war, verschwindet sie für immer.</p>
 <h3 id="validate-before-you-save">Vor dem Speichern prüfen<a class="headerlink" href="#validate-before-you-save" title="Permanent link">&para;</a></h3>
 <p><strong>Validate</strong> listet alles auf, was es finden kann. <strong>Save</strong> macht dieselbe Prüfung und verweigert das Speichern, wenn etwas ein Fehler ist.</p>
 <p><strong>Fehler verhindern das Speichern:</strong></p>
@@ -2395,7 +2367,7 @@
 <tbody>
 <tr>
 <td>Keine Orte</td>
-<td>die Mission kann nie auf der Karte platziert werden</td>
+<td>das Spiel setzt die Mission an einen zufälligen Ort aus der mitgelieferten Liste</td>
 </tr>
 <tr>
 <td>Doppelte Ortsnamen</td>
@@ -2418,8 +2390,8 @@
 <td>die Mission bleibt für immer auf der Karte</td>
 </tr>
 <tr>
-<td>Ein unbrauchbarer historischer Tag</td>
-<td>das Datum ist fehlerhaft, leer oder unplausibel früh, die Mission hat also gar kein frühestes Datum</td>
+<td>Is Historic ist angehakt, aber das Datum ist leer, unmöglich oder vor 1900</td>
+<td>die Mission verhält sich wie eine historische Mission ohne Datum - in Ordnung, wenn du das so wolltest</td>
 </tr>
 <tr>
 <td>Ein Wert, dessen Minimum über dem Maximum liegt</td>
@@ -2441,11 +2413,16 @@
 </table>
 <p>Die Warnung über fehlenden Text erscheint nicht bei mitgelieferten Missionen, denn die tragen übersetzte Texte statt im Editor eingetippter.</p>
 <h3 id="what-the-editor-cannot-do">Was der Editor nicht kann<a class="headerlink" href="#what-the-editor-cannot-do" title="Permanent link">&para;</a></h3>
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
+- Eine mitgelieferte Mission öffnen oder kopieren.
+-->
 <ul>
-<li>Eine mitgelieferte Mission öffnen oder kopieren.</li>
 <li>Die Python-Seite schreiben. Alles, was etwas <em>entscheiden</em> muss - auf die geflogene Crew reagieren, eine Folgemission vergeben, den Text je nach Geschehen ändern -, braucht ein Skript.</li>
-<li>Eine Kette über eine einzelne Voraussetzung "diese Mission muss abgeschlossen sein" hinaus bauen. Längere Ketten sind in den Dateien leichter zu überblicken und zu pflegen. Siehe <a href="chains/">Ketten und Kampagnen</a>.</li>
 </ul>
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
+- Eine Kette über eine einzelne Voraussetzung "diese Mission muss abgeschlossen sein" hinaus bauen. Längere Ketten sind in den Dateien leichter zu überblicken und zu pflegen. Siehe [Ketten und Kampagnen](chains.md).
+-->
+
 <p>Für all das öffnest du die Missionsdatei in einem Texteditor, direkt aus dem Dateibrowser.</p>
 <h2 id="json-and-python">JSON und Python<a class="headerlink" href="#json-and-python" title="Permanent link">&para;</a></h2>
 <p>Eine Mission ist eine <code>.json</code>-Datei mit den Zahlen und optional eine gleichnamige <code>.py</code>-Datei mit dem Text und etwaiger Logik. Der Dateiname ist die Missions-Id. Beide kommen in den Ordner <code>Missions/</code> deines Mods (oder, solange du ausprobierst, in deinen eigenen <code>Missions</code>-Ordner von oben).</p>
@@ -2461,7 +2438,7 @@
 <li><strong>Mindestens zwei Missionswerte.</strong> Der erste zählt, wenn die Mission nach Plan läuft, der zweite, wenn nicht. Ein einziger Eintrag lässt den Fähigkeitswurf abstürzen.</li>
 <li><strong>Stell deinen Ids den Namen deines Mods voran.</strong> Eine doppelte Id ersetzt stillschweigend die Mission, die sie dupliziert, und welche gewinnt, hängt von der Ladereihenfolge ab.</li>
 </ul>
-<p>Der <strong>Validate</strong>-Knopf des Mission Editors fängt alle drei ab, bevor du überhaupt startest. Jedes Feld des JSON ist unter <a href="reference/">Referenz</a> beschrieben, und vollständige, funktionierende Missionen findest du unter <a href="../examples/">Beispiele</a>.</p>
+<p>Der <strong>Validate</strong>-Knopf des Mission Editors fängt die ersten beiden ab, dazu eine Kollision mit der Id einer mitgelieferten Mission, bevor du überhaupt startest. Eine Kollision mit der Id eines anderen Mods oder des Supporter Packs sieht er nicht. Jedes Feld des JSON ist unter <a href="reference/">Referenz</a> beschrieben, und vollständige, funktionierende Missionen findest du unter <a href="../examples/">Beispiele</a>.</p>
 <h3 id="the-two-modes">Die zwei Modi<a class="headerlink" href="#the-two-modes" title="Permanent link">&para;</a></h3>
 <p>Wie viel vom Skript das Spiel nutzt, hängt davon ab, ob neben der Mission eine <code>.json</code> liegt.</p>
 <ul>
@@ -2470,7 +2447,7 @@
 </ul>
 <p>Das ist mit Abstand die häufigste Quelle für Verwirrung: Ein Handler, der in einer reinen Skript-Mission perfekt funktioniert, wird einfach ignoriert, sobald du eine <code>.json</code> hinzufügst.</p>
 <h3 id="mission-event-handlers">Missions-Event-Handler<a class="headerlink" href="#mission-event-handlers" title="Permanent link">&para;</a></h3>
-<p>Ein Handler ist eine Python-Funktion, die das Spiel zu einem bestimmten Zeitpunkt im Leben der Mission aufruft. Jeder Name unten verlinkt auf seine vollständige Beschreibung unter <a href="reference/">Referenz</a>.</p>
+<p>Ein Handler ist eine Python-Funktion, die das Spiel zu einem bestimmten Zeitpunkt im Leben der Mission aufruft. Jeder Name unten verlinkt auf seine vollständige Beschreibung unter <a href="reference/">Referenz</a>. Wo der Event-String vom Handlernamen abweicht, steht er in Klammern.</p>
 <table>
 <thead>
 <tr>
@@ -2483,7 +2460,7 @@
 <tr>
 <td><a href="reference/#get_mission_id"><code>get_mission_id</code></a></td>
 <td>die Kennung der Mission</td>
-<td><strong>immer</strong> - Pflicht</td>
+<td>immer - <strong>Pflicht bei einer Mission ohne JSON</strong>, sonst vom Standardskript übernommen</td>
 </tr>
 <tr>
 <td><a href="reference/#initialize_mission"><code>initialize_mission</code></a></td>
@@ -2501,13 +2478,13 @@
 <td>immer</td>
 </tr>
 <tr>
-<td><a href="reference/#send_mission_result_text"><code>send_mission_result_text</code></a></td>
-<td>der Text, der beim Ende der Mission erscheint</td>
-<td>immer</td>
+<td><a href="reference/#send_mission_result_event"><code>send_mission_result_event</code></a> (<code>send_mission_result_text</code>)</td>
+<td>reagieren, wenn die Mission endet</td>
+<td>immer, außer bei Abbruch</td>
 </tr>
 <tr>
-<td><a href="reference/#send_mission_cancelled_text"><code>send_mission_cancelled_text</code></a></td>
-<td>der Text, der erscheint, wenn der Spieler abbricht</td>
+<td><a href="reference/#send_mission_cancelled_event"><code>send_mission_cancelled_event</code></a> (<code>send_mission_cancelled_text</code>)</td>
+<td>reagieren, wenn der Spieler abbricht oder die Mission verfällt</td>
 <td>immer</td>
 </tr>
 <tr>
@@ -2558,7 +2535,7 @@
 <tr>
 <td><a href="reference/#get_mission_result"><code>get_mission_result</code></a></td>
 <td>ob die Mission erfolgreich war</td>
-<td>reine Skript-Missionen</td>
+<td>reine Skript-Missionen - dort <strong>Pflicht</strong></td>
 </tr>
 </tbody>
 </table>

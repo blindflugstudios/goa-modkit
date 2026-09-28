@@ -1680,8 +1680,6 @@
       
         
       
-        
-      
     
     
     
@@ -1770,34 +1768,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -2269,7 +2239,7 @@
 <h2 id="first-always">Immer zuerst<a class="headerlink" href="#first-always" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Lass den Validator</strong> über deinen Mod laufen. Er findet die meisten der Probleme unten, bevor das Spiel sie überhaupt zu sehen bekommt. Bitte den Agenten <code>validate my mod</code> oder siehe <a href="../without-ai/#4-check-it-with-the-validator">Ohne KI-Agent</a>.</li>
-<li><strong>Richtig neu laden</strong>: <strong>Einstellungen</strong> (Options) <strong>→ Verlassen zum Hauptmenü</strong> (Quit to main menu), <strong>Mods</strong> öffnen, dann den Spielstand laden. Im Zweifel das Spiel neu starten.</li>
+<li><strong>Richtig neu laden</strong>: <strong>Einstellungen</strong> (Options) <strong>→ Verlassen zum Hauptmenü</strong> (Quit to main menu), dann den Spielstand laden. Hast du einen neuen Mod-Ordner (oder einen neuen Inhaltsordner wie <code>Quests/</code>) angelegt, öffne vorher <strong>Mods</strong> und drück auf <strong>Refresh</strong>. Im Zweifel das Spiel neu starten.</li>
 </ol>
 <h2 id="symptom-cause-fix">Symptom, Ursache, Lösung<a class="headerlink" href="#symptom-cause-fix" title="Permanent link">&para;</a></h2>
 <table>
@@ -2353,8 +2323,8 @@
 </tr>
 <tr>
 <td><strong>Meine neue oder geänderte Quest taucht nicht auf</strong></td>
-<td>Quests werden bei jedem Laden eines Spielstands eingelesen, ein ganz neuer <code>Quests/</code>-Ordner wird aber erst bemerkt, wenn das Mods-Fenster neu einliest.</td>
-<td><strong>Einstellungen → Verlassen zum Hauptmenü</strong>, <strong>Mods</strong> öffnen (oder <strong>Refresh</strong> drücken), dann den Spielstand laden.</td>
+<td>Quests werden bei jedem Laden eines Spielstands eingelesen, ein ganz neuer <code>Quests/</code>-Ordner wird aber erst bemerkt, wenn du im Mods-Fenster auf <strong>Refresh</strong> drückst (oder das Spiel neu startest).</td>
+<td><strong>Einstellungen → Verlassen zum Hauptmenü</strong>, <strong>Mods</strong> öffnen und <strong>Refresh</strong> drücken, dann den Spielstand laden.</td>
 </tr>
 <tr>
 <td><strong>Meine CSV-Änderungen greifen nicht</strong></td>
@@ -2369,7 +2339,7 @@
 </tbody>
 </table>
 <h2 id="find-the-playerlog">Das Player.log finden<a class="headerlink" href="#find-the-playerlog" title="Permanent link">&para;</a></h2>
-<p>Das Spiel schreibt alles, was es tut, samt jedem Fehler, in eine Textdatei namens <code>Player.log</code>. Sie wird bei jedem Spielstart neu geschrieben, der vorherige Durchlauf bleibt als <code>Player-prev.log</code> erhalten. Schau direkt nach dem Problem hinein, bevor du das Spiel neu startest.</p>
+<p>Das Spiel schreibt seine Fehler in eine Textdatei namens <code>Player.log</code>. (Die ausführlichen <code>[Mod ...]</code>-Zeilen zu allem, was es lädt, erscheinen nur in Entwicklungs-Builds; das veröffentlichte Spiel schreibt nur Fehler ins Log.) Sie wird bei jedem Spielstart neu geschrieben, der vorherige Durchlauf bleibt als <code>Player-prev.log</code> erhalten. Schau direkt nach dem Problem hinein, bevor du das Spiel neu startest.</p>
 <table>
 <thead>
 <tr>

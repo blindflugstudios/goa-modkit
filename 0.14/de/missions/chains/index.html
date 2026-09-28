@@ -1725,8 +1725,6 @@
       
         
       
-        
-      
     
     
     
@@ -1815,34 +1813,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -2389,12 +2359,12 @@
 </tr>
 <tr>
 <td><code>"mymod_convoy_spotted,cancelled"</code></td>
-<td>vom Spieler abgebrochen</td>
+<td>vom Spieler abgebrochen oder verfallen</td>
 </tr>
 </tbody>
 </table>
 <p><code>cancelled</code> ist ein eigener Ausgang: Eine Mission, die der Spieler abgebrochen hat, zählt nicht als Fehlschlag.</p>
-<p>"Erfolg" heißt, dass der Ausgang, den die Würfel gewählt haben, im JSON <code>"_missionSuccess": true</code> hat. Das ist nicht dasselbe wie der Fertigkeitswurf: Ausgang-Index 1 (schiefgelaufen, Fertigkeit bestanden) kann ein Erfolg sein, wenn du ihn so markierst. Genau das lässt eine gerettete Mission anders wirken als eine glatte.</p>
+<p>"Erfolg" hängt von der Position des Ausgangs ab, den die Würfel gewählt haben: Index 1 (schiefgelaufen, Fertigkeit bestanden) und Index 3 (wie geplant, Fertigkeit bestanden) zählen als Erfolg, Index 0 und 2 als Fehlschlag.</p>
 <p>Das Spiel merkt sich jeden Abschluss für die ganze Kampagne. Ein Spieler, der eine Mission verloren und später gewonnen hat, erfüllt sowohl <code>,failure</code> als auch <code>,success</code>.</p>
 <h2 id="branching">Verzweigen<a class="headerlink" href="#branching" title="Permanent link">&para;</a></h2>
 <p>Zwei Folgemissionen, die an gegensätzliche Ausgänge gebunden sind, ergeben eine Gabelung:</p>
@@ -2416,8 +2386,8 @@
 <p><code>"_isHistoric": true</code> ändert das. Eine historische Mission:</p>
 <ul>
 <li><strong>kommt nie in die Zufallsziehung.</strong> Sobald ihre Sperren erfüllt sind, erscheint sie garantiert.</li>
-<li><strong>erscheint an ihrem Datum</strong>, wenn sie einen <code>_historicDay</code> hat: beim ersten Tageswechsel an oder nach diesem Datum, bei dem auch ihre anderen Sperren erfüllt sind. Dafür werden die Wochen-Slots nicht genutzt.</li>
-<li><strong>behält die normale Vorlaufzeit</strong>, wenn sie keinen <code>_historicDay</code> hat: Sie nimmt statt einer zufälligen Mission den nächsten wöchentlichen Missions-Slot. So kommt eine Folgemission mit derselben Verzögerung wie jede andere Mission an, statt sofort auf der Karte zu landen.</li>
+<li><strong>erscheint an ihrem Datum</strong>, wenn sie einen <code>_historicDay</code> hat: genau an diesem Tag, wenn auch ihre anderen Sperren erfüllt sind. Dafür werden die Wochen-Slots nicht genutzt.</li>
+<li><strong>behält die normale Vorlaufzeit</strong>, wenn sie keinen <code>_historicDay</code> hat: Sie erscheint zusammen mit der nächsten Wochenmission und belegt keinen der Slots dieser Woche. So kommt eine Folgemission mit derselben Verzögerung wie jede andere Mission an, statt sofort auf der Karte zu landen.</li>
 <li><strong>läuft nie ab.</strong> <code>_timeToStartRange</code> wird ignoriert, der Spieler hat also unbegrenzt Zeit, sie zu fliegen.</li>
 <li><strong>gibt es bei Erfolg nur einmal.</strong> Einmal gewonnen, erscheint sie nie wieder. Ein gescheiterter oder abgebrochener Versuch bringt sie zurück, eine Kette, die an <code>success</code> gebunden ist, lässt sich also wiederholen.</li>
 <li><strong>ist nie zweimal auf der Karte.</strong> Solange eine Kopie wartet oder in der Luft ist, erscheint keine zweite.</li>
@@ -2435,22 +2405,22 @@
 <tr>
 <td>nein</td>
 <td>nein</td>
-<td>im nächsten Wochen-Slot</td>
+<td>zusammen mit der nächsten Wochenmission</td>
 </tr>
 <tr>
 <td>ja</td>
 <td>nein</td>
-<td>im nächsten Wochen-Slot, nachdem der Vorgänger richtig ausgegangen ist</td>
+<td>zusammen mit der nächsten Wochenmission, nachdem der Vorgänger richtig ausgegangen ist</td>
 </tr>
 <tr>
 <td>nein</td>
 <td>ja</td>
-<td>beim ersten Tageswechsel an oder nach dem Datum</td>
+<td>genau an diesem Tag</td>
 </tr>
 <tr>
 <td>ja</td>
 <td>ja</td>
-<td>am Datum, wenn der Vorgänger schon richtig ausgegangen ist; sonst beim ersten Tageswechsel danach</td>
+<td>genau an diesem Tag, sobald der Vorgänger richtig ausgegangen ist</td>
 </tr>
 </tbody>
 </table>
@@ -2459,13 +2429,13 @@
 <div class="highlight"><pre><span></span><code><span class="nt">"_isHistoric"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="nt">"_historicDay"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Year"</span><span class="p">:</span><span class="w"> </span><span class="mi">1940</span><span class="p">,</span><span class="w"> </span><span class="nt">"Month"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="nt">"Day"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="nt">"Hour"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">"Minute"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
-<p>Das Datum ist eine Untergrenze: Vorher ist die Mission nicht verfügbar, danach bleibt sie verfügbar, bis sie gewonnen wird. Ein Jahr unter 1900 zählt als "kein Datum". Deshalb tragen Beispieldateien <code>"Year": 1</code>, wenn sie keins meinen.</p>
-<p>Um eine Mission ab einem bestimmten Zeitpunkt zu sperren, verwende eine <code>LatestAppearanceDay</code>-Voraussetzung (Typ 2), gezählt in Tagen ab Beginn der Kampagne. Das funktioniert bei jeder Mission, ob historisch oder nicht.</p>
+<p>Die Mission erscheint genau an diesem Tag. Ein Jahr unter 1900 zählt als "kein Datum". Deshalb tragen Beispieldateien <code>"Year": 1</code>, wenn sie keins meinen.</p>
+<p>Um eine Mission ab einem bestimmten Zeitpunkt zu sperren, verwende eine <code>LatestAppearanceDay</code>-Voraussetzung (Typ 2), gezählt in Tagen ab dem Startdatum der Karte. Das funktioniert bei jeder Mission, ob historisch oder nicht.</p>
 <p>Zusammengesetzt wird so jede Operation an ihrem echten Datum verfügbar, und eine verpasste kann wieder geschlossen werden.</p>
 <h2 id="pitfalls">Stolperfallen<a class="headerlink" href="#pitfalls" title="Permanent link">&para;</a></h2>
 <p><strong>Doppelte Ids.</strong> Zwei Missionen mit derselben Id bedeuten, dass eine die andere stillschweigend ersetzt, abhängig von der Ladereihenfolge. Setz deinen Mod-Namen vor jede Id und denk beim Umbenennen daran, die Ids in jedem <code>CompletedMission</code>-Wert anzupassen.</p>
 <p><strong><code>_isHistoric</code> bei Folgemissionen vergessen.</strong> Die Kette funktioniert, aber Schritte tauchen womöglich erst nach sehr langer Zeit auf, und ein abgeschlossener Schritt kann erneut gezogen werden.</p>
-<p><strong>Mehrere historische Missionen gleichzeitig fällig.</strong> Sie erscheinen alle zusammen: die datierten an ihrem Tag, die undatierten im selben Slot. Wenn sie nacheinander kommen sollen, verkette sie über ihre Ausgänge oder gib ihnen verschiedene Tage.</p>
+<p><strong>Mehrere historische Missionen gleichzeitig fällig.</strong> Sie erscheinen alle zusammen: die datierten an ihrem Tag, die undatierten zusammen mit derselben Wochenmission. Wenn sie nacheinander kommen sollen, verkette sie über ihre Ausgänge oder gib ihnen verschiedene Tage.</p>
 <p><strong>Verketten auf eine Mission, die nie erscheint.</strong> Eine Sperre auf eine Mission, deren eigene Voraussetzungen nie erfüllt sind oder die für eine andere Karte getaggt ist, blockiert stillschweigend den Rest der Kette. Teste jeden Schritt einzeln, bevor du sie verbindest.</p>
 <p><strong>Testen mit dem Cheat.</strong> <code>create_mission</code> ignoriert jede Sperre. Es beweist, dass eine Mission lädt, nicht, dass die Kette freigeschaltet wird. Siehe <a href="../../basics/testing/#testing-a-chain">Testen und neu laden</a>.</p>
 <h2 id="when-json-is-not-enough">Wenn JSON nicht reicht<a class="headerlink" href="#when-json-is-not-enough" title="Permanent link">&para;</a></h2>

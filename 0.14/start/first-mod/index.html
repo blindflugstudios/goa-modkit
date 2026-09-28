@@ -1713,8 +1713,6 @@
       
         
       
-        
-      
     
     
     
@@ -1803,34 +1801,6 @@
     
   
     Objects and models
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Terrain objects
   
 
     
@@ -2402,8 +2372,8 @@ claude
 <p>The game reads mods when a game is loaded. So:</p>
 <ol>
 <li>Start Ground of Aces. If it is already running with a save open, go to <strong>Options → Quit to main menu</strong> first.</li>
-<li>In the main menu, open <strong>Mods</strong>. The list refreshes when the window opens. Your mod should be listed and switched on.</li>
-<li>Your mod has a Python file (the <code>.py</code>), so it also shows a <strong>Scripting</strong> switch. Switch it on and confirm - you wrote the scripts. (The current version of the game runs a mod's scripts either way, so this does no harm; see <a href="../../basics/security/">Python mods and safety</a>.)</li>
+<li>In the main menu, open <strong>Mods</strong> and press <strong>Refresh</strong>, so the game notices your new folder. Your mod should be listed and switched on.</li>
+<li>Every mod also shows a <strong>Scripting</strong> switch. It is reserved for a coming opt-in and has no effect at the moment: the game runs a mod's scripts whenever the mod is enabled, so you can leave the switch as it is. See <a href="../../basics/security/">Python mods and safety</a>.</li>
 <li>Close the Mods window and load your save (or start a new game).</li>
 </ol>
 <!-- screenshot: Mods window with the new mod listed, enabled, scripting switched on -->
@@ -2427,7 +2397,7 @@ claude
 <p>Go back to the terminal and ask for a change, for example:</p>
 <div class="highlight"><pre><span></span><code>Make the mission harder and let the bomber crew radio in when they spot the English coast.
 </code></pre></div>
-<p>The agent edits, checks and copies the mod again. Then in the game: <strong>Options → Quit to main menu</strong>, load your save, and check the mission again. (If the change added a new folder to the mod, for example a first <code>Quests/</code>, open <strong>Mods</strong> once before loading.)</p>
+<p>The agent edits, checks and copies the mod again. Then in the game: <strong>Options → Quit to main menu</strong>, load your save, and check the mission again. (If the change added a new folder to the mod, for example a first <code>Quests/</code>, open <strong>Mods</strong> and press <strong>Refresh</strong> before loading.)</p>
 <h2 id="if-something-goes-wrong">If something goes wrong<a class="headerlink" href="#if-something-goes-wrong" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The mission does not show up, the texts look like <code>missions/...</code>, or the game complains: see <a href="../troubleshooting/">When nothing happens</a>.</li>

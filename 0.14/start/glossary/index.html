@@ -1680,8 +1680,6 @@
       
         
       
-        
-      
     
     
     
@@ -1770,34 +1768,6 @@
     
   
     Objects and models
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Terrain objects
   
 
     
@@ -2302,7 +2272,7 @@
 <p><strong>Mod</strong> - A folder of files that adds to or changes the game: missions, quests, scripts, maps, objects or data tables.</p>
 <p><strong><code>Mods</code> folder</strong> - Where the game looks for installed mods. Open it from the main menu: <strong>Mods → Open folder</strong>.</p>
 <p><strong><code>mods/</code> folder (in the modkit)</strong> - Where you and your agent build your own mods before they are copied to the game's <code>Mods</code> folder. Git ignores it, so updates never change it.</p>
-<p><strong>Content folder</strong> - A folder inside a mod whose name tells the game what is in it: <code>Missions</code>, <code>Quests</code>, <code>Maps</code>, <code>Objects</code>, <code>CSV</code>, <code>TerrainObjects</code>, <code>Biomes</code>.</p>
+<p><strong>Content folder</strong> - A folder inside a mod whose name tells the game what is in it: <code>Missions</code>, <code>Quests</code>, <code>Maps</code>, <code>Objects</code>, <code>CSV</code>, <code>Biomes</code>. (Art mods in <code>Objects</code> and <code>Biomes</code> are work in progress and not supported by the current alpha yet.)</p>
 <p><strong>Id</strong> - The unique name of a thing in the game, for example the mission id <code>coastal_patrol</code>. Ids must not contain spaces and must be unique: two missions with the same id replace each other.</p>
 <p><strong>Localization key</strong> - The name of a text, like <code>missions/coastal_patrol/mission_name</code>. The game looks up the key to find the text in the player's language. If the text is missing, you see the key itself.</p>
 <p><strong>Validator</strong> - The modkit's checker (<code>goa_validate</code>). It reads your mod and reports what would break in the game, without starting the game and without running your scripts.</p>
@@ -2310,7 +2280,7 @@
 <p><strong>Handler</strong> - A function in a mission or event script that the game calls at a certain moment, for example when a mission sends a radio message.</p>
 <p><strong>Mission Editor</strong> - The in-game tool, in the main menu, for creating missions without any files or tools.</p>
 <p><strong>Console / cheat console</strong> - A small window in the game where you type commands such as <code>create_mission</code>. Switch it on in <strong>Options → Cheats</strong>. See <a href="../../basics/cheats/">Cheat console</a>.</p>
-<p><strong>Player.log</strong> - The text file where the game writes what it does and every error. The first place to look when a mod misbehaves. See <a href="../troubleshooting/#find-the-playerlog">When nothing happens</a>.</p>
+<p><strong>Player.log</strong> - The text file where the game writes its errors (development builds also write what it does). The first place to look when a mod misbehaves. See <a href="../troubleshooting/#find-the-playerlog">When nothing happens</a>.</p>
 <p><strong>Steam Workshop</strong> - Steam's page for sharing mods. Players subscribe to a mod there and Steam installs it for them.</p>
 <p><strong>Subscribe</strong> - Clicking <strong>Subscribe</strong> on a Workshop mod. Steam downloads it, and the game loads it next time.</p>
 

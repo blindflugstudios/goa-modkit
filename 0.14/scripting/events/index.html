@@ -1752,8 +1752,6 @@
       
         
       
-        
-      
     
     
     
@@ -1842,34 +1840,6 @@
     
   
     Objects and models
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Terrain objects
   
 
     
@@ -2432,7 +2402,7 @@
 <ul>
 <li><code>event_name</code>: which event, usually written as <code>MinorEvent.SOME_NAME</code> (import it with <code>from Blindflug.MinorEvents import MinorEvent</code>). The plain string, like <code>"midnight"</code>, works too.</li>
 <li><code>chance</code>: the probability that the handler runs when the event fires, from 0.0 to 1.0. Default 1.0 (always).</li>
-<li><code>max_occurrences</code>: how often the handler may run in one playthrough. <code>-1</code> means unlimited, which is the default.</li>
+<li><code>max_occurrences</code>: how often the handler may run in one save game. The count is stored in the save, keyed by the handler's <code>&lt;module&gt;.&lt;function&gt;</code> name, so renaming either resets it. A negative value means no limit and is the default (<code>-1</code>); <code>0</code> means the handler never runs. The chance roll and the limit check both happen before the handler is called.</li>
 </ul>
 <p><strong>Returning <code>False</code> does not count</strong> against <code>max_occurrences</code>. Use it to check a condition and bail out without using up the budget. Returning nothing, <code>True</code> or any other value counts.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">MinorEvent</span><span class="o">.</span><span class="n">MIDNIGHT</span><span class="p">,</span> <span class="n">chance</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">max_occurrences</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>

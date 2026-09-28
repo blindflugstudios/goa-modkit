@@ -1575,8 +1575,6 @@
       
         
       
-        
-      
     
     
     
@@ -1876,34 +1874,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -2493,7 +2463,7 @@
 </code></pre></div>
 </li>
 <li>
-<p>Öffne <strong>Hauptmenü → Mods</strong>, prüfe, dass <strong>my_map_mod</strong> eingeschaltet ist, und starte ein neues Spiel. Deine Karte steht unter <strong>Custom maps</strong>.</p>
+<p>Öffne <strong>Hauptmenü → Mods</strong> und drücke <strong>Refresh</strong>, damit das Spiel den neuen Mod-Ordner findet. Prüfe, dass <strong>my_map_mod</strong> eingeschaltet ist, und starte ein neues Spiel. Deine Karte steht unter <strong>Custom maps</strong>.</p>
 </li>
 </ol>
 <p>Das ist schon eine vollständige Karten-Mod. Eine <code>config.json</code> brauchst du nicht, du kannst aber eine hinzufügen (siehe <a href="../../basics/mods/">So funktionieren Mods</a>).</p>
@@ -2540,7 +2510,7 @@
 </tr>
 <tr>
 <td><strong>Biomes</strong></td>
-<td>Den Bodentyp malen: Gras, Erde, Straße, Fels, Sand, Kies. Der Bodentyp wirkt sich auch aufs Spiel aus, siehe <a href="../biomes/">Biome</a>.</td>
+<td>Den Bodentyp malen: Gras, Erde, Straße, Fels, Sand, Kies. Der Bodentyp wirkt sich auch aufs Spiel aus, siehe <a href="../biomes/">Biome</a> (Grafik-Mods für Biome sind noch in Arbeit und werden von der aktuellen Alpha nicht unterstützt).</td>
 </tr>
 <tr>
 <td><strong>Gras</strong> (Grass)</td>
@@ -2548,7 +2518,7 @@
 </tr>
 <tr>
 <td><strong>Landschaftsobjekte</strong> (Terrain Objects)</td>
-<td>Bäume, Büsche, Felsen, Teiche und mehr setzen, einzeln oder mit einem Pinsel. Die Liste findest du unter <a href="../terrain-objects/">Landschaftsobjekte</a>.</td>
+<td>Bäume, Büsche, Felsen, Teiche und mehr setzen, einzeln oder mit einem Pinsel. Ihren Look kannst du über <a href="../objects/">Objekte und Modelle</a> ändern (Grafik-Mods sind noch in Arbeit und werden von der aktuellen Alpha nicht unterstützt).</td>
 </tr>
 <tr>
 <td><strong>Karteneinstellungen</strong></td>
@@ -2731,7 +2701,7 @@
 <p>Die Id einer Karte ist ihr Dateiname ohne <code>.goamap</code>. <code>my_airfield.goamap</code> hat die Id <code>my_airfield</code>, und Spielstände merken sich die Karte über diese Id.</p>
 <ul>
 <li>Gelesen werden nur Dateien, die direkt in <code>Maps/</code> liegen. Unterordner werden ignoriert.</li>
-<li>Zwei Karten mit derselben Id erscheinen nicht beide. Die zuletzt gelesene ersetzt die andere. Karten werden in dieser Reihenfolge gelesen: die mitgelieferten Karten, dein eigener Ordner <code>Maps</code>, dann die eingeschalteten Mods in Ladereihenfolge. Eine Mod-Karte namens <code>Debden.goamap</code> ersetzt also das mitgelieferte Debden. Wähle einen eindeutigen Namen, außer genau das ist deine Absicht.</li>
+<li>Zwei Karten mit derselben Id erscheinen nicht beide. Die zuletzt gelesene ersetzt die andere. Karten werden in dieser Reihenfolge gelesen: die mitgelieferten Karten, die eingeschalteten Mods in Ladereihenfolge, dann dein eigener Ordner <code>Maps</code> neben <code>Mods</code>, der sich gegen jede Mod durchsetzt. Eine Mod-Karte namens <code>Debden.goamap</code> ersetzt also das mitgelieferte Debden. Wähle einen eindeutigen Namen, außer genau das ist deine Absicht.</li>
 <li>Ersetzt eine Mod-Karte eine Karte, laden Spielstände auf dieser Karte die Version der Mod.</li>
 </ul>
 <h2 id="seeing-your-changes">Änderungen sehen<a class="headerlink" href="#seeing-your-changes" title="Permanent link">&para;</a></h2>

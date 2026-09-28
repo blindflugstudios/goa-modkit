@@ -1713,8 +1713,6 @@
       
         
       
-        
-      
     
     
     
@@ -1803,34 +1801,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -2402,8 +2372,8 @@ claude
 <p>Das Spiel liest Mods ein, wenn ein Spiel geladen wird. Also:</p>
 <ol>
 <li>Starte Ground of Aces. Läuft es schon mit einem offenen Spielstand, geh zuerst auf <strong>Einstellungen</strong> (Options) <strong>→ Verlassen zum Hauptmenü</strong> (Quit to main menu).</li>
-<li>Öffne im Hauptmenü <strong>Mods</strong>. Die Liste wird beim Öffnen des Fensters aktualisiert. Dein Mod sollte dort stehen und eingeschaltet sein.</li>
-<li>Dein Mod hat eine Python-Datei (die <code>.py</code>), deshalb zeigt er auch einen <strong>Scripting</strong>-Schalter. Schalte ihn ein und bestätige - die Skripte hast du selbst geschrieben. (Die aktuelle Spielversion führt die Skripte einer Mod ohnehin aus, der Schalter schadet also nicht; siehe <a href="../../basics/security/">Python-Mods und Sicherheit</a>.)</li>
+<li>Öffne im Hauptmenü <strong>Mods</strong> und drück auf <strong>Refresh</strong>, damit das Spiel deinen neuen Ordner bemerkt. Dein Mod sollte dort stehen und eingeschaltet sein.</li>
+<li>Jede Mod zeigt außerdem einen <strong>Scripting</strong>-Schalter. Er ist für eine kommende Zustimmungsfunktion reserviert und hat derzeit keine Wirkung: Das Spiel führt die Skripte einer Mod immer aus, wenn die Mod eingeschaltet ist, du kannst den Schalter also lassen, wie er ist. Siehe <a href="../../basics/security/">Python-Mods und Sicherheit</a>.</li>
 <li>Schließ das Mods-Fenster und lade deinen Spielstand (oder starte ein neues Spiel).</li>
 </ol>
 <!-- screenshot: Mods window with the new mod listed, enabled, scripting switched on -->
@@ -2427,7 +2397,7 @@ claude
 <p>Geh zurück ins Terminal und wünsch dir eine Änderung, zum Beispiel:</p>
 <div class="highlight"><pre><span></span><code>Make the mission harder and let the bomber crew radio in when they spot the English coast.
 </code></pre></div>
-<p>Der Agent bearbeitet, prüft und kopiert den Mod erneut. Dann im Spiel: <strong>Einstellungen → Verlassen zum Hauptmenü</strong>, Spielstand laden und die Mission noch einmal anschauen. (Hat die Änderung einen neuen Ordner in den Mod gebracht, zum Beispiel ein erstes <code>Quests/</code>, öffne vor dem Laden einmal <strong>Mods</strong>.)</p>
+<p>Der Agent bearbeitet, prüft und kopiert den Mod erneut. Dann im Spiel: <strong>Einstellungen → Verlassen zum Hauptmenü</strong>, Spielstand laden und die Mission noch einmal anschauen. (Hat die Änderung einen neuen Ordner in den Mod gebracht, zum Beispiel ein erstes <code>Quests/</code>, öffne vor dem Laden <strong>Mods</strong> und drück auf <strong>Refresh</strong>.)</p>
 <h2 id="if-something-goes-wrong">Wenn etwas schiefgeht<a class="headerlink" href="#if-something-goes-wrong" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Die Mission taucht nicht auf, die Texte sehen aus wie <code>missions/...</code> oder das Spiel beschwert sich: siehe <a href="../troubleshooting/">Wenn nichts passiert</a>.</li>

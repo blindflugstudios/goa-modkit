@@ -1578,8 +1578,6 @@
       
         
       
-        
-      
     
     
     
@@ -1668,34 +1666,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -3234,13 +3204,13 @@
 <p>Eine id in der Liste, für die es keine Quest-Datei gibt, wird im veröffentlichten Spiel ohne Meldung übersprungen; die Karte lädt trotzdem.</p>
 <h2 id="changing-a-shipped-quest">Eine mitgelieferte Quest ändern<a class="headerlink" href="#changing-a-shipped-quest" title="Permanent link">&para;</a></h2>
 <p>Um eine Quest zu ändern, die das Spiel mitbringt, leg eine Datei mit <strong>demselben Namen</strong> in den Ordner <code>Quests/</code> deiner Mod. Deine Kopie ersetzt die mitgelieferte vollständig, also starte mit einer vollständigen Kopie des Originals und ändere, was du brauchst: einen <code>_amount</code>, einen <code>_parameter</code>, einen Schritt optional machen, einen Schritt hinzufügen oder entfernen.</p>
-<p>Die mitgelieferten Dateien sind einfaches JSON im Installationsordner des Spiels, unter <code>GroundOfAces_Data/StreamingAssets/Scripts/Quest/</code> (auf macOS: <code>GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Scripts/Quest/</code>) - <code>quest0</code> bis <code>quest14</code>, die <code>tutorial_*</code>-Quests und die <code>*_skin_unlock</code>-Quests. Kopier sie von dort; bearbeite sie nie direkt, denn ein Spiel-Update überschreibt diesen Ordner. Die mitgelieferten Karten liegen gleich daneben in <code>StreamingAssets/Maps/</code> - dort findest du auch eine echte <code>Metadata.json</code> zum Anschauen.</p>
+<p>Die mitgelieferten Dateien sind einfaches JSON im Installationsordner des Spiels, unter <code>Ground Of Aces_Data/StreamingAssets/Scripts/Quest/</code> (auf macOS: <code>Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Scripts/Quest/</code>) - <code>quest0</code> bis <code>quest14</code>, die <code>tutorial_*</code>-Quests und die <code>*_skin_unlock</code>-Quests. Kopier sie von dort; bearbeite sie nie direkt, denn ein Spiel-Update überschreibt diesen Ordner. Die mitgelieferten Karten liegen gleich daneben in <code>StreamingAssets/Maps/</code> - dort findest du auch eine echte <code>Metadata.json</code> zum Anschauen.</p>
 <p>Änderungen erreichen auch <strong>bestehende Spielstände</strong>. Beim Laden eines Spielstands wird jede Quest darin mit der aktuellen Datei verglichen: Schritt-Titel, Schritt-Beschreibungen, Bedingungstypen, Parameter und Mengen werden an Ort und Stelle aktualisiert, neue Schritte werden angehängt, entfernte Schritte gelöscht, und ein Schritt, dessen Fortschritt die neue Menge schon erreicht, wird sofort abgeschlossen. Schritte werden <strong>nach Position</strong> zugeordnet, ein Schritt in der Mitte verschiebt also in einem laufenden Spielstand die Bedeutung aller folgenden - häng neue Schritte ans Ende, wenn eine Quest schon im Umlauf ist. Nicht aktualisiert werden in einem laufenden Spielstand: <code>_questTitle</code>, <code>_questDescription</code> und <code>_isHiddenInUI</code> der Quest selbst sowie <code>_isOptional</code> und <code>_genericIconKey</code> eines Schritts - die werden festgelegt, wenn die Quest zum ersten Mal vergeben wird.</p>
 <h2 id="quest-types">Quest-Typen<a class="headerlink" href="#quest-types" title="Permanent link">&para;</a></h2>
 <p><code>_questType: 0</code> ist eine normale Quest und genau die, die du willst. Die anderen beiden gibt es für die eigenen Inhalte des Spiels, und beide haben einen Haken.</p>
 <p><strong>Tutorial-Quests (<code>2</code>)</strong> lassen zusätzlich die Tutorial-Hervorhebung nacheinander auf die Buttons in <code>_highlightedUIElements</code> zeigen und können Konsolenbefehle aus <code>_cheatsOnStart</code> und <code>_completionCheats</code> ausführen. In einer Mod gilt:</p>
 <ul>
-<li>Die <strong>Befehle werden entfernt</strong>. Eine Mod-Quest mit einer dieser Listen lädt trotzdem, aber die Listen werden ignoriert (mit einer Warnung im Log), und nichts wird ausgeführt.</li>
+<li>Die <strong>Befehle werden entfernt</strong>. Eine Mod-Quest mit einer dieser Listen lädt trotzdem, aber die Listen werden ignoriert (Entwickler-Builds schreiben eine Warnung ins Log), und nichts wird ausgeführt.</li>
 <li>Die Hervorhebungs-ids sind eine feste Liste im Spiel - die ids in den mitgelieferten Tutorial-Quests (<code>SawStation</code>, <code>Sickbed</code>, <code>ParkingSmall</code>, <code>CrewRoleDropdown</code>, ...) sind das Vokabular. Eine unbekannte id bewirkt nichts.</li>
 <li>Die Ereignisse nur im Tutorial (siehe <a href="#events">Ereignisse</a>) treten nur auf, solange das Tutorial selbst läuft, und das kann nur der Spieler einschalten (das Häkchen im Fenster für ein neues Spiel), keine Mod.</li>
 </ul>
@@ -3412,7 +3382,7 @@
 </table>
 <p>Wenn eine Quest nicht auftaucht oder ein Schritt sich nicht bewegt, lies die Log-Datei des Spiels, <code>Player.log</code> (wo sie liegt: <a href="../basics/mods/#seeing-your-changes">So funktionieren Mods</a>).</p>
 <ul>
-<li>Eine Quest-Datei ganz ohne JSON-Objekt wird übersprungen, mit einem Fehler im Log. Eine Datei, die wie JSON anfängt, aber innen kaputt ist (ein fehlendes Komma, eine offene Klammer), kann das Laden des Levels kaputt machen - prüf dein JSON in einem Editor, bevor du testest.</li>
+<li>Eine Quest-Datei mit ungültigem JSON (ein fehlendes Komma, eine offene Klammer) wird <strong>nicht</strong> übersprungen - sie macht das Laden des Levels kaputt. Prüf dein JSON in einem Editor, bevor du testest.</li>
 <li>Eine Karte, die eine unbekannte Quest-id aufführt, und ein Schritt, der wegen eines falschen <code>_type</code> oder einer falsch geschriebenen id nie vorankommt, bekommen <strong>keine</strong> Zeile im Log - prüf die Tabellen oben.</li>
 </ul>
 <p>Mehr Tipps zum Testen: <a href="../basics/testing/">Testen und neu laden</a>.</p>

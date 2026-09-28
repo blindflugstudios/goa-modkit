@@ -1680,8 +1680,6 @@
       
         
       
-        
-      
     
     
     
@@ -1770,34 +1768,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -2302,7 +2272,7 @@
 <p><strong>Mod</strong> - Ein Ordner mit Dateien, der dem Spiel etwas hinzufügt oder es verändert: Missionen, Quests, Skripte, Karten, Objekte oder Datentabellen.</p>
 <p><strong><code>Mods</code>-Ordner</strong> - Hier sucht das Spiel nach installierten Mods. Du öffnest ihn im Hauptmenü: <strong>Mods → Open folder</strong>.</p>
 <p><strong><code>mods/</code>-Ordner (im Modkit)</strong> - Hier bauen du und dein Agent eure eigenen Mods, bevor sie in den <code>Mods</code>-Ordner des Spiels kopiert werden. Git ignoriert ihn, deshalb ändern Updates ihn nie.</p>
-<p><strong>Inhaltsordner</strong> - Ein Ordner in einem Mod, dessen Name dem Spiel sagt, was drin ist: <code>Missions</code>, <code>Quests</code>, <code>Maps</code>, <code>Objects</code>, <code>CSV</code>, <code>TerrainObjects</code>, <code>Biomes</code>.</p>
+<p><strong>Inhaltsordner</strong> - Ein Ordner in einem Mod, dessen Name dem Spiel sagt, was drin ist: <code>Missions</code>, <code>Quests</code>, <code>Maps</code>, <code>Objects</code>, <code>CSV</code>, <code>Biomes</code>. (Grafik-Mods in <code>Objects</code> und <code>Biomes</code> sind noch in Arbeit und werden von der aktuellen Alpha noch nicht unterstützt.)</p>
 <p><strong>ID</strong> - Der eindeutige Name eines Dings im Spiel, zum Beispiel die Missions-ID <code>coastal_patrol</code>. IDs dürfen keine Leerzeichen enthalten und müssen eindeutig sein: Zwei Missionen mit derselben ID ersetzen sich gegenseitig.</p>
 <p><strong>Lokalisierungsschlüssel</strong> - Der Name eines Textes, etwa <code>missions/coastal_patrol/mission_name</code>. Das Spiel schlägt den Schlüssel nach, um den Text in der Sprache des Spielers zu finden. Fehlt der Text, siehst du den Schlüssel selbst.</p>
 <p><strong>Validator</strong> - Der Prüfer des Modkits (<code>goa_validate</code>). Er liest deinen Mod und meldet, was im Spiel kaputtgehen würde, ohne das Spiel zu starten und ohne deine Skripte auszuführen.</p>
@@ -2310,7 +2280,7 @@
 <p><strong>Handler</strong> - Eine Funktion in einem Missions- oder Ereignis-Skript, die das Spiel zu einem bestimmten Zeitpunkt aufruft, zum Beispiel wenn eine Mission einen Funkspruch sendet.</p>
 <p><strong>Mission Editor</strong> - Das Werkzeug im Spiel, im Hauptmenü, mit dem du Missionen ganz ohne Dateien oder Werkzeuge erstellst.</p>
 <p><strong>Konsole / Cheat-Konsole</strong> - Ein kleines Fenster im Spiel, in das du Befehle wie <code>create_mission</code> tippst. Du schaltest sie unter <strong>Einstellungen</strong> (Options) <strong>→ Cheats</strong> ein. Siehe <a href="../../basics/cheats/">Cheat-Konsole</a>.</p>
-<p><strong>Player.log</strong> - Die Textdatei, in die das Spiel schreibt, was es tut, samt jedem Fehler. Die erste Anlaufstelle, wenn ein Mod sich danebenbenimmt. Siehe <a href="../troubleshooting/#find-the-playerlog">Wenn nichts passiert</a>.</p>
+<p><strong>Player.log</strong> - Die Textdatei, in die das Spiel seine Fehler schreibt (Entwicklungs-Builds schreiben auch hinein, was es tut). Die erste Anlaufstelle, wenn ein Mod sich danebenbenimmt. Siehe <a href="../troubleshooting/#find-the-playerlog">Wenn nichts passiert</a>.</p>
 <p><strong>Steam Workshop</strong> - Die Seite von Steam zum Teilen von Mods. Spieler abonnieren dort einen Mod, und Steam installiert ihn für sie.</p>
 <p><strong>Abonnieren</strong> - Ein Klick auf <strong>Abonnieren</strong> (Subscribe) bei einem Workshop-Mod. Steam lädt ihn herunter, und das Spiel lädt ihn beim nächsten Mal.</p>
 

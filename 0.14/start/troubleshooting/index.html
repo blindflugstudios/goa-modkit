@@ -1680,8 +1680,6 @@
       
         
       
-        
-      
     
     
     
@@ -1770,34 +1768,6 @@
     
   
     Objects and models
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Terrain objects
   
 
     
@@ -2269,7 +2239,7 @@
 <h2 id="first-always">First, always<a class="headerlink" href="#first-always" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Run the validator</strong> on your mod. It catches most of the problems below before the game ever sees them. Ask the agent to <code>validate my mod</code>, or see <a href="../without-ai/#4-check-it-with-the-validator">Without an AI agent</a>.</li>
-<li><strong>Reload properly</strong>: <strong>Options → Quit to main menu</strong>, open <strong>Mods</strong>, then load your save. If in doubt, restart the game.</li>
+<li><strong>Reload properly</strong>: <strong>Options → Quit to main menu</strong>, then load your save. If you added a new mod folder (or a new content folder such as <code>Quests/</code>), open <strong>Mods</strong> and press <strong>Refresh</strong> first. If in doubt, restart the game.</li>
 </ol>
 <h2 id="symptom-cause-fix">Symptom, cause, fix<a class="headerlink" href="#symptom-cause-fix" title="Permanent link">&para;</a></h2>
 <table>
@@ -2353,8 +2323,8 @@
 </tr>
 <tr>
 <td><strong>My new or changed quest does not show up</strong></td>
-<td>Quests are read each time a save loads, but a brand-new <code>Quests/</code> folder is only noticed after the Mods window rescans.</td>
-<td><strong>Options → Quit to main menu</strong>, open <strong>Mods</strong> (or press <strong>Refresh</strong>), then load your save.</td>
+<td>Quests are read each time a save loads, but a brand-new <code>Quests/</code> folder is only noticed after you press <strong>Refresh</strong> in the Mods window (or restart the game).</td>
+<td><strong>Options → Quit to main menu</strong>, open <strong>Mods</strong> and press <strong>Refresh</strong>, then load your save.</td>
 </tr>
 <tr>
 <td><strong>My CSV changes do not apply</strong></td>
@@ -2369,7 +2339,7 @@
 </tbody>
 </table>
 <h2 id="find-the-playerlog">Find the Player.log<a class="headerlink" href="#find-the-playerlog" title="Permanent link">&para;</a></h2>
-<p>The game writes everything it does, including every error, into a text file called <code>Player.log</code>. It is rewritten each time the game starts, and the previous run is kept as <code>Player-prev.log</code>. Look at it right after the problem, before restarting the game.</p>
+<p>The game writes its errors into a text file called <code>Player.log</code>. (The detailed <code>[Mod ...]</code> lines about everything it loads appear only in development builds; the released game logs errors only.) It is rewritten each time the game starts, and the previous run is kept as <code>Player-prev.log</code>. Look at it right after the problem, before restarting the game.</p>
 <table>
 <thead>
 <tr>

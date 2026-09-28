@@ -1575,8 +1575,6 @@
       
         
       
-        
-      
     
     
     
@@ -1876,34 +1874,6 @@
     
   
     Objects and models
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Terrain objects
   
 
     
@@ -2493,7 +2463,7 @@
 </code></pre></div>
 </li>
 <li>
-<p>Open <strong>Main menu → Mods</strong>, make sure <strong>my_map_mod</strong> is switched on, then start a new game. Your map is listed under <strong>Custom maps</strong>.</p>
+<p>Open <strong>Main menu → Mods</strong> and press <strong>Refresh</strong> so the game finds the new mod folder, make sure <strong>my_map_mod</strong> is switched on, then start a new game. Your map is listed under <strong>Custom maps</strong>.</p>
 </li>
 </ol>
 <p>That is a complete map mod. No <code>config.json</code> is needed, although you may add one (see <a href="../../basics/mods/">How mods work</a>).</p>
@@ -2540,7 +2510,7 @@
 </tr>
 <tr>
 <td><strong>Biomes</strong></td>
-<td>Paint the ground type: grass, dirt, road, rock, sand, gravel. The ground type also affects gameplay, see <a href="../biomes/">Biomes</a>.</td>
+<td>Paint the ground type: grass, dirt, road, rock, sand, gravel. The ground type also affects gameplay, see <a href="../biomes/">Biomes</a> (biome art mods are work in progress and not supported in the current alpha).</td>
 </tr>
 <tr>
 <td><strong>Grass</strong></td>
@@ -2548,7 +2518,7 @@
 </tr>
 <tr>
 <td><strong>Terrain Objects</strong></td>
-<td>Place trees, bushes, rocks, ponds and so on, one by one or with a brush. See <a href="../terrain-objects/">Terrain objects</a> for the list.</td>
+<td>Place trees, bushes, rocks, ponds and so on, one by one or with a brush. Their look can be changed with <a href="../objects/">Objects and models</a> (art mods are work in progress and not supported in the current alpha).</td>
 </tr>
 <tr>
 <td><strong>Map settings</strong></td>
@@ -2731,7 +2701,7 @@
 <p>A map's id is its file name without <code>.goamap</code>. <code>my_airfield.goamap</code> has the id <code>my_airfield</code>, and saves remember the map by that id.</p>
 <ul>
 <li>Only files directly inside <code>Maps/</code> are read. Subfolders are ignored.</li>
-<li>Two maps with the same id do not both appear. The one read last replaces the other. Maps are read in this order: the shipped maps, your own <code>Maps</code> folder, then the enabled mods in load order. So a mod map named <code>Debden.goamap</code> replaces the shipped Debden. Pick a unique name unless that is exactly what you want.</li>
+<li>Two maps with the same id do not both appear. The one read last replaces the other. Maps are read in this order: the shipped maps, the enabled mods in load order, then your own <code>Maps</code> folder next to <code>Mods</code>, which wins over every mod. So a mod map named <code>Debden.goamap</code> replaces the shipped Debden. Pick a unique name unless that is exactly what you want.</li>
 <li>If a mod map replaces a map, saves made on that map load the mod's version.</li>
 </ul>
 <h2 id="seeing-your-changes">Seeing your changes<a class="headerlink" href="#seeing-your-changes" title="Permanent link">&para;</a></h2>

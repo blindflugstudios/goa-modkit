@@ -2246,8 +2246,6 @@
       
         
       
-        
-      
     
     
     
@@ -2336,34 +2334,6 @@
     
   
     Objects and models
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Terrain objects
   
 
     
@@ -3547,11 +3517,11 @@ RandomActionChatProbability,0.6
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>These lines are written as information and warnings. The released game writes mainly errors to its log, so you may not see them there. In that case check the effect in the game instead - load a level and look at the value you changed.</p>
+<p>These lines are written as information and warnings. The released game logs errors only, so you will see them only in a development build or in the Unity editor. In the released game, check the effect in the game instead - load a level and look at the value you changed.</p>
 </div>
 <p>A misspelled table name or a header row that does not match still produces a <code>skipped:</code> line naming the file. <strong>If you see no <code>[Mod ...]</code> lines at all and the change does not show</strong>, the game did not pick the mod up: the <code>CSV/</code> folder was still empty when the game started (press <strong>Refresh</strong> in the Mods window), the mod is switched off in the Mods window, or the mod folder is a symbolic link or junction, which is never followed.</p>
 <h3 id="finding-a-tables-column-headers">Finding a table's column headers<a class="headerlink" href="#finding-a-tables-column-headers" title="Permanent link">&para;</a></h3>
-<p>The game ships header templates for four tables (<code>BuildingComponents</code>, <code>PropsInfluence</code>, <code>ResourceCost</code> and <code>VehicleData</code>) in <code>GroundOfAces_Data/StreamingAssets/Modding/Templates/</code> inside the installation folder (on macOS: <code>GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/</code>). For the rest, the column list is on this page, and every table section links the built-in file. Or ask the game: write a deliberately wrong header, load once, and the log prints the columns it expected.</p>
+<p>The game ships header templates for four tables (<code>BuildingComponents</code>, <code>PropsInfluence</code>, <code>ResourceCost</code> and <code>VehicleData</code>) in <code>Ground Of Aces_Data/StreamingAssets/Modding/Templates/</code> inside the installation folder (on macOS: <code>Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/</code>). For the rest, the column list is on this page, and every table section links the built-in file. Or ask the game: write a deliberately wrong header, load once, and the log prints the columns it expected.</p>
 <h2 id="load-order">Load order<a class="headerlink" href="#load-order" title="Permanent link">&para;</a></h2>
 <p>Mods are applied in the order described on <a href="../../basics/mods/#which-mod-wins">Which mod wins</a> - Workshop first, then your own, lower <code>LoadOrder</code> first. When two mods change the same row, the later one wins for the cells it touches: a whole-row CSV replaces everything an earlier mod did to that row, a <code>Replace</code> only the cells it names. A mod switched off in the Mods window contributes nothing.</p>
 <h2 id="when-changes-take-effect">When changes take effect<a class="headerlink" href="#when-changes-take-effect" title="Permanent link">&para;</a></h2>
@@ -3669,7 +3639,7 @@ special rule, only the generic ones above apply.</p>
 <tr>
 <td><code>Manoeuvrability</code></td>
 <td><code>min-max</code></td>
-<td><code>2-10</code> … <code>28-50</code></td>
+<td>min 2–28, max 8–50</td>
 <td>same</td>
 </tr>
 <tr>
@@ -3763,13 +3733,13 @@ mod's numbers even after you remove it.</p>
 <td><code>Minimum Missions Per Week</code></td>
 <td>whole number</td>
 <td>2–10</td>
-<td>above <code>Missions Per Week</code> makes the quota impossible</td>
+<td>the weekly HQ quota: how many missions the base must fly to a result each week. Won and lost missions count; cancelled ones and failed historic missions do not. Missing this or <code>Minimum Success Rate</code> halves the next shipment's slots (rounded up) and, on the normal HQ strikes setting, adds a strike - three weeks missed in a row end the run. Training weeks and the "no requirements" HQ setting skip the check. Above <code>Missions Per Week</code> makes the quota impossible</td>
 </tr>
 <tr>
 <td><code>Minimum Success Rate</code></td>
 <td>fraction, not percent</td>
 <td>0.4–0.8</td>
-<td>above 1 is unachievable</td>
+<td>share of the missions counted by <code>Minimum Missions Per Week</code> that must be won; above 1 is unachievable</td>
 </tr>
 <tr>
 <td><code>Available Shipment Slots</code></td>
@@ -3808,7 +3778,7 @@ mod's numbers even after you remove it.</p>
 <td><code>Material</code></td>
 <td>text</td>
 <td><code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code>, <code>tarmac</code></td>
-<td><strong>must not repeat another tier's material</strong>; it also names the <code>ResourceCost</code> row that prices the surface</td>
+<td><strong>must not repeat another tier's material</strong>, and must name an existing <code>ResourceCost</code> row - that row is what each tile of this runway costs. <code>ResourceCost</code> does not accept new surface rows, so in practice keep to <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code> and <code>tarmac</code> (swapping them between tiers is fine). A material with no <code>ResourceCost</code> row is accepted here, and then laying a runway of that tier fails with an error</td>
 </tr>
 <tr>
 <td><code>Biome Id</code></td>
@@ -3820,7 +3790,7 @@ mod's numbers even after you remove it.</p>
 <td><code>Build Time</code></td>
 <td>whole number</td>
 <td>5,2,2,2,2</td>
-<td>in-game minutes of work per tile for one crew member; two workers halve it</td>
+<td>in-game minutes of work per tile. Each tile is worked by one crew member at a time, so more crew lay more tiles in parallel, not one tile faster</td>
 </tr>
 </tbody>
 </table>
@@ -3895,9 +3865,44 @@ mod's numbers even after you remove it.</p>
 <h4 id="attackscomposition-what-an-air-raid-is-made-of"><code>AttacksComposition</code> - what an air raid is made of<a class="headerlink" href="#attackscomposition-what-an-air-raid-is-made-of" title="Permanent link">&para;</a></h4>
 <p>Built-in file: <a href="../../assets/csv/AttacksComposition.csv">AttacksComposition.csv</a></p>
 <p>The row id is the raid severity. Normal play reaches <strong>1–25</strong>; rows <code>99</code>, <code>101</code>, <code>200</code> and <code>300</code> are not
-reached by the normal severity ladder and are kept for special raids. The ranges below describe rows 1–25;
-the four special rows go beyond them (<code>9-9</code> bombers, <code>10-10</code> divers, <code>0-0</code> fighters) and point at
-themselves in the last two columns.</p>
+reached by the normal severity ladder and are kept for special raids. The ranges below describe rows 1–25.
+The four special rows point at themselves in the last two columns and hold:</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th><code>Bombers</code></th>
+<th><code>Divers</code></th>
+<th><code>Fighters</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>99</code></td>
+<td><code>9-9</code></td>
+<td><code>6-6</code></td>
+<td><code>8-8</code></td>
+</tr>
+<tr>
+<td><code>200</code></td>
+<td><code>10-10</code></td>
+<td><code>0-0</code></td>
+<td><code>0-0</code></td>
+</tr>
+<tr>
+<td><code>300</code></td>
+<td><code>0-0</code></td>
+<td><code>10-10</code></td>
+<td><code>0-0</code></td>
+</tr>
+<tr>
+<td><code>101</code></td>
+<td><code>0-0</code></td>
+<td><code>3-3</code></td>
+<td><code>2-2</code></td>
+</tr>
+</tbody>
+</table>
 <table>
 <thead>
 <tr>
@@ -3964,7 +3969,7 @@ themselves in the last two columns.</p>
 <td><code>Damage</code></td>
 <td>number</td>
 <td>0–6</td>
-<td><strong><code>0</code> switches the whole weapon off</strong> - fire rate, ammo and aiming are then ignored</td>
+<td><code>0</code> makes the piece a non-firing station like the <code>Searchlight</code> or <code>Lookout</code>: it can still be placed and crewed, but it never shoots, and every column from <code>Fire Rate</code> onward is not read for it</td>
 </tr>
 <tr>
 <td><code>Fire Rate</code></td>
@@ -4053,7 +4058,7 @@ removed.</p>
 <td><code>Build Time</code></td>
 <td>whole number</td>
 <td>0–420</td>
-<td>in-game minutes of work for one crew member; two workers halve it</td>
+<td>in-game minutes of work. One crew member builds an object at a time; extra crew do not speed it up</td>
 </tr>
 <tr>
 <td><code>Health</code></td>
@@ -4120,7 +4125,9 @@ LuxuryGoods  MilitaryConstruction  Camouflage  FoodRations  StrongMedicine  Repa
 AntiAirAmmo  PlaneBombs
 </code></pre></div>
 <p>Runway surfaces are rows here too - <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code>, <code>tarmac</code> - so changing <code>gravel</code>
-changes what a tier-3 runway costs per tile.</p>
+changes what a tier-3 runway costs per tile. <strong>Do not remove a surface row</strong>: unlike an object, a surface with
+no row does not become free - laying a runway of that tier fails with an error. To make a surface free, set
+every cell of its row to <code>0</code>.</p>
 <h4 id="propsinfluence-the-mood-effect-an-object-radiates"><code>PropsInfluence</code> - the mood effect an object radiates<a class="headerlink" href="#propsinfluence-the-mood-effect-an-object-radiates" title="Permanent link">&para;</a></h4>
 <p>Built-in file: <a href="../../assets/csv/PropsInfluence.csv">PropsInfluence.csv</a></p>
 <p>One row per object that lifts or lowers the mood of crew nearby. <strong>Rows can be added and removed</strong>; an object
@@ -4156,13 +4163,13 @@ without a row simply has no effect.</p>
 <tr>
 <td><code>Effect 1</code></td>
 <td><code>&lt;signed number&gt; &lt;name&gt;</code></td>
-<td><code>+0.5 Mood</code> … <code>+10 Mood</code>, <code>-1 Mood</code>, <code>-1.5 Energy</code>, <code>+2 Energy</code>, <code>+1 Confidence</code></td>
-<td>names: <code>Mood</code>, <code>Confidence</code>, <code>Energy</code>; the built-in rows go from <code>-1.5</code> to <code>+10</code></td>
+<td><code>-1 Mood</code> to <code>+3 Mood</code>, <code>+1 Energy</code> to <code>+2 Energy</code>, <code>+0.5 Confidence</code> to <code>+10 Confidence</code>, or <code>-1 Accident</code></td>
+<td>names: <code>Mood</code>, <code>Confidence</code>, <code>Energy</code></td>
 </tr>
 <tr>
 <td><code>Effect 2</code></td>
 <td>same, or empty</td>
-<td></td>
+<td><code>-1.5 Energy</code>, <code>+1 Energy</code>, <code>+0.5 Mood</code>, <code>+10 Mood</code> or <code>+1 Confidence</code> on 9 rows; empty on the rest</td>
 <td></td>
 </tr>
 <tr>
@@ -4217,7 +4224,7 @@ towers); an invented name is accepted and does nothing.</p>
 <td><code>Farming Time</code></td>
 <td>whole number</td>
 <td>0–400</td>
-<td>in-game minutes of work per harvest for one crew member; two workers halve it</td>
+<td>in-game minutes of work per harvest, by one crew member at a time</td>
 </tr>
 <tr>
 <td><code>Resource Amount</code></td>
@@ -4259,7 +4266,7 @@ towers); an invented name is accepted and does nothing.</p>
 <td><code>Is Fireproof</code></td>
 <td><code>TRUE</code>/<code>FALSE</code></td>
 <td></td>
-<td>making trees fireproof removes fire spread from the map</td>
+<td><code>TRUE</code> makes the object a firebreak: fire can neither start on nor spread onto the tiles it covers. Fire still crosses the open ground around it</td>
 </tr>
 </tbody>
 </table>
@@ -4452,7 +4459,7 @@ introducing new ones.</p>
 <td><code>Time To Craft</code></td>
 <td>whole number</td>
 <td>10–180</td>
-<td>in-game minutes of work for one crew member; two workers halve it</td>
+<td>in-game minutes of work, by one crew member at a time</td>
 </tr>
 <tr>
 <td><code>Valid Entry</code></td>
@@ -4645,7 +4652,7 @@ event value into a <code>Timed</code> row pins a crew member's mood to the ceili
 <td><code>ModifierRange</code></td>
 <td><code>min/max</code> whole numbers</td>
 <td><code>0/-5</code>, <code>2/0</code></td>
-<td>bonus applied to the roll</td>
+<td>added to the lowest/highest stat roll; ignored by <code>NoFlightModifier</code> rows</td>
 </tr>
 <tr>
 <td><code>Parameter</code></td>
@@ -4695,7 +4702,7 @@ and then fails when the task runs. This is the one place in this table where you
 <tbody>
 <tr>
 <td><code>Phase</code></td>
-<td><code>Work</code>, <code>Leisure</code>, <code>Sleep</code></td>
+<td><code>Work</code>, <code>Leisure</code>, <code>Sleep</code> (<code>Alert</code> and <code>None</code> are also accepted but are not meant for the schedule)</td>
 <td></td>
 </tr>
 <tr>
@@ -4710,8 +4717,10 @@ and then fails when the task runs. This is the one place in this table where you
 </tr>
 </tbody>
 </table>
-<p>The four spans are expanded hour by hour, so <strong>gaps and overlaps both matter</strong>: an hour no row covers has no
-phase at all and the crew idle through it. Keep the spans continuous from 0 to 24.</p>
+<p>The four spans are expanded hour by hour, and <strong>every hour from 0 to 23 must be covered by exactly one row</strong>.
+With a gap or an overlap, the hourly phase lookup throws an error and the base stays in whatever phase it was
+in before - a broken state, not a defined "no phase". A row whose <code>Phase</code> is misspelled is skipped with a
+warning, which leaves a gap. Keep the spans continuous from 0 to 24, without overlaps.</p>
 <h4 id="daynightsystemdata-sun-and-shadows"><code>DayNightSystemData</code> - sun and shadows<a class="headerlink" href="#daynightsystemdata-sun-and-shadows" title="Permanent link">&para;</a></h4>
 <p>Built-in file: <a href="../../assets/csv/DayNightSystemData.csv">DayNightSystemData.csv</a></p>
 <p>Name and value, all numbers, purely visual.</p>
@@ -4782,6 +4791,7 @@ and the log carries an error. This is the table to be most careful with.</p>
 <code>AirplaneIntegrityModifierTreshold</code>, <code>AirplaneHealthModifierTreshold</code>, <code>AirAttackFighterHealth</code>,
 <code>AirAttackDiverHealth</code>, <code>AirAttackBomberHealth</code>.</p>
 <h4 id="feedbackvariables"><code>FeedbackVariables</code><a class="headerlink" href="#feedbackvariables" title="Permanent link">&para;</a></h4>
+<p>Built-in file: <a href="../../assets/csv/FeedbackVariables.csv">FeedbackVariables.csv</a></p>
 <p>The in-game feedback form: <code>API Endpoint</code>, <code>Feedback Character Limit</code>, <code>Screenshot Height</code>, <code>Survey Link</code>,
 <code>Survey Link Demo</code>, <code>Survey Opened Player Prefs</code>. There is no reason for a gameplay mod to touch this, and
 pointing <code>API Endpoint</code> elsewhere sends players' feedback to that address.</p>

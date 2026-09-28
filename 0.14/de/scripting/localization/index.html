@@ -1769,8 +1769,6 @@
       
         
       
-        
-      
     
     
     
@@ -1859,34 +1857,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -2608,7 +2578,7 @@
 <tr>
 <td>Sprachen</td>
 <td>eine</td>
-<td>beliebig viele, auch solche, die das Spiel nicht mitliefert</td>
+<td>alle, die das Spiel in seinen Einstellungen anbietet</td>
 </tr>
 <tr>
 <td>Gut für</td>
@@ -2641,7 +2611,7 @@ quest/&lt;questId&gt;/subQuest&lt;N&gt;_description
 </code></pre></div>
 <p>Bei Platzhalternamen zählt Groß- und Kleinschreibung, und sie müssen exakt übereinstimmen. Werte müssen Strings sein, pack Zahlen und Ids also in <code>str(...)</code>.</p>
 <h2 id="inline-formatting">Inline-Formatierung<a class="headerlink" href="#inline-formatting" title="Permanent link">&para;</a></h2>
-<p>Drei Tags funktionieren in jedem Text:</p>
+<p>Vier Tags funktionieren in jedem Text:</p>
 <table>
 <thead>
 <tr>
@@ -2662,17 +2632,23 @@ quest/&lt;questId&gt;/subQuest&lt;N&gt;_description
 <td><code>[morale:&lt;name&gt;]</code></td>
 <td>Symbol und Farbe der Moralkategorie</td>
 </tr>
+<tr>
+<td><code>[CharacterStat:&lt;name&gt;]</code></td>
+<td>Symbol und Farbe einer Crew-Fähigkeit (<code>Flying</code>, <code>Shooting</code>, <code>Bombing</code>, <code>Endurance</code>, <code>Engineering</code>, <code>Navigating</code>)</td>
+</tr>
 </tbody>
 </table>
+<p><code>CharacterStat</code> schreibt sich mit großem <code>C</code> und <code>S</code> - bei diesem Tag kommt es auf Groß- und Kleinschreibung an.</p>
 <p>Kombiniere sie mit Platzhaltern, um einen Charakter aus einem Event zu nennen:</p>
 <div class="highlight"><pre><span></span><code><span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"mymod/chat"</span><span class="p">,</span>
                      <span class="s2">"[character:{[FIRST]}] talked to [character:{[SECOND]}] until dawn."</span><span class="p">)</span>
 
 <span class="n">event_log</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="s2">"mymod/chat"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"FIRST"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">first_id</span><span class="p">),</span> <span class="s2">"SECOND"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">second_id</span><span class="p">)})</span>
 </code></pre></div>
-<p>Für Ressourcen und Moral setzt du den Spielwert beim Laden des Skripts in den Text ein:</p>
+<p>Für Ressourcen, Moral und Crew-Fähigkeiten setzt du den Spielwert beim Laden des Skripts in den Text ein:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.GameResources</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.Game.Characters.Morale</span><span class="w"> </span><span class="kn">import</span> <span class="n">MoraleCategory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">BlindGame.CharacterStats.Data</span><span class="w"> </span><span class="kn">import</span> <span class="n">CharacterStatType</span>
 
 <span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"mymod/mice"</span><span class="p">,</span>
                      <span class="s2">"Mice got into the [resource:</span><span class="si">{}</span><span class="s2">] again."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ResourceType</span><span class="o">.</span><span class="n">FoodRations</span><span class="p">))</span>
@@ -2681,7 +2657,7 @@ quest/&lt;questId&gt;/subQuest&lt;N&gt;_description
 </code></pre></div>
 <p>f-Strings funktionieren auch, und die eigenen Skripte des Spiels verwenden sie. Denk daran, die geschweiften Klammern eines Platzhalters in einem f-String zu verdoppeln: <code>f"[character:{{[FIRST]}}] shared the [resource:{ResourceType.FoodRations}]"</code>.</p>
 <h2 id="languages">Sprachen<a class="headerlink" href="#languages" title="Permanent link">&para;</a></h2>
-<p>Definiere immer Englisch (<code>"en"</code>). Hat ein Term keinen Text in der Sprache des Spielers, greift das Spiel auf eine Sprache zurück, die ihn hat, also auf Englisch, wenn du es definiert hast, statt den rohen Schlüssel anzuzeigen.</p>
+<p>Definiere immer Englisch (<code>"en"</code>). Hat ein Term keinen Text in der Sprache des Spielers, zeigt das Spiel den Text einer Sprache, die du registriert hast - mit <code>en</code> bist du also auf der sicheren Seite. Ein Schlüssel, der in keiner einzigen Sprache registriert ist, erscheint als roher Schlüssel.</p>
 <p>Zum Übersetzen rufst du <code>SetTerm</code> einmal pro Sprache auf:</p>
 <div class="highlight"><pre><span></span><code><span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"mymod/greeting"</span><span class="p">,</span> <span class="s2">"Good morning, gentlemen."</span><span class="p">)</span>
 <span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"de"</span><span class="p">,</span> <span class="s2">"mymod/greeting"</span><span class="p">,</span> <span class="s2">"Guten Morgen, meine Herren."</span><span class="p">)</span>
@@ -2689,7 +2665,7 @@ quest/&lt;questId&gt;/subQuest&lt;N&gt;_description
 </code></pre></div>
 <p>Das Spiel liefert diese Sprachcodes mit:</p>
 <p><code>en</code>, <code>en-GB</code>, <code>de-DE</code>, <code>de</code>, <code>ar</code>, <code>bg</code>, <code>ca</code>, <code>zh-CN</code>, <code>zh-TW</code>, <code>cs</code>, <code>da</code>, <code>nl</code>, <code>fi</code>, <code>fr</code>, <code>el</code>, <code>hu</code>, <code>id</code>, <code>it</code>, <code>ja</code>, <code>ko</code>, <code>ms</code>, <code>nb</code>, <code>fa</code>, <code>pl</code>, <code>pt</code>, <code>pt-BR</code>, <code>ro</code>, <code>ru</code>, <code>es</code>, <code>es-419</code>, <code>sv</code>, <code>gsw-CH</code>, <code>th</code>, <code>tr</code>, <code>uk</code>, <code>vi</code></p>
-<p>Deutsch ist <code>de</code> - das ist die Sprache, die Spieler in den Einstellungen wählen (<code>de-DE</code> in der Liste ist eine Testsprache, die du ignorieren kannst). Ein unbekannter Code wird automatisch hinzugefügt, Text für eine Sprache, die das Spiel nicht mitliefert, braucht also keine Vorbereitung (der Spieler braucht allerdings trotzdem eine Möglichkeit, diese Sprache auszuwählen).</p>
+<p>Deutsch ist <code>de</code> - das ist die Sprache, die Spieler in den Einstellungen wählen (<code>de-DE</code> in der Liste ist eine Testsprache, die du ignorieren kannst). Der Sprachcode muss einer sein, den das Spiel in seinen Einstellungen anbietet.</p>
 <p>Ein praktisches Muster für mehrere Sprachen:</p>
 <div class="highlight"><pre><span></span><code><span class="n">TEXTS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"mymod/greeting"</span><span class="p">:</span> <span class="p">{</span>

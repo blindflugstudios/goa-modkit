@@ -1830,8 +1830,6 @@
       
         
       
-        
-      
     
     
     
@@ -1920,34 +1918,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -2587,7 +2557,7 @@
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EarliestAppearanceDay"</span><span class="p">,</span><span class="w"> </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="w"> </span><span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
-<p>Jeder Eintrag ist eine Sperre, und alle müssen erfüllt sein. Typ 0 ist die Landebahnstufe, die die Basis haben muss; Typ 1 ist der früheste Tag, gezählt ab Beginn der Kampagne. Typ 3 lässt die Mission auf eine andere folgen, siehe <a href="../chains/">Ketten und Kampagnen</a>. Die vollständige Liste steht in der <a href="../reference/#requirements">Referenz</a>.</p>
+<p>Jeder Eintrag ist eine Sperre, und alle müssen erfüllt sein. Typ 0 ist die Landebahnstufe, die die Basis haben muss; Typ 1 ist der früheste Tag, gezählt ab dem Startdatum der Karte. Typ 3 lässt die Mission auf eine andere folgen, siehe <a href="../chains/">Ketten und Kampagnen</a>. Die vollständige Liste steht in der <a href="../reference/#requirements">Referenz</a>.</p>
 <h3 id="how-the-dice-fall">Wie die Würfel fallen<a class="headerlink" href="#how-the-dice-fall" title="Permanent link">&para;</a></h3>
 <p>Zwei Würfe entscheiden jede Mission:</p>
 <ol>
@@ -2612,7 +2582,7 @@ index 3   as planned,  skill passed
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><code>_effectValue</code> steht immer in Anführungszeichen. Bei <code>Damage</code> (Typ 3) ist es ein Bereich wie <code>"20-60"</code>, der für jedes Flugzeug einzeln gewürfelt wird. Bei allem anderen ist es eine ganze Zahl wie <code>"-40"</code>. Alle Effekttypen stehen in der <a href="../reference/#outcomes">Referenz</a>.</p>
+<p><code>_effectValue</code> steht immer in Anführungszeichen. Bei <code>Damage</code> (Typ 3) ist es ein Bereich wie <code>"20-60"</code>, der pro Flug gewürfelt wird. Bei allem anderen ist es eine ganze Zahl wie <code>"-40"</code>. Alle Effekttypen stehen in der <a href="../reference/#outcomes">Referenz</a>.</p>
 <h3 id="the-stats-at-least-two">Die Stats: mindestens zwei<a class="headerlink" href="#the-stats-at-least-two" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">"_missionStats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recon"</span><span class="p">,</span><span class="w">           </span><span class="nt">"_missionSkillType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">"_statRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mf">45.0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
@@ -2659,7 +2629,7 @@ index 3   as planned,  skill passed
 </tr>
 <tr>
 <td>die Flugzeuge sind zurück</td>
-<td><code>send_mission_result_text</code></td>
+<td><code>send_mission_result_event</code></td>
 <td>eine Abschlusszeile im Ereignisprotokoll</td>
 </tr>
 <tr>
@@ -2710,7 +2680,7 @@ index 3   as planned,  skill passed
 <span class="n">_term</span><span class="p">(</span><span class="s2">"gw_success_transmission"</span><span class="p">,</span> <span class="s2">"Despite the weather the flight brought back a full report."</span><span class="p">)</span>
 <span class="n">_term</span><span class="p">(</span><span class="s2">"gw_failure_transmission"</span><span class="p">,</span> <span class="s2">"The flight lost the coastline in the murk and turned back early."</span><span class="p">)</span>
 </code></pre></div>
-<p><code>ap</code> steht für "as planned" (wie geplant), <code>gw</code> für "gone wrong" (schiefgelaufen). Die ersten drei Namen liest das Spiel selbst, sie lassen sich nicht ändern; fehlt einer, zeigt das Missionsfenster den rohen Schlüssel. Die anderen sechs verwendet das Skript, und jede mitgelieferte Mission nutzt genau diese Namen, also bleib dabei. Mehr unter <a href="../../scripting/localization/">Lokalisierung</a>.</p>
+<p><code>ap</code> steht für "as planned" (wie geplant), <code>gw</code> für "gone wrong" (schiefgelaufen). Die ersten drei Namen liest das Spiel selbst, sie lassen sich nicht ändern; fehlt einer, bleibt dieser Platz im Spiel leer. Die anderen sechs verwendet das Skript, und jede mitgelieferte Mission nutzt genau diese Namen, also bleib dabei. Mehr unter <a href="../../scripting/localization/">Lokalisierung</a>.</p>
 <h3 id="three-handlers-are-enough">Drei Handler reichen<a class="headerlink" href="#three-handlers-are-enough" title="Permanent link">&para;</a></h3>
 <p><strong>Die Id.</strong> Gib genau den Dateinamen zurück:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">MissionEvent</span><span class="o">.</span><span class="n">GET_MISSION_ID</span><span class="p">)</span>

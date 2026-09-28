@@ -1375,10 +1375,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#send_mission_result_text" class="md-nav__link">
+  <a href="#send_mission_result_event" class="md-nav__link">
     <span class="md-ellipsis">
       
-        send_mission_result_text
+        send_mission_result_event
       
     </span>
   </a>
@@ -1386,10 +1386,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#send_mission_cancelled_text" class="md-nav__link">
+  <a href="#send_mission_cancelled_event" class="md-nav__link">
     <span class="md-ellipsis">
       
-        send_mission_cancelled_text
+        send_mission_cancelled_event
       
     </span>
   </a>
@@ -2034,8 +2034,6 @@
       
         
       
-        
-      
     
     
     
@@ -2124,34 +2122,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -2673,10 +2643,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#send_mission_result_text" class="md-nav__link">
+  <a href="#send_mission_result_event" class="md-nav__link">
     <span class="md-ellipsis">
       
-        send_mission_result_text
+        send_mission_result_event
       
     </span>
   </a>
@@ -2684,10 +2654,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#send_mission_cancelled_text" class="md-nav__link">
+  <a href="#send_mission_cancelled_event" class="md-nav__link">
     <span class="md-ellipsis">
       
-        send_mission_cancelled_text
+        send_mission_cancelled_event
       
     </span>
   </a>
@@ -3014,7 +2984,7 @@
 <tr>
 <td>Ausgänge</td>
 <td>vier <code>_missionOutcomes</code></td>
-<td><code>missions_api.SetOutcome</code> und <code>AddOutcomeEffect</code>, oder <code>get_mission_result</code></td>
+<td><code>missions_api.SetOutcome</code> und <code>AddOutcomeEffect</code>, dazu <code>get_mission_result</code> (Pflicht)</td>
 </tr>
 <tr>
 <td>Ereignisse im Flug pro Flug</td>
@@ -3084,7 +3054,7 @@
 <tr>
 <td>3</td>
 <td>Ein Slot ist fällig</td>
-<td>Jede historische Mission ohne Datum, deren Sperren erfüllt sind, nimmt diesen Slot. Nur wenn keine fällig ist, läuft eine Zufallsziehung.</td>
+<td>Jede historische Mission ohne Datum, deren Sperren erfüllt sind, erscheint zusammen mit dieser Wochenmission und belegt den Slot nicht. Den Slot selbst füllt die Zufallsziehung.</td>
 </tr>
 <tr>
 <td>4</td>
@@ -3099,7 +3069,7 @@
 <tr>
 <td>6</td>
 <td>Erstellung</td>
-<td>Das Spiel wählt einen Ort (bis zu 5 Versuche, um zwei Missionen am selben Fleck zu vermeiden), berechnet daraus Entfernung und Treibstoff und richtet die Mission aus JSON oder Skript ein. Dann ruft es <a href="#initialize_mission"><code>initialize_mission</code></a> auf.</td>
+<td>Das Spiel wählt einen Ort (eine Ziehung plus bis zu fünf weitere, um zwei Missionen am selben Fleck zu vermeiden), berechnet daraus Entfernung und Treibstoff und richtet die Mission aus JSON oder Skript ein. Dann ruft es <a href="#initialize_mission"><code>initialize_mission</code></a> auf.</td>
 </tr>
 <tr>
 <td>7</td>
@@ -3119,7 +3089,7 @@
 <tr>
 <td>10</td>
 <td>Rückkehr</td>
-<td>Die Flugzeuge landen, die Akten der Crew werden aktualisiert, Events feuern. Dann <a href="#send_mission_result_text"><code>send_mission_result_text</code></a> oder <a href="#send_mission_cancelled_text"><code>send_mission_cancelled_text</code></a>, falls der Spieler die Mission abgebrochen hat.</td>
+<td>Die Flugzeuge landen, die Akten der Crew werden aktualisiert, Events feuern. Dann <a href="#send_mission_result_event"><code>send_mission_result_event</code></a> oder <a href="#send_mission_cancelled_event"><code>send_mission_cancelled_event</code></a>, falls der Spieler die Mission abgebrochen hat oder sie verfallen ist.</td>
 </tr>
 <tr>
 <td>11</td>
@@ -3180,7 +3150,7 @@
 <p class="admonition-title">Mindestens zwei Missions-Stats</p>
 <p>Der Fertigkeitswurf liest direkt den ersten und den zweiten Eintrag von <code>_missionStats</code>. Mit nur einem stürzt die Mission beim Fertigkeitswurf ab.</p>
 </div>
-<p>"Erfolg" in einer Kette oder einer Quest bedeutet nicht Index 3. Es bedeutet, dass der gewählte Ausgang <code>"_missionSuccess": true</code> hat. Index 1 (schiefgelaufen, aber gerettet) kann als Erfolg zählen, wenn du das so festlegst.</p>
+<p>"Erfolg" in einer Kette oder einer Quest bedeutet nicht Index 3. Welcher Ausgang als Erfolg zählt, ist durch seine Position festgelegt: Index 0 und 2 sind Fehlschläge, Index 1 (schiefgelaufen, aber gerettet) und Index 3 sind Erfolge.</p>
 <h2 id="handlers">Handler<a class="headerlink" href="#handlers" title="Permanent link">&para;</a></h2>
 <p>Ein Handler ist eine Python-Funktion, die das Spiel zu einem festen Zeitpunkt aufruft. Du markierst sie mit dem Decorator <code>@event_handler(...)</code> und dem Namen des Zeitpunkts:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.FlightMission</span><span class="w"> </span><span class="kn">import</span> <span class="n">MissionEvent</span>
@@ -3225,13 +3195,13 @@
 <td>in beiden Modi</td>
 </tr>
 <tr>
-<td><code>send_mission_result_text</code></td>
+<td><code>send_mission_result_event</code></td>
 <td><code>SEND_MISSION_RESULT_EVENT</code></td>
 <td>nichts</td>
-<td>in beiden Modi</td>
+<td>in beiden Modi, außer bei Abbruch</td>
 </tr>
 <tr>
-<td><code>send_mission_cancelled_text</code></td>
+<td><code>send_mission_cancelled_event</code></td>
 <td><code>SEND_MISSION_CANCELLED_EVENT</code></td>
 <td>nichts</td>
 <td>in beiden Modi</td>
@@ -3294,7 +3264,7 @@
 <td><code>get_mission_result</code></td>
 <td><code>GET_MISSION_RESULT</code></td>
 <td>bool</td>
-<td>nur ohne Daten</td>
+<td>nur Skript - <strong>Pflicht</strong></td>
 </tr>
 <tr>
 <td><code>get_mission_icon</code></td>
@@ -3372,10 +3342,10 @@
         <span class="n">missions_api</span><span class="o">.</span><span class="n">CreateMission</span><span class="p">(</span><span class="s2">"mymod_pursuit"</span><span class="p">)</span>
 </code></pre></div>
 <p>Siehe <a href="../chains/#when-json-is-not-enough">Ketten und Kampagnen</a>.</p>
-<h3 id="send_mission_result_text">send_mission_result_text<a class="headerlink" href="#send_mission_result_text" title="Permanent link">&para;</a></h3>
-<p>Wird aufgerufen, nachdem die Flugzeuge von einer Mission zurückgekommen sind, die bis zum Ende geflogen wurde. Die übliche Aufgabe ist eine Abschlusszeile im Ereignisprotokoll mit <code>event_log.Create</code>. Die Python-Konstante ist <code>MissionEvent.SEND_MISSION_RESULT_EVENT</code>.</p>
-<h3 id="send_mission_cancelled_text">send_mission_cancelled_text<a class="headerlink" href="#send_mission_cancelled_text" title="Permanent link">&para;</a></h3>
-<p>Wird statt <code>send_mission_result_text</code> aufgerufen, wenn der Spieler die Mission abgebrochen hat. Die Python-Konstante ist <code>MissionEvent.SEND_MISSION_CANCELLED_EVENT</code>. Eine abgebrochene Mission wendet keinen Ausgang an und zählt für Ketten als <code>cancelled</code>, nicht als Fehlschlag.</p>
+<h3 id="send_mission_result_event">send_mission_result_event<a class="headerlink" href="#send_mission_result_event" title="Permanent link">&para;</a></h3>
+<p>Wird aufgerufen, nachdem die Flugzeuge von einer Mission zurückgekommen sind, die bis zum Ende geflogen wurde - immer, außer wenn die Mission abgebrochen wurde. Die übliche Aufgabe ist eine Abschlusszeile im Ereignisprotokoll mit <code>event_log.Create</code>. Die Python-Konstante ist <code>MissionEvent.SEND_MISSION_RESULT_EVENT</code>, der Event-String <code>send_mission_result_text</code>.</p>
+<h3 id="send_mission_cancelled_event">send_mission_cancelled_event<a class="headerlink" href="#send_mission_cancelled_event" title="Permanent link">&para;</a></h3>
+<p>Wird statt <code>send_mission_result_event</code> aufgerufen, wenn der Spieler die Mission abbricht oder sie verfällt. Die Python-Konstante ist <code>MissionEvent.SEND_MISSION_CANCELLED_EVENT</code>, der Event-String <code>send_mission_cancelled_text</code>. Eine abgebrochene Mission wendet keinen Ausgang an und zählt für Ketten als <code>cancelled</code>, nicht als Fehlschlag.</p>
 <h3 id="get_mission_result_text">get_mission_result_text<a class="headerlink" href="#get_mission_result_text" title="Permanent link">&para;</a></h3>
 <p>Wird aufgerufen, wenn der Spieler das Ergebnisfenster einer Mission öffnet, die bis zum Ende geflogen wurde. Gib den Textschlüssel der Zeile zurück, die das Fenster zeigen soll. Lies hier nur die Würfe; würfle nie selbst.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">MissionEvent</span><span class="o">.</span><span class="n">GET_MISSION_RESULT_TEXT</span><span class="p">)</span>
@@ -3404,7 +3374,7 @@
 <h3 id="get_fuel_level">get_fuel_level<a class="headerlink" href="#get_fuel_level" title="Permanent link">&para;</a></h3>
 <p>Reine Skript-Missionen. Gibt den Treibstoff zurück, den der Flug kostet. Standard, wenn er fehlt: 100. Ruft das Skript <code>SetMissionLocation</code> auf, wird der Treibstoff aus der Entfernung zu diesem Ort neu berechnet.</p>
 <h3 id="get_mission_result">get_mission_result<a class="headerlink" href="#get_mission_result" title="Permanent link">&para;</a></h3>
-<p>Gibt <code>True</code> zurück, wenn die Mission erfolgreich war, sonst <code>False</code>. Das Spiel fragt nur, wenn es keine Ausgangsdaten für die Mission hat: bei einer reinen Skript-Mission, die keine Ausgänge geschrieben hat, oder bei einer, deren geschriebene Daten verloren gingen, weil der Spieler einen Spielstand geladen hat. Fehlt der Handler in dieser Situation, scheitert die Mission beim Ende mit einem Fehler.</p>
+<p>Gibt <code>True</code> zurück, wenn die Mission erfolgreich war, sonst <code>False</code>. Jede reine Skript-Mission muss ihn definieren: Er entscheidet über das Ende, und ohne ihn scheitert die Mission beim Abschluss mit einem Fehler.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">MissionEvent</span><span class="o">.</span><span class="n">GET_MISSION_RESULT</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_mission_result</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">missions_api</span><span class="o">.</span><span class="n">GetAsPlannedRoll</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">)</span> <span class="ow">and</span> <span class="n">missions_api</span><span class="o">.</span><span class="n">GetSkillRoll</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">)</span>
@@ -3497,7 +3467,7 @@
 <tr>
 <td><code>_historicDay</code></td>
 <td>Datum</td>
-<td>Frühestes Datum, an dem eine historische Mission erscheint. Ein Jahr unter 1900 zählt als "kein Datum".</td>
+<td>Der genaue Tag, an dem eine historische Mission erscheint. Ein Jahr unter 1900 zählt als "kein Datum".</td>
 </tr>
 <tr>
 <td><code>_rawMissionName</code> ... <code>_rawGwFailureTransmission</code></td>
@@ -3544,13 +3514,13 @@
 <td>1</td>
 <td><code>EarliestAppearanceDay</code></td>
 <td>Tage, <code>"14"</code></td>
-<td>seit Beginn der Kampagne mindestens so viele Tage vergangen sind</td>
+<td>die Tageszahl, gezählt ab dem Startdatum der Karte, diesen Wert erreicht hat</td>
 </tr>
 <tr>
 <td>2</td>
 <td><code>LatestAppearanceDay</code></td>
 <td>Tage, <code>"40"</code></td>
-<td>seit Beginn der Kampagne höchstens so viele Tage vergangen sind</td>
+<td>die Tageszahl, gezählt ab dem Startdatum der Karte, diesen Wert noch nicht überschritten hat</td>
 </tr>
 <tr>
 <td>3</td>
@@ -3635,7 +3605,7 @@
 <td>3</td>
 <td><code>Damage</code></td>
 <td>Bereich, <code>"20-60"</code></td>
-<td>Schaden an jedem Flugzeug, pro Flugzeug gewürfelt; schwerer Schaden verletzt auch die Crew</td>
+<td>Schaden an den Flugzeugen, pro Flug gewürfelt; schwerer Schaden verletzt auch die Crew</td>
 </tr>
 <tr>
 <td>4</td>

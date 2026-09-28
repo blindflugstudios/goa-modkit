@@ -1578,8 +1578,6 @@
       
         
       
-        
-      
     
     
     
@@ -1668,34 +1666,6 @@
     
   
     Objects and models
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Terrain objects
   
 
     
@@ -2307,12 +2277,14 @@
 </table>
 <p>That third folder always wins, which makes it a good place to try changes out - and a place to remember to clear when a mission of yours seems to ignore the copy in your mod folder.</p>
 <h2 id="the-mission-editor">The Mission Editor<a class="headerlink" href="#the-mission-editor" title="Permanent link">&para;</a></h2>
-<p>Open the game and choose <strong>Mission Editor</strong> in the main menu.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The editor always opens on a single working mission called <code>new_mission</code>. It loads yours if you have saved one under that id, and otherwise starts a fresh one. Rename it in the <strong>Mission Id</strong> field before saving, and the next visit starts a new <code>new_mission</code>, so you can write one mission after another.</p>
-<p>There is no mission browser yet, so the editor cannot open a shipped mission or reopen one you renamed and saved. To come back to a saved mission, edit its <code>.json</code> in the Missions folder above, or start again from a copy.</p>
-</div>
+<p>Open the game and choose <strong>Mission Editor</strong> in the main menu. That opens the mission list: every shipped mission, every mission from an enabled mod, and every mission you saved yourself. <strong>Create</strong> starts a fresh mission with the id <code>new_mission</code> - rename it in the <strong>Mission Id</strong> field before saving. <strong>Edit</strong> opens any mission in the list, shipped ones included. A shipped mission cannot be saved under its own id, so give it a new id and it is saved as your own copy. Your own saved missions carry a delete button, and <strong>Refresh</strong> re-reads the list.</p>
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
+!!! note
+    The editor always opens on a single working mission called `new_mission`. It loads yours if you have saved one under that id, and otherwise starts a fresh one. Rename it in the **Mission Id** field before saving, and the next visit starts a new `new_mission`, so you can write one mission after another.
+
+    There is no mission browser yet, so the editor cannot open a shipped mission or reopen one you renamed and saved. To come back to a saved mission, edit its `.json` in the Missions folder above, or start again from a copy.
+-->
+
 <h3 id="what-you-fill-in">What you fill in<a class="headerlink" href="#what-you-fill-in" title="Permanent link">&para;</a></h3>
 <p><strong>Identity.</strong> The mission id, and the tags that decide which maps the mission can appear on. An id must be lower-case letters, digits and underscores only.</p>
 <p><strong>Tags.</strong> Tags are free-form labels, not map names. A map lists the tags it supports in its <code>Metadata.json</code> (the <code>_tags</code> field inside the <code>.goamap</code> file), a mission lists the tags it is written for (the <code>_tags</code> field of the mission JSON), and the mission can only turn up on that map when the two lists share at least one tag. Several tags on a mission mean "any of these" - one match is enough.</p>
@@ -2324,13 +2296,13 @@
 </div>
 <p><strong>Validate</strong> warns you when a mission carries a tag that no known map declares. That mission can never appear anywhere, which is only what you want if a script hands it out directly.</p>
 <p><strong>Timing and size.</strong> How many aircraft the player may send, how long the mission waits on the map before it expires, and how long the flight itself takes. Both times are ranges - the game rolls a value between the two numbers.</p>
-<p><strong>Difficulty.</strong> The chance the mission goes as planned, a difficulty rating from 1 to 3, and the enemy strength the intel report shows the player.</p>
-<p><strong>Text.</strong> The mission name and description, the intel threat report, and the radio transmissions for each ending. Type them straight in. A mission written in the editor does not need a script, because every mission without one runs on the game's shared default mission script.</p>
+<p><strong>Difficulty.</strong> The chance the mission goes as planned and a difficulty rating from 1 to 3.</p>
+<p><strong>Text.</strong> The mission name and description, the intel threat report with the enemy strength it shows the player (flavour only - it does not affect the outcome), and the radio transmissions for each ending. Type them straight in. A mission written in the editor does not need a script, because every mission without one runs on the game's shared default mission script.</p>
 <p><strong>Locations.</strong> Where on the war map the mission can appear. Pick from the list and add as many as you like; the game chooses one when the mission is created. The full list, with coordinates, is on <a href="locations/">Locations</a>.</p>
 <p><strong>Requirements.</strong> Conditions that must hold before the mission shows up at all - a runway tier, a date window, or another mission having been completed.</p>
 <p><strong>Stats.</strong> The skills the mission rolls against. You need exactly two: the first is used when the flight goes to plan, the second when it does not.</p>
-<p><strong>Outcomes.</strong> Exactly four endings, and what each one gives or costs - morale, victory points, damage.</p>
-<p><strong>Historic day.</strong> Tick this to make the mission part of the storyline: it appears on or after a date you choose, takes a scheduled slot when it is due, and is gone for good once it has succeeded.</p>
+<p><strong>Outcomes.</strong> Exactly four endings, and what each one gives or costs - morale, victory points, damage. Which ending counts as a success is fixed by its position and cannot be edited: slot 1 (gone wrong, skill check failed) is a failure, slot 2 (gone wrong, skill check passed) a success, slot 3 (as planned, skill check failed) a failure, slot 4 (as planned, skill check passed) a success.</p>
+<p><strong>Is Historic.</strong> Tick this to make the mission part of the storyline. With a date, it appears on that exact day; without one, it appears alongside the next weekly mission and does not take up one of that week's slots. It is gone for good once it has succeeded.</p>
 <h3 id="validate-before-you-save">Validate before you save<a class="headerlink" href="#validate-before-you-save" title="Permanent link">&para;</a></h3>
 <p><strong>Validate</strong> lists everything it can find. <strong>Save</strong> runs the same check and refuses if anything is an error.</p>
 <p><strong>Errors block saving:</strong></p>
@@ -2395,7 +2367,7 @@
 <tbody>
 <tr>
 <td>No locations</td>
-<td>the mission can never be placed on the map</td>
+<td>the game places the mission at a random location from the shipped list</td>
 </tr>
 <tr>
 <td>Duplicate location names</td>
@@ -2418,8 +2390,8 @@
 <td>the mission sits on the map forever</td>
 </tr>
 <tr>
-<td>A historic day that cannot be used</td>
-<td>the date is malformed, empty or implausibly early, so the mission has no earliest date at all</td>
+<td>Is Historic ticked but the date is empty, impossible or before 1900</td>
+<td>the mission behaves like an undated historic mission - fine if that is what you intended</td>
 </tr>
 <tr>
 <td>A stat whose minimum is above its maximum</td>
@@ -2441,11 +2413,16 @@
 </table>
 <p>The missing-text warning does not appear for shipped missions, which carry translated text rather than text typed into the editor.</p>
 <h3 id="what-the-editor-cannot-do">What the editor cannot do<a class="headerlink" href="#what-the-editor-cannot-do" title="Permanent link">&para;</a></h3>
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
+- Open or copy a shipped mission.
+-->
 <ul>
-<li>Open or copy a shipped mission.</li>
 <li>Write the Python side. Anything that has to <em>decide</em> something - react to the crew that flew, hand out a follow-up mission, change the text depending on what happened - needs a script.</li>
-<li>Build a chain beyond a single "this mission must have been completed" requirement. Longer chains are easier to see and manage in the files. See <a href="chains/">Chains and campaigns</a>.</li>
 </ul>
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
+- Build a chain beyond a single "this mission must have been completed" requirement. Longer chains are easier to see and manage in the files. See [Chains and campaigns](chains.md).
+-->
+
 <p>For any of those, open the mission file in a text editor, straight from the file browser.</p>
 <h2 id="json-and-python">JSON and Python<a class="headerlink" href="#json-and-python" title="Permanent link">&para;</a></h2>
 <p>A mission is a <code>.json</code> file holding the numbers, and optionally a <code>.py</code> file of the same name holding the text and any logic. The file name is the mission id. Both go into your mod's <code>Missions/</code> folder (or, while you try things out, into your own <code>Missions</code> folder above).</p>
@@ -2461,7 +2438,7 @@
 <li><strong>At least two mission stats.</strong> The first is used when the mission goes to plan, the second when it does not. One entry crashes the skill roll.</li>
 <li><strong>Prefix your ids with your mod name.</strong> A duplicate id silently replaces the mission it duplicates, and which one wins depends on load order.</li>
 </ul>
-<p>The Mission Editor's <strong>Validate</strong> button catches all three before you ever launch. Every field of the JSON is described on <a href="reference/">Reference</a>, and complete, working missions are collected on <a href="../examples/">Examples</a>.</p>
+<p>The Mission Editor's <strong>Validate</strong> button catches the first two, and a clash with a shipped id, before you ever launch. A clash with another mod's id, or with the Supporter Pack, it cannot see. Every field of the JSON is described on <a href="reference/">Reference</a>, and complete, working missions are collected on <a href="../examples/">Examples</a>.</p>
 <h3 id="the-two-modes">The two modes<a class="headerlink" href="#the-two-modes" title="Permanent link">&para;</a></h3>
 <p>How much of the script the game uses depends on whether the mission has a <code>.json</code> beside it.</p>
 <ul>
@@ -2470,7 +2447,7 @@
 </ul>
 <p>This is the single most common source of confusion: a handler that works perfectly in a script-only mission is simply ignored once you add a <code>.json</code>.</p>
 <h3 id="mission-event-handlers">Mission event handlers<a class="headerlink" href="#mission-event-handlers" title="Permanent link">&para;</a></h3>
-<p>A handler is a Python function the game calls at a certain moment of the mission's life. Each name below links to its full description on <a href="reference/">Reference</a>.</p>
+<p>A handler is a Python function the game calls at a certain moment of the mission's life. Each name below links to its full description on <a href="reference/">Reference</a>. Where the event string differs from the handler name, it is given in brackets.</p>
 <table>
 <thead>
 <tr>
@@ -2483,7 +2460,7 @@
 <tr>
 <td><a href="reference/#get_mission_id"><code>get_mission_id</code></a></td>
 <td>the identifier of the mission</td>
-<td><strong>always</strong> - required</td>
+<td>always - <strong>required for a mission without JSON</strong>, inherited from the default script otherwise</td>
 </tr>
 <tr>
 <td><a href="reference/#initialize_mission"><code>initialize_mission</code></a></td>
@@ -2501,13 +2478,13 @@
 <td>always</td>
 </tr>
 <tr>
-<td><a href="reference/#send_mission_result_text"><code>send_mission_result_text</code></a></td>
-<td>the text shown when the mission ends</td>
-<td>always</td>
+<td><a href="reference/#send_mission_result_event"><code>send_mission_result_event</code></a> (<code>send_mission_result_text</code>)</td>
+<td>react when the mission ends</td>
+<td>always, except when cancelled</td>
 </tr>
 <tr>
-<td><a href="reference/#send_mission_cancelled_text"><code>send_mission_cancelled_text</code></a></td>
-<td>the text shown when the player aborts</td>
+<td><a href="reference/#send_mission_cancelled_event"><code>send_mission_cancelled_event</code></a> (<code>send_mission_cancelled_text</code>)</td>
+<td>react when the player aborts or the mission expires</td>
 <td>always</td>
 </tr>
 <tr>
@@ -2558,7 +2535,7 @@
 <tr>
 <td><a href="reference/#get_mission_result"><code>get_mission_result</code></a></td>
 <td>whether the mission succeeded</td>
-<td>script-only missions</td>
+<td>script-only missions - <strong>required</strong> there</td>
 </tr>
 </tbody>
 </table>

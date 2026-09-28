@@ -1769,8 +1769,6 @@
       
         
       
-        
-      
     
     
     
@@ -1859,34 +1857,6 @@
     
   
     Objects and models
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Terrain objects
   
 
     
@@ -2473,7 +2443,7 @@
 <ol>
 <li>Finds the row by <code>Id</code>. Capitalisation of the id does not matter; the table's own spelling is kept.</li>
 <li>Builds the complete row as it would look after the change, on the side, without touching the real table yet.</li>
-<li>Fills cells the table must never leave empty with the game's default, if your change left them empty.</li>
+<li>Fills in the two cells the game completes for you, if your change left them empty: <code>0</code> in <code>ResourceCost</code>, <code>None</code> in <code>Associated Task</code> of <code>BuildingComponents</code>. Any other empty cell is left empty for the check.</li>
 <li>Checks the whole row against the table's rules (value types, allowed ranges, references to other tables, see <a href="../csv/">CSV tables</a>).</li>
 <li>Only if everything passes, writes the row into the table. Otherwise it writes nothing, logs the reason, and moves on to the next command.</li>
 </ol>
@@ -2484,11 +2454,11 @@
 </code></pre></div>
 <ul>
 <li>Changes only the columns named in <code>Cells</code>. Every other cell keeps its current value.</li>
-<li>A cell given as <code>""</code>, only spaces, or <code>null</code> is cleared (or reset to the table's default where a cell cannot be empty).</li>
+<li>A cell given as <code>""</code>, only spaces, or <code>null</code> is cleared. That is only allowed in a column where the game already leaves some row empty; elsewhere the command is refused. Only <code>ResourceCost</code> cells (which become <code>0</code>) and <code>Associated Task</code> (which becomes <code>None</code>) are filled in instead.</li>
 <li>The row must already exist. Otherwise: <code>'...' is not a built-in row; use Add to create one</code>.</li>
 <li>Every key in <code>Cells</code> must be a column of the table, spelled exactly. Otherwise the message lists the table's columns.</li>
 <li>The whole resulting row is checked, not just the cells you named. A row that was fine before stays fine unless your values break a rule.</li>
-<li>A few built-in rows span several lines in the game's own table. They cannot be patched cell by cell; the log tells you to ship the whole row as a <code>&lt;Table&gt;.csv</code> instead.</li>
+<li>A few built-in rows span several lines in the game's own table. They are refused, whether patched cell by cell or shipped as a whole row. Only in <code>ResourceCost</code> does a whole-row <code>&lt;Table&gt;.csv</code> fix them (see <a href="../csv/#rows-that-take-up-several-lines">Rows that take up several lines</a>); the multi-line rows of <code>MoraleInfluenceValues</code> and <code>TaskValues</code> cannot be changed at all.</li>
 </ul>
 <h3 id="add-create-a-new-row"><code>Add</code>: create a new row<a class="headerlink" href="#add-create-a-new-row" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Add"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"storage_box"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Cells"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Planks"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">"Metal"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
@@ -2515,7 +2485,7 @@
 </ul>
 <h2 id="when-changes-take-effect">When changes take effect<a class="headerlink" href="#when-changes-take-effect" title="Permanent link">&para;</a></h2>
 <p>Tables are rebuilt from the game's own data and all enabled mods every time a level loads. After editing a command file, save your game, choose <strong>Options → Quit to main menu</strong>, and load the save again. No restart is needed; if in doubt, restart anyway. See <a href="../../basics/testing/">Testing and reloading</a>. A brand-new <code>CSV/</code> folder, or a new mod, is only noticed after you open <strong>Mods</strong> in the main menu (press <strong>Refresh</strong>) or restart.</p>
-<p>Because the tables are rebuilt from scratch, removing a command, or switching the mod off, restores the original value at the next load.</p>
+<p>Because the tables are rebuilt from scratch, removing a command, or switching the mod off, restores the original value at the next load. The exception are aircraft already parked at your base: they keep the health, integrity and fuel capacity they were built with, so a save made while the mod was active keeps its numbers (see <a href="../csv/#vehicledata-aircraft"><code>VehicleData</code></a>).</p>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <h3 id="file">File<a class="headerlink" href="#file" title="Permanent link">&para;</a></h3>
 <table>
@@ -2589,7 +2559,7 @@
 <p>Every message starts with <code>[Mod &lt;mod id&gt;] CSV/&lt;Table&gt;.json</code>. Applied commands:</p>
 <div class="highlight"><pre><span></span><code>[Mod my_balance_mod] CSV/VehicleData.json command 1 replaced cells Fuel Capacity of row 'gladiator'.
 [Mod my_balance_mod] CSV/ResourceCost.json command 2 added row 'storage_box'.
-[Mod my_balance_mod] CSV/PropsInfluence.json command 3 cleared cells Tarp of row 'Chair'.
+[Mod my_balance_mod] CSV/ResourceCost.json command 3 cleared cells Tarp of row 'Chair'.
 [Mod my_balance_mod] CSV/PropsInfluence.json command 4 removed row 'Drawer'.
 </code></pre></div>
 <p>Problems with the whole file (nothing in it is applied):</p>
@@ -2666,7 +2636,7 @@
 </tr>
 </tbody>
 </table>
-<p>The released game may write only errors to <code>Player.log</code>; the full list of lines appears in development builds.</p>
+<p>The released game logs only errors to <code>Player.log</code>; the full list of lines appears in a development build or in the Unity editor.</p>
 
 
 

@@ -1830,8 +1830,6 @@
       
         
       
-        
-      
     
     
     
@@ -1920,34 +1918,6 @@
     
   
     Objects and models
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Terrain objects
   
 
     
@@ -2587,7 +2557,7 @@
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EarliestAppearanceDay"</span><span class="p">,</span><span class="w"> </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="w"> </span><span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
-<p>Each entry is a gate, and all of them must pass. Type 0 is the runway tier the base must have; type 1 is the earliest day, counted from the start of the campaign. Type 3 makes the mission follow another one, see <a href="../chains/">Chains and campaigns</a>. The full list is in the <a href="../reference/#requirements">Reference</a>.</p>
+<p>Each entry is a gate, and all of them must pass. Type 0 is the runway tier the base must have; type 1 is the earliest day, counted from the map's starting date. Type 3 makes the mission follow another one, see <a href="../chains/">Chains and campaigns</a>. The full list is in the <a href="../reference/#requirements">Reference</a>.</p>
 <h3 id="how-the-dice-fall">How the dice fall<a class="headerlink" href="#how-the-dice-fall" title="Permanent link">&para;</a></h3>
 <p>Two rolls decide every mission:</p>
 <ol>
@@ -2612,7 +2582,7 @@ index 3   as planned,  skill passed
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><code>_effectValue</code> is always written in quotes. For <code>Damage</code> (type 3) it is a range like <code>"20-60"</code>, rolled for each plane. For everything else it is a whole number like <code>"-40"</code>. All effect types are in the <a href="../reference/#outcomes">Reference</a>.</p>
+<p><code>_effectValue</code> is always written in quotes. For <code>Damage</code> (type 3) it is a range like <code>"20-60"</code>, rolled per flight. For everything else it is a whole number like <code>"-40"</code>. All effect types are in the <a href="../reference/#outcomes">Reference</a>.</p>
 <h3 id="the-stats-at-least-two">The stats: at least two<a class="headerlink" href="#the-stats-at-least-two" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">"_missionStats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recon"</span><span class="p">,</span><span class="w">           </span><span class="nt">"_missionSkillType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">"_statRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mf">45.0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
@@ -2659,7 +2629,7 @@ index 3   as planned,  skill passed
 </tr>
 <tr>
 <td>the planes are back</td>
-<td><code>send_mission_result_text</code></td>
+<td><code>send_mission_result_event</code></td>
 <td>a closing line in the event log</td>
 </tr>
 <tr>
@@ -2710,7 +2680,7 @@ index 3   as planned,  skill passed
 <span class="n">_term</span><span class="p">(</span><span class="s2">"gw_success_transmission"</span><span class="p">,</span> <span class="s2">"Despite the weather the flight brought back a full report."</span><span class="p">)</span>
 <span class="n">_term</span><span class="p">(</span><span class="s2">"gw_failure_transmission"</span><span class="p">,</span> <span class="s2">"The flight lost the coastline in the murk and turned back early."</span><span class="p">)</span>
 </code></pre></div>
-<p><code>ap</code> means "as planned", <code>gw</code> means "gone wrong". The first three names are read by the game itself and cannot be changed; if one is missing, the mission window shows the raw key. The other six are used by the script, and every shipped mission uses these names, so stick with them. More in <a href="../../scripting/localization/">Localization</a>.</p>
+<p><code>ap</code> means "as planned", <code>gw</code> means "gone wrong". The first three names are read by the game itself and cannot be changed; if one is missing, that slot shows nothing in game. The other six are used by the script, and every shipped mission uses these names, so stick with them. More in <a href="../../scripting/localization/">Localization</a>.</p>
 <h3 id="three-handlers-are-enough">Three handlers are enough<a class="headerlink" href="#three-handlers-are-enough" title="Permanent link">&para;</a></h3>
 <p><strong>The id.</strong> Return exactly the file name:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">MissionEvent</span><span class="o">.</span><span class="n">GET_MISSION_ID</span><span class="p">)</span>

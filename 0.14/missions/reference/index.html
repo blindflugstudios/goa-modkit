@@ -1375,10 +1375,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#send_mission_result_text" class="md-nav__link">
+  <a href="#send_mission_result_event" class="md-nav__link">
     <span class="md-ellipsis">
       
-        send_mission_result_text
+        send_mission_result_event
       
     </span>
   </a>
@@ -1386,10 +1386,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#send_mission_cancelled_text" class="md-nav__link">
+  <a href="#send_mission_cancelled_event" class="md-nav__link">
     <span class="md-ellipsis">
       
-        send_mission_cancelled_text
+        send_mission_cancelled_event
       
     </span>
   </a>
@@ -2034,8 +2034,6 @@
       
         
       
-        
-      
     
     
     
@@ -2124,34 +2122,6 @@
     
   
     Objects and models
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Terrain objects
   
 
     
@@ -2673,10 +2643,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#send_mission_result_text" class="md-nav__link">
+  <a href="#send_mission_result_event" class="md-nav__link">
     <span class="md-ellipsis">
       
-        send_mission_result_text
+        send_mission_result_event
       
     </span>
   </a>
@@ -2684,10 +2654,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#send_mission_cancelled_text" class="md-nav__link">
+  <a href="#send_mission_cancelled_event" class="md-nav__link">
     <span class="md-ellipsis">
       
-        send_mission_cancelled_text
+        send_mission_cancelled_event
       
     </span>
   </a>
@@ -3014,7 +2984,7 @@
 <tr>
 <td>Outcomes</td>
 <td>four <code>_missionOutcomes</code></td>
-<td><code>missions_api.SetOutcome</code> and <code>AddOutcomeEffect</code>, or <code>get_mission_result</code></td>
+<td><code>missions_api.SetOutcome</code> and <code>AddOutcomeEffect</code>, plus <code>get_mission_result</code> (required)</td>
 </tr>
 <tr>
 <td>In-flight events per flight</td>
@@ -3084,7 +3054,7 @@
 <tr>
 <td>3</td>
 <td>A slot comes due</td>
-<td>Every historic mission without a date whose gates pass takes this slot. Only when none is due does a random draw run.</td>
+<td>Every historic mission without a date whose gates pass appears alongside this weekly mission and does not take up the slot. The slot itself is filled by the random draw.</td>
 </tr>
 <tr>
 <td>4</td>
@@ -3099,7 +3069,7 @@
 <tr>
 <td>6</td>
 <td>Creation</td>
-<td>The game picks a location (up to 5 tries to avoid two missions on the same spot), works out distance and fuel from it, and sets up the mission from JSON or script. Then it calls <a href="#initialize_mission"><code>initialize_mission</code></a>.</td>
+<td>The game picks a location (one draw, plus up to five re-draws to avoid two missions on the same spot), works out distance and fuel from it, and sets up the mission from JSON or script. Then it calls <a href="#initialize_mission"><code>initialize_mission</code></a>.</td>
 </tr>
 <tr>
 <td>7</td>
@@ -3119,7 +3089,7 @@
 <tr>
 <td>10</td>
 <td>Return</td>
-<td>Planes land, crew records update, events fire. Then <a href="#send_mission_result_text"><code>send_mission_result_text</code></a>, or <a href="#send_mission_cancelled_text"><code>send_mission_cancelled_text</code></a> if the player called the mission off.</td>
+<td>Planes land, crew records update, events fire. Then <a href="#send_mission_result_event"><code>send_mission_result_event</code></a>, or <a href="#send_mission_cancelled_event"><code>send_mission_cancelled_event</code></a> if the player called the mission off or it expired.</td>
 </tr>
 <tr>
 <td>11</td>
@@ -3180,7 +3150,7 @@
 <p class="admonition-title">At least two mission stats</p>
 <p>The skill roll reads the first and the second entry of <code>_missionStats</code> directly. With only one, the mission crashes on the skill roll.</p>
 </div>
-<p>"Success" in a chain or a quest does not mean index 3. It means the chosen outcome has <code>"_missionSuccess": true</code>. Index 1 (gone wrong, but salvaged) can count as a success if you say so.</p>
+<p>"Success" in a chain or a quest does not mean index 3. Which ending counts as a success is fixed by its position: index 0 and 2 are failures, index 1 (gone wrong, but salvaged) and index 3 are successes.</p>
 <h2 id="handlers">Handlers<a class="headerlink" href="#handlers" title="Permanent link">&para;</a></h2>
 <p>A handler is a Python function the game calls at a fixed moment. You mark it with the <code>@event_handler(...)</code> decorator and the name of the moment:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.FlightMission</span><span class="w"> </span><span class="kn">import</span> <span class="n">MissionEvent</span>
@@ -3225,13 +3195,13 @@
 <td>both modes</td>
 </tr>
 <tr>
-<td><code>send_mission_result_text</code></td>
+<td><code>send_mission_result_event</code></td>
 <td><code>SEND_MISSION_RESULT_EVENT</code></td>
 <td>nothing</td>
-<td>both modes</td>
+<td>both modes, except when cancelled</td>
 </tr>
 <tr>
-<td><code>send_mission_cancelled_text</code></td>
+<td><code>send_mission_cancelled_event</code></td>
 <td><code>SEND_MISSION_CANCELLED_EVENT</code></td>
 <td>nothing</td>
 <td>both modes</td>
@@ -3294,7 +3264,7 @@
 <td><code>get_mission_result</code></td>
 <td><code>GET_MISSION_RESULT</code></td>
 <td>bool</td>
-<td>only without data</td>
+<td>script only - <strong>required</strong></td>
 </tr>
 <tr>
 <td><code>get_mission_icon</code></td>
@@ -3372,10 +3342,10 @@
         <span class="n">missions_api</span><span class="o">.</span><span class="n">CreateMission</span><span class="p">(</span><span class="s2">"mymod_pursuit"</span><span class="p">)</span>
 </code></pre></div>
 <p>See <a href="../chains/#when-json-is-not-enough">Chains and campaigns</a>.</p>
-<h3 id="send_mission_result_text">send_mission_result_text<a class="headerlink" href="#send_mission_result_text" title="Permanent link">&para;</a></h3>
-<p>Called after the planes have come back from a mission that was flown to the end. The usual job is one closing line in the event log with <code>event_log.Create</code>. The Python constant is <code>MissionEvent.SEND_MISSION_RESULT_EVENT</code>.</p>
-<h3 id="send_mission_cancelled_text">send_mission_cancelled_text<a class="headerlink" href="#send_mission_cancelled_text" title="Permanent link">&para;</a></h3>
-<p>Called instead of <code>send_mission_result_text</code> when the player called the mission off. The Python constant is <code>MissionEvent.SEND_MISSION_CANCELLED_EVENT</code>. A cancelled mission applies no outcome and counts as <code>cancelled</code> for chains, not as a failure.</p>
+<h3 id="send_mission_result_event">send_mission_result_event<a class="headerlink" href="#send_mission_result_event" title="Permanent link">&para;</a></h3>
+<p>Called after the planes have come back from a mission that was flown to the end - always, except when the mission was cancelled. The usual job is one closing line in the event log with <code>event_log.Create</code>. The Python constant is <code>MissionEvent.SEND_MISSION_RESULT_EVENT</code>; the event string is <code>send_mission_result_text</code>.</p>
+<h3 id="send_mission_cancelled_event">send_mission_cancelled_event<a class="headerlink" href="#send_mission_cancelled_event" title="Permanent link">&para;</a></h3>
+<p>Called instead of <code>send_mission_result_event</code> when the player aborts the mission or it expires. The Python constant is <code>MissionEvent.SEND_MISSION_CANCELLED_EVENT</code>; the event string is <code>send_mission_cancelled_text</code>. A cancelled mission applies no outcome and counts as <code>cancelled</code> for chains, not as a failure.</p>
 <h3 id="get_mission_result_text">get_mission_result_text<a class="headerlink" href="#get_mission_result_text" title="Permanent link">&para;</a></h3>
 <p>Called when the player opens the result window of a mission that was flown to the end. Return the text key of the line the window should show. Only read the rolls here; never make them.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">MissionEvent</span><span class="o">.</span><span class="n">GET_MISSION_RESULT_TEXT</span><span class="p">)</span>
@@ -3404,7 +3374,7 @@
 <h3 id="get_fuel_level">get_fuel_level<a class="headerlink" href="#get_fuel_level" title="Permanent link">&para;</a></h3>
 <p>Script-only missions. Returns the fuel the flight costs. Default when missing: 100. If the script calls <code>SetMissionLocation</code>, the fuel is recalculated from the distance to that location.</p>
 <h3 id="get_mission_result">get_mission_result<a class="headerlink" href="#get_mission_result" title="Permanent link">&para;</a></h3>
-<p>Returns <code>True</code> if the mission succeeded, <code>False</code> if not. The game only asks when it has no outcome data for the mission: a script-only mission that authored no outcomes, or one whose authored data was lost because the player loaded a save. If it is missing in that situation, the mission fails with an error when it ends.</p>
+<p>Returns <code>True</code> if the mission succeeded, <code>False</code> if not. Every script-only mission must define it: it decides the ending, and without it the mission fails with an error when it finishes.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">MissionEvent</span><span class="o">.</span><span class="n">GET_MISSION_RESULT</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_mission_result</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">missions_api</span><span class="o">.</span><span class="n">GetAsPlannedRoll</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">)</span> <span class="ow">and</span> <span class="n">missions_api</span><span class="o">.</span><span class="n">GetSkillRoll</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">)</span>
@@ -3497,7 +3467,7 @@
 <tr>
 <td><code>_historicDay</code></td>
 <td>date</td>
-<td>Earliest date a historic mission appears. A year below 1900 counts as "no date".</td>
+<td>The exact day a historic mission appears. A year below 1900 counts as "no date".</td>
 </tr>
 <tr>
 <td><code>_rawMissionName</code> ... <code>_rawGwFailureTransmission</code></td>
@@ -3544,13 +3514,13 @@
 <td>1</td>
 <td><code>EarliestAppearanceDay</code></td>
 <td>days, <code>"14"</code></td>
-<td>at least this many days have passed since the campaign started</td>
+<td>the day number, counted from the map's starting date, has reached this value</td>
 </tr>
 <tr>
 <td>2</td>
 <td><code>LatestAppearanceDay</code></td>
 <td>days, <code>"40"</code></td>
-<td>at most this many days have passed since the campaign started</td>
+<td>the day number, counted from the map's starting date, has not passed this value</td>
 </tr>
 <tr>
 <td>3</td>
@@ -3635,7 +3605,7 @@
 <td>3</td>
 <td><code>Damage</code></td>
 <td>range, <code>"20-60"</code></td>
-<td>damage to each plane, rolled per plane; heavy damage also hurts the crew</td>
+<td>damage to the planes, rolled per flight; heavy damage also hurts the crew</td>
 </tr>
 <tr>
 <td>4</td>

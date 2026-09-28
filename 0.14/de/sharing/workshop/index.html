@@ -1573,8 +1573,6 @@
       
         
       
-        
-      
     
     
     
@@ -1663,34 +1661,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -2286,11 +2256,11 @@
 <h2 id="uploading-your-mod">Deine Mod hochladen<a class="headerlink" href="#uploading-your-mod" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Bring den Ordner genau in den Zustand, den du ausliefern willst.</strong> Der <em>ganze</em> Mod-Ordner wird so hochgeladen, wie er ist - <code>config.json</code>, <code>preview.png</code> und jeder Inhaltsunterordner. Entferne vorher Testdateien, Backups und Notizen, die du nicht veröffentlichen willst.</li>
-<li><strong>Gib ihr einen Namen und ein Bild.</strong> Der <code>Name</code> in der <code>config.json</code> wird beim ersten Upload zum Workshop-Titel (ohne <code>config.json</code> wird der Ordnername verwendet). Die <code>preview.png</code> im Hauptverzeichnis des Mod-Ordners wird zum Workshop-Bild. Sie muss ein PNG mit <strong>höchstens 1 MB</strong> sein; eine größere Datei lässt den Upload mit einem Fehler scheitern.</li>
+<li><strong>Gib ihr einen Namen und ein Bild.</strong> Der <code>Name</code> in der <code>config.json</code> wird beim ersten Upload zum Workshop-Titel (ohne <code>config.json</code> wird der Ordnername verwendet). Die <code>preview.png</code> im Hauptverzeichnis des Mod-Ordners wird beim ersten Upload zum Workshop-Bild. Sie muss ein PNG mit <strong>höchstens 1 MB</strong> sein; eine größere Datei lässt den Upload mit einem Fehler scheitern.</li>
 <li><strong>Öffne Hauptmenü (Main menu) → Mods</strong> und drück bei der Mod auf <strong>Upload</strong>. Nur deine eigenen Mods (aus deinem <code>Mods</code>-Ordner) haben diesen Button; abonnierte Workshop-Items nicht.</li>
-<li><strong>Wähl das Ziel.</strong> Ein Fenster listet <strong>Create new Workshop item...</strong> und darunter jedes Workshop-Item, das du bisher veröffentlicht hast. Wähl <strong>Create new Workshop item...</strong> für einen ersten Upload oder eines deiner bestehenden Items, um dessen Inhalt durch diese Version zu ersetzen.</li>
+<li><strong>Wähl das Ziel.</strong> Ein Fenster listet <strong>New Workshop item</strong> und darunter jedes Workshop-Item, das du bisher veröffentlicht hast. Wähl <strong>New Workshop item</strong> für einen ersten Upload oder eines deiner bestehenden Items, um dessen Inhalt durch diese Version zu ersetzen.</li>
 <li><strong>Bestätige.</strong> Das Spiel fragt noch einmal nach - "Do you want to create a new Workshop item for ...?" oder, bei einem Update, ob das bestehende Item verwendet werden soll - und du antwortest mit <strong>Ja (Yes)</strong>.</li>
-<li><strong>Warte auf den Upload.</strong> Das Fenster zeigt den Fortschritt in Prozent. Wenn er fertig ist, öffnet ein Button die Workshop-Seite des neuen Items im Steam-Overlay.</li>
+<li><strong>Warte auf den Upload.</strong> Das Fenster zeigt einen Fortschrittsbalken. Wenn der Upload fertig ist, zeigt das Fenster den Workshop-Link des Items.</li>
 </ol>
 <p>Was das Spiel beim Upload mitschickt:</p>
 <table>
@@ -2320,7 +2290,7 @@
 <tr>
 <td>Bild</td>
 <td><code>preview.png</code>, falls vorhanden</td>
-<td><code>preview.png</code>, falls vorhanden</td>
+<td>bleibt unverändert</td>
 </tr>
 <tr>
 <td>Sichtbarkeit</td>
@@ -2334,7 +2304,7 @@
 </tr>
 </tbody>
 </table>
-<p>Die Beschreibung schreibst du immer auf der Steam-Seite des Items; das Spiel schickt nie eine mit. Den Titel eines bereits veröffentlichten Items änderst du ebenfalls auf der Steam-Seite.</p>
+<p>Die Beschreibung schreibst du immer auf der Steam-Seite des Items; das Spiel schickt nie eine mit. Ein Update ersetzt nur die Dateien: Titel und Bild eines bereits veröffentlichten Items änderst du ebenfalls auf der Steam-Seite.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Beim ersten Veröffentlichen bittet dich Steam eventuell, der rechtlichen Vereinbarung für den Workshop zuzustimmen. Bis du das tust, bleibt das Item versteckt. Öffne die Steam-Seite des Items und stimm dort zu, dann wird das Item sichtbar.</p>

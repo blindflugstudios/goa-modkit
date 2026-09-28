@@ -2246,8 +2246,6 @@
       
         
       
-        
-      
     
     
     
@@ -2336,34 +2334,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -3547,11 +3517,11 @@ RandomActionChatProbability,0.6
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Diese Zeilen werden als Informationen und Warnungen geschrieben. Das veröffentlichte Spiel schreibt hauptsächlich Fehler in sein Log, deshalb siehst du sie dort vielleicht nicht. Prüf dann stattdessen die Wirkung im Spiel - lade ein Level und schau dir den geänderten Wert an.</p>
+<p>Diese Zeilen werden als Informationen und Warnungen geschrieben. Das veröffentlichte Spiel schreibt nur Fehler in sein Log, du siehst sie also nur in einem Entwickler-Build oder im Unity-Editor. Im veröffentlichten Spiel prüfst du stattdessen die Wirkung im Spiel - lade ein Level und schau dir den geänderten Wert an.</p>
 </div>
 <p>Ein falsch geschriebener Tabellenname oder eine nicht passende Kopfzeile erzeugt trotzdem eine <code>skipped:</code>-Zeile mit dem Dateinamen. <strong>Wenn du gar keine <code>[Mod ...]</code>-Zeilen siehst und die Änderung nicht auftaucht</strong>, hat das Spiel die Mod nicht erkannt: Der <code>CSV/</code>-Ordner war beim Spielstart noch leer (drück <strong>Refresh</strong> im Mods-Fenster), die Mod ist im Mods-Fenster ausgeschaltet, oder der Mod-Ordner ist ein symbolischer Link oder eine Junction, denen das Spiel nie folgt.</p>
 <h3 id="finding-a-tables-column-headers">Die Spaltenüberschriften einer Tabelle finden<a class="headerlink" href="#finding-a-tables-column-headers" title="Permanent link">&para;</a></h3>
-<p>Das Spiel liefert Kopfzeilen-Vorlagen für vier Tabellen (<code>BuildingComponents</code>, <code>PropsInfluence</code>, <code>ResourceCost</code> und <code>VehicleData</code>) in <code>GroundOfAces_Data/StreamingAssets/Modding/Templates/</code> im Installationsordner mit (unter macOS: <code>GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/</code>). Für den Rest steht die Spaltenliste auf dieser Seite, und jeder Tabellenabschnitt verlinkt die eingebaute Datei. Oder frag das Spiel: Schreib absichtlich eine falsche Kopfzeile, lade einmal, und das Log gibt die erwarteten Spalten aus.</p>
+<p>Das Spiel liefert Kopfzeilen-Vorlagen für vier Tabellen (<code>BuildingComponents</code>, <code>PropsInfluence</code>, <code>ResourceCost</code> und <code>VehicleData</code>) in <code>Ground Of Aces_Data/StreamingAssets/Modding/Templates/</code> im Installationsordner mit (unter macOS: <code>Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/</code>). Für den Rest steht die Spaltenliste auf dieser Seite, und jeder Tabellenabschnitt verlinkt die eingebaute Datei. Oder frag das Spiel: Schreib absichtlich eine falsche Kopfzeile, lade einmal, und das Log gibt die erwarteten Spalten aus.</p>
 <h2 id="load-order">Ladereihenfolge<a class="headerlink" href="#load-order" title="Permanent link">&para;</a></h2>
 <p>Mods werden in der Reihenfolge angewendet, die unter <a href="../../basics/mods/#which-mod-wins">Welche Mod gewinnt</a> beschrieben ist - zuerst Workshop, dann deine eigenen, niedrigere <code>LoadOrder</code> zuerst. Wenn zwei Mods dieselbe Zeile ändern, gewinnt die spätere bei den Zellen, die sie anfasst: Eine CSV mit der ganzen Zeile ersetzt alles, was eine frühere Mod an dieser Zeile gemacht hat, ein <code>Replace</code> nur die Zellen, die es nennt. Eine im Mods-Fenster ausgeschaltete Mod trägt nichts bei.</p>
 <h2 id="when-changes-take-effect">Wann Änderungen wirken<a class="headerlink" href="#when-changes-take-effect" title="Permanent link">&para;</a></h2>
@@ -3669,7 +3639,7 @@ besondere Regel hat, gelten nur die allgemeinen Regeln von oben.</p>
 <tr>
 <td><code>Manoeuvrability</code></td>
 <td><code>min-max</code></td>
-<td><code>2-10</code> … <code>28-50</code></td>
+<td>min 2–28, max 8–50</td>
 <td>ebenso</td>
 </tr>
 <tr>
@@ -3763,13 +3733,13 @@ die Zahlen dieser Mod, auch nachdem du sie entfernt hast.</p>
 <td><code>Minimum Missions Per Week</code></td>
 <td>ganze Zahl</td>
 <td>2–10</td>
-<td>über <code>Missions Per Week</code> ist die Quote unerfüllbar</td>
+<td>die wöchentliche HQ-Quote: wie viele Missionen die Basis jede Woche bis zu einem Ergebnis fliegen muss. Gewonnene und verlorene Missionen zählen, abgebrochene und gescheiterte historische Missionen nicht. Verfehlst du diesen Wert oder <code>Minimum Success Rate</code>, halbieren sich die Plätze der nächsten Lieferung (aufgerundet), und bei der normalen Einstellung für HQ-Verwarnungen gibt es eine Verwarnung - drei verfehlte Wochen in Folge beenden den Durchgang. Trainingswochen und die HQ-Einstellung "keine Anforderungen" überspringen die Prüfung. Über <code>Missions Per Week</code> ist die Quote unerfüllbar</td>
 </tr>
 <tr>
 <td><code>Minimum Success Rate</code></td>
 <td>Bruchteil, kein Prozentwert</td>
 <td>0.4–0.8</td>
-<td>über 1 ist unerreichbar</td>
+<td>Anteil der von <code>Minimum Missions Per Week</code> gezählten Missionen, der gewonnen werden muss; über 1 ist unerreichbar</td>
 </tr>
 <tr>
 <td><code>Available Shipment Slots</code></td>
@@ -3808,7 +3778,7 @@ die Zahlen dieser Mod, auch nachdem du sie entfernt hast.</p>
 <td><code>Material</code></td>
 <td>Text</td>
 <td><code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code>, <code>tarmac</code></td>
-<td><strong>darf das Material einer anderen Stufe nicht wiederholen</strong>; es benennt auch die <code>ResourceCost</code>-Zeile, die den Belag bepreist</td>
+<td><strong>darf das Material einer anderen Stufe nicht wiederholen</strong> und muss eine vorhandene <code>ResourceCost</code>-Zeile nennen - diese Zeile bestimmt, was jede Kachel dieser Startbahn kostet. <code>ResourceCost</code> nimmt keine neuen Belagszeilen an, bleib also in der Praxis bei <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code> und <code>tarmac</code> (sie zwischen den Stufen zu tauschen, ist in Ordnung). Ein Material ohne <code>ResourceCost</code>-Zeile wird hier angenommen, und dann schlägt das Verlegen einer Startbahn dieser Stufe mit einem Fehler fehl</td>
 </tr>
 <tr>
 <td><code>Biome Id</code></td>
@@ -3820,7 +3790,7 @@ die Zahlen dieser Mod, auch nachdem du sie entfernt hast.</p>
 <td><code>Build Time</code></td>
 <td>ganze Zahl</td>
 <td>5,2,2,2,2</td>
-<td>Spielminuten Arbeit pro Kachel für ein Crewmitglied; zwei Arbeiter halbieren sie</td>
+<td>Spielminuten Arbeit pro Kachel. An jeder Kachel arbeitet immer nur ein Crewmitglied, mehr Crew verlegt also mehr Kacheln gleichzeitig, aber keine Kachel schneller</td>
 </tr>
 </tbody>
 </table>
@@ -3895,9 +3865,44 @@ die Zahlen dieser Mod, auch nachdem du sie entfernt hast.</p>
 <h4 id="attackscomposition-what-an-air-raid-is-made-of"><code>AttacksComposition</code> - woraus ein Luftangriff besteht<a class="headerlink" href="#attackscomposition-what-an-air-raid-is-made-of" title="Permanent link">&para;</a></h4>
 <p>Eingebaute Datei: <a href="../../../assets/csv/AttacksComposition.csv">AttacksComposition.csv</a></p>
 <p>Die Zeilen-Id ist die Schwere des Angriffs. Im normalen Spiel werden <strong>1–25</strong> erreicht; die Zeilen <code>99</code>, <code>101</code>, <code>200</code> und <code>300</code> erreicht
-die normale Schwereleiter nicht, sie sind für besondere Angriffe reserviert. Die Bereiche unten beschreiben die Zeilen 1–25;
-die vier Sonderzeilen gehen darüber hinaus (<code>9-9</code> Bomber, <code>10-10</code> Sturzkampfflugzeuge, <code>0-0</code> Jäger) und verweisen in den letzten
-beiden Spalten auf sich selbst.</p>
+die normale Schwereleiter nicht, sie sind für besondere Angriffe reserviert. Die Bereiche unten beschreiben die Zeilen 1–25.
+Die vier Sonderzeilen verweisen in den letzten beiden Spalten auf sich selbst und enthalten:</p>
+<table>
+<thead>
+<tr>
+<th>Zeile</th>
+<th><code>Bombers</code></th>
+<th><code>Divers</code></th>
+<th><code>Fighters</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>99</code></td>
+<td><code>9-9</code></td>
+<td><code>6-6</code></td>
+<td><code>8-8</code></td>
+</tr>
+<tr>
+<td><code>200</code></td>
+<td><code>10-10</code></td>
+<td><code>0-0</code></td>
+<td><code>0-0</code></td>
+</tr>
+<tr>
+<td><code>300</code></td>
+<td><code>0-0</code></td>
+<td><code>10-10</code></td>
+<td><code>0-0</code></td>
+</tr>
+<tr>
+<td><code>101</code></td>
+<td><code>0-0</code></td>
+<td><code>3-3</code></td>
+<td><code>2-2</code></td>
+</tr>
+</tbody>
+</table>
 <table>
 <thead>
 <tr>
@@ -3964,7 +3969,7 @@ beiden Spalten auf sich selbst.</p>
 <td><code>Damage</code></td>
 <td>Zahl</td>
 <td>0–6</td>
-<td><strong><code>0</code> schaltet die ganze Waffe ab</strong> - Feuerrate, Munition und Zielen werden dann ignoriert</td>
+<td><code>0</code> macht das Teil zu einer Station, die nicht schießt, wie <code>Searchlight</code> oder <code>Lookout</code>: Es lässt sich weiterhin platzieren und besetzen, feuert aber nie, und alle Spalten ab <code>Fire Rate</code> werden dafür nicht gelesen</td>
 </tr>
 <tr>
 <td><code>Fire Rate</code></td>
@@ -4053,7 +4058,7 @@ entfernt werden.</p>
 <td><code>Build Time</code></td>
 <td>ganze Zahl</td>
 <td>0–420</td>
-<td>Spielminuten Arbeit für ein Crewmitglied; zwei Arbeiter halbieren sie</td>
+<td>Spielminuten Arbeit. An einem Objekt baut immer nur ein Crewmitglied; zusätzliche Crew macht es nicht schneller</td>
 </tr>
 <tr>
 <td><code>Health</code></td>
@@ -4120,7 +4125,9 @@ LuxuryGoods  MilitaryConstruction  Camouflage  FoodRations  StrongMedicine  Repa
 AntiAirAmmo  PlaneBombs
 </code></pre></div>
 <p>Auch die Startbahnbeläge sind hier Zeilen - <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code>, <code>tarmac</code> - wenn du also <code>gravel</code> änderst,
-änderst du, was eine Startbahn der Stufe 3 pro Kachel kostet.</p>
+änderst du, was eine Startbahn der Stufe 3 pro Kachel kostet. <strong>Entferne keine Belagszeile</strong>: Anders als ein Objekt wird ein Belag
+ohne Zeile nicht kostenlos - das Verlegen einer Startbahn dieser Stufe schlägt dann mit einem Fehler fehl. Soll ein Belag nichts kosten,
+setz jede Zelle seiner Zeile auf <code>0</code>.</p>
 <h4 id="propsinfluence-the-mood-effect-an-object-radiates"><code>PropsInfluence</code> - der Stimmungseffekt, den ein Objekt ausstrahlt<a class="headerlink" href="#propsinfluence-the-mood-effect-an-object-radiates" title="Permanent link">&para;</a></h4>
 <p>Eingebaute Datei: <a href="../../../assets/csv/PropsInfluence.csv">PropsInfluence.csv</a></p>
 <p>Eine Zeile pro Objekt, das die Stimmung der Crew in der Nähe hebt oder senkt. <strong>Zeilen können hinzugefügt und entfernt werden</strong>; ein Objekt
@@ -4156,13 +4163,13 @@ ohne Zeile hat einfach keine Wirkung.</p>
 <tr>
 <td><code>Effect 1</code></td>
 <td><code>&lt;Zahl mit Vorzeichen&gt; &lt;Name&gt;</code></td>
-<td><code>+0.5 Mood</code> … <code>+10 Mood</code>, <code>-1 Mood</code>, <code>-1.5 Energy</code>, <code>+2 Energy</code>, <code>+1 Confidence</code></td>
-<td>Namen: <code>Mood</code>, <code>Confidence</code>, <code>Energy</code>; die eingebauten Zeilen reichen von <code>-1.5</code> bis <code>+10</code></td>
+<td><code>-1 Mood</code> bis <code>+3 Mood</code>, <code>+1 Energy</code> bis <code>+2 Energy</code>, <code>+0.5 Confidence</code> bis <code>+10 Confidence</code> oder <code>-1 Accident</code></td>
+<td>Namen: <code>Mood</code>, <code>Confidence</code>, <code>Energy</code></td>
 </tr>
 <tr>
 <td><code>Effect 2</code></td>
 <td>ebenso, oder leer</td>
-<td></td>
+<td><code>-1.5 Energy</code>, <code>+1 Energy</code>, <code>+0.5 Mood</code>, <code>+10 Mood</code> oder <code>+1 Confidence</code> in 9 Zeilen; in den übrigen leer</td>
 <td></td>
 </tr>
 <tr>
@@ -4217,7 +4224,7 @@ ein erfundener Name wird angenommen und bewirkt nichts.</p>
 <td><code>Farming Time</code></td>
 <td>ganze Zahl</td>
 <td>0–400</td>
-<td>Spielminuten Arbeit pro Ernte für ein Crewmitglied; zwei Arbeiter halbieren sie</td>
+<td>Spielminuten Arbeit pro Ernte, immer von einem Crewmitglied zur Zeit</td>
 </tr>
 <tr>
 <td><code>Resource Amount</code></td>
@@ -4259,7 +4266,7 @@ ein erfundener Name wird angenommen und bewirkt nichts.</p>
 <td><code>Is Fireproof</code></td>
 <td><code>TRUE</code>/<code>FALSE</code></td>
 <td></td>
-<td>Bäume feuerfest zu machen, verhindert, dass sich Feuer auf der Karte ausbreitet</td>
+<td><code>TRUE</code> macht das Objekt zu einer Brandschneise: Auf den Kacheln, die es belegt, kann Feuer weder entstehen noch sich dorthin ausbreiten. Über den freien Boden drumherum läuft Feuer weiterhin</td>
 </tr>
 </tbody>
 </table>
@@ -4452,7 +4459,7 @@ neue einzuführen.</p>
 <td><code>Time To Craft</code></td>
 <td>ganze Zahl</td>
 <td>10–180</td>
-<td>Spielminuten Arbeit für ein Crewmitglied; zwei Arbeiter halbieren sie</td>
+<td>Spielminuten Arbeit, immer von einem Crewmitglied zur Zeit</td>
 </tr>
 <tr>
 <td><code>Valid Entry</code></td>
@@ -4645,7 +4652,7 @@ in eine <code>Timed</code>-Zeile, klebt die Stimmung eines Crewmitglieds innerha
 <td><code>ModifierRange</code></td>
 <td><code>min/max</code> ganze Zahlen</td>
 <td><code>0/-5</code>, <code>2/0</code></td>
-<td>Bonus auf den Wurf</td>
+<td>wird zum niedrigsten/höchsten Wurf der Werte addiert; von <code>NoFlightModifier</code>-Zeilen ignoriert</td>
 </tr>
 <tr>
 <td><code>Parameter</code></td>
@@ -4695,7 +4702,7 @@ und schlägt erst fehl, wenn die Aufgabe läuft. Das ist die einzige Stelle in d
 <tbody>
 <tr>
 <td><code>Phase</code></td>
-<td><code>Work</code>, <code>Leisure</code>, <code>Sleep</code></td>
+<td><code>Work</code>, <code>Leisure</code>, <code>Sleep</code> (<code>Alert</code> und <code>None</code> werden auch akzeptiert, sind aber nicht für den Tagesplan gedacht)</td>
 <td></td>
 </tr>
 <tr>
@@ -4710,8 +4717,10 @@ und schlägt erst fehl, wenn die Aufgabe läuft. Das ist die einzige Stelle in d
 </tr>
 </tbody>
 </table>
-<p>Die vier Zeitspannen werden Stunde für Stunde aufgeschlüsselt, deshalb <strong>zählen Lücken und Überschneidungen</strong>: Eine Stunde, die keine Zeile
-abdeckt, hat überhaupt keine Phase, und die Crew trödelt sie durch. Halte die Spannen lückenlos von 0 bis 24.</p>
+<p>Die vier Zeitspannen werden Stunde für Stunde aufgeschlüsselt, und <strong>jede Stunde von 0 bis 23 muss von genau einer Zeile abgedeckt sein</strong>.
+Bei einer Lücke oder Überschneidung wirft die stündliche Abfrage der Phase einen Fehler, und die Basis bleibt in der Phase, in der sie
+vorher war - ein kaputter Zustand, kein definiertes "keine Phase". Eine Zeile mit falsch geschriebener <code>Phase</code> wird mit einer Warnung
+übersprungen und hinterlässt so eine Lücke. Halte die Spannen lückenlos von 0 bis 24, ohne Überschneidungen.</p>
 <h4 id="daynightsystemdata-sun-and-shadows"><code>DayNightSystemData</code> - Sonne und Schatten<a class="headerlink" href="#daynightsystemdata-sun-and-shadows" title="Permanent link">&para;</a></h4>
 <p>Eingebaute Datei: <a href="../../../assets/csv/DayNightSystemData.csv">DayNightSystemData.csv</a></p>
 <p>Name und Wert, alles Zahlen, rein optisch.</p>
@@ -4782,6 +4791,7 @@ und im Log steht ein Fehler. Bei dieser Tabelle solltest du am vorsichtigsten se
 <code>AirplaneIntegrityModifierTreshold</code>, <code>AirplaneHealthModifierTreshold</code>, <code>AirAttackFighterHealth</code>,
 <code>AirAttackDiverHealth</code>, <code>AirAttackBomberHealth</code>.</p>
 <h4 id="feedbackvariables"><code>FeedbackVariables</code><a class="headerlink" href="#feedbackvariables" title="Permanent link">&para;</a></h4>
+<p>Eingebaute Datei: <a href="../../../assets/csv/FeedbackVariables.csv">FeedbackVariables.csv</a></p>
 <p>Das Feedback-Formular im Spiel: <code>API Endpoint</code>, <code>Feedback Character Limit</code>, <code>Screenshot Height</code>, <code>Survey Link</code>,
 <code>Survey Link Demo</code>, <code>Survey Opened Player Prefs</code>. Eine Gameplay-Mod hat keinen Grund, das anzufassen, und wenn du
 <code>API Endpoint</code> woandershin zeigen lässt, geht das Feedback der Spieler an diese Adresse.</p>

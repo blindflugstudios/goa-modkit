@@ -1752,8 +1752,6 @@
       
         
       
-        
-      
     
     
     
@@ -1842,34 +1840,6 @@
     
   
     Objekte und Modelle
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../content/terrain-objects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gelände-Objekte
   
 
     
@@ -2432,7 +2402,7 @@
 <ul>
 <li><code>event_name</code>: welches Event, meistens geschrieben als <code>MinorEvent.SOME_NAME</code> (importiert mit <code>from Blindflug.MinorEvents import MinorEvent</code>). Der einfache String, etwa <code>"midnight"</code>, funktioniert auch.</li>
 <li><code>chance</code>: die Wahrscheinlichkeit, dass der Handler läuft, wenn das Event feuert, von 0.0 bis 1.0. Standard 1.0 (immer).</li>
-<li><code>max_occurrences</code>: wie oft der Handler in einem Spieldurchlauf laufen darf. <code>-1</code> heißt unbegrenzt, das ist der Standard.</li>
+<li><code>max_occurrences</code>: wie oft der Handler in einem Spielstand laufen darf. Der Zähler wird im Spielstand gespeichert, unter dem Namen <code>&lt;module&gt;.&lt;function&gt;</code> des Handlers - benennst du eins davon um, fängt er von vorne an. Ein negativer Wert heißt unbegrenzt, das ist der Standard (<code>-1</code>); <code>0</code> heißt, der Handler läuft nie. Der Zufallswurf für <code>chance</code> und die Prüfung des Limits passieren beide, bevor der Handler aufgerufen wird.</li>
 </ul>
 <p><strong>Die Rückgabe von <code>False</code> zählt nicht</strong> gegen <code>max_occurrences</code>. Nutze das, um eine Bedingung zu prüfen und auszusteigen, ohne das Kontingent zu verbrauchen. Keine Rückgabe, <code>True</code> oder jeder andere Wert zählt.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">MinorEvent</span><span class="o">.</span><span class="n">MIDNIGHT</span><span class="p">,</span> <span class="n">chance</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">max_occurrences</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
