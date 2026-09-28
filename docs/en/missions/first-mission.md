@@ -36,7 +36,7 @@ Create `mymod_coastal_patrol.json`. The easiest start is a copy of `coastal_patr
 ]
 ```
 
-Each entry is a gate, and all of them must pass. Type 0 is the runway tier the base must have; type 1 is the earliest day, counted from the start of the campaign. Type 3 makes the mission follow another one, see [Chains and campaigns](chains.md). The full list is in the [Reference](reference.md#requirements).
+Each entry is a gate, and all of them must pass. Type 0 is the runway tier the base must have; type 1 is the earliest day, counted from the map's starting date. Type 3 makes the mission follow another one, see [Chains and campaigns](chains.md). The full list is in the [Reference](reference.md#requirements).
 
 ### How the dice fall
 
@@ -71,7 +71,7 @@ Each outcome says whether it counts as a success (`_missionSuccess`) and carries
 }
 ```
 
-`_effectValue` is always written in quotes. For `Damage` (type 3) it is a range like `"20-60"`, rolled for each plane. For everything else it is a whole number like `"-40"`. All effect types are in the [Reference](reference.md#outcomes).
+`_effectValue` is always written in quotes. For `Damage` (type 3) it is a range like `"20-60"`, rolled per flight. For everything else it is a whole number like `"-40"`. All effect types are in the [Reference](reference.md#outcomes).
 
 ### The stats: at least two
 
@@ -113,7 +113,7 @@ For one flight of one mission:
 | the mission is created | `initialize_mission` | set up state |
 | in flight, once per progress step | `send_mission_event` | roll, and radio in what is happening |
 | the flight ends | `set_mission_impact` | react to the outcome |
-| the planes are back | `send_mission_result_text` | a closing line in the event log |
+| the planes are back | `send_mission_result_event` | a closing line in the event log |
 | the player opens the result window | `get_mission_result_text` | which text that window shows |
 
 `send_mission_event` is the one that fires several times: three times for a mission with a JSON file, at one third, two thirds and the end of the flight. It is not told which step it is, so the script asks:
@@ -171,7 +171,7 @@ _term("gw_success_transmission", "Despite the weather the flight brought back a 
 _term("gw_failure_transmission", "The flight lost the coastline in the murk and turned back early.")
 ```
 
-`ap` means "as planned", `gw` means "gone wrong". The first three names are read by the game itself and cannot be changed; if one is missing, the mission window shows the raw key. The other six are used by the script, and every shipped mission uses these names, so stick with them. More in [Localization](../scripting/localization.md).
+`ap` means "as planned", `gw` means "gone wrong". The first three names are read by the game itself and cannot be changed; if one is missing, that slot shows nothing in game. The other six are used by the script, and every shipped mission uses these names, so stick with them. More in [Localization](../scripting/localization.md).
 
 ### Three handlers are enough
 

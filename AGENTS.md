@@ -56,8 +56,10 @@ Mods/<mod_id>/
   Quests/            quest .json (files directly inside, no subfolders)
   CSV/               data table changes (.csv whole rows, .json commands)
   Maps/              .goamap files
-  Objects/  TerrainObjects/  Biomes/    art mods, see docs/en/content/
+  Objects/  Biomes/  art mods - WORK IN PROGRESS, not supported by the current alpha
 ```
+
+- **Art mods are not supported by the current alpha.** If a user asks for a model, texture or biome mod, tell them so before building anything and never promise it will work. There is no `TerrainObjects/` folder any more.
 
 - The game decides what a mod contains from **which folders hold files**, not from `config.json`. Folder names are exact: `Missions`, not `Mission` or `missions`.
 - There is **no `Events/` or `Scripts/` folder**. A `.py` anywhere except `Missions/` never runs, and nothing tells you.
@@ -66,7 +68,7 @@ Mods/<mod_id>/
 
 - **Mod id** (`Id` in `config.json`): 3-64 characters, `a-z 0-9 _ . -`, starting with a letter or digit. An invalid `Id` is silently ignored and the folder name is used instead (lower-cased, other characters turned into `_`). **Recommend only `a-z 0-9 _`** so the id also works as a prefix for mission ids. Name the folder the same as the id.
 - **Prefix every id with the mod id**: missions (`channel_escort_strike`), quests, text keys (`channel_escort/...`), map file names. A duplicate id silently **replaces** the other mission, quest or map, and load order decides which wins.
-- **Mission id** = file name (without `.json`/`.py`). Use lower-case letters, digits and `_` only.
+- **Mission id** = file name (without `.json`/`.py`). Use lower-case letters, digits and `_` only. An id containing `test_`, `debug_`, `_debug` or `_test` counts as developer content and is not loaded by the shipped game.
 - **Quest id** = file name. Keep `_questId` identical to it, or the quest is handed out again on every load.
 - Check new ids against `mission_ids` and `quest_ids` in `generated/catalog.json`.
 
@@ -101,7 +103,7 @@ Reference: `docs/en/missions/reference.md`, walkthrough `docs/en/missions/first-
 
 ### Text: nine slots per mission
 
-Keys are `missions/<id>/<slot>`. The first three are **mandatory** (the game builds them itself and shows the raw key if missing):
+Keys are `missions/<id>/<slot>`. The first three are **mandatory** (the game builds them itself; a missing slot shows nothing in game):
 
 ```
 mission_name  mission_description  intel_threat_report
@@ -109,12 +111,12 @@ ap_transmission  gw_transmission
 ap_success_transmission  ap_failure_transmission  gw_success_transmission  gw_failure_transmission
 ```
 
-Two ways to supply them, combinable: the `_raw...` fields in the JSON (`_rawMissionName`, `_rawMissionDescription`, `_rawIntelThreatReport`, `_rawApTransmission`, `_rawGwTransmission`, `_rawApSuccessTransmission`, `_rawApFailureTransmission`, `_rawGwSuccessTransmission`, `_rawGwFailureTransmission`) - one language, no script needed; or `localization.SetTerm(lang, key, text)` at the top level of any script in the mod - any language, any key.
+Two ways to supply them, combinable: the `_raw...` fields in the JSON (`_rawMissionName`, `_rawMissionDescription`, `_rawIntelThreatReport`, `_rawApTransmission`, `_rawGwTransmission`, `_rawApSuccessTransmission`, `_rawApFailureTransmission`, `_rawGwSuccessTransmission`, `_rawGwFailureTransmission`) - one language, no script needed; or `localization.SetTerm(lang, key, text)` at the top level of any script in the mod - any language the game offers in its options; a shipped key is replaced, so prefix your keys with the mod id.
 
 ### Script behaviour
 
-- **Roll once, read afterwards.** `missions_api.MakeAsPlannedRoll` / `MakeSkillRoll` roll and store. `GetAsPlannedRoll` / `GetSkillRoll` read. Roll in the first in-flight event only; everything later reads. Re-rolling tells a different story from the outcome the player gets.
-- **Prefer JSON.** A mission without a JSON (script-only, authored in `initialize_mission`) never enters the random draw; it only appears via `missions_api.CreateMission` or `create_mission`. Its data does not survive a save, so it must define `get_mission_result`. See `examples/script_only_scramble/`.
+- **Roll once, read afterwards.** `missions_api.MakeAsPlannedRoll` / `MakeSkillRoll` roll and store. `GetAsPlannedRoll` / `GetSkillRoll` read. The default script rolls as-planned at the first in-flight event and the skill check at the second; everything after that reads. Re-rolling tells a different story from the outcome the player gets.
+- **Prefer JSON.** A mission without a JSON (script-only, authored in `initialize_mission`) first appears only via `missions_api.CreateMission` or `create_mission`; once it has been created, the weekly draw may hand it out again unless you give it requirements. Its data does not survive a save, so it must define `get_mission_result`. See `examples/script_only_scramble/`.
 - **Chains:** `{"_requirementType": 3, "_value": "<missionId>,<success|failure|cancelled>"}`. `success` means the outcome's `_missionSuccess` flag, not the skill roll. Set `"_isHistoric": true` on follow-ups so they are guaranteed to appear once the gate passes instead of waiting in the random pool.
 - **`missions_api.CreateMission(id)`** hands out a mission now, ignoring its requirements. Call it from `set_mission_impact`, **never** from `initialize_mission` (refused and logged).
 - **Campaign state** (`examples/campaign_kanalkampf/`): store it under `game_api.GetScriptDataPath(<id>)`, put `game_api.GetAirBaseGuid()` in the file name (the folder is shared by all saves), give every key a default, wrap every read and write in `try/except`.
@@ -220,9 +222,9 @@ Game data folder (holds `Mods/`, `Missions/`, and on Windows/Linux `Player.log`)
 You cannot reload the game. The public game has **no** `reload_mods` command (it exists only in developer builds) - never tell a player to type it. The reload loop is:
 
 1. In the game: save, then **Options -> Quit to main menu**.
-2. Main menu -> **Mods**. Opening this window rescans the `Mods` folder (there is also a **Refresh** button). Check the mod is listed and switched on.
+2. Main menu -> **Mods**. For a brand-new mod folder (or a content folder that was empty when the game started) press **Refresh** - the list of mods is otherwise read only at game start. Check the mod is listed and switched on.
 3. Load the save again (or start a new game). Missions, scripts, quests, maps and CSV changes are picked up now.
-4. **Art mods** (`Objects/`, `TerrainObjects/`, `Biomes/` - models and textures) are imported once at game start and need a **full restart of the game**.
+4. **Art mods** (`Objects/`, `Biomes/` - models and textures; work in progress, not supported by the current alpha) are imported once at game start and need a **full restart of the game**.
 
 If anything looks odd, restart the game - that always works.
 
@@ -260,7 +262,7 @@ Quote the relevant lines to the user, explain them in one plain sentence, fix, v
 | Quests | `docs/en/quests/index.md` |
 | Scripting | `docs/en/scripting/` (`events.md`, `api.md`, `localization.md`) |
 | Data tables | `docs/en/data/csv.md`, `docs/en/data/table-editor.md` |
-| Maps and art | `docs/en/content/` (`maps.md`, `objects.md`, `terrain-objects.md`, `biomes.md`) |
+| Maps and art | `docs/en/content/` (`maps.md`, `objects.md`, `biomes.md`; art pages are work in progress) |
 | Workshop | `docs/en/sharing/workshop.md` |
 
 If the docs do not answer something, check `templates/`, `examples/` and `generated/catalog.json`, and tell the user what you could not confirm.

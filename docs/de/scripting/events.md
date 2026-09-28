@@ -32,7 +32,7 @@ def handler(argument1, argument2):
 
 - `event_name`: welches Event, meistens geschrieben als `MinorEvent.SOME_NAME` (importiert mit `from Blindflug.MinorEvents import MinorEvent`). Der einfache String, etwa `"midnight"`, funktioniert auch.
 - `chance`: die Wahrscheinlichkeit, dass der Handler läuft, wenn das Event feuert, von 0.0 bis 1.0. Standard 1.0 (immer).
-- `max_occurrences`: wie oft der Handler in einem Spieldurchlauf laufen darf. `-1` heißt unbegrenzt, das ist der Standard.
+- `max_occurrences`: wie oft der Handler in einem Spielstand laufen darf. Der Zähler wird im Spielstand gespeichert, unter dem Namen `<module>.<function>` des Handlers - benennst du eins davon um, fängt er von vorne an. Ein negativer Wert heißt unbegrenzt, das ist der Standard (`-1`); `0` heißt, der Handler läuft nie. Der Zufallswurf für `chance` und die Prüfung des Limits passieren beide, bevor der Handler aufgerufen wird.
 
 **Die Rückgabe von `False` zählt nicht** gegen `max_occurrences`. Nutze das, um eine Bedingung zu prüfen und auszusteigen, ohne das Kontingent zu verbrauchen. Keine Rückgabe, `True` oder jeder andere Wert zählt.
 

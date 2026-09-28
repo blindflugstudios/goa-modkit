@@ -32,7 +32,7 @@ def handler(argument1, argument2):
 
 - `event_name`: which event, usually written as `MinorEvent.SOME_NAME` (import it with `from Blindflug.MinorEvents import MinorEvent`). The plain string, like `"midnight"`, works too.
 - `chance`: the probability that the handler runs when the event fires, from 0.0 to 1.0. Default 1.0 (always).
-- `max_occurrences`: how often the handler may run in one playthrough. `-1` means unlimited, which is the default.
+- `max_occurrences`: how often the handler may run in one save game. The count is stored in the save, keyed by the handler's `<module>.<function>` name, so renaming either resets it. A negative value means no limit and is the default (`-1`); `0` means the handler never runs. The chance roll and the limit check both happen before the handler is called.
 
 **Returning `False` does not count** against `max_occurrences`. Use it to check a condition and bail out without using up the budget. Returning nothing, `True` or any other value counts.
 

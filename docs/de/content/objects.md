@@ -1,8 +1,25 @@
 # Objekte und Modelle
 
+!!! warning "In Arbeit"
+    Grafik-Mods sind noch in Arbeit. Die aktuelle Alpha unterstützt das noch nicht, Modelle und Texturen aus einer Mod tauchen im Spiel also vorerst nicht auf.
+
 Genug vom Standardfass? Eine Mod kann den Objekten, die du auf deinem Flugplatz baust, einen neuen Look geben: Möbel, Zäune, Geschütze, Schilder, Poster, Werkbänke und Trainingsgeräte. Entweder legst du ein neues 3D-Modell hinein, oder du behältst das Modell des Spiels und bemalst es mit einer neuen Textur.
 
 Nur das Aussehen ändert sich. Größe im Raster, Kosten, was die Mannschaft mit dem Objekt anfangen kann und alle anderen Regeln bleiben so, wie das Spiel sie festlegt. Zahlen änderst du mit [CSV-Tabellen](../data/csv.md).
+
+## Ordneraufbau (vorläufig) { #folder-layout-preliminary }
+
+So wird das Spiel Objektgrafik einlesen. Das ist vorläufig und kann sich noch ändern.
+
+- `Objects/` enthält alle Modelle und alle Texturen der Mod in einem Ordner. Der **Dateiname** eines Modells ist die Id des Objekts, das es ersetzt: `Chair.fbx` ersetzt den Stuhl, `Chair.destroyed.fbx` seinen zerstörten Look, `tree.2.glb` die Variante 2 des Baums. Sowohl `.fbx` als auch `.glb` werden angenommen.
+- Die Materialien eines Modells benennen ihre Texturen, und die PNG mit diesem Namen in `Objects/` wird verwendet: Ein Material, das das Bild `wood-01` nennt, bekommt `Objects/wood-01.png`. Eine Textur kann also beliebig vielen Modellen dienen.
+- `Chair.thumbnail.png` (höchstens 256 × 256) ersetzt das Symbol des Stuhls im Baumenü. Sie wird nur neben einem Modell mit derselben Id verwendet.
+- Unterordner unter `Objects/` werden auch gelesen, ihre Namen bedeuten aber nichts: `Objects/Chair/model.fbx` ist ein Modell für ein Objekt namens `model`, nicht für den Stuhl.
+- Einstellungen pro Objekt stehen in einer einzigen `Objects/config.json`, nach Objekt-Id geordnet: `{"Objects": {"Chair": {"UseGameMaterial": false}}}`. Eine `config.json` in einem Unterordner wird ignoriert.
+- Bäume, Büsche, Felsen und die anderen Kartenobjekte bekommen ihren neuen Look ebenfalls über `Objects/`. Einen Ordner `TerrainObjects/` gibt es nicht mehr.
+- Grafik wird einmal eingelesen, beim Spielstart. Nach einer Änderung **startest du das Spiel neu**; weder **Refresh** noch der Schalter **Enabled** im Mods-Fenster lesen sie neu ein.
+
+<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
 
 ## Schnellstart { #quick-start }
 
@@ -147,9 +164,17 @@ Haben zwei eingeschaltete Mods einen Ordner für dasselbe Objekt, gewinnt die zu
 
 Objekte, [Landschaftsobjekte](terrain-objects.md) und [Biome](biomes.md) sind getrennt: Ein Ordner `Objects/tree` und ein Ordner `TerrainObjects/tree` beeinflussen sich nie gegenseitig.
 
+-->
+
 ## Welche Objekte sich ändern lassen { #which-objects-can-be-changed }
 
+<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
+
 Der Ordnername ist die Id des Objekts, dieselbe Id, die das Objekt in der Spalte `ID` der Tabelle `BuildingComponents` hat (siehe [CSV-Tabellen](../data/csv.md)).
+
+-->
+
+Der Dateiname des Modells ist die Id des Objekts, dieselbe Id, die das Objekt in der Spalte `ID` der Tabelle `BuildingComponents` hat (siehe [CSV-Tabellen](../data/csv.md)).
 
 **Werkbänke:**
 
@@ -191,6 +216,8 @@ WickerChair, Windhose, WoodenChair, WoodenFenceSimple, WoodenFenceSimplePole, Wo
 WoodenFenceSturdyEdge, WoodenFenceSturdyPole, WoodenTableLarge, WoodenTableMedium, WoodenTableSmall
 ```
 
+<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
+
 **Noch nicht möglich:** Wände, Böden, Dächer, Türen und Fenster von Gebäuden (`wall_wood`, `floor_brick` und so weiter), Parkplätze, Flugzeuge, Fahrzeuge und Figuren. Ein Ordner für eines davon wird gelesen, hat aber keine Wirkung. Bäume, Felsen und andere natürliche Objekte sind [Landschaftsobjekte](terrain-objects.md); der Boden selbst ist ein [Biom](biomes.md).
 
 ## Wenn etwas nicht auftaucht { #when-something-does-not-show-up }
@@ -226,3 +253,5 @@ Gibt es gar keine Zeile für deinen Ordner, prüfe, ob der Ordnername einer Id a
 
 !!! note
     Das veröffentlichte Spiel schreibt eventuell nur Fehler in `Player.log`, manche dieser Zeilen erscheinen also nur in Entwickler-Builds. Taucht nichts auf und das Aussehen ändert sich nicht, geh die Checkliste durch: Dateinamen, Ordnername, Dateigröße, Neustart.
+
+-->

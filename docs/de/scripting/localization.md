@@ -102,7 +102,7 @@ Ein leeres Feld zählt als nicht gefüllt, und das Spiel greift auf den Schlüss
 |---|---|---|
 | Braucht ein Skript | nein | ja |
 | Anzahl der Texte | genau neun | unbegrenzt |
-| Sprachen | eine | beliebig viele, auch solche, die das Spiel nicht mitliefert |
+| Sprachen | eine | alle, die das Spiel in seinen Einstellungen anbietet |
 | Gut für | eine Mission mit festem Text | Text, der sich danach richtet, was im Flug passiert ist |
 
 Beides lässt sich kombinieren: Raw-Text deckt die neun Standard-Slots ab, und ein Skript ergänzt eigene Terms für alles darüber hinaus. Das Beispiel `raf_collection` macht genau das: Drei Missionen liefern nur Raw-Text, und `greenhorn_watch` fügt eigene Terms hinzu, damit es je nach Erfahrung der Crew eine andere Geschichte erzählen kann.
@@ -144,13 +144,16 @@ Bei Platzhalternamen zählt Groß- und Kleinschreibung, und sie müssen exakt ü
 
 ## Inline-Formatierung { #inline-formatting }
 
-Drei Tags funktionieren in jedem Text:
+Vier Tags funktionieren in jedem Text:
 
 | Tag | Wirkung |
 |---|---|
 | `[character:<id>]` | ein anklickbarer Link zu diesem Charakter, angezeigt als sein Name |
 | `[resource:<name>]` | Symbol und Farbe der Ressource |
 | `[morale:<name>]` | Symbol und Farbe der Moralkategorie |
+| `[CharacterStat:<name>]` | Symbol und Farbe einer Crew-Fähigkeit (`Flying`, `Shooting`, `Bombing`, `Endurance`, `Engineering`, `Navigating`) |
+
+`CharacterStat` schreibt sich mit großem `C` und `S` - bei diesem Tag kommt es auf Groß- und Kleinschreibung an.
 
 Kombiniere sie mit Platzhaltern, um einen Charakter aus einem Event zu nennen:
 
@@ -161,11 +164,12 @@ localization.SetTerm("en", "mymod/chat",
 event_log.Create("mymod/chat", {"FIRST": str(first_id), "SECOND": str(second_id)})
 ```
 
-Für Ressourcen und Moral setzt du den Spielwert beim Laden des Skripts in den Text ein:
+Für Ressourcen, Moral und Crew-Fähigkeiten setzt du den Spielwert beim Laden des Skripts in den Text ein:
 
 ```python
 from Blindflug.GameResources import ResourceType
 from Blindflug.Game.Characters.Morale import MoraleCategory
+from BlindGame.CharacterStats.Data import CharacterStatType
 
 localization.SetTerm("en", "mymod/mice",
                      "Mice got into the [resource:{}] again.".format(ResourceType.FoodRations))
@@ -177,7 +181,7 @@ f-Strings funktionieren auch, und die eigenen Skripte des Spiels verwenden sie. 
 
 ## Sprachen { #languages }
 
-Definiere immer Englisch (`"en"`). Hat ein Term keinen Text in der Sprache des Spielers, greift das Spiel auf eine Sprache zurück, die ihn hat, also auf Englisch, wenn du es definiert hast, statt den rohen Schlüssel anzuzeigen.
+Definiere immer Englisch (`"en"`). Hat ein Term keinen Text in der Sprache des Spielers, zeigt das Spiel den Text einer Sprache, die du registriert hast - mit `en` bist du also auf der sicheren Seite. Ein Schlüssel, der in keiner einzigen Sprache registriert ist, erscheint als roher Schlüssel.
 
 Zum Übersetzen rufst du `SetTerm` einmal pro Sprache auf:
 
@@ -191,7 +195,7 @@ Das Spiel liefert diese Sprachcodes mit:
 
 `en`, `en-GB`, `de-DE`, `de`, `ar`, `bg`, `ca`, `zh-CN`, `zh-TW`, `cs`, `da`, `nl`, `fi`, `fr`, `el`, `hu`, `id`, `it`, `ja`, `ko`, `ms`, `nb`, `fa`, `pl`, `pt`, `pt-BR`, `ro`, `ru`, `es`, `es-419`, `sv`, `gsw-CH`, `th`, `tr`, `uk`, `vi`
 
-Deutsch ist `de` - das ist die Sprache, die Spieler in den Einstellungen wählen (`de-DE` in der Liste ist eine Testsprache, die du ignorieren kannst). Ein unbekannter Code wird automatisch hinzugefügt, Text für eine Sprache, die das Spiel nicht mitliefert, braucht also keine Vorbereitung (der Spieler braucht allerdings trotzdem eine Möglichkeit, diese Sprache auszuwählen).
+Deutsch ist `de` - das ist die Sprache, die Spieler in den Einstellungen wählen (`de-DE` in der Liste ist eine Testsprache, die du ignorieren kannst). Der Sprachcode muss einer sein, den das Spiel in seinen Einstellungen anbietet.
 
 Ein praktisches Muster für mehrere Sprachen:
 

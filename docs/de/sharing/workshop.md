@@ -10,11 +10,11 @@ Workshop-Seite von Ground of Aces: <https://steamcommunity.com/app/2308690/works
 ## Deine Mod hochladen { #uploading-your-mod }
 
 1. **Bring den Ordner genau in den Zustand, den du ausliefern willst.** Der *ganze* Mod-Ordner wird so hochgeladen, wie er ist - `config.json`, `preview.png` und jeder Inhaltsunterordner. Entferne vorher Testdateien, Backups und Notizen, die du nicht veröffentlichen willst.
-2. **Gib ihr einen Namen und ein Bild.** Der `Name` in der `config.json` wird beim ersten Upload zum Workshop-Titel (ohne `config.json` wird der Ordnername verwendet). Die `preview.png` im Hauptverzeichnis des Mod-Ordners wird zum Workshop-Bild. Sie muss ein PNG mit **höchstens 1 MB** sein; eine größere Datei lässt den Upload mit einem Fehler scheitern.
+2. **Gib ihr einen Namen und ein Bild.** Der `Name` in der `config.json` wird beim ersten Upload zum Workshop-Titel (ohne `config.json` wird der Ordnername verwendet). Die `preview.png` im Hauptverzeichnis des Mod-Ordners wird beim ersten Upload zum Workshop-Bild. Sie muss ein PNG mit **höchstens 1 MB** sein; eine größere Datei lässt den Upload mit einem Fehler scheitern.
 3. **Öffne Hauptmenü (Main menu) → Mods** und drück bei der Mod auf **Upload**. Nur deine eigenen Mods (aus deinem `Mods`-Ordner) haben diesen Button; abonnierte Workshop-Items nicht.
-4. **Wähl das Ziel.** Ein Fenster listet **Create new Workshop item...** und darunter jedes Workshop-Item, das du bisher veröffentlicht hast. Wähl **Create new Workshop item...** für einen ersten Upload oder eines deiner bestehenden Items, um dessen Inhalt durch diese Version zu ersetzen.
+4. **Wähl das Ziel.** Ein Fenster listet **New Workshop item** und darunter jedes Workshop-Item, das du bisher veröffentlicht hast. Wähl **New Workshop item** für einen ersten Upload oder eines deiner bestehenden Items, um dessen Inhalt durch diese Version zu ersetzen.
 5. **Bestätige.** Das Spiel fragt noch einmal nach - "Do you want to create a new Workshop item for ...?" oder, bei einem Update, ob das bestehende Item verwendet werden soll - und du antwortest mit **Ja (Yes)**.
-6. **Warte auf den Upload.** Das Fenster zeigt den Fortschritt in Prozent. Wenn er fertig ist, öffnet ein Button die Workshop-Seite des neuen Items im Steam-Overlay.
+6. **Warte auf den Upload.** Das Fenster zeigt einen Fortschrittsbalken. Wenn der Upload fertig ist, zeigt das Fenster den Workshop-Link des Items.
 
 Was das Spiel beim Upload mitschickt:
 
@@ -23,11 +23,11 @@ Was das Spiel beim Upload mitschickt:
 | Dateien | der ganze Mod-Ordner | der ganze Mod-Ordner, ersetzt die alten Dateien |
 | Titel | der `Name` der Mod | bleibt unverändert |
 | Beschreibung | keine | bleibt unverändert |
-| Bild | `preview.png`, falls vorhanden | `preview.png`, falls vorhanden |
+| Bild | `preview.png`, falls vorhanden | bleibt unverändert |
 | Sichtbarkeit | öffentlich | öffentlich |
 | Workshop-Tag | `Mod` | `Mod` |
 
-Die Beschreibung schreibst du immer auf der Steam-Seite des Items; das Spiel schickt nie eine mit. Den Titel eines bereits veröffentlichten Items änderst du ebenfalls auf der Steam-Seite.
+Die Beschreibung schreibst du immer auf der Steam-Seite des Items; das Spiel schickt nie eine mit. Ein Update ersetzt nur die Dateien: Titel und Bild eines bereits veröffentlichten Items änderst du ebenfalls auf der Steam-Seite.
 
 !!! tip
     Beim ersten Veröffentlichen bittet dich Steam eventuell, der rechtlichen Vereinbarung für den Workshop zuzustimmen. Bis du das tust, bleibt das Item versteckt. Öffne die Steam-Seite des Items und stimm dort zu, dann wird das Item sichtbar.

@@ -44,7 +44,7 @@ Für jeden Befehl, in der Reihenfolge in der Datei, macht das Spiel Folgendes:
 
 1. Es sucht die Zeile anhand der `Id`. Groß- und Kleinschreibung der Id spielt keine Rolle; die Schreibweise der Tabelle bleibt erhalten.
 2. Es baut die komplette Zeile so, wie sie nach der Änderung aussähe, nebenbei, ohne die echte Tabelle schon anzufassen.
-3. Zellen, die in der Tabelle nie leer sein dürfen, füllt es mit dem Standardwert des Spiels, falls deine Änderung sie leer gelassen hat.
+3. Die beiden Zellen, die das Spiel für dich ausfüllt, setzt es, falls deine Änderung sie leer gelassen hat: `0` in `ResourceCost`, `None` in `Associated Task` von `BuildingComponents`. Jede andere leere Zelle bleibt für die Prüfung leer.
 4. Es prüft die ganze Zeile gegen die Regeln der Tabelle (Werttypen, erlaubte Bereiche, Verweise auf andere Tabellen, siehe [CSV-Tabellen](csv.md)).
 5. Nur wenn alles passt, schreibt es die Zeile in die Tabelle. Sonst schreibt es nichts, protokolliert den Grund und macht mit dem nächsten Befehl weiter.
 
@@ -59,11 +59,11 @@ Ein abgelehnter Befehl hinterlässt also nie eine halb geänderte Zeile, und ein
 ```
 
 - Ändert nur die Spalten, die in `Cells` stehen. Alle anderen Zellen behalten ihren aktuellen Wert.
-- Eine Zelle mit `""`, nur Leerzeichen oder `null` wird geleert (oder auf den Standardwert der Tabelle zurückgesetzt, wo eine Zelle nicht leer sein darf).
+- Eine Zelle mit `""`, nur Leerzeichen oder `null` wird geleert. Das ist nur in einer Spalte erlaubt, in der das Spiel schon selbst irgendeine Zeile leer lässt; sonst wird der Befehl abgelehnt. Nur `ResourceCost`-Zellen (sie werden zu `0`) und `Associated Task` (wird zu `None`) werden stattdessen ausgefüllt.
 - Die Zeile muss schon existieren. Sonst: `'...' is not a built-in row; use Add to create one`.
 - Jeder Schlüssel in `Cells` muss eine Spalte der Tabelle sein, exakt geschrieben. Sonst listet die Meldung die Spalten der Tabelle auf.
 - Geprüft wird die ganze resultierende Zeile, nicht nur die Zellen, die du genannt hast. Eine Zeile, die vorher in Ordnung war, bleibt es, solange deine Werte keine Regel brechen.
-- Einige eingebaute Zeilen erstrecken sich in der Tabelle des Spiels über mehrere Zeilen. Die lassen sich nicht Zelle für Zelle ändern; das Log sagt dir, dass du stattdessen die ganze Zeile als `<Table>.csv` mitliefern sollst.
+- Einige eingebaute Zeilen erstrecken sich in der Tabelle des Spiels über mehrere Zeilen. Sie werden abgelehnt, egal ob du sie Zelle für Zelle änderst oder als ganze Zeile mitlieferst. Nur in `ResourceCost` hilft eine `<Table>.csv` mit der ganzen Zeile (siehe [Zeilen, die mehrere Zeilen belegen](csv.md#rows-that-take-up-several-lines)); die mehrzeiligen Zeilen von `MoraleInfluenceValues` und `TaskValues` lassen sich überhaupt nicht ändern.
 
 ### `Add`: eine neue Zeile anlegen { #add-create-a-new-row }
 
@@ -96,7 +96,7 @@ Ein abgelehnter Befehl hinterlässt also nie eine halb geänderte Zeile, und ein
 
 Die Tabellen werden bei jedem Laden eines Levels aus den Daten des Spiels und allen aktivierten Mods neu aufgebaut. Nachdem du eine Befehlsdatei bearbeitet hast, speichere dein Spiel, wähle **Einstellungen (Options) → Quit to main menu** und lade den Spielstand erneut. Ein Neustart ist nicht nötig; im Zweifel starte trotzdem neu. Siehe [Testen und Neuladen](../basics/testing.md). Einen ganz neuen `CSV/`-Ordner oder eine neue Mod bemerkt das Spiel erst, nachdem du im Hauptmenü **Mods** geöffnet hast (drück **Refresh**) oder das Spiel neu startest.
 
-Weil die Tabellen von Grund auf neu gebaut werden, stellt das Entfernen eines Befehls oder das Abschalten der Mod beim nächsten Laden den ursprünglichen Wert wieder her.
+Weil die Tabellen von Grund auf neu gebaut werden, stellt das Entfernen eines Befehls oder das Abschalten der Mod beim nächsten Laden den ursprünglichen Wert wieder her. Ausnahme sind Flugzeuge, die schon auf deiner Basis stehen: Sie behalten die Gesundheit, Integrität und Treibstoffkapazität, mit der sie gebaut wurden, ein Spielstand mit aktiver Mod behält also ihre Zahlen (siehe [`VehicleData`](csv.md#vehicledata-aircraft)).
 
 ## Referenz { #reference }
 
@@ -126,7 +126,7 @@ Jede Meldung beginnt mit `[Mod <mod id>] CSV/<Table>.json`. Angewendete Befehle:
 ```text
 [Mod my_balance_mod] CSV/VehicleData.json command 1 replaced cells Fuel Capacity of row 'gladiator'.
 [Mod my_balance_mod] CSV/ResourceCost.json command 2 added row 'storage_box'.
-[Mod my_balance_mod] CSV/PropsInfluence.json command 3 cleared cells Tarp of row 'Chair'.
+[Mod my_balance_mod] CSV/ResourceCost.json command 3 cleared cells Tarp of row 'Chair'.
 [Mod my_balance_mod] CSV/PropsInfluence.json command 4 removed row 'Drawer'.
 ```
 
@@ -153,4 +153,4 @@ Probleme mit einem Befehl (nur dieser Befehl wird übersprungen):
 | `rejected: '...' already exists; use Replace to change it.` | `Add` mit einer Id, die schon existiert. |
 | `rejected:` gefolgt von einer Regel | Der Wert bricht eine der Regeln der Tabelle, siehe [CSV-Tabellen](csv.md). |
 
-Das veröffentlichte Spiel schreibt unter Umständen nur Fehler in `Player.log`; die vollständige Liste der Zeilen erscheint in Entwickler-Builds.
+Das veröffentlichte Spiel schreibt nur Fehler in `Player.log`; die vollständige Liste der Zeilen erscheint in einem Entwickler-Build oder im Unity-Editor.

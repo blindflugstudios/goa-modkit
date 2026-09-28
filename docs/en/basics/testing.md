@@ -6,7 +6,7 @@ There is no preview window for mods. You test a mod by loading it into the game 
 
 1. Edit your files in the mod folder.
 2. In the game, save, then **Options → Quit to main menu**.
-3. Open **Mods** from the main menu. The window rescans the `Mods` folder when it opens; **Refresh** rescans it again.
+3. If you created a new mod folder (or a content folder such as `Quests/` that was empty when the game started), open **Mods** from the main menu and press **Refresh**. Opening the window alone does not scan the `Mods` folder again.
 4. Load your save. Missions, scripts, quests and CSV tables are read fresh every time a save is loaded. Only art needs a full restart.
 5. For a mission, open the cheat console and type `create_mission <your_mission_id>` to put it on the war map right now.
 6. Something wrong? Open `Player.log` (see [below](#reading-playerlog)).
@@ -17,8 +17,8 @@ Every time you load a save, the game reads your mod's content again: mission fil
 
 Two things need more:
 
-- **Art is imported only when the game starts.** Models, textures and other files in `Objects/`, `TerrainObjects/` and `Biomes/` need a full restart of the game.
-- **New mods**: a mod folder you just created shows up after the Mods window has rescanned (open it, or press **Refresh**). Check that the mod is switched on.
+- **Art is imported only when the game starts.** Models, textures and other files in `Objects/` and `Biomes/` need a full restart of the game. (Art mods are work in progress and not supported by the current alpha yet.)
+- **New mods**: a mod folder you just created shows up only after you press **Refresh** in the Mods window (or restart the game). The same goes for a content folder such as `Quests/` that was empty when the game started. Check that the mod is switched on.
 
 A mission that was already on the war map in your save keeps the values it was created with. After changing a mission's JSON, create a fresh copy with `create_mission` to see the change.
 
@@ -61,10 +61,10 @@ Work down this list before you start doubting your logic.
 Mission files, event scripts and helper modules all go into `Mods/<your_mod>/Missions/`. There is no `Events/` or `Scripts/` folder for mods; a script placed anywhere else never runs, silently. The extension must be exactly `.py` or `.json` (watch out for `coastal_patrol.json.txt` when your system hides extensions).
 
 **2. Is the mod enabled?**
-A mod switched off in the Mods window is not loaded at all. A mod folder you created while the game was running appears after the Mods window has rescanned.
+A mod switched off in the Mods window is not loaded at all. A mod folder you created while the game was running appears only after you press **Refresh** in the Mods window (or restart the game).
 
 **3. Did the script load?**
-Every script that loads successfully is listed in `Player.log` with its file name, followed by the handlers it registered. If your file name is missing, the game did not read it.
+In development builds, every script that loads successfully is listed in `Player.log` with its file name, followed by the handlers it registered. The released game logs errors only, so there a missing line proves nothing: check instead whether the script's effect shows up in the game.
 
 **4. Is there a syntax error?**
 A Python syntax error shows up in `Player.log` as:
@@ -132,7 +132,7 @@ They cannot be renamed. Define them with `localization.SetTerm`, or fill the mat
 
 ## Reading Player.log
 
-The game writes everything it notices into a text file called `Player.log`. It is rewritten each time the game starts, so look at it while the game is running or right after closing it.
+The game writes what it notices into a text file called `Player.log`. The released game logs errors only; the detailed `[Mod ...]` lines appear only in development builds. It is rewritten each time the game starts, so look at it while the game is running or right after closing it.
 
 | Platform | Location |
 |---|---|

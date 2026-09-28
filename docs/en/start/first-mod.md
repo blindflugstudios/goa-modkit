@@ -68,8 +68,8 @@ When the agent says the mod is installed, note the **mission id** it tells you (
 The game reads mods when a game is loaded. So:
 
 1. Start Ground of Aces. If it is already running with a save open, go to **Options → Quit to main menu** first.
-2. In the main menu, open **Mods**. The list refreshes when the window opens. Your mod should be listed and switched on.
-3. Your mod has a Python file (the `.py`), so it also shows a **Scripting** switch. Switch it on and confirm - you wrote the scripts. (The current version of the game runs a mod's scripts either way, so this does no harm; see [Python mods and safety](../basics/security.md).)
+2. In the main menu, open **Mods** and press **Refresh**, so the game notices your new folder. Your mod should be listed and switched on.
+3. Every mod also shows a **Scripting** switch. It is reserved for a coming opt-in and has no effect at the moment: the game runs a mod's scripts whenever the mod is enabled, so you can leave the switch as it is. See [Python mods and safety](../basics/security.md).
 4. Close the Mods window and load your save (or start a new game).
 
 <!-- screenshot: Mods window with the new mod listed, enabled, scripting switched on -->
@@ -104,7 +104,7 @@ Go back to the terminal and ask for a change, for example:
 Make the mission harder and let the bomber crew radio in when they spot the English coast.
 ```
 
-The agent edits, checks and copies the mod again. Then in the game: **Options → Quit to main menu**, load your save, and check the mission again. (If the change added a new folder to the mod, for example a first `Quests/`, open **Mods** once before loading.)
+The agent edits, checks and copies the mod again. Then in the game: **Options → Quit to main menu**, load your save, and check the mission again. (If the change added a new folder to the mod, for example a first `Quests/`, open **Mods** and press **Refresh** before loading.)
 
 ## If something goes wrong
 

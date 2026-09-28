@@ -18,7 +18,7 @@ Karten baust du mit dem **Karten Editor** (Map Editor), der im Spiel enthalten i
           my_airfield.goamap
     ```
 
-5. Öffne **Hauptmenü → Mods**, prüfe, dass **my_map_mod** eingeschaltet ist, und starte ein neues Spiel. Deine Karte steht unter **Custom maps**.
+5. Öffne **Hauptmenü → Mods** und drücke **Refresh**, damit das Spiel den neuen Mod-Ordner findet. Prüfe, dass **my_map_mod** eingeschaltet ist, und starte ein neues Spiel. Deine Karte steht unter **Custom maps**.
 
 Das ist schon eine vollständige Karten-Mod. Eine `config.json` brauchst du nicht, du kannst aber eine hinzufügen (siehe [So funktionieren Mods](../basics/mods.md)).
 
@@ -40,9 +40,9 @@ Der Editor hat für jeden Teil der Karte ein eigenes Werkzeug:
 | Werkzeug | Was du damit machst |
 |---|---|
 | **Landschaftshöhe** (Terrain Height) | Gelände anheben und absenken. |
-| **Biomes** | Den Bodentyp malen: Gras, Erde, Straße, Fels, Sand, Kies. Der Bodentyp wirkt sich auch aufs Spiel aus, siehe [Biome](biomes.md). |
+| **Biomes** | Den Bodentyp malen: Gras, Erde, Straße, Fels, Sand, Kies. Der Bodentyp wirkt sich auch aufs Spiel aus, siehe [Biome](biomes.md) (Grafik-Mods für Biome sind noch in Arbeit und werden von der aktuellen Alpha nicht unterstützt). |
 | **Gras** (Grass) | Gras auf den Boden malen oder entfernen. |
-| **Landschaftsobjekte** (Terrain Objects) | Bäume, Büsche, Felsen, Teiche und mehr setzen, einzeln oder mit einem Pinsel. Die Liste findest du unter [Landschaftsobjekte](terrain-objects.md). |
+| **Landschaftsobjekte** (Terrain Objects) | Bäume, Büsche, Felsen, Teiche und mehr setzen, einzeln oder mit einem Pinsel. Ihren Look kannst du über [Objekte und Modelle](objects.md) ändern (Grafik-Mods sind noch in Arbeit und werden von der aktuellen Alpha nicht unterstützt). |
 | **Karteneinstellungen** | Name, Beschreibung, Tags, Start-Quests, Startdatum und Startvorräte der Karte (siehe unten). |
 
 **Rückgängig machen** (Undo) und **Wiederholen** (Redo) funktionieren wie gewohnt. Die Tastenkürzel listet der Editor unter **Shortcuts** auf.
@@ -154,7 +154,7 @@ Eine Id, zu der es keine Quest-Datei gibt, wird übersprungen; die Karte lädt t
 Die Id einer Karte ist ihr Dateiname ohne `.goamap`. `my_airfield.goamap` hat die Id `my_airfield`, und Spielstände merken sich die Karte über diese Id.
 
 - Gelesen werden nur Dateien, die direkt in `Maps/` liegen. Unterordner werden ignoriert.
-- Zwei Karten mit derselben Id erscheinen nicht beide. Die zuletzt gelesene ersetzt die andere. Karten werden in dieser Reihenfolge gelesen: die mitgelieferten Karten, dein eigener Ordner `Maps`, dann die eingeschalteten Mods in Ladereihenfolge. Eine Mod-Karte namens `Debden.goamap` ersetzt also das mitgelieferte Debden. Wähle einen eindeutigen Namen, außer genau das ist deine Absicht.
+- Zwei Karten mit derselben Id erscheinen nicht beide. Die zuletzt gelesene ersetzt die andere. Karten werden in dieser Reihenfolge gelesen: die mitgelieferten Karten, die eingeschalteten Mods in Ladereihenfolge, dann dein eigener Ordner `Maps` neben `Mods`, der sich gegen jede Mod durchsetzt. Eine Mod-Karte namens `Debden.goamap` ersetzt also das mitgelieferte Debden. Wähle einen eindeutigen Namen, außer genau das ist deine Absicht.
 - Ersetzt eine Mod-Karte eine Karte, laden Spielstände auf dieser Karte die Version der Mod.
 
 ## Änderungen sehen { #seeing-your-changes }

@@ -74,7 +74,7 @@ Jedes Fachwort aus diesem Handbuch, in einfacher Sprache.
 
 **`mods/`-Ordner (im Modkit)** - Hier bauen du und dein Agent eure eigenen Mods, bevor sie in den `Mods`-Ordner des Spiels kopiert werden. Git ignoriert ihn, deshalb ändern Updates ihn nie.
 
-**Inhaltsordner** - Ein Ordner in einem Mod, dessen Name dem Spiel sagt, was drin ist: `Missions`, `Quests`, `Maps`, `Objects`, `CSV`, `TerrainObjects`, `Biomes`.
+**Inhaltsordner** - Ein Ordner in einem Mod, dessen Name dem Spiel sagt, was drin ist: `Missions`, `Quests`, `Maps`, `Objects`, `CSV`, `Biomes`. (Grafik-Mods in `Objects` und `Biomes` sind noch in Arbeit und werden von der aktuellen Alpha noch nicht unterstützt.)
 
 **ID** - Der eindeutige Name eines Dings im Spiel, zum Beispiel die Missions-ID `coastal_patrol`. IDs dürfen keine Leerzeichen enthalten und müssen eindeutig sein: Zwei Missionen mit derselben ID ersetzen sich gegenseitig.
 
@@ -90,7 +90,7 @@ Jedes Fachwort aus diesem Handbuch, in einfacher Sprache.
 
 **Konsole / Cheat-Konsole** - Ein kleines Fenster im Spiel, in das du Befehle wie `create_mission` tippst. Du schaltest sie unter **Einstellungen** (Options) **→ Cheats** ein. Siehe [Cheat-Konsole](../basics/cheats.md).
 
-**Player.log** - Die Textdatei, in die das Spiel schreibt, was es tut, samt jedem Fehler. Die erste Anlaufstelle, wenn ein Mod sich danebenbenimmt. Siehe [Wenn nichts passiert](troubleshooting.md#find-the-playerlog).
+**Player.log** - Die Textdatei, in die das Spiel seine Fehler schreibt (Entwicklungs-Builds schreiben auch hinein, was es tut). Die erste Anlaufstelle, wenn ein Mod sich danebenbenimmt. Siehe [Wenn nichts passiert](troubleshooting.md#find-the-playerlog).
 
 **Steam Workshop** - Die Seite von Steam zum Teilen von Mods. Spieler abonnieren dort einen Mod, und Steam installiert ihn für sie.
 

@@ -15,7 +15,7 @@ Eine Mission wird an ihrer **Id** erkannt, und die ist einfach ihr Dateiname ohn
 | Fertigkeits-Stats | `_missionStats` | `missions_api.SetMissionStat` in `initialize_mission` |
 | Ort auf der Karte | `_potentialLocations` | `missions_api.SetMissionLocation` |
 | Wie-geplant-Chance | `_asPlannedChance` | `missions_api.SetAsPlannedChance` |
-| Ausgänge | vier `_missionOutcomes` | `missions_api.SetOutcome` und `AddOutcomeEffect`, oder `get_mission_result` |
+| Ausgänge | vier `_missionOutcomes` | `missions_api.SetOutcome` und `AddOutcomeEffect`, dazu `get_mission_result` (Pflicht) |
 | Ereignisse im Flug pro Flug | immer 3 | `get_mission_events_count` (Standard 3) |
 | Erscheint von selbst (wöchentliche Ziehung, historisches Erscheinen) | ja | nein, siehe [Reine Skript-Missionen](#script-only-missions) |
 
@@ -68,14 +68,14 @@ Was mit einer Mission passiert, von der Woche, in der sie geplant wird, bis zum 
 |---|---|---|
 | 1 | Wochenplan | Zu Beginn jeder Woche verteilt das Spiel eine Anzahl Missions-Slots über die Woche. Die Anzahl hängt vom Rang der Basis ab. |
 | 2 | Historische Missionen mit Datum | Bei jedem Tageswechsel wird jede historische Mission mit `_historicDay`, deren Sperren erfüllt sind, erstellt, außerhalb der Wochen-Slots. |
-| 3 | Ein Slot ist fällig | Jede historische Mission ohne Datum, deren Sperren erfüllt sind, nimmt diesen Slot. Nur wenn keine fällig ist, läuft eine Zufallsziehung. |
+| 3 | Ein Slot ist fällig | Jede historische Mission ohne Datum, deren Sperren erfüllt sind, erscheint zusammen mit dieser Wochenmission und belegt den Slot nicht. Den Slot selbst füllt die Zufallsziehung. |
 | 4 | Zufallsziehung | Alle nicht-historischen Missionen, deren Sperren erfüllt sind, bilden einen Pool. Eine wird gezogen und aus dem Pool entfernt. Ist der Pool leer, wird er wieder aufgefüllt. |
 | 5 | Sperren | Eine Mission kommt infrage, wenn alle `_missionRequirements` erfüllt sind, die aktuelle Karte einen ihrer `_tags` teilt und sie (bei historischen Missionen) noch nicht gewonnen wurde und nicht schon auf der Karte ist. |
-| 6 | Erstellung | Das Spiel wählt einen Ort (bis zu 5 Versuche, um zwei Missionen am selben Fleck zu vermeiden), berechnet daraus Entfernung und Treibstoff und richtet die Mission aus JSON oder Skript ein. Dann ruft es [`initialize_mission`](#initialize_mission) auf. |
+| 6 | Erstellung | Das Spiel wählt einen Ort (eine Ziehung plus bis zu fünf weitere, um zwei Missionen am selben Fleck zu vermeiden), berechnet daraus Entfernung und Treibstoff und richtet die Mission aus JSON oder Skript ein. Dann ruft es [`initialize_mission`](#initialize_mission) auf. |
 | 7 | Warten | Die Mission liegt auf der Kriegskarte, bis der Spieler Flugzeuge schickt oder ihr Startfenster abläuft. Historische Missionen laufen nie ab. |
 | 8 | Flug | Die Uhr startet, sobald **alle** zugewiesenen Flugzeuge in der Luft sind. [`send_mission_event`](#send_mission_event) feuert jedes Mal, wenn der Flug einen weiteren Schritt erreicht (standardmäßig nach einem Drittel, nach zwei Dritteln und am Ende). |
 | 9 | Ausgang | Mit Daten: Die Würfe wählen einen der vier Ausgänge, seine Effekte werden angewendet, dann läuft [`set_mission_impact`](#set_mission_impact). Ohne Daten: [`get_mission_result`](#get_mission_result) entscheidet, dann läuft `set_mission_impact`. |
-| 10 | Rückkehr | Die Flugzeuge landen, die Akten der Crew werden aktualisiert, Events feuern. Dann [`send_mission_result_text`](#send_mission_result_text) oder [`send_mission_cancelled_text`](#send_mission_cancelled_text), falls der Spieler die Mission abgebrochen hat. |
+| 10 | Rückkehr | Die Flugzeuge landen, die Akten der Crew werden aktualisiert, Events feuern. Dann [`send_mission_result_event`](#send_mission_result_event) oder [`send_mission_cancelled_event`](#send_mission_cancelled_event), falls der Spieler die Mission abgebrochen hat oder sie verfallen ist. |
 | 11 | Ergebnisfenster | Wenn der Spieler es öffnet, liefert [`get_mission_result_text`](#get_mission_result_text) den Text. |
 
 ### Die zwei Würfe und der Ausgang-Index { #the-two-rolls-and-the-outcome-index }
@@ -102,7 +102,7 @@ Für Programmierer: `index = (skillPassed ? 1 : 0) | (asPlanned ? 2 : 0)`.
 !!! warning "Mindestens zwei Missions-Stats"
     Der Fertigkeitswurf liest direkt den ersten und den zweiten Eintrag von `_missionStats`. Mit nur einem stürzt die Mission beim Fertigkeitswurf ab.
 
-"Erfolg" in einer Kette oder einer Quest bedeutet nicht Index 3. Es bedeutet, dass der gewählte Ausgang `"_missionSuccess": true` hat. Index 1 (schiefgelaufen, aber gerettet) kann als Erfolg zählen, wenn du das so festlegst.
+"Erfolg" in einer Kette oder einer Quest bedeutet nicht Index 3. Welcher Ausgang als Erfolg zählt, ist durch seine Position festgelegt: Index 0 und 2 sind Fehlschläge, Index 1 (schiefgelaufen, aber gerettet) und Index 3 sind Erfolge.
 
 ## Handler { #handlers }
 
@@ -124,8 +124,8 @@ Den Funktionsnamen wählst du selbst; was zählt, ist der Decorator. Jeder Handl
 | `initialize_mission` | `INITIALIZE_MISSION` | nichts | in beiden Modi |
 | `send_mission_event` | `SEND_MISSION_EVENT` | nichts | in beiden Modi |
 | `set_mission_impact` | `SET_MISSION_IMPACT` | nichts | in beiden Modi |
-| `send_mission_result_text` | `SEND_MISSION_RESULT_EVENT` | nichts | in beiden Modi |
-| `send_mission_cancelled_text` | `SEND_MISSION_CANCELLED_EVENT` | nichts | in beiden Modi |
+| `send_mission_result_event` | `SEND_MISSION_RESULT_EVENT` | nichts | in beiden Modi, außer bei Abbruch |
+| `send_mission_cancelled_event` | `SEND_MISSION_CANCELLED_EVENT` | nichts | in beiden Modi |
 | `get_mission_result_text` | `GET_MISSION_RESULT_TEXT` | str | in beiden Modi |
 | `get_mission_name` | `GET_MISSION_NAME` | str | nur Skript |
 | `get_mission_description_text` | `GET_MISSION_DESCRIPTION_TEXT` | str | nur Skript |
@@ -135,7 +135,7 @@ Den Funktionsnamen wählst du selbst; was zählt, ist der Decorator. Jeder Handl
 | `get_enemy_count` | `GET_ENEMY_COUNT` | int | nur Skript |
 | `get_mission_events_count` | `GET_MISSION_EVENTS_COUNT` | int | nur Skript |
 | `get_fuel_level` | `GET_FUEL_LEVEL` | int | nur Skript |
-| `get_mission_result` | `GET_MISSION_RESULT` | bool | nur ohne Daten |
+| `get_mission_result` | `GET_MISSION_RESULT` | bool | nur Skript - **Pflicht** |
 | `get_mission_icon` | `GET_MISSION_ICON` | - | **nie aufgerufen** |
 | `calculate_mission_modifiers` | `CALCULATE_MISSION_MODIFIERS` | - | **nie aufgerufen** |
 | `calculate_airplane_modifiers` | `CALCULATE_AIRPLANE_MODIFIERS` | - | **nie aufgerufen** |
@@ -216,13 +216,13 @@ def set_mission_impact(mission_entity_id):
 
 Siehe [Ketten und Kampagnen](chains.md#when-json-is-not-enough).
 
-### send_mission_result_text
+### send_mission_result_event
 
-Wird aufgerufen, nachdem die Flugzeuge von einer Mission zurückgekommen sind, die bis zum Ende geflogen wurde. Die übliche Aufgabe ist eine Abschlusszeile im Ereignisprotokoll mit `event_log.Create`. Die Python-Konstante ist `MissionEvent.SEND_MISSION_RESULT_EVENT`.
+Wird aufgerufen, nachdem die Flugzeuge von einer Mission zurückgekommen sind, die bis zum Ende geflogen wurde - immer, außer wenn die Mission abgebrochen wurde. Die übliche Aufgabe ist eine Abschlusszeile im Ereignisprotokoll mit `event_log.Create`. Die Python-Konstante ist `MissionEvent.SEND_MISSION_RESULT_EVENT`, der Event-String `send_mission_result_text`.
 
-### send_mission_cancelled_text
+### send_mission_cancelled_event
 
-Wird statt `send_mission_result_text` aufgerufen, wenn der Spieler die Mission abgebrochen hat. Die Python-Konstante ist `MissionEvent.SEND_MISSION_CANCELLED_EVENT`. Eine abgebrochene Mission wendet keinen Ausgang an und zählt für Ketten als `cancelled`, nicht als Fehlschlag.
+Wird statt `send_mission_result_event` aufgerufen, wenn der Spieler die Mission abbricht oder sie verfällt. Die Python-Konstante ist `MissionEvent.SEND_MISSION_CANCELLED_EVENT`, der Event-String `send_mission_cancelled_text`. Eine abgebrochene Mission wendet keinen Ausgang an und zählt für Ketten als `cancelled`, nicht als Fehlschlag.
 
 ### get_mission_result_text
 
@@ -274,7 +274,7 @@ Reine Skript-Missionen. Gibt den Treibstoff zurück, den der Flug kostet. Standa
 
 ### get_mission_result
 
-Gibt `True` zurück, wenn die Mission erfolgreich war, sonst `False`. Das Spiel fragt nur, wenn es keine Ausgangsdaten für die Mission hat: bei einer reinen Skript-Mission, die keine Ausgänge geschrieben hat, oder bei einer, deren geschriebene Daten verloren gingen, weil der Spieler einen Spielstand geladen hat. Fehlt der Handler in dieser Situation, scheitert die Mission beim Ende mit einem Fehler.
+Gibt `True` zurück, wenn die Mission erfolgreich war, sonst `False`. Jede reine Skript-Mission muss ihn definieren: Er entscheidet über das Ende, und ohne ihn scheitert die Mission beim Abschluss mit einem Fehler.
 
 ```python
 @event_handler(MissionEvent.GET_MISSION_RESULT)
@@ -319,7 +319,7 @@ Die Missionsdatei wird Feld für Feld gelesen. Feldnamen beginnen mit einem Unte
 | `_difficultyRating` | int | Sterne, die dem Spieler angezeigt werden, 1–3. Standard 1. |
 | `_tags` | Liste von Strings | Zu welchen Karten die Mission gehört. Siehe [Karten-Tags](#map-tags). |
 | `_isHistoric` | bool | Macht die Mission zu einem Story-Moment. Siehe [Ketten und Kampagnen](chains.md#historic-missions). |
-| `_historicDay` | Datum | Frühestes Datum, an dem eine historische Mission erscheint. Ein Jahr unter 1900 zählt als "kein Datum". |
+| `_historicDay` | Datum | Der genaue Tag, an dem eine historische Mission erscheint. Ein Jahr unter 1900 zählt als "kein Datum". |
 | `_rawMissionName` ... `_rawGwFailureTransmission` | String | Neun optionale Textfelder. Siehe [Lokalisierung](../scripting/localization.md#text-in-the-json-instead-of-a-term). |
 | `_distanceLocationDependant` | `{"x", "y"}` | Wird von Blindflugs eigenem Missionswerkzeug geschrieben. Das Spiel liest es nicht; lass es in Ruhe oder weg. |
 
@@ -349,8 +349,8 @@ Jeder Eintrag in `_missionRequirements` ist eine Sperre. Alle Sperren müssen er
 | `_requirementType` | Name | `_value` | Erfüllt, wenn |
 |---|---|---|---|
 | 0 | `RunwayTier` | Stufe als Zahl, `"2"` | die Basis eine Landebahn mindestens dieser Stufe hat |
-| 1 | `EarliestAppearanceDay` | Tage, `"14"` | seit Beginn der Kampagne mindestens so viele Tage vergangen sind |
-| 2 | `LatestAppearanceDay` | Tage, `"40"` | seit Beginn der Kampagne höchstens so viele Tage vergangen sind |
+| 1 | `EarliestAppearanceDay` | Tage, `"14"` | die Tageszahl, gezählt ab dem Startdatum der Karte, diesen Wert erreicht hat |
+| 2 | `LatestAppearanceDay` | Tage, `"40"` | die Tageszahl, gezählt ab dem Startdatum der Karte, diesen Wert noch nicht überschritten hat |
 | 3 | `CompletedMission` | `"<missionId>"` oder `"<missionId>,<outcome>"` | der Spieler diese Mission mindestens einmal mit diesem Ausgang beendet hat |
 
 Bei `CompletedMission` ist der Ausgang `success`, `failure` oder `cancelled`. Ohne Ausgang zählt jeder Abschluss, auch ein abgebrochener. Das Spiel merkt sich jeden Abschluss, nach einem gescheiterten und einem späteren erfolgreichen Versuch sind also sowohl `,failure` als auch `,success` erfüllt. Siehe [Ketten und Kampagnen](chains.md).
@@ -384,7 +384,7 @@ Genau vier Einträge, in der Reihenfolge des [Ausgang-Index](#the-two-rolls-and-
 | 0 | `CrewMood` | Zahl, `"-20"` | Stimmung aller, die geflogen sind |
 | 1 | `CrewConfidence` | Zahl | Selbstvertrauen aller, die geflogen sind |
 | 2 | `CrewEnergy` | Zahl | Energie aller, die geflogen sind |
-| 3 | `Damage` | Bereich, `"20-60"` | Schaden an jedem Flugzeug, pro Flugzeug gewürfelt; schwerer Schaden verletzt auch die Crew |
+| 3 | `Damage` | Bereich, `"20-60"` | Schaden an den Flugzeugen, pro Flug gewürfelt; schwerer Schaden verletzt auch die Crew |
 | 4 | `BaseMood` | Zahl | Stimmung der ganzen Basis |
 | 5 | `BaseConfidence` | Zahl | Selbstvertrauen der ganzen Basis |
 | 6 | `BaseEnergy` | Zahl | Energie der ganzen Basis |

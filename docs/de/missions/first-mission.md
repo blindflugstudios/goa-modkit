@@ -36,7 +36,7 @@ Leg `mymod_coastal_patrol.json` an. Am einfachsten startest du mit einer Kopie v
 ]
 ```
 
-Jeder Eintrag ist eine Sperre, und alle müssen erfüllt sein. Typ 0 ist die Landebahnstufe, die die Basis haben muss; Typ 1 ist der früheste Tag, gezählt ab Beginn der Kampagne. Typ 3 lässt die Mission auf eine andere folgen, siehe [Ketten und Kampagnen](chains.md). Die vollständige Liste steht in der [Referenz](reference.md#requirements).
+Jeder Eintrag ist eine Sperre, und alle müssen erfüllt sein. Typ 0 ist die Landebahnstufe, die die Basis haben muss; Typ 1 ist der früheste Tag, gezählt ab dem Startdatum der Karte. Typ 3 lässt die Mission auf eine andere folgen, siehe [Ketten und Kampagnen](chains.md). Die vollständige Liste steht in der [Referenz](reference.md#requirements).
 
 ### Wie die Würfel fallen { #how-the-dice-fall }
 
@@ -71,7 +71,7 @@ Jeder Ausgang legt fest, ob er als Erfolg zählt (`_missionSuccess`), und trägt
 }
 ```
 
-`_effectValue` steht immer in Anführungszeichen. Bei `Damage` (Typ 3) ist es ein Bereich wie `"20-60"`, der für jedes Flugzeug einzeln gewürfelt wird. Bei allem anderen ist es eine ganze Zahl wie `"-40"`. Alle Effekttypen stehen in der [Referenz](reference.md#outcomes).
+`_effectValue` steht immer in Anführungszeichen. Bei `Damage` (Typ 3) ist es ein Bereich wie `"20-60"`, der pro Flug gewürfelt wird. Bei allem anderen ist es eine ganze Zahl wie `"-40"`. Alle Effekttypen stehen in der [Referenz](reference.md#outcomes).
 
 ### Die Stats: mindestens zwei { #the-stats-at-least-two }
 
@@ -113,7 +113,7 @@ Für einen Flug einer Mission:
 | die Mission wird erstellt | `initialize_mission` | Zustand einrichten |
 | im Flug, einmal pro Fortschrittsschritt | `send_mission_event` | würfeln und per Funk melden, was passiert |
 | der Flug endet | `set_mission_impact` | auf den Ausgang reagieren |
-| die Flugzeuge sind zurück | `send_mission_result_text` | eine Abschlusszeile im Ereignisprotokoll |
+| die Flugzeuge sind zurück | `send_mission_result_event` | eine Abschlusszeile im Ereignisprotokoll |
 | der Spieler öffnet das Ergebnisfenster | `get_mission_result_text` | welchen Text dieses Fenster zeigt |
 
 `send_mission_event` ist der Handler, der mehrmals feuert: dreimal bei einer Mission mit JSON-Datei, nach einem Drittel, nach zwei Dritteln und am Ende des Flugs. Er erfährt nicht, welcher Schritt gerade dran ist, also fragt das Skript nach:
@@ -171,7 +171,7 @@ _term("gw_success_transmission", "Despite the weather the flight brought back a 
 _term("gw_failure_transmission", "The flight lost the coastline in the murk and turned back early.")
 ```
 
-`ap` steht für "as planned" (wie geplant), `gw` für "gone wrong" (schiefgelaufen). Die ersten drei Namen liest das Spiel selbst, sie lassen sich nicht ändern; fehlt einer, zeigt das Missionsfenster den rohen Schlüssel. Die anderen sechs verwendet das Skript, und jede mitgelieferte Mission nutzt genau diese Namen, also bleib dabei. Mehr unter [Lokalisierung](../scripting/localization.md).
+`ap` steht für "as planned" (wie geplant), `gw` für "gone wrong" (schiefgelaufen). Die ersten drei Namen liest das Spiel selbst, sie lassen sich nicht ändern; fehlt einer, bleibt dieser Platz im Spiel leer. Die anderen sechs verwendet das Skript, und jede mitgelieferte Mission nutzt genau diese Namen, also bleib dabei. Mehr unter [Lokalisierung](../scripting/localization.md).
 
 ### Drei Handler reichen { #three-handlers-are-enough }
 

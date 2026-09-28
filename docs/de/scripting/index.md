@@ -23,7 +23,7 @@ Mods/
       morale_boost.py
 ```
 
-Die Skripte des Spiels liegen im Installationsordner unter `GroundOfAces_Data/StreamingAssets/Scripts` (auf macOS: `GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Scripts`). Das sind mitgelieferte Inhalte, die du nur lesen solltest - lies sie für Ideen, aber ändere sie nicht, denn ein Spiel-Update überschreibt sie. Die mitgelieferten Ordner sind:
+Die Skripte des Spiels liegen im Installationsordner unter `Ground Of Aces_Data/StreamingAssets/Scripts` (auf macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Scripts`). Das sind mitgelieferte Inhalte, die du nur lesen solltest - lies sie für Ideen, aber ändere sie nicht, denn ein Spiel-Update überschreibt sie. Die mitgelieferten Ordner sind:
 
 | Ordner | Inhalt |
 |---|---|

@@ -15,7 +15,7 @@ We are telling you this plainly because you should know it, not because Workshop
 - **Know which mods have scripts.** The **Mods** window shows which mods contain scripts.
 - **Only use script mods from authors you trust**: people you know from the community, with a history of mods, comments and a Workshop page that explains what the mod does.
 - **Subscribed Workshop mods are switched on by default.** You can switch any mod off in the **Mods** window.
-- **The game asks before you turn on scripting for a mod.** Take that question seriously. If you are not sure about the author, say no, or unsubscribe.
+- **The Scripting switch is no protection yet.** Every mod shows one in the **Mods** window, but it is reserved for a coming opt-in and has no effect at the moment: a mod's scripts run whenever the mod is enabled. To stop a mod's scripts, switch the whole mod off, or unsubscribe.
 - **Something odd?** Unsubscribe, and report the mod on its Workshop page and in the [modding channel on Discord](https://discord.com/channels/1006159027157356587/1551969822911242240).
 
 !!! tip "Check a mod before you trust it"

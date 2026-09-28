@@ -59,14 +59,14 @@ möchtest - wir freuen uns darauf.
 | **Ereignis-Skripte** | Python, das auf das reagiert, was auf dem Stützpunkt und in der Luft passiert | [Scripting](scripting/index.md) |
 | **Quests** | Checklisten, die den Spieler anleiten | [Quests](quests/index.md) |
 | **Spieldaten** | Flugzeuge, Gebäude, Angriffe, Kosten - dreh an den Zahlen | [CSV-Tabellen](data/csv.md) |
-| **Karten und Grafik** | Eigene Karten, Modelle, Geländeobjekte und Biome | [Karten](content/maps.md) |
+| **Karten und Grafik** | Eigene Karten, Modelle und Biome (Grafik-Mods sind noch in Arbeit und werden von der aktuellen Alpha noch nicht unterstützt) | [Karten](content/maps.md) |
 | **Workshop** | Teil deinen Mod mit allen Spielern | [Steam Workshop](sharing/workshop.md) |
 
 ## So funktioniert es in einer Minute { #how-it-works-in-one-minute }
 
 1. Öffne das Spiel und geh auf **Hauptmenü** (Main menu) **→ Mods → Open folder**.
 2. Leg dort einen Mod-Ordner ab - zum Beispiel eine Kopie eines der [Beispiele](examples.md).
-3. Zurück im Spiel: Geh ins Hauptmenü, öffne einmal **Mods** (dabei wird der Ordner neu eingelesen) und lade deinen Spielstand.
+3. Zurück im Spiel: Geh ins Hauptmenü, öffne **Mods**, drück auf **Refresh** (damit das Spiel den neuen Ordner bemerkt) und lade deinen Spielstand.
 
 Das ist schon die ganze Runde - die Details stehen unter [Testen und neu laden](basics/testing.md). Alles andere auf dieser Seite dreht sich darum, was du in diesen Ordner legst.
 

@@ -102,10 +102,10 @@ Kopiere den Ordner, leg keine Verknüpfung und keinen Alias an: Das Spiel übers
 ### 6. Laden und losfliegen { #6-load-it-and-fly }
 
 1. Ist ein Spielstand offen: **Einstellungen** (Options) **→ Verlassen zum Hauptmenü** (Quit to main menu).
-2. Öffne **Mods**. Dein Mod steht in der Liste. Weil er eine `.py`-Datei hat, zeigt er auch einen **Scripting**-Schalter: Schalte ihn ein und bestätige (das aktuelle Spiel führt die Skripte ohnehin aus).
+2. Öffne **Mods** und drück auf **Refresh**. Dein Mod steht in der Liste. Jede Mod zeigt außerdem einen **Scripting**-Schalter: Er hat derzeit keine Wirkung (das aktuelle Spiel führt die Skripte einer Mod immer aus, wenn die Mod eingeschaltet ist), du kannst ihn also lassen, wie er ist.
 3. Lade deinen Spielstand.
 4. Schalte **Einstellungen → Cheats** ein, öffne die Konsole mit dem Cheat-Knopf und tippe `create_mission coastal_patrol`. Die Mission erscheint auf der Kriegskarte.
 
-Nach jeder späteren Änderung: prüfen, erneut kopieren (alte Dateien ersetzen), **Verlassen zum Hauptmenü**, Spielstand laden (öffne vorher **Mods**, wenn du einen neuen Ordner wie `Quests/` angelegt hast).
+Nach jeder späteren Änderung: prüfen, erneut kopieren (alte Dateien ersetzen), **Verlassen zum Hauptmenü**, Spielstand laden (öffne vorher **Mods** und drück auf **Refresh**, wenn du einen neuen Ordner wie `Quests/` angelegt hast).
 
 Es passiert nichts? Siehe [Wenn nichts passiert](troubleshooting.md).

@@ -1,8 +1,25 @@
 # Objects and models
 
+!!! warning "Work in progress"
+    Art mods are work in progress. The current alpha does not support them yet, so models and textures from a mod do not show up in the game for now.
+
 Tired of the standard-issue barrel? A mod can give the objects you build on your airfield a new look: furniture, fences, guns, signs, posters, workbenches and training equipment. You either drop in a new 3D model, or keep the game's model and paint it with a new texture.
 
 Only the look changes. Size on the grid, cost, what crew can do with the object, and every other rule stay as the game defines them. Changing numbers is done with [CSV tables](../data/csv.md).
+
+## Folder layout (preliminary)
+
+This is how the game will read object art. It is preliminary and may still change.
+
+- `Objects/` holds every model and every texture of the mod in one folder. A model's **file name** is the id of the object it replaces: `Chair.fbx` re-dresses the chair, `Chair.destroyed.fbx` its destroyed look, `tree.2.glb` variant 2 of the tree. Both `.fbx` and `.glb` are accepted.
+- A model's materials name their textures, and the PNG of that name in `Objects/` is used: a material that names the image `wood-01` gets `Objects/wood-01.png`. One texture can serve any number of models.
+- `Chair.thumbnail.png` (at most 256 × 256) replaces the chair's icon in the build menu. It is only used next to a model of the same id.
+- Subfolders below `Objects/` are read too, but their names mean nothing: `Objects/Chair/model.fbx` is a model for an object called `model`, not for the chair.
+- Per-object settings live in one `Objects/config.json`, keyed by object id: `{"Objects": {"Chair": {"UseGameMaterial": false}}}`. A `config.json` in a subfolder is ignored.
+- Trees, bushes, rocks and the other map objects are re-dressed from `Objects/` too. There is no `TerrainObjects/` folder any more.
+- Art is imported once, when the game starts. After a change, **restart the game**; neither **Refresh** nor the **Enabled** switch in the Mods window re-imports it.
+
+<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
 
 ## Quick start
 
@@ -147,9 +164,17 @@ If two enabled mods both have a folder for the same object, the mod applied last
 
 Objects, [terrain objects](terrain-objects.md) and [biomes](biomes.md) are separate: a folder `Objects/tree` and a folder `TerrainObjects/tree` never affect each other.
 
+-->
+
 ## Which objects can be changed
 
+<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
+
 The folder name is the object's id, the same id the object has in the `ID` column of the `BuildingComponents` table (see [CSV tables](../data/csv.md)).
+
+-->
+
+The model's file name is the object's id, the same id the object has in the `ID` column of the `BuildingComponents` table (see [CSV tables](../data/csv.md)).
 
 **Workbenches:**
 
@@ -191,6 +216,8 @@ WickerChair, Windhose, WoodenChair, WoodenFenceSimple, WoodenFenceSimplePole, Wo
 WoodenFenceSturdyEdge, WoodenFenceSturdyPole, WoodenTableLarge, WoodenTableMedium, WoodenTableSmall
 ```
 
+<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
+
 **Not available yet:** walls, floors, roofs, doors and windows of buildings (`wall_wood`, `floor_brick` and so on), parking spots, aircraft, vehicles and characters. A folder for one of those is read but has no effect. Trees, rocks and other natural objects are [terrain objects](terrain-objects.md); the ground itself is a [biome](biomes.md).
 
 ## When something does not show up
@@ -226,3 +253,5 @@ If there is no line at all for your folder, check that the folder name matches a
 
 !!! note
     The released game may write only errors to `Player.log`, so some of these lines appear only in development builds. If nothing shows up and the look does not change, work through the checklist: file names, folder name, file size, restart.
+
+-->

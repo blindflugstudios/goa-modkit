@@ -413,7 +413,7 @@ Eine id in der Liste, für die es keine Quest-Datei gibt, wird im veröffentlich
 
 Um eine Quest zu ändern, die das Spiel mitbringt, leg eine Datei mit **demselben Namen** in den Ordner `Quests/` deiner Mod. Deine Kopie ersetzt die mitgelieferte vollständig, also starte mit einer vollständigen Kopie des Originals und ändere, was du brauchst: einen `_amount`, einen `_parameter`, einen Schritt optional machen, einen Schritt hinzufügen oder entfernen.
 
-Die mitgelieferten Dateien sind einfaches JSON im Installationsordner des Spiels, unter `GroundOfAces_Data/StreamingAssets/Scripts/Quest/` (auf macOS: `GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Scripts/Quest/`) - `quest0` bis `quest14`, die `tutorial_*`-Quests und die `*_skin_unlock`-Quests. Kopier sie von dort; bearbeite sie nie direkt, denn ein Spiel-Update überschreibt diesen Ordner. Die mitgelieferten Karten liegen gleich daneben in `StreamingAssets/Maps/` - dort findest du auch eine echte `Metadata.json` zum Anschauen.
+Die mitgelieferten Dateien sind einfaches JSON im Installationsordner des Spiels, unter `Ground Of Aces_Data/StreamingAssets/Scripts/Quest/` (auf macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Scripts/Quest/`) - `quest0` bis `quest14`, die `tutorial_*`-Quests und die `*_skin_unlock`-Quests. Kopier sie von dort; bearbeite sie nie direkt, denn ein Spiel-Update überschreibt diesen Ordner. Die mitgelieferten Karten liegen gleich daneben in `StreamingAssets/Maps/` - dort findest du auch eine echte `Metadata.json` zum Anschauen.
 
 Änderungen erreichen auch **bestehende Spielstände**. Beim Laden eines Spielstands wird jede Quest darin mit der aktuellen Datei verglichen: Schritt-Titel, Schritt-Beschreibungen, Bedingungstypen, Parameter und Mengen werden an Ort und Stelle aktualisiert, neue Schritte werden angehängt, entfernte Schritte gelöscht, und ein Schritt, dessen Fortschritt die neue Menge schon erreicht, wird sofort abgeschlossen. Schritte werden **nach Position** zugeordnet, ein Schritt in der Mitte verschiebt also in einem laufenden Spielstand die Bedeutung aller folgenden - häng neue Schritte ans Ende, wenn eine Quest schon im Umlauf ist. Nicht aktualisiert werden in einem laufenden Spielstand: `_questTitle`, `_questDescription` und `_isHiddenInUI` der Quest selbst sowie `_isOptional` und `_genericIconKey` eines Schritts - die werden festgelegt, wenn die Quest zum ersten Mal vergeben wird.
 
@@ -423,7 +423,7 @@ Die mitgelieferten Dateien sind einfaches JSON im Installationsordner des Spiels
 
 **Tutorial-Quests (`2`)** lassen zusätzlich die Tutorial-Hervorhebung nacheinander auf die Buttons in `_highlightedUIElements` zeigen und können Konsolenbefehle aus `_cheatsOnStart` und `_completionCheats` ausführen. In einer Mod gilt:
 
-- Die **Befehle werden entfernt**. Eine Mod-Quest mit einer dieser Listen lädt trotzdem, aber die Listen werden ignoriert (mit einer Warnung im Log), und nichts wird ausgeführt.
+- Die **Befehle werden entfernt**. Eine Mod-Quest mit einer dieser Listen lädt trotzdem, aber die Listen werden ignoriert (Entwickler-Builds schreiben eine Warnung ins Log), und nichts wird ausgeführt.
 - Die Hervorhebungs-ids sind eine feste Liste im Spiel - die ids in den mitgelieferten Tutorial-Quests (`SawStation`, `Sickbed`, `ParkingSmall`, `CrewRoleDropdown`, ...) sind das Vokabular. Eine unbekannte id bewirkt nichts.
 - Die Ereignisse nur im Tutorial (siehe [Ereignisse](#events)) treten nur auf, solange das Tutorial selbst läuft, und das kann nur der Spieler einschalten (das Häkchen im Fenster für ein neues Spiel), keine Mod.
 
@@ -571,7 +571,7 @@ Lade nach jeder Änderung erneut ein Level (ein neuer Ordner braucht zuerst **Re
 
 Wenn eine Quest nicht auftaucht oder ein Schritt sich nicht bewegt, lies die Log-Datei des Spiels, `Player.log` (wo sie liegt: [So funktionieren Mods](../basics/mods.md#seeing-your-changes)).
 
-- Eine Quest-Datei ganz ohne JSON-Objekt wird übersprungen, mit einem Fehler im Log. Eine Datei, die wie JSON anfängt, aber innen kaputt ist (ein fehlendes Komma, eine offene Klammer), kann das Laden des Levels kaputt machen - prüf dein JSON in einem Editor, bevor du testest.
+- Eine Quest-Datei mit ungültigem JSON (ein fehlendes Komma, eine offene Klammer) wird **nicht** übersprungen - sie macht das Laden des Levels kaputt. Prüf dein JSON in einem Editor, bevor du testest.
 - Eine Karte, die eine unbekannte Quest-id aufführt, und ein Schritt, der wegen eines falschen `_type` oder einer falsch geschriebenen id nie vorankommt, bekommen **keine** Zeile im Log - prüf die Tabellen oben.
 
 Mehr Tipps zum Testen: [Testen und neu laden](../basics/testing.md).

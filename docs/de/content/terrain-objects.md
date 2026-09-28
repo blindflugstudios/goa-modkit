@@ -1,5 +1,10 @@
 # Landschaftsobjekte
 
+!!! warning "In Arbeit"
+    Grafik-Mods sind noch in Arbeit. Die aktuelle Alpha unterstützt das noch nicht. Einen Ordner `TerrainObjects/` gibt es nicht mehr; Bäume, Felsen und andere Kartenobjekte bekommen ihren neuen Look über `Objects/`, siehe [Objekte und Modelle](objects.md).
+
+<!-- OUTDATED (docs audit 2026-09-28): the whole page describes the removed TerrainObjects/ folder and is excluded from the build, see DOCS_AUDIT.md -->
+
 Landschaftsobjekte sind die Dinge, die zur Landschaft gehören und nicht zu deinem Flugplatz: Bäume, Büsche, Felsen, Lehm- und Sandgruben, Teiche, wildes Getreide, alte Zäune und Gräber. Sie werden mit dem Werkzeug **Landschaftsobjekte** (Terrain Objects) im [Karten Editor](maps.md) auf eine Karte gesetzt.
 
 Eine Mod kann jedem von ihnen einen neuen Look geben, auf allen Karten gleichzeitig. Das funktioniert genau wie der [Reskin von Objekten](objects.md), mit einer Ergänzung: Viele Landschaftsobjekte gibt es in mehreren Varianten, und du kannst alle Varianten gemeinsam oder jede einzeln ändern.

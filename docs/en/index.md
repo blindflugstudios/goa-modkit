@@ -58,14 +58,14 @@ build - we love to hear it.
 | **Event scripts** | Python that reacts to what happens on the base and in the air | [Scripting](scripting/index.md) |
 | **Quests** | Checklists that guide the player | [Quests](quests/index.md) |
 | **Game data** | Aircraft, buildings, raids, costs - change the numbers | [CSV tables](data/csv.md) |
-| **Maps and art** | Your own maps, models, terrain objects and biomes | [Maps](content/maps.md) |
+| **Maps and art** | Your own maps, models and biomes (art mods are work in progress and not supported by the current alpha yet) | [Maps](content/maps.md) |
 | **Workshop** | Share your mod with every player | [Steam Workshop](sharing/workshop.md) |
 
 ## How it works in one minute
 
 1. Open the game, go to **Main menu → Mods → Open folder**.
 2. Put a mod folder there - for example a copy of one of the [examples](examples.md).
-3. Back in the game, return to the main menu, open **Mods** once (it rescans the folder) and load your save.
+3. Back in the game, return to the main menu, open **Mods**, press **Refresh** (so the game notices the new folder) and load your save.
 
 That is the whole loop - see [Testing and reloading](basics/testing.md) for the details. Everything else on this site is about what you put into that folder.
 

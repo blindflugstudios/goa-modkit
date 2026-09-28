@@ -1,5 +1,10 @@
 # Terrain objects
 
+!!! warning "Work in progress"
+    Art mods are work in progress. The current alpha does not support them yet. There is no `TerrainObjects/` folder any more; trees, rocks and other map objects are re-dressed from `Objects/`, see [Objects and models](objects.md).
+
+<!-- OUTDATED (docs audit 2026-09-28): the whole page describes the removed TerrainObjects/ folder and is excluded from the build, see DOCS_AUDIT.md -->
+
 Terrain objects are the things that belong to the land rather than to your airfield: trees, bushes, rocks, clay and sand pits, ponds, wild crops, old fences and graves. They are placed on a map with the **Terrain Objects** tool of the [Map Editor](maps.md).
 
 A mod can give any of them a new look, on every map at once. It works exactly like [reskinning objects](objects.md), with one addition: many terrain objects come in several variants, and you can change all variants together or one at a time.

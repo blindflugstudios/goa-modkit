@@ -15,7 +15,7 @@ Wir sagen dir das so deutlich, weil du es wissen solltest, nicht weil Workshop-M
 - **Wisse, welche Mods Skripte enthalten.** Das Fenster **Mods** zeigt dir, welche Mods Skripte mitbringen.
 - **Nutze Skript-Mods nur von Autoren, denen du vertraust**: Leute, die du aus der Community kennst, mit bisherigen Mods, Kommentaren und einer Workshop-Seite, die erklärt, was die Mod tut.
 - **Abonnierte Workshop-Mods sind standardmäßig eingeschaltet.** Im Fenster **Mods** kannst du jede Mod ausschalten.
-- **Das Spiel fragt nach, bevor du das Scripting für eine Mod einschaltest.** Nimm diese Frage ernst. Wenn du dir beim Autor nicht sicher bist, sag Nein oder kündige das Abo.
+- **Der Schalter Scripting schützt dich noch nicht.** Jede Mod zeigt ihn im Fenster **Mods**, aber er ist für eine kommende Zustimmungsfunktion reserviert und hat derzeit keine Wirkung: Die Skripte einer Mod laufen immer, wenn die Mod eingeschaltet ist. Um die Skripte einer Mod zu stoppen, schalte die ganze Mod aus oder kündige das Abo.
 - **Kommt dir etwas komisch vor?** Kündige das Abo und melde die Mod auf ihrer Workshop-Seite und im [Modding-Channel auf Discord](https://discord.com/channels/1006159027157356587/1551969822911242240).
 
 !!! tip "Prüf eine Mod, bevor du ihr vertraust"

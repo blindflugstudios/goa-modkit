@@ -413,7 +413,7 @@ An id in the list that no quest file provides is skipped without a message in th
 
 To change a quest the game ships with, drop a file with **the same name** into your mod's `Quests/`. Your copy replaces the shipped one entirely, so start from a full copy of the original and change what you need: an `_amount`, a `_parameter`, a step made optional, a step added or removed.
 
-The shipped files are plain JSON inside the game's installation folder, under `GroundOfAces_Data/StreamingAssets/Scripts/Quest/` (on macOS: `GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Scripts/Quest/`) - `quest0` to `quest14`, the `tutorial_*` quests and the `*_skin_unlock` quests. Copy from there; never edit them in place, because a game update overwrites that folder. The shipped maps sit nearby in `StreamingAssets/Maps/`, which is also the place to look at a real `Metadata.json`.
+The shipped files are plain JSON inside the game's installation folder, under `Ground Of Aces_Data/StreamingAssets/Scripts/Quest/` (on macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Scripts/Quest/`) - `quest0` to `quest14`, the `tutorial_*` quests and the `*_skin_unlock` quests. Copy from there; never edit them in place, because a game update overwrites that folder. The shipped maps sit nearby in `StreamingAssets/Maps/`, which is also the place to look at a real `Metadata.json`.
 
 Changes reach **existing saves** too. When a save is loaded, every quest already in it is compared with the current file: step titles, step descriptions, requirement types, parameters and amounts are updated in place, steps you added are appended, steps you removed are deleted, and a step whose progress already meets the new amount completes right away. Steps are matched **by position**, so inserting a step in the middle re-labels everything after it in a running save - append new steps at the end when a quest is already out in the wild. Not updated in a running save: the quest's own `_questTitle`, `_questDescription` and `_isHiddenInUI`, and a step's `_isOptional` and `_genericIconKey` - those are fixed when the quest is first handed out.
 
@@ -423,7 +423,7 @@ Changes reach **existing saves** too. When a save is loaded, every quest already
 
 **Tutorial quests (`2`)** additionally point the tutorial highlight at the buttons listed in `_highlightedUIElements`, one after the other, and can run console commands from `_cheatsOnStart` and `_completionCheats`. In a mod:
 
-- The **commands are removed**. A mod quest with either list still loads, but the lists are ignored (with a warning in the log) and nothing runs.
+- The **commands are removed**. A mod quest with either list still loads, but the lists are ignored (development builds log a warning) and nothing runs.
 - The highlight ids are a fixed list inside the game - the ids in the shipped tutorial quests (`SawStation`, `Sickbed`, `ParkingSmall`, `CrewRoleDropdown`, ...) are the vocabulary. An unknown id does nothing.
 - The tutorial-only events (see [Events](#events)) fire only while the tutorial itself is running, which only the player can switch on (the checkbox in the new-game window), not a mod.
 
@@ -571,7 +571,7 @@ Load a level again after every edit (a new folder needs **Refresh** in the Mods 
 
 When a quest does not show up, or a step does not move, read the game's log file `Player.log` (where it is: [How mods work](../basics/mods.md#seeing-your-changes)).
 
-- A quest file with no JSON object in it at all is skipped, with an error in the log. A file that starts like JSON but is broken inside (a missing comma, an unclosed bracket) can break the loading of the level - check your JSON in an editor before you test.
+- A quest file that is not valid JSON (a missing comma, an unclosed bracket) is **not** skipped - it breaks the loading of the level. Check your JSON in an editor before you test.
 - A map that lists an unknown quest id, and a step that never progresses because of a wrong `_type` or a misspelt id, get **no** line in the log - check the tables above.
 
 More testing tips: [Testing and reloading](../basics/testing.md).

@@ -48,12 +48,12 @@ Check the result: `<mods_folder>/<mod_id>/` directly contains `config.json` and 
 There is no `reload_mods` in the public game. In plain steps:
 
 1. If the game is running with a save open: save, then **Options -> Quit to main menu**. If it is not running, start it.
-2. Main menu -> **Mods**. Opening this window rescans the folder (there is also a **Refresh** button). The mod should be listed and switched on.
+2. Main menu -> **Mods**. If the mod folder is new (first install), or the mod got a new content folder such as `Quests/`, press **Refresh** - opening the window alone does not rescan. The mod should be listed and switched on.
 3. Load the save again, or start a new game.
-4. **If the mod has art** (`Objects/`, `TerrainObjects/`, `Biomes/`): restart the whole game instead - art is imported only at game start. Missions, scripts, quests, maps and CSV only need steps 1-3.
+4. **If the mod has art** (`Objects/`, `Biomes/`): restart the whole game instead - art is imported only at game start. Art mods are work in progress and not supported by the current alpha yet; say so. Missions, scripts, quests, maps and CSV only need steps 1-3.
 5. To test right away: switch on **Options -> Cheats** once; with a game loaded, click the cheat button on the game screen and type e.g. `create_mission <mission_id>` or `quest <quest_id>`, then Enter.
 
-The Mods window may show a scripting toggle. It currently changes nothing - scripts in an enabled mod run either way - so do not present it as protection.
+The Mods window shows a **Scripting** switch on every mod. It is reserved for a coming opt-in and currently changes nothing - scripts in an enabled mod run either way - so do not present it as protection.
 
 ## 4. Ask
 

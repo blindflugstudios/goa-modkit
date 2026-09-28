@@ -23,11 +23,11 @@ Der Wert ist eine Missions-Id, optional gefolgt von einem Komma und dem Ausgang,
 | `"mymod_convoy_spotted"` | beendet, mit beliebigem Ausgang (auch abgebrochen) |
 | `"mymod_convoy_spotted,success"` | erfolgreich beendet |
 | `"mymod_convoy_spotted,failure"` | geflogen und gescheitert |
-| `"mymod_convoy_spotted,cancelled"` | vom Spieler abgebrochen |
+| `"mymod_convoy_spotted,cancelled"` | vom Spieler abgebrochen oder verfallen |
 
 `cancelled` ist ein eigener Ausgang: Eine Mission, die der Spieler abgebrochen hat, zählt nicht als Fehlschlag.
 
-"Erfolg" heißt, dass der Ausgang, den die Würfel gewählt haben, im JSON `"_missionSuccess": true` hat. Das ist nicht dasselbe wie der Fertigkeitswurf: Ausgang-Index 1 (schiefgelaufen, Fertigkeit bestanden) kann ein Erfolg sein, wenn du ihn so markierst. Genau das lässt eine gerettete Mission anders wirken als eine glatte.
+"Erfolg" hängt von der Position des Ausgangs ab, den die Würfel gewählt haben: Index 1 (schiefgelaufen, Fertigkeit bestanden) und Index 3 (wie geplant, Fertigkeit bestanden) zählen als Erfolg, Index 0 und 2 als Fehlschlag.
 
 Das Spiel merkt sich jeden Abschluss für die ganze Kampagne. Ein Spieler, der eine Mission verloren und später gewonnen hat, erfüllt sowohl `,failure` als auch `,success`.
 
@@ -61,8 +61,8 @@ Eine normale Mission liegt in einem Pool und wird über die Woche verteilt zufä
 `"_isHistoric": true` ändert das. Eine historische Mission:
 
 - **kommt nie in die Zufallsziehung.** Sobald ihre Sperren erfüllt sind, erscheint sie garantiert.
-- **erscheint an ihrem Datum**, wenn sie einen `_historicDay` hat: beim ersten Tageswechsel an oder nach diesem Datum, bei dem auch ihre anderen Sperren erfüllt sind. Dafür werden die Wochen-Slots nicht genutzt.
-- **behält die normale Vorlaufzeit**, wenn sie keinen `_historicDay` hat: Sie nimmt statt einer zufälligen Mission den nächsten wöchentlichen Missions-Slot. So kommt eine Folgemission mit derselben Verzögerung wie jede andere Mission an, statt sofort auf der Karte zu landen.
+- **erscheint an ihrem Datum**, wenn sie einen `_historicDay` hat: genau an diesem Tag, wenn auch ihre anderen Sperren erfüllt sind. Dafür werden die Wochen-Slots nicht genutzt.
+- **behält die normale Vorlaufzeit**, wenn sie keinen `_historicDay` hat: Sie erscheint zusammen mit der nächsten Wochenmission und belegt keinen der Slots dieser Woche. So kommt eine Folgemission mit derselben Verzögerung wie jede andere Mission an, statt sofort auf der Karte zu landen.
 - **läuft nie ab.** `_timeToStartRange` wird ignoriert, der Spieler hat also unbegrenzt Zeit, sie zu fliegen.
 - **gibt es bei Erfolg nur einmal.** Einmal gewonnen, erscheint sie nie wieder. Ein gescheiterter oder abgebrochener Versuch bringt sie zurück, eine Kette, die an `success` gebunden ist, lässt sich also wiederholen.
 - **ist nie zweimal auf der Karte.** Solange eine Kopie wartet oder in der Luft ist, erscheint keine zweite.
@@ -71,10 +71,10 @@ Ihre Sperren werden mit UND verknüpft:
 
 | Hat eine `CompletedMission`-Sperre | Hat einen `_historicDay` | Erscheint |
 |---|---|---|
-| nein | nein | im nächsten Wochen-Slot |
-| ja | nein | im nächsten Wochen-Slot, nachdem der Vorgänger richtig ausgegangen ist |
-| nein | ja | beim ersten Tageswechsel an oder nach dem Datum |
-| ja | ja | am Datum, wenn der Vorgänger schon richtig ausgegangen ist; sonst beim ersten Tageswechsel danach |
+| nein | nein | zusammen mit der nächsten Wochenmission |
+| ja | nein | zusammen mit der nächsten Wochenmission, nachdem der Vorgänger richtig ausgegangen ist |
+| nein | ja | genau an diesem Tag |
+| ja | ja | genau an diesem Tag, sobald der Vorgänger richtig ausgegangen ist |
 
 Genau diese Kombination braucht ein Story-Moment. Verwende sie für jeden Schritt einer Kette, meistens außer dem ersten.
 
@@ -85,9 +85,9 @@ Genau diese Kombination braucht ein Story-Moment. Verwende sie für jeden Schrit
 "_historicDay": { "Year": 1940, "Month": 8, "Day": 13, "Hour": 0, "Minute": 0 }
 ```
 
-Das Datum ist eine Untergrenze: Vorher ist die Mission nicht verfügbar, danach bleibt sie verfügbar, bis sie gewonnen wird. Ein Jahr unter 1900 zählt als "kein Datum". Deshalb tragen Beispieldateien `"Year": 1`, wenn sie keins meinen.
+Die Mission erscheint genau an diesem Tag. Ein Jahr unter 1900 zählt als "kein Datum". Deshalb tragen Beispieldateien `"Year": 1`, wenn sie keins meinen.
 
-Um eine Mission ab einem bestimmten Zeitpunkt zu sperren, verwende eine `LatestAppearanceDay`-Voraussetzung (Typ 2), gezählt in Tagen ab Beginn der Kampagne. Das funktioniert bei jeder Mission, ob historisch oder nicht.
+Um eine Mission ab einem bestimmten Zeitpunkt zu sperren, verwende eine `LatestAppearanceDay`-Voraussetzung (Typ 2), gezählt in Tagen ab dem Startdatum der Karte. Das funktioniert bei jeder Mission, ob historisch oder nicht.
 
 Zusammengesetzt wird so jede Operation an ihrem echten Datum verfügbar, und eine verpasste kann wieder geschlossen werden.
 
@@ -97,7 +97,7 @@ Zusammengesetzt wird so jede Operation an ihrem echten Datum verfügbar, und ein
 
 **`_isHistoric` bei Folgemissionen vergessen.** Die Kette funktioniert, aber Schritte tauchen womöglich erst nach sehr langer Zeit auf, und ein abgeschlossener Schritt kann erneut gezogen werden.
 
-**Mehrere historische Missionen gleichzeitig fällig.** Sie erscheinen alle zusammen: die datierten an ihrem Tag, die undatierten im selben Slot. Wenn sie nacheinander kommen sollen, verkette sie über ihre Ausgänge oder gib ihnen verschiedene Tage.
+**Mehrere historische Missionen gleichzeitig fällig.** Sie erscheinen alle zusammen: die datierten an ihrem Tag, die undatierten zusammen mit derselben Wochenmission. Wenn sie nacheinander kommen sollen, verkette sie über ihre Ausgänge oder gib ihnen verschiedene Tage.
 
 **Verketten auf eine Mission, die nie erscheint.** Eine Sperre auf eine Mission, deren eigene Voraussetzungen nie erfüllt sind oder die für eine andere Karte getaggt ist, blockiert stillschweigend den Rest der Kette. Teste jeden Schritt einzeln, bevor du sie verbindest.
 

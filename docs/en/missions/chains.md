@@ -23,11 +23,11 @@ The value is a mission id, optionally followed by a comma and the outcome it mus
 | `"mymod_convoy_spotted"` | finished, with any outcome (including cancelled) |
 | `"mymod_convoy_spotted,success"` | finished successfully |
 | `"mymod_convoy_spotted,failure"` | flown and failed |
-| `"mymod_convoy_spotted,cancelled"` | called off by the player |
+| `"mymod_convoy_spotted,cancelled"` | called off by the player, or expired |
 
 `cancelled` is its own outcome: a mission the player called off does not count as a failure.
 
-"Success" means the outcome the dice picked has `"_missionSuccess": true` in the JSON. It is not the same as the skill roll: outcome index 1 (gone wrong, skill passed) can be a success if you mark it so. That is what makes a salvaged mission feel different from a clean one.
+"Success" is fixed by the position of the outcome the dice picked: index 1 (gone wrong, skill passed) and index 3 (as planned, skill passed) count as a success, index 0 and 2 as a failure.
 
 The game remembers every finish for the whole campaign. A player who failed a mission and later won it satisfies both `,failure` and `,success`.
 
@@ -61,8 +61,8 @@ A normal mission sits in a pool and is drawn at random across the week. For a fo
 `"_isHistoric": true` changes that. A historic mission:
 
 - **never enters the random draw.** The moment its gates pass, it is guaranteed to appear.
-- **appears on its date** when it has a `_historicDay`: at the first day change on or after that date where its other gates also pass. This does not use the weekly slots.
-- **keeps the normal lead time** when it has no `_historicDay`: it takes the next weekly mission slot instead of a random mission, so a follow-up arrives with the same delay as any other mission rather than dropping onto the map instantly.
+- **appears on its date** when it has a `_historicDay`: on that exact day, if its other gates also pass. This does not use the weekly slots.
+- **keeps the normal lead time** when it has no `_historicDay`: it appears alongside the next weekly mission and does not take up one of that week's slots, so a follow-up arrives with the same delay as any other mission rather than dropping onto the map instantly.
 - **never expires.** `_timeToStartRange` is ignored, so the player has unlimited time to fly it.
 - **is one-shot on success.** Once won, it never appears again. A failed or cancelled attempt brings it back, so a chain gated on `success` can be retried.
 - **is never on the map twice.** While one copy is waiting or in flight, no second copy appears.
@@ -71,10 +71,10 @@ Its gates combine with AND:
 
 | Has a `CompletedMission` gate | Has a `_historicDay` | Appears |
 |---|---|---|
-| no | no | at the next weekly slot |
-| yes | no | at the next weekly slot after the predecessor ended right |
-| no | yes | at the first day change on or after the date |
-| yes | yes | on the date if the predecessor already ended right; otherwise at the first day change after it does |
+| no | no | alongside the next weekly mission |
+| yes | no | alongside the next weekly mission after the predecessor ended right |
+| no | yes | on that exact day |
+| yes | yes | on that exact day, once the predecessor has ended right |
 
 That combination is exactly what a story beat needs. Use it for every step of a chain except, usually, the first.
 
@@ -85,9 +85,9 @@ That combination is exactly what a story beat needs. Use it for every step of a 
 "_historicDay": { "Year": 1940, "Month": 8, "Day": 13, "Hour": 0, "Minute": 0 }
 ```
 
-The date is a floor: the mission is not available before it, and stays available after it until it is won. A year below 1900 counts as "no date", which is why example files carry `"Year": 1` when they mean none.
+The mission appears on that exact day. A year below 1900 counts as "no date", which is why example files carry `"Year": 1` when they mean none.
 
-To close a mission off after a certain point, use a `LatestAppearanceDay` requirement (type 2), counted in days from the start of the campaign. It works on any mission, historic or not.
+To close a mission off after a certain point, use a `LatestAppearanceDay` requirement (type 2), counted in days from the map's starting date. It works on any mission, historic or not.
 
 Put together, each operation becomes available on its real date, and one that was missed can be closed off.
 
@@ -97,7 +97,7 @@ Put together, each operation becomes available on its real date, and one that wa
 
 **Forgetting `_isHistoric` on follow-ups.** The chain works, but steps may take a very long time to surface, and a finished step can be drawn again.
 
-**Several historic missions due at once.** They all appear together: dated ones on their day, undated ones in the same slot. If you want them one after another, chain them on each other's outcome or give them different days.
+**Several historic missions due at once.** They all appear together: dated ones on their day, undated ones alongside the same weekly mission. If you want them one after another, chain them on each other's outcome or give them different days.
 
 **Chaining on a mission that never appears.** A gate on a mission whose own requirements never pass, or which is tagged for a different map, silently blocks the rest of the chain. Test each step on its own before linking them.
 

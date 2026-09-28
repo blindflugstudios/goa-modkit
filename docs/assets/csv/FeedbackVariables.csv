@@ -1,0 +1,7 @@
+VariableID,Value
+API Endpoint,https://x4i7zvfevf.execute-api.eu-central-1.amazonaws.com/default/AlphaFeedback
+Feedback Character Limit,300
+Screenshot Height,720
+Survey Link,https://bit.ly/GOAalphafeedback
+Survey Link Demo,https://bit.ly/GOAdemosurvey
+Survey Opened Player Prefs,SURVEY_OPENED

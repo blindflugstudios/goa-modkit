@@ -147,13 +147,13 @@ Eine Ablehnung nennt die Datei, die Zeilen- oder Befehlsnummer und den Grund:
 ```
 
 !!! note
-    Diese Zeilen werden als Informationen und Warnungen geschrieben. Das veröffentlichte Spiel schreibt hauptsächlich Fehler in sein Log, deshalb siehst du sie dort vielleicht nicht. Prüf dann stattdessen die Wirkung im Spiel - lade ein Level und schau dir den geänderten Wert an.
+    Diese Zeilen werden als Informationen und Warnungen geschrieben. Das veröffentlichte Spiel schreibt nur Fehler in sein Log, du siehst sie also nur in einem Entwickler-Build oder im Unity-Editor. Im veröffentlichten Spiel prüfst du stattdessen die Wirkung im Spiel - lade ein Level und schau dir den geänderten Wert an.
 
 Ein falsch geschriebener Tabellenname oder eine nicht passende Kopfzeile erzeugt trotzdem eine `skipped:`-Zeile mit dem Dateinamen. **Wenn du gar keine `[Mod ...]`-Zeilen siehst und die Änderung nicht auftaucht**, hat das Spiel die Mod nicht erkannt: Der `CSV/`-Ordner war beim Spielstart noch leer (drück **Refresh** im Mods-Fenster), die Mod ist im Mods-Fenster ausgeschaltet, oder der Mod-Ordner ist ein symbolischer Link oder eine Junction, denen das Spiel nie folgt.
 
 ### Die Spaltenüberschriften einer Tabelle finden { #finding-a-tables-column-headers }
 
-Das Spiel liefert Kopfzeilen-Vorlagen für vier Tabellen (`BuildingComponents`, `PropsInfluence`, `ResourceCost` und `VehicleData`) in `GroundOfAces_Data/StreamingAssets/Modding/Templates/` im Installationsordner mit (unter macOS: `GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/`). Für den Rest steht die Spaltenliste auf dieser Seite, und jeder Tabellenabschnitt verlinkt die eingebaute Datei. Oder frag das Spiel: Schreib absichtlich eine falsche Kopfzeile, lade einmal, und das Log gibt die erwarteten Spalten aus.
+Das Spiel liefert Kopfzeilen-Vorlagen für vier Tabellen (`BuildingComponents`, `PropsInfluence`, `ResourceCost` und `VehicleData`) in `Ground Of Aces_Data/StreamingAssets/Modding/Templates/` im Installationsordner mit (unter macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/`). Für den Rest steht die Spaltenliste auf dieser Seite, und jeder Tabellenabschnitt verlinkt die eingebaute Datei. Oder frag das Spiel: Schreib absichtlich eine falsche Kopfzeile, lade einmal, und das Log gibt die erwarteten Spalten aus.
 
 ## Ladereihenfolge { #load-order }
 
@@ -198,7 +198,7 @@ Eine Zeile pro Flugzeug. Zeilen können nicht hinzugefügt oder entfernt werden.
 | `Fight Power` | `min-max` | `0-0` … `43-60` | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
 | `Bomb Power` | `min-max` | `0-0` … `50-80` | ebenso |
 | `Recon Power` | `min-max` | `5-10` … `42-60` | ebenso |
-| `Manoeuvrability` | `min-max` | `2-10` … `28-50` | ebenso |
+| `Manoeuvrability` | `min-max` | min 2–28, max 8–50 | ebenso |
 | `Transport Capacity` | `min-max` | `1-5` … `60-90` | ebenso |
 | `Stealthiness` | `min-max` | `10-48` … `88-98` | ebenso |
 | `Wreck Resource Type` | `/`-Liste von Ressourcen | `Metal/RepairParts` | beide Wrack-Spalten gesetzt oder beide leer |
@@ -224,8 +224,8 @@ Zeilen `1`–`6`, eine pro Basiskategorie. Alle sechs müssen existieren, und ih
 | `Minimum Airstrip Count` | ganze Zahl | 1–5 | |
 | `Minimum Parking Count` | ganze Zahl | 1–20 | |
 | `Missions Per Week` | ganze Zahl | 6–18 | Plätze, die die Woche anbietet; bei 0 werden keine Missionen geplant |
-| `Minimum Missions Per Week` | ganze Zahl | 2–10 | über `Missions Per Week` ist die Quote unerfüllbar |
-| `Minimum Success Rate` | Bruchteil, kein Prozentwert | 0.4–0.8 | über 1 ist unerreichbar |
+| `Minimum Missions Per Week` | ganze Zahl | 2–10 | die wöchentliche HQ-Quote: wie viele Missionen die Basis jede Woche bis zu einem Ergebnis fliegen muss. Gewonnene und verlorene Missionen zählen, abgebrochene und gescheiterte historische Missionen nicht. Verfehlst du diesen Wert oder `Minimum Success Rate`, halbieren sich die Plätze der nächsten Lieferung (aufgerundet), und bei der normalen Einstellung für HQ-Verwarnungen gibt es eine Verwarnung - drei verfehlte Wochen in Folge beenden den Durchgang. Trainingswochen und die HQ-Einstellung "keine Anforderungen" überspringen die Prüfung. Über `Missions Per Week` ist die Quote unerfüllbar |
+| `Minimum Success Rate` | Bruchteil, kein Prozentwert | 0.4–0.8 | Anteil der von `Minimum Missions Per Week` gezählten Missionen, der gewonnen werden muss; über 1 ist unerreichbar |
 | `Available Shipment Slots` | ganze Zahl | 4–8 | 0 schaltet den Nachschub ab |
 
 #### `AirstripTiers`
@@ -238,9 +238,9 @@ Zeilen `1`–`5`.
 |---|---|---|---|
 | `Length` | ganze Zahl | 80,120,140,160,200 | Stufen gelten nach "Länge oder mehr", halte sie also aufsteigend |
 | `Width` | ganze Zahl | 12,14,18,22,26 | ebenso |
-| `Material` | Text | `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | **darf das Material einer anderen Stufe nicht wiederholen**; es benennt auch die `ResourceCost`-Zeile, die den Belag bepreist |
+| `Material` | Text | `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | **darf das Material einer anderen Stufe nicht wiederholen** und muss eine vorhandene `ResourceCost`-Zeile nennen - diese Zeile bestimmt, was jede Kachel dieser Startbahn kostet. `ResourceCost` nimmt keine neuen Belagszeilen an, bleib also in der Praxis bei `dirt`, `sand`, `gravel`, `concrete` und `tarmac` (sie zwischen den Stufen zu tauschen, ist in Ordnung). Ein Material ohne `ResourceCost`-Zeile wird hier angenommen, und dann schlägt das Verlegen einer Startbahn dieser Stufe mit einem Fehler fehl |
 | `Biome Id` | ganze Zahl | 6,20,22,15,13 | Boden, der unter die fertige Bahn gemalt wird |
-| `Build Time` | ganze Zahl | 5,2,2,2,2 | Spielminuten Arbeit pro Kachel für ein Crewmitglied; zwei Arbeiter halbieren sie |
+| `Build Time` | ganze Zahl | 5,2,2,2,2 | Spielminuten Arbeit pro Kachel. An jeder Kachel arbeitet immer nur ein Crewmitglied, mehr Crew verlegt also mehr Kacheln gleichzeitig, aber keine Kachel schneller |
 
 #### `Biomes`
 
@@ -274,9 +274,15 @@ Zeilen `Fighter`, `Diver`, `Bomber`. Die Namen können nicht geändert werden. A
 Eingebaute Datei: [AttacksComposition.csv](../assets/csv/AttacksComposition.csv)
 
 Die Zeilen-Id ist die Schwere des Angriffs. Im normalen Spiel werden **1–25** erreicht; die Zeilen `99`, `101`, `200` und `300` erreicht
-die normale Schwereleiter nicht, sie sind für besondere Angriffe reserviert. Die Bereiche unten beschreiben die Zeilen 1–25;
-die vier Sonderzeilen gehen darüber hinaus (`9-9` Bomber, `10-10` Sturzkampfflugzeuge, `0-0` Jäger) und verweisen in den letzten
-beiden Spalten auf sich selbst.
+die normale Schwereleiter nicht, sie sind für besondere Angriffe reserviert. Die Bereiche unten beschreiben die Zeilen 1–25.
+Die vier Sonderzeilen verweisen in den letzten beiden Spalten auf sich selbst und enthalten:
+
+| Zeile | `Bombers` | `Divers` | `Fighters` |
+|---|---|---|---|
+| `99` | `9-9` | `6-6` | `8-8` |
+| `200` | `10-10` | `0-0` | `0-0` |
+| `300` | `0-0` | `10-10` | `0-0` |
+| `101` | `0-0` | `3-3` | `2-2` |
 
 | Spalte | Wert | Eingebaut (Zeilen 1–25) | Hinweise |
 |---|---|---|---|
@@ -296,7 +302,7 @@ Die Zeilen sind Ausrüstungs-Ids: `Bofors40mm`, `Searchlight`, `RadioTower`, `Vi
 | Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|
 | `Range` | Zahl | 10–70 | 0 macht das Teil nutzlos |
-| `Damage` | Zahl | 0–6 | **`0` schaltet die ganze Waffe ab** - Feuerrate, Munition und Zielen werden dann ignoriert |
+| `Damage` | Zahl | 0–6 | `0` macht das Teil zu einer Station, die nicht schießt, wie `Searchlight` oder `Lookout`: Es lässt sich weiterhin platzieren und besetzen, feuert aber nie, und alle Spalten ab `Fire Rate` werden dafür nicht gelesen |
 | `Fire Rate` | ganze Zahl | 0–720 | Schuss pro Minute |
 | `Ammo Type` | Ressourcenname oder `None` | `GunAmmo`, `AntiAirAmmo`, `None`, `0` | alles, was kein Ressourcenname ist (`None`, `0`), bedeutet, dass das Teil keine Munition lagert |
 | `Ammo Capacity` | ganze Zahl | 0–80 | auf einmal geladene Schuss |
@@ -320,7 +326,7 @@ entfernt werden.
 | Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|
 | `Dimensions` | `WxHxD`, oder `dynamic/1x0x1` für Dächer | `1x3x1`, `1x0x1`, `2x2x2` | |
-| `Build Time` | ganze Zahl | 0–420 | Spielminuten Arbeit für ein Crewmitglied; zwei Arbeiter halbieren sie |
+| `Build Time` | ganze Zahl | 0–420 | Spielminuten Arbeit. An einem Objekt baut immer nur ein Crewmitglied; zusätzliche Crew macht es nicht schneller |
 | `Health` | ganze Zahl | 0–10000 | der riesige Wert kennzeichnet die unzerstörbaren Teile |
 | `Associated Task` | Aufgabenname oder `None` | `Sleep`, `Chill`, `UseEquipment`, `PlayPiano`, `UseTrainingObject`, `MonitorAirspace`, `UseRadio`, `SaluteTheFlag`, `Grieve`, `ListenToMusic`, `PlayDartboard`, `PlayGuitar`, `PlayBilliardTable`, `UsePlanningBoard` | ein Objekt auf eine Aufgabe zu setzen, zu der seine Grafik nicht passt, ist erlaubt und sieht falsch aus |
 | `Users Limit` | ganze Zahl | 0–5 | 0 bei einem benutzbaren Objekt bedeutet, dass niemand es benutzen kann |
@@ -355,7 +361,9 @@ AntiAirAmmo  PlaneBombs
 ```
 
 Auch die Startbahnbeläge sind hier Zeilen - `dirt`, `sand`, `gravel`, `concrete`, `tarmac` - wenn du also `gravel` änderst,
-änderst du, was eine Startbahn der Stufe 3 pro Kachel kostet.
+änderst du, was eine Startbahn der Stufe 3 pro Kachel kostet. **Entferne keine Belagszeile**: Anders als ein Objekt wird ein Belag
+ohne Zeile nicht kostenlos - das Verlegen einer Startbahn dieser Stufe schlägt dann mit einem Fehler fehl. Soll ein Belag nichts kosten,
+setz jede Zelle seiner Zeile auf `0`.
 
 #### `PropsInfluence` - der Stimmungseffekt, den ein Objekt ausstrahlt { #propsinfluence-the-mood-effect-an-object-radiates }
 
@@ -369,8 +377,8 @@ ohne Zeile hat einfach keine Wirkung.
 | `Buff Name` | Lokalisierungsschlüssel | `prop_effects/organised_sleep` | darf nicht leer sein |
 | `Radius` | Zahl | 0.5–50 | in Kacheln; die Kontrolltürme reichen 20, 30 und 50 weit |
 | `Associated Tasks Or Action` | Kommaliste von Aufgabennamen | `Sleep`, `"Sleep,Chill"`, `UseEquipment` | darf nicht leer sein. Ein Name, der zu keiner Aufgabe passt, wird angenommen, und der Effekt **greift einfach nie** |
-| `Effect 1` | `<Zahl mit Vorzeichen> <Name>` | `+0.5 Mood` … `+10 Mood`, `-1 Mood`, `-1.5 Energy`, `+2 Energy`, `+1 Confidence` | Namen: `Mood`, `Confidence`, `Energy`; die eingebauten Zeilen reichen von `-1.5` bis `+10` |
-| `Effect 2` | ebenso, oder leer | | |
+| `Effect 1` | `<Zahl mit Vorzeichen> <Name>` | `-1 Mood` bis `+3 Mood`, `+1 Energy` bis `+2 Energy`, `+0.5 Confidence` bis `+10 Confidence` oder `-1 Accident` | Namen: `Mood`, `Confidence`, `Energy` |
+| `Effect 2` | ebenso, oder leer | `-1.5 Energy`, `+1 Energy`, `+0.5 Mood`, `+10 Mood` oder `+1 Confidence` in 9 Zeilen; in den übrigen leer | |
 | `Effect 3` | ebenso, oder leer | | keine eingebaute Zeile verwendet ihn |
 
 Das Vorzeichen gehört zur Zahl, `1 Mood` bedeutet also `+1`. Namen werden locker abgeglichen, `+1 mood` funktioniert also. Ein anderer Name
@@ -389,14 +397,14 @@ Eine Zeile pro Weltobjekt. Die Ids werden von Kartendateien verwendet und könne
 | `LocKey_Description` | Lokalisierungsschlüssel | | |
 | `Dimensions` | `WxHxD` | `1x4x1`, `2x2x2`, `3x1x3` | |
 | `Resource Harvested` | Ressourcenname oder leer | `Wood`, `Stone`, `Herbs`, `Food`, `RawWater`, `Clay`, `Sandbags`, `Metal`, `Planks`, `Fuel`, Saatgut | leer bedeutet, dass es nichts zu ernten gibt |
-| `Farming Time` | ganze Zahl | 0–400 | Spielminuten Arbeit pro Ernte für ein Crewmitglied; zwei Arbeiter halbieren sie |
+| `Farming Time` | ganze Zahl | 0–400 | Spielminuten Arbeit pro Ernte, immer von einem Crewmitglied zur Zeit |
 | `Resource Amount` | ganze Zahl | 0–50 | Ertrag pro Ernte |
 | `Resource Total` | ganze Zahl | 0–500 | Gesamtmenge, bevor die Quelle erschöpft ist |
 | `Limited Harvest Amount` | ganze Zahl | 0, 20, 30, 100 | Obergrenze für endlose Quellen; 0 = unbegrenzt |
 | `Destroyed On Depletion` | `TRUE`/`FALSE` | | `FALSE` mit `Refresh Time` 0 hinterlässt etwas, das nie wieder geerntet werden kann |
 | `Refresh Time` | ganze Zahl | 0–21600 | Minuten, bis es nachwächst |
 | `Health` | ganze Zahl | 1–2147483647 | der riesige Wert kennzeichnet die unzerstörbaren |
-| `Is Fireproof` | `TRUE`/`FALSE` | | Bäume feuerfest zu machen, verhindert, dass sich Feuer auf der Karte ausbreitet |
+| `Is Fireproof` | `TRUE`/`FALSE` | | `TRUE` macht das Objekt zu einer Brandschneise: Auf den Kacheln, die es belegt, kann Feuer weder entstehen noch sich dorthin ausbreiten. Über den freien Boden drumherum läuft Feuer weiterhin |
 
 #### `GrowingData` - Setzlinge werden zu Bäumen { #growingdata-saplings-becoming-trees }
 
@@ -461,7 +469,7 @@ neue einzuführen.
 | `Output Resource Amount` | ganze Zahl | 1–200 | |
 | `Input Resource Type` | `/`-Liste von Ressourcen oder `None` | `Food/RawWater`, `Metal`, `None` | `None` bedeutet: aus nichts hergestellt |
 | `Input Resource Amount` | `/`-Liste ganzer Zahlen | `2/2`, `0` | **muss genauso viele Einträge haben wie die Typliste** |
-| `Time To Craft` | ganze Zahl | 10–180 | Spielminuten Arbeit für ein Crewmitglied; zwei Arbeiter halbieren sie |
+| `Time To Craft` | ganze Zahl | 10–180 | Spielminuten Arbeit, immer von einem Crewmitglied zur Zeit |
 | `Valid Entry` | `TRUE`/`FALSE` | `TRUE` | Überbleibsel; das Spiel liest es nicht |
 
 #### `ShipmentData` - der Nachschubkatalog { #shipmentdata-the-supply-catalogue }
@@ -581,7 +589,7 @@ Die Zeilen-Id benennt, was gemessen wird: `AirplaneIntegrity`, `AirplaneHealth`,
 |---|---|---|---|
 | `ModifierCategory` | eine Bezeichnung | `low`, `high`, `zero`, `critical`, `mismatch` | |
 | `ModifierType` | `SkillRollModifier` oder `NoFlightModifier` | | |
-| `ModifierRange` | `min/max` ganze Zahlen | `0/-5`, `2/0` | Bonus auf den Wurf |
+| `ModifierRange` | `min/max` ganze Zahlen | `0/-5`, `2/0` | wird zum niedrigsten/höchsten Wurf der Werte addiert; von `NoFlightModifier`-Zeilen ignoriert |
 | `Parameter` | durch Leerzeichen getrennte Crewrollen oder `Default` | `Default`, `CrewRole.Pilot` | jede Rolle braucht das Präfix `CrewRole.` - ein bloßes `Pilot` passt nie, eine unbekannte Rolle ebenso wenig |
 | `ThresholdRange` | `min/max` ganze Zahlen | `1/40`, `-100/-90`, `50/100` | der Bereich gemessener Werte, den diese Zeile abdeckt |
 
@@ -621,12 +629,14 @@ Vier Zeilen, `0`–`3`.
 
 | Spalte | Wert | Eingebaut |
 |---|---|---|
-| `Phase` | `Work`, `Leisure`, `Sleep` | | (`Alert` und `None` werden auch akzeptiert, sind aber nicht für den Tagesplan gedacht) |
+| `Phase` | `Work`, `Leisure`, `Sleep` (`Alert` und `None` werden auch akzeptiert, sind aber nicht für den Tagesplan gedacht) | |
 | `StartHour` | ganze Zahl, einschließlich | 0, 5, 7, 22 |
 | `EndHour` | ganze Zahl, ausschließlich | 5, 7, 22, 24 |
 
-Die vier Zeitspannen werden Stunde für Stunde aufgeschlüsselt, deshalb **zählen Lücken und Überschneidungen**: Eine Stunde, die keine Zeile
-abdeckt, hat überhaupt keine Phase, und die Crew trödelt sie durch. Halte die Spannen lückenlos von 0 bis 24.
+Die vier Zeitspannen werden Stunde für Stunde aufgeschlüsselt, und **jede Stunde von 0 bis 23 muss von genau einer Zeile abgedeckt sein**.
+Bei einer Lücke oder Überschneidung wirft die stündliche Abfrage der Phase einen Fehler, und die Basis bleibt in der Phase, in der sie
+vorher war - ein kaputter Zustand, kein definiertes "keine Phase". Eine Zeile mit falsch geschriebener `Phase` wird mit einer Warnung
+übersprungen und hinterlässt so eine Lücke. Halte die Spannen lückenlos von 0 bis 24, ohne Überschneidungen.
 
 #### `DayNightSystemData` - Sonne und Schatten { #daynightsystemdata-sun-and-shadows }
 
@@ -683,6 +693,8 @@ Acht Einträge sind Überbleibsel, und **nichts liest sie**, sie zu ändern bewi
 `AirAttackDiverHealth`, `AirAttackBomberHealth`.
 
 #### `FeedbackVariables`
+
+Eingebaute Datei: [FeedbackVariables.csv](../assets/csv/FeedbackVariables.csv)
 
 Das Feedback-Formular im Spiel: `API Endpoint`, `Feedback Character Limit`, `Screenshot Height`, `Survey Link`,
 `Survey Link Demo`, `Survey Opened Player Prefs`. Eine Gameplay-Mod hat keinen Grund, das anzufassen, und wenn du

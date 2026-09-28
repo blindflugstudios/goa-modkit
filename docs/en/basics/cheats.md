@@ -24,7 +24,7 @@ Type `help` for the full list with an example for each command, or `help create_
     Whatever a cheat does is saved with your game. Test mods on a spare save, not on your favourite campaign.
 
 !!! note "Reloading your mod is not a console command"
-    After changing a mod: **Options → Quit to main menu**, open **Mods**, then load your save. Quests are re-read too; only models and textures need a full game restart. See [Testing and reloading](testing.md).
+    After changing a mod: **Options → Quit to main menu**, then load your save (if you added a new mod folder, press **Refresh** in the **Mods** window first). Quests are re-read too; only models and textures need a full game restart - and art mods are work in progress, not supported by the current alpha yet. See [Testing and reloading](testing.md).
 
 ## The commands
 

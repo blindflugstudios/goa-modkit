@@ -6,7 +6,7 @@ Für Mods gibt es kein Vorschaufenster. Du testest eine Mod, indem du sie ins Sp
 
 1. Bearbeite deine Dateien im Mod-Ordner.
 2. Speichere im Spiel und geh dann auf **Einstellungen** (Options) **→ Verlassen zum Hauptmenü** (Quit to main menu).
-3. Öffne im Hauptmenü **Mods**. Das Fenster durchsucht den `Mods`-Ordner neu, sobald es sich öffnet; **Refresh** durchsucht ihn noch einmal.
+3. Wenn du einen neuen Mod-Ordner angelegt hast (oder einen Inhaltsordner wie `Quests/`, der beim Spielstart leer war), öffne im Hauptmenü **Mods** und drück auf **Refresh**. Das bloße Öffnen des Fensters durchsucht den `Mods`-Ordner nicht neu.
 4. Lade deinen Spielstand. Missionen, Skripte, Quests und CSV-Tabellen werden bei jedem Laden eines Spielstands frisch eingelesen. Nur Grafik braucht einen kompletten Neustart.
 5. Für eine Mission öffnest du die Cheat-Konsole und tippst `create_mission <your_mission_id>`, damit sie sofort auf der Kriegskarte erscheint.
 6. Irgendwas stimmt nicht? Öffne `Player.log` (siehe [unten](#reading-playerlog)).
@@ -17,8 +17,8 @@ Jedes Mal, wenn du einen Spielstand lädst, liest das Spiel die Inhalte deiner M
 
 Zwei Dinge brauchen mehr:
 
-- **Grafik wird nur beim Spielstart importiert.** Modelle, Texturen und andere Dateien in `Objects/`, `TerrainObjects/` und `Biomes/` brauchen einen kompletten Neustart des Spiels.
-- **Neue Mods**: Ein Mod-Ordner, den du gerade angelegt hast, taucht auf, nachdem das Mods-Fenster neu gesucht hat (öffne es oder drück **Refresh**). Prüfe, dass die Mod eingeschaltet ist.
+- **Grafik wird nur beim Spielstart importiert.** Modelle, Texturen und andere Dateien in `Objects/` und `Biomes/` brauchen einen kompletten Neustart des Spiels. (Grafik-Mods sind noch in Arbeit und werden von der aktuellen Alpha noch nicht unterstützt.)
+- **Neue Mods**: Ein Mod-Ordner, den du gerade angelegt hast, taucht erst auf, wenn du im Mods-Fenster auf **Refresh** drückst (oder das Spiel neu startest). Dasselbe gilt für einen Inhaltsordner wie `Quests/`, der beim Spielstart leer war. Prüfe, dass die Mod eingeschaltet ist.
 
 Eine Mission, die in deinem Spielstand schon auf der Kriegskarte lag, behält die Werte, mit denen sie erstellt wurde. Wenn du das JSON einer Mission geändert hast, erstelle mit `create_mission` eine frische Kopie, um die Änderung zu sehen.
 
@@ -61,10 +61,10 @@ Arbeite diese Liste ab, bevor du an deiner Logik zweifelst.
 Missionsdateien, Event-Skripte und Hilfsmodule gehören alle nach `Mods/<your_mod>/Missions/`. Für Mods gibt es keinen `Events/`- oder `Scripts/`-Ordner; ein Skript an einem anderen Ort läuft nie, und zwar ohne Meldung. Die Endung muss genau `.py` oder `.json` sein (Vorsicht vor `coastal_patrol.json.txt`, wenn dein System Dateiendungen ausblendet).
 
 **2. Ist die Mod aktiviert?**
-Eine im Mods-Fenster ausgeschaltete Mod wird gar nicht geladen. Ein Mod-Ordner, den du angelegt hast, während das Spiel lief, erscheint, nachdem das Mods-Fenster neu gesucht hat.
+Eine im Mods-Fenster ausgeschaltete Mod wird gar nicht geladen. Ein Mod-Ordner, den du angelegt hast, während das Spiel lief, erscheint erst, wenn du im Mods-Fenster auf **Refresh** drückst (oder das Spiel neu startest).
 
 **3. Wurde das Skript geladen?**
-Jedes erfolgreich geladene Skript steht mit seinem Dateinamen in `Player.log`, gefolgt von den Handlern, die es registriert hat. Fehlt dein Dateiname, hat das Spiel die Datei nicht gelesen.
+In Entwicklungs-Builds steht jedes erfolgreich geladene Skript mit seinem Dateinamen in `Player.log`, gefolgt von den Handlern, die es registriert hat. Das veröffentlichte Spiel schreibt nur Fehler ins Log, dort beweist eine fehlende Zeile also nichts: Prüf stattdessen, ob die Wirkung des Skripts im Spiel sichtbar wird.
 
 **4. Gibt es einen Syntaxfehler?**
 Ein Python-Syntaxfehler erscheint in `Player.log` so:
@@ -132,7 +132,7 @@ Sie lassen sich nicht umbenennen. Definiere sie mit `localization.SetTerm` oder 
 
 ## Player.log lesen { #reading-playerlog }
 
-Das Spiel schreibt alles, was ihm auffällt, in eine Textdatei namens `Player.log`. Sie wird bei jedem Spielstart neu geschrieben, schau sie dir also an, während das Spiel läuft, oder direkt nachdem du es geschlossen hast.
+Das Spiel schreibt, was ihm auffällt, in eine Textdatei namens `Player.log`. Das veröffentlichte Spiel schreibt nur Fehler ins Log; die ausführlichen `[Mod ...]`-Zeilen erscheinen nur in Entwicklungs-Builds. Sie wird bei jedem Spielstart neu geschrieben, schau sie dir also an, während das Spiel läuft, oder direkt nachdem du es geschlossen hast.
 
 | Plattform | Ort |
 |---|---|

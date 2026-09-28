@@ -5,7 +5,7 @@ Most mod problems come from a handful of causes. Find your symptom, then try the
 ## First, always
 
 1. **Run the validator** on your mod. It catches most of the problems below before the game ever sees them. Ask the agent to `validate my mod`, or see [Without an AI agent](without-ai.md#4-check-it-with-the-validator).
-2. **Reload properly**: **Options → Quit to main menu**, open **Mods**, then load your save. If in doubt, restart the game.
+2. **Reload properly**: **Options → Quit to main menu**, then load your save. If you added a new mod folder (or a new content folder such as `Quests/`), open **Mods** and press **Refresh** first. If in doubt, restart the game.
 
 ## Symptom, cause, fix
 
@@ -25,13 +25,13 @@ Most mod problems come from a handful of causes. Find your symptom, then try the
 | **I changed a function in my script, nothing changed** | When a mission has a JSON file, the JSON supplies the numbers, and some script functions (for example the one for the icon) are never called. | Change the value in the JSON instead. The validator warns about functions the game never calls. |
 | **Texts show things like `missions/my_mission/mission_name`, or `null`** | The text for that key was never set: a typo in the key, a missing `localization.SetTerm` line, or the script did not load at all. | Compare the key in the text with the key in `SetTerm`. If all texts are missing, the script failed to load: check the Player.log. |
 | **The whole script seems to be skipped** | It uses Python syntax newer than the game's Python (IronPython 3.4) understands: the walrus `:=`, a `match` statement, or positional-only `/` parameters. The game skips the entire file. | Rewrite those lines in older syntax. f-strings are fine. The validator reports these as errors. |
-| **My new or changed quest does not show up** | Quests are read each time a save loads, but a brand-new `Quests/` folder is only noticed after the Mods window rescans. | **Options → Quit to main menu**, open **Mods** (or press **Refresh**), then load your save. |
+| **My new or changed quest does not show up** | Quests are read each time a save loads, but a brand-new `Quests/` folder is only noticed after you press **Refresh** in the Mods window (or restart the game). | **Options → Quit to main menu**, open **Mods** and press **Refresh**, then load your save. |
 | **My CSV changes do not apply** | Table changes are merged when a game is loaded. | Quit to main menu and load your save again. |
 | **The console says `Unknown cheat`** | A typo, or a command that does not exist in your version. | Type `help` to list all commands. Press **Tab** to complete a command name. |
 
 ## Find the Player.log
 
-The game writes everything it does, including every error, into a text file called `Player.log`. It is rewritten each time the game starts, and the previous run is kept as `Player-prev.log`. Look at it right after the problem, before restarting the game.
+The game writes its errors into a text file called `Player.log`. (The detailed `[Mod ...]` lines about everything it loads appear only in development builds; the released game logs errors only.) It is rewritten each time the game starts, and the previous run is kept as `Player-prev.log`. Look at it right after the problem, before restarting the game.
 
 | System | Where |
 |---|---|

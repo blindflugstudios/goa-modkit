@@ -24,7 +24,7 @@ Tipp `help` für die vollständige Liste mit einem Beispiel zu jedem Befehl, ode
     Was ein Cheat bewirkt, wird mit deinem Spiel gespeichert. Teste Mods auf einem Ersatz-Spielstand, nicht auf deiner Lieblingskampagne.
 
 !!! note "Deine Mod neu laden ist kein Konsolenbefehl"
-    Nach einer Änderung an einer Mod: **Einstellungen → Verlassen zum Hauptmenü**, **Mods** öffnen, dann deinen Spielstand laden. Auch Quests werden dabei neu eingelesen, nur Modelle und Texturen brauchen einen kompletten Neustart. Siehe [Testen und neu laden](testing.md).
+    Nach einer Änderung an einer Mod: **Einstellungen → Verlassen zum Hauptmenü**, dann deinen Spielstand laden (wenn du einen neuen Mod-Ordner angelegt hast, drück vorher im Fenster **Mods** auf **Refresh**). Auch Quests werden dabei neu eingelesen, nur Modelle und Texturen brauchen einen kompletten Neustart - und Grafik-Mods sind noch in Arbeit und werden von der aktuellen Alpha noch nicht unterstützt. Siehe [Testen und neu laden](testing.md).
 
 ## Die Befehle { #the-commands }
 

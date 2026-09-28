@@ -18,7 +18,7 @@ You build maps with the **Map Editor** that comes with the game, and you ship th
           my_airfield.goamap
     ```
 
-5. Open **Main menu → Mods**, make sure **my_map_mod** is switched on, then start a new game. Your map is listed under **Custom maps**.
+5. Open **Main menu → Mods** and press **Refresh** so the game finds the new mod folder, make sure **my_map_mod** is switched on, then start a new game. Your map is listed under **Custom maps**.
 
 That is a complete map mod. No `config.json` is needed, although you may add one (see [How mods work](../basics/mods.md)).
 
@@ -40,9 +40,9 @@ The editor has a tool for each part of the map:
 | Tool | What you do with it |
 |---|---|
 | **Terrain Height** | Raise and lower the ground. |
-| **Biomes** | Paint the ground type: grass, dirt, road, rock, sand, gravel. The ground type also affects gameplay, see [Biomes](biomes.md). |
+| **Biomes** | Paint the ground type: grass, dirt, road, rock, sand, gravel. The ground type also affects gameplay, see [Biomes](biomes.md) (biome art mods are work in progress and not supported in the current alpha). |
 | **Grass** | Paint grass on the ground, or remove it. |
-| **Terrain Objects** | Place trees, bushes, rocks, ponds and so on, one by one or with a brush. See [Terrain objects](terrain-objects.md) for the list. |
+| **Terrain Objects** | Place trees, bushes, rocks, ponds and so on, one by one or with a brush. Their look can be changed with [Objects and models](objects.md) (art mods are work in progress and not supported in the current alpha). |
 | **Map settings** | The name, description, tags, starting quests, start date and starting supplies of the map (see below). |
 
 **Undo** and **Redo** work as you would expect. The editor lists its keyboard shortcuts under **Shortcuts**.
@@ -154,7 +154,7 @@ An id that no quest file provides is skipped; the map still loads. How to write 
 A map's id is its file name without `.goamap`. `my_airfield.goamap` has the id `my_airfield`, and saves remember the map by that id.
 
 - Only files directly inside `Maps/` are read. Subfolders are ignored.
-- Two maps with the same id do not both appear. The one read last replaces the other. Maps are read in this order: the shipped maps, your own `Maps` folder, then the enabled mods in load order. So a mod map named `Debden.goamap` replaces the shipped Debden. Pick a unique name unless that is exactly what you want.
+- Two maps with the same id do not both appear. The one read last replaces the other. Maps are read in this order: the shipped maps, the enabled mods in load order, then your own `Maps` folder next to `Mods`, which wins over every mod. So a mod map named `Debden.goamap` replaces the shipped Debden. Pick a unique name unless that is exactly what you want.
 - If a mod map replaces a map, saves made on that map load the mod's version.
 
 ## Seeing your changes

@@ -36,12 +36,14 @@ That third folder always wins, which makes it a good place to try changes out - 
 
 ## The Mission Editor
 
-Open the game and choose **Mission Editor** in the main menu.
+Open the game and choose **Mission Editor** in the main menu. That opens the mission list: every shipped mission, every mission from an enabled mod, and every mission you saved yourself. **Create** starts a fresh mission with the id `new_mission` - rename it in the **Mission Id** field before saving. **Edit** opens any mission in the list, shipped ones included. A shipped mission cannot be saved under its own id, so give it a new id and it is saved as your own copy. Your own saved missions carry a delete button, and **Refresh** re-reads the list.
 
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 !!! note
     The editor always opens on a single working mission called `new_mission`. It loads yours if you have saved one under that id, and otherwise starts a fresh one. Rename it in the **Mission Id** field before saving, and the next visit starts a new `new_mission`, so you can write one mission after another.
 
     There is no mission browser yet, so the editor cannot open a shipped mission or reopen one you renamed and saved. To come back to a saved mission, edit its `.json` in the Missions folder above, or start again from a copy.
+-->
 
 ### What you fill in
 
@@ -60,9 +62,9 @@ Leaving the list empty is the normal case. An empty list on either side counts a
 
 **Timing and size.** How many aircraft the player may send, how long the mission waits on the map before it expires, and how long the flight itself takes. Both times are ranges - the game rolls a value between the two numbers.
 
-**Difficulty.** The chance the mission goes as planned, a difficulty rating from 1 to 3, and the enemy strength the intel report shows the player.
+**Difficulty.** The chance the mission goes as planned and a difficulty rating from 1 to 3.
 
-**Text.** The mission name and description, the intel threat report, and the radio transmissions for each ending. Type them straight in. A mission written in the editor does not need a script, because every mission without one runs on the game's shared default mission script.
+**Text.** The mission name and description, the intel threat report with the enemy strength it shows the player (flavour only - it does not affect the outcome), and the radio transmissions for each ending. Type them straight in. A mission written in the editor does not need a script, because every mission without one runs on the game's shared default mission script.
 
 **Locations.** Where on the war map the mission can appear. Pick from the list and add as many as you like; the game chooses one when the mission is created. The full list, with coordinates, is on [Locations](locations.md).
 
@@ -70,9 +72,9 @@ Leaving the list empty is the normal case. An empty list on either side counts a
 
 **Stats.** The skills the mission rolls against. You need exactly two: the first is used when the flight goes to plan, the second when it does not.
 
-**Outcomes.** Exactly four endings, and what each one gives or costs - morale, victory points, damage.
+**Outcomes.** Exactly four endings, and what each one gives or costs - morale, victory points, damage. Which ending counts as a success is fixed by its position and cannot be edited: slot 1 (gone wrong, skill check failed) is a failure, slot 2 (gone wrong, skill check passed) a success, slot 3 (as planned, skill check failed) a failure, slot 4 (as planned, skill check passed) a success.
 
-**Historic day.** Tick this to make the mission part of the storyline: it appears on or after a date you choose, takes a scheduled slot when it is due, and is gone for good once it has succeeded.
+**Is Historic.** Tick this to make the mission part of the storyline. With a date, it appears on that exact day; without one, it appears alongside the next weekly mission and does not take up one of that week's slots. It is gone for good once it has succeeded.
 
 ### Validate before you save
 
@@ -97,13 +99,13 @@ Leaving the list empty is the normal case. An empty list on either side counts a
 
 | Warning | Meaning |
 |---|---|
-| No locations | the mission can never be placed on the map |
+| No locations | the game places the mission at a random location from the shipped list |
 | Duplicate location names | |
 | Unknown map tag | no known map carries this tag, so the mission is unavailable everywhere - intended only if a script hands it out |
 | Difficulty rating outside 1–3 | |
 | Fewer than one aircraft slot | nobody can fly it |
 | Time to start never expires | the mission sits on the map forever |
-| A historic day that cannot be used | the date is malformed, empty or implausibly early, so the mission has no earliest date at all |
+| Is Historic ticked but the date is empty, impossible or before 1900 | the mission behaves like an undated historic mission - fine if that is what you intended |
 | A stat whose minimum is above its maximum | |
 | An outcome effect the game cannot read | that one effect silently never applies |
 | An outcome uses Max Victory Points | the game works that value out itself and ignores it when you write it |
@@ -113,9 +115,13 @@ The missing-text warning does not appear for shipped missions, which carry trans
 
 ### What the editor cannot do
 
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 - Open or copy a shipped mission.
+-->
 - Write the Python side. Anything that has to *decide* something - react to the crew that flew, hand out a follow-up mission, change the text depending on what happened - needs a script.
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 - Build a chain beyond a single "this mission must have been completed" requirement. Longer chains are easier to see and manage in the files. See [Chains and campaigns](chains.md).
+-->
 
 For any of those, open the mission file in a text editor, straight from the file browser.
 
@@ -137,7 +143,7 @@ Three things catch people out, and all three are limits of the game rather than 
 - **At least two mission stats.** The first is used when the mission goes to plan, the second when it does not. One entry crashes the skill roll.
 - **Prefix your ids with your mod name.** A duplicate id silently replaces the mission it duplicates, and which one wins depends on load order.
 
-The Mission Editor's **Validate** button catches all three before you ever launch. Every field of the JSON is described on [Reference](reference.md), and complete, working missions are collected on [Examples](../examples.md).
+The Mission Editor's **Validate** button catches the first two, and a clash with a shipped id, before you ever launch. A clash with another mod's id, or with the Supporter Pack, it cannot see. Every field of the JSON is described on [Reference](reference.md), and complete, working missions are collected on [Examples](../examples.md).
 
 ### The two modes
 
@@ -150,16 +156,16 @@ This is the single most common source of confusion: a handler that works perfect
 
 ### Mission event handlers
 
-A handler is a Python function the game calls at a certain moment of the mission's life. Each name below links to its full description on [Reference](reference.md).
+A handler is a Python function the game calls at a certain moment of the mission's life. Each name below links to its full description on [Reference](reference.md). Where the event string differs from the handler name, it is given in brackets.
 
 | Handler | What it does | When it runs |
 |---|---|---|
-| [`get_mission_id`](reference.md#get_mission_id) | the identifier of the mission | **always** - required |
+| [`get_mission_id`](reference.md#get_mission_id) | the identifier of the mission | always - **required for a mission without JSON**, inherited from the default script otherwise |
 | [`initialize_mission`](reference.md#initialize_mission) | set the mission up as it is created | always |
 | [`send_mission_event`](reference.md#send_mission_event) | report progress while the flight is in the air | always |
 | [`set_mission_impact`](reference.md#set_mission_impact) | apply consequences once the outcome is known | always |
-| [`send_mission_result_text`](reference.md#send_mission_result_text) | the text shown when the mission ends | always |
-| [`send_mission_cancelled_text`](reference.md#send_mission_cancelled_text) | the text shown when the player aborts | always |
+| [`send_mission_result_event`](reference.md#send_mission_result_event) (`send_mission_result_text`) | react when the mission ends | always, except when cancelled |
+| [`send_mission_cancelled_event`](reference.md#send_mission_cancelled_event) (`send_mission_cancelled_text`) | react when the player aborts or the mission expires | always |
 | [`get_mission_result_text`](reference.md#get_mission_result_text) | the text in the result window | always |
 | [`get_mission_name`](reference.md#get_mission_name) | the name in the mission info window | script-only missions |
 | [`get_mission_description_text`](reference.md#get_mission_description_text) | the description in the info window | script-only missions |
@@ -169,7 +175,7 @@ A handler is a Python function the game calls at a certain moment of the mission
 | [`get_enemy_count`](reference.md#get_enemy_count) | how many enemies are present | script-only missions |
 | [`get_mission_events_count`](reference.md#get_mission_events_count) | how many progress reports to send | script-only missions |
 | [`get_fuel_level`](reference.md#get_fuel_level) | the fuel the mission needs | script-only missions |
-| [`get_mission_result`](reference.md#get_mission_result) | whether the mission succeeded | script-only missions |
+| [`get_mission_result`](reference.md#get_mission_result) | whether the mission succeeded | script-only missions - **required** there |
 
 In a script-only mission, the getters from `get_mission_name` to `get_fuel_level` are optional: leave one out and the game uses a default value instead. For a mission with JSON, the number of progress reports is fixed at 3, so `get_mission_events_count` is ignored there.
 

@@ -68,8 +68,8 @@ Wenn der Agent meldet, dass der Mod installiert ist, merk dir die **Missions-ID*
 Das Spiel liest Mods ein, wenn ein Spiel geladen wird. Also:
 
 1. Starte Ground of Aces. Läuft es schon mit einem offenen Spielstand, geh zuerst auf **Einstellungen** (Options) **→ Verlassen zum Hauptmenü** (Quit to main menu).
-2. Öffne im Hauptmenü **Mods**. Die Liste wird beim Öffnen des Fensters aktualisiert. Dein Mod sollte dort stehen und eingeschaltet sein.
-3. Dein Mod hat eine Python-Datei (die `.py`), deshalb zeigt er auch einen **Scripting**-Schalter. Schalte ihn ein und bestätige - die Skripte hast du selbst geschrieben. (Die aktuelle Spielversion führt die Skripte einer Mod ohnehin aus, der Schalter schadet also nicht; siehe [Python-Mods und Sicherheit](../basics/security.md).)
+2. Öffne im Hauptmenü **Mods** und drück auf **Refresh**, damit das Spiel deinen neuen Ordner bemerkt. Dein Mod sollte dort stehen und eingeschaltet sein.
+3. Jede Mod zeigt außerdem einen **Scripting**-Schalter. Er ist für eine kommende Zustimmungsfunktion reserviert und hat derzeit keine Wirkung: Das Spiel führt die Skripte einer Mod immer aus, wenn die Mod eingeschaltet ist, du kannst den Schalter also lassen, wie er ist. Siehe [Python-Mods und Sicherheit](../basics/security.md).
 4. Schließ das Mods-Fenster und lade deinen Spielstand (oder starte ein neues Spiel).
 
 <!-- screenshot: Mods window with the new mod listed, enabled, scripting switched on -->
@@ -104,7 +104,7 @@ Geh zurück ins Terminal und wünsch dir eine Änderung, zum Beispiel:
 Make the mission harder and let the bomber crew radio in when they spot the English coast.
 ```
 
-Der Agent bearbeitet, prüft und kopiert den Mod erneut. Dann im Spiel: **Einstellungen → Verlassen zum Hauptmenü**, Spielstand laden und die Mission noch einmal anschauen. (Hat die Änderung einen neuen Ordner in den Mod gebracht, zum Beispiel ein erstes `Quests/`, öffne vor dem Laden einmal **Mods**.)
+Der Agent bearbeitet, prüft und kopiert den Mod erneut. Dann im Spiel: **Einstellungen → Verlassen zum Hauptmenü**, Spielstand laden und die Mission noch einmal anschauen. (Hat die Änderung einen neuen Ordner in den Mod gebracht, zum Beispiel ein erstes `Quests/`, öffne vor dem Laden **Mods** und drück auf **Refresh**.)
 
 ## Wenn etwas schiefgeht { #if-something-goes-wrong }
 

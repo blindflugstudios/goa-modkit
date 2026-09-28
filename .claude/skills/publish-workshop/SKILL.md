@@ -15,7 +15,7 @@ Source: `docs/en/sharing/workshop.md`. You cannot press the upload button; the u
 4. `config.json` has a valid `Id` and a `Name` (the Workshop title; without it subscribers see a number).
 5. Optional `preview.png` in the mod root: PNG, at most 1 MB, 512x512 recommended.
 6. The **whole folder is uploaded.** Remove test files, backups, notes and anything private. A short `README.md` is fine.
-7. Design check: players who subscribe may have scripts switched off at first. Say whether the mod still makes sense with only its JSON (missions with `_raw...` texts do; event scripts and quest texts do not).
+7. Scripts run for every subscriber who has the mod enabled - the **Scripting** switch in the Mods window has no effect at the moment. Do not tell players to rely on it; to stop a mod's scripts they switch the mod off.
 
 ## 2. Install the final version
 
@@ -25,9 +25,9 @@ Follow `install-mod` so the copy in the game's `Mods` folder is exactly the revi
 
 1. Start the game **through Steam** (DRM-free builds have no Workshop).
 2. Main menu -> Mods -> press **Upload** on the mod.
-3. First time: pick **Create new Workshop item...**. Update: pick their existing item instead, so players get an update rather than a second item.
-4. Confirm, wait for the progress to finish, open the item page from the button.
-5. Write the description on the Steam page (the game sends none). Accept the Workshop legal agreement there if Steam asks, or the item stays hidden.
+3. First time: pick **New Workshop item**. Update: pick their existing item instead, so players get an update rather than a second item.
+4. Confirm and wait for the progress bar. When it is done, the window shows the item's Workshop link.
+5. Write the description on the Steam page (the game sends none). An update replaces the files only: title, description and picture of an existing item are edited on its Steam page. Accept the Workshop legal agreement there if Steam asks, or the item stays hidden.
 
 ## 4. Warn about updates
 

@@ -74,7 +74,7 @@ Every technical word used in this handbook, in plain language.
 
 **`mods/` folder (in the modkit)** - Where you and your agent build your own mods before they are copied to the game's `Mods` folder. Git ignores it, so updates never change it.
 
-**Content folder** - A folder inside a mod whose name tells the game what is in it: `Missions`, `Quests`, `Maps`, `Objects`, `CSV`, `TerrainObjects`, `Biomes`.
+**Content folder** - A folder inside a mod whose name tells the game what is in it: `Missions`, `Quests`, `Maps`, `Objects`, `CSV`, `Biomes`. (Art mods in `Objects` and `Biomes` are work in progress and not supported by the current alpha yet.)
 
 **Id** - The unique name of a thing in the game, for example the mission id `coastal_patrol`. Ids must not contain spaces and must be unique: two missions with the same id replace each other.
 
@@ -90,7 +90,7 @@ Every technical word used in this handbook, in plain language.
 
 **Console / cheat console** - A small window in the game where you type commands such as `create_mission`. Switch it on in **Options → Cheats**. See [Cheat console](../basics/cheats.md).
 
-**Player.log** - The text file where the game writes what it does and every error. The first place to look when a mod misbehaves. See [When nothing happens](troubleshooting.md#find-the-playerlog).
+**Player.log** - The text file where the game writes its errors (development builds also write what it does). The first place to look when a mod misbehaves. See [When nothing happens](troubleshooting.md#find-the-playerlog).
 
 **Steam Workshop** - Steam's page for sharing mods. Players subscribe to a mod there and Steam installs it for them.
 

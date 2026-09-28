@@ -53,7 +53,7 @@ Die Installationsseiten richten diese Werkzeuge für dich ein, einen Befehl nach
 2. **Hol dir das Modkit**: `gh repo clone blindflugstudios/goa-modkit`. Das machst du einmal. Später holt `git pull` die Updates. Deine eigenen Mods liegen im Ordner `mods/` und werden von Updates nie angefasst.
 3. **Beschreib deinen Mod** dem Agenten in ganz normaler Sprache, zum Beispiel "Mach mir eine Mission, in der zwei Spitfires einen beschädigten Bomber über den Ärmelkanal nach Hause eskortieren."
 4. **Der Agent baut ihn, prüft ihn und kopiert ihn** in den `Mods`-Ordner des Spiels.
-5. **Lade ihn im Spiel**: Öffne das Mods-Fenster, lade deinen Spielstand und flieg los. [Dein erster Mod in 10 Minuten](first-mod.md) zeigt jeden Klick.
+5. **Lade ihn im Spiel**: Öffne das Mods-Fenster und drück auf **Refresh**, lade deinen Spielstand und flieg los. [Dein erster Mod in 10 Minuten](first-mod.md) zeigt jeden Klick.
 
 Die 10 Minuten zählen ab Schritt 2, wenn die Werkzeuge schon installiert sind.
 

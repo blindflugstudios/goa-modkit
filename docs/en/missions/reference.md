@@ -15,7 +15,7 @@ A mission is identified by its **id**, which is simply its file name without the
 | Skill stats | `_missionStats` | `missions_api.SetMissionStat` in `initialize_mission` |
 | Map location | `_potentialLocations` | `missions_api.SetMissionLocation` |
 | As-planned chance | `_asPlannedChance` | `missions_api.SetAsPlannedChance` |
-| Outcomes | four `_missionOutcomes` | `missions_api.SetOutcome` and `AddOutcomeEffect`, or `get_mission_result` |
+| Outcomes | four `_missionOutcomes` | `missions_api.SetOutcome` and `AddOutcomeEffect`, plus `get_mission_result` (required) |
 | In-flight events per flight | always 3 | `get_mission_events_count` (default 3) |
 | Appears on its own (weekly draw, historic spawn) | yes | no, see [Script-only missions](#script-only-missions) |
 
@@ -68,14 +68,14 @@ What happens to one mission, from the week it is planned to the result window:
 |---|---|---|
 | 1 | Weekly schedule | At the start of each week the game spreads a number of mission slots across the week. The number depends on the base's rank. |
 | 2 | Historic missions with a date | At every day change, each historic mission with a `_historicDay` whose gates pass is created, outside the weekly slots. |
-| 3 | A slot comes due | Every historic mission without a date whose gates pass takes this slot. Only when none is due does a random draw run. |
+| 3 | A slot comes due | Every historic mission without a date whose gates pass appears alongside this weekly mission and does not take up the slot. The slot itself is filled by the random draw. |
 | 4 | Random draw | All non-historic missions whose gates pass form a pool. One is drawn and removed from the pool. When the pool is empty it refills. |
 | 5 | Gates | A mission is eligible when all `_missionRequirements` pass, the current map shares one of its `_tags`, and (for historic missions) it has not been won yet and is not already on the map. |
-| 6 | Creation | The game picks a location (up to 5 tries to avoid two missions on the same spot), works out distance and fuel from it, and sets up the mission from JSON or script. Then it calls [`initialize_mission`](#initialize_mission). |
+| 6 | Creation | The game picks a location (one draw, plus up to five re-draws to avoid two missions on the same spot), works out distance and fuel from it, and sets up the mission from JSON or script. Then it calls [`initialize_mission`](#initialize_mission). |
 | 7 | Waiting | The mission sits on the war map until the player sends planes or its start window runs out. Historic missions never run out. |
 | 8 | Flight | The clock starts once **all** assigned planes are airborne. [`send_mission_event`](#send_mission_event) fires each time the flight passes another step (by default at one third, two thirds and the end). |
 | 9 | Outcome | With data: the rolls pick one of the four outcomes, its effects are applied, then [`set_mission_impact`](#set_mission_impact) runs. Without data: [`get_mission_result`](#get_mission_result) decides, then `set_mission_impact` runs. |
-| 10 | Return | Planes land, crew records update, events fire. Then [`send_mission_result_text`](#send_mission_result_text), or [`send_mission_cancelled_text`](#send_mission_cancelled_text) if the player called the mission off. |
+| 10 | Return | Planes land, crew records update, events fire. Then [`send_mission_result_event`](#send_mission_result_event), or [`send_mission_cancelled_event`](#send_mission_cancelled_event) if the player called the mission off or it expired. |
 | 11 | Result window | When the player opens it, [`get_mission_result_text`](#get_mission_result_text) supplies the text. |
 
 ### The two rolls and the outcome index
@@ -102,7 +102,7 @@ For programmers: `index = (skillPassed ? 1 : 0) | (asPlanned ? 2 : 0)`.
 !!! warning "At least two mission stats"
     The skill roll reads the first and the second entry of `_missionStats` directly. With only one, the mission crashes on the skill roll.
 
-"Success" in a chain or a quest does not mean index 3. It means the chosen outcome has `"_missionSuccess": true`. Index 1 (gone wrong, but salvaged) can count as a success if you say so.
+"Success" in a chain or a quest does not mean index 3. Which ending counts as a success is fixed by its position: index 0 and 2 are failures, index 1 (gone wrong, but salvaged) and index 3 are successes.
 
 ## Handlers
 
@@ -124,8 +124,8 @@ The function name is up to you; the decorator is what counts. Every handler rece
 | `initialize_mission` | `INITIALIZE_MISSION` | nothing | both modes |
 | `send_mission_event` | `SEND_MISSION_EVENT` | nothing | both modes |
 | `set_mission_impact` | `SET_MISSION_IMPACT` | nothing | both modes |
-| `send_mission_result_text` | `SEND_MISSION_RESULT_EVENT` | nothing | both modes |
-| `send_mission_cancelled_text` | `SEND_MISSION_CANCELLED_EVENT` | nothing | both modes |
+| `send_mission_result_event` | `SEND_MISSION_RESULT_EVENT` | nothing | both modes, except when cancelled |
+| `send_mission_cancelled_event` | `SEND_MISSION_CANCELLED_EVENT` | nothing | both modes |
 | `get_mission_result_text` | `GET_MISSION_RESULT_TEXT` | str | both modes |
 | `get_mission_name` | `GET_MISSION_NAME` | str | script only |
 | `get_mission_description_text` | `GET_MISSION_DESCRIPTION_TEXT` | str | script only |
@@ -135,7 +135,7 @@ The function name is up to you; the decorator is what counts. Every handler rece
 | `get_enemy_count` | `GET_ENEMY_COUNT` | int | script only |
 | `get_mission_events_count` | `GET_MISSION_EVENTS_COUNT` | int | script only |
 | `get_fuel_level` | `GET_FUEL_LEVEL` | int | script only |
-| `get_mission_result` | `GET_MISSION_RESULT` | bool | only without data |
+| `get_mission_result` | `GET_MISSION_RESULT` | bool | script only - **required** |
 | `get_mission_icon` | `GET_MISSION_ICON` | - | **never called** |
 | `calculate_mission_modifiers` | `CALCULATE_MISSION_MODIFIERS` | - | **never called** |
 | `calculate_airplane_modifiers` | `CALCULATE_AIRPLANE_MODIFIERS` | - | **never called** |
@@ -216,13 +216,13 @@ def set_mission_impact(mission_entity_id):
 
 See [Chains and campaigns](chains.md#when-json-is-not-enough).
 
-### send_mission_result_text
+### send_mission_result_event
 
-Called after the planes have come back from a mission that was flown to the end. The usual job is one closing line in the event log with `event_log.Create`. The Python constant is `MissionEvent.SEND_MISSION_RESULT_EVENT`.
+Called after the planes have come back from a mission that was flown to the end - always, except when the mission was cancelled. The usual job is one closing line in the event log with `event_log.Create`. The Python constant is `MissionEvent.SEND_MISSION_RESULT_EVENT`; the event string is `send_mission_result_text`.
 
-### send_mission_cancelled_text
+### send_mission_cancelled_event
 
-Called instead of `send_mission_result_text` when the player called the mission off. The Python constant is `MissionEvent.SEND_MISSION_CANCELLED_EVENT`. A cancelled mission applies no outcome and counts as `cancelled` for chains, not as a failure.
+Called instead of `send_mission_result_event` when the player aborts the mission or it expires. The Python constant is `MissionEvent.SEND_MISSION_CANCELLED_EVENT`; the event string is `send_mission_cancelled_text`. A cancelled mission applies no outcome and counts as `cancelled` for chains, not as a failure.
 
 ### get_mission_result_text
 
@@ -274,7 +274,7 @@ Script-only missions. Returns the fuel the flight costs. Default when missing: 1
 
 ### get_mission_result
 
-Returns `True` if the mission succeeded, `False` if not. The game only asks when it has no outcome data for the mission: a script-only mission that authored no outcomes, or one whose authored data was lost because the player loaded a save. If it is missing in that situation, the mission fails with an error when it ends.
+Returns `True` if the mission succeeded, `False` if not. Every script-only mission must define it: it decides the ending, and without it the mission fails with an error when it finishes.
 
 ```python
 @event_handler(MissionEvent.GET_MISSION_RESULT)
@@ -319,7 +319,7 @@ The mission file is read field by field. Field names start with an underscore an
 | `_difficultyRating` | int | Stars shown to the player, 1–3. Default 1. |
 | `_tags` | list of strings | Which maps the mission belongs to. See [Map tags](#map-tags). |
 | `_isHistoric` | bool | Makes the mission a story beat. See [Chains and campaigns](chains.md#historic-missions). |
-| `_historicDay` | date | Earliest date a historic mission appears. A year below 1900 counts as "no date". |
+| `_historicDay` | date | The exact day a historic mission appears. A year below 1900 counts as "no date". |
 | `_rawMissionName` ... `_rawGwFailureTransmission` | string | Nine optional text fields. See [Localization](../scripting/localization.md#text-in-the-json-instead-of-a-term). |
 | `_distanceLocationDependant` | `{"x", "y"}` | Written by Blindflug's own mission tool. The game does not read it; leave it alone or leave it out. |
 
@@ -349,8 +349,8 @@ Each entry in `_missionRequirements` is one gate. All gates must pass.
 | `_requirementType` | Name | `_value` | Passes when |
 |---|---|---|---|
 | 0 | `RunwayTier` | tier as a number, `"2"` | the base has a runway of at least this tier |
-| 1 | `EarliestAppearanceDay` | days, `"14"` | at least this many days have passed since the campaign started |
-| 2 | `LatestAppearanceDay` | days, `"40"` | at most this many days have passed since the campaign started |
+| 1 | `EarliestAppearanceDay` | days, `"14"` | the day number, counted from the map's starting date, has reached this value |
+| 2 | `LatestAppearanceDay` | days, `"40"` | the day number, counted from the map's starting date, has not passed this value |
 | 3 | `CompletedMission` | `"<missionId>"` or `"<missionId>,<outcome>"` | the player has finished that mission with that outcome at least once |
 
 For `CompletedMission`, the outcome is `success`, `failure` or `cancelled`. Without an outcome, any finish counts, including a cancelled one. The game remembers every finish, so after a failed and a later successful attempt both `,failure` and `,success` pass. See [Chains and campaigns](chains.md).
@@ -384,7 +384,7 @@ Exactly four entries, in the order of the [outcome index](#the-two-rolls-and-the
 | 0 | `CrewMood` | number, `"-20"` | mood of everyone who flew |
 | 1 | `CrewConfidence` | number | confidence of everyone who flew |
 | 2 | `CrewEnergy` | number | energy of everyone who flew |
-| 3 | `Damage` | range, `"20-60"` | damage to each plane, rolled per plane; heavy damage also hurts the crew |
+| 3 | `Damage` | range, `"20-60"` | damage to the planes, rolled per flight; heavy damage also hurts the crew |
 | 4 | `BaseMood` | number | mood of the whole base |
 | 5 | `BaseConfidence` | number | confidence of the whole base |
 | 6 | `BaseEnergy` | number | energy of the whole base |

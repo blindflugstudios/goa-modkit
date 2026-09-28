@@ -23,7 +23,7 @@ Mods/
       morale_boost.py
 ```
 
-The game's own scripts sit in the installation folder, under `GroundOfAces_Data/StreamingAssets/Scripts` (on macOS: `GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Scripts`). That is read-only shipped content - read it for ideas, but do not change it, because a game update overwrites it. The shipped folders are:
+The game's own scripts sit in the installation folder, under `Ground Of Aces_Data/StreamingAssets/Scripts` (on macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Scripts`). That is read-only shipped content - read it for ideas, but do not change it, because a game update overwrites it. The shipped folders are:
 
 | Folder | Contents |
 |---|---|

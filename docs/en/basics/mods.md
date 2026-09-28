@@ -7,10 +7,10 @@ This page covers what every mod has in common: where it lives, how the game find
 ## A mod in one minute
 
 1. Find your `Mods` folder: **Main menu → Mods → Open folder**. On Windows that is `%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Mods\`; the other platforms are listed [below](#where-mods-live).
-2. Create a folder in it, for example `my_mod`, and inside it one of the content folders: `CSV/`, `Missions/`, `Quests/`, `Maps/`, `Objects/`, `TerrainObjects/` or `Biomes/`. Put at least one file in it.
+2. Create a folder in it, for example `my_mod`, and inside it one of the content folders: `CSV/`, `Missions/`, `Quests/`, `Maps/`, `Objects/` or `Biomes/`. Put at least one file in it.
 3. Optionally add a `config.json` with the mod's name and id, and a `preview.png` (at most 1 MB) as its picture.
 4. Press **Refresh** in the Mods window so the game notices the new folder, then load a level.
-5. From then on, every change to a file inside the mod is picked up the next time you load a level.
+5. From then on, every change to a file inside the mod is picked up the next time you load a level. Only replacement art (`Objects/`, `Biomes/`) needs a restart of the game.
 
 The folder can have any name - `MyMod` works as well as `my_mod`. Only the optional `Id` inside `config.json` has to be lower-case (`my_mod`, not `MyMod`). Prefix every id you invent with your mod's name, so you never replace something by accident.
 
@@ -44,9 +44,8 @@ Mods/
     Missions/          mission .json files and Python .py scripts
     Quests/            quest .json files
     Maps/              .goamap map files
-    Objects/           replacement models for buildings and objects
-    TerrainObjects/    replacement models for trees, rocks and other map objects
-    Biomes/            biome definitions
+    Objects/           replacement models, textures and icons
+    Biomes/            replacement ground textures, one PNG per biome slot
 ```
 
 | Folder | What goes in it | Read more |
@@ -55,9 +54,11 @@ Mods/
 | `Missions/` | missions (`.json`) and Python scripts (`.py`) | [Missions](../missions/index.md), [Scripting](../scripting/index.md) |
 | `Quests/` | quests (`.json`) | [Quests](../quests/index.md) |
 | `Maps/` | maps (`.goamap`) | [Maps](../content/maps.md) |
-| `Objects/` | replacement models for buildings and objects | [Objects and models](../content/objects.md) |
-| `TerrainObjects/` | replacement models for trees, rocks and other map objects | [Terrain objects](../content/terrain-objects.md) |
-| `Biomes/` | biome definitions | [Biomes](../content/biomes.md) |
+| `Objects/` | replacement models, textures and icons - buildings, workbenches, trainers and map objects alike | [Objects and models](../content/objects.md) |
+| `Biomes/` | replacement ground textures, one PNG per biome slot | [Biomes](../content/biomes.md) |
+
+!!! note "Art mods are a work in progress"
+    Replacement art (`Objects/`, `Biomes/`) is work in progress and not supported by the current alpha yet.
 
 Three rules decide whether the game notices the folder at all:
 
@@ -65,7 +66,7 @@ Three rules decide whether the game notices the folder at all:
 - A mod folder with none of the subfolders above (or only empty ones) is ignored without a message.
 - Symbolic links and junctions (shortcuts that point to another folder) are never followed, neither as the mod folder nor as one of its subfolders. The game skips them with a warning in the log.
 
-For `CSV`, `Missions`, `Quests` and `Maps` only files directly inside the subfolder are read; anything deeper is ignored. `Objects`, `TerrainObjects` and `Biomes` work the other way round: each object gets its own subfolder named after the thing it replaces. Their pages explain the layout.
+For `CSV`, `Missions`, `Quests` and `Maps` only files directly inside the subfolder are read; anything deeper is ignored. `Objects` and `Biomes` hold replacement art and follow their own rules: in `Objects/` a model's *file name* is the id of the object it replaces (`Chair.fbx` replaces the chair), and subfolder names mean nothing. `Biomes/` holds one PNG per biome slot, named after the slot's number (`8.png`), directly inside the folder.
 
 ### `config.json`
 
@@ -86,7 +87,7 @@ Optional. Without it, the folder name is shown as the mod's name, its id is made
 | `Id` | What the game uses to tell mods apart and to break load-order ties. 3–64 characters of lower-case letters, digits, `_`, `.` or `-`, starting with a letter or digit. |
 | `Name` | What players see in the Mods window. Any text. It also becomes the Workshop title on a first upload. |
 | `LoadOrder` | A whole number that decides the order in which mods are applied (see [Which mod wins](#which-mod-wins)). Lower numbers are applied first. Default `100`. |
-| `Author`, `Version` | Kept for you and for anyone reading the file. The game does not read them. |
+| `Author`, `Version` | Kept for you and for the Workshop page. The game does not read them. |
 
 What happens when something is off:
 
@@ -103,7 +104,7 @@ Optional. A PNG at the root of the mod folder, at most 1 MB. The Mods window sho
 
 | Control | What it does |
 |---|---|
-| **Enabled** switch (per mod) | Switches the mod on or off. A mod that is off contributes nothing: its tables, quests, missions, scripts and maps are all skipped. Maps take effect at once; everything else the next time a level is loaded. New mods are on by default. |
+| **Enabled** switch (per mod) | Switches the mod on or off. A mod that is off contributes nothing: its tables, quests, missions, scripts, maps and art are all skipped. Maps take effect at once; tables, quests, missions and scripts the next time a level is loaded; replacement art (`Objects/`, `Biomes/`) after a restart, because art is imported once when the game starts. New mods are on by default. |
 | **Upload** button (per mod, your own mods only) | Publishes the mod to the Steam Workshop. See [Steam Workshop](../sharing/workshop.md). |
 | **Refresh** | Scans the Workshop items and your `Mods` folder again. Press it after you create a new mod folder, rename one, change a `config.json`, or subscribe to something on the Workshop while the game is running. |
 | **Open folder** | Opens your `Mods` folder in the file browser, creating it if it does not exist yet. |
@@ -111,7 +112,7 @@ Optional. A PNG at the root of the mod folder, at most 1 MB. The Mods window sho
 
 Each mod also has a details view that shows its name, the id the game uses, its load order and the folder it was read from, with a button to open that folder.
 
-Mods that contain Python files also show a **Scripting** switch. Turning it on asks you to confirm. At the moment the game does not enforce this switch, so it is no protection: a mod's scripts run whenever the mod is enabled, whatever the switch says. The only way to keep a mod's scripts from running is to switch the whole mod off. Read [Python mods and safety](security.md) before you enable a mod with scripts from someone you do not know.
+Every mod also shows a **Scripting** switch. Turning it on asks you to confirm. The switch is reserved for a coming opt-in and has no effect at the moment, so it is no protection: a mod's scripts run whenever the mod is enabled, whatever the switch says. The only way to keep a mod's scripts from running is to switch the whole mod off. Read [Python mods and safety](security.md) before you enable a mod with scripts from someone you do not know.
 
 ## Which mod wins
 
@@ -122,28 +123,29 @@ Mods are applied Workshop items first, then the ones in your `Mods` folder, and 
 
 The practical rule that follows: **prefix every id you invent with your mod's name**, so you never replace something by accident.
 
-Your own `Missions` and `Maps` folders next to `Mods` - where the in-game Mission Editor and the map editor save - follow different rules:
+Your own `Missions` and `Maps` folders next to `Mods` - where the in-game Mission Editor and the map editor save - are read after every mod and win over all of them:
 
-- **Missions:** your own `Missions` folder is read after every mod and wins over all of them. Remember that folder when a mission of yours seems to ignore the copy in your mod.
-- **Maps:** the order is the other way round. Maps are read shipped maps first, then your own `Maps` folder, then the enabled mods in load order. So a mod map with the same file name replaces both your own map and the shipped one. See [Maps](../content/maps.md).
+- **Missions:** a mission in your own `Missions` folder beats a mission with the same id in any mod. Remember that folder when a mission of yours seems to ignore the copy in your mod.
+- **Maps:** a map in your own `Maps` folder beats a mod map with the same file name. See [Maps](../content/maps.md).
 
 ## Seeing your changes
 
-Everything a mod contains is read when a level is loaded. Return to the main menu and load a save or start a map, and the game picks up whatever you changed in the meantime - tables, quests, missions, scripts and maps alike. The *list* of mods is scanned when the game starts, whenever you open the Mods window, and when you press **Refresh** there.
+Almost everything a mod contains is read when a level is loaded. Return to the main menu and load a save or start a map, and the game picks up whatever you changed in the meantime - tables, quests, missions, scripts and maps alike. Two things are read only once, when the game starts: the *list* of mods, and the replacement art in `Objects/` and `Biomes/`. Opening the Mods window does not scan again; press **Refresh** there when you add a mod folder.
 
 The everyday loop while you work on a mod:
 
 1. Save your game.
 2. **Options → Quit to main menu.**
-3. Open **Mods** if you added or renamed a mod folder (opening the window scans again).
+3. Open **Mods** and press **Refresh** if you added or renamed a mod folder.
 4. Load the save.
 
 | You changed... | To see it |
 |---|---|
 | A file inside a mod the game already knows | Load a level (loading a save is enough) |
 | A map inside a mod | Also at once, when you toggle the mod's **Enabled** switch |
-| A new mod folder, a renamed folder, a changed `config.json`, a subfolder that was empty when the game started | Open the Mods window (or press **Refresh** there), then load a level - or restart the game |
+| A new mod folder, a renamed folder, a changed `config.json`, a subfolder that was empty when the game started | **Refresh** in the Mods window, then load a level - or restart the game |
 | A new Workshop subscription while the game is running | **Refresh** in the Mods window once Steam has finished downloading it |
+| A model, texture, thumbnail or biome PNG | Restart the game - art is imported once at startup, and neither **Refresh** nor the **Enabled** switch re-imports it |
 
 [Testing and reloading](testing.md) has more on this loop and on the tools that help while testing.
 
@@ -155,4 +157,4 @@ The game writes what it accepted and what it refused to its log file, `Player.lo
 | macOS | `~/Library/Logs/Blindflug Studios/Ground Of Aces/Player.log` |
 | Linux | `~/.config/unity3d/Blindflug Studios/Ground Of Aces/Player.log` |
 
-The previous run's log is kept next to it as `Player-prev.log`. The released game writes mainly errors to the log, so some of the detailed `[Mod ...]` lines described on the category pages may not appear there; when in doubt, check the effect in the game itself. More on this in [Testing and reloading](testing.md) and [When nothing happens](../start/troubleshooting.md).
+The previous run's log is kept next to it as `Player-prev.log`. The released game logs errors only; the detailed `[Mod ...]` lines described on the category pages appear only in development builds. So when in doubt, check the effect in the game itself. More on this in [Testing and reloading](testing.md) and [When nothing happens](../start/troubleshooting.md).

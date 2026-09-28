@@ -36,12 +36,14 @@ Dieser dritte Ordner gewinnt immer. Das macht ihn zu einem guten Ort, um Änderu
 
 ## Der Mission Editor { #the-mission-editor }
 
-Starte das Spiel und wähle im Hauptmenü **Mission Editor**.
+Starte das Spiel und wähle im Hauptmenü **Mission Editor**. Das öffnet die Missionsliste: jede mitgelieferte Mission, jede Mission aus einem aktivierten Mod und jede Mission, die du selbst gespeichert hast. **Create** beginnt eine neue Mission mit der Id `new_mission` - benenne sie vor dem Speichern im Feld **Mission Id** um. **Edit** öffnet jede Mission aus der Liste, auch mitgelieferte. Eine mitgelieferte Mission lässt sich nicht unter ihrer eigenen Id speichern; gib ihr also eine neue Id, dann wird sie als deine eigene Kopie gespeichert. Deine eigenen gespeicherten Missionen haben einen Löschen-Knopf, und **Refresh** liest die Liste neu ein.
 
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 !!! note
     Der Editor öffnet immer eine einzige Arbeitsmission namens `new_mission`. Hast du eine unter dieser Id gespeichert, lädt er sie, sonst beginnt er eine neue. Benenne sie vor dem Speichern im Feld **Mission Id** um, dann beginnt der nächste Besuch mit einer frischen `new_mission`. So kannst du eine Mission nach der anderen schreiben.
 
     Einen Missions-Browser gibt es noch nicht. Der Editor kann also weder eine mitgelieferte Mission öffnen noch eine, die du umbenannt und gespeichert hast, wieder aufrufen. Um an einer gespeicherten Mission weiterzuarbeiten, bearbeite ihre `.json` im Missions-Ordner oben oder fang mit einer Kopie neu an.
+-->
 
 ### Was du ausfüllst { #what-you-fill-in }
 
@@ -60,9 +62,9 @@ Eine leere Liste ist der Normalfall. Eine leere Liste auf einer der beiden Seite
 
 **Zeit und Größe.** Wie viele Flugzeuge der Spieler schicken darf, wie lange die Mission auf der Karte wartet, bevor sie verfällt, und wie lange der Flug selbst dauert. Beide Zeiten sind Bereiche - das Spiel würfelt einen Wert zwischen den beiden Zahlen.
 
-**Schwierigkeit.** Die Chance, dass die Mission nach Plan läuft, eine Schwierigkeitsstufe von 1 bis 3 und die Feindstärke, die der Aufklärungsbericht dem Spieler zeigt.
+**Schwierigkeit.** Die Chance, dass die Mission nach Plan läuft, und eine Schwierigkeitsstufe von 1 bis 3.
 
-**Text.** Missionsname und Beschreibung, der Bedrohungsbericht der Aufklärung und die Funksprüche für jedes Ende. Tipp sie einfach direkt ein. Eine im Editor geschriebene Mission braucht kein Skript, denn jede Mission ohne eigenes Skript läuft mit dem gemeinsamen Standard-Missionsskript des Spiels.
+**Text.** Missionsname und Beschreibung, der Bedrohungsbericht der Aufklärung mit der Feindstärke, die er dem Spieler zeigt (reine Atmosphäre - sie beeinflusst das Ergebnis nicht), und die Funksprüche für jedes Ende. Tipp sie einfach direkt ein. Eine im Editor geschriebene Mission braucht kein Skript, denn jede Mission ohne eigenes Skript läuft mit dem gemeinsamen Standard-Missionsskript des Spiels.
 
 **Orte.** Wo auf der Kriegskarte die Mission erscheinen kann. Wähle aus der Liste und füge so viele hinzu, wie du willst; das Spiel sucht einen aus, wenn die Mission erstellt wird. Die vollständige Liste mit Koordinaten steht unter [Orte](locations.md).
 
@@ -70,9 +72,9 @@ Eine leere Liste ist der Normalfall. Eine leere Liste auf einer der beiden Seite
 
 **Werte.** Die Fähigkeiten, gegen die die Mission würfelt. Du brauchst genau zwei: Die erste zählt, wenn der Flug nach Plan läuft, die zweite, wenn nicht.
 
-**Ergebnisse.** Genau vier Enden und was jedes davon bringt oder kostet - Moral, Siegpunkte, Schaden.
+**Ergebnisse.** Genau vier Enden und was jedes davon bringt oder kostet - Moral, Siegpunkte, Schaden. Welches Ende als Erfolg zählt, ist durch seine Position festgelegt und lässt sich nicht ändern: Platz 1 (schiefgelaufen, Fähigkeitswurf gescheitert) ist ein Fehlschlag, Platz 2 (schiefgelaufen, Fähigkeitswurf bestanden) ein Erfolg, Platz 3 (nach Plan, Fähigkeitswurf gescheitert) ein Fehlschlag, Platz 4 (nach Plan, Fähigkeitswurf bestanden) ein Erfolg.
 
-**Historischer Tag.** Setz hier einen Haken, damit die Mission Teil der Geschichte wird: Sie erscheint an oder nach einem Datum deiner Wahl, belegt einen festen Platz, wenn sie fällig ist, und verschwindet für immer, sobald sie erfolgreich war.
+**Is Historic.** Setz hier einen Haken, damit die Mission Teil der Geschichte wird. Mit Datum erscheint sie genau an diesem Tag; ohne Datum erscheint sie zusammen mit der nächsten Wochenmission und belegt keinen der Plätze dieser Woche. Sobald sie erfolgreich war, verschwindet sie für immer.
 
 ### Vor dem Speichern prüfen { #validate-before-you-save }
 
@@ -97,13 +99,13 @@ Eine leere Liste ist der Normalfall. Eine leere Liste auf einer der beiden Seite
 
 | Warnung | Bedeutung |
 |---|---|
-| Keine Orte | die Mission kann nie auf der Karte platziert werden |
+| Keine Orte | das Spiel setzt die Mission an einen zufälligen Ort aus der mitgelieferten Liste |
 | Doppelte Ortsnamen | |
 | Unbekannter Karten-Tag | keine bekannte Karte trägt diesen Tag, die Mission ist also nirgends verfügbar - nur gewollt, wenn ein Skript sie vergibt |
 | Schwierigkeitsstufe außerhalb von 1–3 | |
 | Weniger als ein Flugzeugplatz | niemand kann sie fliegen |
 | Zeit bis zum Start läuft nie ab | die Mission bleibt für immer auf der Karte |
-| Ein unbrauchbarer historischer Tag | das Datum ist fehlerhaft, leer oder unplausibel früh, die Mission hat also gar kein frühestes Datum |
+| Is Historic ist angehakt, aber das Datum ist leer, unmöglich oder vor 1900 | die Mission verhält sich wie eine historische Mission ohne Datum - in Ordnung, wenn du das so wolltest |
 | Ein Wert, dessen Minimum über dem Maximum liegt | |
 | Ein Ergebnis-Effekt, den das Spiel nicht lesen kann | dieser eine Effekt wird stillschweigend nie angewendet |
 | Ein Ergebnis nutzt Max Victory Points | diesen Wert berechnet das Spiel selbst und ignoriert ihn, wenn du ihn einträgst |
@@ -113,9 +115,13 @@ Die Warnung über fehlenden Text erscheint nicht bei mitgelieferten Missionen, d
 
 ### Was der Editor nicht kann { #what-the-editor-cannot-do }
 
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 - Eine mitgelieferte Mission öffnen oder kopieren.
+-->
 - Die Python-Seite schreiben. Alles, was etwas *entscheiden* muss - auf die geflogene Crew reagieren, eine Folgemission vergeben, den Text je nach Geschehen ändern -, braucht ein Skript.
+<!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 - Eine Kette über eine einzelne Voraussetzung "diese Mission muss abgeschlossen sein" hinaus bauen. Längere Ketten sind in den Dateien leichter zu überblicken und zu pflegen. Siehe [Ketten und Kampagnen](chains.md).
+-->
 
 Für all das öffnest du die Missionsdatei in einem Texteditor, direkt aus dem Dateibrowser.
 
@@ -137,7 +143,7 @@ Drei Dinge bringen Leute regelmäßig ins Stolpern, und alle drei sind Grenzen d
 - **Mindestens zwei Missionswerte.** Der erste zählt, wenn die Mission nach Plan läuft, der zweite, wenn nicht. Ein einziger Eintrag lässt den Fähigkeitswurf abstürzen.
 - **Stell deinen Ids den Namen deines Mods voran.** Eine doppelte Id ersetzt stillschweigend die Mission, die sie dupliziert, und welche gewinnt, hängt von der Ladereihenfolge ab.
 
-Der **Validate**-Knopf des Mission Editors fängt alle drei ab, bevor du überhaupt startest. Jedes Feld des JSON ist unter [Referenz](reference.md) beschrieben, und vollständige, funktionierende Missionen findest du unter [Beispiele](../examples.md).
+Der **Validate**-Knopf des Mission Editors fängt die ersten beiden ab, dazu eine Kollision mit der Id einer mitgelieferten Mission, bevor du überhaupt startest. Eine Kollision mit der Id eines anderen Mods oder des Supporter Packs sieht er nicht. Jedes Feld des JSON ist unter [Referenz](reference.md) beschrieben, und vollständige, funktionierende Missionen findest du unter [Beispiele](../examples.md).
 
 ### Die zwei Modi { #the-two-modes }
 
@@ -150,16 +156,16 @@ Das ist mit Abstand die häufigste Quelle für Verwirrung: Ein Handler, der in e
 
 ### Missions-Event-Handler { #mission-event-handlers }
 
-Ein Handler ist eine Python-Funktion, die das Spiel zu einem bestimmten Zeitpunkt im Leben der Mission aufruft. Jeder Name unten verlinkt auf seine vollständige Beschreibung unter [Referenz](reference.md).
+Ein Handler ist eine Python-Funktion, die das Spiel zu einem bestimmten Zeitpunkt im Leben der Mission aufruft. Jeder Name unten verlinkt auf seine vollständige Beschreibung unter [Referenz](reference.md). Wo der Event-String vom Handlernamen abweicht, steht er in Klammern.
 
 | Handler | Was er tut | Wann er läuft |
 |---|---|---|
-| [`get_mission_id`](reference.md#get_mission_id) | die Kennung der Mission | **immer** - Pflicht |
+| [`get_mission_id`](reference.md#get_mission_id) | die Kennung der Mission | immer - **Pflicht bei einer Mission ohne JSON**, sonst vom Standardskript übernommen |
 | [`initialize_mission`](reference.md#initialize_mission) | die Mission beim Erstellen einrichten | immer |
 | [`send_mission_event`](reference.md#send_mission_event) | Fortschritt melden, während der Flug in der Luft ist | immer |
 | [`set_mission_impact`](reference.md#set_mission_impact) | Folgen anwenden, sobald das Ergebnis feststeht | immer |
-| [`send_mission_result_text`](reference.md#send_mission_result_text) | der Text, der beim Ende der Mission erscheint | immer |
-| [`send_mission_cancelled_text`](reference.md#send_mission_cancelled_text) | der Text, der erscheint, wenn der Spieler abbricht | immer |
+| [`send_mission_result_event`](reference.md#send_mission_result_event) (`send_mission_result_text`) | reagieren, wenn die Mission endet | immer, außer bei Abbruch |
+| [`send_mission_cancelled_event`](reference.md#send_mission_cancelled_event) (`send_mission_cancelled_text`) | reagieren, wenn der Spieler abbricht oder die Mission verfällt | immer |
 | [`get_mission_result_text`](reference.md#get_mission_result_text) | der Text im Ergebnisfenster | immer |
 | [`get_mission_name`](reference.md#get_mission_name) | der Name im Missions-Infofenster | reine Skript-Missionen |
 | [`get_mission_description_text`](reference.md#get_mission_description_text) | die Beschreibung im Infofenster | reine Skript-Missionen |
@@ -169,7 +175,7 @@ Ein Handler ist eine Python-Funktion, die das Spiel zu einem bestimmten Zeitpunk
 | [`get_enemy_count`](reference.md#get_enemy_count) | wie viele Feinde da sind | reine Skript-Missionen |
 | [`get_mission_events_count`](reference.md#get_mission_events_count) | wie viele Fortschrittsmeldungen gesendet werden | reine Skript-Missionen |
 | [`get_fuel_level`](reference.md#get_fuel_level) | der Treibstoff, den die Mission braucht | reine Skript-Missionen |
-| [`get_mission_result`](reference.md#get_mission_result) | ob die Mission erfolgreich war | reine Skript-Missionen |
+| [`get_mission_result`](reference.md#get_mission_result) | ob die Mission erfolgreich war | reine Skript-Missionen - dort **Pflicht** |
 
 In einer reinen Skript-Mission sind die Getter von `get_mission_name` bis `get_fuel_level` optional: Lässt du einen weg, nimmt das Spiel stattdessen einen Standardwert. Bei einer Mission mit JSON ist die Zahl der Fortschrittsmeldungen fest auf 3 gesetzt, `get_mission_events_count` wird dort also ignoriert.
 

@@ -6,6 +6,10 @@ repo_name: blindflugstudios/goa-modkit
 edit_uri: edit/main/docs/
 copyright: Documentation CC-BY 4.0 - Ground of Aces and Blindflug Studios logos and names are trademarks and not covered by any license.
 
+# Hidden until rewritten: the TerrainObjects/ folder no longer exists (see DOCS_AUDIT.md).
+exclude_docs: |
+  **/content/terrain-objects.md
+
 theme:
   name: material
   custom_dir: overrides
@@ -106,7 +110,6 @@ plugins:
             Table command files: Tabellen-Befehlsdateien
             Maps: Karten
             Objects and models: Objekte und Modelle
-            Terrain objects: Gelände-Objekte
             Biomes: Biome
             Steam Workshop: Steam Workshop
             Claude Code: Claude Code
@@ -165,7 +168,6 @@ nav:
   - Maps and art:
       - Maps: content/maps.md
       - Objects and models: content/objects.md
-      - Terrain objects: content/terrain-objects.md
       - Biomes: content/biomes.md
   - Sharing:
       - Steam Workshop: sharing/workshop.md

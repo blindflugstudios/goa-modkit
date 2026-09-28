@@ -10,11 +10,11 @@ Workshop page for Ground of Aces: <https://steamcommunity.com/app/2308690/worksh
 ## Uploading your mod
 
 1. **Make the folder exactly what you want to ship.** The *whole* mod folder is uploaded as it is - `config.json`, `preview.png` and every content subfolder. Remove test files, backups and notes you do not want to publish first.
-2. **Give it a name and a picture.** The `Name` in `config.json` becomes the Workshop title on a first upload (without a `config.json` the folder name is used). `preview.png` at the root of the mod folder becomes the Workshop picture. It must be a PNG of **at most 1 MB**; a larger file makes the upload fail with an error.
+2. **Give it a name and a picture.** The `Name` in `config.json` becomes the Workshop title on a first upload (without a `config.json` the folder name is used). `preview.png` at the root of the mod folder becomes the Workshop picture on a first upload. It must be a PNG of **at most 1 MB**; a larger file makes the upload fail with an error.
 3. **Open Main menu → Mods** and press **Upload** on the mod. Only your own mods (from your `Mods` folder) have this button; Workshop items you are subscribed to do not.
-4. **Pick the target.** A window lists **Create new Workshop item...** followed by every Workshop item you have published before. Pick **Create new Workshop item...** for a first upload, or one of your existing items to replace its contents with this version.
+4. **Pick the target.** A window lists **New Workshop item** followed by every Workshop item you have published before. Pick **New Workshop item** for a first upload, or one of your existing items to replace its contents with this version.
 5. **Confirm.** The game asks once more - "Do you want to create a new Workshop item for ...?" or, for an update, whether to use the existing item - and you answer **Yes**.
-6. **Wait for the upload.** The window shows the progress as a percentage. When it is done, a button opens the new item's Workshop page in the Steam overlay.
+6. **Wait for the upload.** The window shows a progress bar. When the upload is done, the window shows the item's Workshop link.
 
 What the game sends with the upload:
 
@@ -23,11 +23,11 @@ What the game sends with the upload:
 | Files | the whole mod folder | the whole mod folder, replacing the old files |
 | Title | the mod's `Name` | left as it is |
 | Description | none | left as it is |
-| Picture | `preview.png`, if there is one | `preview.png`, if there is one |
+| Picture | `preview.png`, if there is one | left as it is |
 | Visibility | public | public |
 | Workshop tag | `Mod` | `Mod` |
 
-The description is always written on the item's Steam page; the game never sends one. To change the title of an item you already published, edit it on the Steam page too.
+The description is always written on the item's Steam page; the game never sends one. An update replaces the files only: to change the title or the picture of an item you already published, edit them on the Steam page too.
 
 !!! tip
     Steam may ask you to accept the Workshop legal agreement the first time you publish. Until you do, the item stays hidden. Open the item's Steam page and accept the agreement there, and the item becomes visible.

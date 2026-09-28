@@ -44,7 +44,7 @@ For every command, in the order they appear in the file, the game:
 
 1. Finds the row by `Id`. Capitalisation of the id does not matter; the table's own spelling is kept.
 2. Builds the complete row as it would look after the change, on the side, without touching the real table yet.
-3. Fills cells the table must never leave empty with the game's default, if your change left them empty.
+3. Fills in the two cells the game completes for you, if your change left them empty: `0` in `ResourceCost`, `None` in `Associated Task` of `BuildingComponents`. Any other empty cell is left empty for the check.
 4. Checks the whole row against the table's rules (value types, allowed ranges, references to other tables, see [CSV tables](csv.md)).
 5. Only if everything passes, writes the row into the table. Otherwise it writes nothing, logs the reason, and moves on to the next command.
 
@@ -59,11 +59,11 @@ So a rejected command never leaves a half-changed row behind, and one bad comman
 ```
 
 - Changes only the columns named in `Cells`. Every other cell keeps its current value.
-- A cell given as `""`, only spaces, or `null` is cleared (or reset to the table's default where a cell cannot be empty).
+- A cell given as `""`, only spaces, or `null` is cleared. That is only allowed in a column where the game already leaves some row empty; elsewhere the command is refused. Only `ResourceCost` cells (which become `0`) and `Associated Task` (which becomes `None`) are filled in instead.
 - The row must already exist. Otherwise: `'...' is not a built-in row; use Add to create one`.
 - Every key in `Cells` must be a column of the table, spelled exactly. Otherwise the message lists the table's columns.
 - The whole resulting row is checked, not just the cells you named. A row that was fine before stays fine unless your values break a rule.
-- A few built-in rows span several lines in the game's own table. They cannot be patched cell by cell; the log tells you to ship the whole row as a `<Table>.csv` instead.
+- A few built-in rows span several lines in the game's own table. They are refused, whether patched cell by cell or shipped as a whole row. Only in `ResourceCost` does a whole-row `<Table>.csv` fix them (see [Rows that take up several lines](csv.md#rows-that-take-up-several-lines)); the multi-line rows of `MoraleInfluenceValues` and `TaskValues` cannot be changed at all.
 
 ### `Add`: create a new row
 
@@ -96,7 +96,7 @@ So a rejected command never leaves a half-changed row behind, and one bad comman
 
 Tables are rebuilt from the game's own data and all enabled mods every time a level loads. After editing a command file, save your game, choose **Options → Quit to main menu**, and load the save again. No restart is needed; if in doubt, restart anyway. See [Testing and reloading](../basics/testing.md). A brand-new `CSV/` folder, or a new mod, is only noticed after you open **Mods** in the main menu (press **Refresh**) or restart.
 
-Because the tables are rebuilt from scratch, removing a command, or switching the mod off, restores the original value at the next load.
+Because the tables are rebuilt from scratch, removing a command, or switching the mod off, restores the original value at the next load. The exception are aircraft already parked at your base: they keep the health, integrity and fuel capacity they were built with, so a save made while the mod was active keeps its numbers (see [`VehicleData`](csv.md#vehicledata-aircraft)).
 
 ## Reference
 
@@ -126,7 +126,7 @@ Every message starts with `[Mod <mod id>] CSV/<Table>.json`. Applied commands:
 ```text
 [Mod my_balance_mod] CSV/VehicleData.json command 1 replaced cells Fuel Capacity of row 'gladiator'.
 [Mod my_balance_mod] CSV/ResourceCost.json command 2 added row 'storage_box'.
-[Mod my_balance_mod] CSV/PropsInfluence.json command 3 cleared cells Tarp of row 'Chair'.
+[Mod my_balance_mod] CSV/ResourceCost.json command 3 cleared cells Tarp of row 'Chair'.
 [Mod my_balance_mod] CSV/PropsInfluence.json command 4 removed row 'Drawer'.
 ```
 
@@ -153,4 +153,4 @@ Problems with one command (only that command is skipped):
 | `rejected: '...' already exists; use Replace to change it.` | `Add` of an id that exists. |
 | `rejected:` followed by a rule | The value breaks one of the table's rules, see [CSV tables](csv.md). |
 
-The released game may write only errors to `Player.log`; the full list of lines appears in development builds.
+The released game logs only errors to `Player.log`; the full list of lines appears in a development build or in the Unity editor.

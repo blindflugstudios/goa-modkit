@@ -102,10 +102,10 @@ Copy the folder, do not create a shortcut or alias: the game skips linked folder
 ### 6. Load it and fly
 
 1. If a save is open, **Options → Quit to main menu**.
-2. Open **Mods**. Your mod is listed. It has a `.py` file, so it also shows a **Scripting** switch: switch it on and confirm (the current game runs the scripts either way).
+2. Open **Mods** and press **Refresh**. Your mod is listed. Every mod also shows a **Scripting** switch: it has no effect at the moment (the current game runs a mod's scripts whenever the mod is enabled), so you can leave it as it is.
 3. Load your save.
 4. Turn on **Options → Cheats**, open the console with the cheat button and type `create_mission coastal_patrol`. The mission appears on the war map.
 
-After each later change: validate, copy again (replace the old files), **Quit to main menu**, load your save (open **Mods** first if you added a new folder such as `Quests/`).
+After each later change: validate, copy again (replace the old files), **Quit to main menu**, load your save (open **Mods** and press **Refresh** first if you added a new folder such as `Quests/`).
 
 Nothing happening? See [When nothing happens](troubleshooting.md).

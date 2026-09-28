@@ -5,7 +5,7 @@ Die meisten Mod-Probleme haben eine Handvoll Ursachen. Such dein Symptom und pro
 ## Immer zuerst { #first-always }
 
 1. **Lass den Validator** über deinen Mod laufen. Er findet die meisten der Probleme unten, bevor das Spiel sie überhaupt zu sehen bekommt. Bitte den Agenten `validate my mod` oder siehe [Ohne KI-Agent](without-ai.md#4-check-it-with-the-validator).
-2. **Richtig neu laden**: **Einstellungen** (Options) **→ Verlassen zum Hauptmenü** (Quit to main menu), **Mods** öffnen, dann den Spielstand laden. Im Zweifel das Spiel neu starten.
+2. **Richtig neu laden**: **Einstellungen** (Options) **→ Verlassen zum Hauptmenü** (Quit to main menu), dann den Spielstand laden. Hast du einen neuen Mod-Ordner (oder einen neuen Inhaltsordner wie `Quests/`) angelegt, öffne vorher **Mods** und drück auf **Refresh**. Im Zweifel das Spiel neu starten.
 
 ## Symptom, Ursache, Lösung { #symptom-cause-fix }
 
@@ -25,13 +25,13 @@ Die meisten Mod-Probleme haben eine Handvoll Ursachen. Such dein Symptom und pro
 | **Ich habe eine Funktion in meinem Skript geändert, nichts hat sich geändert** | Wenn eine Mission eine JSON-Datei hat, liefert das JSON die Zahlen, und manche Skript-Funktionen (zum Beispiel die für das Icon) werden nie aufgerufen. | Ändere stattdessen den Wert im JSON. Der Validator warnt vor Funktionen, die das Spiel nie aufruft. |
 | **Texte zeigen Dinge wie `missions/my_mission/mission_name` oder `null`** | Der Text für diesen Schlüssel wurde nie gesetzt: ein Tippfehler im Schlüssel, eine fehlende `localization.SetTerm`-Zeile, oder das Skript wurde gar nicht geladen. | Vergleiche den Schlüssel im Text mit dem Schlüssel in `SetTerm`. Fehlen alle Texte, konnte das Skript nicht geladen werden: Schau ins Player.log. |
 | **Das ganze Skript scheint übersprungen zu werden** | Es nutzt Python-Syntax, die neuer ist, als das Python des Spiels (IronPython 3.4) versteht: den Walross-Operator `:=`, eine `match`-Anweisung oder reine Positionsparameter mit `/`. Das Spiel überspringt dann die ganze Datei. | Schreib diese Zeilen in älterer Syntax um. f-Strings sind in Ordnung. Der Validator meldet so etwas als Fehler. |
-| **Meine neue oder geänderte Quest taucht nicht auf** | Quests werden bei jedem Laden eines Spielstands eingelesen, ein ganz neuer `Quests/`-Ordner wird aber erst bemerkt, wenn das Mods-Fenster neu einliest. | **Einstellungen → Verlassen zum Hauptmenü**, **Mods** öffnen (oder **Refresh** drücken), dann den Spielstand laden. |
+| **Meine neue oder geänderte Quest taucht nicht auf** | Quests werden bei jedem Laden eines Spielstands eingelesen, ein ganz neuer `Quests/`-Ordner wird aber erst bemerkt, wenn du im Mods-Fenster auf **Refresh** drückst (oder das Spiel neu startest). | **Einstellungen → Verlassen zum Hauptmenü**, **Mods** öffnen und **Refresh** drücken, dann den Spielstand laden. |
 | **Meine CSV-Änderungen greifen nicht** | Tabellenänderungen werden eingemischt, wenn ein Spiel geladen wird. | Zurück ins Hauptmenü und den Spielstand erneut laden. |
 | **Die Konsole sagt `Unknown cheat`** | Ein Tippfehler oder ein Befehl, den es in deiner Version nicht gibt. | Tippe `help`, um alle Befehle aufzulisten. Drück **Tab**, um einen Befehlsnamen zu vervollständigen. |
 
 ## Das Player.log finden {#find-the-playerlog}
 
-Das Spiel schreibt alles, was es tut, samt jedem Fehler, in eine Textdatei namens `Player.log`. Sie wird bei jedem Spielstart neu geschrieben, der vorherige Durchlauf bleibt als `Player-prev.log` erhalten. Schau direkt nach dem Problem hinein, bevor du das Spiel neu startest.
+Das Spiel schreibt seine Fehler in eine Textdatei namens `Player.log`. (Die ausführlichen `[Mod ...]`-Zeilen zu allem, was es lädt, erscheinen nur in Entwicklungs-Builds; das veröffentlichte Spiel schreibt nur Fehler ins Log.) Sie wird bei jedem Spielstart neu geschrieben, der vorherige Durchlauf bleibt als `Player-prev.log` erhalten. Schau direkt nach dem Problem hinein, bevor du das Spiel neu startest.
 
 | System | Wo |
 |---|---|

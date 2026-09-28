@@ -102,7 +102,7 @@ An empty field counts as not filled, and the game falls back to the key.
 |---|---|---|
 | Needs a script | no | yes |
 | Number of texts | exactly nine | unlimited |
-| Languages | one | any, including ones the game does not ship |
+| Languages | one | any the game offers in its options |
 | Good for | a mission whose text is fixed | text that varies with what happened in flight |
 
 The two combine: raw text covers the nine standard slots, and a script adds its own terms for anything beyond them. The `raf_collection` example does exactly that: three missions ship raw text alone, and `greenhorn_watch` adds terms of its own so it can tell a different story depending on how experienced the crew is.
@@ -144,13 +144,16 @@ Placeholder names are case-sensitive and must match exactly. Values must be stri
 
 ## Inline formatting
 
-Three tags work inside any text:
+Four tags work inside any text:
 
 | Tag | Effect |
 |---|---|
 | `[character:<id>]` | a clickable link to that character, shown as their name |
 | `[resource:<name>]` | the resource's icon and color |
 | `[morale:<name>]` | the morale category's icon and color |
+| `[CharacterStat:<name>]` | a crew skill's icon and color (`Flying`, `Shooting`, `Bombing`, `Endurance`, `Engineering`, `Navigating`) |
+
+`CharacterStat` is written with a capital `C` and `S` - this tag is case-sensitive.
 
 Combine them with placeholders to name a character from an event:
 
@@ -161,11 +164,12 @@ localization.SetTerm("en", "mymod/chat",
 event_log.Create("mymod/chat", {"FIRST": str(first_id), "SECOND": str(second_id)})
 ```
 
-For resources and morale, put the game's own value into the text when the script loads:
+For resources, morale and crew skills, put the game's own value into the text when the script loads:
 
 ```python
 from Blindflug.GameResources import ResourceType
 from Blindflug.Game.Characters.Morale import MoraleCategory
+from BlindGame.CharacterStats.Data import CharacterStatType
 
 localization.SetTerm("en", "mymod/mice",
                      "Mice got into the [resource:{}] again.".format(ResourceType.FoodRations))
@@ -177,7 +181,7 @@ f-strings work as well, and the game's own scripts use them. Remember to double 
 
 ## Languages
 
-Always define English (`"en"`). When a term has no text in the player's language, the game falls back to a language that has it, which is English if you defined it, rather than showing the raw key.
+Always define English (`"en"`). When a term has no text in the player's language, the game shows the text of a language you did register, so `en` is the safe fallback. A key registered in no language at all is shown as the raw key.
 
 To translate, call `SetTerm` once per language:
 
@@ -191,7 +195,7 @@ The game ships these language codes:
 
 `en`, `en-GB`, `de-DE`, `de`, `ar`, `bg`, `ca`, `zh-CN`, `zh-TW`, `cs`, `da`, `nl`, `fi`, `fr`, `el`, `hu`, `id`, `it`, `ja`, `ko`, `ms`, `nb`, `fa`, `pl`, `pt`, `pt-BR`, `ro`, `ru`, `es`, `es-419`, `sv`, `gsw-CH`, `th`, `tr`, `uk`, `vi`
 
-German is `de` - that is the language players pick in the options (`de-DE` in the list is a test language, you can ignore it). An unknown code is added automatically, so text for a language the game does not ship needs no preparation (the player still needs a way to select that language).
+German is `de` - that is the language players pick in the options (`de-DE` in the list is a test language, you can ignore it). The language code must be one the game offers in its options.
 
 A handy pattern for several languages:
 

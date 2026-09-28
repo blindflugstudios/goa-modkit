@@ -147,13 +147,13 @@ A refusal names the file, the row or command number, and the reason:
 ```
 
 !!! note
-    These lines are written as information and warnings. The released game writes mainly errors to its log, so you may not see them there. In that case check the effect in the game instead - load a level and look at the value you changed.
+    These lines are written as information and warnings. The released game logs errors only, so you will see them only in a development build or in the Unity editor. In the released game, check the effect in the game instead - load a level and look at the value you changed.
 
 A misspelled table name or a header row that does not match still produces a `skipped:` line naming the file. **If you see no `[Mod ...]` lines at all and the change does not show**, the game did not pick the mod up: the `CSV/` folder was still empty when the game started (press **Refresh** in the Mods window), the mod is switched off in the Mods window, or the mod folder is a symbolic link or junction, which is never followed.
 
 ### Finding a table's column headers
 
-The game ships header templates for four tables (`BuildingComponents`, `PropsInfluence`, `ResourceCost` and `VehicleData`) in `GroundOfAces_Data/StreamingAssets/Modding/Templates/` inside the installation folder (on macOS: `GroundOfAces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/`). For the rest, the column list is on this page, and every table section links the built-in file. Or ask the game: write a deliberately wrong header, load once, and the log prints the columns it expected.
+The game ships header templates for four tables (`BuildingComponents`, `PropsInfluence`, `ResourceCost` and `VehicleData`) in `Ground Of Aces_Data/StreamingAssets/Modding/Templates/` inside the installation folder (on macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/`). For the rest, the column list is on this page, and every table section links the built-in file. Or ask the game: write a deliberately wrong header, load once, and the log prints the columns it expected.
 
 ## Load order
 
@@ -198,7 +198,7 @@ One row per aircraft. Rows cannot be added or removed.
 | `Fight Power` | `min-max` | `0-0` … `43-60` | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
 | `Bomb Power` | `min-max` | `0-0` … `50-80` | same |
 | `Recon Power` | `min-max` | `5-10` … `42-60` | same |
-| `Manoeuvrability` | `min-max` | `2-10` … `28-50` | same |
+| `Manoeuvrability` | `min-max` | min 2–28, max 8–50 | same |
 | `Transport Capacity` | `min-max` | `1-5` … `60-90` | same |
 | `Stealthiness` | `min-max` | `10-48` … `88-98` | same |
 | `Wreck Resource Type` | `/`-list of resources | `Metal/RepairParts` | both wreck columns set, or both empty |
@@ -224,8 +224,8 @@ Rows `1`–`6`, one per base category. All six must exist and their ids cannot c
 | `Minimum Airstrip Count` | whole number | 1–5 | |
 | `Minimum Parking Count` | whole number | 1–20 | |
 | `Missions Per Week` | whole number | 6–18 | slots the week offers; 0 and no missions are scheduled |
-| `Minimum Missions Per Week` | whole number | 2–10 | above `Missions Per Week` makes the quota impossible |
-| `Minimum Success Rate` | fraction, not percent | 0.4–0.8 | above 1 is unachievable |
+| `Minimum Missions Per Week` | whole number | 2–10 | the weekly HQ quota: how many missions the base must fly to a result each week. Won and lost missions count; cancelled ones and failed historic missions do not. Missing this or `Minimum Success Rate` halves the next shipment's slots (rounded up) and, on the normal HQ strikes setting, adds a strike - three weeks missed in a row end the run. Training weeks and the "no requirements" HQ setting skip the check. Above `Missions Per Week` makes the quota impossible |
+| `Minimum Success Rate` | fraction, not percent | 0.4–0.8 | share of the missions counted by `Minimum Missions Per Week` that must be won; above 1 is unachievable |
 | `Available Shipment Slots` | whole number | 4–8 | 0 disables supply |
 
 #### `AirstripTiers`
@@ -238,9 +238,9 @@ Rows `1`–`5`.
 |---|---|---|---|
 | `Length` | whole number | 80,120,140,160,200 | tiers match on "length or more", so keep them ascending |
 | `Width` | whole number | 12,14,18,22,26 | same |
-| `Material` | text | `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | **must not repeat another tier's material**; it also names the `ResourceCost` row that prices the surface |
+| `Material` | text | `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | **must not repeat another tier's material**, and must name an existing `ResourceCost` row - that row is what each tile of this runway costs. `ResourceCost` does not accept new surface rows, so in practice keep to `dirt`, `sand`, `gravel`, `concrete` and `tarmac` (swapping them between tiers is fine). A material with no `ResourceCost` row is accepted here, and then laying a runway of that tier fails with an error |
 | `Biome Id` | whole number | 6,20,22,15,13 | ground painted under the finished strip |
-| `Build Time` | whole number | 5,2,2,2,2 | in-game minutes of work per tile for one crew member; two workers halve it |
+| `Build Time` | whole number | 5,2,2,2,2 | in-game minutes of work per tile. Each tile is worked by one crew member at a time, so more crew lay more tiles in parallel, not one tile faster |
 
 #### `Biomes`
 
@@ -274,9 +274,15 @@ Rows `Fighter`, `Diver`, `Bomber`. The names cannot change. All columns are whol
 Built-in file: [AttacksComposition.csv](../assets/csv/AttacksComposition.csv)
 
 The row id is the raid severity. Normal play reaches **1–25**; rows `99`, `101`, `200` and `300` are not
-reached by the normal severity ladder and are kept for special raids. The ranges below describe rows 1–25;
-the four special rows go beyond them (`9-9` bombers, `10-10` divers, `0-0` fighters) and point at
-themselves in the last two columns.
+reached by the normal severity ladder and are kept for special raids. The ranges below describe rows 1–25.
+The four special rows point at themselves in the last two columns and hold:
+
+| Row | `Bombers` | `Divers` | `Fighters` |
+|---|---|---|---|
+| `99` | `9-9` | `6-6` | `8-8` |
+| `200` | `10-10` | `0-0` | `0-0` |
+| `300` | `0-0` | `10-10` | `0-0` |
+| `101` | `0-0` | `3-3` | `2-2` |
 
 | Column | Value | Built-in (rows 1–25) | Notes |
 |---|---|---|---|
@@ -296,7 +302,7 @@ Rows are equipment ids: `Bofors40mm`, `Searchlight`, `RadioTower`, `VickersGunAA
 | Column | Value | Built-in | Notes |
 |---|---|---|---|
 | `Range` | number | 10–70 | 0 makes the piece useless |
-| `Damage` | number | 0–6 | **`0` switches the whole weapon off** - fire rate, ammo and aiming are then ignored |
+| `Damage` | number | 0–6 | `0` makes the piece a non-firing station like the `Searchlight` or `Lookout`: it can still be placed and crewed, but it never shoots, and every column from `Fire Rate` onward is not read for it |
 | `Fire Rate` | whole number | 0–720 | rounds per minute |
 | `Ammo Type` | resource name or `None` | `GunAmmo`, `AntiAirAmmo`, `None`, `0` | anything that is not a resource name (`None`, `0`) means the piece stores no ammo |
 | `Ammo Capacity` | whole number | 0–80 | rounds loaded at once |
@@ -320,7 +326,7 @@ removed.
 | Column | Value | Built-in | Notes |
 |---|---|---|---|
 | `Dimensions` | `WxHxD`, or `dynamic/1x0x1` for roofs | `1x3x1`, `1x0x1`, `2x2x2` | |
-| `Build Time` | whole number | 0–420 | in-game minutes of work for one crew member; two workers halve it |
+| `Build Time` | whole number | 0–420 | in-game minutes of work. One crew member builds an object at a time; extra crew do not speed it up |
 | `Health` | whole number | 0–10000 | the huge value marks the indestructible pieces |
 | `Associated Task` | task name or `None` | `Sleep`, `Chill`, `UseEquipment`, `PlayPiano`, `UseTrainingObject`, `MonitorAirspace`, `UseRadio`, `SaluteTheFlag`, `Grieve`, `ListenToMusic`, `PlayDartboard`, `PlayGuitar`, `PlayBilliardTable`, `UsePlanningBoard` | pointing an object at a task its art does not fit is allowed, and looks wrong |
 | `Users Limit` | whole number | 0–5 | 0 on a usable object means nobody can use it |
@@ -355,7 +361,9 @@ AntiAirAmmo  PlaneBombs
 ```
 
 Runway surfaces are rows here too - `dirt`, `sand`, `gravel`, `concrete`, `tarmac` - so changing `gravel`
-changes what a tier-3 runway costs per tile.
+changes what a tier-3 runway costs per tile. **Do not remove a surface row**: unlike an object, a surface with
+no row does not become free - laying a runway of that tier fails with an error. To make a surface free, set
+every cell of its row to `0`.
 
 #### `PropsInfluence` - the mood effect an object radiates
 
@@ -369,8 +377,8 @@ without a row simply has no effect.
 | `Buff Name` | localization key | `prop_effects/organised_sleep` | must not be empty |
 | `Radius` | number | 0.5–50 | in tiles; the control towers reach 20, 30 and 50 |
 | `Associated Tasks Or Action` | comma list of task names | `Sleep`, `"Sleep,Chill"`, `UseEquipment` | must not be empty. A name that matches no task is accepted and the effect simply **never fires** |
-| `Effect 1` | `<signed number> <name>` | `+0.5 Mood` … `+10 Mood`, `-1 Mood`, `-1.5 Energy`, `+2 Energy`, `+1 Confidence` | names: `Mood`, `Confidence`, `Energy`; the built-in rows go from `-1.5` to `+10` |
-| `Effect 2` | same, or empty | | |
+| `Effect 1` | `<signed number> <name>` | `-1 Mood` to `+3 Mood`, `+1 Energy` to `+2 Energy`, `+0.5 Confidence` to `+10 Confidence`, or `-1 Accident` | names: `Mood`, `Confidence`, `Energy` |
+| `Effect 2` | same, or empty | `-1.5 Energy`, `+1 Energy`, `+0.5 Mood`, `+10 Mood` or `+1 Confidence` on 9 rows; empty on the rest | |
 | `Effect 3` | same, or empty | | no built-in row uses it |
 
 The sign is part of the number, so `1 Mood` means `+1`. Names are matched loosely, so `+1 mood` works. A name
@@ -389,14 +397,14 @@ One row per world object. Ids are used by map files and cannot change.
 | `LocKey_Description` | localization key | | |
 | `Dimensions` | `WxHxD` | `1x4x1`, `2x2x2`, `3x1x3` | |
 | `Resource Harvested` | resource name, or empty | `Wood`, `Stone`, `Herbs`, `Food`, `RawWater`, `Clay`, `Sandbags`, `Metal`, `Planks`, `Fuel`, seeds | empty means nothing to harvest |
-| `Farming Time` | whole number | 0–400 | in-game minutes of work per harvest for one crew member; two workers halve it |
+| `Farming Time` | whole number | 0–400 | in-game minutes of work per harvest, by one crew member at a time |
 | `Resource Amount` | whole number | 0–50 | yield per harvest |
 | `Resource Total` | whole number | 0–500 | total before it is used up |
 | `Limited Harvest Amount` | whole number | 0, 20, 30, 100 | cap for endless sources; 0 = uncapped |
 | `Destroyed On Depletion` | `TRUE`/`FALSE` | | `FALSE` with `Refresh Time` 0 leaves something that can never be harvested again |
 | `Refresh Time` | whole number | 0–21600 | minutes until it regrows |
 | `Health` | whole number | 1–2147483647 | the huge value marks the indestructible ones |
-| `Is Fireproof` | `TRUE`/`FALSE` | | making trees fireproof removes fire spread from the map |
+| `Is Fireproof` | `TRUE`/`FALSE` | | `TRUE` makes the object a firebreak: fire can neither start on nor spread onto the tiles it covers. Fire still crosses the open ground around it |
 
 #### `GrowingData` - saplings becoming trees
 
@@ -461,7 +469,7 @@ introducing new ones.
 | `Output Resource Amount` | whole number | 1–200 | |
 | `Input Resource Type` | `/`-list of resources, or `None` | `Food/RawWater`, `Metal`, `None` | `None` means made from nothing |
 | `Input Resource Amount` | `/`-list of whole numbers | `2/2`, `0` | **must have as many entries as the type list** |
-| `Time To Craft` | whole number | 10–180 | in-game minutes of work for one crew member; two workers halve it |
+| `Time To Craft` | whole number | 10–180 | in-game minutes of work, by one crew member at a time |
 | `Valid Entry` | `TRUE`/`FALSE` | `TRUE` | left over; the game does not read it |
 
 #### `ShipmentData` - the supply catalogue
@@ -581,7 +589,7 @@ The row id names what is being measured: `AirplaneIntegrity`, `AirplaneHealth`, 
 |---|---|---|---|
 | `ModifierCategory` | a label | `low`, `high`, `zero`, `critical`, `mismatch` | |
 | `ModifierType` | `SkillRollModifier` or `NoFlightModifier` | | |
-| `ModifierRange` | `min/max` whole numbers | `0/-5`, `2/0` | bonus applied to the roll |
+| `ModifierRange` | `min/max` whole numbers | `0/-5`, `2/0` | added to the lowest/highest stat roll; ignored by `NoFlightModifier` rows |
 | `Parameter` | space-separated crew roles, or `Default` | `Default`, `CrewRole.Pilot` | every role must carry the `CrewRole.` prefix - a bare `Pilot` never matches, and neither does an unknown role |
 | `ThresholdRange` | `min/max` whole numbers | `1/40`, `-100/-90`, `50/100` | the range of measured values this row covers |
 
@@ -621,12 +629,14 @@ Four rows, `0`–`3`.
 
 | Column | Value | Built-in |
 |---|---|---|
-| `Phase` | `Work`, `Leisure`, `Sleep` | | (`Alert` and `None` are also accepted but are not meant for the schedule) |
+| `Phase` | `Work`, `Leisure`, `Sleep` (`Alert` and `None` are also accepted but are not meant for the schedule) | |
 | `StartHour` | whole number, inclusive | 0, 5, 7, 22 |
 | `EndHour` | whole number, exclusive | 5, 7, 22, 24 |
 
-The four spans are expanded hour by hour, so **gaps and overlaps both matter**: an hour no row covers has no
-phase at all and the crew idle through it. Keep the spans continuous from 0 to 24.
+The four spans are expanded hour by hour, and **every hour from 0 to 23 must be covered by exactly one row**.
+With a gap or an overlap, the hourly phase lookup throws an error and the base stays in whatever phase it was
+in before - a broken state, not a defined "no phase". A row whose `Phase` is misspelled is skipped with a
+warning, which leaves a gap. Keep the spans continuous from 0 to 24, without overlaps.
 
 #### `DayNightSystemData` - sun and shadows
 
@@ -683,6 +693,8 @@ Eight entries are left over and **nothing reads them**, so changing them does no
 `AirAttackDiverHealth`, `AirAttackBomberHealth`.
 
 #### `FeedbackVariables`
+
+Built-in file: [FeedbackVariables.csv](../assets/csv/FeedbackVariables.csv)
 
 The in-game feedback form: `API Endpoint`, `Feedback Character Limit`, `Screenshot Height`, `Survey Link`,
 `Survey Link Demo`, `Survey Opened Player Prefs`. There is no reason for a gameplay mod to touch this, and

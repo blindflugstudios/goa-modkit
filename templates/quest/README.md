@@ -21,4 +21,4 @@ quest/
 
 `_requirements: []` means the quest starts on every map as soon as a game loads. To tie it to one map, see `templates/map-quest-line/`.
 
-Quest files are read every time a level loads: save, quit to the main menu, open **Mods** (it rescans the folder), then load the save again. To hand the quest out right away while testing, type `quest my_mod_first_steps` in the cheat console (Options -> Cheats, then the cheat button on the game screen).
+Quest files are read every time a level loads: save, quit to the main menu, then load the save again (if the `Quests/` folder is new, open **Mods** and press **Refresh** first). To hand the quest out right away while testing, type `quest my_mod_first_steps` in the cheat console (Options -> Cheats, then the cheat button on the game screen).
