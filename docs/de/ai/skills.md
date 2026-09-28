@@ -18,12 +18,13 @@ gespiegelt (liest Claude Code). Sie sind identisch.
 | `csv-tweak` | "Mach die Spitfire schneller" | Ändert Spieldaten über eine CSV-Überschreibung |
 | `localize-mod` | "Füg meinem Mod deutsche Texte hinzu" | Ergänzt oder korrigiert die Texte eines Mods in weiteren Sprachen |
 | `new-map` | "Liefer eine Karte mit meiner eigenen Questreihe aus" | Richtet einen Karten-Ordner und seine Metadaten ein |
-| `import-model` | "Nimm mein eigenes Modell für ..." | Bringt ein 3D-Modell in einen Mod |
+| `import-model` | "Nimm mein eigenes Modell für ..." | Bringt ein 3D-Modell in einen Mod (in Arbeit, von der aktuellen Alpha nicht unterstützt) |
 | `publish-workshop` | "Stell meinen Mod in den Workshop" | Prüft den Mod und führt dich durch den Upload im Spiel |
 | `validate` | "Prüf meinen Mod" | Startet den Validator und erklärt jeden Fund in einfachen Worten |
 | `install-mod` | "Pack meinen Mod ins Spiel" | Kopiert den Mod in den `Mods`-Ordner des Spiels |
 | `read-log` | "Irgendwas stimmt nicht, schau ins Log" | Liest dein `Player.log` und erklärt, was schiefgegangen ist |
 | `update-kit` | "Aktualisier das Kit" | Holt die neuesten Regeln, Doku und Skills und sagt dir, was sich geändert hat |
+| `update-docs` | "/update-docs" | Für Kit-Maintainer: gleicht dieses Handbuch mit dem `Docs/`-Ordner des Spielteams ab (fragt nach einem GitHub-Link oder einem lokalen Pfad) |
 
 ## Agenten (Claude Code und OpenCode) { #agents-claude-code-and-opencode }
 
