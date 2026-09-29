@@ -13,7 +13,7 @@ Willkommen an der Startbahn. Dieser Abschnitt bringt dich von "Ich habe Ground o
 ## Zuerst Zugang holen { #get-access-first }
 
 Während der Developer Preview ist das Modkit privat. Bevor du etwas installierst, schick deinen
-**GitHub-Benutzernamen** per Mail an [nuria@blindflugstudios.com](mailto:nuria@blindflugstudios.com)
+**GitHub-Benutzernamen** per Mail an [jan@blindflugstudios.com](mailto:jan@blindflugstudios.com)
 oder [moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com) (noch kein GitHub-Konto?
 Die Installationsseiten zeigen, wie du eins anlegst - es ist kostenlos). Du bekommst dann eine
 Einladung von GitHub per Mail; nimm sie an, und der Download-Schritt auf den Installationsseiten

@@ -45,7 +45,7 @@ Claude Code, Codex or the open-source OpenCode: clone this repository, start you
 The documentation is open to everyone. The modkit itself - the repository with the examples,
 templates, validator and AI rules - is private during the preview. To get access, send a short
 email with your **GitHub username** to
-[nuria@blindflugstudios.com](mailto:nuria@blindflugstudios.com) or
+[jan@blindflugstudios.com](mailto:jan@blindflugstudios.com) or
 [moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com). Tell us what you would like to
 build - we love to hear it.
 

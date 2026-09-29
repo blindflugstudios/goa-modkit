@@ -13,7 +13,7 @@ Welcome to the flight line. This section takes you from "I own Ground of Aces on
 ## Get access first
 
 During the developer preview the modkit is private. Before you install anything, email your
-**GitHub username** to [nuria@blindflugstudios.com](mailto:nuria@blindflugstudios.com) or
+**GitHub username** to [jan@blindflugstudios.com](mailto:jan@blindflugstudios.com) or
 [moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com) (no GitHub account yet? The
 install pages show how to make one - it is free). You will get an invitation email from GitHub;
 accept it, and the download step on the install pages works. GitHub asks you to switch on

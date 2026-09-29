@@ -6,7 +6,7 @@
 
 > [!CAUTION]
 > **Developer Preview - subject to change. Currently by invitation only. Use at your own risk.**
-> Access: email your GitHub username to [nuria@blindflugstudios.com](mailto:nuria@blindflugstudios.com) or [moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com).
+> Access: email your GitHub username to [jan@blindflugstudios.com](mailto:jan@blindflugstudios.com) or [moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com).
 > Everything here - docs, tools, rules and the game's modding features - may change without notice.
 > Back up your saves before you try a mod.
 
