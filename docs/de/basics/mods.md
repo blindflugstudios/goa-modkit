@@ -2,7 +2,7 @@
 
 Eine Mod ist ein Ordner. Das Spiel sucht darin nach ein paar fest benannten Unterordnern, und was in diesen Unterordnern liegt, ist das, was die Mod verändert. Es gibt keinen Verpackungsschritt, kein Manifest, das du schreiben musst, und nichts zu kompilieren: Du bearbeitest Dateien, lädst ein Level und siehst das Ergebnis.
 
-Diese Seite behandelt, was alle Mods gemeinsam haben: wo sie liegen, wie das Spiel sie findet, wie man sie ein- und ausschaltet und welche Mod gewinnt, wenn zwei dasselbe ändern. Was *in* die Unterordner gehört, steht auf den Themenseiten: [CSV-Tabellen](../data/csv.md), [Missionen](../missions/index.md), [Quests](../quests/index.md), [Scripting](../scripting/index.md), die Seiten zu [Karten und Grafik](../content/maps.md) und [Flugzeug-Skins](../content/airplanes.md). Wie eine fertige Mod zu anderen Spielern kommt, steht unter [Steam Workshop](../sharing/workshop.md).
+Diese Seite behandelt, was alle Mods gemeinsam haben: wo sie liegen, wie das Spiel sie findet, wie man sie ein- und ausschaltet und welche Mod gewinnt, wenn zwei dasselbe ändern. Was *in* die Unterordner gehört, steht auf den Themenseiten: [CSV-Tabellen](../data/csv.md), [Missionen](../missions/index.md), [Quests](../quests/index.md), [Scripting](../scripting/index.md), [Karten](../content/maps.md), [Objekte](../content/objects.md) und [Flugzeug-Skins](../content/airplanes.md). Wie eine fertige Mod zu anderen Spielern kommt, steht unter [Steam Workshop](../sharing/workshop.md).
 
 ## Eine Mod in einer Minute { #a-mod-in-one-minute }
 

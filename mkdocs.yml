@@ -85,7 +85,8 @@ plugins:
             Quests: Quests
             Scripting: Scripting
             Game data: Spieldaten
-            Maps and art: Karten und Grafik
+            Objects: Objekte
+            Airplanes: Flugzeuge
             Sharing: Teilen
             AI agents: KI-Agenten
             Examples: Beispiele
@@ -168,13 +169,15 @@ nav:
   - Game data:
       - CSV tables: data/csv.md
       - Table command files: data/table-editor.md
-  - Maps and art:
+  - Maps:
       - Maps: content/maps.md
+  - Objects:
       - Objects and models: content/objects.md
-      - Biomes: content/biomes.md
-      - Airplane skins: content/airplanes.md
       - Moddable objects: content/moddable-objects.md
       - Built-in texture names: content/texture-names.md
+      - Biomes: content/biomes.md
+      - Airplanes:
+          - Airplane skins: content/airplanes.md
   - Sharing:
       - Steam Workshop: sharing/workshop.md
   - AI agents:

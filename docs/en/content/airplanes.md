@@ -9,6 +9,9 @@ A mod skin behaves like a built-in one:
 - It is put on an airplane with the **Paint Airplane** task, like any other skin.
 - It is part of the pool the randomize setting picks from.
 
+!!! tip "Example files"
+    Example files for airplane skins are in the [example folder on Google Drive](https://drive.google.com/open?id=15fkBMoUdIB0wkL8wjuqEwflo2xZqbXni&usp=drive_fs). Use them as a reference for how your own files should look.
+
 ## Quick start
 
 1. Make a mod folder with an `Airplanes/` folder inside:

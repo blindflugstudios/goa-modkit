@@ -4,6 +4,9 @@ Tired of the standard-issue barrel? A mod can give the game's objects a new look
 
 Only the look changes. Size on the grid, cost, health, where crew stand to use it, and every other rule stay as the game defines them. Changing numbers is done with [CSV tables](../data/csv.md).
 
+!!! tip "Example files"
+    Ready-made example models, textures, thumbnails and export presets are in the [example folder on Google Drive](https://drive.google.com/open?id=15fkBMoUdIB0wkL8wjuqEwflo2xZqbXni&usp=drive_fs). Use them as a reference for how your own files should look.
+
 Everything for objects goes into one folder in your mod, `Objects/`:
 
 ```text

@@ -4,6 +4,9 @@ Genug vom Standardfass? Eine Mod kann den Objekten des Spiels einen neuen Look g
 
 Nur das Aussehen ändert sich. Größe im Raster, Kosten, Lebenspunkte, wo die Mannschaft steht, um es zu benutzen, und alle anderen Regeln bleiben so, wie das Spiel sie festlegt. Zahlen änderst du mit [CSV-Tabellen](../data/csv.md).
 
+!!! tip "Beispieldateien"
+    Fertige Beispielmodelle, Texturen, Vorschaubilder und Export-Presets findest du im [Beispielordner auf Google Drive](https://drive.google.com/open?id=15fkBMoUdIB0wkL8wjuqEwflo2xZqbXni&usp=drive_fs). Nimm sie als Vorlage dafür, wie deine eigenen Dateien aussehen sollen.
+
 Alles für Objekte kommt in einen einzigen Ordner deiner Mod, `Objects/`:
 
 ```text

@@ -2,7 +2,7 @@
 
 A mod is a folder. The game looks inside it for a handful of fixed subfolders, and whatever those subfolders contain is what the mod changes. There is no packaging step, no manifest you have to write, and nothing to compile: you edit files, load a level, and see the result.
 
-This page covers what every mod has in common: where it lives, how the game finds it, how it is switched on and off, and which mod wins when two change the same thing. What goes *into* the subfolders is on the category pages: [CSV tables](../data/csv.md), [Missions](../missions/index.md), [Quests](../quests/index.md), [Scripting](../scripting/index.md), the [Maps and art](../content/maps.md) pages and [Airplane skins](../content/airplanes.md). How a finished mod reaches other players is on [Steam Workshop](../sharing/workshop.md).
+This page covers what every mod has in common: where it lives, how the game finds it, how it is switched on and off, and which mod wins when two change the same thing. What goes *into* the subfolders is on the category pages: [CSV tables](../data/csv.md), [Missions](../missions/index.md), [Quests](../quests/index.md), [Scripting](../scripting/index.md), [Maps](../content/maps.md), [Objects](../content/objects.md) and [Airplane skins](../content/airplanes.md). How a finished mod reaches other players is on [Steam Workshop](../sharing/workshop.md).
 
 ## A mod in one minute
 

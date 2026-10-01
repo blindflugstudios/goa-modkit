@@ -9,6 +9,9 @@ Eine Mod-Lackierung verhält sich wie eine eingebaute:
 - Sie kommt mit der Aufgabe **Paint Airplane** aufs Flugzeug, wie jede andere Lackierung.
 - Sie gehört zu dem Pool, aus dem die Zufallseinstellung wählt.
 
+!!! tip "Beispieldateien"
+    Beispieldateien für Flugzeug-Skins findest du im [Beispielordner auf Google Drive](https://drive.google.com/open?id=15fkBMoUdIB0wkL8wjuqEwflo2xZqbXni&usp=drive_fs). Nimm sie als Vorlage dafür, wie deine eigenen Dateien aussehen sollen.
+
 ## Schnellstart { #quick-start }
 
 1. Lege einen Mod-Ordner mit einem Ordner `Airplanes/` darin an:
