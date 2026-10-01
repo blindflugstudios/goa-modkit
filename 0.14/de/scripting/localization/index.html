@@ -1563,6 +1563,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#location-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ortsnamen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#placeholders" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1769,6 +1780,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1885,6 +1902,90 @@
     
   
     Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
   
 
     
@@ -2333,6 +2434,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#location-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ortsnamen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#placeholders" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2602,6 +2714,11 @@ quest/&lt;questId&gt;/subQuest&lt;N&gt;_description
 <span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"quest/</span><span class="si">{}</span><span class="s2">/subQuest0_description"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">QUEST_ID</span><span class="p">),</span> <span class="s2">"Fell five trees."</span><span class="p">)</span>
 </code></pre></div>
 <p>Die Schlüssel müssen nur mit dem übereinstimmen, was in der Quest-Datei steht. Siehe <a href="../../quests/">Quests</a>.</p>
+<h2 id="location-names">Ortsnamen<a class="headerlink" href="#location-names" title="Permanent link">&para;</a></h2>
+<p>Eine Mod kann eigene Orte zur Kriegskarte hinzufügen (siehe <a href="../../missions/locations/#adding-locations-with-a-mod">Orte mit einer Mod hinzufügen</a>). Der Spieler sieht den <code>_locationName</code> eines solchen Orts genau so, wie er geschrieben ist, denn nur die mitgelieferten Orte haben Übersetzungen. Damit dein Ort einen richtigen Namen bekommt, registrierst du einen Term namens <code>mission_location/&lt;name&gt;</code>, wobei <code>&lt;name&gt;</code> der <code>_locationName</code> ist:</p>
+<div class="highlight"><pre><span></span><code><span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"mission_location/mymod_scapa_flow"</span><span class="p">,</span> <span class="s2">"Scapa Flow"</span><span class="p">)</span>
+<span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"de"</span><span class="p">,</span> <span class="s2">"mission_location/mymod_scapa_flow"</span><span class="p">,</span> <span class="s2">"Scapa Flow"</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="placeholders">Platzhalter<a class="headerlink" href="#placeholders" title="Permanent link">&para;</a></h2>
 <p><code>event_log.Create</code> nimmt ein Dictionary, das <code>{[NAME]}</code>-Platzhalter füllt:</p>
 <div class="highlight"><pre><span></span><code><span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"mymod/pilot_tired"</span><span class="p">,</span>

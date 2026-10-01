@@ -1725,6 +1725,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1841,6 +1847,90 @@
     
   
     Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
   
 
     
@@ -2385,11 +2475,11 @@
 <p>Eine normale Mission liegt in einem Pool und wird über die Woche verteilt zufällig gezogen. Für eine Folgemission ist das meistens falsch: Der Spieler schließt Schritt eins ab und wartet dann, womöglich wochenlang, womöglich für immer, wenn der Pool groß ist.</p>
 <p><code>"_isHistoric": true</code> ändert das. Eine historische Mission:</p>
 <ul>
-<li><strong>kommt nie in die Zufallsziehung.</strong> Sobald ihre Sperren erfüllt sind, erscheint sie garantiert.</li>
-<li><strong>erscheint an ihrem Datum</strong>, wenn sie einen <code>_historicDay</code> hat: genau an diesem Tag, wenn auch ihre anderen Sperren erfüllt sind. Dafür werden die Wochen-Slots nicht genutzt.</li>
-<li><strong>behält die normale Vorlaufzeit</strong>, wenn sie keinen <code>_historicDay</code> hat: Sie erscheint zusammen mit der nächsten Wochenmission und belegt keinen der Slots dieser Woche. So kommt eine Folgemission mit derselben Verzögerung wie jede andere Mission an, statt sofort auf der Karte zu landen.</li>
+<li><strong>kommt nie in die Zufallsziehung.</strong> Sobald ihre Sperren erfüllt sind, erscheint sie garantiert. Das Spiel prüft jede Spielstunde, sie taucht also innerhalb einer Stunde auf. Sie wartet nie auf den Wochenplan und belegt nie einen der Slots dieser Woche.</li>
+<li><strong>erscheint an ihrem Datum</strong>, wenn sie einen <code>_historicDay</code> hat: an diesem Tag oder später, wenn ihre anderen Sperren erst später erfüllt sind.</li>
+<li><strong>erscheint innerhalb einer Stunde</strong>, wenn sie keinen <code>_historicDay</code> hat: sobald ihre Sperren erfüllt sind. Eine Folgemission mit der Sperre <code>"&lt;vorherige Mission&gt;,success"</code> taucht innerhalb einer Stunde nach dem Erfolg dieser Mission auf.</li>
 <li><strong>läuft nie ab.</strong> <code>_timeToStartRange</code> wird ignoriert, der Spieler hat also unbegrenzt Zeit, sie zu fliegen.</li>
-<li><strong>gibt es bei Erfolg nur einmal.</strong> Einmal gewonnen, erscheint sie nie wieder. Ein gescheiterter oder abgebrochener Versuch bringt sie zurück, eine Kette, die an <code>success</code> gebunden ist, lässt sich also wiederholen.</li>
+<li><strong>gibt es bei Erfolg nur einmal.</strong> Einmal gewonnen, erscheint sie nie wieder. Ein gescheiterter oder abgebrochener Versuch bringt sie bei der nächsten stündlichen Prüfung zurück - selbst wenn ihr Ergebnisbericht noch ungelesen ist -, eine Kette, die an <code>success</code> gebunden ist, lässt sich also wiederholen.</li>
 <li><strong>ist nie zweimal auf der Karte.</strong> Solange eine Kopie wartet oder in der Luft ist, erscheint keine zweite.</li>
 </ul>
 <p>Ihre Sperren werden mit UND verknüpft:</p>
@@ -2405,22 +2495,22 @@
 <tr>
 <td>nein</td>
 <td>nein</td>
-<td>zusammen mit der nächsten Wochenmission</td>
+<td>bei der nächsten stündlichen Prüfung</td>
 </tr>
 <tr>
 <td>ja</td>
 <td>nein</td>
-<td>zusammen mit der nächsten Wochenmission, nachdem der Vorgänger richtig ausgegangen ist</td>
+<td>innerhalb einer Stunde, nachdem der Vorgänger richtig ausgegangen ist</td>
 </tr>
 <tr>
 <td>nein</td>
 <td>ja</td>
-<td>genau an diesem Tag</td>
+<td>an diesem Tag</td>
 </tr>
 <tr>
 <td>ja</td>
 <td>ja</td>
-<td>genau an diesem Tag, sobald der Vorgänger richtig ausgegangen ist</td>
+<td>an diesem Tag oder später - innerhalb einer Stunde, nachdem der Vorgänger richtig ausgegangen ist, falls das erst nach dem Datum passiert</td>
 </tr>
 </tbody>
 </table>
@@ -2429,13 +2519,13 @@
 <div class="highlight"><pre><span></span><code><span class="nt">"_isHistoric"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="nt">"_historicDay"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Year"</span><span class="p">:</span><span class="w"> </span><span class="mi">1940</span><span class="p">,</span><span class="w"> </span><span class="nt">"Month"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="nt">"Day"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="nt">"Hour"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">"Minute"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
-<p>Die Mission erscheint genau an diesem Tag. Ein Jahr unter 1900 zählt als "kein Datum". Deshalb tragen Beispieldateien <code>"Year": 1</code>, wenn sie keins meinen.</p>
+<p>Das Datum ist der früheste Tag, an dem die Mission erscheint: an diesem Tag, wenn ihre anderen Sperren schon erfüllt sind, sonst innerhalb einer Stunde, nachdem sie es sind. Ein Jahr unter 1900 zählt als "kein Datum". Deshalb tragen Beispieldateien <code>"Year": 1</code>, wenn sie keins meinen.</p>
 <p>Um eine Mission ab einem bestimmten Zeitpunkt zu sperren, verwende eine <code>LatestAppearanceDay</code>-Voraussetzung (Typ 2), gezählt in Tagen ab dem Startdatum der Karte. Das funktioniert bei jeder Mission, ob historisch oder nicht.</p>
 <p>Zusammengesetzt wird so jede Operation an ihrem echten Datum verfügbar, und eine verpasste kann wieder geschlossen werden.</p>
 <h2 id="pitfalls">Stolperfallen<a class="headerlink" href="#pitfalls" title="Permanent link">&para;</a></h2>
 <p><strong>Doppelte Ids.</strong> Zwei Missionen mit derselben Id bedeuten, dass eine die andere stillschweigend ersetzt, abhängig von der Ladereihenfolge. Setz deinen Mod-Namen vor jede Id und denk beim Umbenennen daran, die Ids in jedem <code>CompletedMission</code>-Wert anzupassen.</p>
-<p><strong><code>_isHistoric</code> bei Folgemissionen vergessen.</strong> Die Kette funktioniert, aber Schritte tauchen womöglich erst nach sehr langer Zeit auf, und ein abgeschlossener Schritt kann erneut gezogen werden.</p>
-<p><strong>Mehrere historische Missionen gleichzeitig fällig.</strong> Sie erscheinen alle zusammen: die datierten an ihrem Tag, die undatierten zusammen mit derselben Wochenmission. Wenn sie nacheinander kommen sollen, verkette sie über ihre Ausgänge oder gib ihnen verschiedene Tage.</p>
+<p><strong><code>_isHistoric</code> bei Folgemissionen vergessen.</strong> Die Kette funktioniert, aber jeder Schritt kommt in die zufällige Wochenauswahl, sobald seine Sperre erfüllt ist. Er braucht also womöglich ein paar Slots, bis er auftaucht, und ein abgeschlossener Schritt kann erneut gezogen werden. Genau das richtige für eine wiederholbare Folgemission - eine, die der Spieler mehr als einmal fliegen darf. Nimm <code>_isHistoric</code>, wenn die Folgemission sofort und nur einmal erscheinen soll.</p>
+<p><strong>Mehrere historische Missionen gleichzeitig fällig.</strong> Sie erscheinen alle zusammen: die datierten an ihrem Tag, die undatierten bei derselben stündlichen Prüfung. Wenn sie nacheinander kommen sollen, verkette sie über ihre Ausgänge oder gib ihnen verschiedene Tage.</p>
 <p><strong>Verketten auf eine Mission, die nie erscheint.</strong> Eine Sperre auf eine Mission, deren eigene Voraussetzungen nie erfüllt sind oder die für eine andere Karte getaggt ist, blockiert stillschweigend den Rest der Kette. Teste jeden Schritt einzeln, bevor du sie verbindest.</p>
 <p><strong>Testen mit dem Cheat.</strong> <code>create_mission</code> ignoriert jede Sperre. Es beweist, dass eine Mission lädt, nicht, dass die Kette freigeschaltet wird. Siehe <a href="../../basics/testing/#testing-a-chain">Testen und neu laden</a>.</p>
 <h2 id="when-json-is-not-enough">Wenn JSON nicht reicht<a class="headerlink" href="#when-json-is-not-enough" title="Permanent link">&para;</a></h2>

@@ -1578,6 +1578,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1694,6 +1700,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2277,7 +2367,12 @@
 </table>
 <p>That third folder always wins, which makes it a good place to try changes out - and a place to remember to clear when a mission of yours seems to ignore the copy in your mod folder.</p>
 <h2 id="the-mission-editor">The Mission Editor<a class="headerlink" href="#the-mission-editor" title="Permanent link">&para;</a></h2>
-<p>Open the game and choose <strong>Mission Editor</strong> in the main menu. That opens the mission list: every shipped mission, every mission from an enabled mod, and every mission you saved yourself. <strong>Create</strong> starts a fresh mission with the id <code>new_mission</code> - rename it in the <strong>Mission Id</strong> field before saving. <strong>Edit</strong> opens any mission in the list, shipped ones included. A shipped mission cannot be saved under its own id, so give it a new id and it is saved as your own copy. Your own saved missions carry a delete button, and <strong>Refresh</strong> re-reads the list.</p>
+<p>Open the game and choose <strong>Mission Editor</strong> in the main menu. That opens the mission list: every shipped mission, every mission from an enabled mod, and every mission you saved yourself. <strong>Create</strong> starts a fresh mission with the id <code>new_mission</code> - rename it in the <strong>Mission Id</strong> field before saving. <strong>Edit</strong> opens any mission in the list, shipped ones included. A shipped mission cannot be saved under its own id, so give it a new id and it is saved as your own copy. Your own saved missions carry a delete button, <strong>Refresh</strong> re-reads the list, and the folder button opens your Missions folder in the file browser.</p>
+<div class="admonition tip">
+<p class="admonition-title">Learn from the game's own missions</p>
+<p>The shipped missions make good examples, and the Mission Editor lists them all. <code>calm_supply_drop</code> is a whole mission in one file, with no script of its own. The four <em>Blitz</em> missions (<code>german_blitz_1_long_nights</code>, <code>german_blitz_2_aspirin</code>, <code>german_blitz_3_morning_after</code>, <code>german_blitz_4_answering_in_kind</code>) are a historic chain, each one waiting for the one before it to succeed. And <code>default_mission.py</code>, the script every mission without its own <code>.py</code> runs on, sits in the game's <code>Scripts/Mission</code> folder (see <a href="../scripting/#where-scripts-live">Where scripts live</a>). Open a shipped mission with <strong>Edit</strong> and save it under a new id to get your own copy.</p>
+<p>A copy under a new id shows <strong>no text</strong> at first. A shipped mission keeps its text inside the game, filed under its own id (<code>missions/&lt;id&gt;/mission_name</code> and the other text slots), and your copy has a different id. Type the texts in (in the file they are the <code>_raw...</code> fields), or register them with <code>localization.SetTerm</code> in a script - see <a href="reference/">Reference</a>. Keeping the shipped id instead replaces the shipped mission, text and all.</p>
+</div>
 <!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 !!! note
     The editor always opens on a single working mission called `new_mission`. It loads yours if you have saved one under that id, and otherwise starts a fresh one. Rename it in the **Mission Id** field before saving, and the next visit starts a new `new_mission`, so you can write one mission after another.
@@ -2289,20 +2384,25 @@
 <p><strong>Identity.</strong> The mission id, and the tags that decide which maps the mission can appear on. An id must be lower-case letters, digits and underscores only.</p>
 <p><strong>Tags.</strong> Tags are free-form labels, not map names. A map lists the tags it supports in its <code>Metadata.json</code> (the <code>_tags</code> field inside the <code>.goamap</code> file), a mission lists the tags it is written for (the <code>_tags</code> field of the mission JSON), and the mission can only turn up on that map when the two lists share at least one tag. Several tags on a mission mean "any of these" - one match is enough.</p>
 <p>Type them into the mission tags field as one comma-separated list without spaces: <code>naval,atlantic</code>. A tag follows the same rules as an id - lower-case letters, digits and underscores - and the field enforces that as you type, turning capitals into lower case and dropping anything else. The match against a map ignores capitalisation anyway, so a map that spells its tag <code>Campaign_Debden</code> still counts.</p>
-<p>Leaving the list empty is the normal case. An empty list on either side counts as the single tag <code>default</code>, and every shipped map lists <code>default</code>, so an untagged mission is available on all of them. Tag a mission <code>campaign_debden</code> and it appears only on maps that also list <code>campaign_debden</code> - and nowhere else, not even on the shipped maps, unless you add <code>default</code> alongside it. A map made for a campaign usually lists only its own tag, precisely to keep the regular missions out.</p>
+<p>Leaving the list empty is the normal case. An empty list on either side counts as the single tag <code>default</code>, and every shipped map lists <code>default</code>, so an untagged mission is available on all of them. Each shipped map also lists its own name (<code>debden</code>, <code>duxford</code>, <code>lichfield</code>, <code>perranporth</code>), so a mission tagged <code>debden</code> and nothing else appears only there - see <a href="../content/maps/">Maps</a>. Tag a mission <code>campaign_debden</code> and it appears only on maps that also list <code>campaign_debden</code> - and nowhere else, not even on the shipped maps, unless you add <code>default</code> alongside it. A map made for a campaign usually lists only its own tag, precisely to keep the regular missions out.</p>
 <div class="admonition note">
 <p class="admonition-title">Quests have no tags</p>
 <p>Tags are for missions only. A quest has no tags field. A map picks its quests through the <code>StartingQuestIds</code> list in its <code>Metadata.json</code>; with none listed it starts the game's default quest line (<code>quest0</code>). See <a href="../quests/#quests-and-maps">Quests and maps</a>.</p>
 </div>
 <p><strong>Validate</strong> warns you when a mission carries a tag that no known map declares. That mission can never appear anywhere, which is only what you want if a script hands it out directly.</p>
-<p><strong>Timing and size.</strong> How many aircraft the player may send, how long the mission waits on the map before it expires, and how long the flight itself takes. Both times are ranges - the game rolls a value between the two numbers.</p>
+<p><strong>Timing and size.</strong> How many aircraft the player may send, how long the mission waits on the map before it expires, and how long the flight itself takes. Both times are ranges in game minutes - the game rolls a value between the two numbers. A time-to-start maximum of <code>0</code> means the mission never expires, and a historic mission (below) never expires, whatever you enter.</p>
 <p><strong>Difficulty.</strong> The chance the mission goes as planned and a difficulty rating from 1 to 3.</p>
-<p><strong>Text.</strong> The mission name and description, the intel threat report with the enemy strength it shows the player (flavour only - it does not affect the outcome), and the radio transmissions for each ending. Type them straight in. A mission written in the editor does not need a script, because every mission without one runs on the game's shared default mission script.</p>
+<p><strong>Text.</strong> The mission name and description, the intel threat report with the enemy strength it shows the player (flavour only - it does not affect the outcome), two radio messages during the flight (one for a flight going to plan, one for a flight that has gone wrong), and one closing message for each of the four endings. Type them straight in. A mission written in the editor does not need a script, because every mission without one runs on the game's shared default mission script.</p>
 <p><strong>Locations.</strong> Where on the war map the mission can appear. Pick from the list and add as many as you like; the game chooses one when the mission is created. The full list, with coordinates, is on <a href="locations/">Locations</a>.</p>
 <p><strong>Requirements.</strong> Conditions that must hold before the mission shows up at all - a runway tier, a date window, or another mission having been completed.</p>
 <p><strong>Stats.</strong> The skills the mission rolls against. You need exactly two: the first is used when the flight goes to plan, the second when it does not.</p>
-<p><strong>Outcomes.</strong> Exactly four endings, and what each one gives or costs - morale, victory points, damage. Which ending counts as a success is fixed by its position and cannot be edited: slot 1 (gone wrong, skill check failed) is a failure, slot 2 (gone wrong, skill check passed) a success, slot 3 (as planned, skill check failed) a failure, slot 4 (as planned, skill check passed) a success.</p>
-<p><strong>Is Historic.</strong> Tick this to make the mission part of the storyline. With a date, it appears on that exact day; without one, it appears alongside the next weekly mission and does not take up one of that week's slots. It is gone for good once it has succeeded.</p>
+<p><strong>Outcomes.</strong> Exactly four endings, and what each one gives or costs - morale, victory points, damage. The editor shows them from top to bottom from the best ending to the worst, not in the order of the slots below. Which ending counts as a success is fixed by its position and cannot be edited: slot 1 (gone wrong, skill check failed) is a failure, slot 2 (gone wrong, skill check passed) a success, slot 3 (as planned, skill check failed) a failure, slot 4 (as planned, skill check passed) a success.</p>
+<p><strong>Is Historic.</strong> Tick this to make the mission part of the storyline. A historic mission is never part of the random weekly draw. The game checks every in-game hour, so it shows up within the hour after its requirements pass. It never waits for the weekly schedule and never takes up one of that week's slots.</p>
+<ul>
+<li><strong>With a date</strong>, it appears on that day - or later, if its other requirements only pass later.</li>
+<li><strong>Without a date</strong>, it appears as soon as its requirements pass. A follow-up that waits for another mission's success shows up within the hour after that success.</li>
+</ul>
+<p>A historic mission never expires. It is gone for good once it has succeeded. If it fails or is cancelled, it is back on the map at the next hourly check, even while its result report is still waiting to be read.</p>
 <h3 id="validate-before-you-save">Validate before you save<a class="headerlink" href="#validate-before-you-save" title="Permanent link">&para;</a></h3>
 <p><strong>Validate</strong> lists everything it can find. <strong>Save</strong> runs the same check and refuses if anything is an error.</p>
 <p><strong>Errors block saving:</strong></p>
@@ -2323,8 +2423,8 @@
 <td>a shipped mission already uses it</td>
 </tr>
 <tr>
-<td>Mission with given ID already exists</td>
-<td>saving would silently replace another mission you saved</td>
+<td>Mission id is in use</td>
+<td>renaming onto another mission you saved would silently replace it</td>
 </tr>
 <tr>
 <td>A tag has invalid characters</td>
@@ -2418,6 +2518,7 @@
 -->
 <ul>
 <li>Write the Python side. Anything that has to <em>decide</em> something - react to the crew that flew, hand out a follow-up mission, change the text depending on what happened - needs a script.</li>
+<li>Show a chain as a whole. Each mission only lists its own requirements; how several missions link up is easier to follow in the files. See <a href="chains/">Chains and campaigns</a>.</li>
 </ul>
 <!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 - Build a chain beyond a single "this mission must have been completed" requirement. Longer chains are easier to see and manage in the files. See [Chains and campaigns](chains.md).

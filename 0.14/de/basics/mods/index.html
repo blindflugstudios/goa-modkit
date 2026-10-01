@@ -1719,6 +1719,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1835,6 +1841,90 @@
     
   
     Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
   
 
     
@@ -2314,11 +2404,11 @@
 
 <h1 id="so-funktionieren-mods">So funktionieren Mods<a class="headerlink" href="#so-funktionieren-mods" title="Permanent link">&para;</a></h1>
 <p>Eine Mod ist ein Ordner. Das Spiel sucht darin nach ein paar fest benannten Unterordnern, und was in diesen Unterordnern liegt, ist das, was die Mod verändert. Es gibt keinen Verpackungsschritt, kein Manifest, das du schreiben musst, und nichts zu kompilieren: Du bearbeitest Dateien, lädst ein Level und siehst das Ergebnis.</p>
-<p>Diese Seite behandelt, was alle Mods gemeinsam haben: wo sie liegen, wie das Spiel sie findet, wie man sie ein- und ausschaltet und welche Mod gewinnt, wenn zwei dasselbe ändern. Was <em>in</em> die Unterordner gehört, steht auf den Themenseiten: <a href="../../data/csv/">CSV-Tabellen</a>, <a href="../../missions/">Missionen</a>, <a href="../../quests/">Quests</a>, <a href="../../scripting/">Scripting</a> und die Seiten zu <a href="../../content/maps/">Karten und Grafik</a>. Wie eine fertige Mod zu anderen Spielern kommt, steht unter <a href="../../sharing/workshop/">Steam Workshop</a>.</p>
+<p>Diese Seite behandelt, was alle Mods gemeinsam haben: wo sie liegen, wie das Spiel sie findet, wie man sie ein- und ausschaltet und welche Mod gewinnt, wenn zwei dasselbe ändern. Was <em>in</em> die Unterordner gehört, steht auf den Themenseiten: <a href="../../data/csv/">CSV-Tabellen</a>, <a href="../../missions/">Missionen</a>, <a href="../../quests/">Quests</a>, <a href="../../scripting/">Scripting</a>, die Seiten zu <a href="../../content/maps/">Karten und Grafik</a> und <a href="../../content/airplanes/">Flugzeug-Skins</a>. Wie eine fertige Mod zu anderen Spielern kommt, steht unter <a href="../../sharing/workshop/">Steam Workshop</a>.</p>
 <h2 id="a-mod-in-one-minute">Eine Mod in einer Minute<a class="headerlink" href="#a-mod-in-one-minute" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Finde deinen <code>Mods</code>-Ordner: <strong>Hauptmenü (Main menu) → Mods → Open folder</strong>. Unter Windows ist das <code>%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Mods\</code>; die anderen Plattformen findest du <a href="#where-mods-live">weiter unten</a>.</li>
-<li>Leg darin einen Ordner an, zum Beispiel <code>my_mod</code>, und darin einen der Inhaltsordner: <code>CSV/</code>, <code>Missions/</code>, <code>Quests/</code>, <code>Maps/</code>, <code>Objects/</code> oder <code>Biomes/</code>. Leg mindestens eine Datei hinein.</li>
+<li>Leg darin einen Ordner an, zum Beispiel <code>my_mod</code>, und darin einen der Inhaltsordner: <code>CSV/</code>, <code>Missions/</code>, <code>Quests/</code>, <code>Maps/</code>, <code>Objects/</code>, <code>Biomes/</code> oder <code>Airplanes/</code>. Leg mindestens eine Datei hinein.</li>
 <li>Optional: Füge eine <code>config.json</code> mit Name und Id der Mod hinzu und eine <code>preview.png</code> (höchstens 1 MB) als Vorschaubild.</li>
 <li>Drück im Mods-Fenster auf <strong>Refresh</strong>, damit das Spiel den neuen Ordner bemerkt, und lade dann ein Level.</li>
 <li>Ab dann wird jede Änderung an einer Datei in der Mod beim nächsten Laden eines Levels übernommen. Nur Ersatzgrafik (<code>Objects/</code>, <code>Biomes/</code>) braucht einen Neustart des Spiels.</li>
@@ -2362,10 +2452,12 @@
     preview.png        optional - the picture shown in the Mods window and on the Workshop
     CSV/               data tables
     Missions/          mission .json files and Python .py scripts
+      Locations/       new mission locations, .json
     Quests/            quest .json files
     Maps/              .goamap map files
     Objects/           replacement models, textures and icons
     Biomes/            replacement ground textures, one PNG per biome slot
+    Airplanes/         new airplane skins
 </code></pre></div>
 <table>
 <thead>
@@ -2387,6 +2479,11 @@
 <td><a href="../../missions/">Missionen</a>, <a href="../../scripting/">Scripting</a></td>
 </tr>
 <tr>
+<td><code>Missions/Locations/</code></td>
+<td>neue Missionsorte (<code>.json</code>)</td>
+<td><a href="../../missions/locations/#adding-locations-with-a-mod">Orte mit einer Mod hinzufügen</a></td>
+</tr>
+<tr>
 <td><code>Quests/</code></td>
 <td>Quests (<code>.json</code>)</td>
 <td><a href="../../quests/">Quests</a></td>
@@ -2406,19 +2503,20 @@
 <td>Ersatztexturen für den Boden, ein PNG pro Biom-Slot</td>
 <td><a href="../../content/biomes/">Biome</a></td>
 </tr>
+<tr>
+<td><code>Airplanes/</code></td>
+<td>neue Flugzeug-Skins: eine <code>config.json</code> und die PNGs der Skins</td>
+<td><a href="../../content/airplanes/">Flugzeug-Skins</a></td>
+</tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Grafik-Mods sind noch in Arbeit</p>
-<p>Ersatzgrafik (<code>Objects/</code>, <code>Biomes/</code>) ist noch in Arbeit und wird von der aktuellen Alpha noch nicht unterstützt.</p>
-</div>
 <p>Drei Regeln entscheiden, ob das Spiel den Ordner überhaupt bemerkt:</p>
 <ul>
 <li>Ein Unterordner zählt nur, wenn etwas darin liegt. Ein leerer <code>CSV/</code>-Ordner ist dasselbe wie gar kein <code>CSV/</code>-Ordner.</li>
 <li>Ein Mod-Ordner ohne einen der obigen Unterordner (oder nur mit leeren) wird ohne Meldung ignoriert.</li>
 <li>Symbolische Links und Junctions (Verknüpfungen, die auf einen anderen Ordner zeigen) werden nie verfolgt, weder als Mod-Ordner noch als einer seiner Unterordner. Das Spiel überspringt sie mit einer Warnung im Log.</li>
 </ul>
-<p>Bei <code>CSV</code>, <code>Missions</code>, <code>Quests</code> und <code>Maps</code> werden nur Dateien gelesen, die direkt im Unterordner liegen; alles, was tiefer liegt, wird ignoriert. <code>Objects</code> und <code>Biomes</code> enthalten Ersatzgrafik und folgen eigenen Regeln: In <code>Objects/</code> ist der <em>Dateiname</em> eines Modells die Id des Objekts, das es ersetzt (<code>Chair.fbx</code> ersetzt den Stuhl), und die Namen von Unterordnern spielen keine Rolle. <code>Biomes/</code> enthält ein PNG pro Biom-Slot, benannt nach der Nummer des Slots (<code>8.png</code>), direkt im Ordner.</p>
+<p>Bei <code>CSV</code>, <code>Missions</code>, <code>Quests</code> und <code>Maps</code> werden nur Dateien gelesen, die direkt im Unterordner liegen; alles, was tiefer liegt, wird ignoriert, mit einer Ausnahme: <code>Missions/Locations/</code> wird ebenfalls gelesen. <code>Objects</code> und <code>Biomes</code> enthalten Ersatzgrafik und folgen eigenen Regeln: In <code>Objects/</code> ist der <em>Dateiname</em> eines Modells die Id des Objekts, das es ersetzt (<code>Chair.fbx</code> ersetzt den Stuhl), und die Namen von Unterordnern spielen keine Rolle. <code>Biomes/</code> enthält ein PNG pro Biom-Slot, benannt nach der Nummer des Slots (<code>8.png</code>), direkt im Ordner. <code>Airplanes/</code> enthält neue Flugzeug-Skins, beschrieben unter <a href="../../content/airplanes/">Flugzeug-Skins</a>.</p>
 <h3 id="configjson"><code>config.json</code><a class="headerlink" href="#configjson" title="Permanent link">&para;</a></h3>
 <p>Optional. Ohne sie wird der Ordnername als Name der Mod angezeigt, die Id wird aus dem Ordnernamen gebildet, und die Ladereihenfolge ist 100.</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -2461,7 +2559,7 @@
 <li>Eine <code>config.json</code>, die das Spiel nicht lesen kann (ein fehlendes Komma, eine überzählige Klammer), wird im Log gemeldet und so behandelt, als gäbe es sie nicht.</li>
 </ul>
 <h3 id="previewpng"><code>preview.png</code><a class="headerlink" href="#previewpng" title="Permanent link">&para;</a></h3>
-<p>Optional. Ein PNG im Hauptverzeichnis des Mod-Ordners, höchstens 1 MB groß. Das Mods-Fenster zeigt es neben dem Namen der Mod an, und es wird zum Bild des Items, wenn du die Mod in den Workshop hochlädst. Ohne Vorschaubild zeigt das Mods-Fenster ein Platzhalterbild.</p>
+<p>Optional. Ein PNG im Hauptverzeichnis des Mod-Ordners, höchstens 1 MB groß. Das Mods-Fenster zeigt es neben dem Namen der Mod an, und es wird zum Bild des Items, wenn du die Mod in den Workshop hochlädst. Ohne Vorschaubild zeigt das Mods-Fenster ein Platzhalterbild, und das Workshop-Item hat kein Bild, bis du auf seiner Steam-Seite eins hinzufügst.</p>
 <h2 id="the-mods-window">Das Mods-Fenster<a class="headerlink" href="#the-mods-window" title="Permanent link">&para;</a></h2>
 <p><strong>Hauptmenü → Mods</strong> listet jede Mod auf, die das Spiel gefunden hat - Workshop-Abos und deine eigenen Ordner - mit Vorschaubild, einer Markierung, ob sie aus dem Workshop oder aus deinem <code>Mods</code>-Ordner stammt, und einem Abzeichen pro Art von Inhalt, den sie mitbringt.</p>
 <table>
@@ -2514,7 +2612,7 @@
 <ol>
 <li>Speichere dein Spiel.</li>
 <li><strong>Einstellungen (Options) → Quit to main menu.</strong></li>
-<li>Öffne <strong>Mods</strong> und drück auf <strong>Refresh</strong>, wenn du einen Mod-Ordner hinzugefügt oder umbenannt hast.</li>
+<li>Öffne <strong>Mods</strong> und drück auf <strong>Refresh</strong>, wenn du einen Mod-Ordner hinzugefügt oder umbenannt oder seine <code>config.json</code> geändert hast.</li>
 <li>Lade den Spielstand.</li>
 </ol>
 <table>
@@ -2542,11 +2640,19 @@
 <td><strong>Refresh</strong> im Mods-Fenster, sobald Steam den Download abgeschlossen hat</td>
 </tr>
 <tr>
+<td>Ein Flugzeug-Skin-PNG oder die <code>Airplanes/config.json</code></td>
+<td>Ein Level laden - Skins werden bei jedem Laden eines Levels gelesen</td>
+</tr>
+<tr>
 <td>Ein Modell, eine Textur, ein Vorschausymbol oder ein Biom-PNG</td>
 <td>Das Spiel neu starten - Grafik wird einmal beim Spielstart importiert, und weder <strong>Refresh</strong> noch der Schalter <strong>Enabled</strong> importieren sie neu</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Im Moment braucht jede Änderung an der 3D-Grafik in <code>Objects/</code> und <code>Biomes/</code> einen Neustart des Spiels. Ein künftiges Update bringt eine Option, Mods im Hauptmenü neu zu laden; dann ist der Neustart nicht mehr nötig.</p>
+</div>
 <p><a href="../testing/">Testen und neu laden</a> erklärt mehr zu diesem Ablauf und zu den Werkzeugen, die beim Testen helfen.</p>
 <p>Das Spiel schreibt in seine Log-Datei <code>Player.log</code>, was es angenommen und was es abgelehnt hat:</p>
 <table>

@@ -1752,6 +1752,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1868,6 +1874,90 @@
     
   
     Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
   
 
     
@@ -2418,7 +2508,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Deine Mod neu laden ist kein Konsolenbefehl</p>
-<p>Nach einer Änderung an einer Mod: <strong>Einstellungen → Verlassen zum Hauptmenü</strong>, dann deinen Spielstand laden (wenn du einen neuen Mod-Ordner angelegt hast, drück vorher im Fenster <strong>Mods</strong> auf <strong>Refresh</strong>). Auch Quests werden dabei neu eingelesen, nur Modelle und Texturen brauchen einen kompletten Neustart - und Grafik-Mods sind noch in Arbeit und werden von der aktuellen Alpha noch nicht unterstützt. Siehe <a href="../testing/">Testen und neu laden</a>.</p>
+<p>Nach einer Änderung an einer Mod: <strong>Einstellungen → Verlassen zum Hauptmenü</strong>, dann deinen Spielstand laden (wenn du einen neuen Mod-Ordner angelegt hast, drück vorher im Fenster <strong>Mods</strong> auf <strong>Refresh</strong>). Auch Quests werden dabei neu eingelesen, nur Grafik (Modelle, Texturen, Symbole und Biom-PNGs) braucht einen kompletten Neustart. Siehe <a href="../testing/">Testen und neu laden</a>.</p>
 </div>
 <h2 id="the-commands">Die Befehle<a class="headerlink" href="#the-commands" title="Permanent link">&para;</a></h2>
 <p>Argumente in <code>[eckigen Klammern]</code> sind Platzhalter: Ersetze sie, ohne die Klammern. Mit ★ markierte Befehle wirst du beim Testen von Mods am häufigsten brauchen.</p>
@@ -2908,14 +2998,12 @@
 <td>Einstellung für die HQ-Anforderungen.</td>
 <td><code>hq_strikes_parameter 0</code></td>
 </tr>
-<tr>
-<td></td>
-<td><code>set_random_event_chance [0-1]</code></td>
-<td>Grundwahrscheinlichkeit für Zufallsereignisse.</td>
-<td><code>set_random_event_chance 0.5</code></td>
-</tr>
 </tbody>
 </table>
+<!-- OUTDATED (docs audit 2026-10-01): set_random_event_chance exists only in development builds, see DOCS_AUDIT.md
+| | `set_random_event_chance [0-1]` | Grundwahrscheinlichkeit für Zufallsereignisse. | `set_random_event_chance 0.5` |
+-->
+
 <h3 id="debug-views-and-technical">Debug-Ansichten und Technisches<a class="headerlink" href="#debug-views-and-technical" title="Permanent link">&para;</a></h3>
 <p>Nutze diese nur, wenn du weißt, warum. <code>enable_system</code> und <code>enable_input_action</code> können einen Spielstand in einem seltsamen Zustand hinterlassen.</p>
 <table>

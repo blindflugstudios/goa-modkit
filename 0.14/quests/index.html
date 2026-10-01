@@ -1578,6 +1578,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1694,6 +1700,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2262,6 +2352,17 @@
     <span class="md-ellipsis">
       
         Example quests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shipped-quests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shipped quests
       
     </span>
   </a>
@@ -3283,6 +3384,7 @@
 <span class="w">    </span><span class="p">],</span>
 <span class="w">    </span><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_first_steps"</span>
 <span class="w">        </span><span class="p">}</span>
@@ -3336,6 +3438,7 @@
 <span class="w">    </span><span class="p">],</span>
 <span class="w">    </span><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
 <span class="w">        </span><span class="p">}</span>
@@ -3347,7 +3450,34 @@
 <span class="w">    </span><span class="nt">"_completionCheats"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>The game's own quest files (<code>quest0.json</code>, <code>quest1.json</code>, the <code>*_skin_unlock</code> and <code>tutorial_*</code> quests) are worth reading too; find them in the installation folder as described in <a href="#changing-a-shipped-quest">Changing a shipped quest</a>.</p>
+<h2 id="shipped-quests">Shipped quests<a class="headerlink" href="#shipped-quests" title="Permanent link">&para;</a></h2>
+<p>The game's own quest files are worth reading too: they show what the real thing looks like. Find them in the installation folder as described in <a href="#changing-a-shipped-quest">Changing a shipped quest</a>. Remember that a mod file with the same name <strong>replaces</strong> the shipped quest, so rename your copy before you change it.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>quest0.json</code></td>
+<td>The first quest of the main line: requirement type 3, so it only starts on maps that list it in <code>StartingQuestIds</code>. Its steps are the counted-state types - an airstrip of tier 1, a parking spot, a Gladiator, beds.</td>
+</tr>
+<tr>
+<td><code>quest1.json</code></td>
+<td>The second quest, chained on <code>quest0</code> with requirement type 1. It mixes event steps (<code>harvesting_finished</code>, <code>project_finished</code>) with a workbench count, and has an optional step.</td>
+</tr>
+<tr>
+<td><code>fighter_day_skin_unlock.json</code></td>
+<td>An aircraft skin achievement: <code>_questType: 1</code>, hidden from the quest panel, and the only place where a role name (<code>fighter</code>) is allowed where an aircraft id normally goes - see <a href="#quest-types">Quest types</a>.</td>
+</tr>
+<tr>
+<td><code>tutorial_building.json</code></td>
+<td>A tutorial quest: <code>_questType: 2</code> with <code>_highlightedUIElements</code> that point the player at the interface while the steps are open.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="testing-a-quest">Testing a quest<a class="headerlink" href="#testing-a-quest" title="Permanent link">&para;</a></h2>
 <p>Load a level again after every edit (a new folder needs <strong>Refresh</strong> in the Mods window first), then use the <a href="../basics/cheats/">cheat console</a>:</p>
 <table>

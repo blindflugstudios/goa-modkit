@@ -2034,6 +2034,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2150,6 +2156,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -3048,51 +3138,46 @@
 </tr>
 <tr>
 <td>2</td>
-<td>Historic missions with a date</td>
-<td>At every day change, each historic mission with a <code>_historicDay</code> whose gates pass is created, outside the weekly slots.</td>
+<td>Hourly historic check</td>
+<td>Every in-game hour, each historic mission whose gates pass is created: one with a <code>_historicDay</code> on that day or, if its other gates only pass later, as soon as they do; one without a date right away. It never waits for the weekly schedule and never takes up a slot. A historic mission that failed or was cancelled is back at the next hourly check, even while its result report is still unread.</td>
 </tr>
 <tr>
 <td>3</td>
-<td>A slot comes due</td>
-<td>Every historic mission without a date whose gates pass appears alongside this weekly mission and does not take up the slot. The slot itself is filled by the random draw.</td>
+<td>Random draw</td>
+<td>When one of the week's slots comes due, it is filled by the random draw. All non-historic missions whose gates pass form a pool. One is drawn and removed from the pool. When the pool is empty it refills.</td>
 </tr>
 <tr>
 <td>4</td>
-<td>Random draw</td>
-<td>All non-historic missions whose gates pass form a pool. One is drawn and removed from the pool. When the pool is empty it refills.</td>
-</tr>
-<tr>
-<td>5</td>
 <td>Gates</td>
 <td>A mission is eligible when all <code>_missionRequirements</code> pass, the current map shares one of its <code>_tags</code>, and (for historic missions) it has not been won yet and is not already on the map.</td>
 </tr>
 <tr>
-<td>6</td>
+<td>5</td>
 <td>Creation</td>
 <td>The game picks a location (one draw, plus up to five re-draws to avoid two missions on the same spot), works out distance and fuel from it, and sets up the mission from JSON or script. Then it calls <a href="#initialize_mission"><code>initialize_mission</code></a>.</td>
 </tr>
 <tr>
-<td>7</td>
+<td>6</td>
 <td>Waiting</td>
-<td>The mission sits on the war map until the player sends planes or its start window runs out. Historic missions never run out.</td>
+<td>The mission sits on the war map until the player sends planes or its start window runs out. Historic missions never run out, and neither does a mission whose time-to-start maximum is <code>0</code>.</td>
 </tr>
 <tr>
-<td>8</td>
+<td>7</td>
 <td>Flight</td>
 <td>The clock starts once <strong>all</strong> assigned planes are airborne. <a href="#send_mission_event"><code>send_mission_event</code></a> fires each time the flight passes another step (by default at one third, two thirds and the end).</td>
 </tr>
 <tr>
-<td>9</td>
+<td>8</td>
 <td>Outcome</td>
 <td>With data: the rolls pick one of the four outcomes, its effects are applied, then <a href="#set_mission_impact"><code>set_mission_impact</code></a> runs. Without data: <a href="#get_mission_result"><code>get_mission_result</code></a> decides, then <code>set_mission_impact</code> runs.</td>
 </tr>
 <tr>
-<td>10</td>
+<td>9</td>
 <td>Return</td>
 <td>Planes land, crew records update, events fire. Then <a href="#send_mission_result_event"><code>send_mission_result_event</code></a>, or <a href="#send_mission_cancelled_event"><code>send_mission_cancelled_event</code></a> if the player called the mission off or it expired.</td>
 </tr>
 <tr>
-<td>11</td>
+<td>10</td>
 <td>Result window</td>
 <td>When the player opens it, <a href="#get_mission_result_text"><code>get_mission_result_text</code></a> supplies the text.</td>
 </tr>
@@ -3159,6 +3244,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">send_mission_event</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">):</span>
     <span class="o">...</span>
 </code></pre></div>
+<p><strong>Every mission script needs <code>from Blindflug.FlightMission import MissionEvent</code> at the top.</strong> Scripts get no automatic imports, so without that line <code>MissionEvent</code> does not exist in your script.</p>
 <p>The function name is up to you; the decorator is what counts. Every handler receives exactly one argument, <code>mission_entity_id</code>: the number of the mission this call is about. Pass it on to every <code>missions_api</code> call. The same script can run for two flights of the same mission at once, so never store per-flight state in a module-level variable.</p>
 <table>
 <thead>
@@ -3363,6 +3449,7 @@
 <p>Script-only missions. Returns the text key of the description in the mission window. Default when missing: empty.</p>
 <h3 id="get_time_to_start">get_time_to_start<a class="headerlink" href="#get_time_to_start" title="Permanent link">&para;</a></h3>
 <p>Script-only missions. Returns how many in-game minutes the mission waits on the war map before it expires. Default when missing: 60.</p>
+<p>Returning <code>0</code> or a negative number cancels the mission at the next in-game minute. Unlike <code>_timeToStartRange</code> in a JSON file, there is no "never expires" value here.</p>
 <h3 id="get_completion_time">get_completion_time<a class="headerlink" href="#get_completion_time" title="Permanent link">&para;</a></h3>
 <p>Script-only missions. Returns the flight time in in-game minutes. Default when missing: 120.</p>
 <h3 id="get_threat_level">get_threat_level<a class="headerlink" href="#get_threat_level" title="Permanent link">&para;</a></h3>
@@ -3407,12 +3494,12 @@
 <tr>
 <td><code>_timeToStartRange</code></td>
 <td><code>{"x": min, "y": max}</code></td>
-<td>Minutes the mission waits on the war map before it expires, rolled between min and max. Ignored for historic missions.</td>
+<td>Game minutes the mission waits on the war map before it expires, rolled between min and max. A maximum of <code>0</code> means it never expires. Ignored for historic missions, which never expire.</td>
 </tr>
 <tr>
 <td><code>_timeToCompleteRange</code></td>
 <td><code>{"x": min, "y": max}</code></td>
-<td>Flight time in minutes, rolled between min and max.</td>
+<td>Flight time in game minutes, rolled between min and max.</td>
 </tr>
 <tr>
 <td><code>_missionRequirements</code></td>
@@ -3467,7 +3554,7 @@
 <tr>
 <td><code>_historicDay</code></td>
 <td>date</td>
-<td>The exact day a historic mission appears. A year below 1900 counts as "no date".</td>
+<td>The earliest day a historic mission appears: on that day, or later if its other gates only pass later. A year below 1900 counts as "no date".</td>
 </tr>
 <tr>
 <td><code>_rawMissionName</code> ... <code>_rawGwFailureTransmission</code></td>
@@ -3742,7 +3829,7 @@
 <h3 id="map-tags">Map tags<a class="headerlink" href="#map-tags" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">"_tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"campaign_debden"</span><span class="p">]</span>
 </code></pre></div>
-<p>A map lists the tags it supports in its <code>Metadata.json</code>, and a mission lists the tags it is written for. The mission can appear on a map only when the two lists share at least one tag (upper and lower case do not matter). An empty or missing list on either side counts as <code>["default"]</code>, and every built-in map supports <code>default</code>, so an untagged mission appears everywhere.</p>
+<p>A map lists the tags it supports in its <code>Metadata.json</code>, and a mission lists the tags it is written for. The mission can appear on a map only when the two lists share at least one tag (upper and lower case do not matter). An empty or missing list on either side counts as <code>["default"]</code>, and every built-in map supports <code>default</code>, so an untagged mission appears everywhere. Each built-in map also lists its own name (<code>debden</code>, <code>duxford</code>, <code>lichfield</code>, <code>perranporth</code>), so a mission tagged only <code>duxford</code> appears only on Duxford. See <a href="../../content/maps/">Maps</a>.</p>
 <p>A mission tagged only <code>campaign_debden</code> appears only on maps that list that tag. A mission that should appear on your campaign map and everywhere else lists both: <code>["campaign_debden", "default"]</code>.</p>
 <p>Tags are checked by the weekly draw, by the historic spawn and by <code>missions_api.CreateMission</code>. The <code>create_mission</code> cheat ignores them. Quests have no tags; a map chooses its quests differently (see <a href="../../quests/">Quests</a>).</p>
 <h2 id="known-pitfalls">Known pitfalls<a class="headerlink" href="#known-pitfalls" title="Permanent link">&para;</a></h2>

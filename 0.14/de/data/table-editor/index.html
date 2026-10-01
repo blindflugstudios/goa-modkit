@@ -1769,6 +1769,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1885,6 +1891,90 @@
     
   
     Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
   
 
     
@@ -2458,7 +2548,7 @@
 <li>Die Zeile muss schon existieren. Sonst: <code>'...' is not a built-in row; use Add to create one</code>.</li>
 <li>Jeder Schlüssel in <code>Cells</code> muss eine Spalte der Tabelle sein, exakt geschrieben. Sonst listet die Meldung die Spalten der Tabelle auf.</li>
 <li>Geprüft wird die ganze resultierende Zeile, nicht nur die Zellen, die du genannt hast. Eine Zeile, die vorher in Ordnung war, bleibt es, solange deine Werte keine Regel brechen.</li>
-<li>Einige eingebaute Zeilen erstrecken sich in der Tabelle des Spiels über mehrere Zeilen. Sie werden abgelehnt, egal ob du sie Zelle für Zelle änderst oder als ganze Zeile mitlieferst. Nur in <code>ResourceCost</code> hilft eine <code>&lt;Table&gt;.csv</code> mit der ganzen Zeile (siehe <a href="../csv/#rows-that-take-up-several-lines">Zeilen, die mehrere Zeilen belegen</a>); die mehrzeiligen Zeilen von <code>MoraleInfluenceValues</code> und <code>TaskValues</code> lassen sich überhaupt nicht ändern.</li>
+<li>Einige eingebaute Zeilen erstrecken sich in der Tabelle des Spiels über mehrere Zeilen. Sie werden abgelehnt, egal ob du sie Zelle für Zelle änderst oder als ganze Zeile mitlieferst. Nur in <code>ResourceCost</code> hilft eine <code>&lt;Table&gt;.csv</code> mit der ganzen Zeile (siehe <a href="../csv/#rows-that-take-up-several-lines">Zeilen, die mehrere Zeilen belegen</a>); die mehrzeiligen Zeilen von <code>MoraleInfluenceValues</code>, <code>FlightMissionData</code> (<code>AirplaneIntegrity</code>, <code>AirplaneHealth</code>, <code>Mood</code>, <code>Energy</code>, <code>Confidence</code>) und <code>TaskValues</code> lassen sich überhaupt nicht ändern.</li>
 </ul>
 <h3 id="add-create-a-new-row"><code>Add</code>: eine neue Zeile anlegen<a class="headerlink" href="#add-create-a-new-row" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Add"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"storage_box"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Cells"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Planks"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">"Metal"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
@@ -2466,7 +2556,7 @@
 <ul>
 <li>Nur in den Tabellen, die neue Zeilen erlauben (siehe <a href="../csv/">CSV-Tabellen</a>). Anderswo: <code>new rows are not supported in '...'; only built-in rows can be changed</code>.</li>
 <li>Die Id darf noch nicht existieren. Sonst: <code>'...' already exists; use Replace to change it</code>.</li>
-<li>Spalten, die du weglässt, bekommen den Standardwert der Tabelle oder bleiben leer; die Zeilenprüfung entscheidet dann, ob das in Ordnung ist.</li>
+<li>Spalten, die du weglässt, bleiben leer, und eine Zelle darf nur in einer Spalte leer sein, in der das Spiel schon selbst irgendeine Zeile leer lässt; sonst wird der Befehl abgelehnt. Zwei Spalten werden stattdessen für dich ausgefüllt: Jede <code>ResourceCost</code>-Zelle, die du weglässt, wird zu <code>0</code>, ein <code>Add</code> dort braucht also nur die Ressourcen, die wirklich etwas kosten, und <code>Associated Task</code> in <code>BuildingComponents</code> wird zu <code>None</code>. Siehe <a href="../csv/#empty-cells">Leere Zellen</a>.</li>
 </ul>
 <h3 id="remove-clear-cells-or-delete-a-row"><code>Remove</code>: Zellen leeren oder eine Zeile löschen<a class="headerlink" href="#remove-clear-cells-or-delete-a-row" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Remove"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chair"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"Tarp"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span>

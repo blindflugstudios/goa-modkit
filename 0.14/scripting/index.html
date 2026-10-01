@@ -1578,6 +1578,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1694,6 +1700,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2532,7 +2622,7 @@
 </code></pre></div>
 <ul>
 <li><code>event_name</code> - the name of the event to handle. This can be any text that matches an existing event, but the easier way is <code>from Blindflug.MinorEvents import MinorEvent</code> and the constants defined there, such as <code>MinorEvent.DAY_PHASE_CHANGE</code>.</li>
-<li><code>chance</code> - the chance, from <code>0.0</code> to <code>1.0</code>, that the handler is called when the event happens. <code>0.5</code> gives it a 50 % chance. The default is <code>1.0</code> (always).</li>
+<li><code>chance</code> - the chance, from <code>0.0</code> to <code>1.0</code>, that the handler is called when the event happens. <code>0.5</code> gives it a 50 % chance. The default is <code>1.0</code> (always). The game adds a global base chance to every handler's value; in the normal game it is <code>0</code>, so your value is what counts (only a cheat in development builds changes it).</li>
 <li><code>max_occurrences</code> - the maximum number of times the handler can run in one save game. The count is stored in the save, keyed by the handler's <code>&lt;module&gt;.&lt;function&gt;</code> name, so renaming the file or the function resets it. A negative value means "no limit" and is the default (<code>-1</code>); <code>0</code> means the handler never runs. The chance roll and the limit check both happen before the handler is called.</li>
 </ul>
 <p>The name of the function can be any valid Python name. Together with the file name, it identifies the handler when the game counts how often it ran.</p>

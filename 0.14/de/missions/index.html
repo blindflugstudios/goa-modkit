@@ -1578,6 +1578,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1694,6 +1700,90 @@
     
   
     Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
   
 
     
@@ -2277,7 +2367,12 @@
 </table>
 <p>Dieser dritte Ordner gewinnt immer. Das macht ihn zu einem guten Ort, um Änderungen auszuprobieren - und zu einem Ort, den du leeren solltest, wenn eine deiner Missionen die Kopie in deinem Mod-Ordner scheinbar ignoriert.</p>
 <h2 id="the-mission-editor">Der Mission Editor<a class="headerlink" href="#the-mission-editor" title="Permanent link">&para;</a></h2>
-<p>Starte das Spiel und wähle im Hauptmenü <strong>Mission Editor</strong>. Das öffnet die Missionsliste: jede mitgelieferte Mission, jede Mission aus einem aktivierten Mod und jede Mission, die du selbst gespeichert hast. <strong>Create</strong> beginnt eine neue Mission mit der Id <code>new_mission</code> - benenne sie vor dem Speichern im Feld <strong>Mission Id</strong> um. <strong>Edit</strong> öffnet jede Mission aus der Liste, auch mitgelieferte. Eine mitgelieferte Mission lässt sich nicht unter ihrer eigenen Id speichern; gib ihr also eine neue Id, dann wird sie als deine eigene Kopie gespeichert. Deine eigenen gespeicherten Missionen haben einen Löschen-Knopf, und <strong>Refresh</strong> liest die Liste neu ein.</p>
+<p>Starte das Spiel und wähle im Hauptmenü <strong>Mission Editor</strong>. Das öffnet die Missionsliste: jede mitgelieferte Mission, jede Mission aus einem aktivierten Mod und jede Mission, die du selbst gespeichert hast. <strong>Create</strong> beginnt eine neue Mission mit der Id <code>new_mission</code> - benenne sie vor dem Speichern im Feld <strong>Mission Id</strong> um. <strong>Edit</strong> öffnet jede Mission aus der Liste, auch mitgelieferte. Eine mitgelieferte Mission lässt sich nicht unter ihrer eigenen Id speichern; gib ihr also eine neue Id, dann wird sie als deine eigene Kopie gespeichert. Deine eigenen gespeicherten Missionen haben einen Löschen-Knopf, <strong>Refresh</strong> liest die Liste neu ein, und der Ordner-Knopf öffnet deinen Missions-Ordner im Dateibrowser.</p>
+<div class="admonition tip">
+<p class="admonition-title">Von den Missionen des Spiels lernen</p>
+<p>Die mitgelieferten Missionen sind gute Beispiele, und der Mission Editor listet sie alle auf. <code>calm_supply_drop</code> ist eine komplette Mission in einer einzigen Datei, ganz ohne eigenes Skript. Die vier <em>Blitz</em>-Missionen (<code>german_blitz_1_long_nights</code>, <code>german_blitz_2_aspirin</code>, <code>german_blitz_3_morning_after</code>, <code>german_blitz_4_answering_in_kind</code>) bilden eine historische Kette, in der jede auf den Erfolg der vorherigen wartet. Und <code>default_mission.py</code>, das Skript, mit dem jede Mission ohne eigene <code>.py</code> läuft, liegt im Ordner <code>Scripts/Mission</code> des Spiels (siehe <a href="../scripting/#where-scripts-live">Wo Skripte liegen</a>). Öffne eine mitgelieferte Mission mit <strong>Edit</strong> und speichere sie unter einer neuen Id, dann hast du deine eigene Kopie.</p>
+<p>Eine Kopie unter neuer Id zeigt zuerst <strong>keinen Text</strong>. Eine mitgelieferte Mission bewahrt ihre Texte im Spiel auf, abgelegt unter ihrer eigenen Id (<code>missions/&lt;id&gt;/mission_name</code> und die anderen Textplätze), und deine Kopie hat eine andere Id. Tipp die Texte ein (in der Datei sind das die <code>_raw...</code>-Felder) oder registriere sie mit <code>localization.SetTerm</code> in einem Skript - siehe <a href="reference/">Referenz</a>. Behältst du stattdessen die mitgelieferte Id, ersetzt du die mitgelieferte Mission samt Text.</p>
+</div>
 <!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 !!! note
     Der Editor öffnet immer eine einzige Arbeitsmission namens `new_mission`. Hast du eine unter dieser Id gespeichert, lädt er sie, sonst beginnt er eine neue. Benenne sie vor dem Speichern im Feld **Mission Id** um, dann beginnt der nächste Besuch mit einer frischen `new_mission`. So kannst du eine Mission nach der anderen schreiben.
@@ -2289,20 +2384,25 @@
 <p><strong>Identität.</strong> Die Missions-Id und die Tags, die entscheiden, auf welchen Karten die Mission erscheinen kann. Eine Id darf nur Kleinbuchstaben, Ziffern und Unterstriche enthalten.</p>
 <p><strong>Tags.</strong> Tags sind frei wählbare Etiketten, keine Kartennamen. Eine Karte listet die Tags, die sie unterstützt, in ihrer <code>Metadata.json</code> (das Feld <code>_tags</code> in der <code>.goamap</code>-Datei). Eine Mission listet die Tags, für die sie geschrieben ist (das Feld <code>_tags</code> im Missions-JSON). Die Mission kann nur auf dieser Karte auftauchen, wenn beide Listen mindestens einen Tag gemeinsam haben. Mehrere Tags an einer Mission bedeuten "einer davon" - ein Treffer genügt.</p>
 <p>Tippe sie als eine kommagetrennte Liste ohne Leerzeichen ins Tag-Feld der Mission: <code>naval,atlantic</code>. Für Tags gelten dieselben Regeln wie für Ids - Kleinbuchstaben, Ziffern und Unterstriche. Das Feld setzt das schon beim Tippen durch: Großbuchstaben werden zu Kleinbuchstaben, alles andere fällt weg. Der Abgleich mit einer Karte ignoriert Groß- und Kleinschreibung ohnehin, eine Karte mit dem Tag <code>Campaign_Debden</code> zählt also trotzdem.</p>
-<p>Eine leere Liste ist der Normalfall. Eine leere Liste auf einer der beiden Seiten zählt als der einzelne Tag <code>default</code>, und jede mitgelieferte Karte listet <code>default</code>. Eine Mission ohne Tags ist also auf allen verfügbar. Gibst du einer Mission den Tag <code>campaign_debden</code>, erscheint sie nur auf Karten, die ebenfalls <code>campaign_debden</code> listen - und sonst nirgends, nicht einmal auf den mitgelieferten Karten, es sei denn, du fügst <code>default</code> hinzu. Eine Karte für eine Kampagne listet meist nur ihren eigenen Tag, genau damit die normalen Missionen draußen bleiben.</p>
+<p>Eine leere Liste ist der Normalfall. Eine leere Liste auf einer der beiden Seiten zählt als der einzelne Tag <code>default</code>, und jede mitgelieferte Karte listet <code>default</code>. Eine Mission ohne Tags ist also auf allen verfügbar. Jede mitgelieferte Karte listet außerdem ihren eigenen Namen (<code>debden</code>, <code>duxford</code>, <code>lichfield</code>, <code>perranporth</code>); eine Mission, die nur den Tag <code>debden</code> trägt, erscheint also nur dort - siehe <a href="../content/maps/">Karten</a>. Gibst du einer Mission den Tag <code>campaign_debden</code>, erscheint sie nur auf Karten, die ebenfalls <code>campaign_debden</code> listen - und sonst nirgends, nicht einmal auf den mitgelieferten Karten, es sei denn, du fügst <code>default</code> hinzu. Eine Karte für eine Kampagne listet meist nur ihren eigenen Tag, genau damit die normalen Missionen draußen bleiben.</p>
 <div class="admonition note">
 <p class="admonition-title">Quests haben keine Tags</p>
 <p>Tags gibt es nur für Missionen. Eine Quest hat kein Tag-Feld. Eine Karte wählt ihre Quests über die Liste <code>StartingQuestIds</code> in ihrer <code>Metadata.json</code>; steht dort nichts, startet sie die Standard-Questreihe des Spiels (<code>quest0</code>). Siehe <a href="../quests/#quests-and-maps">Quests und Karten</a>.</p>
 </div>
 <p><strong>Validate</strong> warnt dich, wenn eine Mission einen Tag trägt, den keine bekannte Karte angibt. Eine solche Mission kann nirgends erscheinen - das willst du nur, wenn ein Skript sie direkt vergibt.</p>
-<p><strong>Zeit und Größe.</strong> Wie viele Flugzeuge der Spieler schicken darf, wie lange die Mission auf der Karte wartet, bevor sie verfällt, und wie lange der Flug selbst dauert. Beide Zeiten sind Bereiche - das Spiel würfelt einen Wert zwischen den beiden Zahlen.</p>
+<p><strong>Zeit und Größe.</strong> Wie viele Flugzeuge der Spieler schicken darf, wie lange die Mission auf der Karte wartet, bevor sie verfällt, und wie lange der Flug selbst dauert. Beide Zeiten sind Bereiche in Spielminuten - das Spiel würfelt einen Wert zwischen den beiden Zahlen. Ein Maximum von <code>0</code> bei der Zeit bis zum Start bedeutet, dass die Mission nie verfällt, und eine historische Mission (siehe unten) verfällt nie, egal was du einträgst.</p>
 <p><strong>Schwierigkeit.</strong> Die Chance, dass die Mission nach Plan läuft, und eine Schwierigkeitsstufe von 1 bis 3.</p>
-<p><strong>Text.</strong> Missionsname und Beschreibung, der Bedrohungsbericht der Aufklärung mit der Feindstärke, die er dem Spieler zeigt (reine Atmosphäre - sie beeinflusst das Ergebnis nicht), und die Funksprüche für jedes Ende. Tipp sie einfach direkt ein. Eine im Editor geschriebene Mission braucht kein Skript, denn jede Mission ohne eigenes Skript läuft mit dem gemeinsamen Standard-Missionsskript des Spiels.</p>
+<p><strong>Text.</strong> Missionsname und Beschreibung, der Bedrohungsbericht der Aufklärung mit der Feindstärke, die er dem Spieler zeigt (reine Atmosphäre - sie beeinflusst das Ergebnis nicht), zwei Funksprüche während des Flugs (einer für einen Flug nach Plan, einer für einen Flug, der schiefgelaufen ist) und ein abschließender Funkspruch für jedes der vier Enden. Tipp sie einfach direkt ein. Eine im Editor geschriebene Mission braucht kein Skript, denn jede Mission ohne eigenes Skript läuft mit dem gemeinsamen Standard-Missionsskript des Spiels.</p>
 <p><strong>Orte.</strong> Wo auf der Kriegskarte die Mission erscheinen kann. Wähle aus der Liste und füge so viele hinzu, wie du willst; das Spiel sucht einen aus, wenn die Mission erstellt wird. Die vollständige Liste mit Koordinaten steht unter <a href="locations/">Orte</a>.</p>
 <p><strong>Voraussetzungen.</strong> Bedingungen, die erfüllt sein müssen, bevor die Mission überhaupt auftaucht - eine Startbahnstufe, ein Datumsfenster oder eine andere abgeschlossene Mission.</p>
 <p><strong>Werte.</strong> Die Fähigkeiten, gegen die die Mission würfelt. Du brauchst genau zwei: Die erste zählt, wenn der Flug nach Plan läuft, die zweite, wenn nicht.</p>
-<p><strong>Ergebnisse.</strong> Genau vier Enden und was jedes davon bringt oder kostet - Moral, Siegpunkte, Schaden. Welches Ende als Erfolg zählt, ist durch seine Position festgelegt und lässt sich nicht ändern: Platz 1 (schiefgelaufen, Fähigkeitswurf gescheitert) ist ein Fehlschlag, Platz 2 (schiefgelaufen, Fähigkeitswurf bestanden) ein Erfolg, Platz 3 (nach Plan, Fähigkeitswurf gescheitert) ein Fehlschlag, Platz 4 (nach Plan, Fähigkeitswurf bestanden) ein Erfolg.</p>
-<p><strong>Is Historic.</strong> Setz hier einen Haken, damit die Mission Teil der Geschichte wird. Mit Datum erscheint sie genau an diesem Tag; ohne Datum erscheint sie zusammen mit der nächsten Wochenmission und belegt keinen der Plätze dieser Woche. Sobald sie erfolgreich war, verschwindet sie für immer.</p>
+<p><strong>Ergebnisse.</strong> Genau vier Enden und was jedes davon bringt oder kostet - Moral, Siegpunkte, Schaden. Der Editor zeigt sie von oben nach unten vom besten bis zum schlechtesten Ende, nicht in der Reihenfolge der Plätze unten. Welches Ende als Erfolg zählt, ist durch seine Position festgelegt und lässt sich nicht ändern: Platz 1 (schiefgelaufen, Fähigkeitswurf gescheitert) ist ein Fehlschlag, Platz 2 (schiefgelaufen, Fähigkeitswurf bestanden) ein Erfolg, Platz 3 (nach Plan, Fähigkeitswurf gescheitert) ein Fehlschlag, Platz 4 (nach Plan, Fähigkeitswurf bestanden) ein Erfolg.</p>
+<p><strong>Is Historic.</strong> Setz hier einen Haken, damit die Mission Teil der Geschichte wird. Eine historische Mission ist nie Teil der zufälligen Wochenauswahl. Das Spiel prüft jede Spielstunde, also taucht sie innerhalb einer Stunde auf, nachdem ihre Voraussetzungen erfüllt sind. Sie wartet nie auf den Wochenplan und belegt nie einen der Plätze dieser Woche.</p>
+<ul>
+<li><strong>Mit Datum</strong> erscheint sie an diesem Tag - oder später, wenn ihre anderen Voraussetzungen erst später erfüllt sind.</li>
+<li><strong>Ohne Datum</strong> erscheint sie, sobald ihre Voraussetzungen erfüllt sind. Eine Folgemission, die auf den Erfolg einer anderen Mission wartet, taucht innerhalb einer Stunde nach diesem Erfolg auf.</li>
+</ul>
+<p>Eine historische Mission verfällt nie. Sobald sie erfolgreich war, verschwindet sie für immer. Scheitert sie oder wird sie abgebrochen, ist sie bei der nächsten stündlichen Prüfung wieder auf der Karte, selbst wenn ihr Ergebnisbericht noch ungelesen ist.</p>
 <h3 id="validate-before-you-save">Vor dem Speichern prüfen<a class="headerlink" href="#validate-before-you-save" title="Permanent link">&para;</a></h3>
 <p><strong>Validate</strong> listet alles auf, was es finden kann. <strong>Save</strong> macht dieselbe Prüfung und verweigert das Speichern, wenn etwas ein Fehler ist.</p>
 <p><strong>Fehler verhindern das Speichern:</strong></p>
@@ -2323,8 +2423,8 @@
 <td>eine mitgelieferte Mission nutzt sie schon</td>
 </tr>
 <tr>
-<td>Mission mit dieser Id existiert bereits</td>
-<td>Speichern würde eine andere gespeicherte Mission stillschweigend ersetzen</td>
+<td>Missions-Id ist schon vergeben (Mission id is in use)</td>
+<td>die Umbenennung auf eine andere gespeicherte Mission würde diese stillschweigend ersetzen</td>
 </tr>
 <tr>
 <td>Ein Tag hat ungültige Zeichen</td>
@@ -2418,6 +2518,7 @@
 -->
 <ul>
 <li>Die Python-Seite schreiben. Alles, was etwas <em>entscheiden</em> muss - auf die geflogene Crew reagieren, eine Folgemission vergeben, den Text je nach Geschehen ändern -, braucht ein Skript.</li>
+<li>Eine Kette als Ganzes zeigen. Jede Mission listet nur ihre eigenen Voraussetzungen; wie mehrere Missionen zusammenhängen, ist in den Dateien leichter zu verfolgen. Siehe <a href="chains/">Ketten und Kampagnen</a>.</li>
 </ul>
 <!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 - Eine Kette über eine einzelne Voraussetzung "diese Mission muss abgeschlossen sein" hinaus bauen. Längere Ketten sind in den Dateien leichter zu überblicken und zu pflegen. Siehe [Ketten und Kampagnen](chains.md).

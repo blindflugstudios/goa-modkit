@@ -1752,6 +1752,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1868,6 +1874,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2401,7 +2491,7 @@
 </code></pre></div>
 <ul>
 <li><code>event_name</code>: which event, usually written as <code>MinorEvent.SOME_NAME</code> (import it with <code>from Blindflug.MinorEvents import MinorEvent</code>). The plain string, like <code>"midnight"</code>, works too.</li>
-<li><code>chance</code>: the probability that the handler runs when the event fires, from 0.0 to 1.0. Default 1.0 (always).</li>
+<li><code>chance</code>: the probability that the handler runs when the event fires, from 0.0 to 1.0. Default 1.0 (always). The game adds a global base chance to every handler's value; in the normal game it is <code>0</code>, so your value is what counts (only a cheat in development builds changes it).</li>
 <li><code>max_occurrences</code>: how often the handler may run in one save game. The count is stored in the save, keyed by the handler's <code>&lt;module&gt;.&lt;function&gt;</code> name, so renaming either resets it. A negative value means no limit and is the default (<code>-1</code>); <code>0</code> means the handler never runs. The chance roll and the limit check both happen before the handler is called.</li>
 </ul>
 <p><strong>Returning <code>False</code> does not count</strong> against <code>max_occurrences</code>. Use it to check a condition and bail out without using up the budget. Returning nothing, <code>True</code> or any other value counts.</p>
@@ -2420,11 +2510,13 @@
 <li>Ids of characters, buildings, workbenches and so on arrive as strings.</li>
 <li>Ids of planes and dogs (<code>...EntityId</code>, <code>voxelObjectId</code>) arrive as numbers. These are the numbers <code>airplanes_api</code> and <code>resources_api</code> expect.</li>
 <li>Values like a resource type or a day phase arrive as game values you can compare directly: <code>if resource == ResourceType.MilitaryConstruction:</code>. Turn them into text with <code>str(value)</code>.</li>
+<li>Character arguments are character ids (strings), resource arguments are <code>ResourceType</code> values, and task arguments (the <code>taskType</code> of <code>task_started</code> and <code>task_completed</code>) are <code>Task</code> values (<code>from Blindflug.Tasks import Task</code>).</li>
 </ul>
 <p>Useful imports for comparing:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.GameResources</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.Game.Characters.Morale</span><span class="w"> </span><span class="kn">import</span> <span class="n">MoraleCategory</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.DayPhases</span><span class="w"> </span><span class="kn">import</span> <span class="n">DayPhase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.Tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
 </code></pre></div>
 <h3 id="missions-and-flights">Missions and flights<a class="headerlink" href="#missions-and-flights" title="Permanent link">&para;</a></h3>
 <table>

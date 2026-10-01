@@ -1719,6 +1719,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1835,6 +1841,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2314,11 +2404,11 @@
 
 <h1 id="how-mods-work">How mods work<a class="headerlink" href="#how-mods-work" title="Permanent link">&para;</a></h1>
 <p>A mod is a folder. The game looks inside it for a handful of fixed subfolders, and whatever those subfolders contain is what the mod changes. There is no packaging step, no manifest you have to write, and nothing to compile: you edit files, load a level, and see the result.</p>
-<p>This page covers what every mod has in common: where it lives, how the game finds it, how it is switched on and off, and which mod wins when two change the same thing. What goes <em>into</em> the subfolders is on the category pages: <a href="../../data/csv/">CSV tables</a>, <a href="../../missions/">Missions</a>, <a href="../../quests/">Quests</a>, <a href="../../scripting/">Scripting</a> and the <a href="../../content/maps/">Maps and art</a> pages. How a finished mod reaches other players is on <a href="../../sharing/workshop/">Steam Workshop</a>.</p>
+<p>This page covers what every mod has in common: where it lives, how the game finds it, how it is switched on and off, and which mod wins when two change the same thing. What goes <em>into</em> the subfolders is on the category pages: <a href="../../data/csv/">CSV tables</a>, <a href="../../missions/">Missions</a>, <a href="../../quests/">Quests</a>, <a href="../../scripting/">Scripting</a>, the <a href="../../content/maps/">Maps and art</a> pages and <a href="../../content/airplanes/">Airplane skins</a>. How a finished mod reaches other players is on <a href="../../sharing/workshop/">Steam Workshop</a>.</p>
 <h2 id="a-mod-in-one-minute">A mod in one minute<a class="headerlink" href="#a-mod-in-one-minute" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Find your <code>Mods</code> folder: <strong>Main menu → Mods → Open folder</strong>. On Windows that is <code>%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Mods\</code>; the other platforms are listed <a href="#where-mods-live">below</a>.</li>
-<li>Create a folder in it, for example <code>my_mod</code>, and inside it one of the content folders: <code>CSV/</code>, <code>Missions/</code>, <code>Quests/</code>, <code>Maps/</code>, <code>Objects/</code> or <code>Biomes/</code>. Put at least one file in it.</li>
+<li>Create a folder in it, for example <code>my_mod</code>, and inside it one of the content folders: <code>CSV/</code>, <code>Missions/</code>, <code>Quests/</code>, <code>Maps/</code>, <code>Objects/</code>, <code>Biomes/</code> or <code>Airplanes/</code>. Put at least one file in it.</li>
 <li>Optionally add a <code>config.json</code> with the mod's name and id, and a <code>preview.png</code> (at most 1 MB) as its picture.</li>
 <li>Press <strong>Refresh</strong> in the Mods window so the game notices the new folder, then load a level.</li>
 <li>From then on, every change to a file inside the mod is picked up the next time you load a level. Only replacement art (<code>Objects/</code>, <code>Biomes/</code>) needs a restart of the game.</li>
@@ -2362,10 +2452,12 @@
     preview.png        optional - the picture shown in the Mods window and on the Workshop
     CSV/               data tables
     Missions/          mission .json files and Python .py scripts
+      Locations/       new mission locations, .json
     Quests/            quest .json files
     Maps/              .goamap map files
     Objects/           replacement models, textures and icons
     Biomes/            replacement ground textures, one PNG per biome slot
+    Airplanes/         new airplane skins
 </code></pre></div>
 <table>
 <thead>
@@ -2387,6 +2479,11 @@
 <td><a href="../../missions/">Missions</a>, <a href="../../scripting/">Scripting</a></td>
 </tr>
 <tr>
+<td><code>Missions/Locations/</code></td>
+<td>new mission locations (<code>.json</code>)</td>
+<td><a href="../../missions/locations/#adding-locations-with-a-mod">Adding locations with a mod</a></td>
+</tr>
+<tr>
 <td><code>Quests/</code></td>
 <td>quests (<code>.json</code>)</td>
 <td><a href="../../quests/">Quests</a></td>
@@ -2406,19 +2503,20 @@
 <td>replacement ground textures, one PNG per biome slot</td>
 <td><a href="../../content/biomes/">Biomes</a></td>
 </tr>
+<tr>
+<td><code>Airplanes/</code></td>
+<td>new airplane skins: a <code>config.json</code> and the skins' PNGs</td>
+<td><a href="../../content/airplanes/">Airplane skins</a></td>
+</tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Art mods are a work in progress</p>
-<p>Replacement art (<code>Objects/</code>, <code>Biomes/</code>) is work in progress and not supported by the current alpha yet.</p>
-</div>
 <p>Three rules decide whether the game notices the folder at all:</p>
 <ul>
 <li>A subfolder only counts when there is something in it. An empty <code>CSV/</code> folder is the same as no <code>CSV/</code> folder.</li>
 <li>A mod folder with none of the subfolders above (or only empty ones) is ignored without a message.</li>
 <li>Symbolic links and junctions (shortcuts that point to another folder) are never followed, neither as the mod folder nor as one of its subfolders. The game skips them with a warning in the log.</li>
 </ul>
-<p>For <code>CSV</code>, <code>Missions</code>, <code>Quests</code> and <code>Maps</code> only files directly inside the subfolder are read; anything deeper is ignored. <code>Objects</code> and <code>Biomes</code> hold replacement art and follow their own rules: in <code>Objects/</code> a model's <em>file name</em> is the id of the object it replaces (<code>Chair.fbx</code> replaces the chair), and subfolder names mean nothing. <code>Biomes/</code> holds one PNG per biome slot, named after the slot's number (<code>8.png</code>), directly inside the folder.</p>
+<p>For <code>CSV</code>, <code>Missions</code>, <code>Quests</code> and <code>Maps</code> only files directly inside the subfolder are read; anything deeper is ignored, with one exception: <code>Missions/Locations/</code> is read as well. <code>Objects</code> and <code>Biomes</code> hold replacement art and follow their own rules: in <code>Objects/</code> a model's <em>file name</em> is the id of the object it replaces (<code>Chair.fbx</code> replaces the chair), and subfolder names mean nothing. <code>Biomes/</code> holds one PNG per biome slot, named after the slot's number (<code>8.png</code>), directly inside the folder. <code>Airplanes/</code> holds new airplane skins, described on <a href="../../content/airplanes/">Airplane skins</a>.</p>
 <h3 id="configjson"><code>config.json</code><a class="headerlink" href="#configjson" title="Permanent link">&para;</a></h3>
 <p>Optional. Without it, the folder name is shown as the mod's name, its id is made from the folder name, and the load order is 100.</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -2461,7 +2559,7 @@
 <li>A <code>config.json</code> the game cannot read (a missing comma, a stray bracket) is reported in the log and treated as if it were absent.</li>
 </ul>
 <h3 id="previewpng"><code>preview.png</code><a class="headerlink" href="#previewpng" title="Permanent link">&para;</a></h3>
-<p>Optional. A PNG at the root of the mod folder, at most 1 MB. The Mods window shows it next to the mod's name, and it becomes the item's picture when you upload the mod to the Workshop. Without one the Mods window shows a placeholder picture.</p>
+<p>Optional. A PNG at the root of the mod folder, at most 1 MB. The Mods window shows it next to the mod's name, and it becomes the item's picture when you upload the mod to the Workshop. Without one the Mods window shows a placeholder picture, and the Workshop item has no picture until you add one on its Steam page.</p>
 <h2 id="the-mods-window">The Mods window<a class="headerlink" href="#the-mods-window" title="Permanent link">&para;</a></h2>
 <p><strong>Main menu → Mods</strong> lists every mod the game found - Workshop subscriptions and your own folders - with its preview picture, a marker that says whether it came from the Workshop or from your <code>Mods</code> folder, and one badge per kind of content it carries.</p>
 <table>
@@ -2514,7 +2612,7 @@
 <ol>
 <li>Save your game.</li>
 <li><strong>Options → Quit to main menu.</strong></li>
-<li>Open <strong>Mods</strong> and press <strong>Refresh</strong> if you added or renamed a mod folder.</li>
+<li>Open <strong>Mods</strong> and press <strong>Refresh</strong> if you added or renamed a mod folder or changed its <code>config.json</code>.</li>
 <li>Load the save.</li>
 </ol>
 <table>
@@ -2542,11 +2640,19 @@
 <td><strong>Refresh</strong> in the Mods window once Steam has finished downloading it</td>
 </tr>
 <tr>
+<td>An airplane skin PNG or the <code>Airplanes/config.json</code></td>
+<td>Load a level - skins are read each time a level is loaded</td>
+</tr>
+<tr>
 <td>A model, texture, thumbnail or biome PNG</td>
 <td>Restart the game - art is imported once at startup, and neither <strong>Refresh</strong> nor the <strong>Enabled</strong> switch re-imports it</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For now, any change to the 3D art in <code>Objects/</code> and <code>Biomes/</code> needs a restart of the game. A future update adds an option to reload mods from the main menu, which will make the restart unnecessary.</p>
+</div>
 <p><a href="../testing/">Testing and reloading</a> has more on this loop and on the tools that help while testing.</p>
 <p>The game writes what it accepted and what it refused to its log file, <code>Player.log</code>:</p>
 <table>

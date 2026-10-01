@@ -1730,6 +1730,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1846,6 +1852,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2341,15 +2431,15 @@
 <li>Edit your files in the mod folder.</li>
 <li>In the game, save, then <strong>Options → Quit to main menu</strong>.</li>
 <li>If you created a new mod folder (or a content folder such as <code>Quests/</code> that was empty when the game started), open <strong>Mods</strong> from the main menu and press <strong>Refresh</strong>. Opening the window alone does not scan the <code>Mods</code> folder again.</li>
-<li>Load your save. Missions, scripts, quests and CSV tables are read fresh every time a save is loaded. Only art needs a full restart.</li>
+<li>Load your save. Missions, scripts, quests, CSV tables, maps and airplane skins are read fresh every time a save is loaded. Only art (<code>Objects/</code>, <code>Biomes/</code>) needs a full restart.</li>
 <li>For a mission, open the cheat console and type <code>create_mission &lt;your_mission_id&gt;</code> to put it on the war map right now.</li>
 <li>Something wrong? Open <code>Player.log</code> (see <a href="#reading-playerlog">below</a>).</li>
 </ol>
 <h2 id="reloading-without-restarting-the-game">Reloading without restarting the game<a class="headerlink" href="#reloading-without-restarting-the-game" title="Permanent link">&para;</a></h2>
-<p>Every time you load a save, the game reads your mod's content again: mission files, Python scripts, quests and CSV tables, from the game itself and from every enabled mod. So the edit loop is: change a file, go back to the main menu, open <strong>Mods</strong>, load the save again.</p>
+<p>Every time you load a save, the game reads your mod's content again: mission files, Python scripts, quests, CSV tables, maps and airplane skins, from the game itself and from every enabled mod. So the edit loop is: change a file, go back to the main menu, open <strong>Mods</strong>, load the save again.</p>
 <p>Two things need more:</p>
 <ul>
-<li><strong>Art is imported only when the game starts.</strong> Models, textures and other files in <code>Objects/</code> and <code>Biomes/</code> need a full restart of the game. (Art mods are work in progress and not supported by the current alpha yet.)</li>
+<li><strong>Art is imported only when the game starts.</strong> Models, textures and other files in <code>Objects/</code> and <code>Biomes/</code> need a full restart of the game. A future update adds an option to reload mods from the main menu, which will make the restart unnecessary.</li>
 <li><strong>New mods</strong>: a mod folder you just created shows up only after you press <strong>Refresh</strong> in the Mods window (or restart the game). The same goes for a content folder such as <code>Quests/</code> that was empty when the game started. Check that the mod is switched on.</li>
 </ul>
 <p>A mission that was already on the war map in your save keeps the values it was created with. After changing a mission's JSON, create a fresh copy with <code>create_mission</code> to see the change.</p>
@@ -2370,7 +2460,7 @@
 <tbody>
 <tr>
 <td><code>skip_day</code></td>
-<td>jump to the next day; historic missions with a date are checked at every day change</td>
+<td>jump to the next day; historic missions are checked every in-game hour, so one dated for that day shows up within the hour</td>
 </tr>
 <tr>
 <td><code>freeze_time off</code></td>
@@ -2383,8 +2473,8 @@
 <p><code>create_mission</code> skips every gate, so it cannot show that a chain unlocks. To test the unlocking:</p>
 <ol>
 <li>Lower the gates for the test: <code>RunwayTier</code> 1 and <code>EarliestAppearanceDay</code> 1 remove the two most common reasons a mission never shows up.</li>
-<li>Make the follow-up historic (<code>"_isHistoric": true</code>). Historic missions skip the random draw and appear at the next weekly slot, or on their date, as soon as their gates pass.</li>
-<li>Fly the first mission to the outcome you are testing and wait for the next slot.</li>
+<li>Make the follow-up historic (<code>"_isHistoric": true</code>). Historic missions skip the random draw. The game checks them every in-game hour, so they appear within the hour after their gates pass (or on their date); they never wait for a weekly slot.</li>
+<li>Fly the first mission to the outcome you are testing and wait up to an in-game hour.</li>
 </ol>
 <p>Remember that a historic mission is one-shot once it has been won. Turn <code>_isHistoric</code> off again afterwards if the mission is not meant to be a story beat.</p>
 <h2 id="when-nothing-shows-up">When nothing shows up<a class="headerlink" href="#when-nothing-shows-up" title="Permanent link">&para;</a></h2>
@@ -2433,7 +2523,7 @@ A mission only enters the pool when all its requirements pass. Check <code>Runwa
 </ul>
 <p>A clean validator run means the mod is well-formed, not that it plays well. Only a flight in the game tells you that.</p>
 <h2 id="where-text-goes-missing">Where text goes missing<a class="headerlink" href="#where-text-goes-missing" title="Permanent link">&para;</a></h2>
-<p>If the mission appears but shows a raw key like <code>missions/mymod_patrol/mission_name</code> instead of a name, that text was never defined. The game builds three keys itself and expects them to exist:</p>
+<p>If the mission appears but a slot such as its name shows nothing in the mission window, that text was never defined. The game builds three keys itself and expects them to exist:</p>
 <div class="highlight"><pre><span></span><code>missions/&lt;id&gt;/mission_name
 missions/&lt;id&gt;/mission_description
 missions/&lt;id&gt;/intel_threat_report

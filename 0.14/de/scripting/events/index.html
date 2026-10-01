@@ -1752,6 +1752,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1868,6 +1874,90 @@
     
   
     Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
   
 
     
@@ -2401,7 +2491,7 @@
 </code></pre></div>
 <ul>
 <li><code>event_name</code>: welches Event, meistens geschrieben als <code>MinorEvent.SOME_NAME</code> (importiert mit <code>from Blindflug.MinorEvents import MinorEvent</code>). Der einfache String, etwa <code>"midnight"</code>, funktioniert auch.</li>
-<li><code>chance</code>: die Wahrscheinlichkeit, dass der Handler läuft, wenn das Event feuert, von 0.0 bis 1.0. Standard 1.0 (immer).</li>
+<li><code>chance</code>: die Wahrscheinlichkeit, dass der Handler läuft, wenn das Event feuert, von 0.0 bis 1.0. Standard 1.0 (immer). Das Spiel rechnet zu jedem Handler noch eine globale Grundchance dazu; im normalen Spiel ist sie <code>0</code>, es zählt also dein Wert (nur ein Cheat in Entwickler-Builds ändert sie).</li>
 <li><code>max_occurrences</code>: wie oft der Handler in einem Spielstand laufen darf. Der Zähler wird im Spielstand gespeichert, unter dem Namen <code>&lt;module&gt;.&lt;function&gt;</code> des Handlers - benennst du eins davon um, fängt er von vorne an. Ein negativer Wert heißt unbegrenzt, das ist der Standard (<code>-1</code>); <code>0</code> heißt, der Handler läuft nie. Der Zufallswurf für <code>chance</code> und die Prüfung des Limits passieren beide, bevor der Handler aufgerufen wird.</li>
 </ul>
 <p><strong>Die Rückgabe von <code>False</code> zählt nicht</strong> gegen <code>max_occurrences</code>. Nutze das, um eine Bedingung zu prüfen und auszusteigen, ohne das Kontingent zu verbrauchen. Keine Rückgabe, <code>True</code> oder jeder andere Wert zählt.</p>
@@ -2420,11 +2510,13 @@
 <li>Ids von Charakteren, Gebäuden, Werkbänken und so weiter kommen als Strings an.</li>
 <li>Ids von Flugzeugen und Hunden (<code>...EntityId</code>, <code>voxelObjectId</code>) kommen als Zahlen an. Das sind die Zahlen, die <code>airplanes_api</code> und <code>resources_api</code> erwarten.</li>
 <li>Werte wie ein Ressourcentyp oder eine Tagesphase kommen als Spielwerte an, die du direkt vergleichen kannst: <code>if resource == ResourceType.MilitaryConstruction:</code>. Mit <code>str(value)</code> machst du Text daraus.</li>
+<li>Charakter-Argumente sind Charakter-Ids (Strings), Ressourcen-Argumente sind <code>ResourceType</code>-Werte und Aufgaben-Argumente (der <code>taskType</code> von <code>task_started</code> und <code>task_completed</code>) sind <code>Task</code>-Werte (<code>from Blindflug.Tasks import Task</code>).</li>
 </ul>
 <p>Nützliche Imports zum Vergleichen:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.GameResources</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.Game.Characters.Morale</span><span class="w"> </span><span class="kn">import</span> <span class="n">MoraleCategory</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.DayPhases</span><span class="w"> </span><span class="kn">import</span> <span class="n">DayPhase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Blindflug.Tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
 </code></pre></div>
 <h3 id="missions-and-flights">Missionen und Flüge<a class="headerlink" href="#missions-and-flights" title="Permanent link">&para;</a></h3>
 <table>

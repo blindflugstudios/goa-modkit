@@ -1769,6 +1769,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1885,6 +1891,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2458,7 +2548,7 @@
 <li>The row must already exist. Otherwise: <code>'...' is not a built-in row; use Add to create one</code>.</li>
 <li>Every key in <code>Cells</code> must be a column of the table, spelled exactly. Otherwise the message lists the table's columns.</li>
 <li>The whole resulting row is checked, not just the cells you named. A row that was fine before stays fine unless your values break a rule.</li>
-<li>A few built-in rows span several lines in the game's own table. They are refused, whether patched cell by cell or shipped as a whole row. Only in <code>ResourceCost</code> does a whole-row <code>&lt;Table&gt;.csv</code> fix them (see <a href="../csv/#rows-that-take-up-several-lines">Rows that take up several lines</a>); the multi-line rows of <code>MoraleInfluenceValues</code> and <code>TaskValues</code> cannot be changed at all.</li>
+<li>A few built-in rows span several lines in the game's own table. They are refused, whether patched cell by cell or shipped as a whole row. Only in <code>ResourceCost</code> does a whole-row <code>&lt;Table&gt;.csv</code> fix them (see <a href="../csv/#rows-that-take-up-several-lines">Rows that take up several lines</a>); the multi-line rows of <code>MoraleInfluenceValues</code>, <code>FlightMissionData</code> (<code>AirplaneIntegrity</code>, <code>AirplaneHealth</code>, <code>Mood</code>, <code>Energy</code>, <code>Confidence</code>) and <code>TaskValues</code> cannot be changed at all.</li>
 </ul>
 <h3 id="add-create-a-new-row"><code>Add</code>: create a new row<a class="headerlink" href="#add-create-a-new-row" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Add"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"storage_box"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Cells"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Planks"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">"Metal"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
@@ -2466,7 +2556,7 @@
 <ul>
 <li>Only in the tables that allow new rows (see <a href="../csv/">CSV tables</a>). Elsewhere: <code>new rows are not supported in '...'; only built-in rows can be changed</code>.</li>
 <li>The id must not exist yet. Otherwise: <code>'...' already exists; use Replace to change it</code>.</li>
-<li>Columns you leave out get the table's default or stay empty; the row check then decides whether that is acceptable.</li>
+<li>Columns you leave out stay empty, and a cell may only be empty in a column where the game already leaves some row empty; otherwise the command is refused. Two columns are filled in for you instead: any <code>ResourceCost</code> cell you leave out becomes <code>0</code>, so an <code>Add</code> there only needs the resources that actually cost something, and <code>Associated Task</code> in <code>BuildingComponents</code> becomes <code>None</code>. See <a href="../csv/#empty-cells">Empty cells</a>.</li>
 </ul>
 <h3 id="remove-clear-cells-or-delete-a-row"><code>Remove</code>: clear cells, or delete a row<a class="headerlink" href="#remove-clear-cells-or-delete-a-row" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Remove"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chair"</span><span class="p">,</span><span class="w"> </span><span class="nt">"Columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"Tarp"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span>

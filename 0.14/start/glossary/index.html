@@ -1680,6 +1680,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1796,6 +1802,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2269,10 +2359,10 @@
 <p><strong>Skill</strong> - A written set of instructions in the modkit that teaches the agent one job, for example <code>new-mission</code>, <code>validate</code> or <code>install-mod</code>. The agent picks the right skill by itself.</p>
 <p><strong><code>AGENTS.md</code></strong> - The rulebook for agents in the modkit: folders, pitfalls, and the build, check, copy routine.</p>
 <h2 id="modding">Modding<a class="headerlink" href="#modding" title="Permanent link">&para;</a></h2>
-<p><strong>Mod</strong> - A folder of files that adds to or changes the game: missions, quests, scripts, maps, objects or data tables.</p>
+<p><strong>Mod</strong> - A folder of files that adds to or changes the game: missions, quests, scripts, maps, objects, airplane skins or data tables.</p>
 <p><strong><code>Mods</code> folder</strong> - Where the game looks for installed mods. Open it from the main menu: <strong>Mods → Open folder</strong>.</p>
 <p><strong><code>mods/</code> folder (in the modkit)</strong> - Where you and your agent build your own mods before they are copied to the game's <code>Mods</code> folder. Git ignores it, so updates never change it.</p>
-<p><strong>Content folder</strong> - A folder inside a mod whose name tells the game what is in it: <code>Missions</code>, <code>Quests</code>, <code>Maps</code>, <code>Objects</code>, <code>CSV</code>, <code>Biomes</code>. (Art mods in <code>Objects</code> and <code>Biomes</code> are work in progress and not supported by the current alpha yet.)</p>
+<p><strong>Content folder</strong> - A folder inside a mod whose name tells the game what is in it: <code>Missions</code>, <code>Quests</code>, <code>Maps</code>, <code>Objects</code>, <code>CSV</code>, <code>Biomes</code>, <code>Airplanes</code>. New mission locations go one level deeper, in <code>Missions/Locations</code>.</p>
 <p><strong>Id</strong> - The unique name of a thing in the game, for example the mission id <code>coastal_patrol</code>. Ids must not contain spaces and must be unique: two missions with the same id replace each other.</p>
 <p><strong>Localization key</strong> - The name of a text, like <code>missions/coastal_patrol/mission_name</code>. The game looks up the key to find the text in the player's language. If the text is missing, you see the key itself.</p>
 <p><strong>Validator</strong> - The modkit's checker (<code>goa_validate</code>). It reads your mod and reports what would break in the game, without starting the game and without running your scripts.</p>

@@ -1730,6 +1730,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1846,6 +1852,90 @@
     
   
     Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
   
 
     
@@ -2341,15 +2431,15 @@
 <li>Bearbeite deine Dateien im Mod-Ordner.</li>
 <li>Speichere im Spiel und geh dann auf <strong>Einstellungen</strong> (Options) <strong>→ Verlassen zum Hauptmenü</strong> (Quit to main menu).</li>
 <li>Wenn du einen neuen Mod-Ordner angelegt hast (oder einen Inhaltsordner wie <code>Quests/</code>, der beim Spielstart leer war), öffne im Hauptmenü <strong>Mods</strong> und drück auf <strong>Refresh</strong>. Das bloße Öffnen des Fensters durchsucht den <code>Mods</code>-Ordner nicht neu.</li>
-<li>Lade deinen Spielstand. Missionen, Skripte, Quests und CSV-Tabellen werden bei jedem Laden eines Spielstands frisch eingelesen. Nur Grafik braucht einen kompletten Neustart.</li>
+<li>Lade deinen Spielstand. Missionen, Skripte, Quests, CSV-Tabellen, Karten und Flugzeug-Skins werden bei jedem Laden eines Spielstands frisch eingelesen. Nur Grafik (<code>Objects/</code>, <code>Biomes/</code>) braucht einen kompletten Neustart.</li>
 <li>Für eine Mission öffnest du die Cheat-Konsole und tippst <code>create_mission &lt;your_mission_id&gt;</code>, damit sie sofort auf der Kriegskarte erscheint.</li>
 <li>Irgendwas stimmt nicht? Öffne <code>Player.log</code> (siehe <a href="#reading-playerlog">unten</a>).</li>
 </ol>
 <h2 id="reloading-without-restarting-the-game">Neu laden, ohne das Spiel neu zu starten<a class="headerlink" href="#reloading-without-restarting-the-game" title="Permanent link">&para;</a></h2>
-<p>Jedes Mal, wenn du einen Spielstand lädst, liest das Spiel die Inhalte deiner Mod neu ein: Missionsdateien, Python-Skripte, Quests und CSV-Tabellen, aus dem Spiel selbst und aus jeder aktivierten Mod. Deine Bearbeitungsschleife lautet also: Datei ändern, zurück ins Hauptmenü, <strong>Mods</strong> öffnen, Spielstand erneut laden.</p>
+<p>Jedes Mal, wenn du einen Spielstand lädst, liest das Spiel die Inhalte deiner Mod neu ein: Missionsdateien, Python-Skripte, Quests, CSV-Tabellen, Karten und Flugzeug-Skins, aus dem Spiel selbst und aus jeder aktivierten Mod. Deine Bearbeitungsschleife lautet also: Datei ändern, zurück ins Hauptmenü, <strong>Mods</strong> öffnen, Spielstand erneut laden.</p>
 <p>Zwei Dinge brauchen mehr:</p>
 <ul>
-<li><strong>Grafik wird nur beim Spielstart importiert.</strong> Modelle, Texturen und andere Dateien in <code>Objects/</code> und <code>Biomes/</code> brauchen einen kompletten Neustart des Spiels. (Grafik-Mods sind noch in Arbeit und werden von der aktuellen Alpha noch nicht unterstützt.)</li>
+<li><strong>Grafik wird nur beim Spielstart importiert.</strong> Modelle, Texturen und andere Dateien in <code>Objects/</code> und <code>Biomes/</code> brauchen einen kompletten Neustart des Spiels. Ein künftiges Update bringt eine Option, Mods im Hauptmenü neu zu laden; dann ist der Neustart nicht mehr nötig.</li>
 <li><strong>Neue Mods</strong>: Ein Mod-Ordner, den du gerade angelegt hast, taucht erst auf, wenn du im Mods-Fenster auf <strong>Refresh</strong> drückst (oder das Spiel neu startest). Dasselbe gilt für einen Inhaltsordner wie <code>Quests/</code>, der beim Spielstart leer war. Prüfe, dass die Mod eingeschaltet ist.</li>
 </ul>
 <p>Eine Mission, die in deinem Spielstand schon auf der Kriegskarte lag, behält die Werte, mit denen sie erstellt wurde. Wenn du das JSON einer Mission geändert hast, erstelle mit <code>create_mission</code> eine frische Kopie, um die Änderung zu sehen.</p>
@@ -2370,7 +2460,7 @@
 <tbody>
 <tr>
 <td><code>skip_day</code></td>
-<td>zum nächsten Tag springen; historische Missionen mit Datum werden bei jedem Tageswechsel geprüft</td>
+<td>zum nächsten Tag springen; historische Missionen werden jede Spielstunde geprüft, eine für diesen Tag datierte erscheint also innerhalb der Stunde</td>
 </tr>
 <tr>
 <td><code>freeze_time off</code></td>
@@ -2383,8 +2473,8 @@
 <p><code>create_mission</code> überspringt jede Sperre, kann also nicht zeigen, dass eine Kette freigeschaltet wird. So testest du das Freischalten:</p>
 <ol>
 <li>Senk die Sperren für den Test: <code>RunwayTier</code> 1 und <code>EarliestAppearanceDay</code> 1 räumen die zwei häufigsten Gründe aus dem Weg, warum eine Mission nie auftaucht.</li>
-<li>Mach die Folgemission historisch (<code>"_isHistoric": true</code>). Historische Missionen überspringen die Zufallsziehung und erscheinen im nächsten Wochen-Slot oder an ihrem Datum, sobald ihre Sperren erfüllt sind.</li>
-<li>Flieg die erste Mission bis zu dem Ausgang, den du testest, und warte auf den nächsten Slot.</li>
+<li>Mach die Folgemission historisch (<code>"_isHistoric": true</code>). Historische Missionen überspringen die Zufallsziehung. Das Spiel prüft sie jede Spielstunde, sie erscheinen also innerhalb der Stunde, nachdem ihre Sperren erfüllt sind (oder an ihrem Datum); auf einen Wochen-Slot warten sie nie.</li>
+<li>Flieg die erste Mission bis zu dem Ausgang, den du testest, und warte bis zu einer Spielstunde.</li>
 </ol>
 <p>Denk daran: Eine historische Mission gibt es nur einmal, sobald sie gewonnen wurde. Schalte <code>_isHistoric</code> danach wieder aus, wenn die Mission kein Story-Moment sein soll.</p>
 <h2 id="when-nothing-shows-up">Wenn nichts auftaucht<a class="headerlink" href="#when-nothing-shows-up" title="Permanent link">&para;</a></h2>
@@ -2433,7 +2523,7 @@ Eine Mission kommt nur in den Pool, wenn alle ihre Voraussetzungen erfüllt sind
 </ul>
 <p>Ein sauberer Validator-Lauf heißt, dass die Mod korrekt aufgebaut ist, nicht, dass sie sich gut spielt. Das verrät dir nur ein Flug im Spiel.</p>
 <h2 id="where-text-goes-missing">Wo Text verloren geht<a class="headerlink" href="#where-text-goes-missing" title="Permanent link">&para;</a></h2>
-<p>Wenn die Mission erscheint, aber statt eines Namens einen rohen Schlüssel wie <code>missions/mymod_patrol/mission_name</code> zeigt, wurde dieser Text nie definiert. Drei Schlüssel baut das Spiel selbst und erwartet, dass es sie gibt:</p>
+<p>Wenn die Mission erscheint, aber ein Feld wie ihr Name im Missionsfenster leer bleibt, wurde dieser Text nie definiert. Drei Schlüssel baut das Spiel selbst und erwartet, dass es sie gibt:</p>
 <div class="highlight"><pre><span></span><code>missions/&lt;id&gt;/mission_name
 missions/&lt;id&gt;/mission_description
 missions/&lt;id&gt;/intel_threat_report

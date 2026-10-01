@@ -2034,6 +2034,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2150,6 +2156,90 @@
     
   
     Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
   
 
     
@@ -3048,51 +3138,46 @@
 </tr>
 <tr>
 <td>2</td>
-<td>Historische Missionen mit Datum</td>
-<td>Bei jedem Tageswechsel wird jede historische Mission mit <code>_historicDay</code>, deren Sperren erfüllt sind, erstellt, außerhalb der Wochen-Slots.</td>
+<td>Stündliche Prüfung der historischen Missionen</td>
+<td>Jede Spielstunde wird jede historische Mission erstellt, deren Sperren erfüllt sind: eine mit <code>_historicDay</code> an diesem Tag oder, wenn ihre anderen Sperren erst später erfüllt sind, sobald sie es sind; eine ohne Datum sofort. Sie wartet nie auf den Wochenplan und belegt nie einen Slot. Eine historische Mission, die gescheitert ist oder abgebrochen wurde, ist bei der nächsten stündlichen Prüfung wieder da, selbst wenn ihr Ergebnisbericht noch ungelesen ist.</td>
 </tr>
 <tr>
 <td>3</td>
-<td>Ein Slot ist fällig</td>
-<td>Jede historische Mission ohne Datum, deren Sperren erfüllt sind, erscheint zusammen mit dieser Wochenmission und belegt den Slot nicht. Den Slot selbst füllt die Zufallsziehung.</td>
+<td>Zufallsziehung</td>
+<td>Wird einer der Slots der Woche fällig, füllt ihn die Zufallsziehung. Alle nicht-historischen Missionen, deren Sperren erfüllt sind, bilden einen Pool. Eine wird gezogen und aus dem Pool entfernt. Ist der Pool leer, wird er wieder aufgefüllt.</td>
 </tr>
 <tr>
 <td>4</td>
-<td>Zufallsziehung</td>
-<td>Alle nicht-historischen Missionen, deren Sperren erfüllt sind, bilden einen Pool. Eine wird gezogen und aus dem Pool entfernt. Ist der Pool leer, wird er wieder aufgefüllt.</td>
-</tr>
-<tr>
-<td>5</td>
 <td>Sperren</td>
 <td>Eine Mission kommt infrage, wenn alle <code>_missionRequirements</code> erfüllt sind, die aktuelle Karte einen ihrer <code>_tags</code> teilt und sie (bei historischen Missionen) noch nicht gewonnen wurde und nicht schon auf der Karte ist.</td>
 </tr>
 <tr>
-<td>6</td>
+<td>5</td>
 <td>Erstellung</td>
 <td>Das Spiel wählt einen Ort (eine Ziehung plus bis zu fünf weitere, um zwei Missionen am selben Fleck zu vermeiden), berechnet daraus Entfernung und Treibstoff und richtet die Mission aus JSON oder Skript ein. Dann ruft es <a href="#initialize_mission"><code>initialize_mission</code></a> auf.</td>
 </tr>
 <tr>
-<td>7</td>
+<td>6</td>
 <td>Warten</td>
-<td>Die Mission liegt auf der Kriegskarte, bis der Spieler Flugzeuge schickt oder ihr Startfenster abläuft. Historische Missionen laufen nie ab.</td>
+<td>Die Mission liegt auf der Kriegskarte, bis der Spieler Flugzeuge schickt oder ihr Startfenster abläuft. Historische Missionen laufen nie ab, und eine Mission mit einem Maximum von <code>0</code> bei der Zeit bis zum Start auch nicht.</td>
 </tr>
 <tr>
-<td>8</td>
+<td>7</td>
 <td>Flug</td>
 <td>Die Uhr startet, sobald <strong>alle</strong> zugewiesenen Flugzeuge in der Luft sind. <a href="#send_mission_event"><code>send_mission_event</code></a> feuert jedes Mal, wenn der Flug einen weiteren Schritt erreicht (standardmäßig nach einem Drittel, nach zwei Dritteln und am Ende).</td>
 </tr>
 <tr>
-<td>9</td>
+<td>8</td>
 <td>Ausgang</td>
 <td>Mit Daten: Die Würfe wählen einen der vier Ausgänge, seine Effekte werden angewendet, dann läuft <a href="#set_mission_impact"><code>set_mission_impact</code></a>. Ohne Daten: <a href="#get_mission_result"><code>get_mission_result</code></a> entscheidet, dann läuft <code>set_mission_impact</code>.</td>
 </tr>
 <tr>
-<td>10</td>
+<td>9</td>
 <td>Rückkehr</td>
 <td>Die Flugzeuge landen, die Akten der Crew werden aktualisiert, Events feuern. Dann <a href="#send_mission_result_event"><code>send_mission_result_event</code></a> oder <a href="#send_mission_cancelled_event"><code>send_mission_cancelled_event</code></a>, falls der Spieler die Mission abgebrochen hat oder sie verfallen ist.</td>
 </tr>
 <tr>
-<td>11</td>
+<td>10</td>
 <td>Ergebnisfenster</td>
 <td>Wenn der Spieler es öffnet, liefert <a href="#get_mission_result_text"><code>get_mission_result_text</code></a> den Text.</td>
 </tr>
@@ -3159,6 +3244,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">send_mission_event</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">):</span>
     <span class="o">...</span>
 </code></pre></div>
+<p><strong>Jedes Missionsskript braucht oben die Zeile <code>from Blindflug.FlightMission import MissionEvent</code>.</strong> Skripte bekommen keine automatischen Importe, ohne diese Zeile gibt es <code>MissionEvent</code> in deinem Skript also nicht.</p>
 <p>Den Funktionsnamen wählst du selbst; was zählt, ist der Decorator. Jeder Handler bekommt genau ein Argument, <code>mission_entity_id</code>: die Nummer der Mission, um die es bei diesem Aufruf geht. Gib sie an jeden <code>missions_api</code>-Aufruf weiter. Dasselbe Skript kann gleichzeitig für zwei Flüge derselben Mission laufen, also speichere niemals Zustand eines einzelnen Flugs in einer Variablen auf Modulebene.</p>
 <table>
 <thead>
@@ -3363,6 +3449,7 @@
 <p>Reine Skript-Missionen. Gibt den Textschlüssel der Beschreibung im Missionsfenster zurück. Standard, wenn er fehlt: leer.</p>
 <h3 id="get_time_to_start">get_time_to_start<a class="headerlink" href="#get_time_to_start" title="Permanent link">&para;</a></h3>
 <p>Reine Skript-Missionen. Gibt zurück, wie viele Spielminuten die Mission auf der Kriegskarte wartet, bevor sie abläuft. Standard, wenn er fehlt: 60.</p>
+<p>Gibt er <code>0</code> oder eine negative Zahl zurück, wird die Mission in der nächsten Spielminute abgebrochen. Anders als bei <code>_timeToStartRange</code> in einer JSON-Datei gibt es hier keinen Wert für "läuft nie ab".</p>
 <h3 id="get_completion_time">get_completion_time<a class="headerlink" href="#get_completion_time" title="Permanent link">&para;</a></h3>
 <p>Reine Skript-Missionen. Gibt die Flugzeit in Spielminuten zurück. Standard, wenn er fehlt: 120.</p>
 <h3 id="get_threat_level">get_threat_level<a class="headerlink" href="#get_threat_level" title="Permanent link">&para;</a></h3>
@@ -3407,12 +3494,12 @@
 <tr>
 <td><code>_timeToStartRange</code></td>
 <td><code>{"x": min, "y": max}</code></td>
-<td>Minuten, die die Mission auf der Kriegskarte wartet, bevor sie abläuft, gewürfelt zwischen min und max. Wird bei historischen Missionen ignoriert.</td>
+<td>Spielminuten, die die Mission auf der Kriegskarte wartet, bevor sie abläuft, gewürfelt zwischen min und max. Ein Maximum von <code>0</code> bedeutet, dass sie nie abläuft. Wird bei historischen Missionen ignoriert; die laufen nie ab.</td>
 </tr>
 <tr>
 <td><code>_timeToCompleteRange</code></td>
 <td><code>{"x": min, "y": max}</code></td>
-<td>Flugzeit in Minuten, gewürfelt zwischen min und max.</td>
+<td>Flugzeit in Spielminuten, gewürfelt zwischen min und max.</td>
 </tr>
 <tr>
 <td><code>_missionRequirements</code></td>
@@ -3467,7 +3554,7 @@
 <tr>
 <td><code>_historicDay</code></td>
 <td>Datum</td>
-<td>Der genaue Tag, an dem eine historische Mission erscheint. Ein Jahr unter 1900 zählt als "kein Datum".</td>
+<td>Der früheste Tag, an dem eine historische Mission erscheint: an diesem Tag oder später, wenn ihre anderen Sperren erst später erfüllt sind. Ein Jahr unter 1900 zählt als "kein Datum".</td>
 </tr>
 <tr>
 <td><code>_rawMissionName</code> ... <code>_rawGwFailureTransmission</code></td>
@@ -3742,7 +3829,7 @@
 <h3 id="map-tags">Karten-Tags<a class="headerlink" href="#map-tags" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">"_tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"campaign_debden"</span><span class="p">]</span>
 </code></pre></div>
-<p>Eine Karte listet in ihrer <code>Metadata.json</code> die Tags, die sie unterstützt, und eine Mission listet die Tags, für die sie geschrieben ist. Die Mission kann nur auf einer Karte erscheinen, wenn beide Listen mindestens einen Tag gemeinsam haben (Groß- und Kleinschreibung spielt keine Rolle). Eine leere oder fehlende Liste auf einer der beiden Seiten zählt als <code>["default"]</code>, und jede eingebaute Karte unterstützt <code>default</code>, eine Mission ohne Tags erscheint also überall.</p>
+<p>Eine Karte listet in ihrer <code>Metadata.json</code> die Tags, die sie unterstützt, und eine Mission listet die Tags, für die sie geschrieben ist. Die Mission kann nur auf einer Karte erscheinen, wenn beide Listen mindestens einen Tag gemeinsam haben (Groß- und Kleinschreibung spielt keine Rolle). Eine leere oder fehlende Liste auf einer der beiden Seiten zählt als <code>["default"]</code>, und jede eingebaute Karte unterstützt <code>default</code>, eine Mission ohne Tags erscheint also überall. Jede eingebaute Karte listet außerdem ihren eigenen Namen (<code>debden</code>, <code>duxford</code>, <code>lichfield</code>, <code>perranporth</code>); eine Mission, die nur den Tag <code>duxford</code> trägt, erscheint also nur auf Duxford. Siehe <a href="../../content/maps/">Karten</a>.</p>
 <p>Eine Mission, die nur mit <code>campaign_debden</code> getaggt ist, erscheint nur auf Karten, die diesen Tag listen. Eine Mission, die auf deiner Kampagnenkarte und überall sonst erscheinen soll, listet beide: <code>["campaign_debden", "default"]</code>.</p>
 <p>Tags werden von der wöchentlichen Ziehung, vom historischen Erscheinen und von <code>missions_api.CreateMission</code> geprüft. Der Cheat <code>create_mission</code> ignoriert sie. Quests haben keine Tags; eine Karte wählt ihre Quests auf andere Weise (siehe <a href="../../quests/">Quests</a>).</p>
 <h2 id="known-pitfalls">Bekannte Stolperfallen<a class="headerlink" href="#known-pitfalls" title="Permanent link">&para;</a></h2>

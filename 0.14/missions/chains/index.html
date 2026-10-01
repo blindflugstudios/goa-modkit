@@ -1725,6 +1725,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1841,6 +1847,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2385,11 +2475,11 @@
 <p>A normal mission sits in a pool and is drawn at random across the week. For a follow-up that is usually wrong: the player finishes step one and then waits, possibly for weeks, possibly forever if the pool is large.</p>
 <p><code>"_isHistoric": true</code> changes that. A historic mission:</p>
 <ul>
-<li><strong>never enters the random draw.</strong> The moment its gates pass, it is guaranteed to appear.</li>
-<li><strong>appears on its date</strong> when it has a <code>_historicDay</code>: on that exact day, if its other gates also pass. This does not use the weekly slots.</li>
-<li><strong>keeps the normal lead time</strong> when it has no <code>_historicDay</code>: it appears alongside the next weekly mission and does not take up one of that week's slots, so a follow-up arrives with the same delay as any other mission rather than dropping onto the map instantly.</li>
+<li><strong>never enters the random draw.</strong> Once its gates pass, it is guaranteed to appear. The game checks every in-game hour, so it shows up within the hour. It never waits for the weekly schedule and never takes up one of that week's slots.</li>
+<li><strong>appears on its date</strong> when it has a <code>_historicDay</code>: on that day, or later if its other gates only pass later.</li>
+<li><strong>appears within the hour</strong> when it has no <code>_historicDay</code>: as soon as its gates pass. A follow-up gated on <code>"&lt;previous mission&gt;,success"</code> shows up within the hour after that mission succeeds.</li>
 <li><strong>never expires.</strong> <code>_timeToStartRange</code> is ignored, so the player has unlimited time to fly it.</li>
-<li><strong>is one-shot on success.</strong> Once won, it never appears again. A failed or cancelled attempt brings it back, so a chain gated on <code>success</code> can be retried.</li>
+<li><strong>is one-shot on success.</strong> Once won, it never appears again. A failed or cancelled attempt brings it back at the next hourly check - even while its result report is still waiting to be read - so a chain gated on <code>success</code> can be retried.</li>
 <li><strong>is never on the map twice.</strong> While one copy is waiting or in flight, no second copy appears.</li>
 </ul>
 <p>Its gates combine with AND:</p>
@@ -2405,22 +2495,22 @@
 <tr>
 <td>no</td>
 <td>no</td>
-<td>alongside the next weekly mission</td>
+<td>at the next hourly check</td>
 </tr>
 <tr>
 <td>yes</td>
 <td>no</td>
-<td>alongside the next weekly mission after the predecessor ended right</td>
+<td>within the hour after the predecessor ended right</td>
 </tr>
 <tr>
 <td>no</td>
 <td>yes</td>
-<td>on that exact day</td>
+<td>on that day</td>
 </tr>
 <tr>
 <td>yes</td>
 <td>yes</td>
-<td>on that exact day, once the predecessor has ended right</td>
+<td>on that day, or later - within the hour after the predecessor ended right, if that happens after the date</td>
 </tr>
 </tbody>
 </table>
@@ -2429,13 +2519,13 @@
 <div class="highlight"><pre><span></span><code><span class="nt">"_isHistoric"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="nt">"_historicDay"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Year"</span><span class="p">:</span><span class="w"> </span><span class="mi">1940</span><span class="p">,</span><span class="w"> </span><span class="nt">"Month"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="nt">"Day"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="nt">"Hour"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">"Minute"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
-<p>The mission appears on that exact day. A year below 1900 counts as "no date", which is why example files carry <code>"Year": 1</code> when they mean none.</p>
+<p>That date is the earliest day the mission appears: on that day if its other gates already pass, otherwise within the hour after they do. A year below 1900 counts as "no date", which is why example files carry <code>"Year": 1</code> when they mean none.</p>
 <p>To close a mission off after a certain point, use a <code>LatestAppearanceDay</code> requirement (type 2), counted in days from the map's starting date. It works on any mission, historic or not.</p>
 <p>Put together, each operation becomes available on its real date, and one that was missed can be closed off.</p>
 <h2 id="pitfalls">Pitfalls<a class="headerlink" href="#pitfalls" title="Permanent link">&para;</a></h2>
 <p><strong>Duplicate ids.</strong> Two missions with the same id means one silently replaces the other, decided by load order. Prefix every id with your mod name, and remember to update the ids inside every <code>CompletedMission</code> value when you rename.</p>
-<p><strong>Forgetting <code>_isHistoric</code> on follow-ups.</strong> The chain works, but steps may take a very long time to surface, and a finished step can be drawn again.</p>
-<p><strong>Several historic missions due at once.</strong> They all appear together: dated ones on their day, undated ones alongside the same weekly mission. If you want them one after another, chain them on each other's outcome or give them different days.</p>
+<p><strong>Forgetting <code>_isHistoric</code> on follow-ups.</strong> The chain works, but each step joins the random weekly draw once its gate passes, so it may take a few slots to surface, and a finished step can be drawn again. That is the right choice for a repeatable follow-up - one the player may fly more than once. Use <code>_isHistoric</code> when the follow-up must appear right away and only once.</p>
+<p><strong>Several historic missions due at once.</strong> They all appear together: dated ones on their day, undated ones at the same hourly check. If you want them one after another, chain them on each other's outcome or give them different days.</p>
 <p><strong>Chaining on a mission that never appears.</strong> A gate on a mission whose own requirements never pass, or which is tagged for a different map, silently blocks the rest of the chain. Test each step on its own before linking them.</p>
 <p><strong>Testing with the cheat.</strong> <code>create_mission</code> ignores every gate. It proves a mission loads, not that the chain unlocks. See <a href="../../basics/testing/#testing-a-chain">Testing and reloading</a>.</p>
 <h2 id="when-json-is-not-enough">When JSON is not enough<a class="headerlink" href="#when-json-is-not-enough" title="Permanent link">&para;</a></h2>

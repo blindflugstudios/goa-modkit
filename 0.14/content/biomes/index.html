@@ -16,7 +16,7 @@
         <link rel="prev" href="../objects/">
       
       
-        <link rel="next" href="../../sharing/workshop/">
+        <link rel="next" href="../airplanes/">
       
       
         
@@ -1575,6 +1575,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1746,10 +1752,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#folder-layout-preliminary" class="md-nav__link">
+  <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Folder layout (preliminary)
+        Quick start
       
     </span>
   </a>
@@ -1817,10 +1823,105 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#when-something-does-not-show-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When something does not show up
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2172,10 +2273,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#folder-layout-preliminary" class="md-nav__link">
+  <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Folder layout (preliminary)
+        Quick start
       
     </span>
   </a>
@@ -2243,6 +2344,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#when-something-does-not-show-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When something does not show up
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2269,64 +2381,31 @@
 
 
 <h1 id="biomes">Biomes<a class="headerlink" href="#biomes" title="Permanent link">&para;</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Work in progress</p>
-<p>Art mods are work in progress. The current alpha does not support them yet, so biome textures from a mod do not show up in the game for now.</p>
-</div>
-<p>A biome is a ground type: the grass, dirt, road, rock, sand or gravel painted across a map with the <strong>Biomes</strong> tool of the <a href="../maps/">Map Editor</a>. The game has 24 of them. A mod can repaint any of them with a new texture, and the change shows on every map, shipped or custom.</p>
+<p>A biome is a ground type: the grass, dirt, road, rock, sand or gravel painted across a map with the <strong>Biomes</strong> tool of the <a href="../maps/">Map Editor</a>. The game has 24 of them, numbered <code>0</code> to <code>23</code>. A mod can repaint any of them with a new texture, and the change shows on every map, shipped or custom.</p>
 <p>A biome mod changes the <strong>look</strong> only. How fast people and aircraft move over the ground, which runway tier it counts as, and similar rules live in the <code>Biomes</code> table and are changed with <a href="../../data/csv/">CSV tables</a>.</p>
-<h2 id="folder-layout-preliminary">Folder layout (preliminary)<a class="headerlink" href="#folder-layout-preliminary" title="Permanent link">&para;</a></h2>
-<p>This is how the game will read biome art. It is preliminary and may still change.</p>
-<ul>
-<li><code>Biomes/</code> holds one PNG per biome slot, named after the slot's number, directly inside the folder: <code>8.png</code> repaints slot 8, the first grass (see the <a href="#biome-names">list</a>).</li>
-<li>Subfolders and other file names are reported in the log and ignored.</li>
-<li>Biome textures are imported once, when the game starts. After a change, <strong>restart the game</strong>; neither <strong>Refresh</strong> nor the <strong>Enabled</strong> switch in the Mods window re-imports them.</li>
-</ul>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-## Quick start
-
-Give the first grass a new texture:
-
+<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<p>Give the first grass a new texture:</p>
 <div class="highlight"><pre><span></span><code>Mods/
   my_ground_mod/
     Biomes/
-      Terrain-Type_Grass_A/
-        albedo.png
+      8.png
 </code></pre></div>
-
-Restart the game and load a save or start a map. Everywhere the map uses that grass, you now see your texture.
-
-!!! note
-    Biome textures are read once, when the game starts. After changing a texture or switching the mod on or off, **restart the game**.
-
--->
-
+<p>Restart the game and load a save or start a map. Everywhere the map uses that grass, you now see your texture.</p>
+<div class="admonition note">
+<p class="admonition-title">Restart after every change</p>
+<p>Biome textures are imported <strong>once, when the game starts</strong>. After you add or change a PNG, or switch the mod on or off, <strong>quit the game completely and start it again</strong>. Loading a save, <strong>Refresh</strong> and the <strong>Enabled</strong> switch in the Mods window do not re-import them.</p>
+</div>
 <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-- `Biomes/` holds one folder per biome you want to repaint, named exactly after the biome (see the [list](#biome-names)). Capitalisation does not matter.
-- Each folder needs one file: `albedo.png`, the colour texture.
-
--->
-
 <ul>
+<li><code>Biomes/</code> holds one PNG per ground type, named after its number: <code>8.png</code> repaints ground type 8, the first grass (see the <a href="#biome-names">list</a>).</li>
+<li>The number is written in plain digits without leading zeros: <code>8.png</code>, not <code>08.png</code>. A number outside <code>0</code> to <code>23</code> is reported in the log together with the valid range.</li>
+<li>Only files directly inside <code>Biomes/</code> count. Subfolders, other file types and other names are reported in the log and ignored.</li>
 <li>A mod cannot add new biomes, only repaint the 24 that exist. A map remembers which biome is painted where by number, so there is nothing a new one could be attached to.</li>
 <li>The biome's surface detail and its burnt look after a fire are not replaced.</li>
-<li>The game's own textures are untouched on disk. When you leave a map, the original ground returns, and switching the mod off (and restarting) brings it back everywhere.</li>
+<li>The game's own textures are untouched on disk. Switching the mod off (and restarting) brings the original ground back everywhere.</li>
+<li>The repainted ground is put together on the graphics card. On a computer whose graphics card cannot copy textures there, biome PNGs are not applied and the log says so. There is nothing to fix in the mod then.</li>
 </ul>
 <h3 id="the-texture">The texture<a class="headerlink" href="#the-texture" title="Permanent link">&para;</a></h3>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-| Rule | Limit |
-|---|---|
-| Format | PNG only |
-| Size | At most 2048 × 2048 pixels |
-| File size | At most 8 MB |
-| File name | `albedo.png` |
-
--->
-
 <table>
 <thead>
 <tr>
@@ -2337,58 +2416,21 @@ Restart the game and load a save or start a map. Everywhere the map uses that gr
 <tbody>
 <tr>
 <td>Format</td>
-<td>PNG only</td>
+<td>A real PNG. A JPEG renamed to <code>.png</code> is refused.</td>
 </tr>
 <tr>
 <td>Size</td>
-<td>At most 2048 × 2048 pixels</td>
+<td>At most 4096 × 4096 pixels (each side on its own)</td>
 </tr>
 <tr>
 <td>File size</td>
-<td>At most 8 MB</td>
+<td>At most 10 MB</td>
 </tr>
 </tbody>
 </table>
-<p>The game scales your texture to the size of its own ground textures, so any size within the limit works; a square image avoids stretching. The texture repeats across the ground, so it should tile seamlessly: the left edge must continue into the right edge, the top into the bottom.</p>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-Other files in a biome folder (`model.glb`, `destroyed_albedo.png`, ...) mean nothing here. The log says so, and `albedo.png` still loads.
-
--->
-
+<p>A PNG over a limit is <strong>not scaled down</strong>: it is skipped with a warning in the log, and the game's own ground stays. Within the limits, the game resizes your texture to the size of its own ground textures, so any size works; a square image avoids stretching. The texture repeats across the ground, so it should tile seamlessly: the left edge must continue into the right edge, the top into the bottom.</p>
 <h2 id="biome-names">Biome names<a class="headerlink" href="#biome-names" title="Permanent link">&para;</a></h2>
 <p>The number is the biome's row in the <code>Biomes</code> table. Rows with the same number describe how that ground plays.</p>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-| Number | Folder name | Ground |
-|---|---|---|
-| 0 | `Terrain-Type_Dirt_A` | dirt |
-| 1 | `Terrain-Type_Dirt_B` | dirt |
-| 2 | `Terrain-Type_Dirt_C` | dirt |
-| 3 | `Terrain-Type_Dirt_D` | dirt |
-| 4 | `Terrain-Type_Dirt_E` | dirt |
-| 5 | `Terrain-Type_Dirt_F` | dirt |
-| 6 | `Terrain-Type_Dirt_G` | dirt, also laid under parking spots, gardening plots and dirt runways |
-| 7 | `Terrain-Type_Dirt_H` | dirt |
-| 8 | `Terrain-Type_Grass_A` | grass |
-| 9 | `Terrain-Type_Grass_B` | grass |
-| 10 | `Terrain-Type_Grass_C` | grass |
-| 11 | `Terrain-Type_Grass_D` | grass |
-| 12 | `Terrain-Type_Grass_E` | grass |
-| 13 | `Terrain-Type_Road_A` | road, also laid under tarmac runways |
-| 14 | `Terrain-Type_Road_B` | road |
-| 15 | `Terrain-Type_Road_C` | road, also laid under concrete runways |
-| 16 | `Terrain-Type_Rock_A` | rock |
-| 17 | `Terrain-Type_Rock_B` | rock |
-| 18 | `Terrain-Type_Rock_C` | rock |
-| 19 | `Terrain-Type_Sand_A` | sand |
-| 20 | `Terrain-Type_Sand_B` | sand, also laid under sand runways |
-| 21 | `Terrain-Type_Sand_C` | sand |
-| 22 | `Terrain-Type_Gravel_A` | gravel, also laid under gravel runways |
-| 23 | `Terrain-Type_Grass_B3` | grass |
-
--->
-
 <table>
 <thead>
 <tr>
@@ -2523,16 +2565,6 @@ Other files in a biome folder (`model.glb`, `destroyed_albedo.png`, ...) mean no
 <p>The runway surfaces are the built-in values of the <code>AirstripTiers</code> table (<code>Biome Id</code> column); a mod that changes that table changes which ground is laid.</p>
 <h2 id="biomes-and-the-biomes-table">Biomes and the <code>Biomes</code> table<a class="headerlink" href="#biomes-and-the-biomes-table" title="Permanent link">&para;</a></h2>
 <p>The two are independent and combine freely:</p>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-| You want to change... | Use |
-|---|---|
-| What a ground type looks like | `Biomes/<name>/albedo.png` (this page) |
-| How a ground type plays: movement speed, runway tier, wear on stored goods, fire spread | The `Biomes` table, row `<number>` ([CSV tables](../data/csv.md)) |
-| Which ground is painted where on a map | The **Biomes** tool in the [Map Editor](maps.md) |
-
--->
-
 <table>
 <thead>
 <tr>
@@ -2556,24 +2588,14 @@ Other files in a biome folder (`model.glb`, `destroyed_albedo.png`, ...) mean no
 </tbody>
 </table>
 <h2 id="several-mods-same-biome">Several mods, same biome<a class="headerlink" href="#several-mods-same-biome" title="Permanent link">&para;</a></h2>
-<p>If two enabled mods repaint the same biome, the mod applied last wins, and the log notes which one overrode which. See <a href="../../basics/mods/">How mods work</a> for the order.</p>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-## When something does not show up
-
-Check `Player.log` for lines starting with `[Mod <your mod id>] Biomes/...`:
-
-| Log line (shortened) | Meaning |
-|---|---|
-| `Biomes/Terrain-Type_Grass_A: replaced biome slot 8 (Terrain-Type_Grass_A).` | Your texture is in use. Written when a map loads. |
-| `Biomes/Grass_A names no biome of this game. Known biomes: Terrain-Type_Dirt_A, ...` | The folder name does not match. Copy it from the list above. |
-| `Biomes/Terrain-Type_Grass_A has no albedo.png and is ignored` | Add the texture, or fix its name. |
-| `Biomes/Terrain-Type_Grass_A: only albedo.png is used for a biome; the other files are ignored.` | Harmless; remove the extra files if you like. |
-| `Biomes/Terrain-Type_Grass_A/albedo.png is 4096x4096, over the 2048x2048 limit` | Scale the texture down. |
-| `Biomes/Terrain-Type_Grass_A/albedo.png is not a PNG` | Save it as a real PNG. |
-| `[Mods] This device cannot copy textures on the GPU; biome textures from mods are not applied.` | Your graphics hardware does not support biome mods. Nothing to fix in the mod. |
-
--->
+<p>If two enabled mods repaint the same biome, the mod applied last wins, and the log notes which one overrode which. See <a href="../../basics/mods/#which-mod-wins">How mods work</a> for the order.</p>
+<h2 id="when-something-does-not-show-up">When something does not show up<a class="headerlink" href="#when-something-does-not-show-up" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Did you <strong>restart the game</strong>? Biome textures are only imported at game start.</li>
+<li>Is the file directly inside <code>Biomes/</code>, named with a number from <code>0</code> to <code>23</code> and no leading zero?</li>
+<li>Is it a real PNG, at most 4096 × 4096 pixels and 10 MB?</li>
+</ul>
+<p>Problems are written to <code>Player.log</code> on lines that start with <code>[Mod &lt;your mod id&gt;]</code>. The detailed lines may only appear in development builds, so if the log is silent, go through the list above. The size limits for all art are also on <a href="../objects/#file-limits">Objects and models</a>.</p>
 
 
 
@@ -2628,13 +2650,13 @@ Check `Player.log` for lines starting with `[Mod <your mod id>] Biomes/...`:
         
         
           
-          <a href="../../sharing/workshop/" class="md-footer__link md-footer__link--next" aria-label="Next: Steam Workshop">
+          <a href="../airplanes/" class="md-footer__link md-footer__link--next" aria-label="Next: Airplane skins">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Steam Workshop
+                Airplane skins
               </div>
             </div>
             <div class="md-footer__button md-icon">

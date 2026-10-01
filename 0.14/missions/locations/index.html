@@ -1257,6 +1257,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-locations-with-a-mod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding locations with a mod
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#using-your-own-coordinates" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1680,6 +1691,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1796,6 +1813,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2199,6 +2300,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-locations-with-a-mod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding locations with a mod
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#using-your-own-coordinates" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2235,10 +2347,10 @@
 
 
 <h1 id="locations">Locations<a class="headerlink" href="#locations" title="Permanent link">&para;</a></h1>
-<p>Every mission happens somewhere. A mission lists the places it can appear, and the game picks one of them each time the mission is created. This page explains how that choice works, what the location flags mean, and lists every place that ships with the game, with its coordinates.</p>
+<p>Every mission happens somewhere. A mission lists the places it can appear, and the game picks one of them each time the mission is created. This page explains how that choice works, what the location flags mean, lists every place that ships with the game, with its coordinates, and shows how a mod adds places of its own.</p>
 <h2 id="how-a-location-is-chosen">How a location is chosen<a class="headerlink" href="#how-a-location-is-chosen" title="Permanent link">&para;</a></h2>
 <p>When a mission is created, the game draws one entry from the mission's list of locations (<code>_potentialLocations</code> in the mission JSON). If that spot is already used by another mission on the map, it draws again, up to five more times. If every draw comes up taken, it keeps the last one, so two missions can end up sharing a location.</p>
-<p>If a mission lists no locations at all, the game falls back to a random place from the <a href="#the-locations-that-ship-with-the-game">list below</a>.</p>
+<p>If a mission lists no locations at all, the game falls back to a random place from the full list: the <a href="#the-locations-that-ship-with-the-game">places that ship with the game</a> plus any that enabled mods add (see <a href="#adding-locations-with-a-mod">Adding locations with a mod</a>).</p>
 <p>Distance is not decoration: the fuel a flight costs is worked out from the great-circle distance (the shortest distance over the globe) between the location and the loaded map's own coordinates, multiplied by <code>FuelConsumptionPerKilometer</code> from the <code>Variables</code> table (see <a href="../../data/csv/">CSV tables</a>). A mission over Berlin is far more expensive to fly than one over the Channel.</p>
 <h2 id="using-a-location">Using a location<a class="headerlink" href="#using-a-location" title="Permanent link">&para;</a></h2>
 <p><strong>In the Mission Editor</strong>, open the <strong>Locations</strong> section, pick a place from the dropdown and add it. Add as many as you like; the same place cannot be added twice.</p>
@@ -2283,7 +2395,7 @@
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"_locationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"seine_bay"</span><span class="p">,</span><span class="w"> </span><span class="nt">"_locationName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"seine_bay"</span><span class="p">,</span><span class="w"> </span><span class="nt">"_coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mf">49.7154</span><span class="p">,</span><span class="w"> </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.672</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">"_flags"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
-<p><strong>From a script</strong>, a script-only mission (one without a <code>.json</code>) is placed with <code>missions_api.SetMissionLocation(mission_entity_id, location_name)</code>, usually from <code>initialize_mission</code>. It accepts only a name from the list below, never coordinates of your own, and returns <code>False</code> for an unknown name. Without a location, a script-only mission sits at the map origin. See <a href="../reference/">Reference</a>.</p>
+<p><strong>From a script</strong>, a script-only mission (one without a <code>.json</code>) is placed with <code>missions_api.SetMissionLocation(mission_entity_id, location_name)</code>, usually from <code>initialize_mission</code>. It accepts only a name from the list below or one that an enabled mod adds (see <a href="#adding-locations-with-a-mod">Adding locations with a mod</a>), never coordinates of your own, and returns <code>False</code> for an unknown name. Without a location, a script-only mission sits at the map origin. See <a href="../reference/">Reference</a>.</p>
 <h2 id="location-flags">Location flags<a class="headerlink" href="#location-flags" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2324,7 +2436,7 @@
 <p>They add up, so <code>10</code> is Sea + Enemy territory (2 + 8) - the most common value for a coastal target on the far side of the Channel.</p>
 <div class="admonition warning">
 <p class="admonition-title">The flags in your mission file are not read</p>
-<p>The <code>_flags</code> value in a mission file is kept for completeness, but <strong>the game does not read it</strong>. Every shipped mission leaves it at <code>0</code>. Quest steps such as "fly a mission over the sea" look the mission's location <strong>name</strong> up in the list below and use the flags recorded there. The quest step writes the flag <strong>name</strong>, not the number: <code>location,sea</code>, <code>location,ownterritory</code>, <code>location,enemyterritory</code> (see <a href="../../quests/#aircraft-and-missions">Quests</a>).</p>
+<p>The <code>_flags</code> value in a mission file is kept for completeness, but <strong>the game does not read it</strong>. Every shipped mission leaves it at <code>0</code>. Quest steps such as "fly a mission over the sea" look the mission's location <strong>name</strong> up in the location list - the places below plus any that enabled mods add - and use the flags recorded there. The quest step writes the flag <strong>name</strong>, not the number: <code>location,sea</code>, <code>location,ownterritory</code>, <code>location,enemyterritory</code> (see <a href="../../quests/#aircraft-and-missions">Quests</a>).</p>
 <p>Two consequences: a location name that is not on the list passes every location condition automatically, and because no shipped location carries <code>Land</code>, a <code>location,land</code> condition can never be met.</p>
 </div>
 <h2 id="the-locations-that-ship-with-the-game">The locations that ship with the game<a class="headerlink" href="#the-locations-that-ship-with-the-game" title="Permanent link">&para;</a></h2>
@@ -2835,8 +2947,37 @@
 </tbody>
 </table>
 <p>Two further entries exist in the game's list but are development leftovers - <strong>do not use them</strong>: <code>test1</code> and <code>ireland</code>. Neither carries any flag, and <code>ireland</code> is not in Ireland.</p>
+<h2 id="adding-locations-with-a-mod">Adding locations with a mod<a class="headerlink" href="#adding-locations-with-a-mod" title="Permanent link">&para;</a></h2>
+<p>A mod can add its own places to the list, so its missions - and anyone else's - can use them by name. Put one or more <code>.json</code> files into a <code>Locations</code> folder inside your mod's <code>Missions/</code> folder:</p>
+<div class="highlight"><pre><span></span><code>Mods/
+  my_mod/
+    Missions/
+      Locations/
+        mymod_locations.json
+</code></pre></div>
+<p>Only files directly inside <code>Missions/Locations/</code> are read. A file looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">"Locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"_locationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mymod_scapa_flow"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_locationName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mymod_scapa_flow"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mf">58.9</span><span class="p">,</span><span class="w"> </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mf">-3.1</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"_flags"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The <code>Locations</code> list holds as many places as you like. Each entry has the same fields as an entry in a mission file (<a href="#using-a-location">see above</a>), and <code>_flags</code> must be a number here too (<a href="#location-flags">Location flags</a>).</p>
+<ul>
+<li><strong>While your mod is enabled, its places are on the list</strong>, and they leave it when the mod is switched off or removed. Switching a mod on or off updates the list without restarting the game.</li>
+<li><strong>A place from a mod behaves like a shipped one.</strong> It is offered in the Mission Editor's dropdown, works with <code>missions_api.SetMissionLocation</code>, can be drawn for a mission that lists no locations, and its flags are what quest location conditions see.</li>
+<li><strong>Shipped names always win.</strong> If your place uses a name the game already has, the shipped one is used. If two mods add the same name, the game uses one of them and does not tell you. So give every place your mod's prefix, as in <code>mymod_scapa_flow</code>.</li>
+<li><strong>The player sees <code>_locationName</code> exactly as written</strong>, underscores and all. Shipped places come with translations; yours has none until you register a term called <code>mission_location/&lt;name&gt;</code> - see <a href="../../scripting/localization/#location-names">Location names</a>.</li>
+<li><strong>A file the game cannot read is skipped</strong>, with a warning in <code>Player.log</code>. Your other location files still load.</li>
+<li>Keep the coordinates inside the war map (see the next section).</li>
+</ul>
 <h2 id="using-your-own-coordinates">Using your own coordinates<a class="headerlink" href="#using-your-own-coordinates" title="Permanent link">&para;</a></h2>
-<p>Nothing stops a mission from naming a place that is not on the list. The coordinates live in the mission's own file, not in a shared table, so you can put a mission anywhere. The name and coordinates are yours; the flags a quest step sees are not - they come from the shipped list by name (see above), so a place of your own matches every location condition. A script cannot use your own place: <code>missions_api.SetMissionLocation</code> only accepts names from the list.</p>
+<p>Nothing stops a mission from naming a place that is not on the list. The coordinates live in the mission's own file, not in a shared table, so you can put a mission anywhere. The name and coordinates are yours; the flags a quest step sees are not - they come from the location list by name (the shipped places and any added by a mod), so a place that exists only in a mission's own file matches every location condition. A script cannot use such a place either: <code>missions_api.SetMissionLocation</code> only accepts names from the list. To give a place flags, or to use it from a script, <a href="#adding-locations-with-a-mod">add it with a mod</a>.</p>
 <p>The war map shows latitude 40.75 to 61.25 and longitude -11.75 to 21.64 (a Mercator projection, the usual flat world map). The range of the shipped places above is simply where they happen to be, not the map's limit. A location outside the map's box still works - distance and fuel are just maths - but its marker is pushed to the nearest edge of the map, so the player sees it at the border rather than where it really is. It stays clickable.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>

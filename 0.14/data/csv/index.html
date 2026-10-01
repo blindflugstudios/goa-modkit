@@ -2246,6 +2246,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2362,6 +2368,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -3532,6 +3622,16 @@ RandomActionChatProbability,0.6
 <code>StartTimeValues</code> and <code>StateInfluence</code> - cannot.</p>
 <p>Each section lists the columns, what values they take, and what the built-in rows use. Where a column has no
 special rule, only the generic ones above apply.</p>
+<p>The built-in values are always complete, never a sample:</p>
+<ul>
+<li><code>a–b</code> is the full range: the lowest and the highest value any built-in row uses.</li>
+<li>A list joined by "or" is every distinct value the built-in rows use.</li>
+<li>A list marked "by row" gives each row's value, in the order the rows appear in the file.</li>
+<li>"on every row" means all built-in rows hold that one value.</li>
+<li>A <code>min-max</code> column gives each half its own range: "min 0–43, max 0–60" means the first number runs from 0 to
+  43 across the rows and the second from 0 to 60.</li>
+<li>An empty built-in cell means the built-in rows use every value listed under Value.</li>
+</ul>
 <h3 id="aircraft-and-base">Aircraft and base<a class="headerlink" href="#aircraft-and-base" title="Permanent link">&para;</a></h3>
 <h4 id="vehicledata-aircraft"><code>VehicleData</code> - aircraft<a class="headerlink" href="#vehicledata-aircraft" title="Permanent link">&para;</a></h4>
 <p>Built-in file: <a href="../../assets/csv/VehicleData.csv">VehicleData.csv</a></p>
@@ -3541,7 +3641,7 @@ special rule, only the generic ones above apply.</p>
 <tr>
 <th>Column</th>
 <th>Value</th>
-<th>Built-in range</th>
+<th>Built-in</th>
 <th>Notes</th>
 </tr>
 </thead>
@@ -3549,7 +3649,7 @@ special rule, only the generic ones above apply.</p>
 <tr>
 <td><code>Name</code></td>
 <td>localization key</td>
-<td><code>airplane/spitfire</code></td>
+<td><code>airplane/&lt;row id&gt;</code> on every row, e.g. <code>airplane/spitfire</code></td>
 <td>must not be empty</td>
 </tr>
 <tr>
@@ -3561,8 +3661,8 @@ special rule, only the generic ones above apply.</p>
 <tr>
 <td><code>Crew</code></td>
 <td>comma list of seats; repeat a role for two seats</td>
-<td><code>Pilot</code>, <code>"Pilot,Gunner,Navigator"</code></td>
-<td>roles: <code>Pilot</code>, <code>Gunner</code>, <code>Navigator</code>, <code>BombAimer</code>, <code>FlightEngineer</code>, <code>RadioOperator</code></td>
+<td>1–8 seats, from <code>Pilot</code> alone to <code>Pilot,Pilot,BombAimer,Navigator,FlightEngineer,RadioOperator,Gunner,Gunner</code>; every row starts with <code>Pilot</code> and all six roles are used</td>
+<td>in a CSV file, wrap a cell with more than one seat in quotes: <code>"Pilot,Gunner,Navigator"</code>. Roles: <code>Pilot</code>, <code>Gunner</code>, <code>Navigator</code>, <code>BombAimer</code>, <code>FlightEngineer</code>, <code>RadioOperator</code></td>
 </tr>
 <tr>
 <td><code>Runway Tier</code></td>
@@ -3585,7 +3685,7 @@ special rule, only the generic ones above apply.</p>
 <tr>
 <td><code>Movement Speed</code></td>
 <td>whole number</td>
-<td>5</td>
+<td>5 on every row</td>
 <td>taxi speed; 0 and it never reaches the runway</td>
 </tr>
 <tr>
@@ -3597,13 +3697,13 @@ special rule, only the generic ones above apply.</p>
 <tr>
 <td><code>Health</code></td>
 <td>whole number</td>
-<td>100</td>
+<td>100 on every row</td>
 <td></td>
 </tr>
 <tr>
 <td><code>Initial Integrity</code></td>
 <td>whole number</td>
-<td>1000</td>
+<td>1000 on every row</td>
 <td>hours of wear the aircraft can take before it is worn out (1000 h ≈ 41 days)</td>
 </tr>
 <tr>
@@ -3615,56 +3715,56 @@ special rule, only the generic ones above apply.</p>
 <tr>
 <td><code>Voxel Size</code></td>
 <td><code>AxBxC</code></td>
-<td><code>10x0x10</code></td>
+<td><code>10x0x10</code> on every row</td>
 <td></td>
 </tr>
 <tr>
 <td><code>Fight Power</code></td>
 <td><code>min-max</code></td>
-<td><code>0-0</code> … <code>43-60</code></td>
+<td>min 0–43, max 0–60</td>
 <td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
 </tr>
 <tr>
 <td><code>Bomb Power</code></td>
 <td><code>min-max</code></td>
-<td><code>0-0</code> … <code>50-80</code></td>
-<td>same</td>
+<td>min 0–50, max 0–80</td>
+<td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
 </tr>
 <tr>
 <td><code>Recon Power</code></td>
 <td><code>min-max</code></td>
-<td><code>5-10</code> … <code>42-60</code></td>
-<td>same</td>
+<td>min 5–42, max 10–60</td>
+<td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
 </tr>
 <tr>
 <td><code>Manoeuvrability</code></td>
 <td><code>min-max</code></td>
 <td>min 2–28, max 8–50</td>
-<td>same</td>
+<td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
 </tr>
 <tr>
 <td><code>Transport Capacity</code></td>
 <td><code>min-max</code></td>
-<td><code>1-5</code> … <code>60-90</code></td>
-<td>same</td>
+<td>min 1–60, max 5–90</td>
+<td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
 </tr>
 <tr>
 <td><code>Stealthiness</code></td>
 <td><code>min-max</code></td>
-<td><code>10-48</code> … <code>88-98</code></td>
-<td>same</td>
+<td>min 10–88, max 48–98</td>
+<td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
 </tr>
 <tr>
 <td><code>Wreck Resource Type</code></td>
 <td><code>/</code>-list of resources</td>
-<td><code>Metal/RepairParts</code></td>
+<td><code>Metal/RepairParts</code> on every row</td>
 <td>both wreck columns set, or both empty</td>
 </tr>
 <tr>
 <td><code>Wreck Resource Amount</code></td>
 <td><code>/</code>-list of whole numbers</td>
-<td><code>10/5</code></td>
-<td>same length as the type list</td>
+<td><code>10/5</code> on every row</td>
+<td>one amount per entry in <code>Wreck Resource Type</code>, in the order listed there</td>
 </tr>
 <tr>
 <td><code>Low Caliber Ammo Capacity</code></td>
@@ -3676,13 +3776,13 @@ special rule, only the generic ones above apply.</p>
 <td><code>High Caliber Ammo Capacity</code></td>
 <td>whole number</td>
 <td>0–300</td>
-<td><code>AntiAirAmmo</code>; 0 = none</td>
+<td><code>AntiAirAmmo</code> carried; 0 = none</td>
 </tr>
 <tr>
 <td><code>Plane Bombs Capacity</code></td>
 <td>whole number</td>
 <td>0–32</td>
-<td><code>PlaneBombs</code>; 0 = none</td>
+<td><code>PlaneBombs</code> carried; 0 = none</td>
 </tr>
 </tbody>
 </table>
@@ -3708,7 +3808,7 @@ mod's numbers even after you remove it.</p>
 <tr>
 <td><code>Airstrip Tier</code></td>
 <td>whole number</td>
-<td>1,2,3,4,5,5</td>
+<td>by row: 1, 2, 3, 4, 5, 5</td>
 <td>required to reach the rank</td>
 </tr>
 <tr>
@@ -3765,31 +3865,31 @@ mod's numbers even after you remove it.</p>
 <tr>
 <td><code>Length</code></td>
 <td>whole number</td>
-<td>80,120,140,160,200</td>
+<td>by row: 80, 120, 140, 160, 200</td>
 <td>tiers match on "length or more", so keep them ascending</td>
 </tr>
 <tr>
 <td><code>Width</code></td>
 <td>whole number</td>
-<td>12,14,18,22,26</td>
-<td>same</td>
+<td>by row: 12, 14, 18, 22, 26</td>
+<td>tiers match on "width or more", so keep them ascending</td>
 </tr>
 <tr>
 <td><code>Material</code></td>
 <td>text</td>
-<td><code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code>, <code>tarmac</code></td>
+<td>by row: <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code>, <code>tarmac</code></td>
 <td><strong>must not repeat another tier's material</strong>, and must name an existing <code>ResourceCost</code> row - that row is what each tile of this runway costs. <code>ResourceCost</code> does not accept new surface rows, so in practice keep to <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code> and <code>tarmac</code> (swapping them between tiers is fine). A material with no <code>ResourceCost</code> row is accepted here, and then laying a runway of that tier fails with an error</td>
 </tr>
 <tr>
 <td><code>Biome Id</code></td>
 <td>whole number</td>
-<td>6,20,22,15,13</td>
+<td>by row: 6, 20, 22, 15, 13</td>
 <td>ground painted under the finished strip</td>
 </tr>
 <tr>
 <td><code>Build Time</code></td>
 <td>whole number</td>
-<td>5,2,2,2,2</td>
+<td>by row: 5, 2, 2, 2, 2</td>
 <td>in-game minutes of work per tile. Each tile is worked by one crew member at a time, so more crew lay more tiles in parallel, not one tile faster</td>
 </tr>
 </tbody>
@@ -3813,17 +3913,17 @@ mod's numbers even after you remove it.</p>
 </tr>
 <tr>
 <td><code>Character Speed Modifier</code></td>
-<td>1 … 1.2</td>
+<td>1–1.2</td>
 <td>0 freezes anyone standing on it</td>
 </tr>
 <tr>
 <td><code>Airplane Speed Modifier</code></td>
-<td>0.5 … 1.2</td>
+<td>0.5–1.2</td>
 <td></td>
 </tr>
 <tr>
 <td><code>Degradation Penalty</code></td>
-<td>0 … 0.2</td>
+<td>0–0.2</td>
 <td>extra wear on goods stored here</td>
 </tr>
 <tr>
@@ -3841,24 +3941,39 @@ mod's numbers even after you remove it.</p>
 <tr>
 <th>Column</th>
 <th>Built-in</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>PlaneHealth</code></td>
-<td>18, 26, 34</td>
+<td>by row: 18, 26, 34</td>
+<td></td>
 </tr>
 <tr>
 <td><code>PlanePower</code></td>
-<td>23, 17, 14</td>
+<td>by row: 23, 17, 14</td>
+<td></td>
 </tr>
 <tr>
-<td><code>PlaneWinDealDamageMin</code> / <code>Max</code></td>
-<td>15–120 - damage to your aircraft when the enemy wins</td>
+<td><code>PlaneWinDealDamageMin</code></td>
+<td>by row: 20, 20, 15</td>
+<td>damage to your aircraft when the enemy wins</td>
 </tr>
 <tr>
-<td><code>PlaneLooseDealDamageMin</code> / <code>Max</code></td>
-<td>5–25 - damage when the enemy loses</td>
+<td><code>PlaneWinDealDamageMax</code></td>
+<td>by row: 120, 70, 50</td>
+<td></td>
+</tr>
+<tr>
+<td><code>PlaneLooseDealDamageMin</code></td>
+<td>by row: 10, 5, 5</td>
+<td>damage to your aircraft when the enemy loses</td>
+</tr>
+<tr>
+<td><code>PlaneLooseDealDamageMax</code></td>
+<td>by row: 25, 20, 15</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -3916,20 +4031,20 @@ The four special rows point at themselves in the last two columns and hold:</p>
 <tr>
 <td><code>Bombers</code></td>
 <td><code>min-max</code></td>
-<td><code>0-0</code> … <code>4-6</code></td>
+<td>min 0–4, max 0–6</td>
 <td>whole numbers, <code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Divers</code></td>
 <td><code>min-max</code></td>
-<td><code>0-0</code> … <code>6-6</code></td>
-<td>same</td>
+<td>min 0–6, max 0–6</td>
+<td>whole numbers, <code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Fighters</code></td>
 <td><code>min-max</code></td>
-<td><code>1-2</code> … <code>8-8</code></td>
-<td>same</td>
+<td>min 1–8, max 2–8</td>
+<td>whole numbers, <code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>LowAttacks</code></td>
@@ -3941,7 +4056,7 @@ The four special rows point at themselves in the last two columns and hold:</p>
 <td><code>HighAttacks</code></td>
 <td>whole number</td>
 <td>2–25</td>
-<td>severity used when the map is set to harder raids - same</td>
+<td>severity used when the map is set to harder raids - <strong>must name a row this table has</strong></td>
 </tr>
 </tbody>
 </table>
@@ -3980,7 +4095,7 @@ The four special rows point at themselves in the last two columns and hold:</p>
 <tr>
 <td><code>Ammo Type</code></td>
 <td>resource name or <code>None</code></td>
-<td><code>GunAmmo</code>, <code>AntiAirAmmo</code>, <code>None</code>, <code>0</code></td>
+<td><code>GunAmmo</code>, <code>AntiAirAmmo</code>, <code>None</code> or <code>0</code></td>
 <td>anything that is not a resource name (<code>None</code>, <code>0</code>) means the piece stores no ammo</td>
 </tr>
 <tr>
@@ -4010,7 +4125,7 @@ The four special rows point at themselves in the last two columns and hold:</p>
 <tr>
 <td><code>Firing Angle</code></td>
 <td>number</td>
-<td>0, 140, 360</td>
+<td>0, 140 or 360</td>
 <td><code>0</code> is read as a full circle</td>
 </tr>
 <tr>
@@ -4028,7 +4143,7 @@ The four special rows point at themselves in the last two columns and hold:</p>
 <tr>
 <td><code>Attacker Priority</code></td>
 <td><code>Bombers</code>, <code>Divers</code>, <code>Fighters</code>, <code>Nearest</code>, <code>None</code></td>
-<td></td>
+<td><code>Bombers</code>, <code>Divers</code>, <code>Fighters</code> or <code>None</code>; no row uses <code>Nearest</code></td>
 <td>anything else falls back to <code>None</code></td>
 </tr>
 </tbody>
@@ -4051,7 +4166,7 @@ removed.</p>
 <tr>
 <td><code>Dimensions</code></td>
 <td><code>WxHxD</code>, or <code>dynamic/1x0x1</code> for roofs</td>
-<td><code>1x3x1</code>, <code>1x0x1</code>, <code>2x2x2</code></td>
+<td>width 1–32, height 0–6, depth 1–32 (from <code>1x0x1</code> to <code>32x1x32</code>), <code>dynamic/1x0x1</code> on the roofs, empty on 9 rows (listed below)</td>
 <td></td>
 </tr>
 <tr>
@@ -4069,7 +4184,7 @@ removed.</p>
 <tr>
 <td><code>Associated Task</code></td>
 <td>task name or <code>None</code></td>
-<td><code>Sleep</code>, <code>Chill</code>, <code>UseEquipment</code>, <code>PlayPiano</code>, <code>UseTrainingObject</code>, <code>MonitorAirspace</code>, <code>UseRadio</code>, <code>SaluteTheFlag</code>, <code>Grieve</code>, <code>ListenToMusic</code>, <code>PlayDartboard</code>, <code>PlayGuitar</code>, <code>PlayBilliardTable</code>, <code>UsePlanningBoard</code></td>
+<td><code>None</code>, <code>Sleep</code>, <code>Chill</code>, <code>UseEquipment</code>, <code>PlayPiano</code>, <code>UseTrainingObject</code>, <code>MonitorAirspace</code>, <code>UseRadio</code>, <code>SaluteTheFlag</code>, <code>Grieve</code>, <code>ListenToMusic</code>, <code>PlayDartboard</code>, <code>PlayGuitar</code>, <code>PlayBilliardTable</code> or <code>UsePlanningBoard</code></td>
 <td>pointing an object at a task its art does not fit is allowed, and looks wrong</td>
 </tr>
 <tr>
@@ -4145,7 +4260,7 @@ without a row simply has no effect.</p>
 <tr>
 <td><code>Buff Name</code></td>
 <td>localization key</td>
-<td><code>prop_effects/organised_sleep</code></td>
+<td>a <code>prop_effects/&lt;effect&gt;</code> key on every row (31 different keys), e.g. <code>prop_effects/organised_sleep</code></td>
 <td>must not be empty</td>
 </tr>
 <tr>
@@ -4157,8 +4272,8 @@ without a row simply has no effect.</p>
 <tr>
 <td><code>Associated Tasks Or Action</code></td>
 <td>comma list of task names</td>
-<td><code>Sleep</code>, <code>"Sleep,Chill"</code>, <code>UseEquipment</code></td>
-<td>must not be empty. A name that matches no task is accepted and the effect simply <strong>never fires</strong></td>
+<td>1–4 names per row, e.g. <code>Sleep</code> or <code>"Sleep,Chill"</code>, drawn from <code>AidInjured</code>, <code>BoardAirplane</code>, <code>BringResources</code>, <code>Bury</code>, <code>Chill</code>, <code>Cook</code>, <code>Eat</code>, <code>Grieve</code>, <code>HarvestGardeningTile</code>, <code>Landing</code>, <code>Loiter</code>, <code>MaintainAirplane</code>, <code>PlayGuitar</code>, <code>PlayPiano</code>, <code>Recover</code>, <code>RecoverInBed</code>, <code>Repair</code>, <code>RepairAirplane</code>, <code>Sleep</code>, <code>Stockpile</code>, <code>UseEquipment</code>, <code>UsePlanningBoard</code>, <code>UseRadio</code>, <code>UseTrainingObject</code>, <code>Water</code> or <code>WorkOnWorkbench</code></td>
+<td>must not be empty. In a CSV file, wrap a cell with more than one task in quotes: <code>"Sleep,Chill"</code>. A name that matches no task is accepted and the effect simply <strong>never fires</strong></td>
 </tr>
 <tr>
 <td><code>Effect 1</code></td>
@@ -4168,15 +4283,15 @@ without a row simply has no effect.</p>
 </tr>
 <tr>
 <td><code>Effect 2</code></td>
-<td>same, or empty</td>
+<td><code>&lt;signed number&gt; &lt;name&gt;</code>, or empty</td>
 <td><code>-1.5 Energy</code>, <code>+1 Energy</code>, <code>+0.5 Mood</code>, <code>+10 Mood</code> or <code>+1 Confidence</code> on 9 rows; empty on the rest</td>
 <td></td>
 </tr>
 <tr>
 <td><code>Effect 3</code></td>
-<td>same, or empty</td>
+<td><code>&lt;signed number&gt; &lt;name&gt;</code>, or empty</td>
+<td>empty on every row</td>
 <td></td>
-<td>no built-in row uses it</td>
 </tr>
 </tbody>
 </table>
@@ -4199,25 +4314,25 @@ towers); an invented name is accepted and does nothing.</p>
 <tr>
 <td><code>LocKey_Name</code></td>
 <td>localization key</td>
-<td><code>map.obj.tree.name</code></td>
+<td><code>map.obj.&lt;object&gt;.name</code> on 20 rows, e.g. <code>map.obj.tree.name</code>; <code>map.obj.&lt;object&gt;</code> without <code>.name</code> on the other 13, e.g. <code>map.obj.crate</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>LocKey_Description</code></td>
 <td>localization key</td>
-<td></td>
+<td><code>map.obj.&lt;object&gt;.description</code> on 18 rows, e.g. <code>map.obj.tree.description</code>; <code>map.obj.&lt;object&gt;</code> without <code>.description</code> on the other 15, e.g. <code>map.obj.crate</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>Dimensions</code></td>
 <td><code>WxHxD</code></td>
-<td><code>1x4x1</code>, <code>2x2x2</code>, <code>3x1x3</code></td>
+<td>width 1–4, height 1–6, depth 1–6 (from <code>1x1x1</code> to <code>4x6x4</code>)</td>
 <td></td>
 </tr>
 <tr>
 <td><code>Resource Harvested</code></td>
 <td>resource name, or empty</td>
-<td><code>Wood</code>, <code>Stone</code>, <code>Herbs</code>, <code>Food</code>, <code>RawWater</code>, <code>Clay</code>, <code>Sandbags</code>, <code>Metal</code>, <code>Planks</code>, <code>Fuel</code>, seeds</td>
+<td><code>Wood</code>, <code>Stone</code>, <code>Herbs</code>, <code>Food</code>, <code>RawWater</code>, <code>Clay</code>, <code>Sandbags</code>, <code>Metal</code>, <code>Planks</code>, <code>Fuel</code>, <code>GrainSeeds</code>, <code>BeansSeeds</code>, <code>PotatoSeeds</code> or <code>TomatoSeeds</code>; empty on 9 rows</td>
 <td>empty means nothing to harvest</td>
 </tr>
 <tr>
@@ -4241,7 +4356,7 @@ towers); an invented name is accepted and does nothing.</p>
 <tr>
 <td><code>Limited Harvest Amount</code></td>
 <td>whole number</td>
-<td>0, 20, 30, 100</td>
+<td>0, 20, 30 or 100</td>
 <td>cap for endless sources; 0 = uncapped</td>
 </tr>
 <tr>
@@ -4265,7 +4380,7 @@ towers); an invented name is accepted and does nothing.</p>
 <tr>
 <td><code>Is Fireproof</code></td>
 <td><code>TRUE</code>/<code>FALSE</code></td>
-<td></td>
+<td><code>TRUE</code> on the rocks, pits, pond, ocean, <code>WaterPump</code> and <code>WaterTower</code></td>
 <td><code>TRUE</code> makes the object a firebreak: fire can neither start on nor spread onto the tiles it covers. Fire still crosses the open ground around it</td>
 </tr>
 </tbody>
@@ -4285,17 +4400,17 @@ towers); an invented name is accepted and does nothing.</p>
 <tr>
 <td><code>To</code></td>
 <td>a <code>MapObjects</code> id</td>
-<td><code>tree</code>, <code>tree_big</code></td>
+<td>by row: <code>tree</code>, <code>tree_big</code></td>
 </tr>
 <tr>
 <td><code>Min Hours</code></td>
 <td>whole number</td>
-<td>672</td>
+<td>672 on every row</td>
 </tr>
 <tr>
 <td><code>Max Hours</code></td>
 <td>whole number</td>
-<td>840</td>
+<td>840 on every row</td>
 </tr>
 </tbody>
 </table>
@@ -4315,18 +4430,18 @@ towers); an invented name is accepted and does nothing.</p>
 <tbody>
 <tr>
 <td><code>Growth</code></td>
-<td>3, 6, 15, 10</td>
+<td>by row: 3, 6, 15, 10</td>
 <td>watered days until harvest - the plant gains one at midnight for every day its tile was watered; 0 is harvestable instantly</td>
 </tr>
 <tr>
 <td><code>Food</code></td>
-<td>3, 4, 20, 7</td>
-<td>food per harvest</td>
+<td>by row: 3, 4, 20, 7</td>
+<td><code>Food</code> per tile harvested, when the zone is set to grow for food</td>
 </tr>
 <tr>
 <td><code>Seeds</code></td>
-<td>2, 5, 3, 1</td>
-<td>seeds per harvest; 0 makes the crop unsustainable</td>
+<td>by row: 2, 5, 3, 1</td>
+<td>the crop's own seed resource (<code>GrainSeeds</code>, <code>BeansSeeds</code>, <code>PotatoSeeds</code>, <code>TomatoSeeds</code>) per tile harvested, when the zone is set to grow for seeds; 0 makes the crop unsustainable</td>
 </tr>
 <tr>
 <td><code>Regrowth</code></td>
@@ -4394,7 +4509,7 @@ towers); an invented name is accepted and does nothing.</p>
 <tr>
 <td><code>Explosiveness</code></td>
 <td>whole number</td>
-<td>0, 2, 3</td>
+<td>0, 2 or 3</td>
 <td>0 is inert</td>
 </tr>
 <tr>
@@ -4406,7 +4521,7 @@ towers); an invented name is accepted and does nothing.</p>
 <tr>
 <td><code>VariantAmountMapping</code></td>
 <td><code>/</code>-list of whole numbers</td>
-<td><code>1/2</code>, <code>1</code></td>
+<td><code>1/2</code> or <code>1</code></td>
 <td>picks the pile's look</td>
 </tr>
 </tbody>
@@ -4428,13 +4543,13 @@ introducing new ones.</p>
 <tr>
 <td><code>Workbench Type</code></td>
 <td>workbench name</td>
-<td><code>FieldKitchen</code>, <code>IndoorKitchen</code>, <code>SawStation</code>, <code>Brickstation</code>, <code>CementMixer</code>, <code>MetalworksWorkbench</code>, <code>CanningStation</code>, <code>ElectronicsWorkbench</code>, <code>TailorStation</code>, <code>EspionageRadio</code>, <code>WaterCooker</code>, <code>HerbDryer</code>, <code>Distillery</code></td>
+<td><code>FieldKitchen</code>, <code>IndoorKitchen</code>, <code>SawStation</code>, <code>Brickstation</code>, <code>CementMixer</code>, <code>MetalworksWorkbench</code>, <code>CanningStation</code>, <code>ElectronicsWorkbench</code>, <code>TailorStation</code>, <code>EspionageRadio</code>, <code>WaterCooker</code>, <code>HerbDryer</code> or <code>Distillery</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>Output Resource Type</code></td>
 <td>resource name</td>
-<td></td>
+<td><code>AntiAirAmmo</code>, <code>Bricks</code>, <code>Camouflage</code>, <code>Cement</code>, <code>Electronics</code>, <code>FoodRations</code>, <code>Fuel</code>, <code>GunAmmo</code>, <code>Intel</code>, <code>LuxuryGoods</code>, <code>Machinery</code>, <code>Meals</code>, <code>Metal</code>, <code>PlaneBombs</code>, <code>Planks</code>, <code>PurifiedWater</code>, <code>RepairParts</code>, <code>SimpleMedicine</code>, <code>StrongMedicine</code> or <code>Tarp</code></td>
 <td></td>
 </tr>
 <tr>
@@ -4446,13 +4561,13 @@ introducing new ones.</p>
 <tr>
 <td><code>Input Resource Type</code></td>
 <td><code>/</code>-list of resources, or <code>None</code></td>
-<td><code>Food/RawWater</code>, <code>Metal</code>, <code>None</code></td>
+<td><code>None</code> on 3 rows; otherwise 1–3 of <code>Clay</code>, <code>Electronics</code>, <code>Food</code>, <code>Herbs</code>, <code>LuxuryGoods</code>, <code>Machinery</code>, <code>Meals</code>, <code>Metal</code>, <code>PurifiedWater</code>, <code>RawWater</code>, <code>Sandbags</code>, <code>SimpleMedicine</code>, <code>Tarp</code> or <code>Wood</code>, e.g. <code>Food/RawWater</code></td>
 <td><code>None</code> means made from nothing</td>
 </tr>
 <tr>
 <td><code>Input Resource Amount</code></td>
 <td><code>/</code>-list of whole numbers</td>
-<td><code>2/2</code>, <code>0</code></td>
+<td>1–3 entries, each 1–10, e.g. <code>2/2</code>; <code>0</code> on the 3 <code>None</code> rows</td>
 <td><strong>must have as many entries as the type list</strong></td>
 </tr>
 <tr>
@@ -4464,7 +4579,7 @@ introducing new ones.</p>
 <tr>
 <td><code>Valid Entry</code></td>
 <td><code>TRUE</code>/<code>FALSE</code></td>
-<td><code>TRUE</code></td>
+<td><code>TRUE</code> on every row</td>
 <td>left over; the game does not read it</td>
 </tr>
 </tbody>
@@ -4477,6 +4592,7 @@ introducing new ones.</p>
 <tr>
 <th>Column</th>
 <th>Value</th>
+<th>Built-in</th>
 <th>Notes</th>
 </tr>
 </thead>
@@ -4485,20 +4601,24 @@ introducing new ones.</p>
 <td><code>Shipment Type</code></td>
 <td><code>Resource</code> or <code>Prop</code></td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td><code>Category</code></td>
 <td><code>Military</code>, <code>Miscellaneous</code> or <code>Large</code></td>
+<td></td>
 <td><strong>capitalisation matters</strong> - <code>military</code> is refused</td>
 </tr>
 <tr>
 <td><code>Amount</code></td>
-<td>whole number, 1–5000</td>
+<td>whole number</td>
+<td>1–5000</td>
 <td>units delivered per slot</td>
 </tr>
 <tr>
 <td><code>Slots</code></td>
-<td>whole number, 1–4</td>
+<td>whole number</td>
+<td>1–4</td>
 <td>more slots than any rank offers makes the item unorderable</td>
 </tr>
 </tbody>
@@ -4511,15 +4631,15 @@ introducing new ones.</p>
 <code>Custom</code>.</p>
 <p>Columns are the six skills - <code>Flying</code>, <code>Shooting</code>, <code>Bombing</code>, <code>Endurance</code>, <code>Engineering</code>, <code>Navigating</code> - and
 the value is a <strong>rank, 0 to 6</strong>, not a point total. <code>0</code> is Untrained and <code>6</code> is Ace. Keep it inside that
-range. <code>Endurance</code> also sets maximum health, which is why every row has at least <code>1</code> there.</p>
+range; the built-in rows use 0–2. <code>Endurance</code> also sets maximum health, which is why every row has at least <code>1</code> there.</p>
 <h4 id="charactersstatsrankprogression-points-per-rank"><code>CharactersStatsRankProgression</code> - points per rank<a class="headerlink" href="#charactersstatsrankprogression-points-per-rank" title="Permanent link">&para;</a></h4>
 <p>Built-in file: <a href="../../assets/csv/CharactersStatsRankProgression.csv">CharactersStatsRankProgression.csv</a></p>
-<p>Rows must stay <code>Untrained</code>, <code>Rank1</code> … <code>Rank5</code>, <code>Ace</code>. <code>LevelUpPoints</code> (0, 10, 14, 22, 36, 58, 90) is the
+<p>Rows must stay <code>Untrained</code>, <code>Rank1</code>, <code>Rank2</code>, <code>Rank3</code>, <code>Rank4</code>, <code>Rank5</code>, <code>Ace</code>. <code>LevelUpPoints</code> (0, 10, 14, 22, 36, 58, 90) is the
 points total at which that rank is reached, and the rank is picked as the highest one a character has passed
 - so <strong>the values must ascend</strong>. Out of order, crew get stuck low or jump straight to Ace.</p>
 <h4 id="characterstatscheck-what-a-rank-is-worth"><code>CharacterStatsCheck</code> - what a rank is worth<a class="headerlink" href="#characterstatscheck-what-a-rank-is-worth" title="Permanent link">&para;</a></h4>
 <p>Built-in file: <a href="../../assets/csv/CharacterStatsCheck.csv">CharacterStatsCheck.csv</a></p>
-<p>Rows are the same seven ranks. For each of the six skills there are two columns: <code>&lt;Skill&gt;Value</code> is a flat
+<p>Rows are the seven ranks <code>Untrained</code>, <code>Rank1</code>, <code>Rank2</code>, <code>Rank3</code>, <code>Rank4</code>, <code>Rank5</code>, <code>Ace</code>. For each of the six skills there are two columns: <code>&lt;Skill&gt;Value</code> is a flat
 bonus added to a mission roll, <code>&lt;Skill&gt;Percentage</code> is a <strong>fraction</strong> - <code>0.25</code> means 25%. Writing <code>25</code> gives a
 2500% bonus. Column names cannot be renamed.</p>
 <h4 id="characterjobpriority-what-each-job-is-willing-to-do"><code>CharacterJobPriority</code> - what each job is willing to do<a class="headerlink" href="#characterjobpriority-what-each-job-is-willing-to-do" title="Permanent link">&para;</a></h4>
@@ -4582,7 +4702,7 @@ promotion:</p>
 <tr>
 <td><code>Itentifier</code></td>
 <td>row id (note the spelling)</td>
-<td><code>Sleep</code>, <code>Chill</code>, <code>Panic</code>, <code>BaseAttacked</code></td>
+<td><code>Sleep</code>, <code>Eat</code>, <code>WorkOnWorkbench</code>, <code>Stockpile</code>, <code>Build</code>, <code>Harvest</code>, <code>Chill</code>, <code>ConsumeLuxuryGoods</code>, <code>UseRadio</code>, <code>SaluteTheFlag</code>, <code>UsePlanningBoard</code>, <code>Panic</code>, <code>Rage</code>, <code>Collapse</code>, <code>Grieve</code>, <code>Bury</code>, <code>UseTrainingObject</code>, <code>Socialize</code>, <code>UseRecreationalItem</code>, <code>Work</code>, <code>Train</code>, <code>Early</code>, <code>Mid</code>, <code>Late</code>, <code>Living</code>, <code>MissionCancelled</code>, <code>MissionCompleted</code>, <code>WarNews</code>, <code>BaseAttacked</code>, <code>Death</code>, <code>Recover</code> or <code>RecoverInBed</code></td>
 <td></td>
 </tr>
 <tr>
@@ -4594,7 +4714,7 @@ promotion:</p>
 <tr>
 <td><code>Parameter</code></td>
 <td>the variant key; comma-separates aliases</td>
-<td><code>default</code>, <code>Prop.Bed</code>, <code>ResourceType.Meals</code></td>
+<td><code>default</code>; <code>Prop.Bed</code>, <code>Prop.BedMetal</code>, <code>Prop.BedWood</code>, <code>Prop.BilliardTable</code>, <code>Prop.Dartboard</code>, <code>Prop.Guitar</code>, <code>Prop.Piano</code>; <code>ResourceType.Food</code>, <code>ResourceType.FoodRations</code>, <code>ResourceType.Intel</code>, <code>ResourceType.LuxuryGoods</code>, <code>ResourceType.Meals</code>, <code>ResourceType.PurifiedWater</code>, <code>ResourceType.RawWater</code>; <code>CharacterClass.AirCrew</code>, <code>CharacterClass.BaseCrew</code>; <code>InfluenceOutcome.Good</code>, <code>InfluenceOutcome.Bad</code>; and one row with two aliases, <code>Prop.Jukebox, Prop.Gramophone</code></td>
 <td><strong>no alias may be listed twice</strong></td>
 </tr>
 <tr>
@@ -4606,7 +4726,7 @@ promotion:</p>
 <tr>
 <td><code>Confidence</code> / <code>Mood</code> / <code>Energy</code></td>
 <td>numbers</td>
-<td>-30 … 50</td>
+<td><code>Confidence</code> -10 to 50, <code>Mood</code> -30 to 50, <code>Energy</code> -20 to 50</td>
 <td></td>
 </tr>
 <tr>
@@ -4624,8 +4744,27 @@ event value into a <code>Timed</code> row pins a crew member's mood to the ceili
 <h3 id="missions-and-time">Missions and time<a class="headerlink" href="#missions-and-time" title="Permanent link">&para;</a></h3>
 <h4 id="flightmissiondata-the-mission-modifiers"><code>FlightMissionData</code> - the mission modifiers<a class="headerlink" href="#flightmissiondata-the-mission-modifiers" title="Permanent link">&para;</a></h4>
 <p>Built-in file: <a href="../../assets/csv/FlightMissionData.csv">FlightMissionData.csv</a></p>
-<p>The row id names what is being measured: <code>AirplaneIntegrity</code>, <code>AirplaneHealth</code>, <code>AirplaneFuel</code>, <code>Mood</code>,
-<code>Energy</code>, <code>Confidence</code>, <code>SeatsConfiguration</code>, <code>CrewHealth</code>, <code>CrewOnFire</code>.</p>
+<p>This table decides how the state of an aircraft and its crew affects a mission. The game checks each
+aircraft and crew member against these rows. When a measured value falls inside a row's <code>ThresholdRange</code>, that
+row's modifier applies to the aircraft. The mission briefing lists each one, and they feed the success estimate.
+There are two kinds:</p>
+<ul>
+<li>A <code>SkillRollModifier</code> shifts the aircraft's mission stats (fight, bomb, recon and the others). Its
+  <code>ModifierRange</code> is added to the lowest and highest value each stat can roll, so <code>0/-10</code> lowers the best
+  possible roll by 10 and <code>2/0</code> raises the worst one by 2.</li>
+<li>A <code>NoFlightModifier</code> stops the aircraft from being sent at all.</li>
+</ul>
+<p>The row id names what is being measured:</p>
+<ul>
+<li><code>AirplaneIntegrity</code> - percent of the aircraft's starting integrity that remains</li>
+<li><code>AirplaneHealth</code> - its health</li>
+<li><code>AirplaneFuel</code> - its fuel level; <code>0</code> means an empty tank</li>
+<li><code>Mood</code>, <code>Energy</code>, <code>Confidence</code> - each crew member's value, from -100 to 100, matched against <code>Parameter</code> by
+  crew role</li>
+<li><code>SeatsConfiguration</code>, <code>CrewHealth</code>, <code>CrewOnFire</code> - yes/no checks, where <code>1</code> means the problem is present: a
+  crew member in a seat that does not match their role, one who is injured, or one on fire</li>
+</ul>
+<p>For each measured value, the first row whose range and role match is the one used.</p>
 <table>
 <thead>
 <tr>
@@ -4639,7 +4778,7 @@ event value into a <code>Timed</code> row pins a crew member's mood to the ceili
 <tr>
 <td><code>ModifierCategory</code></td>
 <td>a label</td>
-<td><code>low</code>, <code>high</code>, <code>zero</code>, <code>critical</code>, <code>mismatch</code></td>
+<td><code>low</code>, <code>high</code>, <code>zero</code>, <code>critical</code> or <code>mismatch</code></td>
 <td></td>
 </tr>
 <tr>
@@ -4651,19 +4790,19 @@ event value into a <code>Timed</code> row pins a crew member's mood to the ceili
 <tr>
 <td><code>ModifierRange</code></td>
 <td><code>min/max</code> whole numbers</td>
-<td><code>0/-5</code>, <code>2/0</code></td>
+<td><code>0/-10</code>, <code>0/-5</code>, <code>0/-3</code>, <code>0/-2</code>, <code>0/0</code>, <code>1/0</code> or <code>2/0</code></td>
 <td>added to the lowest/highest stat roll; ignored by <code>NoFlightModifier</code> rows</td>
 </tr>
 <tr>
 <td><code>Parameter</code></td>
 <td>space-separated crew roles, or <code>Default</code></td>
-<td><code>Default</code>, <code>CrewRole.Pilot</code></td>
+<td><code>Default</code>, <code>CrewRole.Pilot</code>, all six roles, or the five roles other than <code>CrewRole.Pilot</code></td>
 <td>every role must carry the <code>CrewRole.</code> prefix - a bare <code>Pilot</code> never matches, and neither does an unknown role</td>
 </tr>
 <tr>
 <td><code>ThresholdRange</code></td>
 <td><code>min/max</code> whole numbers</td>
-<td><code>1/40</code>, <code>-100/-90</code>, <code>50/100</code></td>
+<td><code>-100/-90</code>, <code>-89/-50</code>, <code>0/0</code>, <code>1/1</code>, <code>1/40</code> or <code>50/100</code></td>
 <td>the range of measured values this row covers</td>
 </tr>
 </tbody>
@@ -4697,23 +4836,27 @@ and then fails when the task runs. This is the one place in this table where you
 <th>Column</th>
 <th>Value</th>
 <th>Built-in</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>Phase</code></td>
-<td><code>Work</code>, <code>Leisure</code>, <code>Sleep</code> (<code>Alert</code> and <code>None</code> are also accepted but are not meant for the schedule)</td>
-<td></td>
+<td><code>Work</code>, <code>Leisure</code>, <code>Sleep</code></td>
+<td>by row: <code>Sleep</code>, <code>Leisure</code>, <code>Work</code>, <code>Leisure</code></td>
+<td><code>Alert</code> and <code>None</code> are also accepted but are not meant for the schedule</td>
 </tr>
 <tr>
 <td><code>StartHour</code></td>
 <td>whole number, inclusive</td>
-<td>0, 5, 7, 22</td>
+<td>by row: 0, 5, 7, 22</td>
+<td></td>
 </tr>
 <tr>
 <td><code>EndHour</code></td>
 <td>whole number, exclusive</td>
-<td>5, 7, 22, 24</td>
+<td>by row: 5, 7, 22, 24</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -4736,7 +4879,7 @@ warning, which leaves a gap. Keep the spans continuous from 0 to 24, without ove
 <tr>
 <td><code>Morning Time</code>, <code>Dawn Time</code>, <code>Day Time</code>, <code>Evening Time</code>, <code>Dusk Time</code>, <code>Night Time</code></td>
 <td>hour each lighting stage begins</td>
-<td>4, 7, 10, 17, 22, 23</td>
+<td>by row: 4, 7, 10, 17, 22, 23</td>
 </tr>
 <tr>
 <td><code>Sun Min Rotation</code> / <code>Sun Max Rotation</code></td>

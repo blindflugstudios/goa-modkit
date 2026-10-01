@@ -1578,6 +1578,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1694,6 +1700,90 @@
     
   
     Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
   
 
     
@@ -2532,7 +2622,7 @@
 </code></pre></div>
 <ul>
 <li><code>event_name</code> - der Name des Events, das behandelt werden soll. Das kann jeder Text sein, der zu einem existierenden Event passt, einfacher ist aber <code>from Blindflug.MinorEvents import MinorEvent</code> mit den dort definierten Konstanten, etwa <code>MinorEvent.DAY_PHASE_CHANGE</code>.</li>
-<li><code>chance</code> - die Chance von <code>0.0</code> bis <code>1.0</code>, dass der Handler beim Eintreten des Events aufgerufen wird. <code>0.5</code> ergibt 50 %. Standard ist <code>1.0</code> (immer).</li>
+<li><code>chance</code> - die Chance von <code>0.0</code> bis <code>1.0</code>, dass der Handler beim Eintreten des Events aufgerufen wird. <code>0.5</code> ergibt 50 %. Standard ist <code>1.0</code> (immer). Das Spiel rechnet zu jedem Handler noch eine globale Grundchance dazu; im normalen Spiel ist sie <code>0</code>, es zählt also dein Wert (nur ein Cheat in Entwickler-Builds ändert sie).</li>
 <li><code>max_occurrences</code> - wie oft der Handler in einem Spielstand höchstens laufen darf. Der Zähler wird im Spielstand gespeichert, unter dem Namen <code>&lt;module&gt;.&lt;function&gt;</code> des Handlers - benennst du Datei oder Funktion um, beginnt er von vorn. Ein negativer Wert bedeutet "kein Limit" und ist der Standard (<code>-1</code>); <code>0</code> bedeutet, dass der Handler nie läuft. Chance-Wurf und Limit-Prüfung passieren beide, bevor der Handler aufgerufen wird.</li>
 </ul>
 <p>Der Name der Funktion kann jeder gültige Python-Name sein. Zusammen mit dem Dateinamen identifiziert er den Handler, wenn das Spiel zählt, wie oft er gelaufen ist.</p>

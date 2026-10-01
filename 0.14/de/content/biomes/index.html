@@ -16,7 +16,7 @@
         <link rel="prev" href="../objects/">
       
       
-        <link rel="next" href="../../sharing/workshop/">
+        <link rel="next" href="../airplanes/">
       
       
         
@@ -1575,6 +1575,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1746,10 +1752,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#folder-layout-preliminary" class="md-nav__link">
+  <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ordneraufbau (vorläufig)
+        Schnellstart
       
     </span>
   </a>
@@ -1817,10 +1823,105 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#when-something-does-not-show-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wenn etwas nicht auftaucht
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2172,10 +2273,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#folder-layout-preliminary" class="md-nav__link">
+  <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ordneraufbau (vorläufig)
+        Schnellstart
       
     </span>
   </a>
@@ -2243,6 +2344,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#when-something-does-not-show-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wenn etwas nicht auftaucht
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2269,64 +2381,31 @@
 
 
 <h1 id="biome">Biome<a class="headerlink" href="#biome" title="Permanent link">&para;</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">In Arbeit</p>
-<p>Grafik-Mods sind noch in Arbeit. Die aktuelle Alpha unterstützt das noch nicht, Biom-Texturen aus einer Mod tauchen im Spiel also vorerst nicht auf.</p>
-</div>
-<p>Ein Biom ist ein Bodentyp: das Gras, die Erde, Straße, Fels, Sand oder Kies, die mit dem Werkzeug <strong>Biomes</strong> im <a href="../maps/">Karten Editor</a> über eine Karte gemalt werden. Das Spiel hat 24 davon. Eine Mod kann jedes davon mit einer neuen Textur übermalen, und die Änderung zeigt sich auf jeder Karte, ob mitgeliefert oder selbst gebaut.</p>
+<p>Ein Biom ist ein Bodentyp: das Gras, die Erde, Straße, Fels, Sand oder Kies, die mit dem Werkzeug <strong>Biomes</strong> im <a href="../maps/">Karten Editor</a> über eine Karte gemalt werden. Das Spiel hat 24 davon, nummeriert von <code>0</code> bis <code>23</code>. Eine Mod kann jedes davon mit einer neuen Textur übermalen, und die Änderung zeigt sich auf jeder Karte, ob mitgeliefert oder selbst gebaut.</p>
 <p>Eine Biom-Mod ändert nur das <strong>Aussehen</strong>. Wie schnell sich Leute und Flugzeuge über den Boden bewegen, als welche Startbahnstufe er zählt und ähnliche Regeln stehen in der Tabelle <code>Biomes</code> und werden mit <a href="../../data/csv/">CSV-Tabellen</a> geändert.</p>
-<h2 id="folder-layout-preliminary">Ordneraufbau (vorläufig)<a class="headerlink" href="#folder-layout-preliminary" title="Permanent link">&para;</a></h2>
-<p>So wird das Spiel Biom-Grafik einlesen. Das ist vorläufig und kann sich noch ändern.</p>
-<ul>
-<li><code>Biomes/</code> enthält eine PNG pro Biom-Slot, benannt nach der Nummer des Slots, direkt im Ordner: <code>8.png</code> übermalt Slot 8, das erste Gras (siehe die <a href="#biome-names">Liste</a>).</li>
-<li>Unterordner und andere Dateinamen werden im Log gemeldet und ignoriert.</li>
-<li>Biom-Texturen werden einmal eingelesen, beim Spielstart. Nach einer Änderung <strong>startest du das Spiel neu</strong>; weder <strong>Refresh</strong> noch der Schalter <strong>Enabled</strong> im Mods-Fenster lesen sie neu ein.</li>
-</ul>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-## Schnellstart { #quick-start }
-
-Gib dem ersten Gras eine neue Textur:
-
+<h2 id="quick-start">Schnellstart<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<p>Gib dem ersten Gras eine neue Textur:</p>
 <div class="highlight"><pre><span></span><code>Mods/
   my_ground_mod/
     Biomes/
-      Terrain-Type_Grass_A/
-        albedo.png
+      8.png
 </code></pre></div>
-
-Starte das Spiel neu und lade einen Spielstand oder starte eine Karte. Überall, wo die Karte dieses Gras verwendet, siehst du jetzt deine Textur.
-
-!!! note
-    Biom-Texturen werden einmal gelesen, beim Spielstart. Nachdem du eine Textur geändert oder die Mod ein- oder ausgeschaltet hast, **starte das Spiel neu**.
-
--->
-
+<p>Starte das Spiel neu und lade einen Spielstand oder starte eine Karte. Überall, wo die Karte dieses Gras verwendet, siehst du jetzt deine Textur.</p>
+<div class="admonition note">
+<p class="admonition-title">Nach jeder Änderung neu starten</p>
+<p>Biom-Texturen werden <strong>einmal eingelesen, beim Spielstart</strong>. Nachdem du eine PNG hinzugefügt oder geändert oder die Mod ein- oder ausgeschaltet hast, <strong>beendest du das Spiel ganz und startest es neu</strong>. Einen Spielstand laden, <strong>Refresh</strong> und der Schalter <strong>Enabled</strong> im Mods-Fenster lesen sie nicht neu ein.</p>
+</div>
 <h2 id="how-it-works">So funktioniert es<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-- `Biomes/` enthält einen Ordner pro Biom, das du übermalen willst, genau nach dem Biom benannt (siehe die [Liste](#biome-names)). Groß- und Kleinschreibung spielt keine Rolle.
-- Jeder Ordner braucht eine Datei: `albedo.png`, die Farbtextur.
-
--->
-
 <ul>
+<li><code>Biomes/</code> enthält eine PNG pro Bodentyp, benannt nach seiner Nummer: <code>8.png</code> übermalt Bodentyp 8, das erste Gras (siehe die <a href="#biome-names">Liste</a>).</li>
+<li>Die Nummer schreibst du als einfache Ziffern ohne führende Nullen: <code>8.png</code>, nicht <code>08.png</code>. Eine Nummer außerhalb von <code>0</code> bis <code>23</code> wird im Log zusammen mit dem gültigen Bereich gemeldet.</li>
+<li>Nur Dateien direkt in <code>Biomes/</code> zählen. Unterordner, andere Dateitypen und andere Namen werden im Log gemeldet und ignoriert.</li>
 <li>Eine Mod kann keine neuen Biome hinzufügen, nur die 24 vorhandenen übermalen. Eine Karte merkt sich über eine Nummer, welches Biom wo gemalt ist, es gibt also nichts, woran ein neues angehängt werden könnte.</li>
 <li>Die Oberflächendetails des Bioms und sein verbrannter Look nach einem Feuer werden nicht ersetzt.</li>
-<li>Die Texturen des Spiels auf der Festplatte bleiben unangetastet. Verlässt du eine Karte, kehrt der Originalboden zurück, und wenn du die Mod ausschaltest (und neu startest), ist er überall wieder da.</li>
+<li>Die Texturen des Spiels auf der Festplatte bleiben unangetastet. Wenn du die Mod ausschaltest (und neu startest), ist der Originalboden überall wieder da.</li>
+<li>Der übermalte Boden wird auf der Grafikkarte zusammengesetzt. Auf einem Computer, dessen Grafikkarte dort keine Texturen kopieren kann, werden Biom-PNGs nicht angewendet, und das Log sagt das. An der Mod gibt es dann nichts zu reparieren.</li>
 </ul>
 <h3 id="the-texture">Die Textur<a class="headerlink" href="#the-texture" title="Permanent link">&para;</a></h3>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-| Regel | Grenze |
-|---|---|
-| Format | Nur PNG |
-| Größe | Höchstens 2048 × 2048 Pixel |
-| Dateigröße | Höchstens 8 MB |
-| Dateiname | `albedo.png` |
-
--->
-
 <table>
 <thead>
 <tr>
@@ -2337,58 +2416,21 @@ Starte das Spiel neu und lade einen Spielstand oder starte eine Karte. Überall,
 <tbody>
 <tr>
 <td>Format</td>
-<td>Nur PNG</td>
+<td>Eine echte PNG. Ein in <code>.png</code> umbenanntes JPEG wird abgelehnt.</td>
 </tr>
 <tr>
 <td>Größe</td>
-<td>Höchstens 2048 × 2048 Pixel</td>
+<td>Höchstens 4096 × 4096 Pixel (jede Seite einzeln)</td>
 </tr>
 <tr>
 <td>Dateigröße</td>
-<td>Höchstens 8 MB</td>
+<td>Höchstens 10 MB</td>
 </tr>
 </tbody>
 </table>
-<p>Das Spiel skaliert deine Textur auf die Größe seiner eigenen Bodentexturen, jede Größe innerhalb der Grenze funktioniert also; ein quadratisches Bild vermeidet Verzerrungen. Die Textur wiederholt sich über den Boden, sie sollte also nahtlos kacheln: Der linke Rand muss in den rechten übergehen, der obere in den unteren.</p>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-Andere Dateien in einem Biom-Ordner (`model.glb`, `destroyed_albedo.png`, ...) haben hier keine Bedeutung. Das Log sagt das, und `albedo.png` lädt trotzdem.
-
--->
-
+<p>Eine PNG über einer Grenze wird <strong>nicht verkleinert</strong>: Sie wird mit einer Warnung im Log übersprungen, und der Boden des Spiels bleibt. Innerhalb der Grenzen bringt das Spiel deine Textur auf die Größe seiner eigenen Bodentexturen, jede Größe funktioniert also; ein quadratisches Bild vermeidet Verzerrung. Die Textur wiederholt sich über den Boden, sie sollte also nahtlos kacheln: Der linke Rand muss in den rechten übergehen, der obere in den unteren.</p>
 <h2 id="biome-names">Biom-Namen<a class="headerlink" href="#biome-names" title="Permanent link">&para;</a></h2>
 <p>Die Nummer ist die Zeile des Bioms in der Tabelle <code>Biomes</code>. Zeilen mit derselben Nummer beschreiben, wie sich dieser Boden spielt.</p>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-| Nummer | Ordnername | Boden |
-|---|---|---|
-| 0 | `Terrain-Type_Dirt_A` | Erde |
-| 1 | `Terrain-Type_Dirt_B` | Erde |
-| 2 | `Terrain-Type_Dirt_C` | Erde |
-| 3 | `Terrain-Type_Dirt_D` | Erde |
-| 4 | `Terrain-Type_Dirt_E` | Erde |
-| 5 | `Terrain-Type_Dirt_F` | Erde |
-| 6 | `Terrain-Type_Dirt_G` | Erde, liegt auch unter Parkplätzen, Gartenbeeten und Erdstartbahnen |
-| 7 | `Terrain-Type_Dirt_H` | Erde |
-| 8 | `Terrain-Type_Grass_A` | Gras |
-| 9 | `Terrain-Type_Grass_B` | Gras |
-| 10 | `Terrain-Type_Grass_C` | Gras |
-| 11 | `Terrain-Type_Grass_D` | Gras |
-| 12 | `Terrain-Type_Grass_E` | Gras |
-| 13 | `Terrain-Type_Road_A` | Straße, liegt auch unter Asphaltstartbahnen |
-| 14 | `Terrain-Type_Road_B` | Straße |
-| 15 | `Terrain-Type_Road_C` | Straße, liegt auch unter Betonstartbahnen |
-| 16 | `Terrain-Type_Rock_A` | Fels |
-| 17 | `Terrain-Type_Rock_B` | Fels |
-| 18 | `Terrain-Type_Rock_C` | Fels |
-| 19 | `Terrain-Type_Sand_A` | Sand |
-| 20 | `Terrain-Type_Sand_B` | Sand, liegt auch unter Sandstartbahnen |
-| 21 | `Terrain-Type_Sand_C` | Sand |
-| 22 | `Terrain-Type_Gravel_A` | Kies, liegt auch unter Kiesstartbahnen |
-| 23 | `Terrain-Type_Grass_B3` | Gras |
-
--->
-
 <table>
 <thead>
 <tr>
@@ -2431,7 +2473,7 @@ Andere Dateien in einem Biom-Ordner (`model.glb`, `destroyed_albedo.png`, ...) h
 <tr>
 <td>6</td>
 <td><code>6.png</code></td>
-<td>Erde, liegt auch unter Parkplätzen, Gartenbeeten und Erdstartbahnen</td>
+<td>Erde, liegt auch unter Parkplätzen, Gartenbeeten und Erdpisten</td>
 </tr>
 <tr>
 <td>7</td>
@@ -2466,7 +2508,7 @@ Andere Dateien in einem Biom-Ordner (`model.glb`, `destroyed_albedo.png`, ...) h
 <tr>
 <td>13</td>
 <td><code>13.png</code></td>
-<td>Straße, liegt auch unter Asphaltstartbahnen</td>
+<td>Straße, liegt auch unter Asphaltpisten</td>
 </tr>
 <tr>
 <td>14</td>
@@ -2476,7 +2518,7 @@ Andere Dateien in einem Biom-Ordner (`model.glb`, `destroyed_albedo.png`, ...) h
 <tr>
 <td>15</td>
 <td><code>15.png</code></td>
-<td>Straße, liegt auch unter Betonstartbahnen</td>
+<td>Straße, liegt auch unter Betonpisten</td>
 </tr>
 <tr>
 <td>16</td>
@@ -2501,7 +2543,7 @@ Andere Dateien in einem Biom-Ordner (`model.glb`, `destroyed_albedo.png`, ...) h
 <tr>
 <td>20</td>
 <td><code>20.png</code></td>
-<td>Sand, liegt auch unter Sandstartbahnen</td>
+<td>Sand, liegt auch unter Sandpisten</td>
 </tr>
 <tr>
 <td>21</td>
@@ -2511,7 +2553,7 @@ Andere Dateien in einem Biom-Ordner (`model.glb`, `destroyed_albedo.png`, ...) h
 <tr>
 <td>22</td>
 <td><code>22.png</code></td>
-<td>Kies, liegt auch unter Kiesstartbahnen</td>
+<td>Kies, liegt auch unter Kiespisten</td>
 </tr>
 <tr>
 <td>23</td>
@@ -2520,24 +2562,14 @@ Andere Dateien in einem Biom-Ordner (`model.glb`, `destroyed_albedo.png`, ...) h
 </tr>
 </tbody>
 </table>
-<p>Die Startbahnbeläge sind die eingebauten Werte der Tabelle <code>AirstripTiers</code> (Spalte <code>Biome Id</code>); eine Mod, die diese Tabelle ändert, ändert auch, welcher Boden verlegt wird.</p>
+<p>Die Pistenbeläge sind die eingebauten Werte der Tabelle <code>AirstripTiers</code> (Spalte <code>Biome Id</code>); eine Mod, die diese Tabelle ändert, ändert, welcher Boden gelegt wird.</p>
 <h2 id="biomes-and-the-biomes-table">Biome und die Tabelle <code>Biomes</code><a class="headerlink" href="#biomes-and-the-biomes-table" title="Permanent link">&para;</a></h2>
 <p>Die beiden sind unabhängig und lassen sich frei kombinieren:</p>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-| Du willst ändern... | Nutze |
-|---|---|
-| Wie ein Bodentyp aussieht | `Biomes/<name>/albedo.png` (diese Seite) |
-| Wie sich ein Bodentyp spielt: Bewegungsgeschwindigkeit, Startbahnstufe, Verschleiß gelagerter Waren, Feuerausbreitung | Die Tabelle `Biomes`, Zeile `<number>` ([CSV-Tabellen](../data/csv.md)) |
-| Welcher Boden wo auf einer Karte gemalt ist | Das Werkzeug **Biomes** im [Karten Editor](maps.md) |
-
--->
-
 <table>
 <thead>
 <tr>
 <th>Du willst ändern...</th>
-<th>Nutze</th>
+<th>Verwende</th>
 </tr>
 </thead>
 <tbody>
@@ -2546,7 +2578,7 @@ Andere Dateien in einem Biom-Ordner (`model.glb`, `destroyed_albedo.png`, ...) h
 <td><code>Biomes/&lt;number&gt;.png</code> (diese Seite)</td>
 </tr>
 <tr>
-<td>Wie sich ein Bodentyp spielt: Bewegungsgeschwindigkeit, Startbahnstufe, Verschleiß gelagerter Waren, Feuerausbreitung</td>
+<td>Wie sich ein Bodentyp spielt: Bewegungstempo, Startbahnstufe, Verschleiß gelagerter Waren, Feuerausbreitung</td>
 <td>Die Tabelle <code>Biomes</code>, Zeile <code>&lt;number&gt;</code> (<a href="../../data/csv/">CSV-Tabellen</a>)</td>
 </tr>
 <tr>
@@ -2556,24 +2588,14 @@ Andere Dateien in einem Biom-Ordner (`model.glb`, `destroyed_albedo.png`, ...) h
 </tbody>
 </table>
 <h2 id="several-mods-same-biome">Mehrere Mods, dasselbe Biom<a class="headerlink" href="#several-mods-same-biome" title="Permanent link">&para;</a></h2>
-<p>Übermalen zwei eingeschaltete Mods dasselbe Biom, gewinnt die zuletzt angewendete Mod, und das Log vermerkt, welche welche überschrieben hat. Die Reihenfolge steht unter <a href="../../basics/mods/">So funktionieren Mods</a>.</p>
-<!-- OUTDATED (docs audit 2026-09-28): describes the old per-folder layout, see DOCS_AUDIT.md
-
-## Wenn etwas nicht auftaucht { #when-something-does-not-show-up }
-
-Suche in `Player.log` nach Zeilen, die mit `[Mod <your mod id>] Biomes/...` beginnen:
-
-| Log-Zeile (gekürzt) | Bedeutung |
-|---|---|
-| `Biomes/Terrain-Type_Grass_A: replaced biome slot 8 (Terrain-Type_Grass_A).` | Deine Textur wird verwendet. Wird beim Laden einer Karte geschrieben. |
-| `Biomes/Grass_A names no biome of this game. Known biomes: Terrain-Type_Dirt_A, ...` | Der Ordnername passt nicht. Kopiere ihn aus der Liste oben. |
-| `Biomes/Terrain-Type_Grass_A has no albedo.png and is ignored` | Füge die Textur hinzu oder korrigiere ihren Namen. |
-| `Biomes/Terrain-Type_Grass_A: only albedo.png is used for a biome; the other files are ignored.` | Harmlos; entferne die zusätzlichen Dateien, wenn du magst. |
-| `Biomes/Terrain-Type_Grass_A/albedo.png is 4096x4096, over the 2048x2048 limit` | Verkleinere die Textur. |
-| `Biomes/Terrain-Type_Grass_A/albedo.png is not a PNG` | Speichere sie als echte PNG. |
-| `[Mods] This device cannot copy textures on the GPU; biome textures from mods are not applied.` | Deine Grafikhardware unterstützt keine Biom-Mods. In der Mod gibt es nichts zu reparieren. |
-
--->
+<p>Übermalen zwei eingeschaltete Mods dasselbe Biom, gewinnt die zuletzt angewendete Mod, und das Log vermerkt, welche welche überschrieben hat. Die Reihenfolge steht unter <a href="../../basics/mods/#which-mod-wins">So funktionieren Mods</a>.</p>
+<h2 id="when-something-does-not-show-up">Wenn etwas nicht auftaucht<a class="headerlink" href="#when-something-does-not-show-up" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Hast du <strong>das Spiel neu gestartet</strong>? Biom-Texturen werden nur beim Spielstart eingelesen.</li>
+<li>Liegt die Datei direkt in <code>Biomes/</code>, benannt mit einer Nummer von <code>0</code> bis <code>23</code> ohne führende Null?</li>
+<li>Ist sie eine echte PNG, höchstens 4096 × 4096 Pixel und 10 MB groß?</li>
+</ul>
+<p>Probleme stehen in der <code>Player.log</code> in Zeilen, die mit <code>[Mod &lt;your mod id&gt;]</code> beginnen. Die ausführlichen Zeilen erscheinen eventuell nur in Entwicklungsversionen. Ist das Log still, geh die Liste oben durch. Die Größengrenzen für alle Grafik stehen auch unter <a href="../objects/#file-limits">Objekte und Modelle</a>.</p>
 
 
 
@@ -2628,13 +2650,13 @@ Suche in `Player.log` nach Zeilen, die mit `[Mod <your mod id>] Biomes/...` begi
         
         
           
-          <a href="../../sharing/workshop/" class="md-footer__link md-footer__link--next" aria-label="Weiter: Steam Workshop">
+          <a href="../airplanes/" class="md-footer__link md-footer__link--next" aria-label="Weiter: Flugzeug-Skins">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Weiter
               </span>
               <div class="md-ellipsis">
-                Steam Workshop
+                Flugzeug-Skins
               </div>
             </div>
             <div class="md-footer__button md-icon">

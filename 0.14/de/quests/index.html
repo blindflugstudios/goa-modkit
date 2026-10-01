@@ -1578,6 +1578,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1694,6 +1700,90 @@
     
   
     Biome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flugzeug-Skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veränderbare Objekte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eingebaute Texturnamen
   
 
     
@@ -2262,6 +2352,17 @@
     <span class="md-ellipsis">
       
         Beispiel-Quests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shipped-quests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mitgelieferte Quests
       
     </span>
   </a>
@@ -3283,6 +3384,7 @@
 <span class="w">    </span><span class="p">],</span>
 <span class="w">    </span><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_first_steps"</span>
 <span class="w">        </span><span class="p">}</span>
@@ -3336,6 +3438,7 @@
 <span class="w">    </span><span class="p">],</span>
 <span class="w">    </span><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
 <span class="w">        </span><span class="p">}</span>
@@ -3347,7 +3450,34 @@
 <span class="w">    </span><span class="nt">"_completionCheats"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Auch die Quest-Dateien des Spiels selbst (<code>quest0.json</code>, <code>quest1.json</code>, die <code>*_skin_unlock</code>- und <code>tutorial_*</code>-Quests) lohnen einen Blick; du findest sie im Installationsordner, wie unter <a href="#changing-a-shipped-quest">Eine mitgelieferte Quest ändern</a> beschrieben.</p>
+<h2 id="shipped-quests">Mitgelieferte Quests<a class="headerlink" href="#shipped-quests" title="Permanent link">&para;</a></h2>
+<p>Auch die Quest-Dateien des Spiels selbst lohnen einen Blick: Sie zeigen, wie das Original aussieht. Du findest sie im Installationsordner, wie unter <a href="#changing-a-shipped-quest">Eine mitgelieferte Quest ändern</a> beschrieben. Denk daran: Eine Mod-Datei mit demselben Namen <strong>ersetzt</strong> die mitgelieferte Quest. Benenne deine Kopie also um, bevor du sie änderst.</p>
+<table>
+<thead>
+<tr>
+<th>Datei</th>
+<th>Was sie zeigt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>quest0.json</code></td>
+<td>Die erste Quest der Hauptreihe: Bedingungstyp 3, sie startet also nur auf Karten, die sie in <code>StartingQuestIds</code> aufführen. Ihre Schritte sind die Typen mit gezähltem Zustand - eine Startbahn der Stufe 1, ein Parkplatz, eine Gladiator, Betten.</td>
+</tr>
+<tr>
+<td><code>quest1.json</code></td>
+<td>Die zweite Quest, mit Bedingungstyp 1 an <code>quest0</code> gehängt. Sie mischt Event-Schritte (<code>harvesting_finished</code>, <code>project_finished</code>) mit einer Werkbank-Zählung und hat einen optionalen Schritt.</td>
+</tr>
+<tr>
+<td><code>fighter_day_skin_unlock.json</code></td>
+<td>Eine Errungenschaft für eine Flugzeug-Lackierung: <code>_questType: 1</code>, im Quest-Panel versteckt, und die einzige Stelle, an der ein Rollenname (<code>fighter</code>) dort stehen darf, wo sonst eine Flugzeug-Id steht - siehe <a href="#quest-types">Quest-Typen</a>.</td>
+</tr>
+<tr>
+<td><code>tutorial_building.json</code></td>
+<td>Eine Tutorial-Quest: <code>_questType: 2</code> mit <code>_highlightedUIElements</code>, die den Spieler auf die Oberfläche hinweisen, solange die Schritte offen sind.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="testing-a-quest">Eine Quest testen<a class="headerlink" href="#testing-a-quest" title="Permanent link">&para;</a></h2>
 <p>Lade nach jeder Änderung erneut ein Level (ein neuer Ordner braucht zuerst <strong>Refresh</strong> im Mods-Fenster), und nutze dann die <a href="../basics/cheats/">Cheat-Konsole</a>:</p>
 <table>

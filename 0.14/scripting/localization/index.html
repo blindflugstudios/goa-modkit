@@ -1563,6 +1563,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#location-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Location names
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#placeholders" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1769,6 +1780,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1885,6 +1902,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2333,6 +2434,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#location-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Location names
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#placeholders" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2602,6 +2714,11 @@ quest/&lt;questId&gt;/subQuest&lt;N&gt;_description
 <span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"quest/</span><span class="si">{}</span><span class="s2">/subQuest0_description"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">QUEST_ID</span><span class="p">),</span> <span class="s2">"Fell five trees."</span><span class="p">)</span>
 </code></pre></div>
 <p>The keys only have to match what the quest file says. See <a href="../../quests/">Quests</a>.</p>
+<h2 id="location-names">Location names<a class="headerlink" href="#location-names" title="Permanent link">&para;</a></h2>
+<p>A mod can add its own places to the war map (see <a href="../../missions/locations/#adding-locations-with-a-mod">Adding locations with a mod</a>). The player sees such a place's <code>_locationName</code> exactly as written, because only the shipped places come with translations. To give your place a proper name, register a term called <code>mission_location/&lt;name&gt;</code>, where <code>&lt;name&gt;</code> is the <code>_locationName</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"mission_location/mymod_scapa_flow"</span><span class="p">,</span> <span class="s2">"Scapa Flow"</span><span class="p">)</span>
+<span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"de"</span><span class="p">,</span> <span class="s2">"mission_location/mymod_scapa_flow"</span><span class="p">,</span> <span class="s2">"Scapa Flow"</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="placeholders">Placeholders<a class="headerlink" href="#placeholders" title="Permanent link">&para;</a></h2>
 <p><code>event_log.Create</code> takes a dictionary that fills <code>{[NAME]}</code> placeholders:</p>
 <div class="highlight"><pre><span></span><code><span class="n">localization</span><span class="o">.</span><span class="n">SetTerm</span><span class="p">(</span><span class="s2">"en"</span><span class="p">,</span> <span class="s2">"mymod/pilot_tired"</span><span class="p">,</span>

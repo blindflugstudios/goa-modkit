@@ -1752,6 +1752,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1868,6 +1874,90 @@
     
   
     Biomes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/airplanes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airplane skins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/moddable-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moddable objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/texture-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in texture names
   
 
     
@@ -2418,7 +2508,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Reloading your mod is not a console command</p>
-<p>After changing a mod: <strong>Options → Quit to main menu</strong>, then load your save (if you added a new mod folder, press <strong>Refresh</strong> in the <strong>Mods</strong> window first). Quests are re-read too; only models and textures need a full game restart - and art mods are work in progress, not supported by the current alpha yet. See <a href="../testing/">Testing and reloading</a>.</p>
+<p>After changing a mod: <strong>Options → Quit to main menu</strong>, then load your save (if you added a new mod folder, press <strong>Refresh</strong> in the <strong>Mods</strong> window first). Quests are re-read too; only art (models, textures, icons and biome PNGs) needs a full game restart. See <a href="../testing/">Testing and reloading</a>.</p>
 </div>
 <h2 id="the-commands">The commands<a class="headerlink" href="#the-commands" title="Permanent link">&para;</a></h2>
 <p>Arguments in <code>[brackets]</code> are placeholders: replace them, without the brackets. Commands marked ★ are the ones you will use most when testing mods.</p>
@@ -2908,14 +2998,12 @@
 <td>HQ requirement setting.</td>
 <td><code>hq_strikes_parameter 0</code></td>
 </tr>
-<tr>
-<td></td>
-<td><code>set_random_event_chance [0-1]</code></td>
-<td>Base chance of random events.</td>
-<td><code>set_random_event_chance 0.5</code></td>
-</tr>
 </tbody>
 </table>
+<!-- OUTDATED (docs audit 2026-10-01): set_random_event_chance exists only in development builds, see DOCS_AUDIT.md
+| | `set_random_event_chance [0-1]` | Base chance of random events. | `set_random_event_chance 0.5` |
+-->
+
 <h3 id="debug-views-and-technical">Debug views and technical<a class="headerlink" href="#debug-views-and-technical" title="Permanent link">&para;</a></h3>
 <p>Use these only if you know why. <code>enable_system</code> and <code>enable_input_action</code> can leave a save in a strange state.</p>
 <table>
