@@ -35,4 +35,4 @@ New mod: copy `templates/event-script/` to `mods/<mod_id>/`. Existing mod: add a
 
 ## 5. Install and hand over
 
-Follow `install-mod`. Tell the user: save, Options -> Quit to main menu, open Mods (rescans the folder; check the mod is on), load the save again. Explain how to trigger the event (and that `chance` may make it rare - suggest temporarily `chance=1.0` for testing, then set it back). Ask what they see; on trouble `read-log`.
+Follow `install-mod`. Tell the user: save, Options -> Quit to main menu, open Mods (if the mod folder is new, press **Refresh** - opening the window alone does not rescan; check the mod is listed and on), load the save again. Explain how to trigger the event (and that `chance` may make it rare - suggest temporarily `chance=1.0` for testing, then set it back). Ask what they see; on trouble `read-log`.

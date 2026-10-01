@@ -2,12 +2,12 @@
 
 A mod is a folder. The game looks inside it for a handful of fixed subfolders, and whatever those subfolders contain is what the mod changes. There is no packaging step, no manifest you have to write, and nothing to compile: you edit files, load a level, and see the result.
 
-This page covers what every mod has in common: where it lives, how the game finds it, how it is switched on and off, and which mod wins when two change the same thing. What goes *into* the subfolders is on the category pages: [CSV tables](../data/csv.md), [Missions](../missions/index.md), [Quests](../quests/index.md), [Scripting](../scripting/index.md) and the [Maps and art](../content/maps.md) pages. How a finished mod reaches other players is on [Steam Workshop](../sharing/workshop.md).
+This page covers what every mod has in common: where it lives, how the game finds it, how it is switched on and off, and which mod wins when two change the same thing. What goes *into* the subfolders is on the category pages: [CSV tables](../data/csv.md), [Missions](../missions/index.md), [Quests](../quests/index.md), [Scripting](../scripting/index.md), the [Maps and art](../content/maps.md) pages and [Airplane skins](../content/airplanes.md). How a finished mod reaches other players is on [Steam Workshop](../sharing/workshop.md).
 
 ## A mod in one minute
 
 1. Find your `Mods` folder: **Main menu → Mods → Open folder**. On Windows that is `%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Mods\`; the other platforms are listed [below](#where-mods-live).
-2. Create a folder in it, for example `my_mod`, and inside it one of the content folders: `CSV/`, `Missions/`, `Quests/`, `Maps/`, `Objects/` or `Biomes/`. Put at least one file in it.
+2. Create a folder in it, for example `my_mod`, and inside it one of the content folders: `CSV/`, `Missions/`, `Quests/`, `Maps/`, `Objects/`, `Biomes/` or `Airplanes/`. Put at least one file in it.
 3. Optionally add a `config.json` with the mod's name and id, and a `preview.png` (at most 1 MB) as its picture.
 4. Press **Refresh** in the Mods window so the game notices the new folder, then load a level.
 5. From then on, every change to a file inside the mod is picked up the next time you load a level. Only replacement art (`Objects/`, `Biomes/`) needs a restart of the game.
@@ -42,23 +42,24 @@ Mods/
     preview.png        optional - the picture shown in the Mods window and on the Workshop
     CSV/               data tables
     Missions/          mission .json files and Python .py scripts
+      Locations/       new mission locations, .json
     Quests/            quest .json files
     Maps/              .goamap map files
     Objects/           replacement models, textures and icons
     Biomes/            replacement ground textures, one PNG per biome slot
+    Airplanes/         new airplane skins
 ```
 
 | Folder | What goes in it | Read more |
 |---|---|---|
 | `CSV/` | changes to the game's data tables | [CSV tables](../data/csv.md) |
 | `Missions/` | missions (`.json`) and Python scripts (`.py`) | [Missions](../missions/index.md), [Scripting](../scripting/index.md) |
+| `Missions/Locations/` | new mission locations (`.json`) | [Adding locations with a mod](../missions/locations.md#adding-locations-with-a-mod) |
 | `Quests/` | quests (`.json`) | [Quests](../quests/index.md) |
 | `Maps/` | maps (`.goamap`) | [Maps](../content/maps.md) |
 | `Objects/` | replacement models, textures and icons - buildings, workbenches, trainers and map objects alike | [Objects and models](../content/objects.md) |
 | `Biomes/` | replacement ground textures, one PNG per biome slot | [Biomes](../content/biomes.md) |
-
-!!! note "Art mods are a work in progress"
-    Replacement art (`Objects/`, `Biomes/`) is work in progress and not supported by the current alpha yet.
+| `Airplanes/` | new airplane skins: a `config.json` and the skins' PNGs | [Airplane skins](../content/airplanes.md) |
 
 Three rules decide whether the game notices the folder at all:
 
@@ -66,7 +67,7 @@ Three rules decide whether the game notices the folder at all:
 - A mod folder with none of the subfolders above (or only empty ones) is ignored without a message.
 - Symbolic links and junctions (shortcuts that point to another folder) are never followed, neither as the mod folder nor as one of its subfolders. The game skips them with a warning in the log.
 
-For `CSV`, `Missions`, `Quests` and `Maps` only files directly inside the subfolder are read; anything deeper is ignored. `Objects` and `Biomes` hold replacement art and follow their own rules: in `Objects/` a model's *file name* is the id of the object it replaces (`Chair.fbx` replaces the chair), and subfolder names mean nothing. `Biomes/` holds one PNG per biome slot, named after the slot's number (`8.png`), directly inside the folder.
+For `CSV`, `Missions`, `Quests` and `Maps` only files directly inside the subfolder are read; anything deeper is ignored, with one exception: `Missions/Locations/` is read as well. `Objects` and `Biomes` hold replacement art and follow their own rules: in `Objects/` a model's *file name* is the id of the object it replaces (`Chair.fbx` replaces the chair), and subfolder names mean nothing. `Biomes/` holds one PNG per biome slot, named after the slot's number (`8.png`), directly inside the folder. `Airplanes/` holds new airplane skins, described on [Airplane skins](../content/airplanes.md).
 
 ### `config.json`
 
@@ -96,7 +97,7 @@ What happens when something is off:
 
 ### `preview.png`
 
-Optional. A PNG at the root of the mod folder, at most 1 MB. The Mods window shows it next to the mod's name, and it becomes the item's picture when you upload the mod to the Workshop. Without one the Mods window shows a placeholder picture.
+Optional. A PNG at the root of the mod folder, at most 1 MB. The Mods window shows it next to the mod's name, and it becomes the item's picture when you upload the mod to the Workshop. Without one the Mods window shows a placeholder picture, and the Workshop item has no picture until you add one on its Steam page.
 
 ## The Mods window
 
@@ -136,7 +137,7 @@ The everyday loop while you work on a mod:
 
 1. Save your game.
 2. **Options → Quit to main menu.**
-3. Open **Mods** and press **Refresh** if you added or renamed a mod folder.
+3. Open **Mods** and press **Refresh** if you added or renamed a mod folder or changed its `config.json`.
 4. Load the save.
 
 | You changed... | To see it |
@@ -145,7 +146,11 @@ The everyday loop while you work on a mod:
 | A map inside a mod | Also at once, when you toggle the mod's **Enabled** switch |
 | A new mod folder, a renamed folder, a changed `config.json`, a subfolder that was empty when the game started | **Refresh** in the Mods window, then load a level - or restart the game |
 | A new Workshop subscription while the game is running | **Refresh** in the Mods window once Steam has finished downloading it |
+| An airplane skin PNG or the `Airplanes/config.json` | Load a level - skins are read each time a level is loaded |
 | A model, texture, thumbnail or biome PNG | Restart the game - art is imported once at startup, and neither **Refresh** nor the **Enabled** switch re-imports it |
+
+!!! note
+    For now, any change to the 3D art in `Objects/` and `Biomes/` needs a restart of the game. A future update adds an option to reload mods from the main menu, which will make the restart unnecessary.
 
 [Testing and reloading](testing.md) has more on this loop and on the tools that help while testing.
 

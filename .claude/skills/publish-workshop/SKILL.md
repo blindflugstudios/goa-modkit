@@ -13,7 +13,7 @@ Source: `docs/en/sharing/workshop.md`. You cannot press the upload button; the u
 2. Run `python tools/validator/goa_validate.py mods/<mod_id>`: 0 errors.
 3. In Claude Code, have the `mod-reviewer` subagent review `mods/<mod_id>/`; otherwise go through `AGENTS.md` section 13 yourself. Fix every finding.
 4. `config.json` has a valid `Id` and a `Name` (the Workshop title; without it subscribers see a number).
-5. Optional `preview.png` in the mod root: PNG, at most 1 MB, 512x512 recommended.
+5. Optional `preview.png` in the mod root: PNG, at most 1 MB, 512x512 recommended. Without one, the Workshop item has no picture until the user adds one on its Steam page.
 6. The **whole folder is uploaded.** Remove test files, backups, notes and anything private. A short `README.md` is fine.
 7. Scripts run for every subscriber who has the mod enabled - the **Scripting** switch in the Mods window has no effect at the moment. Do not tell players to rely on it; to stop a mod's scripts they switch the mod off.
 

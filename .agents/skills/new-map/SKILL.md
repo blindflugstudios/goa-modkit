@@ -35,4 +35,4 @@ Copy `templates/map-quest-line/` to `mods/<mod_id>/`. Ask the user to copy their
 
 ## 5. Install and hand over
 
-Follow `install-mod`. Tell the user: go to the main menu (save and quit if a game is open), open Mods (rescans the folder; check the mod is on), then start a new game on the map. Ask what they see; on trouble `read-log`.
+Follow `install-mod`. Tell the user: go to the main menu (save and quit if a game is open), open Mods (press **Refresh** if the mod folder is new - opening the window alone does not rescan; check the mod is on), then start a new game on the map. Ask what they see; on trouble `read-log`.

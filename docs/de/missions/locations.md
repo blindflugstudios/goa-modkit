@@ -1,12 +1,12 @@
 # Orte
 
-Jede Mission findet irgendwo statt. Eine Mission listet die Orte auf, an denen sie erscheinen kann, und das Spiel wählt bei jeder Erstellung der Mission einen davon aus. Diese Seite erklärt, wie diese Auswahl funktioniert, was die Orts-Flags bedeuten, und listet jeden Ort auf, der mit dem Spiel ausgeliefert wird, samt Koordinaten.
+Jede Mission findet irgendwo statt. Eine Mission listet die Orte auf, an denen sie erscheinen kann, und das Spiel wählt bei jeder Erstellung der Mission einen davon aus. Diese Seite erklärt, wie diese Auswahl funktioniert, was die Orts-Flags bedeuten, listet jeden Ort auf, der mit dem Spiel ausgeliefert wird, samt Koordinaten, und zeigt, wie ein Mod eigene Orte hinzufügt.
 
 ## Wie ein Ort ausgewählt wird { #how-a-location-is-chosen }
 
 Wenn eine Mission erstellt wird, zieht das Spiel einen Eintrag aus der Ortsliste der Mission (`_potentialLocations` im Missions-JSON). Ist dieser Platz schon von einer anderen Mission auf der Karte belegt, zieht es erneut, bis zu fünf weitere Male. Sind alle Ziehungen belegt, behält es die letzte - zwei Missionen können sich also einen Ort teilen.
 
-Listet eine Mission gar keine Orte, nimmt das Spiel ersatzweise einen zufälligen Ort aus der [Liste unten](#the-locations-that-ship-with-the-game).
+Listet eine Mission gar keine Orte, nimmt das Spiel ersatzweise einen zufälligen Ort aus der vollständigen Liste: den [mitgelieferten Orten](#the-locations-that-ship-with-the-game) plus allen, die aktivierte Mods hinzufügen (siehe [Orte mit einem Mod hinzufügen](#adding-locations-with-a-mod)).
 
 Die Entfernung ist keine Deko: Der Treibstoff, den ein Flug kostet, wird aus der Großkreisentfernung (der kürzesten Strecke über den Globus) zwischen dem Ort und den Koordinaten der geladenen Karte berechnet, multipliziert mit `FuelConsumptionPerKilometer` aus der Tabelle `Variables` (siehe [CSV-Tabellen](../data/csv.md)). Eine Mission über Berlin ist also viel teurer als eine über dem Ärmelkanal.
 
@@ -42,7 +42,7 @@ Mit einer Liste mehrerer Orte kann dieselbe Mission an verschiedenen Stellen auf
 ]
 ```
 
-**Aus einem Skript** wird eine reine Skript-Mission (eine ohne `.json`) mit `missions_api.SetMissionLocation(mission_entity_id, location_name)` platziert, meist in `initialize_mission`. Die Funktion akzeptiert nur einen Namen aus der Liste unten, nie eigene Koordinaten, und gibt bei einem unbekannten Namen `False` zurück. Ohne Ort sitzt eine reine Skript-Mission am Ursprung der Karte. Siehe [Referenz](reference.md).
+**Aus einem Skript** wird eine reine Skript-Mission (eine ohne `.json`) mit `missions_api.SetMissionLocation(mission_entity_id, location_name)` platziert, meist in `initialize_mission`. Die Funktion akzeptiert nur einen Namen aus der Liste unten oder einen, den ein aktivierter Mod hinzufügt (siehe [Orte mit einem Mod hinzufügen](#adding-locations-with-a-mod)), nie eigene Koordinaten, und gibt bei einem unbekannten Namen `False` zurück. Ohne Ort sitzt eine reine Skript-Mission am Ursprung der Karte. Siehe [Referenz](reference.md).
 
 ## Orts-Flags { #location-flags }
 
@@ -57,7 +57,7 @@ Mit einer Liste mehrerer Orte kann dieselbe Mission an verschiedenen Stellen auf
 Sie werden addiert: `10` ist also Meer + feindliches Gebiet (2 + 8) - der häufigste Wert für ein Küstenziel auf der anderen Seite des Ärmelkanals.
 
 !!! warning "Die Flags in deiner Missionsdatei werden nicht gelesen"
-    Der Wert `_flags` in einer Missionsdatei ist nur der Vollständigkeit halber da, aber **das Spiel liest ihn nicht**. Jede mitgelieferte Mission lässt ihn auf `0`. Quest-Schritte wie "fliege eine Mission über dem Meer" schlagen den **Namen** des Missionsorts in der Liste unten nach und nutzen die dort hinterlegten Flags. Der Quest-Schritt schreibt den **Namen** des Flags, nicht die Zahl: `location,sea`, `location,ownterritory`, `location,enemyterritory` (siehe [Quests](../quests/index.md#aircraft-and-missions)).
+    Der Wert `_flags` in einer Missionsdatei ist nur der Vollständigkeit halber da, aber **das Spiel liest ihn nicht**. Jede mitgelieferte Mission lässt ihn auf `0`. Quest-Schritte wie "fliege eine Mission über dem Meer" schlagen den **Namen** des Missionsorts in der Ortsliste nach - den Orten unten plus allen, die aktivierte Mods hinzufügen - und nutzen die dort hinterlegten Flags. Der Quest-Schritt schreibt den **Namen** des Flags, nicht die Zahl: `location,sea`, `location,ownterritory`, `location,enemyterritory` (siehe [Quests](../quests/index.md#aircraft-and-missions)).
 
     Zwei Folgen: Ein Ortsname, der nicht in der Liste steht, erfüllt jede Ortsbedingung automatisch, und weil kein mitgelieferter Ort `Land` trägt, kann eine Bedingung `location,land` nie erfüllt werden.
 
@@ -154,9 +154,45 @@ In der Tabelle steht **Eigen** für `OwnTerritory` (4), **Feind** für `EnemyTer
 
 Zwei weitere Einträge stehen in der Liste des Spiels, sind aber Überbleibsel aus der Entwicklung - **nutze sie nicht**: `test1` und `ireland`. Keiner von beiden trägt ein Flag, und `ireland` liegt nicht in Irland.
 
+## Orte mit einem Mod hinzufügen { #adding-locations-with-a-mod }
+
+Ein Mod kann der Liste eigene Orte hinzufügen, damit seine Missionen - und die von anderen - sie über ihren Namen nutzen können. Leg dazu eine oder mehrere `.json`-Dateien in einen Ordner `Locations` im `Missions/`-Ordner deines Mods:
+
+```text
+Mods/
+  my_mod/
+    Missions/
+      Locations/
+        mymod_locations.json
+```
+
+Gelesen werden nur Dateien, die direkt in `Missions/Locations/` liegen. Eine Datei sieht so aus:
+
+```json
+{
+    "Locations": [
+        {
+            "_locationId": "mymod_scapa_flow",
+            "_locationName": "mymod_scapa_flow",
+            "_coordinates": { "x": 58.9, "y": -3.1 },
+            "_flags": 2
+        }
+    ]
+}
+```
+
+Die Liste `Locations` fasst so viele Orte, wie du willst. Jeder Eintrag hat dieselben Felder wie ein Eintrag in einer Missionsdatei ([siehe oben](#using-a-location)), und `_flags` muss auch hier eine Zahl sein ([Orts-Flags](#location-flags)).
+
+- **Solange dein Mod aktiviert ist, stehen seine Orte auf der Liste**, und sie verschwinden wieder, wenn der Mod ausgeschaltet oder entfernt wird. Schaltest du einen Mod ein oder aus, wird die Liste ohne Neustart des Spiels aktualisiert.
+- **Ein Ort aus einem Mod verhält sich wie ein mitgelieferter.** Er wird im Dropdown des Mission Editors angeboten, funktioniert mit `missions_api.SetMissionLocation`, kann für eine Mission ohne Orte gezogen werden, und seine Flags sind das, was Ortsbedingungen in Quests sehen.
+- **Mitgelieferte Namen gewinnen immer.** Nutzt dein Ort einen Namen, den das Spiel schon hat, wird der mitgelieferte verwendet. Fügen zwei Mods denselben Namen hinzu, nimmt das Spiel einen davon und sagt dir nichts. Gib also jedem Ort das Präfix deines Mods, wie bei `mymod_scapa_flow`.
+- **Der Spieler sieht `_locationName` genau so, wie es dasteht**, samt Unterstrichen. Mitgelieferte Orte haben Übersetzungen; deiner hat keine, bis du einen Term namens `mission_location/<name>` registrierst - siehe [Ortsnamen](../scripting/localization.md#location-names).
+- **Eine Datei, die das Spiel nicht lesen kann, wird übersprungen**, mit einer Warnung in `Player.log`. Deine anderen Ortsdateien werden trotzdem geladen.
+- Halte die Koordinaten innerhalb der Kriegskarte (siehe nächster Abschnitt).
+
 ## Eigene Koordinaten verwenden { #using-your-own-coordinates }
 
-Nichts hindert eine Mission daran, einen Ort zu nennen, der nicht in der Liste steht. Die Koordinaten stehen in der Datei der Mission selbst, nicht in einer gemeinsamen Tabelle - du kannst eine Mission also überall hinsetzen. Name und Koordinaten gehören dir; die Flags, die ein Quest-Schritt sieht, nicht - die kommen per Name aus der mitgelieferten Liste (siehe oben), ein eigener Ort erfüllt also jede Ortsbedingung. Ein Skript kann deinen eigenen Ort nicht nutzen: `missions_api.SetMissionLocation` akzeptiert nur Namen aus der Liste.
+Nichts hindert eine Mission daran, einen Ort zu nennen, der nicht in der Liste steht. Die Koordinaten stehen in der Datei der Mission selbst, nicht in einer gemeinsamen Tabelle - du kannst eine Mission also überall hinsetzen. Name und Koordinaten gehören dir; die Flags, die ein Quest-Schritt sieht, nicht - die kommen per Name aus der Ortsliste (den mitgelieferten Orten und allen, die ein Mod hinzufügt). Ein Ort, den es nur in der Datei einer Mission gibt, erfüllt also jede Ortsbedingung. Auch ein Skript kann so einen Ort nicht nutzen: `missions_api.SetMissionLocation` akzeptiert nur Namen aus der Liste. Damit ein Ort Flags hat oder aus einem Skript nutzbar ist, [füg ihn mit einem Mod hinzu](#adding-locations-with-a-mod).
 
 Die Kriegskarte zeigt Breitengrad 40.75 bis 61.25 und Längengrad -11.75 bis 21.64 (eine Mercator-Projektion, die übliche flache Weltkarte). Der Bereich der mitgelieferten Orte oben ist einfach nur da, wo sie zufällig liegen, nicht die Grenze der Karte. Ein Ort außerhalb des Kartenrahmens funktioniert trotzdem - Entfernung und Treibstoff sind nur Mathematik -, aber seine Markierung wird an den nächsten Kartenrand geschoben. Der Spieler sieht ihn also am Rand statt dort, wo er wirklich liegt. Anklickbar bleibt er.
 

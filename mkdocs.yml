@@ -111,6 +111,9 @@ plugins:
             Maps: Karten
             Objects and models: Objekte und Modelle
             Biomes: Biome
+            Airplane skins: Flugzeug-Skins
+            Moddable objects: Veränderbare Objekte
+            Built-in texture names: Eingebaute Texturnamen
             Steam Workshop: Steam Workshop
             Claude Code: Claude Code
             Codex: Codex
@@ -169,6 +172,9 @@ nav:
       - Maps: content/maps.md
       - Objects and models: content/objects.md
       - Biomes: content/biomes.md
+      - Airplane skins: content/airplanes.md
+      - Moddable objects: content/moddable-objects.md
+      - Built-in texture names: content/texture-names.md
   - Sharing:
       - Steam Workshop: sharing/workshop.md
   - AI agents:

@@ -18,7 +18,7 @@ gespiegelt (liest Claude Code). Sie sind identisch.
 | `csv-tweak` | "Mach die Spitfire schneller" | Ändert Spieldaten über eine CSV-Überschreibung |
 | `localize-mod` | "Füg meinem Mod deutsche Texte hinzu" | Ergänzt oder korrigiert die Texte eines Mods in weiteren Sprachen |
 | `new-map` | "Liefer eine Karte mit meiner eigenen Questreihe aus" | Richtet einen Karten-Ordner und seine Metadaten ein |
-| `import-model` | "Nimm mein eigenes Modell für ..." | Bringt ein 3D-Modell in einen Mod (in Arbeit, von der aktuellen Alpha nicht unterstützt) |
+| `import-model` | "Nimm mein eigenes Modell für ..." | Bringt ein 3D-Modell oder eine Textur als Grafik-Mod für Objekte oder Biome in einen Mod |
 | `publish-workshop` | "Stell meinen Mod in den Workshop" | Prüft den Mod und führt dich durch den Upload im Spiel |
 | `validate` | "Prüf meinen Mod" | Startet den Validator und erklärt jeden Fund in einfachen Worten |
 | `install-mod` | "Pack meinen Mod ins Spiel" | Kopiert den Mod in den `Mods`-Ordner des Spiels |

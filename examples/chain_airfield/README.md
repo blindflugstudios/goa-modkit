@@ -23,7 +23,7 @@ Entirely in the JSON. Each mission after the first carries one requirement:
 
 Type 3 is `CompletedMission`; the value is `<mission_id>,<outcome>` where outcome is `success`, `failure` or `cancelled`. The scripts here do not touch the chain at all: they carry the text and the rolls, nothing else.
 
-The follow-ups here are ordinary missions, not historic ones, so once unlocked they join the random draw and may take a while to turn up. Add `"_isHistoric": true` to them if each stage should arrive at the next mission slot; `chain_convoy` shows that.
+The follow-ups here are ordinary missions, not historic ones, so once unlocked they join the random draw and may take a while to turn up. Add `"_isHistoric": true` to them if each stage should arrive within the in-game hour after the one before it succeeds; `chain_convoy` shows that. Leaving the flag off is the right choice for a follow-up the player may fly more than once.
 
 `chain_convoy` also shows the other shape: two missions requiring the *same* predecessor with opposite outcomes, so the story forks instead of continuing.
 

@@ -59,7 +59,8 @@ möchtest - wir freuen uns darauf.
 | **Ereignis-Skripte** | Python, das auf das reagiert, was auf dem Stützpunkt und in der Luft passiert | [Scripting](scripting/index.md) |
 | **Quests** | Checklisten, die den Spieler anleiten | [Quests](quests/index.md) |
 | **Spieldaten** | Flugzeuge, Gebäude, Angriffe, Kosten - dreh an den Zahlen | [CSV-Tabellen](data/csv.md) |
-| **Karten und Grafik** | Eigene Karten, Modelle und Biome (Grafik-Mods sind noch in Arbeit und werden von der aktuellen Alpha noch nicht unterstützt) | [Karten](content/maps.md) |
+| **Karten und Grafik** | Eigene Karten, Modelle und Biome | [Karten](content/maps.md) |
+| **Flugzeug-Skins** | Neue Lackierungen für die Flugzeuge des Spiels | [Flugzeug-Skins](content/airplanes.md) |
 | **Workshop** | Teil deinen Mod mit allen Spielern | [Steam Workshop](sharing/workshop.md) |
 
 ## So funktioniert es in einer Minute { #how-it-works-in-one-minute }

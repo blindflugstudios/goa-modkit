@@ -24,7 +24,7 @@ Type `help` for the full list with an example for each command, or `help create_
     Whatever a cheat does is saved with your game. Test mods on a spare save, not on your favourite campaign.
 
 !!! note "Reloading your mod is not a console command"
-    After changing a mod: **Options → Quit to main menu**, then load your save (if you added a new mod folder, press **Refresh** in the **Mods** window first). Quests are re-read too; only models and textures need a full game restart - and art mods are work in progress, not supported by the current alpha yet. See [Testing and reloading](testing.md).
+    After changing a mod: **Options → Quit to main menu**, then load your save (if you added a new mod folder, press **Refresh** in the **Mods** window first). Quests are re-read too; only art (models, textures, icons and biome PNGs) needs a full game restart. See [Testing and reloading](testing.md).
 
 ## The commands
 
@@ -132,7 +132,10 @@ These change the settings you choose when starting a map. The number is the sett
 | | `change_resource_degradation_rate_parameter [value]` | Resource decay setting. | `change_resource_degradation_rate_parameter 1` |
 | | `explosion_damage_rate_parameter [value]` | Explosion damage setting. | `explosion_damage_rate_parameter 1` |
 | | `hq_strikes_parameter [value]` | HQ requirement setting. | `hq_strikes_parameter 0` |
+
+<!-- OUTDATED (docs audit 2026-10-01): set_random_event_chance exists only in development builds, see DOCS_AUDIT.md
 | | `set_random_event_chance [0-1]` | Base chance of random events. | `set_random_event_chance 0.5` |
+-->
 
 ### Debug views and technical
 

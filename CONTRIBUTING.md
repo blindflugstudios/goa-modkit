@@ -61,8 +61,9 @@ does it inside.
 **Facts that are easy to get wrong:**
 
 - There is no `reload_mods` in the public game. To see a change: save, back to the main menu,
-  load the save. A new mod folder (or a content folder that was empty at game start) needs
-  **Refresh** in the Mods window first. Models and textures need a full restart.
+  load the save. A new or renamed mod folder, a changed `config.json` (or a content folder that
+  was empty at game start) needs **Refresh** in the Mods window first. Art (`Objects/`,
+  `Biomes/`) needs a full restart; airplane skins are read on level load.
 - Mod Python runs on IronPython 3.4: f-strings are fine, nothing newer than Python 3.6
   (no `:=`, no `match`).
 - Imports from the game's `Blindflug.*` namespaces are the normal scripting API.

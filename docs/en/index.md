@@ -58,7 +58,8 @@ build - we love to hear it.
 | **Event scripts** | Python that reacts to what happens on the base and in the air | [Scripting](scripting/index.md) |
 | **Quests** | Checklists that guide the player | [Quests](quests/index.md) |
 | **Game data** | Aircraft, buildings, raids, costs - change the numbers | [CSV tables](data/csv.md) |
-| **Maps and art** | Your own maps, models and biomes (art mods are work in progress and not supported by the current alpha yet) | [Maps](content/maps.md) |
+| **Maps and art** | Your own maps, models and biomes | [Maps](content/maps.md) |
+| **Airplane skins** | New paint schemes for the game's airplanes | [Airplane skins](content/airplanes.md) |
 | **Workshop** | Share your mod with every player | [Steam Workshop](sharing/workshop.md) |
 
 ## How it works in one minute

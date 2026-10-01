@@ -18,7 +18,7 @@ The skills live in `.agents/skills/` (read by Codex and OpenCode) and are mirror
 | `csv-tweak` | "Make the Spitfire faster" | Changes game data through a CSV override |
 | `localize-mod` | "Add German texts to my mod" | Adds or fixes the texts of a mod in more languages |
 | `new-map` | "Ship a map with my own quest line" | Sets up a map folder and its metadata |
-| `import-model` | "Use my own model for ..." | Brings a 3D model into a mod (work in progress, not supported in the current alpha) |
+| `import-model` | "Use my own model for ..." | Brings a 3D model or texture into a mod as an object or biome art mod |
 | `publish-workshop` | "Put my mod on the Workshop" | Checks the mod and walks you through the in-game upload |
 | `validate` | "Check my mod" | Runs the validator and explains every finding in plain words |
 | `install-mod` | "Put my mod into the game" | Copies the mod into the game's `Mods` folder |

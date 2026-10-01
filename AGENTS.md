@@ -53,13 +53,16 @@ Mods/<mod_id>/
   config.json        optional but recommended; "Name" is what the Mods screen shows
   preview.png        optional; Workshop preview, PNG, max 1 MB, 512x512 recommended
   Missions/          mission .json + .py, event scripts, helper scripts (the ONLY script folder)
+    Locations/       new mission locations, .json (the one subfolder that is read)
   Quests/            quest .json (files directly inside, no subfolders)
   CSV/               data table changes (.csv whole rows, .json commands)
   Maps/              .goamap files
-  Objects/  Biomes/  art mods - WORK IN PROGRESS, not supported by the current alpha
+  Objects/  Biomes/  art mods: models, textures, build-menu icons, ground textures
+  Airplanes/         new airplane skins: config.json + PNGs
 ```
 
-- **Art mods are not supported by the current alpha.** If a user asks for a model, texture or biome mod, tell them so before building anything and never promise it will work. There is no `TerrainObjects/` folder any more.
+- **Art mods** (`Objects/`, `Biomes/`) are imported once at game start: every art change needs a **full restart of the game**. Docs: `docs/en/content/objects.md`, `biomes.md`. There is no `TerrainObjects/` folder any more.
+- **Airplane skins** (`Airplanes/`) are read each time a level is loaded. Docs: `docs/en/content/airplanes.md`.
 
 - The game decides what a mod contains from **which folders hold files**, not from `config.json`. Folder names are exact: `Missions`, not `Mission` or `missions`.
 - There is **no `Events/` or `Scripts/` folder**. A `.py` anywhere except `Missions/` never runs, and nothing tells you.
@@ -117,8 +120,9 @@ Two ways to supply them, combinable: the `_raw...` fields in the JSON (`_rawMiss
 
 - **Roll once, read afterwards.** `missions_api.MakeAsPlannedRoll` / `MakeSkillRoll` roll and store. `GetAsPlannedRoll` / `GetSkillRoll` read. The default script rolls as-planned at the first in-flight event and the skill check at the second; everything after that reads. Re-rolling tells a different story from the outcome the player gets.
 - **Prefer JSON.** A mission without a JSON (script-only, authored in `initialize_mission`) first appears only via `missions_api.CreateMission` or `create_mission`; once it has been created, the weekly draw may hand it out again unless you give it requirements. Its data does not survive a save, so it must define `get_mission_result`. See `examples/script_only_scramble/`.
-- **Chains:** `{"_requirementType": 3, "_value": "<missionId>,<success|failure|cancelled>"}`. `success` means the outcome's `_missionSuccess` flag, not the skill roll. Set `"_isHistoric": true` on follow-ups so they are guaranteed to appear once the gate passes instead of waiting in the random pool.
+- **Chains:** `{"_requirementType": 3, "_value": "<missionId>,<success|failure|cancelled>"}`. `success` means the outcome's `_missionSuccess` flag, not the skill roll. Set `"_isHistoric": true` on follow-ups so they are guaranteed to appear once the gate passes instead of waiting in the random pool. Historic missions are checked every in-game hour, so a follow-up shows up within the hour.
 - **`missions_api.CreateMission(id)`** hands out a mission now, ignoring its requirements. Call it from `set_mission_impact`, **never** from `initialize_mission` (refused and logged).
+- **New places:** a mod adds mission locations in `Missions/Locations/*.json` (`{"Locations": [ ... ]}`, same fields as a mission's location entry, `_flags` a number). `_locationName` is the lookup key: prefix it with the mod id (shipped names win; a clash between mods is silent). See `docs/en/missions/locations.md`.
 - **Campaign state** (`examples/campaign_kanalkampf/`): store it under `game_api.GetScriptDataPath(<id>)`, put `game_api.GetAirBaseGuid()` in the file name (the folder is shared by all saves), give every key a default, wrap every read and write in `try/except`.
 
 ### Style
@@ -198,6 +202,7 @@ Detect the Mac chip with `uname -m` (`arm64` or `x86_64`). Then run `tools/bin/g
 - Every enum value, icon, location and field exists in `generated/catalog.json` or `docs/en/`.
 - CSV files: exact table and column names, valid JSON.
 - Quests: every text key is registered by a script; rules from section 9.
+- `Missions/Locations/` and `Airplanes/` are not checked by the validator yet. Check them by hand against `docs/en/missions/locations.md` and `docs/en/content/airplanes.md`: valid JSON, mod-id prefix on location names, every skin names an `Airplane` and has its `<skinId>_BaseMap_1001.png`.
 - No placeholder text (`my_mod`, `TODO`, template texts) remains, unless the user's mod id really is `my_mod`.
 
 ## 14. Installing into the game
@@ -222,9 +227,9 @@ Game data folder (holds `Mods/`, `Missions/`, and on Windows/Linux `Player.log`)
 You cannot reload the game. The public game has **no** `reload_mods` command (it exists only in developer builds) - never tell a player to type it. The reload loop is:
 
 1. In the game: save, then **Options -> Quit to main menu**.
-2. Main menu -> **Mods**. For a brand-new mod folder (or a content folder that was empty when the game started) press **Refresh** - the list of mods is otherwise read only at game start. Check the mod is listed and switched on.
-3. Load the save again (or start a new game). Missions, scripts, quests, maps and CSV changes are picked up now.
-4. **Art mods** (`Objects/`, `Biomes/` - models and textures; work in progress, not supported by the current alpha) are imported once at game start and need a **full restart of the game**.
+2. Main menu -> **Mods**. For a brand-new or renamed mod folder, a changed `config.json`, or a content folder that was empty when the game started, press **Refresh** - the list of mods is otherwise read only at game start. Check the mod is listed and switched on.
+3. Load the save again (or start a new game). Missions, scripts, quests, maps, airplane skins and CSV changes are picked up now.
+4. **Art mods** (`Objects/`, `Biomes/` - models, textures, icons, ground textures) are imported once at game start and need a **full restart of the game**. A future update adds a reload option in the main menu.
 
 If anything looks odd, restart the game - that always works.
 
@@ -262,7 +267,7 @@ Quote the relevant lines to the user, explain them in one plain sentence, fix, v
 | Quests | `docs/en/quests/index.md` |
 | Scripting | `docs/en/scripting/` (`events.md`, `api.md`, `localization.md`) |
 | Data tables | `docs/en/data/csv.md`, `docs/en/data/table-editor.md` |
-| Maps and art | `docs/en/content/` (`maps.md`, `objects.md`, `biomes.md`; art pages are work in progress) |
+| Maps, art and airplane skins | `docs/en/content/` (`maps.md`, `objects.md`, `biomes.md`, `airplanes.md`) |
 | Workshop | `docs/en/sharing/workshop.md` |
 
 If the docs do not answer something, check `templates/`, `examples/` and `generated/catalog.json`, and tell the user what you could not confirm.

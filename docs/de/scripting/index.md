@@ -255,7 +255,7 @@ def handler_function(arg1, arg2):
 ```
 
 - `event_name` - der Name des Events, das behandelt werden soll. Das kann jeder Text sein, der zu einem existierenden Event passt, einfacher ist aber `from Blindflug.MinorEvents import MinorEvent` mit den dort definierten Konstanten, etwa `MinorEvent.DAY_PHASE_CHANGE`.
-- `chance` - die Chance von `0.0` bis `1.0`, dass der Handler beim Eintreten des Events aufgerufen wird. `0.5` ergibt 50 %. Standard ist `1.0` (immer).
+- `chance` - die Chance von `0.0` bis `1.0`, dass der Handler beim Eintreten des Events aufgerufen wird. `0.5` ergibt 50 %. Standard ist `1.0` (immer). Das Spiel rechnet zu jedem Handler noch eine globale Grundchance dazu; im normalen Spiel ist sie `0`, es zählt also dein Wert (nur ein Cheat in Entwickler-Builds ändert sie).
 - `max_occurrences` - wie oft der Handler in einem Spielstand höchstens laufen darf. Der Zähler wird im Spielstand gespeichert, unter dem Namen `<module>.<function>` des Handlers - benennst du Datei oder Funktion um, beginnt er von vorn. Ein negativer Wert bedeutet "kein Limit" und ist der Standard (`-1`); `0` bedeutet, dass der Handler nie läuft. Chance-Wurf und Limit-Prüfung passieren beide, bevor der Handler aufgerufen wird.
 
 Der Name der Funktion kann jeder gültige Python-Name sein. Zusammen mit dem Dateinamen identifiziert er den Handler, wenn das Spiel zählt, wie oft er gelaufen ist.

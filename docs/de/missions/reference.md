@@ -67,16 +67,15 @@ Was mit einer Mission passiert, von der Woche, in der sie geplant wird, bis zum 
 | # | Schritt | Was passiert |
 |---|---|---|
 | 1 | Wochenplan | Zu Beginn jeder Woche verteilt das Spiel eine Anzahl Missions-Slots über die Woche. Die Anzahl hängt vom Rang der Basis ab. |
-| 2 | Historische Missionen mit Datum | Bei jedem Tageswechsel wird jede historische Mission mit `_historicDay`, deren Sperren erfüllt sind, erstellt, außerhalb der Wochen-Slots. |
-| 3 | Ein Slot ist fällig | Jede historische Mission ohne Datum, deren Sperren erfüllt sind, erscheint zusammen mit dieser Wochenmission und belegt den Slot nicht. Den Slot selbst füllt die Zufallsziehung. |
-| 4 | Zufallsziehung | Alle nicht-historischen Missionen, deren Sperren erfüllt sind, bilden einen Pool. Eine wird gezogen und aus dem Pool entfernt. Ist der Pool leer, wird er wieder aufgefüllt. |
-| 5 | Sperren | Eine Mission kommt infrage, wenn alle `_missionRequirements` erfüllt sind, die aktuelle Karte einen ihrer `_tags` teilt und sie (bei historischen Missionen) noch nicht gewonnen wurde und nicht schon auf der Karte ist. |
-| 6 | Erstellung | Das Spiel wählt einen Ort (eine Ziehung plus bis zu fünf weitere, um zwei Missionen am selben Fleck zu vermeiden), berechnet daraus Entfernung und Treibstoff und richtet die Mission aus JSON oder Skript ein. Dann ruft es [`initialize_mission`](#initialize_mission) auf. |
-| 7 | Warten | Die Mission liegt auf der Kriegskarte, bis der Spieler Flugzeuge schickt oder ihr Startfenster abläuft. Historische Missionen laufen nie ab. |
-| 8 | Flug | Die Uhr startet, sobald **alle** zugewiesenen Flugzeuge in der Luft sind. [`send_mission_event`](#send_mission_event) feuert jedes Mal, wenn der Flug einen weiteren Schritt erreicht (standardmäßig nach einem Drittel, nach zwei Dritteln und am Ende). |
-| 9 | Ausgang | Mit Daten: Die Würfe wählen einen der vier Ausgänge, seine Effekte werden angewendet, dann läuft [`set_mission_impact`](#set_mission_impact). Ohne Daten: [`get_mission_result`](#get_mission_result) entscheidet, dann läuft `set_mission_impact`. |
-| 10 | Rückkehr | Die Flugzeuge landen, die Akten der Crew werden aktualisiert, Events feuern. Dann [`send_mission_result_event`](#send_mission_result_event) oder [`send_mission_cancelled_event`](#send_mission_cancelled_event), falls der Spieler die Mission abgebrochen hat oder sie verfallen ist. |
-| 11 | Ergebnisfenster | Wenn der Spieler es öffnet, liefert [`get_mission_result_text`](#get_mission_result_text) den Text. |
+| 2 | Stündliche Prüfung der historischen Missionen | Jede Spielstunde wird jede historische Mission erstellt, deren Sperren erfüllt sind: eine mit `_historicDay` an diesem Tag oder, wenn ihre anderen Sperren erst später erfüllt sind, sobald sie es sind; eine ohne Datum sofort. Sie wartet nie auf den Wochenplan und belegt nie einen Slot. Eine historische Mission, die gescheitert ist oder abgebrochen wurde, ist bei der nächsten stündlichen Prüfung wieder da, selbst wenn ihr Ergebnisbericht noch ungelesen ist. |
+| 3 | Zufallsziehung | Wird einer der Slots der Woche fällig, füllt ihn die Zufallsziehung. Alle nicht-historischen Missionen, deren Sperren erfüllt sind, bilden einen Pool. Eine wird gezogen und aus dem Pool entfernt. Ist der Pool leer, wird er wieder aufgefüllt. |
+| 4 | Sperren | Eine Mission kommt infrage, wenn alle `_missionRequirements` erfüllt sind, die aktuelle Karte einen ihrer `_tags` teilt und sie (bei historischen Missionen) noch nicht gewonnen wurde und nicht schon auf der Karte ist. |
+| 5 | Erstellung | Das Spiel wählt einen Ort (eine Ziehung plus bis zu fünf weitere, um zwei Missionen am selben Fleck zu vermeiden), berechnet daraus Entfernung und Treibstoff und richtet die Mission aus JSON oder Skript ein. Dann ruft es [`initialize_mission`](#initialize_mission) auf. |
+| 6 | Warten | Die Mission liegt auf der Kriegskarte, bis der Spieler Flugzeuge schickt oder ihr Startfenster abläuft. Historische Missionen laufen nie ab, und eine Mission mit einem Maximum von `0` bei der Zeit bis zum Start auch nicht. |
+| 7 | Flug | Die Uhr startet, sobald **alle** zugewiesenen Flugzeuge in der Luft sind. [`send_mission_event`](#send_mission_event) feuert jedes Mal, wenn der Flug einen weiteren Schritt erreicht (standardmäßig nach einem Drittel, nach zwei Dritteln und am Ende). |
+| 8 | Ausgang | Mit Daten: Die Würfe wählen einen der vier Ausgänge, seine Effekte werden angewendet, dann läuft [`set_mission_impact`](#set_mission_impact). Ohne Daten: [`get_mission_result`](#get_mission_result) entscheidet, dann läuft `set_mission_impact`. |
+| 9 | Rückkehr | Die Flugzeuge landen, die Akten der Crew werden aktualisiert, Events feuern. Dann [`send_mission_result_event`](#send_mission_result_event) oder [`send_mission_cancelled_event`](#send_mission_cancelled_event), falls der Spieler die Mission abgebrochen hat oder sie verfallen ist. |
+| 10 | Ergebnisfenster | Wenn der Spieler es öffnet, liefert [`get_mission_result_text`](#get_mission_result_text) den Text. |
 
 ### Die zwei Würfe und der Ausgang-Index { #the-two-rolls-and-the-outcome-index }
 
@@ -115,6 +114,8 @@ from Blindflug.FlightMission import MissionEvent
 def send_mission_event(mission_entity_id):
     ...
 ```
+
+**Jedes Missionsskript braucht oben die Zeile `from Blindflug.FlightMission import MissionEvent`.** Skripte bekommen keine automatischen Importe, ohne diese Zeile gibt es `MissionEvent` in deinem Skript also nicht.
 
 Den Funktionsnamen wählst du selbst; was zählt, ist der Decorator. Jeder Handler bekommt genau ein Argument, `mission_entity_id`: die Nummer der Mission, um die es bei diesem Aufruf geht. Gib sie an jeden `missions_api`-Aufruf weiter. Dasselbe Skript kann gleichzeitig für zwei Flüge derselben Mission laufen, also speichere niemals Zustand eines einzelnen Flugs in einer Variablen auf Modulebene.
 
@@ -252,6 +253,8 @@ Reine Skript-Missionen. Gibt den Textschlüssel der Beschreibung im Missionsfens
 
 Reine Skript-Missionen. Gibt zurück, wie viele Spielminuten die Mission auf der Kriegskarte wartet, bevor sie abläuft. Standard, wenn er fehlt: 60.
 
+Gibt er `0` oder eine negative Zahl zurück, wird die Mission in der nächsten Spielminute abgebrochen. Anders als bei `_timeToStartRange` in einer JSON-Datei gibt es hier keinen Wert für "läuft nie ab".
+
 ### get_completion_time
 
 Reine Skript-Missionen. Gibt die Flugzeit in Spielminuten zurück. Standard, wenn er fehlt: 120.
@@ -307,8 +310,8 @@ Die Missionsdatei wird Feld für Feld gelesen. Feldnamen beginnen mit einem Unte
 | Feld | Typ | Bedeutung |
 |---|---|---|
 | `_maxPlaneSlots` | int | Wie viele Flugzeuge der Spieler zuweisen darf. |
-| `_timeToStartRange` | `{"x": min, "y": max}` | Minuten, die die Mission auf der Kriegskarte wartet, bevor sie abläuft, gewürfelt zwischen min und max. Wird bei historischen Missionen ignoriert. |
-| `_timeToCompleteRange` | `{"x": min, "y": max}` | Flugzeit in Minuten, gewürfelt zwischen min und max. |
+| `_timeToStartRange` | `{"x": min, "y": max}` | Spielminuten, die die Mission auf der Kriegskarte wartet, bevor sie abläuft, gewürfelt zwischen min und max. Ein Maximum von `0` bedeutet, dass sie nie abläuft. Wird bei historischen Missionen ignoriert; die laufen nie ab. |
+| `_timeToCompleteRange` | `{"x": min, "y": max}` | Flugzeit in Spielminuten, gewürfelt zwischen min und max. |
 | `_missionRequirements` | Liste | Sperren, die alle erfüllt sein müssen, bevor die Mission erscheinen kann. Siehe [Voraussetzungen](#requirements). |
 | `_missionOutcomes` | Liste | **Pflicht, genau 4**, in der festen Reihenfolge. Siehe [Ausgänge](#outcomes). |
 | `_asPlannedChance` | int | Chance in Prozent (0–100), dass die Mission wie geplant läuft. |
@@ -319,7 +322,7 @@ Die Missionsdatei wird Feld für Feld gelesen. Feldnamen beginnen mit einem Unte
 | `_difficultyRating` | int | Sterne, die dem Spieler angezeigt werden, 1–3. Standard 1. |
 | `_tags` | Liste von Strings | Zu welchen Karten die Mission gehört. Siehe [Karten-Tags](#map-tags). |
 | `_isHistoric` | bool | Macht die Mission zu einem Story-Moment. Siehe [Ketten und Kampagnen](chains.md#historic-missions). |
-| `_historicDay` | Datum | Der genaue Tag, an dem eine historische Mission erscheint. Ein Jahr unter 1900 zählt als "kein Datum". |
+| `_historicDay` | Datum | Der früheste Tag, an dem eine historische Mission erscheint: an diesem Tag oder später, wenn ihre anderen Sperren erst später erfüllt sind. Ein Jahr unter 1900 zählt als "kein Datum". |
 | `_rawMissionName` ... `_rawGwFailureTransmission` | String | Neun optionale Textfelder. Siehe [Lokalisierung](../scripting/localization.md#text-in-the-json-instead-of-a-term). |
 | `_distanceLocationDependant` | `{"x", "y"}` | Wird von Blindflugs eigenem Missionswerkzeug geschrieben. Das Spiel liest es nicht; lass es in Ruhe oder weg. |
 
@@ -445,7 +448,7 @@ Die Liste der Orte mit ihren Koordinaten steht auf der Seite [Einsatzorte](locat
 "_tags": ["campaign_debden"]
 ```
 
-Eine Karte listet in ihrer `Metadata.json` die Tags, die sie unterstützt, und eine Mission listet die Tags, für die sie geschrieben ist. Die Mission kann nur auf einer Karte erscheinen, wenn beide Listen mindestens einen Tag gemeinsam haben (Groß- und Kleinschreibung spielt keine Rolle). Eine leere oder fehlende Liste auf einer der beiden Seiten zählt als `["default"]`, und jede eingebaute Karte unterstützt `default`, eine Mission ohne Tags erscheint also überall.
+Eine Karte listet in ihrer `Metadata.json` die Tags, die sie unterstützt, und eine Mission listet die Tags, für die sie geschrieben ist. Die Mission kann nur auf einer Karte erscheinen, wenn beide Listen mindestens einen Tag gemeinsam haben (Groß- und Kleinschreibung spielt keine Rolle). Eine leere oder fehlende Liste auf einer der beiden Seiten zählt als `["default"]`, und jede eingebaute Karte unterstützt `default`, eine Mission ohne Tags erscheint also überall. Jede eingebaute Karte listet außerdem ihren eigenen Namen (`debden`, `duxford`, `lichfield`, `perranporth`); eine Mission, die nur den Tag `duxford` trägt, erscheint also nur auf Duxford. Siehe [Karten](../content/maps.md).
 
 Eine Mission, die nur mit `campaign_debden` getaggt ist, erscheint nur auf Karten, die diesen Tag listen. Eine Mission, die auf deiner Kampagnenkarte und überall sonst erscheinen soll, listet beide: `["campaign_debden", "default"]`.
 

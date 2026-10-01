@@ -40,9 +40,9 @@ Der Editor hat für jeden Teil der Karte ein eigenes Werkzeug:
 | Werkzeug | Was du damit machst |
 |---|---|
 | **Landschaftshöhe** (Terrain Height) | Gelände anheben und absenken. |
-| **Biomes** | Den Bodentyp malen: Gras, Erde, Straße, Fels, Sand, Kies. Der Bodentyp wirkt sich auch aufs Spiel aus, siehe [Biome](biomes.md) (Grafik-Mods für Biome sind noch in Arbeit und werden von der aktuellen Alpha nicht unterstützt). |
+| **Biomes** | Den Bodentyp malen: Gras, Erde, Straße, Fels, Sand, Kies. Der Bodentyp wirkt sich auch aufs Spiel aus, siehe [Biome](biomes.md). |
 | **Gras** (Grass) | Gras auf den Boden malen oder entfernen. |
-| **Landschaftsobjekte** (Terrain Objects) | Bäume, Büsche, Felsen, Teiche und mehr setzen, einzeln oder mit einem Pinsel. Ihren Look kannst du über [Objekte und Modelle](objects.md) ändern (Grafik-Mods sind noch in Arbeit und werden von der aktuellen Alpha nicht unterstützt). |
+| **Landschaftsobjekte** (Terrain Objects) | Bäume, Büsche, Felsen, Teiche und mehr setzen, einzeln oder mit einem Pinsel. Ihren Look kannst du über [Objekte und Modelle](objects.md) ändern. |
 | **Karteneinstellungen** | Name, Beschreibung, Tags, Start-Quests, Startdatum und Startvorräte der Karte (siehe unten). |
 
 **Rückgängig machen** (Undo) und **Wiederholen** (Redo) funktionieren wie gewohnt. Die Tastenkürzel listet der Editor unter **Shortcuts** auf.

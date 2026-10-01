@@ -487,6 +487,7 @@ Hier die verkettete Quest vollständig:
     ],
     "_requirements": [
         {
+            "Name": "",
             "_requirementType": 1,
             "_value": "example_first_steps"
         }
@@ -543,6 +544,7 @@ Und die kartengebundene:
     ],
     "_requirements": [
         {
+            "Name": "",
             "_requirementType": 3,
             "_value": ""
         }
@@ -555,7 +557,16 @@ Und die kartengebundene:
 }
 ```
 
-Auch die Quest-Dateien des Spiels selbst (`quest0.json`, `quest1.json`, die `*_skin_unlock`- und `tutorial_*`-Quests) lohnen einen Blick; du findest sie im Installationsordner, wie unter [Eine mitgelieferte Quest ändern](#changing-a-shipped-quest) beschrieben.
+## Mitgelieferte Quests { #shipped-quests }
+
+Auch die Quest-Dateien des Spiels selbst lohnen einen Blick: Sie zeigen, wie das Original aussieht. Du findest sie im Installationsordner, wie unter [Eine mitgelieferte Quest ändern](#changing-a-shipped-quest) beschrieben. Denk daran: Eine Mod-Datei mit demselben Namen **ersetzt** die mitgelieferte Quest. Benenne deine Kopie also um, bevor du sie änderst.
+
+| Datei | Was sie zeigt |
+|---|---|
+| `quest0.json` | Die erste Quest der Hauptreihe: Bedingungstyp 3, sie startet also nur auf Karten, die sie in `StartingQuestIds` aufführen. Ihre Schritte sind die Typen mit gezähltem Zustand - eine Startbahn der Stufe 1, ein Parkplatz, eine Gladiator, Betten. |
+| `quest1.json` | Die zweite Quest, mit Bedingungstyp 1 an `quest0` gehängt. Sie mischt Event-Schritte (`harvesting_finished`, `project_finished`) mit einer Werkbank-Zählung und hat einen optionalen Schritt. |
+| `fighter_day_skin_unlock.json` | Eine Errungenschaft für eine Flugzeug-Lackierung: `_questType: 1`, im Quest-Panel versteckt, und die einzige Stelle, an der ein Rollenname (`fighter`) dort stehen darf, wo sonst eine Flugzeug-Id steht - siehe [Quest-Typen](#quest-types). |
+| `tutorial_building.json` | Eine Tutorial-Quest: `_questType: 2` mit `_highlightedUIElements`, die den Spieler auf die Oberfläche hinweisen, solange die Schritte offen sind. |
 
 ## Eine Quest testen { #testing-a-quest }
 

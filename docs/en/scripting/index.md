@@ -255,7 +255,7 @@ def handler_function(arg1, arg2):
 ```
 
 - `event_name` - the name of the event to handle. This can be any text that matches an existing event, but the easier way is `from Blindflug.MinorEvents import MinorEvent` and the constants defined there, such as `MinorEvent.DAY_PHASE_CHANGE`.
-- `chance` - the chance, from `0.0` to `1.0`, that the handler is called when the event happens. `0.5` gives it a 50 % chance. The default is `1.0` (always).
+- `chance` - the chance, from `0.0` to `1.0`, that the handler is called when the event happens. `0.5` gives it a 50 % chance. The default is `1.0` (always). The game adds a global base chance to every handler's value; in the normal game it is `0`, so your value is what counts (only a cheat in development builds changes it).
 - `max_occurrences` - the maximum number of times the handler can run in one save game. The count is stored in the save, keyed by the handler's `<module>.<function>` name, so renaming the file or the function resets it. A negative value means "no limit" and is the default (`-1`); `0` means the handler never runs. The chance roll and the limit check both happen before the handler is called.
 
 The name of the function can be any valid Python name. Together with the file name, it identifies the handler when the game counts how often it ran.

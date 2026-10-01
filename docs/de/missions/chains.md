@@ -60,21 +60,21 @@ Eine normale Mission liegt in einem Pool und wird über die Woche verteilt zufä
 
 `"_isHistoric": true` ändert das. Eine historische Mission:
 
-- **kommt nie in die Zufallsziehung.** Sobald ihre Sperren erfüllt sind, erscheint sie garantiert.
-- **erscheint an ihrem Datum**, wenn sie einen `_historicDay` hat: genau an diesem Tag, wenn auch ihre anderen Sperren erfüllt sind. Dafür werden die Wochen-Slots nicht genutzt.
-- **behält die normale Vorlaufzeit**, wenn sie keinen `_historicDay` hat: Sie erscheint zusammen mit der nächsten Wochenmission und belegt keinen der Slots dieser Woche. So kommt eine Folgemission mit derselben Verzögerung wie jede andere Mission an, statt sofort auf der Karte zu landen.
+- **kommt nie in die Zufallsziehung.** Sobald ihre Sperren erfüllt sind, erscheint sie garantiert. Das Spiel prüft jede Spielstunde, sie taucht also innerhalb einer Stunde auf. Sie wartet nie auf den Wochenplan und belegt nie einen der Slots dieser Woche.
+- **erscheint an ihrem Datum**, wenn sie einen `_historicDay` hat: an diesem Tag oder später, wenn ihre anderen Sperren erst später erfüllt sind.
+- **erscheint innerhalb einer Stunde**, wenn sie keinen `_historicDay` hat: sobald ihre Sperren erfüllt sind. Eine Folgemission mit der Sperre `"<vorherige Mission>,success"` taucht innerhalb einer Stunde nach dem Erfolg dieser Mission auf.
 - **läuft nie ab.** `_timeToStartRange` wird ignoriert, der Spieler hat also unbegrenzt Zeit, sie zu fliegen.
-- **gibt es bei Erfolg nur einmal.** Einmal gewonnen, erscheint sie nie wieder. Ein gescheiterter oder abgebrochener Versuch bringt sie zurück, eine Kette, die an `success` gebunden ist, lässt sich also wiederholen.
+- **gibt es bei Erfolg nur einmal.** Einmal gewonnen, erscheint sie nie wieder. Ein gescheiterter oder abgebrochener Versuch bringt sie bei der nächsten stündlichen Prüfung zurück - selbst wenn ihr Ergebnisbericht noch ungelesen ist -, eine Kette, die an `success` gebunden ist, lässt sich also wiederholen.
 - **ist nie zweimal auf der Karte.** Solange eine Kopie wartet oder in der Luft ist, erscheint keine zweite.
 
 Ihre Sperren werden mit UND verknüpft:
 
 | Hat eine `CompletedMission`-Sperre | Hat einen `_historicDay` | Erscheint |
 |---|---|---|
-| nein | nein | zusammen mit der nächsten Wochenmission |
-| ja | nein | zusammen mit der nächsten Wochenmission, nachdem der Vorgänger richtig ausgegangen ist |
-| nein | ja | genau an diesem Tag |
-| ja | ja | genau an diesem Tag, sobald der Vorgänger richtig ausgegangen ist |
+| nein | nein | bei der nächsten stündlichen Prüfung |
+| ja | nein | innerhalb einer Stunde, nachdem der Vorgänger richtig ausgegangen ist |
+| nein | ja | an diesem Tag |
+| ja | ja | an diesem Tag oder später - innerhalb einer Stunde, nachdem der Vorgänger richtig ausgegangen ist, falls das erst nach dem Datum passiert |
 
 Genau diese Kombination braucht ein Story-Moment. Verwende sie für jeden Schritt einer Kette, meistens außer dem ersten.
 
@@ -85,7 +85,7 @@ Genau diese Kombination braucht ein Story-Moment. Verwende sie für jeden Schrit
 "_historicDay": { "Year": 1940, "Month": 8, "Day": 13, "Hour": 0, "Minute": 0 }
 ```
 
-Die Mission erscheint genau an diesem Tag. Ein Jahr unter 1900 zählt als "kein Datum". Deshalb tragen Beispieldateien `"Year": 1`, wenn sie keins meinen.
+Das Datum ist der früheste Tag, an dem die Mission erscheint: an diesem Tag, wenn ihre anderen Sperren schon erfüllt sind, sonst innerhalb einer Stunde, nachdem sie es sind. Ein Jahr unter 1900 zählt als "kein Datum". Deshalb tragen Beispieldateien `"Year": 1`, wenn sie keins meinen.
 
 Um eine Mission ab einem bestimmten Zeitpunkt zu sperren, verwende eine `LatestAppearanceDay`-Voraussetzung (Typ 2), gezählt in Tagen ab dem Startdatum der Karte. Das funktioniert bei jeder Mission, ob historisch oder nicht.
 
@@ -95,9 +95,9 @@ Zusammengesetzt wird so jede Operation an ihrem echten Datum verfügbar, und ein
 
 **Doppelte Ids.** Zwei Missionen mit derselben Id bedeuten, dass eine die andere stillschweigend ersetzt, abhängig von der Ladereihenfolge. Setz deinen Mod-Namen vor jede Id und denk beim Umbenennen daran, die Ids in jedem `CompletedMission`-Wert anzupassen.
 
-**`_isHistoric` bei Folgemissionen vergessen.** Die Kette funktioniert, aber Schritte tauchen womöglich erst nach sehr langer Zeit auf, und ein abgeschlossener Schritt kann erneut gezogen werden.
+**`_isHistoric` bei Folgemissionen vergessen.** Die Kette funktioniert, aber jeder Schritt kommt in die zufällige Wochenauswahl, sobald seine Sperre erfüllt ist. Er braucht also womöglich ein paar Slots, bis er auftaucht, und ein abgeschlossener Schritt kann erneut gezogen werden. Genau das richtige für eine wiederholbare Folgemission - eine, die der Spieler mehr als einmal fliegen darf. Nimm `_isHistoric`, wenn die Folgemission sofort und nur einmal erscheinen soll.
 
-**Mehrere historische Missionen gleichzeitig fällig.** Sie erscheinen alle zusammen: die datierten an ihrem Tag, die undatierten zusammen mit derselben Wochenmission. Wenn sie nacheinander kommen sollen, verkette sie über ihre Ausgänge oder gib ihnen verschiedene Tage.
+**Mehrere historische Missionen gleichzeitig fällig.** Sie erscheinen alle zusammen: die datierten an ihrem Tag, die undatierten bei derselben stündlichen Prüfung. Wenn sie nacheinander kommen sollen, verkette sie über ihre Ausgänge oder gib ihnen verschiedene Tage.
 
 **Verketten auf eine Mission, die nie erscheint.** Eine Sperre auf eine Mission, deren eigene Voraussetzungen nie erfüllt sind oder die für eine andere Karte getaggt ist, blockiert stillschweigend den Rest der Kette. Teste jeden Schritt einzeln, bevor du sie verbindest.
 

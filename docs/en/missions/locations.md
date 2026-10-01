@@ -1,12 +1,12 @@
 # Locations
 
-Every mission happens somewhere. A mission lists the places it can appear, and the game picks one of them each time the mission is created. This page explains how that choice works, what the location flags mean, and lists every place that ships with the game, with its coordinates.
+Every mission happens somewhere. A mission lists the places it can appear, and the game picks one of them each time the mission is created. This page explains how that choice works, what the location flags mean, lists every place that ships with the game, with its coordinates, and shows how a mod adds places of its own.
 
 ## How a location is chosen
 
 When a mission is created, the game draws one entry from the mission's list of locations (`_potentialLocations` in the mission JSON). If that spot is already used by another mission on the map, it draws again, up to five more times. If every draw comes up taken, it keeps the last one, so two missions can end up sharing a location.
 
-If a mission lists no locations at all, the game falls back to a random place from the [list below](#the-locations-that-ship-with-the-game).
+If a mission lists no locations at all, the game falls back to a random place from the full list: the [places that ship with the game](#the-locations-that-ship-with-the-game) plus any that enabled mods add (see [Adding locations with a mod](#adding-locations-with-a-mod)).
 
 Distance is not decoration: the fuel a flight costs is worked out from the great-circle distance (the shortest distance over the globe) between the location and the loaded map's own coordinates, multiplied by `FuelConsumptionPerKilometer` from the `Variables` table (see [CSV tables](../data/csv.md)). A mission over Berlin is far more expensive to fly than one over the Channel.
 
@@ -42,7 +42,7 @@ A list with several places lets the same mission turn up in different spots:
 ]
 ```
 
-**From a script**, a script-only mission (one without a `.json`) is placed with `missions_api.SetMissionLocation(mission_entity_id, location_name)`, usually from `initialize_mission`. It accepts only a name from the list below, never coordinates of your own, and returns `False` for an unknown name. Without a location, a script-only mission sits at the map origin. See [Reference](reference.md).
+**From a script**, a script-only mission (one without a `.json`) is placed with `missions_api.SetMissionLocation(mission_entity_id, location_name)`, usually from `initialize_mission`. It accepts only a name from the list below or one that an enabled mod adds (see [Adding locations with a mod](#adding-locations-with-a-mod)), never coordinates of your own, and returns `False` for an unknown name. Without a location, a script-only mission sits at the map origin. See [Reference](reference.md).
 
 ## Location flags
 
@@ -57,7 +57,7 @@ A list with several places lets the same mission turn up in different spots:
 They add up, so `10` is Sea + Enemy territory (2 + 8) - the most common value for a coastal target on the far side of the Channel.
 
 !!! warning "The flags in your mission file are not read"
-    The `_flags` value in a mission file is kept for completeness, but **the game does not read it**. Every shipped mission leaves it at `0`. Quest steps such as "fly a mission over the sea" look the mission's location **name** up in the list below and use the flags recorded there. The quest step writes the flag **name**, not the number: `location,sea`, `location,ownterritory`, `location,enemyterritory` (see [Quests](../quests/index.md#aircraft-and-missions)).
+    The `_flags` value in a mission file is kept for completeness, but **the game does not read it**. Every shipped mission leaves it at `0`. Quest steps such as "fly a mission over the sea" look the mission's location **name** up in the location list - the places below plus any that enabled mods add - and use the flags recorded there. The quest step writes the flag **name**, not the number: `location,sea`, `location,ownterritory`, `location,enemyterritory` (see [Quests](../quests/index.md#aircraft-and-missions)).
 
     Two consequences: a location name that is not on the list passes every location condition automatically, and because no shipped location carries `Land`, a `location,land` condition can never be met.
 
@@ -154,9 +154,45 @@ In the table, **Own** is `OwnTerritory` (4), **Enemy** is `EnemyTerritory` (8), 
 
 Two further entries exist in the game's list but are development leftovers - **do not use them**: `test1` and `ireland`. Neither carries any flag, and `ireland` is not in Ireland.
 
+## Adding locations with a mod
+
+A mod can add its own places to the list, so its missions - and anyone else's - can use them by name. Put one or more `.json` files into a `Locations` folder inside your mod's `Missions/` folder:
+
+```text
+Mods/
+  my_mod/
+    Missions/
+      Locations/
+        mymod_locations.json
+```
+
+Only files directly inside `Missions/Locations/` are read. A file looks like this:
+
+```json
+{
+    "Locations": [
+        {
+            "_locationId": "mymod_scapa_flow",
+            "_locationName": "mymod_scapa_flow",
+            "_coordinates": { "x": 58.9, "y": -3.1 },
+            "_flags": 2
+        }
+    ]
+}
+```
+
+The `Locations` list holds as many places as you like. Each entry has the same fields as an entry in a mission file ([see above](#using-a-location)), and `_flags` must be a number here too ([Location flags](#location-flags)).
+
+- **While your mod is enabled, its places are on the list**, and they leave it when the mod is switched off or removed. Switching a mod on or off updates the list without restarting the game.
+- **A place from a mod behaves like a shipped one.** It is offered in the Mission Editor's dropdown, works with `missions_api.SetMissionLocation`, can be drawn for a mission that lists no locations, and its flags are what quest location conditions see.
+- **Shipped names always win.** If your place uses a name the game already has, the shipped one is used. If two mods add the same name, the game uses one of them and does not tell you. So give every place your mod's prefix, as in `mymod_scapa_flow`.
+- **The player sees `_locationName` exactly as written**, underscores and all. Shipped places come with translations; yours has none until you register a term called `mission_location/<name>` - see [Location names](../scripting/localization.md#location-names).
+- **A file the game cannot read is skipped**, with a warning in `Player.log`. Your other location files still load.
+- Keep the coordinates inside the war map (see the next section).
+
 ## Using your own coordinates
 
-Nothing stops a mission from naming a place that is not on the list. The coordinates live in the mission's own file, not in a shared table, so you can put a mission anywhere. The name and coordinates are yours; the flags a quest step sees are not - they come from the shipped list by name (see above), so a place of your own matches every location condition. A script cannot use your own place: `missions_api.SetMissionLocation` only accepts names from the list.
+Nothing stops a mission from naming a place that is not on the list. The coordinates live in the mission's own file, not in a shared table, so you can put a mission anywhere. The name and coordinates are yours; the flags a quest step sees are not - they come from the location list by name (the shipped places and any added by a mod), so a place that exists only in a mission's own file matches every location condition. A script cannot use such a place either: `missions_api.SetMissionLocation` only accepts names from the list. To give a place flags, or to use it from a script, [add it with a mod](#adding-locations-with-a-mod).
 
 The war map shows latitude 40.75 to 61.25 and longitude -11.75 to 21.64 (a Mercator projection, the usual flat world map). The range of the shipped places above is simply where they happen to be, not the map's limit. A location outside the map's box still works - distance and fuel are just maths - but its marker is pushed to the nearest edge of the map, so the player sees it at the border rather than where it really is. It stays clickable.
 

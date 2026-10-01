@@ -24,7 +24,7 @@ Tipp `help` für die vollständige Liste mit einem Beispiel zu jedem Befehl, ode
     Was ein Cheat bewirkt, wird mit deinem Spiel gespeichert. Teste Mods auf einem Ersatz-Spielstand, nicht auf deiner Lieblingskampagne.
 
 !!! note "Deine Mod neu laden ist kein Konsolenbefehl"
-    Nach einer Änderung an einer Mod: **Einstellungen → Verlassen zum Hauptmenü**, dann deinen Spielstand laden (wenn du einen neuen Mod-Ordner angelegt hast, drück vorher im Fenster **Mods** auf **Refresh**). Auch Quests werden dabei neu eingelesen, nur Modelle und Texturen brauchen einen kompletten Neustart - und Grafik-Mods sind noch in Arbeit und werden von der aktuellen Alpha noch nicht unterstützt. Siehe [Testen und neu laden](testing.md).
+    Nach einer Änderung an einer Mod: **Einstellungen → Verlassen zum Hauptmenü**, dann deinen Spielstand laden (wenn du einen neuen Mod-Ordner angelegt hast, drück vorher im Fenster **Mods** auf **Refresh**). Auch Quests werden dabei neu eingelesen, nur Grafik (Modelle, Texturen, Symbole und Biom-PNGs) braucht einen kompletten Neustart. Siehe [Testen und neu laden](testing.md).
 
 ## Die Befehle { #the-commands }
 
@@ -132,7 +132,10 @@ Diese Befehle ändern die Einstellungen, die du beim Start einer Karte wählst. 
 | | `change_resource_degradation_rate_parameter [value]` | Einstellung für den Ressourcenverfall. | `change_resource_degradation_rate_parameter 1` |
 | | `explosion_damage_rate_parameter [value]` | Einstellung für den Explosionsschaden. | `explosion_damage_rate_parameter 1` |
 | | `hq_strikes_parameter [value]` | Einstellung für die HQ-Anforderungen. | `hq_strikes_parameter 0` |
+
+<!-- OUTDATED (docs audit 2026-10-01): set_random_event_chance exists only in development builds, see DOCS_AUDIT.md
 | | `set_random_event_chance [0-1]` | Grundwahrscheinlichkeit für Zufallsereignisse. | `set_random_event_chance 0.5` |
+-->
 
 ### Debug-Ansichten und Technisches { #debug-views-and-technical }
 

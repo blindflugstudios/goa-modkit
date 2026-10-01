@@ -23,7 +23,7 @@ Was das Spiel beim Upload mitschickt:
 | Dateien | der ganze Mod-Ordner | der ganze Mod-Ordner, ersetzt die alten Dateien |
 | Titel | der `Name` der Mod | bleibt unverändert |
 | Beschreibung | keine | bleibt unverändert |
-| Bild | `preview.png`, falls vorhanden | bleibt unverändert |
+| Bild | `preview.png`, falls vorhanden; ohne sie hat das Item kein Bild, bis du auf seiner Steam-Seite eins hinzufügst | bleibt unverändert |
 | Sichtbarkeit | öffentlich | öffentlich |
 | Workshop-Tag | `Mod` | `Mod` |
 

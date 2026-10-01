@@ -34,4 +34,4 @@ The validator does not check CSV yet. Run it anyway (it still checks any other c
 
 ## 5. Install and hand over
 
-Follow `install-mod`. Tell the user: save, Options -> Quit to main menu, open Mods (rescans the folder; check the mod is on), then load the save again - CSV changes apply when a level loads. Tell them where to look to see the new value. If nothing changed, `read-log` (look for `[Mod <mod_id>]` lines; informational ones may only appear in development builds).
+Follow `install-mod`. Tell the user: save, Options -> Quit to main menu, open Mods (if the mod or its `CSV/` folder is new, press **Refresh** - opening the window alone does not rescan; check the mod is on), then load the save again - CSV changes apply when a level loads. Tell them where to look to see the new value. If nothing changed, `read-log` (look for `[Mod <mod_id>]` lines; informational ones may only appear in development builds).

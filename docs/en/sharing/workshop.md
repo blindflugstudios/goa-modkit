@@ -23,7 +23,7 @@ What the game sends with the upload:
 | Files | the whole mod folder | the whole mod folder, replacing the old files |
 | Title | the mod's `Name` | left as it is |
 | Description | none | left as it is |
-| Picture | `preview.png`, if there is one | left as it is |
+| Picture | `preview.png`, if there is one; without it the item has no picture until you add one on its Steam page | left as it is |
 | Visibility | public | public |
 | Workshop tag | `Mod` | `Mod` |
 

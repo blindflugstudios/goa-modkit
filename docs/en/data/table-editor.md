@@ -63,7 +63,7 @@ So a rejected command never leaves a half-changed row behind, and one bad comman
 - The row must already exist. Otherwise: `'...' is not a built-in row; use Add to create one`.
 - Every key in `Cells` must be a column of the table, spelled exactly. Otherwise the message lists the table's columns.
 - The whole resulting row is checked, not just the cells you named. A row that was fine before stays fine unless your values break a rule.
-- A few built-in rows span several lines in the game's own table. They are refused, whether patched cell by cell or shipped as a whole row. Only in `ResourceCost` does a whole-row `<Table>.csv` fix them (see [Rows that take up several lines](csv.md#rows-that-take-up-several-lines)); the multi-line rows of `MoraleInfluenceValues` and `TaskValues` cannot be changed at all.
+- A few built-in rows span several lines in the game's own table. They are refused, whether patched cell by cell or shipped as a whole row. Only in `ResourceCost` does a whole-row `<Table>.csv` fix them (see [Rows that take up several lines](csv.md#rows-that-take-up-several-lines)); the multi-line rows of `MoraleInfluenceValues`, `FlightMissionData` (`AirplaneIntegrity`, `AirplaneHealth`, `Mood`, `Energy`, `Confidence`) and `TaskValues` cannot be changed at all.
 
 ### `Add`: create a new row
 
@@ -73,7 +73,7 @@ So a rejected command never leaves a half-changed row behind, and one bad comman
 
 - Only in the tables that allow new rows (see [CSV tables](csv.md)). Elsewhere: `new rows are not supported in '...'; only built-in rows can be changed`.
 - The id must not exist yet. Otherwise: `'...' already exists; use Replace to change it`.
-- Columns you leave out get the table's default or stay empty; the row check then decides whether that is acceptable.
+- Columns you leave out stay empty, and a cell may only be empty in a column where the game already leaves some row empty; otherwise the command is refused. Two columns are filled in for you instead: any `ResourceCost` cell you leave out becomes `0`, so an `Add` there only needs the resources that actually cost something, and `Associated Task` in `BuildingComponents` becomes `None`. See [Empty cells](csv.md#empty-cells).
 
 ### `Remove`: clear cells, or delete a row
 

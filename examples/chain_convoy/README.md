@@ -22,9 +22,9 @@ The value is `"<missionId>"` on its own, or `"<missionId>,<outcome>"` where outc
 
 ## Why the follow-ups are historic
 
-Both `convoy_strike` and `convoy_search` set `"_isHistoric": true`. This matters for chains: a historic mission never enters the random weekly draw and is **guaranteed** to appear once its gate passes. With a `_historicDay` it appears on that date; without one (as here) it takes the next mission slot, so it arrives with a normal mission's lead time. It never expires. Without the flag the follow-up would sit in the random pool and might not appear for weeks, or at all.
+Both `convoy_strike` and `convoy_search` set `"_isHistoric": true`. This matters for chains: a historic mission never enters the random weekly draw and is **guaranteed** to appear once its gate passes. The game checks historic missions every in-game hour. With a `_historicDay` it appears on that date (or later, if its gate only passes later); without one (as here) it appears within the hour after its gate passes, without waiting for the weekly schedule or taking up a mission slot. It never expires. Without the flag the follow-up would sit in the random pool and might not appear for weeks, or at all.
 
-A historic mission is also one-shot on success: once won it never appears again, so the branch cannot repeat. A failed or cancelled attempt comes back at the next slot.
+A historic mission is also one-shot on success: once won it never appears again, so the branch cannot repeat. A failed or cancelled attempt is back on the map at the next hourly check, even while its result report is still unread.
 
 ## Files
 

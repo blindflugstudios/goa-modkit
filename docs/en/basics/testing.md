@@ -7,17 +7,17 @@ There is no preview window for mods. You test a mod by loading it into the game 
 1. Edit your files in the mod folder.
 2. In the game, save, then **Options → Quit to main menu**.
 3. If you created a new mod folder (or a content folder such as `Quests/` that was empty when the game started), open **Mods** from the main menu and press **Refresh**. Opening the window alone does not scan the `Mods` folder again.
-4. Load your save. Missions, scripts, quests and CSV tables are read fresh every time a save is loaded. Only art needs a full restart.
+4. Load your save. Missions, scripts, quests, CSV tables, maps and airplane skins are read fresh every time a save is loaded. Only art (`Objects/`, `Biomes/`) needs a full restart.
 5. For a mission, open the cheat console and type `create_mission <your_mission_id>` to put it on the war map right now.
 6. Something wrong? Open `Player.log` (see [below](#reading-playerlog)).
 
 ## Reloading without restarting the game
 
-Every time you load a save, the game reads your mod's content again: mission files, Python scripts, quests and CSV tables, from the game itself and from every enabled mod. So the edit loop is: change a file, go back to the main menu, open **Mods**, load the save again.
+Every time you load a save, the game reads your mod's content again: mission files, Python scripts, quests, CSV tables, maps and airplane skins, from the game itself and from every enabled mod. So the edit loop is: change a file, go back to the main menu, open **Mods**, load the save again.
 
 Two things need more:
 
-- **Art is imported only when the game starts.** Models, textures and other files in `Objects/` and `Biomes/` need a full restart of the game. (Art mods are work in progress and not supported by the current alpha yet.)
+- **Art is imported only when the game starts.** Models, textures and other files in `Objects/` and `Biomes/` need a full restart of the game. A future update adds an option to reload mods from the main menu, which will make the restart unnecessary.
 - **New mods**: a mod folder you just created shows up only after you press **Refresh** in the Mods window (or restart the game). The same goes for a content folder such as `Quests/` that was empty when the game started. Check that the mod is switched on.
 
 A mission that was already on the war map in your save keeps the values it was created with. After changing a mission's JSON, create a fresh copy with `create_mission` to see the change.
@@ -38,7 +38,7 @@ Other cheats that help while testing missions:
 
 | Command | Use |
 |---|---|
-| `skip_day` | jump to the next day; historic missions with a date are checked at every day change |
+| `skip_day` | jump to the next day; historic missions are checked every in-game hour, so one dated for that day shows up within the hour |
 | `freeze_time off` | if the clock stopped (some cheats freeze time as a side effect) |
 
 The full list is on the [Cheat console](cheats.md) page.
@@ -48,8 +48,8 @@ The full list is on the [Cheat console](cheats.md) page.
 `create_mission` skips every gate, so it cannot show that a chain unlocks. To test the unlocking:
 
 1. Lower the gates for the test: `RunwayTier` 1 and `EarliestAppearanceDay` 1 remove the two most common reasons a mission never shows up.
-2. Make the follow-up historic (`"_isHistoric": true`). Historic missions skip the random draw and appear at the next weekly slot, or on their date, as soon as their gates pass.
-3. Fly the first mission to the outcome you are testing and wait for the next slot.
+2. Make the follow-up historic (`"_isHistoric": true`). Historic missions skip the random draw. The game checks them every in-game hour, so they appear within the hour after their gates pass (or on their date); they never wait for a weekly slot.
+3. Fly the first mission to the outcome you are testing and wait up to an in-game hour.
 
 Remember that a historic mission is one-shot once it has been won. Turn `_isHistoric` off again afterwards if the mission is not meant to be a story beat.
 
@@ -120,7 +120,7 @@ A clean validator run means the mod is well-formed, not that it plays well. Only
 
 ## Where text goes missing
 
-If the mission appears but shows a raw key like `missions/mymod_patrol/mission_name` instead of a name, that text was never defined. The game builds three keys itself and expects them to exist:
+If the mission appears but a slot such as its name shows nothing in the mission window, that text was never defined. The game builds three keys itself and expects them to exist:
 
 ```text
 missions/<id>/mission_name

@@ -63,7 +63,7 @@ Ein abgelehnter Befehl hinterlässt also nie eine halb geänderte Zeile, und ein
 - Die Zeile muss schon existieren. Sonst: `'...' is not a built-in row; use Add to create one`.
 - Jeder Schlüssel in `Cells` muss eine Spalte der Tabelle sein, exakt geschrieben. Sonst listet die Meldung die Spalten der Tabelle auf.
 - Geprüft wird die ganze resultierende Zeile, nicht nur die Zellen, die du genannt hast. Eine Zeile, die vorher in Ordnung war, bleibt es, solange deine Werte keine Regel brechen.
-- Einige eingebaute Zeilen erstrecken sich in der Tabelle des Spiels über mehrere Zeilen. Sie werden abgelehnt, egal ob du sie Zelle für Zelle änderst oder als ganze Zeile mitlieferst. Nur in `ResourceCost` hilft eine `<Table>.csv` mit der ganzen Zeile (siehe [Zeilen, die mehrere Zeilen belegen](csv.md#rows-that-take-up-several-lines)); die mehrzeiligen Zeilen von `MoraleInfluenceValues` und `TaskValues` lassen sich überhaupt nicht ändern.
+- Einige eingebaute Zeilen erstrecken sich in der Tabelle des Spiels über mehrere Zeilen. Sie werden abgelehnt, egal ob du sie Zelle für Zelle änderst oder als ganze Zeile mitlieferst. Nur in `ResourceCost` hilft eine `<Table>.csv` mit der ganzen Zeile (siehe [Zeilen, die mehrere Zeilen belegen](csv.md#rows-that-take-up-several-lines)); die mehrzeiligen Zeilen von `MoraleInfluenceValues`, `FlightMissionData` (`AirplaneIntegrity`, `AirplaneHealth`, `Mood`, `Energy`, `Confidence`) und `TaskValues` lassen sich überhaupt nicht ändern.
 
 ### `Add`: eine neue Zeile anlegen { #add-create-a-new-row }
 
@@ -73,7 +73,7 @@ Ein abgelehnter Befehl hinterlässt also nie eine halb geänderte Zeile, und ein
 
 - Nur in den Tabellen, die neue Zeilen erlauben (siehe [CSV-Tabellen](csv.md)). Anderswo: `new rows are not supported in '...'; only built-in rows can be changed`.
 - Die Id darf noch nicht existieren. Sonst: `'...' already exists; use Replace to change it`.
-- Spalten, die du weglässt, bekommen den Standardwert der Tabelle oder bleiben leer; die Zeilenprüfung entscheidet dann, ob das in Ordnung ist.
+- Spalten, die du weglässt, bleiben leer, und eine Zelle darf nur in einer Spalte leer sein, in der das Spiel schon selbst irgendeine Zeile leer lässt; sonst wird der Befehl abgelehnt. Zwei Spalten werden stattdessen für dich ausgefüllt: Jede `ResourceCost`-Zelle, die du weglässt, wird zu `0`, ein `Add` dort braucht also nur die Ressourcen, die wirklich etwas kosten, und `Associated Task` in `BuildingComponents` wird zu `None`. Siehe [Leere Zellen](csv.md#empty-cells).
 
 ### `Remove`: Zellen leeren oder eine Zeile löschen { #remove-clear-cells-or-delete-a-row }
 

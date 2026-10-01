@@ -230,7 +230,7 @@ Mods/my_first_mod/Missions/mymod_coastal_patrol.py
 
 Wo `Mods/` auf deinem Computer liegt, erklärt [So funktionieren Mods](../basics/mods.md); im Spiel bringt dich **Hauptmenü** (Main menu) **→ Mods → Open folder** dorthin.
 
-Starte dann das Spiel und lade einen Spielstand. Das Spiel liest Missionsdateien und Skripte bei jedem Laden eines Spielstands. Lief das Spiel schon, geh also zurück ins Hauptmenü und lade den Spielstand erneut.
+Starte dann das Spiel und lade einen Spielstand. Das Spiel liest Missionsdateien und Skripte bei jedem Laden eines Spielstands. Lief das Spiel schon, geh also zurück ins Hauptmenü und lade den Spielstand erneut. Ist `my_first_mod` ein ganz neuer Ordner, drück vorher im Mods-Fenster (Hauptmenü → **Mods**) auf **Refresh**, damit das Spiel ihn sieht. Speicherst du eine Mission im Mission Editor, werden die Missionen sofort neu geladen - dort musst du nichts neu laden.
 
 Um die Mission zu sehen, ohne auf die wöchentliche Ziehung zu warten, öffne die Cheat-Konsole (siehe [Cheat-Konsole](../basics/cheats.md)) und tippe:
 

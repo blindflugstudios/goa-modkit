@@ -60,21 +60,21 @@ A normal mission sits in a pool and is drawn at random across the week. For a fo
 
 `"_isHistoric": true` changes that. A historic mission:
 
-- **never enters the random draw.** The moment its gates pass, it is guaranteed to appear.
-- **appears on its date** when it has a `_historicDay`: on that exact day, if its other gates also pass. This does not use the weekly slots.
-- **keeps the normal lead time** when it has no `_historicDay`: it appears alongside the next weekly mission and does not take up one of that week's slots, so a follow-up arrives with the same delay as any other mission rather than dropping onto the map instantly.
+- **never enters the random draw.** Once its gates pass, it is guaranteed to appear. The game checks every in-game hour, so it shows up within the hour. It never waits for the weekly schedule and never takes up one of that week's slots.
+- **appears on its date** when it has a `_historicDay`: on that day, or later if its other gates only pass later.
+- **appears within the hour** when it has no `_historicDay`: as soon as its gates pass. A follow-up gated on `"<previous mission>,success"` shows up within the hour after that mission succeeds.
 - **never expires.** `_timeToStartRange` is ignored, so the player has unlimited time to fly it.
-- **is one-shot on success.** Once won, it never appears again. A failed or cancelled attempt brings it back, so a chain gated on `success` can be retried.
+- **is one-shot on success.** Once won, it never appears again. A failed or cancelled attempt brings it back at the next hourly check - even while its result report is still waiting to be read - so a chain gated on `success` can be retried.
 - **is never on the map twice.** While one copy is waiting or in flight, no second copy appears.
 
 Its gates combine with AND:
 
 | Has a `CompletedMission` gate | Has a `_historicDay` | Appears |
 |---|---|---|
-| no | no | alongside the next weekly mission |
-| yes | no | alongside the next weekly mission after the predecessor ended right |
-| no | yes | on that exact day |
-| yes | yes | on that exact day, once the predecessor has ended right |
+| no | no | at the next hourly check |
+| yes | no | within the hour after the predecessor ended right |
+| no | yes | on that day |
+| yes | yes | on that day, or later - within the hour after the predecessor ended right, if that happens after the date |
 
 That combination is exactly what a story beat needs. Use it for every step of a chain except, usually, the first.
 
@@ -85,7 +85,7 @@ That combination is exactly what a story beat needs. Use it for every step of a 
 "_historicDay": { "Year": 1940, "Month": 8, "Day": 13, "Hour": 0, "Minute": 0 }
 ```
 
-The mission appears on that exact day. A year below 1900 counts as "no date", which is why example files carry `"Year": 1` when they mean none.
+That date is the earliest day the mission appears: on that day if its other gates already pass, otherwise within the hour after they do. A year below 1900 counts as "no date", which is why example files carry `"Year": 1` when they mean none.
 
 To close a mission off after a certain point, use a `LatestAppearanceDay` requirement (type 2), counted in days from the map's starting date. It works on any mission, historic or not.
 
@@ -95,9 +95,9 @@ Put together, each operation becomes available on its real date, and one that wa
 
 **Duplicate ids.** Two missions with the same id means one silently replaces the other, decided by load order. Prefix every id with your mod name, and remember to update the ids inside every `CompletedMission` value when you rename.
 
-**Forgetting `_isHistoric` on follow-ups.** The chain works, but steps may take a very long time to surface, and a finished step can be drawn again.
+**Forgetting `_isHistoric` on follow-ups.** The chain works, but each step joins the random weekly draw once its gate passes, so it may take a few slots to surface, and a finished step can be drawn again. That is the right choice for a repeatable follow-up - one the player may fly more than once. Use `_isHistoric` when the follow-up must appear right away and only once.
 
-**Several historic missions due at once.** They all appear together: dated ones on their day, undated ones alongside the same weekly mission. If you want them one after another, chain them on each other's outcome or give them different days.
+**Several historic missions due at once.** They all appear together: dated ones on their day, undated ones at the same hourly check. If you want them one after another, chain them on each other's outcome or give them different days.
 
 **Chaining on a mission that never appears.** A gate on a mission whose own requirements never pass, or which is tagged for a different map, silently blocks the rest of the chain. Test each step on its own before linking them.
 

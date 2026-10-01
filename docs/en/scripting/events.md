@@ -31,7 +31,7 @@ def handler(argument1, argument2):
 ```
 
 - `event_name`: which event, usually written as `MinorEvent.SOME_NAME` (import it with `from Blindflug.MinorEvents import MinorEvent`). The plain string, like `"midnight"`, works too.
-- `chance`: the probability that the handler runs when the event fires, from 0.0 to 1.0. Default 1.0 (always).
+- `chance`: the probability that the handler runs when the event fires, from 0.0 to 1.0. Default 1.0 (always). The game adds a global base chance to every handler's value; in the normal game it is `0`, so your value is what counts (only a cheat in development builds changes it).
 - `max_occurrences`: how often the handler may run in one save game. The count is stored in the save, keyed by the handler's `<module>.<function>` name, so renaming either resets it. A negative value means no limit and is the default (`-1`); `0` means the handler never runs. The chance roll and the limit check both happen before the handler is called.
 
 **Returning `False` does not count** against `max_occurrences`. Use it to check a condition and bail out without using up the budget. Returning nothing, `True` or any other value counts.
@@ -56,6 +56,7 @@ The game passes arguments **by position**, in the order listed below. The names 
 - Ids of characters, buildings, workbenches and so on arrive as strings.
 - Ids of planes and dogs (`...EntityId`, `voxelObjectId`) arrive as numbers. These are the numbers `airplanes_api` and `resources_api` expect.
 - Values like a resource type or a day phase arrive as game values you can compare directly: `if resource == ResourceType.MilitaryConstruction:`. Turn them into text with `str(value)`.
+- Character arguments are character ids (strings), resource arguments are `ResourceType` values, and task arguments (the `taskType` of `task_started` and `task_completed`) are `Task` values (`from Blindflug.Tasks import Task`).
 
 Useful imports for comparing:
 
@@ -63,6 +64,7 @@ Useful imports for comparing:
 from Blindflug.GameResources import ResourceType
 from Blindflug.Game.Characters.Morale import MoraleCategory
 from Blindflug.DayPhases import DayPhase
+from Blindflug.Tasks import Task
 ```
 
 ### Missions and flights

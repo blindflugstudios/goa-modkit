@@ -13,7 +13,7 @@ Find out, offering defaults:
 
 1. **Mod id** - new mod or an existing one in `mods/`? Suggest an id from the idea (`channel_escort`), only `a-z 0-9 _`.
 2. **What happens** - the story in one sentence. Map it to a skill pair: first stat rolled when it goes as planned, second when it goes wrong (`Fight`, `Bomb`, `Recon`, `Transport`, `Maneuverability`, `Stealthiness`).
-3. **Where** - pick 1-3 places from `locations` in the catalog (sea missions need sea places).
+3. **Where** - pick 1-3 places from `locations` in the catalog (sea missions need sea places). If the user wants a place that is not there, add it with the mod (see step 3, Locations).
 4. **How hard** - `_difficultyRating` 1-3, `_asPlannedChance`, `_enemyPlaneReport` (max 18).
 5. **Consequences** - what each of the four endings gives or costs (morale, victory points, damage).
 
@@ -33,9 +33,16 @@ JSON (field meanings in `docs/en/missions/reference.md`):
 - `_outcomeEffect` types from `enums.OutcomeEffectType`; keep the `_effectIcon` values used in the templates for the same type.
 - `_missionStats`: **at least 2**, `_missionSkillType` from `enums.MissionSkillType`.
 - `_missionIcon`: `Fight`, `Recon`, `Bomb`, `Transport`, `Maneuverability` or `Stealth`.
-- `_missionRequirements`: numeric `_value` as a string (`"1"`). Chain: `{"_requirementType": 3, "_value": "<prev_id>,success"}` and `"_isHistoric": true` on the follow-up.
+- `_missionRequirements`: numeric `_value` as a string (`"1"`). Chain: `{"_requirementType": 3, "_value": "<prev_id>,success"}` and `"_isHistoric": true` on the follow-up (it then appears within the in-game hour after the gate passes, once; leave it off only for a repeatable follow-up that may come back through the weekly draw).
 - `_potentialLocations`: copy id, name and coordinates from the catalog.
 - `_tags`: leave `[]` unless the mission belongs to a tagged map.
+
+Locations of the mod's own (only when the user wants a place the catalog lacks; `docs/en/missions/locations.md`, section "Adding locations with a mod"):
+
+- One or more `.json` files directly in `mods/<mod_id>/Missions/Locations/` (no deeper folders), e.g. `<mod_id>_locations.json`: `{"Locations": [{"_locationId": "<mod_id>_scapa_flow", "_locationName": "<mod_id>_scapa_flow", "_coordinates": {"x": <latitude>, "y": <longitude>}, "_flags": 2}]}`.
+- Same fields as a `_potentialLocations` entry; `_flags` a number; keep id and name identical and prefixed with the mod id (shipped names win, a clash between two mods is silent). Keep coordinates inside the war map (latitude 40.75-61.25, longitude -11.75-21.64).
+- Use the same entry in the mission's `_potentialLocations`. The player sees the raw `_locationName` unless a script registers `mission_location/<name>` with `localization.SetTerm`.
+- The validator only knows the catalog's places and may warn about the new name; tell the user that warning is expected.
 
 Python (optional; delete it and use the `_raw...` JSON fields for a text-only mission):
 
@@ -53,7 +60,7 @@ Run `python tools/validator/goa_validate.py mods/<mod_id>` (see the `validate` s
 Follow the `install-mod` skill: copy `mods/<mod_id>/` into the game's `Mods` folder (confirm the path the first time), then tell the user:
 
 1. Save, then Options -> Quit to main menu.
-2. Main menu -> Mods (opening it rescans the folder): the mod is listed and switched on.
+2. Main menu -> Mods. If the mod folder is new (first install) or renamed, press **Refresh** - opening the window alone does not rescan. The mod is listed and switched on.
 3. Load the save again.
 4. To see the mission now: Options -> Cheats on (first time only), click the cheat button on the game screen, type `create_mission <mission_id>`, press Enter, open the war map.
 

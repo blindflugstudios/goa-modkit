@@ -129,6 +129,15 @@ localization.SetTerm("en", "quest/{}/subQuest0_description".format(QUEST_ID), "F
 
 Die Schlüssel müssen nur mit dem übereinstimmen, was in der Quest-Datei steht. Siehe [Quests](../quests/index.md).
 
+## Ortsnamen { #location-names }
+
+Eine Mod kann eigene Orte zur Kriegskarte hinzufügen (siehe [Orte mit einer Mod hinzufügen](../missions/locations.md#adding-locations-with-a-mod)). Der Spieler sieht den `_locationName` eines solchen Orts genau so, wie er geschrieben ist, denn nur die mitgelieferten Orte haben Übersetzungen. Damit dein Ort einen richtigen Namen bekommt, registrierst du einen Term namens `mission_location/<name>`, wobei `<name>` der `_locationName` ist:
+
+```python
+localization.SetTerm("en", "mission_location/mymod_scapa_flow", "Scapa Flow")
+localization.SetTerm("de", "mission_location/mymod_scapa_flow", "Scapa Flow")
+```
+
 ## Platzhalter { #placeholders }
 
 `event_log.Create` nimmt ein Dictionary, das `{[NAME]}`-Platzhalter füllt:

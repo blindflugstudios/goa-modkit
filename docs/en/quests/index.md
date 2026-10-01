@@ -487,6 +487,7 @@ Here is the chained quest in full:
     ],
     "_requirements": [
         {
+            "Name": "",
             "_requirementType": 1,
             "_value": "example_first_steps"
         }
@@ -543,6 +544,7 @@ And the map-bound one:
     ],
     "_requirements": [
         {
+            "Name": "",
             "_requirementType": 3,
             "_value": ""
         }
@@ -555,7 +557,16 @@ And the map-bound one:
 }
 ```
 
-The game's own quest files (`quest0.json`, `quest1.json`, the `*_skin_unlock` and `tutorial_*` quests) are worth reading too; find them in the installation folder as described in [Changing a shipped quest](#changing-a-shipped-quest).
+## Shipped quests
+
+The game's own quest files are worth reading too: they show what the real thing looks like. Find them in the installation folder as described in [Changing a shipped quest](#changing-a-shipped-quest). Remember that a mod file with the same name **replaces** the shipped quest, so rename your copy before you change it.
+
+| File | What it shows |
+|---|---|
+| `quest0.json` | The first quest of the main line: requirement type 3, so it only starts on maps that list it in `StartingQuestIds`. Its steps are the counted-state types - an airstrip of tier 1, a parking spot, a Gladiator, beds. |
+| `quest1.json` | The second quest, chained on `quest0` with requirement type 1. It mixes event steps (`harvesting_finished`, `project_finished`) with a workbench count, and has an optional step. |
+| `fighter_day_skin_unlock.json` | An aircraft skin achievement: `_questType: 1`, hidden from the quest panel, and the only place where a role name (`fighter`) is allowed where an aircraft id normally goes - see [Quest types](#quest-types). |
+| `tutorial_building.json` | A tutorial quest: `_questType: 2` with `_highlightedUIElements` that point the player at the interface while the steps are open. |
 
 ## Testing a quest
 

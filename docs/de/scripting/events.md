@@ -31,7 +31,7 @@ def handler(argument1, argument2):
 ```
 
 - `event_name`: welches Event, meistens geschrieben als `MinorEvent.SOME_NAME` (importiert mit `from Blindflug.MinorEvents import MinorEvent`). Der einfache String, etwa `"midnight"`, funktioniert auch.
-- `chance`: die Wahrscheinlichkeit, dass der Handler läuft, wenn das Event feuert, von 0.0 bis 1.0. Standard 1.0 (immer).
+- `chance`: die Wahrscheinlichkeit, dass der Handler läuft, wenn das Event feuert, von 0.0 bis 1.0. Standard 1.0 (immer). Das Spiel rechnet zu jedem Handler noch eine globale Grundchance dazu; im normalen Spiel ist sie `0`, es zählt also dein Wert (nur ein Cheat in Entwickler-Builds ändert sie).
 - `max_occurrences`: wie oft der Handler in einem Spielstand laufen darf. Der Zähler wird im Spielstand gespeichert, unter dem Namen `<module>.<function>` des Handlers - benennst du eins davon um, fängt er von vorne an. Ein negativer Wert heißt unbegrenzt, das ist der Standard (`-1`); `0` heißt, der Handler läuft nie. Der Zufallswurf für `chance` und die Prüfung des Limits passieren beide, bevor der Handler aufgerufen wird.
 
 **Die Rückgabe von `False` zählt nicht** gegen `max_occurrences`. Nutze das, um eine Bedingung zu prüfen und auszusteigen, ohne das Kontingent zu verbrauchen. Keine Rückgabe, `True` oder jeder andere Wert zählt.
@@ -56,6 +56,7 @@ Das Spiel übergibt Argumente **nach Position**, in der unten aufgeführten Reih
 - Ids von Charakteren, Gebäuden, Werkbänken und so weiter kommen als Strings an.
 - Ids von Flugzeugen und Hunden (`...EntityId`, `voxelObjectId`) kommen als Zahlen an. Das sind die Zahlen, die `airplanes_api` und `resources_api` erwarten.
 - Werte wie ein Ressourcentyp oder eine Tagesphase kommen als Spielwerte an, die du direkt vergleichen kannst: `if resource == ResourceType.MilitaryConstruction:`. Mit `str(value)` machst du Text daraus.
+- Charakter-Argumente sind Charakter-Ids (Strings), Ressourcen-Argumente sind `ResourceType`-Werte und Aufgaben-Argumente (der `taskType` von `task_started` und `task_completed`) sind `Task`-Werte (`from Blindflug.Tasks import Task`).
 
 Nützliche Imports zum Vergleichen:
 
@@ -63,6 +64,7 @@ Nützliche Imports zum Vergleichen:
 from Blindflug.GameResources import ResourceType
 from Blindflug.Game.Characters.Morale import MoraleCategory
 from Blindflug.DayPhases import DayPhase
+from Blindflug.Tasks import Task
 ```
 
 ### Missionen und Flüge { #missions-and-flights }

@@ -173,6 +173,16 @@ Dreißig Tabellen lassen sich modden. Drei Dateien, die es im Spiel gibt, die ab
 Jeder Abschnitt listet die Spalten auf, welche Werte sie nehmen und was die eingebauten Zeilen verwenden. Wo eine Spalte keine
 besondere Regel hat, gelten nur die allgemeinen Regeln von oben.
 
+Die eingebauten Werte sind immer vollständig, nie nur eine Auswahl:
+
+- `a–b` ist der volle Bereich: der niedrigste und der höchste Wert, den irgendeine eingebaute Zeile verwendet.
+- Eine mit "oder" verbundene Liste enthält jeden verschiedenen Wert, den die eingebauten Zeilen verwenden.
+- Eine mit "pro Zeile" markierte Liste nennt den Wert jeder Zeile, in der Reihenfolge, in der die Zeilen in der Datei stehen.
+- "in jeder Zeile" bedeutet, dass alle eingebauten Zeilen genau diesen einen Wert haben.
+- Bei einer `min-max`-Spalte bekommt jede Hälfte ihren eigenen Bereich: "min 0–43, max 0–60" bedeutet, dass die erste Zahl
+  über die Zeilen von 0 bis 43 reicht und die zweite von 0 bis 60.
+- Eine leere Eingebaut-Zelle bedeutet, dass die eingebauten Zeilen jeden Wert verwenden, der unter Wert aufgeführt ist.
+
 ### Flugzeuge und Basis { #aircraft-and-base }
 
 #### `VehicleData` - Flugzeuge { #vehicledata-aircraft }
@@ -181,31 +191,31 @@ Eingebaute Datei: [VehicleData.csv](../assets/csv/VehicleData.csv)
 
 Eine Zeile pro Flugzeug. Zeilen können nicht hinzugefügt oder entfernt werden.
 
-| Spalte | Wert | Eingebauter Bereich | Hinweise |
+| Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|
-| `Name` | Lokalisierungsschlüssel | `airplane/spitfire` | darf nicht leer sein |
+| `Name` | Lokalisierungsschlüssel | `airplane/<Zeilen-Id>` in jeder Zeile, z. B. `airplane/spitfire` | darf nicht leer sein |
 | `Type` | `Fighter`, `Bomber`, `MultiRole`, `Special` | | |
-| `Crew` | Kommaliste der Sitze; wiederhole eine Rolle für zwei Sitze | `Pilot`, `"Pilot,Gunner,Navigator"` | Rollen: `Pilot`, `Gunner`, `Navigator`, `BombAimer`, `FlightEngineer`, `RadioOperator` |
+| `Crew` | Kommaliste der Sitze; wiederhole eine Rolle für zwei Sitze | 1–8 Sitze, von `Pilot` allein bis `Pilot,Pilot,BombAimer,Navigator,FlightEngineer,RadioOperator,Gunner,Gunner`; jede Zeile beginnt mit `Pilot`, und alle sechs Rollen kommen vor | in einer CSV-Datei setzt du eine Zelle mit mehr als einem Sitz in Anführungszeichen: `"Pilot,Gunner,Navigator"`. Rollen: `Pilot`, `Gunner`, `Navigator`, `BombAimer`, `FlightEngineer`, `RadioOperator` |
 | `Runway Tier` | ganze Zahl | 1–5 | über 5 kann keine Startbahn es bedienen |
 | `Parking Size` | ganze Zahl | 0–2 | über 2 kann es nie parken |
 | `Victory Points Cost` | ganze Zahl | 0–12 | 0 macht es kostenlos |
-| `Movement Speed` | ganze Zahl | 5 | Rollgeschwindigkeit; bei 0 erreicht es nie die Startbahn |
+| `Movement Speed` | ganze Zahl | 5 in jeder Zeile | Rollgeschwindigkeit; bei 0 erreicht es nie die Startbahn |
 | `Landing Length` | ganze Zahl | 60–170 | länger als jede baubare Bahn, und es kann nie landen |
-| `Health` | ganze Zahl | 100 | |
-| `Initial Integrity` | ganze Zahl | 1000 | Stunden Verschleiß, die das Flugzeug aushält, bevor es verbraucht ist (1000 h ≈ 41 Tage) |
+| `Health` | ganze Zahl | 100 in jeder Zeile | |
+| `Initial Integrity` | ganze Zahl | 1000 in jeder Zeile | Stunden Verschleiß, die das Flugzeug aushält, bevor es verbraucht ist (1000 h ≈ 41 Tage) |
 | `Fuel Capacity` | ganze Zahl | 200–1260 | |
-| `Voxel Size` | `AxBxC` | `10x0x10` | |
-| `Fight Power` | `min-max` | `0-0` … `43-60` | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
-| `Bomb Power` | `min-max` | `0-0` … `50-80` | ebenso |
-| `Recon Power` | `min-max` | `5-10` … `42-60` | ebenso |
-| `Manoeuvrability` | `min-max` | min 2–28, max 8–50 | ebenso |
-| `Transport Capacity` | `min-max` | `1-5` … `60-90` | ebenso |
-| `Stealthiness` | `min-max` | `10-48` … `88-98` | ebenso |
-| `Wreck Resource Type` | `/`-Liste von Ressourcen | `Metal/RepairParts` | beide Wrack-Spalten gesetzt oder beide leer |
-| `Wreck Resource Amount` | `/`-Liste ganzer Zahlen | `10/5` | gleiche Länge wie die Typliste |
+| `Voxel Size` | `AxBxC` | `10x0x10` in jeder Zeile | |
+| `Fight Power` | `min-max` | min 0–43, max 0–60 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
+| `Bomb Power` | `min-max` | min 0–50, max 0–80 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
+| `Recon Power` | `min-max` | min 5–42, max 10–60 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
+| `Manoeuvrability` | `min-max` | min 2–28, max 8–50 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
+| `Transport Capacity` | `min-max` | min 1–60, max 5–90 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
+| `Stealthiness` | `min-max` | min 10–88, max 48–98 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
+| `Wreck Resource Type` | `/`-Liste von Ressourcen | `Metal/RepairParts` in jeder Zeile | beide Wrack-Spalten gesetzt oder beide leer |
+| `Wreck Resource Amount` | `/`-Liste ganzer Zahlen | `10/5` in jeder Zeile | eine Menge pro Eintrag in `Wreck Resource Type`, in der dort aufgeführten Reihenfolge |
 | `Low Caliber Ammo Capacity` | ganze Zahl | 0–3300 | mitgeführte `GunAmmo`; 0 = keine |
-| `High Caliber Ammo Capacity` | ganze Zahl | 0–300 | `AntiAirAmmo`; 0 = keine |
-| `Plane Bombs Capacity` | ganze Zahl | 0–32 | `PlaneBombs`; 0 = keine |
+| `High Caliber Ammo Capacity` | ganze Zahl | 0–300 | mitgeführte `AntiAirAmmo`; 0 = keine |
+| `Plane Bombs Capacity` | ganze Zahl | 0–32 | mitgeführte `PlaneBombs`; 0 = keine |
 
 !!! warning
     Ein Flugzeug, das schon auf deiner Basis steht, behält die Gesundheit, Integrität und Treibstoffkapazität, mit der es gebaut wurde.
@@ -220,7 +230,7 @@ Zeilen `1`–`6`, eine pro Basiskategorie. Alle sechs müssen existieren, und ih
 
 | Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|
-| `Airstrip Tier` | ganze Zahl | 1,2,3,4,5,5 | nötig, um den Rang zu erreichen |
+| `Airstrip Tier` | ganze Zahl | pro Zeile: 1, 2, 3, 4, 5, 5 | nötig, um den Rang zu erreichen |
 | `Minimum Airstrip Count` | ganze Zahl | 1–5 | |
 | `Minimum Parking Count` | ganze Zahl | 1–20 | |
 | `Missions Per Week` | ganze Zahl | 6–18 | Plätze, die die Woche anbietet; bei 0 werden keine Missionen geplant |
@@ -236,11 +246,11 @@ Zeilen `1`–`5`.
 
 | Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|
-| `Length` | ganze Zahl | 80,120,140,160,200 | Stufen gelten nach "Länge oder mehr", halte sie also aufsteigend |
-| `Width` | ganze Zahl | 12,14,18,22,26 | ebenso |
-| `Material` | Text | `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | **darf das Material einer anderen Stufe nicht wiederholen** und muss eine vorhandene `ResourceCost`-Zeile nennen - diese Zeile bestimmt, was jede Kachel dieser Startbahn kostet. `ResourceCost` nimmt keine neuen Belagszeilen an, bleib also in der Praxis bei `dirt`, `sand`, `gravel`, `concrete` und `tarmac` (sie zwischen den Stufen zu tauschen, ist in Ordnung). Ein Material ohne `ResourceCost`-Zeile wird hier angenommen, und dann schlägt das Verlegen einer Startbahn dieser Stufe mit einem Fehler fehl |
-| `Biome Id` | ganze Zahl | 6,20,22,15,13 | Boden, der unter die fertige Bahn gemalt wird |
-| `Build Time` | ganze Zahl | 5,2,2,2,2 | Spielminuten Arbeit pro Kachel. An jeder Kachel arbeitet immer nur ein Crewmitglied, mehr Crew verlegt also mehr Kacheln gleichzeitig, aber keine Kachel schneller |
+| `Length` | ganze Zahl | pro Zeile: 80, 120, 140, 160, 200 | Stufen gelten nach "Länge oder mehr", halte sie also aufsteigend |
+| `Width` | ganze Zahl | pro Zeile: 12, 14, 18, 22, 26 | Stufen gelten nach "Breite oder mehr", halte sie also aufsteigend |
+| `Material` | Text | pro Zeile: `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | **darf das Material einer anderen Stufe nicht wiederholen** und muss eine vorhandene `ResourceCost`-Zeile nennen - diese Zeile bestimmt, was jede Kachel dieser Startbahn kostet. `ResourceCost` nimmt keine neuen Belagszeilen an, bleib also in der Praxis bei `dirt`, `sand`, `gravel`, `concrete` und `tarmac` (sie zwischen den Stufen zu tauschen, ist in Ordnung). Ein Material ohne `ResourceCost`-Zeile wird hier angenommen, und dann schlägt das Verlegen einer Startbahn dieser Stufe mit einem Fehler fehl |
+| `Biome Id` | ganze Zahl | pro Zeile: 6, 20, 22, 15, 13 | Boden, der unter die fertige Bahn gemalt wird |
+| `Build Time` | ganze Zahl | pro Zeile: 5, 2, 2, 2, 2 | Spielminuten Arbeit pro Kachel. An jeder Kachel arbeitet immer nur ein Crewmitglied, mehr Crew verlegt also mehr Kacheln gleichzeitig, aber keine Kachel schneller |
 
 #### `Biomes`
 
@@ -251,9 +261,9 @@ Zeilen `0`–`23`, die Bodenarten. Alle Spalten sind Zahlen, daher lässt sich d
 | Spalte | Eingebaut | Hinweise |
 |---|---|---|
 | `Airstrip Tier` | 0–5 | Stufe, als die eine Startbahn auf diesem Boden zählt |
-| `Character Speed Modifier` | 1 … 1.2 | 0 friert jeden ein, der darauf steht |
-| `Airplane Speed Modifier` | 0.5 … 1.2 | |
-| `Degradation Penalty` | 0 … 0.2 | zusätzlicher Verschleiß für hier gelagerte Güter |
+| `Character Speed Modifier` | 1–1.2 | 0 friert jeden ein, der darauf steht |
+| `Airplane Speed Modifier` | 0.5–1.2 | |
+| `Degradation Penalty` | 0–0.2 | zusätzlicher Verschleiß für hier gelagerte Güter |
 | `Fire Spread Modifier` | 0.5 oder 1 | |
 
 #### `ScrambleData` - feindliche Flugzeuge beim Alarmstart { #scrambledata-enemy-aircraft-in-a-scramble }
@@ -262,12 +272,14 @@ Eingebaute Datei: [ScrambleData.csv](../assets/csv/ScrambleData.csv)
 
 Zeilen `Fighter`, `Diver`, `Bomber`. Die Namen können nicht geändert werden. Alle Spalten sind ganze Zahlen.
 
-| Spalte | Eingebaut |
-|---|---|
-| `PlaneHealth` | 18, 26, 34 |
-| `PlanePower` | 23, 17, 14 |
-| `PlaneWinDealDamageMin` / `Max` | 15–120 - Schaden an deinem Flugzeug, wenn der Feind gewinnt |
-| `PlaneLooseDealDamageMin` / `Max` | 5–25 - Schaden, wenn der Feind verliert |
+| Spalte | Eingebaut | Hinweise |
+|---|---|---|
+| `PlaneHealth` | pro Zeile: 18, 26, 34 | |
+| `PlanePower` | pro Zeile: 23, 17, 14 | |
+| `PlaneWinDealDamageMin` | pro Zeile: 20, 20, 15 | Schaden an deinem Flugzeug, wenn der Feind gewinnt |
+| `PlaneWinDealDamageMax` | pro Zeile: 120, 70, 50 | |
+| `PlaneLooseDealDamageMin` | pro Zeile: 10, 5, 5 | Schaden an deinem Flugzeug, wenn der Feind verliert |
+| `PlaneLooseDealDamageMax` | pro Zeile: 25, 20, 15 | |
 
 #### `AttacksComposition` - woraus ein Luftangriff besteht { #attackscomposition-what-an-air-raid-is-made-of }
 
@@ -286,11 +298,11 @@ Die vier Sonderzeilen verweisen in den letzten beiden Spalten auf sich selbst un
 
 | Spalte | Wert | Eingebaut (Zeilen 1–25) | Hinweise |
 |---|---|---|---|
-| `Bombers` | `min-max` | `0-0` … `4-6` | ganze Zahlen, `0 ≤ min ≤ max` |
-| `Divers` | `min-max` | `0-0` … `6-6` | ebenso |
-| `Fighters` | `min-max` | `1-2` … `8-8` | ebenso |
+| `Bombers` | `min-max` | min 0–4, max 0–6 | ganze Zahlen, `0 ≤ min ≤ max` |
+| `Divers` | `min-max` | min 0–6, max 0–6 | ganze Zahlen, `0 ≤ min ≤ max` |
+| `Fighters` | `min-max` | min 1–8, max 2–8 | ganze Zahlen, `0 ≤ min ≤ max` |
 | `LowAttacks` | ganze Zahl | 1–14 | Schwere, die stattdessen verwendet wird, wenn die Karte auf leichtere Angriffe eingestellt ist - **muss eine Zeile dieser Tabelle nennen** |
-| `HighAttacks` | ganze Zahl | 2–25 | Schwere, wenn die Karte auf härtere Angriffe eingestellt ist - ebenso |
+| `HighAttacks` | ganze Zahl | 2–25 | Schwere, wenn die Karte auf härtere Angriffe eingestellt ist - **muss eine Zeile dieser Tabelle nennen** |
 
 #### `EquipmentData` - Flak, Suchscheinwerfer, Türme { #equipmentdata-aa-guns-searchlights-towers }
 
@@ -304,15 +316,15 @@ Die Zeilen sind Ausrüstungs-Ids: `Bofors40mm`, `Searchlight`, `RadioTower`, `Vi
 | `Range` | Zahl | 10–70 | 0 macht das Teil nutzlos |
 | `Damage` | Zahl | 0–6 | `0` macht das Teil zu einer Station, die nicht schießt, wie `Searchlight` oder `Lookout`: Es lässt sich weiterhin platzieren und besetzen, feuert aber nie, und alle Spalten ab `Fire Rate` werden dafür nicht gelesen |
 | `Fire Rate` | ganze Zahl | 0–720 | Schuss pro Minute |
-| `Ammo Type` | Ressourcenname oder `None` | `GunAmmo`, `AntiAirAmmo`, `None`, `0` | alles, was kein Ressourcenname ist (`None`, `0`), bedeutet, dass das Teil keine Munition lagert |
+| `Ammo Type` | Ressourcenname oder `None` | `GunAmmo`, `AntiAirAmmo`, `None` oder `0` | alles, was kein Ressourcenname ist (`None`, `0`), bedeutet, dass das Teil keine Munition lagert |
 | `Ammo Capacity` | ganze Zahl | 0–80 | auf einmal geladene Schuss |
 | `Ammo Load Time` | Zahl | 0–6.5 | Sekunden zum Nachladen |
 | `Ammo Storage` | ganze Zahl | 0–500 | **`0` bedeutet, dass es nie Munition holt** |
 | `Damage Bonus` | Zahl | 0 oder 0.25 | wird anderen in Reichweite gewährt (Suchscheinwerfer) |
-| `Firing Angle` | Zahl | 0, 140, 360 | `0` wird als Vollkreis gelesen |
+| `Firing Angle` | Zahl | 0, 140 oder 360 | `0` wird als Vollkreis gelesen |
 | `Aiming Speed` | Zahl | 0–170 | Grad pro Sekunde |
 | `Range Bonus` | Zahl | 0 oder 16 | wird anderen in Reichweite gewährt (Ausguck) |
-| `Attacker Priority` | `Bombers`, `Divers`, `Fighters`, `Nearest`, `None` | | alles andere fällt auf `None` zurück |
+| `Attacker Priority` | `Bombers`, `Divers`, `Fighters`, `Nearest`, `None` | `Bombers`, `Divers`, `Fighters` oder `None`; keine Zeile verwendet `Nearest` | alles andere fällt auf `None` zurück |
 
 ### Bauen und Objekte { #building-and-objects }
 
@@ -325,10 +337,10 @@ entfernt werden.
 
 | Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|
-| `Dimensions` | `WxHxD`, oder `dynamic/1x0x1` für Dächer | `1x3x1`, `1x0x1`, `2x2x2` | |
+| `Dimensions` | `WxHxD`, oder `dynamic/1x0x1` für Dächer | Breite 1–32, Höhe 0–6, Tiefe 1–32 (von `1x0x1` bis `32x1x32`), `dynamic/1x0x1` bei den Dächern, leer in 9 Zeilen (unten aufgeführt) | |
 | `Build Time` | ganze Zahl | 0–420 | Spielminuten Arbeit. An einem Objekt baut immer nur ein Crewmitglied; zusätzliche Crew macht es nicht schneller |
 | `Health` | ganze Zahl | 0–10000 | der riesige Wert kennzeichnet die unzerstörbaren Teile |
-| `Associated Task` | Aufgabenname oder `None` | `Sleep`, `Chill`, `UseEquipment`, `PlayPiano`, `UseTrainingObject`, `MonitorAirspace`, `UseRadio`, `SaluteTheFlag`, `Grieve`, `ListenToMusic`, `PlayDartboard`, `PlayGuitar`, `PlayBilliardTable`, `UsePlanningBoard` | ein Objekt auf eine Aufgabe zu setzen, zu der seine Grafik nicht passt, ist erlaubt und sieht falsch aus |
+| `Associated Task` | Aufgabenname oder `None` | `None`, `Sleep`, `Chill`, `UseEquipment`, `PlayPiano`, `UseTrainingObject`, `MonitorAirspace`, `UseRadio`, `SaluteTheFlag`, `Grieve`, `ListenToMusic`, `PlayDartboard`, `PlayGuitar`, `PlayBilliardTable` oder `UsePlanningBoard` | ein Objekt auf eine Aufgabe zu setzen, zu der seine Grafik nicht passt, ist erlaubt und sieht falsch aus |
 | `Users Limit` | ganze Zahl | 0–5 | 0 bei einem benutzbaren Objekt bedeutet, dass niemand es benutzen kann |
 | `Is Wall Deco` | `TRUE`/`FALSE` | | |
 | `Is Floor Deco` | `TRUE`/`FALSE` | | |
@@ -374,12 +386,12 @@ ohne Zeile hat einfach keine Wirkung.
 
 | Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|
-| `Buff Name` | Lokalisierungsschlüssel | `prop_effects/organised_sleep` | darf nicht leer sein |
+| `Buff Name` | Lokalisierungsschlüssel | ein `prop_effects/<effect>`-Schlüssel in jeder Zeile (31 verschiedene Schlüssel), z. B. `prop_effects/organised_sleep` | darf nicht leer sein |
 | `Radius` | Zahl | 0.5–50 | in Kacheln; die Kontrolltürme reichen 20, 30 und 50 weit |
-| `Associated Tasks Or Action` | Kommaliste von Aufgabennamen | `Sleep`, `"Sleep,Chill"`, `UseEquipment` | darf nicht leer sein. Ein Name, der zu keiner Aufgabe passt, wird angenommen, und der Effekt **greift einfach nie** |
+| `Associated Tasks Or Action` | Kommaliste von Aufgabennamen | 1–4 Namen pro Zeile, z. B. `Sleep` oder `"Sleep,Chill"`, aus `AidInjured`, `BoardAirplane`, `BringResources`, `Bury`, `Chill`, `Cook`, `Eat`, `Grieve`, `HarvestGardeningTile`, `Landing`, `Loiter`, `MaintainAirplane`, `PlayGuitar`, `PlayPiano`, `Recover`, `RecoverInBed`, `Repair`, `RepairAirplane`, `Sleep`, `Stockpile`, `UseEquipment`, `UsePlanningBoard`, `UseRadio`, `UseTrainingObject`, `Water` oder `WorkOnWorkbench` | darf nicht leer sein. In einer CSV-Datei setzt du eine Zelle mit mehr als einer Aufgabe in Anführungszeichen: `"Sleep,Chill"`. Ein Name, der zu keiner Aufgabe passt, wird angenommen, und der Effekt **greift einfach nie** |
 | `Effect 1` | `<Zahl mit Vorzeichen> <Name>` | `-1 Mood` bis `+3 Mood`, `+1 Energy` bis `+2 Energy`, `+0.5 Confidence` bis `+10 Confidence` oder `-1 Accident` | Namen: `Mood`, `Confidence`, `Energy` |
-| `Effect 2` | ebenso, oder leer | `-1.5 Energy`, `+1 Energy`, `+0.5 Mood`, `+10 Mood` oder `+1 Confidence` in 9 Zeilen; in den übrigen leer | |
-| `Effect 3` | ebenso, oder leer | | keine eingebaute Zeile verwendet ihn |
+| `Effect 2` | `<Zahl mit Vorzeichen> <Name>` oder leer | `-1.5 Energy`, `+1 Energy`, `+0.5 Mood`, `+10 Mood` oder `+1 Confidence` in 9 Zeilen; in den übrigen leer | |
+| `Effect 3` | `<Zahl mit Vorzeichen> <Name>` oder leer | leer in jeder Zeile | |
 
 Das Vorzeichen gehört zur Zahl, `1 Mood` bedeutet also `+1`. Namen werden locker abgeglichen, `+1 mood` funktioniert also. Ein anderer Name
 als die drei oben wird als Spezialeffekt gespeichert (das Spiel verwendet `-1 Accident` bei den drei Kontrolltürmen);
@@ -393,18 +405,18 @@ Eine Zeile pro Weltobjekt. Die Ids werden von Kartendateien verwendet und könne
 
 | Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|
-| `LocKey_Name` | Lokalisierungsschlüssel | `map.obj.tree.name` | |
-| `LocKey_Description` | Lokalisierungsschlüssel | | |
-| `Dimensions` | `WxHxD` | `1x4x1`, `2x2x2`, `3x1x3` | |
-| `Resource Harvested` | Ressourcenname oder leer | `Wood`, `Stone`, `Herbs`, `Food`, `RawWater`, `Clay`, `Sandbags`, `Metal`, `Planks`, `Fuel`, Saatgut | leer bedeutet, dass es nichts zu ernten gibt |
+| `LocKey_Name` | Lokalisierungsschlüssel | `map.obj.<object>.name` in 20 Zeilen, z. B. `map.obj.tree.name`; `map.obj.<object>` ohne `.name` in den übrigen 13, z. B. `map.obj.crate` | |
+| `LocKey_Description` | Lokalisierungsschlüssel | `map.obj.<object>.description` in 18 Zeilen, z. B. `map.obj.tree.description`; `map.obj.<object>` ohne `.description` in den übrigen 15, z. B. `map.obj.crate` | |
+| `Dimensions` | `WxHxD` | Breite 1–4, Höhe 1–6, Tiefe 1–6 (von `1x1x1` bis `4x6x4`) | |
+| `Resource Harvested` | Ressourcenname oder leer | `Wood`, `Stone`, `Herbs`, `Food`, `RawWater`, `Clay`, `Sandbags`, `Metal`, `Planks`, `Fuel`, `GrainSeeds`, `BeansSeeds`, `PotatoSeeds` oder `TomatoSeeds`; leer in 9 Zeilen | leer bedeutet, dass es nichts zu ernten gibt |
 | `Farming Time` | ganze Zahl | 0–400 | Spielminuten Arbeit pro Ernte, immer von einem Crewmitglied zur Zeit |
 | `Resource Amount` | ganze Zahl | 0–50 | Ertrag pro Ernte |
 | `Resource Total` | ganze Zahl | 0–500 | Gesamtmenge, bevor die Quelle erschöpft ist |
-| `Limited Harvest Amount` | ganze Zahl | 0, 20, 30, 100 | Obergrenze für endlose Quellen; 0 = unbegrenzt |
+| `Limited Harvest Amount` | ganze Zahl | 0, 20, 30 oder 100 | Obergrenze für endlose Quellen; 0 = unbegrenzt |
 | `Destroyed On Depletion` | `TRUE`/`FALSE` | | `FALSE` mit `Refresh Time` 0 hinterlässt etwas, das nie wieder geerntet werden kann |
 | `Refresh Time` | ganze Zahl | 0–21600 | Minuten, bis es nachwächst |
 | `Health` | ganze Zahl | 1–2147483647 | der riesige Wert kennzeichnet die unzerstörbaren |
-| `Is Fireproof` | `TRUE`/`FALSE` | | `TRUE` macht das Objekt zu einer Brandschneise: Auf den Kacheln, die es belegt, kann Feuer weder entstehen noch sich dorthin ausbreiten. Über den freien Boden drumherum läuft Feuer weiterhin |
+| `Is Fireproof` | `TRUE`/`FALSE` | `TRUE` bei den Felsen, Gruben, dem Teich, dem Meer, `WaterPump` und `WaterTower` | `TRUE` macht das Objekt zu einer Brandschneise: Auf den Kacheln, die es belegt, kann Feuer weder entstehen noch sich dorthin ausbreiten. Über den freien Boden drumherum läuft Feuer weiterhin |
 
 #### `GrowingData` - Setzlinge werden zu Bäumen { #growingdata-saplings-becoming-trees }
 
@@ -414,9 +426,9 @@ Zwei Zeilen, `young_tree` und `young_tree_big`.
 
 | Spalte | Wert | Eingebaut |
 |---|---|---|
-| `To` | eine `MapObjects`-Id | `tree`, `tree_big` |
-| `Min Hours` | ganze Zahl | 672 |
-| `Max Hours` | ganze Zahl | 840 |
+| `To` | eine `MapObjects`-Id | pro Zeile: `tree`, `tree_big` |
+| `Min Hours` | ganze Zahl | 672 in jeder Zeile |
+| `Max Hours` | ganze Zahl | 840 in jeder Zeile |
 
 Ein Setzling, der beim Laden eines Spielstands schon auf der Karte steht, würfelt seine Restzeit zwischen der Hälfte von
 `Min Hours` und `Max Hours`; nur frisch gepflanzte verwenden das volle Minimum.
@@ -429,9 +441,9 @@ Zeilen `grain`, `beans`, `potato`, `tomato`.
 
 | Spalte | Eingebaut | Hinweise |
 |---|---|---|
-| `Growth` | 3, 6, 15, 10 | gegossene Tage bis zur Ernte - die Pflanze gewinnt um Mitternacht einen Punkt für jeden Tag, an dem ihre Kachel gegossen wurde; bei 0 ist sie sofort erntereif |
-| `Food` | 3, 4, 20, 7 | Nahrung pro Ernte |
-| `Seeds` | 2, 5, 3, 1 | Saatgut pro Ernte; 0 macht die Feldfrucht nicht nachhaltig |
+| `Growth` | pro Zeile: 3, 6, 15, 10 | gegossene Tage bis zur Ernte - die Pflanze gewinnt um Mitternacht einen Punkt für jeden Tag, an dem ihre Kachel gegossen wurde; bei 0 ist sie sofort erntereif |
+| `Food` | pro Zeile: 3, 4, 20, 7 | `Food` pro abgeernteter Kachel, wenn die Zone auf Anbau für Nahrung eingestellt ist |
+| `Seeds` | pro Zeile: 2, 5, 3, 1 | die eigene Saatgut-Ressource der Feldfrucht (`GrainSeeds`, `BeansSeeds`, `PotatoSeeds`, `TomatoSeeds`) pro abgeernteter Kachel, wenn die Zone auf Anbau für Saatgut eingestellt ist; 0 macht die Feldfrucht nicht nachhaltig |
 | `Regrowth` | nur `tomato` ist `TRUE` | wächst nach, statt verbraucht zu werden |
 
 ### Ressourcen und Herstellung { #resources-and-crafting }
@@ -451,9 +463,9 @@ Eine Zeile pro Ressource, exakt so benannt, wie das Spiel sie nennt.
 | `Resource Tier` | `Meta`, `Basic`, `Advanced`, `Military`, `Trash` | | |
 | `Category` | `Food`, `Seeds` oder leer | | wenn du `Food` bei allem Essbaren entfernst, kann die Crew nie essen |
 | `Always Degrades` | `TRUE`/`FALSE` | | verdirbt sogar unter einem Dach |
-| `Explosiveness` | ganze Zahl | 0, 2, 3 | 0 ist harmlos |
+| `Explosiveness` | ganze Zahl | 0, 2 oder 3 | 0 ist harmlos |
 | `Flammable` | `TRUE`/`FALSE` | | |
-| `VariantAmountMapping` | `/`-Liste ganzer Zahlen | `1/2`, `1` | wählt das Aussehen des Stapels |
+| `VariantAmountMapping` | `/`-Liste ganzer Zahlen | `1/2` oder `1` | wählt das Aussehen des Stapels |
 
 #### `WorkbenchProjectData` - Herstellungsrezepte { #workbenchprojectdata-crafting-recipes }
 
@@ -464,13 +476,13 @@ neue einzuführen.
 
 | Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|
-| `Workbench Type` | Werkbankname | `FieldKitchen`, `IndoorKitchen`, `SawStation`, `Brickstation`, `CementMixer`, `MetalworksWorkbench`, `CanningStation`, `ElectronicsWorkbench`, `TailorStation`, `EspionageRadio`, `WaterCooker`, `HerbDryer`, `Distillery` | |
-| `Output Resource Type` | Ressourcenname | | |
+| `Workbench Type` | Werkbankname | `FieldKitchen`, `IndoorKitchen`, `SawStation`, `Brickstation`, `CementMixer`, `MetalworksWorkbench`, `CanningStation`, `ElectronicsWorkbench`, `TailorStation`, `EspionageRadio`, `WaterCooker`, `HerbDryer` oder `Distillery` | |
+| `Output Resource Type` | Ressourcenname | `AntiAirAmmo`, `Bricks`, `Camouflage`, `Cement`, `Electronics`, `FoodRations`, `Fuel`, `GunAmmo`, `Intel`, `LuxuryGoods`, `Machinery`, `Meals`, `Metal`, `PlaneBombs`, `Planks`, `PurifiedWater`, `RepairParts`, `SimpleMedicine`, `StrongMedicine` oder `Tarp` | |
 | `Output Resource Amount` | ganze Zahl | 1–200 | |
-| `Input Resource Type` | `/`-Liste von Ressourcen oder `None` | `Food/RawWater`, `Metal`, `None` | `None` bedeutet: aus nichts hergestellt |
-| `Input Resource Amount` | `/`-Liste ganzer Zahlen | `2/2`, `0` | **muss genauso viele Einträge haben wie die Typliste** |
+| `Input Resource Type` | `/`-Liste von Ressourcen oder `None` | `None` in 3 Zeilen; sonst 1–3 aus `Clay`, `Electronics`, `Food`, `Herbs`, `LuxuryGoods`, `Machinery`, `Meals`, `Metal`, `PurifiedWater`, `RawWater`, `Sandbags`, `SimpleMedicine`, `Tarp` oder `Wood`, z. B. `Food/RawWater` | `None` bedeutet: aus nichts hergestellt |
+| `Input Resource Amount` | `/`-Liste ganzer Zahlen | 1–3 Einträge, jeder 1–10, z. B. `2/2`; `0` in den 3 `None`-Zeilen | **muss genauso viele Einträge haben wie die Typliste** |
 | `Time To Craft` | ganze Zahl | 10–180 | Spielminuten Arbeit, immer von einem Crewmitglied zur Zeit |
-| `Valid Entry` | `TRUE`/`FALSE` | `TRUE` | Überbleibsel; das Spiel liest es nicht |
+| `Valid Entry` | `TRUE`/`FALSE` | `TRUE` in jeder Zeile | Überbleibsel; das Spiel liest es nicht |
 
 #### `ShipmentData` - der Nachschubkatalog { #shipmentdata-the-supply-catalogue }
 
@@ -478,12 +490,12 @@ Eingebaute Datei: [ShipmentData.csv](../assets/csv/ShipmentData.csv)
 
 Eine Zeile pro bestellbarem Artikel.
 
-| Spalte | Wert | Hinweise |
-|---|---|---|
-| `Shipment Type` | `Resource` oder `Prop` | |
-| `Category` | `Military`, `Miscellaneous` oder `Large` | **Groß- und Kleinschreibung zählt** - `military` wird abgelehnt |
-| `Amount` | ganze Zahl, 1–5000 | gelieferte Einheiten pro Platz |
-| `Slots` | ganze Zahl, 1–4 | mehr Plätze, als irgendein Rang bietet, machen den Artikel unbestellbar |
+| Spalte | Wert | Eingebaut | Hinweise |
+|---|---|---|---|
+| `Shipment Type` | `Resource` oder `Prop` | | |
+| `Category` | `Military`, `Miscellaneous` oder `Large` | | **Groß- und Kleinschreibung zählt** - `military` wird abgelehnt |
+| `Amount` | ganze Zahl | 1–5000 | gelieferte Einheiten pro Platz |
+| `Slots` | ganze Zahl | 1–4 | mehr Plätze, als irgendein Rang bietet, machen den Artikel unbestellbar |
 
 ### Crew
 
@@ -497,13 +509,13 @@ Die Zeilen sind Berufe und Crewrollen: `Pilot`, `Gunner`, `BombAimer`, `FlightEn
 
 Die Spalten sind die sechs Fähigkeiten - `Flying`, `Shooting`, `Bombing`, `Endurance`, `Engineering`, `Navigating` - und
 der Wert ist ein **Rang von 0 bis 6**, keine Punktzahl. `0` ist Untrained und `6` ist Ace. Bleib innerhalb dieses
-Bereichs. `Endurance` legt auch die maximale Gesundheit fest, deshalb hat jede Zeile dort mindestens `1`.
+Bereichs; die eingebauten Zeilen verwenden 0–2. `Endurance` legt auch die maximale Gesundheit fest, deshalb hat jede Zeile dort mindestens `1`.
 
 #### `CharactersStatsRankProgression` - Punkte pro Rang { #charactersstatsrankprogression-points-per-rank }
 
 Eingebaute Datei: [CharactersStatsRankProgression.csv](../assets/csv/CharactersStatsRankProgression.csv)
 
-Die Zeilen müssen `Untrained`, `Rank1` … `Rank5`, `Ace` bleiben. `LevelUpPoints` (0, 10, 14, 22, 36, 58, 90) ist die
+Die Zeilen müssen `Untrained`, `Rank1`, `Rank2`, `Rank3`, `Rank4`, `Rank5`, `Ace` bleiben. `LevelUpPoints` (0, 10, 14, 22, 36, 58, 90) ist die
 Punktzahl, bei der dieser Rang erreicht wird, und gewählt wird der höchste Rang, den ein Charakter überschritten hat
 - also **müssen die Werte aufsteigen**. Außer der Reihe bleibt die Crew niedrig hängen oder springt direkt zu Ace.
 
@@ -511,7 +523,7 @@ Punktzahl, bei der dieser Rang erreicht wird, und gewählt wird der höchste Ran
 
 Eingebaute Datei: [CharacterStatsCheck.csv](../assets/csv/CharacterStatsCheck.csv)
 
-Die Zeilen sind dieselben sieben Ränge. Für jede der sechs Fähigkeiten gibt es zwei Spalten: `<Skill>Value` ist ein fester
+Die Zeilen sind die sieben Ränge `Untrained`, `Rank1`, `Rank2`, `Rank3`, `Rank4`, `Rank5`, `Ace`. Für jede der sechs Fähigkeiten gibt es zwei Spalten: `<Skill>Value` ist ein fester
 Bonus auf einen Missionswurf, `<Skill>Percentage` ist ein **Bruchteil** - `0.25` bedeutet 25 %. Schreibst du `25`, ergibt das
 einen Bonus von 2500 %. Die Spaltennamen können nicht umbenannt werden.
 
@@ -563,11 +575,11 @@ Eingebaute Datei: [MoraleInfluenceValues.csv](../assets/csv/MoraleInfluenceValue
 
 | Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|
-| `Itentifier` | Zeilen-Id (beachte die Schreibweise) | `Sleep`, `Chill`, `Panic`, `BaseAttacked` | |
+| `Itentifier` | Zeilen-Id (beachte die Schreibweise) | `Sleep`, `Eat`, `WorkOnWorkbench`, `Stockpile`, `Build`, `Harvest`, `Chill`, `ConsumeLuxuryGoods`, `UseRadio`, `SaluteTheFlag`, `UsePlanningBoard`, `Panic`, `Rage`, `Collapse`, `Grieve`, `Bury`, `UseTrainingObject`, `Socialize`, `UseRecreationalItem`, `Work`, `Train`, `Early`, `Mid`, `Late`, `Living`, `MissionCancelled`, `MissionCompleted`, `WarNews`, `BaseAttacked`, `Death`, `Recover` oder `RecoverInBed` | |
 | `IdentifierType` | `Task`, `TaskGroup`, `TaskCategory`, `WarPhase`, `GameEvent`, `-` | | ein Typ, der nicht zur Id passt, bedeutet, dass die Zeile ignoriert wird |
-| `Parameter` | der Variantenschlüssel; Aliase durch Kommas getrennt | `default`, `Prop.Bed`, `ResourceType.Meals` | **kein Alias darf doppelt vorkommen** |
+| `Parameter` | der Variantenschlüssel; Aliase durch Kommas getrennt | `default`; `Prop.Bed`, `Prop.BedMetal`, `Prop.BedWood`, `Prop.BilliardTable`, `Prop.Dartboard`, `Prop.Guitar`, `Prop.Piano`; `ResourceType.Food`, `ResourceType.FoodRations`, `ResourceType.Intel`, `ResourceType.LuxuryGoods`, `ResourceType.Meals`, `ResourceType.PurifiedWater`, `ResourceType.RawWater`; `CharacterClass.AirCrew`, `CharacterClass.BaseCrew`; `InfluenceOutcome.Good`, `InfluenceOutcome.Bad`; und eine Zeile mit zwei Aliasen, `Prop.Jukebox, Prop.Gramophone` | **kein Alias darf doppelt vorkommen** |
 | `Raw Parameter` | eine Notiz | | wird vom Spiel nicht gelesen |
-| `Confidence` / `Mood` / `Energy` | Zahlen | -30 … 50 | |
+| `Confidence` / `Mood` / `Energy` | Zahlen | `Confidence` -10 bis 50, `Mood` -30 bis 50, `Energy` -20 bis 50 | |
 | `Influence Type` | `Timed` oder `OnEventTrigger` | | |
 
 `Timed`-Werte wirken bei jedem Tick und sind deshalb viel kleiner als `OnEventTrigger`-Werte. Kopierst du einen Ereigniswert von `+20`
@@ -582,16 +594,35 @@ Sechs Zeilen enthalten eine Variante pro Zeile und können überhaupt nicht geä
 
 Eingebaute Datei: [FlightMissionData.csv](../assets/csv/FlightMissionData.csv)
 
-Die Zeilen-Id benennt, was gemessen wird: `AirplaneIntegrity`, `AirplaneHealth`, `AirplaneFuel`, `Mood`,
-`Energy`, `Confidence`, `SeatsConfiguration`, `CrewHealth`, `CrewOnFire`.
+Diese Tabelle legt fest, wie sich der Zustand eines Flugzeugs und seiner Crew auf eine Mission auswirkt. Das Spiel prüft jedes
+Flugzeug und jedes Crewmitglied gegen diese Zeilen. Liegt ein gemessener Wert innerhalb der `ThresholdRange` einer Zeile, gilt
+deren Modifikator für das Flugzeug. Das Missionsbriefing listet jeden davon auf, und sie fließen in die Erfolgsschätzung ein.
+Es gibt zwei Arten:
+
+- Ein `SkillRollModifier` verschiebt die Missionswerte des Flugzeugs (Kampf, Bomben, Aufklärung und die übrigen). Seine
+  `ModifierRange` wird zum niedrigsten und höchsten Wert addiert, den jeder Wert würfeln kann: `0/-10` senkt also den
+  bestmöglichen Wurf um 10, und `2/0` hebt den schlechtesten um 2.
+- Ein `NoFlightModifier` verhindert, dass das Flugzeug überhaupt losgeschickt werden kann.
+
+Die Zeilen-Id benennt, was gemessen wird:
+
+- `AirplaneIntegrity` - wie viel Prozent der Start-Integrität des Flugzeugs noch übrig sind
+- `AirplaneHealth` - seine Gesundheit
+- `AirplaneFuel` - sein Treibstoffstand; `0` bedeutet einen leeren Tank
+- `Mood`, `Energy`, `Confidence` - der Wert jedes Crewmitglieds, von -100 bis 100, abgeglichen mit `Parameter` nach
+  Crewrolle
+- `SeatsConfiguration`, `CrewHealth`, `CrewOnFire` - Ja/Nein-Prüfungen, bei denen `1` bedeutet, dass das Problem vorliegt: ein
+  Crewmitglied auf einem Sitz, der nicht zu seiner Rolle passt, eines, das verletzt ist, oder eines, das brennt
+
+Für jeden gemessenen Wert gilt die erste Zeile, deren Bereich und Rolle passen.
 
 | Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|
-| `ModifierCategory` | eine Bezeichnung | `low`, `high`, `zero`, `critical`, `mismatch` | |
+| `ModifierCategory` | eine Bezeichnung | `low`, `high`, `zero`, `critical` oder `mismatch` | |
 | `ModifierType` | `SkillRollModifier` oder `NoFlightModifier` | | |
-| `ModifierRange` | `min/max` ganze Zahlen | `0/-5`, `2/0` | wird zum niedrigsten/höchsten Wurf der Werte addiert; von `NoFlightModifier`-Zeilen ignoriert |
-| `Parameter` | durch Leerzeichen getrennte Crewrollen oder `Default` | `Default`, `CrewRole.Pilot` | jede Rolle braucht das Präfix `CrewRole.` - ein bloßes `Pilot` passt nie, eine unbekannte Rolle ebenso wenig |
-| `ThresholdRange` | `min/max` ganze Zahlen | `1/40`, `-100/-90`, `50/100` | der Bereich gemessener Werte, den diese Zeile abdeckt |
+| `ModifierRange` | `min/max` ganze Zahlen | `0/-10`, `0/-5`, `0/-3`, `0/-2`, `0/0`, `1/0` oder `2/0` | wird zum niedrigsten/höchsten Wurf der Werte addiert; von `NoFlightModifier`-Zeilen ignoriert |
+| `Parameter` | durch Leerzeichen getrennte Crewrollen oder `Default` | `Default`, `CrewRole.Pilot`, alle sechs Rollen oder die fünf Rollen außer `CrewRole.Pilot` | jede Rolle braucht das Präfix `CrewRole.` - ein bloßes `Pilot` passt nie, eine unbekannte Rolle ebenso wenig |
+| `ThresholdRange` | `min/max` ganze Zahlen | `-100/-90`, `-89/-50`, `0/0`, `1/1`, `1/40` oder `50/100` | der Bereich gemessener Werte, den diese Zeile abdeckt |
 
 `NoFlightModifier` ist die harte Sperre, die ein Flugzeug am Boden hält - kein Treibstoff mehr oder ein Crewmitglied mit Stimmung am
 Tiefpunkt. Erweiterst du seine `ThresholdRange`, bleibt deine ganze Staffel am Boden; setzt du sie auf etwas Unerreichbares wie
@@ -627,11 +658,11 @@ Eingebaute Datei: [DaySchedule.csv](../assets/csv/DaySchedule.csv)
 
 Vier Zeilen, `0`–`3`.
 
-| Spalte | Wert | Eingebaut |
-|---|---|---|
-| `Phase` | `Work`, `Leisure`, `Sleep` (`Alert` und `None` werden auch akzeptiert, sind aber nicht für den Tagesplan gedacht) | |
-| `StartHour` | ganze Zahl, einschließlich | 0, 5, 7, 22 |
-| `EndHour` | ganze Zahl, ausschließlich | 5, 7, 22, 24 |
+| Spalte | Wert | Eingebaut | Hinweise |
+|---|---|---|---|
+| `Phase` | `Work`, `Leisure`, `Sleep` | pro Zeile: `Sleep`, `Leisure`, `Work`, `Leisure` | `Alert` und `None` werden auch akzeptiert, sind aber nicht für den Tagesplan gedacht |
+| `StartHour` | ganze Zahl, einschließlich | pro Zeile: 0, 5, 7, 22 | |
+| `EndHour` | ganze Zahl, ausschließlich | pro Zeile: 5, 7, 22, 24 | |
 
 Die vier Zeitspannen werden Stunde für Stunde aufgeschlüsselt, und **jede Stunde von 0 bis 23 muss von genau einer Zeile abgedeckt sein**.
 Bei einer Lücke oder Überschneidung wirft die stündliche Abfrage der Phase einen Fehler, und die Basis bleibt in der Phase, in der sie
@@ -646,7 +677,7 @@ Name und Wert, alles Zahlen, rein optisch.
 
 | Zeile | Bedeutung | Eingebaut |
 |---|---|---|
-| `Morning Time`, `Dawn Time`, `Day Time`, `Evening Time`, `Dusk Time`, `Night Time` | Stunde, in der jede Lichtstufe beginnt | 4, 7, 10, 17, 22, 23 |
+| `Morning Time`, `Dawn Time`, `Day Time`, `Evening Time`, `Dusk Time`, `Night Time` | Stunde, in der jede Lichtstufe beginnt | pro Zeile: 4, 7, 10, 17, 22, 23 |
 | `Sun Min Rotation` / `Sun Max Rotation` | Bogen der Sonnenhöhe, Grad | 15 / 165 |
 | `Sun Yaw Offset` | Kompassdrehung | -90 |
 | `Sun Tilt` | Grad | 10 |

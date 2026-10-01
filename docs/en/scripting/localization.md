@@ -129,6 +129,15 @@ localization.SetTerm("en", "quest/{}/subQuest0_description".format(QUEST_ID), "F
 
 The keys only have to match what the quest file says. See [Quests](../quests/index.md).
 
+## Location names
+
+A mod can add its own places to the war map (see [Adding locations with a mod](../missions/locations.md#adding-locations-with-a-mod)). The player sees such a place's `_locationName` exactly as written, because only the shipped places come with translations. To give your place a proper name, register a term called `mission_location/<name>`, where `<name>` is the `_locationName`:
+
+```python
+localization.SetTerm("en", "mission_location/mymod_scapa_flow", "Scapa Flow")
+localization.SetTerm("de", "mission_location/mymod_scapa_flow", "Scapa Flow")
+```
+
 ## Placeholders
 
 `event_log.Create` takes a dictionary that fills `{[NAME]}` placeholders:

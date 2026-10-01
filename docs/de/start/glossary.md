@@ -68,13 +68,13 @@ Jedes Fachwort aus diesem Handbuch, in einfacher Sprache.
 
 ## Modding
 
-**Mod** - Ein Ordner mit Dateien, der dem Spiel etwas hinzufügt oder es verändert: Missionen, Quests, Skripte, Karten, Objekte oder Datentabellen.
+**Mod** - Ein Ordner mit Dateien, der dem Spiel etwas hinzufügt oder es verändert: Missionen, Quests, Skripte, Karten, Objekte, Flugzeug-Skins oder Datentabellen.
 
 **`Mods`-Ordner** - Hier sucht das Spiel nach installierten Mods. Du öffnest ihn im Hauptmenü: **Mods → Open folder**.
 
 **`mods/`-Ordner (im Modkit)** - Hier bauen du und dein Agent eure eigenen Mods, bevor sie in den `Mods`-Ordner des Spiels kopiert werden. Git ignoriert ihn, deshalb ändern Updates ihn nie.
 
-**Inhaltsordner** - Ein Ordner in einem Mod, dessen Name dem Spiel sagt, was drin ist: `Missions`, `Quests`, `Maps`, `Objects`, `CSV`, `Biomes`. (Grafik-Mods in `Objects` und `Biomes` sind noch in Arbeit und werden von der aktuellen Alpha noch nicht unterstützt.)
+**Inhaltsordner** - Ein Ordner in einem Mod, dessen Name dem Spiel sagt, was drin ist: `Missions`, `Quests`, `Maps`, `Objects`, `CSV`, `Biomes`, `Airplanes`. Neue Missionsorte liegen eine Ebene tiefer, in `Missions/Locations`.
 
 **ID** - Der eindeutige Name eines Dings im Spiel, zum Beispiel die Missions-ID `coastal_patrol`. IDs dürfen keine Leerzeichen enthalten und müssen eindeutig sein: Zwei Missionen mit derselben ID ersetzen sich gegenseitig.
 

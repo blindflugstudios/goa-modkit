@@ -173,6 +173,16 @@ Thirty tables can be modded. Three files that exist in the game but are not load
 Each section lists the columns, what values they take, and what the built-in rows use. Where a column has no
 special rule, only the generic ones above apply.
 
+The built-in values are always complete, never a sample:
+
+- `a–b` is the full range: the lowest and the highest value any built-in row uses.
+- A list joined by "or" is every distinct value the built-in rows use.
+- A list marked "by row" gives each row's value, in the order the rows appear in the file.
+- "on every row" means all built-in rows hold that one value.
+- A `min-max` column gives each half its own range: "min 0–43, max 0–60" means the first number runs from 0 to
+  43 across the rows and the second from 0 to 60.
+- An empty built-in cell means the built-in rows use every value listed under Value.
+
 ### Aircraft and base
 
 #### `VehicleData` - aircraft
@@ -181,31 +191,31 @@ Built-in file: [VehicleData.csv](../assets/csv/VehicleData.csv)
 
 One row per aircraft. Rows cannot be added or removed.
 
-| Column | Value | Built-in range | Notes |
+| Column | Value | Built-in | Notes |
 |---|---|---|---|
-| `Name` | localization key | `airplane/spitfire` | must not be empty |
+| `Name` | localization key | `airplane/<row id>` on every row, e.g. `airplane/spitfire` | must not be empty |
 | `Type` | `Fighter`, `Bomber`, `MultiRole`, `Special` | | |
-| `Crew` | comma list of seats; repeat a role for two seats | `Pilot`, `"Pilot,Gunner,Navigator"` | roles: `Pilot`, `Gunner`, `Navigator`, `BombAimer`, `FlightEngineer`, `RadioOperator` |
+| `Crew` | comma list of seats; repeat a role for two seats | 1–8 seats, from `Pilot` alone to `Pilot,Pilot,BombAimer,Navigator,FlightEngineer,RadioOperator,Gunner,Gunner`; every row starts with `Pilot` and all six roles are used | in a CSV file, wrap a cell with more than one seat in quotes: `"Pilot,Gunner,Navigator"`. Roles: `Pilot`, `Gunner`, `Navigator`, `BombAimer`, `FlightEngineer`, `RadioOperator` |
 | `Runway Tier` | whole number | 1–5 | above 5 and no airstrip can serve it |
 | `Parking Size` | whole number | 0–2 | above 2 and it can never park |
 | `Victory Points Cost` | whole number | 0–12 | 0 makes it free |
-| `Movement Speed` | whole number | 5 | taxi speed; 0 and it never reaches the runway |
+| `Movement Speed` | whole number | 5 on every row | taxi speed; 0 and it never reaches the runway |
 | `Landing Length` | whole number | 60–170 | longer than any buildable strip and it can never land |
-| `Health` | whole number | 100 | |
-| `Initial Integrity` | whole number | 1000 | hours of wear the aircraft can take before it is worn out (1000 h ≈ 41 days) |
+| `Health` | whole number | 100 on every row | |
+| `Initial Integrity` | whole number | 1000 on every row | hours of wear the aircraft can take before it is worn out (1000 h ≈ 41 days) |
 | `Fuel Capacity` | whole number | 200–1260 | |
-| `Voxel Size` | `AxBxC` | `10x0x10` | |
-| `Fight Power` | `min-max` | `0-0` … `43-60` | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
-| `Bomb Power` | `min-max` | `0-0` … `50-80` | same |
-| `Recon Power` | `min-max` | `5-10` … `42-60` | same |
-| `Manoeuvrability` | `min-max` | min 2–28, max 8–50 | same |
-| `Transport Capacity` | `min-max` | `1-5` … `60-90` | same |
-| `Stealthiness` | `min-max` | `10-48` … `88-98` | same |
-| `Wreck Resource Type` | `/`-list of resources | `Metal/RepairParts` | both wreck columns set, or both empty |
-| `Wreck Resource Amount` | `/`-list of whole numbers | `10/5` | same length as the type list |
+| `Voxel Size` | `AxBxC` | `10x0x10` on every row | |
+| `Fight Power` | `min-max` | min 0–43, max 0–60 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
+| `Bomb Power` | `min-max` | min 0–50, max 0–80 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
+| `Recon Power` | `min-max` | min 5–42, max 10–60 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
+| `Manoeuvrability` | `min-max` | min 2–28, max 8–50 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
+| `Transport Capacity` | `min-max` | min 1–60, max 5–90 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
+| `Stealthiness` | `min-max` | min 10–88, max 48–98 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
+| `Wreck Resource Type` | `/`-list of resources | `Metal/RepairParts` on every row | both wreck columns set, or both empty |
+| `Wreck Resource Amount` | `/`-list of whole numbers | `10/5` on every row | one amount per entry in `Wreck Resource Type`, in the order listed there |
 | `Low Caliber Ammo Capacity` | whole number | 0–3300 | `GunAmmo` carried; 0 = none |
-| `High Caliber Ammo Capacity` | whole number | 0–300 | `AntiAirAmmo`; 0 = none |
-| `Plane Bombs Capacity` | whole number | 0–32 | `PlaneBombs`; 0 = none |
+| `High Caliber Ammo Capacity` | whole number | 0–300 | `AntiAirAmmo` carried; 0 = none |
+| `Plane Bombs Capacity` | whole number | 0–32 | `PlaneBombs` carried; 0 = none |
 
 !!! warning
     An aircraft already parked at your base keeps the health, integrity and fuel capacity it was built with.
@@ -220,7 +230,7 @@ Rows `1`–`6`, one per base category. All six must exist and their ids cannot c
 
 | Column | Value | Built-in | Notes |
 |---|---|---|---|
-| `Airstrip Tier` | whole number | 1,2,3,4,5,5 | required to reach the rank |
+| `Airstrip Tier` | whole number | by row: 1, 2, 3, 4, 5, 5 | required to reach the rank |
 | `Minimum Airstrip Count` | whole number | 1–5 | |
 | `Minimum Parking Count` | whole number | 1–20 | |
 | `Missions Per Week` | whole number | 6–18 | slots the week offers; 0 and no missions are scheduled |
@@ -236,11 +246,11 @@ Rows `1`–`5`.
 
 | Column | Value | Built-in | Notes |
 |---|---|---|---|
-| `Length` | whole number | 80,120,140,160,200 | tiers match on "length or more", so keep them ascending |
-| `Width` | whole number | 12,14,18,22,26 | same |
-| `Material` | text | `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | **must not repeat another tier's material**, and must name an existing `ResourceCost` row - that row is what each tile of this runway costs. `ResourceCost` does not accept new surface rows, so in practice keep to `dirt`, `sand`, `gravel`, `concrete` and `tarmac` (swapping them between tiers is fine). A material with no `ResourceCost` row is accepted here, and then laying a runway of that tier fails with an error |
-| `Biome Id` | whole number | 6,20,22,15,13 | ground painted under the finished strip |
-| `Build Time` | whole number | 5,2,2,2,2 | in-game minutes of work per tile. Each tile is worked by one crew member at a time, so more crew lay more tiles in parallel, not one tile faster |
+| `Length` | whole number | by row: 80, 120, 140, 160, 200 | tiers match on "length or more", so keep them ascending |
+| `Width` | whole number | by row: 12, 14, 18, 22, 26 | tiers match on "width or more", so keep them ascending |
+| `Material` | text | by row: `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | **must not repeat another tier's material**, and must name an existing `ResourceCost` row - that row is what each tile of this runway costs. `ResourceCost` does not accept new surface rows, so in practice keep to `dirt`, `sand`, `gravel`, `concrete` and `tarmac` (swapping them between tiers is fine). A material with no `ResourceCost` row is accepted here, and then laying a runway of that tier fails with an error |
+| `Biome Id` | whole number | by row: 6, 20, 22, 15, 13 | ground painted under the finished strip |
+| `Build Time` | whole number | by row: 5, 2, 2, 2, 2 | in-game minutes of work per tile. Each tile is worked by one crew member at a time, so more crew lay more tiles in parallel, not one tile faster |
 
 #### `Biomes`
 
@@ -251,9 +261,9 @@ Rows `0`–`23`, the ground types. All columns are numbers, so this table is eas
 | Column | Built-in | Notes |
 |---|---|---|
 | `Airstrip Tier` | 0–5 | tier a runway laid on this ground counts as |
-| `Character Speed Modifier` | 1 … 1.2 | 0 freezes anyone standing on it |
-| `Airplane Speed Modifier` | 0.5 … 1.2 | |
-| `Degradation Penalty` | 0 … 0.2 | extra wear on goods stored here |
+| `Character Speed Modifier` | 1–1.2 | 0 freezes anyone standing on it |
+| `Airplane Speed Modifier` | 0.5–1.2 | |
+| `Degradation Penalty` | 0–0.2 | extra wear on goods stored here |
 | `Fire Spread Modifier` | 0.5 or 1 | |
 
 #### `ScrambleData` - enemy aircraft in a scramble
@@ -262,12 +272,14 @@ Built-in file: [ScrambleData.csv](../assets/csv/ScrambleData.csv)
 
 Rows `Fighter`, `Diver`, `Bomber`. The names cannot change. All columns are whole numbers.
 
-| Column | Built-in |
-|---|---|
-| `PlaneHealth` | 18, 26, 34 |
-| `PlanePower` | 23, 17, 14 |
-| `PlaneWinDealDamageMin` / `Max` | 15–120 - damage to your aircraft when the enemy wins |
-| `PlaneLooseDealDamageMin` / `Max` | 5–25 - damage when the enemy loses |
+| Column | Built-in | Notes |
+|---|---|---|
+| `PlaneHealth` | by row: 18, 26, 34 | |
+| `PlanePower` | by row: 23, 17, 14 | |
+| `PlaneWinDealDamageMin` | by row: 20, 20, 15 | damage to your aircraft when the enemy wins |
+| `PlaneWinDealDamageMax` | by row: 120, 70, 50 | |
+| `PlaneLooseDealDamageMin` | by row: 10, 5, 5 | damage to your aircraft when the enemy loses |
+| `PlaneLooseDealDamageMax` | by row: 25, 20, 15 | |
 
 #### `AttacksComposition` - what an air raid is made of
 
@@ -286,11 +298,11 @@ The four special rows point at themselves in the last two columns and hold:
 
 | Column | Value | Built-in (rows 1–25) | Notes |
 |---|---|---|---|
-| `Bombers` | `min-max` | `0-0` … `4-6` | whole numbers, `0 ≤ min ≤ max` |
-| `Divers` | `min-max` | `0-0` … `6-6` | same |
-| `Fighters` | `min-max` | `1-2` … `8-8` | same |
+| `Bombers` | `min-max` | min 0–4, max 0–6 | whole numbers, `0 ≤ min ≤ max` |
+| `Divers` | `min-max` | min 0–6, max 0–6 | whole numbers, `0 ≤ min ≤ max` |
+| `Fighters` | `min-max` | min 1–8, max 2–8 | whole numbers, `0 ≤ min ≤ max` |
 | `LowAttacks` | whole number | 1–14 | severity used instead when the map is set to easier raids - **must name a row this table has** |
-| `HighAttacks` | whole number | 2–25 | severity used when the map is set to harder raids - same |
+| `HighAttacks` | whole number | 2–25 | severity used when the map is set to harder raids - **must name a row this table has** |
 
 #### `EquipmentData` - AA guns, searchlights, towers
 
@@ -304,15 +316,15 @@ Rows are equipment ids: `Bofors40mm`, `Searchlight`, `RadioTower`, `VickersGunAA
 | `Range` | number | 10–70 | 0 makes the piece useless |
 | `Damage` | number | 0–6 | `0` makes the piece a non-firing station like the `Searchlight` or `Lookout`: it can still be placed and crewed, but it never shoots, and every column from `Fire Rate` onward is not read for it |
 | `Fire Rate` | whole number | 0–720 | rounds per minute |
-| `Ammo Type` | resource name or `None` | `GunAmmo`, `AntiAirAmmo`, `None`, `0` | anything that is not a resource name (`None`, `0`) means the piece stores no ammo |
+| `Ammo Type` | resource name or `None` | `GunAmmo`, `AntiAirAmmo`, `None` or `0` | anything that is not a resource name (`None`, `0`) means the piece stores no ammo |
 | `Ammo Capacity` | whole number | 0–80 | rounds loaded at once |
 | `Ammo Load Time` | number | 0–6.5 | seconds to reload |
 | `Ammo Storage` | whole number | 0–500 | **`0` means it never draws ammo** |
 | `Damage Bonus` | number | 0 or 0.25 | granted to others in range (searchlight) |
-| `Firing Angle` | number | 0, 140, 360 | `0` is read as a full circle |
+| `Firing Angle` | number | 0, 140 or 360 | `0` is read as a full circle |
 | `Aiming Speed` | number | 0–170 | degrees per second |
 | `Range Bonus` | number | 0 or 16 | granted to others in range (lookout) |
-| `Attacker Priority` | `Bombers`, `Divers`, `Fighters`, `Nearest`, `None` | | anything else falls back to `None` |
+| `Attacker Priority` | `Bombers`, `Divers`, `Fighters`, `Nearest`, `None` | `Bombers`, `Divers`, `Fighters` or `None`; no row uses `Nearest` | anything else falls back to `None` |
 
 ### Building and objects
 
@@ -325,10 +337,10 @@ removed.
 
 | Column | Value | Built-in | Notes |
 |---|---|---|---|
-| `Dimensions` | `WxHxD`, or `dynamic/1x0x1` for roofs | `1x3x1`, `1x0x1`, `2x2x2` | |
+| `Dimensions` | `WxHxD`, or `dynamic/1x0x1` for roofs | width 1–32, height 0–6, depth 1–32 (from `1x0x1` to `32x1x32`), `dynamic/1x0x1` on the roofs, empty on 9 rows (listed below) | |
 | `Build Time` | whole number | 0–420 | in-game minutes of work. One crew member builds an object at a time; extra crew do not speed it up |
 | `Health` | whole number | 0–10000 | the huge value marks the indestructible pieces |
-| `Associated Task` | task name or `None` | `Sleep`, `Chill`, `UseEquipment`, `PlayPiano`, `UseTrainingObject`, `MonitorAirspace`, `UseRadio`, `SaluteTheFlag`, `Grieve`, `ListenToMusic`, `PlayDartboard`, `PlayGuitar`, `PlayBilliardTable`, `UsePlanningBoard` | pointing an object at a task its art does not fit is allowed, and looks wrong |
+| `Associated Task` | task name or `None` | `None`, `Sleep`, `Chill`, `UseEquipment`, `PlayPiano`, `UseTrainingObject`, `MonitorAirspace`, `UseRadio`, `SaluteTheFlag`, `Grieve`, `ListenToMusic`, `PlayDartboard`, `PlayGuitar`, `PlayBilliardTable` or `UsePlanningBoard` | pointing an object at a task its art does not fit is allowed, and looks wrong |
 | `Users Limit` | whole number | 0–5 | 0 on a usable object means nobody can use it |
 | `Is Wall Deco` | `TRUE`/`FALSE` | | |
 | `Is Floor Deco` | `TRUE`/`FALSE` | | |
@@ -374,12 +386,12 @@ without a row simply has no effect.
 
 | Column | Value | Built-in | Notes |
 |---|---|---|---|
-| `Buff Name` | localization key | `prop_effects/organised_sleep` | must not be empty |
+| `Buff Name` | localization key | a `prop_effects/<effect>` key on every row (31 different keys), e.g. `prop_effects/organised_sleep` | must not be empty |
 | `Radius` | number | 0.5–50 | in tiles; the control towers reach 20, 30 and 50 |
-| `Associated Tasks Or Action` | comma list of task names | `Sleep`, `"Sleep,Chill"`, `UseEquipment` | must not be empty. A name that matches no task is accepted and the effect simply **never fires** |
+| `Associated Tasks Or Action` | comma list of task names | 1–4 names per row, e.g. `Sleep` or `"Sleep,Chill"`, drawn from `AidInjured`, `BoardAirplane`, `BringResources`, `Bury`, `Chill`, `Cook`, `Eat`, `Grieve`, `HarvestGardeningTile`, `Landing`, `Loiter`, `MaintainAirplane`, `PlayGuitar`, `PlayPiano`, `Recover`, `RecoverInBed`, `Repair`, `RepairAirplane`, `Sleep`, `Stockpile`, `UseEquipment`, `UsePlanningBoard`, `UseRadio`, `UseTrainingObject`, `Water` or `WorkOnWorkbench` | must not be empty. In a CSV file, wrap a cell with more than one task in quotes: `"Sleep,Chill"`. A name that matches no task is accepted and the effect simply **never fires** |
 | `Effect 1` | `<signed number> <name>` | `-1 Mood` to `+3 Mood`, `+1 Energy` to `+2 Energy`, `+0.5 Confidence` to `+10 Confidence`, or `-1 Accident` | names: `Mood`, `Confidence`, `Energy` |
-| `Effect 2` | same, or empty | `-1.5 Energy`, `+1 Energy`, `+0.5 Mood`, `+10 Mood` or `+1 Confidence` on 9 rows; empty on the rest | |
-| `Effect 3` | same, or empty | | no built-in row uses it |
+| `Effect 2` | `<signed number> <name>`, or empty | `-1.5 Energy`, `+1 Energy`, `+0.5 Mood`, `+10 Mood` or `+1 Confidence` on 9 rows; empty on the rest | |
+| `Effect 3` | `<signed number> <name>`, or empty | empty on every row | |
 
 The sign is part of the number, so `1 Mood` means `+1`. Names are matched loosely, so `+1 mood` works. A name
 other than the three above is stored as a special effect (the game uses `-1 Accident` on the three control
@@ -393,18 +405,18 @@ One row per world object. Ids are used by map files and cannot change.
 
 | Column | Value | Built-in | Notes |
 |---|---|---|---|
-| `LocKey_Name` | localization key | `map.obj.tree.name` | |
-| `LocKey_Description` | localization key | | |
-| `Dimensions` | `WxHxD` | `1x4x1`, `2x2x2`, `3x1x3` | |
-| `Resource Harvested` | resource name, or empty | `Wood`, `Stone`, `Herbs`, `Food`, `RawWater`, `Clay`, `Sandbags`, `Metal`, `Planks`, `Fuel`, seeds | empty means nothing to harvest |
+| `LocKey_Name` | localization key | `map.obj.<object>.name` on 20 rows, e.g. `map.obj.tree.name`; `map.obj.<object>` without `.name` on the other 13, e.g. `map.obj.crate` | |
+| `LocKey_Description` | localization key | `map.obj.<object>.description` on 18 rows, e.g. `map.obj.tree.description`; `map.obj.<object>` without `.description` on the other 15, e.g. `map.obj.crate` | |
+| `Dimensions` | `WxHxD` | width 1–4, height 1–6, depth 1–6 (from `1x1x1` to `4x6x4`) | |
+| `Resource Harvested` | resource name, or empty | `Wood`, `Stone`, `Herbs`, `Food`, `RawWater`, `Clay`, `Sandbags`, `Metal`, `Planks`, `Fuel`, `GrainSeeds`, `BeansSeeds`, `PotatoSeeds` or `TomatoSeeds`; empty on 9 rows | empty means nothing to harvest |
 | `Farming Time` | whole number | 0–400 | in-game minutes of work per harvest, by one crew member at a time |
 | `Resource Amount` | whole number | 0–50 | yield per harvest |
 | `Resource Total` | whole number | 0–500 | total before it is used up |
-| `Limited Harvest Amount` | whole number | 0, 20, 30, 100 | cap for endless sources; 0 = uncapped |
+| `Limited Harvest Amount` | whole number | 0, 20, 30 or 100 | cap for endless sources; 0 = uncapped |
 | `Destroyed On Depletion` | `TRUE`/`FALSE` | | `FALSE` with `Refresh Time` 0 leaves something that can never be harvested again |
 | `Refresh Time` | whole number | 0–21600 | minutes until it regrows |
 | `Health` | whole number | 1–2147483647 | the huge value marks the indestructible ones |
-| `Is Fireproof` | `TRUE`/`FALSE` | | `TRUE` makes the object a firebreak: fire can neither start on nor spread onto the tiles it covers. Fire still crosses the open ground around it |
+| `Is Fireproof` | `TRUE`/`FALSE` | `TRUE` on the rocks, pits, pond, ocean, `WaterPump` and `WaterTower` | `TRUE` makes the object a firebreak: fire can neither start on nor spread onto the tiles it covers. Fire still crosses the open ground around it |
 
 #### `GrowingData` - saplings becoming trees
 
@@ -414,9 +426,9 @@ Two rows, `young_tree` and `young_tree_big`.
 
 | Column | Value | Built-in |
 |---|---|---|
-| `To` | a `MapObjects` id | `tree`, `tree_big` |
-| `Min Hours` | whole number | 672 |
-| `Max Hours` | whole number | 840 |
+| `To` | a `MapObjects` id | by row: `tree`, `tree_big` |
+| `Min Hours` | whole number | 672 on every row |
+| `Max Hours` | whole number | 840 on every row |
 
 A sapling that is already on the map when a save is loaded draws its remaining time between half of
 `Min Hours` and `Max Hours`; only newly planted ones use the full minimum.
@@ -429,9 +441,9 @@ Rows `grain`, `beans`, `potato`, `tomato`.
 
 | Column | Built-in | Notes |
 |---|---|---|
-| `Growth` | 3, 6, 15, 10 | watered days until harvest - the plant gains one at midnight for every day its tile was watered; 0 is harvestable instantly |
-| `Food` | 3, 4, 20, 7 | food per harvest |
-| `Seeds` | 2, 5, 3, 1 | seeds per harvest; 0 makes the crop unsustainable |
+| `Growth` | by row: 3, 6, 15, 10 | watered days until harvest - the plant gains one at midnight for every day its tile was watered; 0 is harvestable instantly |
+| `Food` | by row: 3, 4, 20, 7 | `Food` per tile harvested, when the zone is set to grow for food |
+| `Seeds` | by row: 2, 5, 3, 1 | the crop's own seed resource (`GrainSeeds`, `BeansSeeds`, `PotatoSeeds`, `TomatoSeeds`) per tile harvested, when the zone is set to grow for seeds; 0 makes the crop unsustainable |
 | `Regrowth` | only `tomato` is `TRUE` | regrows instead of being consumed |
 
 ### Resources and crafting
@@ -451,9 +463,9 @@ One row per resource, named exactly as the game names it.
 | `Resource Tier` | `Meta`, `Basic`, `Advanced`, `Military`, `Trash` | | |
 | `Category` | `Food`, `Seeds`, or empty | | removing `Food` from everything edible means the crew can never eat |
 | `Always Degrades` | `TRUE`/`FALSE` | | spoils even under a roof |
-| `Explosiveness` | whole number | 0, 2, 3 | 0 is inert |
+| `Explosiveness` | whole number | 0, 2 or 3 | 0 is inert |
 | `Flammable` | `TRUE`/`FALSE` | | |
-| `VariantAmountMapping` | `/`-list of whole numbers | `1/2`, `1` | picks the pile's look |
+| `VariantAmountMapping` | `/`-list of whole numbers | `1/2` or `1` | picks the pile's look |
 
 #### `WorkbenchProjectData` - crafting recipes
 
@@ -464,13 +476,13 @@ introducing new ones.
 
 | Column | Value | Built-in | Notes |
 |---|---|---|---|
-| `Workbench Type` | workbench name | `FieldKitchen`, `IndoorKitchen`, `SawStation`, `Brickstation`, `CementMixer`, `MetalworksWorkbench`, `CanningStation`, `ElectronicsWorkbench`, `TailorStation`, `EspionageRadio`, `WaterCooker`, `HerbDryer`, `Distillery` | |
-| `Output Resource Type` | resource name | | |
+| `Workbench Type` | workbench name | `FieldKitchen`, `IndoorKitchen`, `SawStation`, `Brickstation`, `CementMixer`, `MetalworksWorkbench`, `CanningStation`, `ElectronicsWorkbench`, `TailorStation`, `EspionageRadio`, `WaterCooker`, `HerbDryer` or `Distillery` | |
+| `Output Resource Type` | resource name | `AntiAirAmmo`, `Bricks`, `Camouflage`, `Cement`, `Electronics`, `FoodRations`, `Fuel`, `GunAmmo`, `Intel`, `LuxuryGoods`, `Machinery`, `Meals`, `Metal`, `PlaneBombs`, `Planks`, `PurifiedWater`, `RepairParts`, `SimpleMedicine`, `StrongMedicine` or `Tarp` | |
 | `Output Resource Amount` | whole number | 1–200 | |
-| `Input Resource Type` | `/`-list of resources, or `None` | `Food/RawWater`, `Metal`, `None` | `None` means made from nothing |
-| `Input Resource Amount` | `/`-list of whole numbers | `2/2`, `0` | **must have as many entries as the type list** |
+| `Input Resource Type` | `/`-list of resources, or `None` | `None` on 3 rows; otherwise 1–3 of `Clay`, `Electronics`, `Food`, `Herbs`, `LuxuryGoods`, `Machinery`, `Meals`, `Metal`, `PurifiedWater`, `RawWater`, `Sandbags`, `SimpleMedicine`, `Tarp` or `Wood`, e.g. `Food/RawWater` | `None` means made from nothing |
+| `Input Resource Amount` | `/`-list of whole numbers | 1–3 entries, each 1–10, e.g. `2/2`; `0` on the 3 `None` rows | **must have as many entries as the type list** |
 | `Time To Craft` | whole number | 10–180 | in-game minutes of work, by one crew member at a time |
-| `Valid Entry` | `TRUE`/`FALSE` | `TRUE` | left over; the game does not read it |
+| `Valid Entry` | `TRUE`/`FALSE` | `TRUE` on every row | left over; the game does not read it |
 
 #### `ShipmentData` - the supply catalogue
 
@@ -478,12 +490,12 @@ Built-in file: [ShipmentData.csv](../assets/csv/ShipmentData.csv)
 
 One row per orderable item.
 
-| Column | Value | Notes |
-|---|---|---|
-| `Shipment Type` | `Resource` or `Prop` | |
-| `Category` | `Military`, `Miscellaneous` or `Large` | **capitalisation matters** - `military` is refused |
-| `Amount` | whole number, 1–5000 | units delivered per slot |
-| `Slots` | whole number, 1–4 | more slots than any rank offers makes the item unorderable |
+| Column | Value | Built-in | Notes |
+|---|---|---|---|
+| `Shipment Type` | `Resource` or `Prop` | | |
+| `Category` | `Military`, `Miscellaneous` or `Large` | | **capitalisation matters** - `military` is refused |
+| `Amount` | whole number | 1–5000 | units delivered per slot |
+| `Slots` | whole number | 1–4 | more slots than any rank offers makes the item unorderable |
 
 ### Crew
 
@@ -497,13 +509,13 @@ Rows are job and crew role names: `Pilot`, `Gunner`, `BombAimer`, `FlightEnginee
 
 Columns are the six skills - `Flying`, `Shooting`, `Bombing`, `Endurance`, `Engineering`, `Navigating` - and
 the value is a **rank, 0 to 6**, not a point total. `0` is Untrained and `6` is Ace. Keep it inside that
-range. `Endurance` also sets maximum health, which is why every row has at least `1` there.
+range; the built-in rows use 0–2. `Endurance` also sets maximum health, which is why every row has at least `1` there.
 
 #### `CharactersStatsRankProgression` - points per rank
 
 Built-in file: [CharactersStatsRankProgression.csv](../assets/csv/CharactersStatsRankProgression.csv)
 
-Rows must stay `Untrained`, `Rank1` … `Rank5`, `Ace`. `LevelUpPoints` (0, 10, 14, 22, 36, 58, 90) is the
+Rows must stay `Untrained`, `Rank1`, `Rank2`, `Rank3`, `Rank4`, `Rank5`, `Ace`. `LevelUpPoints` (0, 10, 14, 22, 36, 58, 90) is the
 points total at which that rank is reached, and the rank is picked as the highest one a character has passed
 - so **the values must ascend**. Out of order, crew get stuck low or jump straight to Ace.
 
@@ -511,7 +523,7 @@ points total at which that rank is reached, and the rank is picked as the highes
 
 Built-in file: [CharacterStatsCheck.csv](../assets/csv/CharacterStatsCheck.csv)
 
-Rows are the same seven ranks. For each of the six skills there are two columns: `<Skill>Value` is a flat
+Rows are the seven ranks `Untrained`, `Rank1`, `Rank2`, `Rank3`, `Rank4`, `Rank5`, `Ace`. For each of the six skills there are two columns: `<Skill>Value` is a flat
 bonus added to a mission roll, `<Skill>Percentage` is a **fraction** - `0.25` means 25%. Writing `25` gives a
 2500% bonus. Column names cannot be renamed.
 
@@ -563,11 +575,11 @@ Built-in file: [MoraleInfluenceValues.csv](../assets/csv/MoraleInfluenceValues.c
 
 | Column | Value | Built-in | Notes |
 |---|---|---|---|
-| `Itentifier` | row id (note the spelling) | `Sleep`, `Chill`, `Panic`, `BaseAttacked` | |
+| `Itentifier` | row id (note the spelling) | `Sleep`, `Eat`, `WorkOnWorkbench`, `Stockpile`, `Build`, `Harvest`, `Chill`, `ConsumeLuxuryGoods`, `UseRadio`, `SaluteTheFlag`, `UsePlanningBoard`, `Panic`, `Rage`, `Collapse`, `Grieve`, `Bury`, `UseTrainingObject`, `Socialize`, `UseRecreationalItem`, `Work`, `Train`, `Early`, `Mid`, `Late`, `Living`, `MissionCancelled`, `MissionCompleted`, `WarNews`, `BaseAttacked`, `Death`, `Recover` or `RecoverInBed` | |
 | `IdentifierType` | `Task`, `TaskGroup`, `TaskCategory`, `WarPhase`, `GameEvent`, `-` | | a type that does not suit the id means the row is ignored |
-| `Parameter` | the variant key; comma-separates aliases | `default`, `Prop.Bed`, `ResourceType.Meals` | **no alias may be listed twice** |
+| `Parameter` | the variant key; comma-separates aliases | `default`; `Prop.Bed`, `Prop.BedMetal`, `Prop.BedWood`, `Prop.BilliardTable`, `Prop.Dartboard`, `Prop.Guitar`, `Prop.Piano`; `ResourceType.Food`, `ResourceType.FoodRations`, `ResourceType.Intel`, `ResourceType.LuxuryGoods`, `ResourceType.Meals`, `ResourceType.PurifiedWater`, `ResourceType.RawWater`; `CharacterClass.AirCrew`, `CharacterClass.BaseCrew`; `InfluenceOutcome.Good`, `InfluenceOutcome.Bad`; and one row with two aliases, `Prop.Jukebox, Prop.Gramophone` | **no alias may be listed twice** |
 | `Raw Parameter` | a note | | not read by the game |
-| `Confidence` / `Mood` / `Energy` | numbers | -30 … 50 | |
+| `Confidence` / `Mood` / `Energy` | numbers | `Confidence` -10 to 50, `Mood` -30 to 50, `Energy` -20 to 50 | |
 | `Influence Type` | `Timed` or `OnEventTrigger` | | |
 
 `Timed` values apply every tick and are therefore much smaller than `OnEventTrigger` ones. Copying a `+20`
@@ -582,16 +594,35 @@ Six rows hold one variant per line and cannot be changed at all: `Sleep`, `Eat`,
 
 Built-in file: [FlightMissionData.csv](../assets/csv/FlightMissionData.csv)
 
-The row id names what is being measured: `AirplaneIntegrity`, `AirplaneHealth`, `AirplaneFuel`, `Mood`,
-`Energy`, `Confidence`, `SeatsConfiguration`, `CrewHealth`, `CrewOnFire`.
+This table decides how the state of an aircraft and its crew affects a mission. The game checks each
+aircraft and crew member against these rows. When a measured value falls inside a row's `ThresholdRange`, that
+row's modifier applies to the aircraft. The mission briefing lists each one, and they feed the success estimate.
+There are two kinds:
+
+- A `SkillRollModifier` shifts the aircraft's mission stats (fight, bomb, recon and the others). Its
+  `ModifierRange` is added to the lowest and highest value each stat can roll, so `0/-10` lowers the best
+  possible roll by 10 and `2/0` raises the worst one by 2.
+- A `NoFlightModifier` stops the aircraft from being sent at all.
+
+The row id names what is being measured:
+
+- `AirplaneIntegrity` - percent of the aircraft's starting integrity that remains
+- `AirplaneHealth` - its health
+- `AirplaneFuel` - its fuel level; `0` means an empty tank
+- `Mood`, `Energy`, `Confidence` - each crew member's value, from -100 to 100, matched against `Parameter` by
+  crew role
+- `SeatsConfiguration`, `CrewHealth`, `CrewOnFire` - yes/no checks, where `1` means the problem is present: a
+  crew member in a seat that does not match their role, one who is injured, or one on fire
+
+For each measured value, the first row whose range and role match is the one used.
 
 | Column | Value | Built-in | Notes |
 |---|---|---|---|
-| `ModifierCategory` | a label | `low`, `high`, `zero`, `critical`, `mismatch` | |
+| `ModifierCategory` | a label | `low`, `high`, `zero`, `critical` or `mismatch` | |
 | `ModifierType` | `SkillRollModifier` or `NoFlightModifier` | | |
-| `ModifierRange` | `min/max` whole numbers | `0/-5`, `2/0` | added to the lowest/highest stat roll; ignored by `NoFlightModifier` rows |
-| `Parameter` | space-separated crew roles, or `Default` | `Default`, `CrewRole.Pilot` | every role must carry the `CrewRole.` prefix - a bare `Pilot` never matches, and neither does an unknown role |
-| `ThresholdRange` | `min/max` whole numbers | `1/40`, `-100/-90`, `50/100` | the range of measured values this row covers |
+| `ModifierRange` | `min/max` whole numbers | `0/-10`, `0/-5`, `0/-3`, `0/-2`, `0/0`, `1/0` or `2/0` | added to the lowest/highest stat roll; ignored by `NoFlightModifier` rows |
+| `Parameter` | space-separated crew roles, or `Default` | `Default`, `CrewRole.Pilot`, all six roles, or the five roles other than `CrewRole.Pilot` | every role must carry the `CrewRole.` prefix - a bare `Pilot` never matches, and neither does an unknown role |
+| `ThresholdRange` | `min/max` whole numbers | `-100/-90`, `-89/-50`, `0/0`, `1/1`, `1/40` or `50/100` | the range of measured values this row covers |
 
 `NoFlightModifier` is the hard block that grounds an aircraft - out of fuel, or a crew member at rock-bottom
 mood. Widening its `ThresholdRange` grounds your whole squadron; setting it to something unreachable such as
@@ -627,11 +658,11 @@ Built-in file: [DaySchedule.csv](../assets/csv/DaySchedule.csv)
 
 Four rows, `0`–`3`.
 
-| Column | Value | Built-in |
-|---|---|---|
-| `Phase` | `Work`, `Leisure`, `Sleep` (`Alert` and `None` are also accepted but are not meant for the schedule) | |
-| `StartHour` | whole number, inclusive | 0, 5, 7, 22 |
-| `EndHour` | whole number, exclusive | 5, 7, 22, 24 |
+| Column | Value | Built-in | Notes |
+|---|---|---|---|
+| `Phase` | `Work`, `Leisure`, `Sleep` | by row: `Sleep`, `Leisure`, `Work`, `Leisure` | `Alert` and `None` are also accepted but are not meant for the schedule |
+| `StartHour` | whole number, inclusive | by row: 0, 5, 7, 22 | |
+| `EndHour` | whole number, exclusive | by row: 5, 7, 22, 24 | |
 
 The four spans are expanded hour by hour, and **every hour from 0 to 23 must be covered by exactly one row**.
 With a gap or an overlap, the hourly phase lookup throws an error and the base stays in whatever phase it was
@@ -646,7 +677,7 @@ Name and value, all numbers, purely visual.
 
 | Row | Meaning | Built-in |
 |---|---|---|
-| `Morning Time`, `Dawn Time`, `Day Time`, `Evening Time`, `Dusk Time`, `Night Time` | hour each lighting stage begins | 4, 7, 10, 17, 22, 23 |
+| `Morning Time`, `Dawn Time`, `Day Time`, `Evening Time`, `Dusk Time`, `Night Time` | hour each lighting stage begins | by row: 4, 7, 10, 17, 22, 23 |
 | `Sun Min Rotation` / `Sun Max Rotation` | sun elevation sweep, degrees | 15 / 165 |
 | `Sun Yaw Offset` | compass rotation | -90 |
 | `Sun Tilt` | degrees | 10 |

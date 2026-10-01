@@ -1,154 +1,184 @@
-# Docs audit 2026-09-28
+# Docs audit 2026-10-01
 
-Comparison of the modkit handbook (`docs/en/`, `docs/de/`, `AGENTS.md`, skills, templates) with the game team's docs in
-`SquadronLeader_Demo/Docs` (state of 2026-09-28, commit 35f391ddab). **The game docs are treated as correct.**
-"SRC" = `SquadronLeader_Demo/Docs`.
+Comparison of the modkit handbook (`docs/en/`, `docs/de/`, `AGENTS.md`, skills, templates, examples) with the
+game team's docs in `SquadronLeader_Demo/Docs` (local checkout `SquadronLeader_Demo - 2`, branch `develop`,
+commit `c307ef6a59` 2026-10-01 "Link the Objects modding page from the main page and mods page"; one local
+commit ahead of `origin/develop`, working tree clean). **The game docs are the reference.** "SRC" =
+`SquadronLeader_Demo/Docs`. Previous audit: 2026-09-28 (commit `35f391ddab`).
 
-What was done with each finding:
+Main SRC changes since the last audit:
 
-- **Fixed** - a wrong statement, reworded to match SRC.
-- **Hidden** - a section or page that describes something that no longer exists. Hidden pages are in
-  `exclude_docs` in `mkdocs.yml`; hidden passages are wrapped in `<!-- OUTDATED (docs audit 2026-09-28) ... -->`
-  so they can be restored or rewritten later.
-- **Open** - SRC contradicts itself or the game code, or SRC trimmed something that is still true. Needs a decision
-  by the game team, left unchanged.
-- Things SRC simply does not mention (unverifiable) are listed at the end and left unchanged.
+- **Historic missions** are checked every in-game hour, no longer at the weekly slot (`ff143666f4`).
+- **Mods can add mission locations** in `Missions/Locations/*.json` (`1077ae90bf`, feature 6082).
+- **Airplane skins** in a new `Airplanes/` folder (`d380f829cd`), new page `Modding/airplanes.md`.
+- **Art** rewritten and presented as working: `Modding/art.md`, `objects.md`, generated `moddable-objects.md`
+  and `textures.md`. SRC no longer calls art mods unsupported or work in progress anywhere.
 
-Art mods (Objects, Biomes, the former TerrainObjects) are **work in progress and not supported by the current alpha**.
-Every page and skill about them now carries a notice saying so.
+Verdicts: **Wrong**, **Outdated**, **Missing**, **Less detailed**, **Open**, **Unverifiable** (see the
+`update-docs` skill). Every finding also applies to the matching `docs/de/` page. Line numbers are `docs/en/`.
 
 ---
 
-## 1. Art mods (Objects, TerrainObjects, Biomes)
+## 1. Mods basics, start pages, Workshop (`mainpage.md`, `Modding/mods.md`)
 
-SRC `Modding/mods.md` 59-78 describes a new layout:
+| Where | Handbook says | Game docs say | Action |
+|---|---|---|---|
+| `basics/mods.md` 10 | content folders `CSV/` ... `Objects/` or `Biomes/` | mainpage 34-35: "... `Biomes/` or `Airplanes/`" | **Outdated** - add `Airplanes/` |
+| `basics/mods.md` 38-58 (tree + folder table) | no `Airplanes/`, no `Missions/Locations/` | mods.md 44 "`Locations/` new mission locations"; 49 "`Airplanes/` new airplane skins" | **Missing** - add both |
+| `basics/mods.md` 69 | "only files directly inside the subfolder are read; anything deeper is ignored." | mods.md 60-61 "... with one exception: `Missions/Locations/` is read as well." | **Wrong** - add exception |
+| `basics/mods.md` 69 | nothing about `Airplanes/` | mods.md 62-63 "`Airplanes/` holds new airplane skins" | **Missing** - add sentence + link |
+| `basics/mods.md` 142-148 | "Seeing your changes" table has no skin row | mods.md 145 "An airplane skin PNG or the `Airplanes/config.json` \| Load a level" | **Missing** - add row |
+| `basics/mods.md` 148 | art restart row only | mods.md 148-150 "A future update adds an option to reload mods from the main menu" | **Less detailed** - add note |
+| `basics/mods.md` 99 | "Without one the Mods window shows a placeholder picture." | mods.md 93-94 "... and the Workshop item has no picture until you add one on its Steam page." | **Less detailed** - add |
+| `index.md` 54-62 | "What you can build" has no skins row | mainpage 18 "Add airplane skins" | **Missing** - add row |
+| `start/glossary.md` 71, 77 | Mod / content folder lists without skins / `Airplanes` | mods.md 42-49 | **Outdated** - add |
+| `basics/testing.md` 10, 16 | "Missions, scripts, quests and CSV tables are read fresh every time a save is loaded." | mods.md 135-136 "tables, quests, missions, scripts and maps alike"; 145 skins | **Less detailed** - add maps, skins |
+| `basics/testing.md` 41 | "historic missions with a date are checked at every day change" | missions.md 146 "The game checks every in-game hour" | **Outdated** - reword |
+| `basics/testing.md` 51-52 | "appear at the next weekly slot ... wait for the next slot." | missions.md 146-152 "never waits for the weekly schedule ... within the hour" | **Wrong** - reword |
+| `basics/testing.md` 123 | missing text shows "a raw key like `missions/mymod_patrol/mission_name`" | missions.md 199 "Missing narrative text \| that slot shows nothing in game" | **Wrong** - "shows nothing" (see Open 4) |
+| `basics/cheats.md` 135 | `set_random_event_chance` listed as a normal cheat | scripting.md 265-266 "the development-build cheat `set_random_event_chance`" | **Wrong** - hide row (dev builds only) |
+| `AGENTS.md` 52-60 (section 5) | layout without `Airplanes/`, `Missions/Locations/` | mods.md 44, 49, 60-63 | **Missing** - add |
+| `AGENTS.md` 225-226 (section 15) | Refresh for "a brand-new mod folder (or a content folder that was empty ...)"; picked up: "Missions, scripts, quests, maps and CSV" | mods.md 143 "a renamed folder, a changed `config.json`"; 145 skins | **Less detailed** - add |
+| Skills `csv-tweak` 37, `event-script` 38, `new-map` 38, `new-mission` 56, `new-quest` 41; `templates/csv-tweak/README.md` 22 | opening Mods "rescans the folder" | mods.md 136, 143; quests.md 63-64; csv-data.md 219-221: new folders need **Refresh** | **Wrong** - same wording as `install-mod` 51 |
 
-- `Objects/` is one flat pool of models and textures. A model's **file name** is the object id (`Chair.fbx`,
-  `Chair.destroyed.fbx`, `tree.2.glb`); subfolder names mean nothing (`Objects/Chair/model.fbx` is an object
-  called `model`). Textures are found by the name the material references (`Objects/wood-01.png`).
-  `Chair.thumbnail.png` (max 256x256) replaces the build-menu icon. Settings live in one `Objects/config.json`
-  keyed by id: `{"Objects": {"Chair": {"UseGameMaterial": false}}}`; a `config.json` in a subfolder is ignored.
-- `Biomes/` holds one PNG per slot, named by the slot number (`8.png`), directly inside the folder.
-- **There is no `TerrainObjects/` folder any more.** Trees, rocks etc. are re-dressed from `Objects/`.
-- Art is imported once at startup: restart needed; neither Refresh nor the Enabled switch re-imports it.
+## 2. Missions and locations (`Modding/missions.md`, `locations.md`, `missions/*.md`)
 
-| Where | Problem | Action |
+| Where | Handbook says | Game docs say | Action |
+|---|---|---|---|
+| `missions/index.md` 77 | "With a date, it appears on that exact day; without one, it appears alongside the next weekly mission" | missions.md 146-152 hourly check; dated "on that day, or later if its other requirements pass later"; undated "within the hour" | **Outdated** - rewrite |
+| `missions/chains.md` 256, 280 | "on that exact day" | missions.md 149 "or later if its other requirements pass later" | **Outdated** - reword |
+| `missions/chains.md` 257 | "keeps the normal lead time ... appears alongside the next weekly mission" | missions.md 151-152 "shows up within the hour after that mission succeeds" | **Wrong** - rewrite |
+| `missions/chains.md` 259 | "A failed or cancelled attempt brings it back" | missions.md 154-156 "back on the map at the next hourly check, even while its result report is still waiting to be read" | **Less detailed** - add |
+| `missions/chains.md` 266-269, 292 | timing table / "alongside the same weekly mission" | missions.md 146-152 | **Outdated** - rewrite rows |
+| `missions/chains.md` 290 | forgetting `_isHistoric`: slow, can be drawn again | missions.md 158-161 "A chain without Is Historic ... Use this for a repeatable follow-up." | **Less detailed** - add the repeatable use |
+| `missions/reference.md` 70-71 | historic created "at every day change"; undated "alongside this weekly mission" | missions.md 146 hourly | **Wrong** - one "hourly historic check" step |
+| `missions/reference.md` 322 | `_historicDay` "The exact day a historic mission appears." | missions.md 149 | **Outdated** - "earliest day" |
+| `examples/chain_convoy/README.md` 25, 27; `examples/chain_airfield/README.md` 26 | next mission slot / normal lead time | missions.md 146-156 | **Wrong** - hourly |
+| `missions/locations.md` 9 | no locations -> "random place from the list below" | locations.md 13-14 "the places below plus any that enabled mods add" | **Outdated** - add (see Open 5) |
+| `missions/locations.md` 45, 159-164 | `SetMissionLocation` only shipped names; "A script cannot use your own place" | locations.md 41-42, 173-178, 186-190 mod-added places work everywhere | **Outdated** - reword |
+| none (`locations.md`, `AGENTS.md` 5/7, `new-mission` skill, `scripting/localization.md`) | - | locations.md 150-182 "Adding locations with a mod": `Missions/Locations/*.json`, `{"Locations": [...]}`, numeric `_flags`, toggling without restart, shipped names win, silent clash between mods, `mission_location/<name>` term, bad file skipped with warning | **Missing** - new section |
+| `missions/index.md` 63; `reference.md` 310 | times are ranges | missions.md 100-102 "in game minutes ... maximum of `0` means the mission never expires, and a historic mission never expires" | **Missing** - add |
+| `missions/reference.md` 253 | `get_time_to_start` default 60 | getTimeToStart.md 22-23 "Returning `0` or a negative number cancels the mission on the next minute tick" | **Less detailed** - add |
+| `missions/index.md` 56; `reference.md` 448-450 | tags | missions.md 86-89 "Each shipped map also lists its own name (`debden`, `duxford`, `lichfield`, `perranporth`)" | **Less detailed** - add |
+| `missions/index.md` 121 | editor cannot do: "Write the Python side" | missions.md 208-209 "Show a chain as a whole" | **Missing** - add |
+| `missions/index.md` 67 | "radio transmissions for each ending" | missions.md 107-109 two mid-flight messages + one per ending | **Less detailed** - spell out |
+| `missions/index.md` 39, 75, 89 | editor list; outcomes; "Mission with given ID already exists" | missions.md 67 folder button; 138 "top to bottom from the best ending to the worst"; 173 "Mission id is in use" | **Less detailed** - minor rewording |
+| `missions/first-mission.md` 397 | "reads mission files and scripts every time a save is loaded" | missions.md 47-49 "Saving in the Mission Editor reloads them at once" | **Missing** - add |
+| `missions/reference.md` 109-117 | import only shown in an example | missions.md 252 "Every mission script needs `from Blindflug.FlightMission import MissionEvent` ... no automatic imports" | **Less detailed** - state as rule |
+| none | - | missions.md 313-370 shipped example missions (`calm_supply_drop`, Blitz chain, `default_mission.py`); 318-325 a copy under a new id shows no text without `_raw*`/`SetTerm` | **Missing** - short pointer + the text note |
+| `tools/validator` (`discover.py`, `rules.py` 308-314) | skips `Missions/` subfolders; warns on any location not in the catalog | locations.md 150-182 | **Missing (tooling)** - kit maintainers; not a docs edit |
+
+## 3. Quests (`Modding/quests.md`, `examples/quests/*.json`)
+
+The page `quests/index.md` matches SRC almost line for line.
+
+| Where | Handbook says | Game docs say | Action |
+|---|---|---|---|
+| `new-quest` skill 41, `new-map` skill 38 | Mods "rescans the folder" | quests.md 63-64 Refresh | **Wrong** - see section 1 |
+| `new-quest` skill 27 | aircraft id needed for `12`/`17` when filtered | quests.md 616-617 "any of 12, 13, 17 that is not empty includes at least one aircraft id" | **Less detailed** - add 13 |
+| `examples/quests/Quests/example_patrol_chain.json`, `example_map_campaign.json` 41-44; `quests/index.md` 489-492, 545-548 | requirement without `"Name"` | SRC examples line 42 `"Name": "",` (ignored by the game, quests.md 131-132) | **Less detailed** - copy SRC files byte for byte, re-paste blocks |
+| `quests/index.md` 558 | shipped quests mentioned in passing | quests.md 570-580 "Shipped quests" table (quest0, quest1, fighter_day_skin_unlock, tutorial_building) | **Less detailed** - add the four descriptions |
+
+## 4. Scripting (`scripting.md`)
+
+| Where | Handbook says | Game docs say | Action |
+|---|---|---|---|
+| `scripting/index.md` 258; `scripting/events.md` 34 | `chance` 0.0-1.0, default 1.0 | scripting.md 265-266 "The game adds a global base chance ... `0` unless changed with the development-build cheat" | **Less detailed** - add |
+| `scripting/events.md` 56-58 | argument kinds without tasks | scripting.md 238-239 "task arguments are `Blindflug.Tasks.Task` values" | **Less detailed** - add |
+| `basics/cheats.md` 135; `event-script` skill 38 | see section 1 | | |
+
+## 5. CSV data (`Modding/csv-data.md`)
+
+All 30 `docs/assets/csv/*.csv` files are byte-identical to the files SRC links (`Assets/BlindGame/Data/Raw/`).
+
+| Where | Handbook says | Game docs say | Action |
+|---|---|---|---|
+| `data/table-editor.md` 76 | "Columns you leave out get the table's default or stay empty" | csv-data.md 135-142 cell may be empty only where the game leaves some row empty; `ResourceCost` cells become `0`; `Associated Task` becomes `None` | **Outdated** - reword |
+| `data/table-editor.md` 66 | unchangeable multi-line rows: `MoraleInfluenceValues`, `TaskValues` | csv-data.md 689-690 `FlightMissionData` rows `AirplaneIntegrity`, `AirplaneHealth`, `Mood`, `Energy`, `Confidence` | **Less detailed** - add |
+| `templates/csv-tweak/README.md` 17 | "Only `Replace` works in most tables." | csv-data.md 83 `Remove` with `Columns` works in every table | **Wrong** - reword |
+| `templates/csv-tweak/README.md` 22; `csv-tweak` skill 37 | "rescans the folder" | csv-data.md 219-221 Refresh | **Wrong** - see section 1 |
+| `data/csv.md` 173-174 | no legend for built-in values | csv-data.md 234-242 "The built-in values are always complete, never a sample" + legend | **Missing** - add legend |
+| `data/csv.md` 186, 188, 198-205, 265-270, 289-291, 315, 328, 331, 377, 379, 396-407, 433-434, 468-471, 499-500, 566-570, 592-594, 632 | sample values (`e.g.`, `0-0 ... 43-60`) | csv-data.md 254-721 complete ranges / lists / "by row" values (e.g. 337-340 PlaneWin/Loose damage by row; 398 Dimensions; 401 `None`; 449 full task list; 503-504 "per tile harvested"; 636-640 morale ids and ranges) | **Less detailed** - copy full values (19 cells) |
+| `data/csv.md` 585-586 | `FlightMissionData` row ids named only | csv-data.md 655-675 how thresholds apply, SkillRoll vs NoFlight, what each id measures, first match wins | **Missing** - add |
+
+## 6. Art and airplane skins (`Modding/art.md`, `objects.md`, `moddable-objects.md`, `textures.md`, `airplanes.md`) - new row
+
+| Where | Handbook says | Game docs say | Action |
+|---|---|---|---|
+| WIP banner: `content/objects.md` 3-4, `biomes.md` 3-4, `basics/mods.md` 60-61, `testing.md` 20, `cheats.md` 27, `maps.md` 43-45, `index.md` 61, `glossary.md` 77, `ai/skills.md` 21, `AGENTS.md` 59, 62, 227, 265, `import-model`, `install-mod` 53 | "Art mods are work in progress. The current alpha does not support them yet" | art.md 6-8, mainpage 17, 79-90 present art as working; no caveat anywhere | **Outdated** - remove only after user confirms (skill rule) |
+| `content/objects.md` 10-12, `biomes.md` 10-12 | "Folder layout (preliminary)" | objects.md 38-60 final rules | **Outdated** - rewrite as real content |
+| `content/objects.md` 16; `import-model` 29 | thumbnail "at most 256 × 256" | objects.md 219, art.md 74 "512 × 512", 10 MB | **Wrong** - fix |
+| `content/biomes.md` 59-60, 68-69 | "2048 × 2048", "8 MB" | art.md 75 "Biome 4096 × 4096 10 MB" | **Wrong** - fix |
+| `content/objects.md` 146-157 (hidden) | texture 2048², 8 MB | art.md 70-81 model 32 MB; texture 4096², 10 MB; real PNG; never scaled down | **Wrong** - new visible limits table |
+| `content/objects.md` 15 | textures found by the name the material references | objects.md 113-125 three ways in order: `<material>_BaseMap_<tile>`, referenced image name, built-in texture name | **Less detailed** - add |
+| none | - | objects.md 146-158 texture-only repaint by built-in name | **Missing** - add, link texture list |
+| none | - | objects.md 160-183 UDIM 1001-1003 + `_Specular_` | **Missing** - add |
+| `content/objects.md` 18 (+ hidden 119, 135-137 "Default `false`") | `UseGameMaterial` example, no default | objects.md 187-212 default = game material (battle damage), `false` loses it, fallbacks, `tree` covers `tree.2` | **Less detailed** / hidden text **Wrong** - rewrite |
+| `content/objects.md` 86-107 (hidden) | glb beats fbx, Y-up metres, first UV, triangulation, LOD | objects.md 51-52, 77-109 (LOD only on objects with built-in LODs; FBX reads base colour/normal/emission textures; embedded images never read) | **Outdated** (largely correct again) - restore in new wording |
+| none | - | objects.md 53-58 variants from 0, no leading zeros, `Chair.001.fbx` refused, destroyed skipped if none; 68-69 subfolder name clash; 79-92 footprint/collision stay, static only; 221-224 thumbnail rules | **Missing** - add |
+| `content/objects.md` 177 | ids from `BuildingComponents` | objects.md 20-25, 36 + map objects from `MapObjects.csv`, case-insensitive | **Less detailed** - add |
+| `content/objects.md` 198-216 | hand list incl. `BarbedWireCorner`, `door_hangar`, `MetalFence`, `MetalFenceCorner`, `Siren`, `WoodenFenceSturdy`, `WoodenFenceSturdyPole` | moddable-objects.md 167 ids, none of these 7 | **Wrong** - use generated list (see Open 1) |
+| `content/objects.md` 219-256, 161-163 (hidden); `biomes.md` 181 (hidden) | log table; last mod wins; GPU copy note | art.md 87-95 last wins, objects decided as a whole, `[Mod <id>]` lines in dev builds; 61-62 GPU note | **Outdated** - short new log/conflict section; restore GPU note |
+| `content/biomes.md` | no leading-zero rule | art.md 55-56 "`8.png`, not `08.png`", out-of-range reported | **Missing** - add |
+| `content/terrain-objects.md` (excluded) | old `TerrainObjects/` page | objects.md 25, 48-54 map objects via `Objects/` | **Outdated** - stays excluded; map-object section goes into `objects.md` |
+| none | - | `moddable-objects.md`, `textures.md` generated reference lists (no URLs or keys) | **Missing** - ask: generated reference page(s)? |
+| none (no page, nav, skill) | - | airplanes.md 1-109: `Airplanes/config.json` `{"Skins": {"<id>": {"Airplane", "Name", "BaseSkin"}}}`, `<id>_BaseMap_1001.png` required, 1002/1003 + `_Specular_` optional, thumbnail, 19 airplane ids, saved as `mod_<modId>_<skinId>`, read on level load, disabled mod falls back | **Missing** - new page `content/airplanes.md` (+ DE, nav), skill trigger |
+| `import-model` skill 29, 37 | old texture rule; manual name check | objects.md 113-183, art.md 66-81 | **Less detailed** - update + checklist |
+
+### Problems in `examples/3d_assets/` (branch `3d-assets`) - for the user, not fixed by this audit
+
+| File | Problem | SRC |
 |---|---|---|
-| `content/terrain-objects.md` (whole page) | Describes the removed `TerrainObjects/` folder | Hidden (page excluded, nav entry removed) |
-| `content/objects.md` (almost whole page) | Per-object subfolders, `model.glb`/`albedo.png`/`destroyed.glb` names, per-folder `config.json`, no thumbnails, `TerrainObjects` cross-refs, folder-path log lines | WIP notice; outdated parts hidden |
-| `content/biomes.md` | `Biomes/<name>/albedo.png` instead of `Biomes/<slot>.png` | WIP notice; outdated parts hidden |
-| `basics/mods.md` 10, 47-49, 58-60, 68 | Lists `TerrainObjects/`; "Biomes = biome definitions" (SRC: ground textures, one PNG per slot); "each object gets its own subfolder" | Fixed / hidden, WIP notice |
-| `basics/mods.md` 106 | Enabled switch: art missing, art needs a restart | Fixed |
-| `basics/mods.md` 141-146 | "Seeing your changes" table has no art row | Fixed |
-| `basics/testing.md` 20, `start/glossary.md` 77, `index.md` 61, `content/maps.md` 45 | Mention `TerrainObjects` / link to the hidden page | Fixed |
-| `ai/skills.md` 21, `.agents/skills/import-model`, `.agents/skills/install-mod` 53 | `TerrainObjects/`, old layout | WIP notice / fixed |
-| `AGENTS.md` 59, 225, 263 | `TerrainObjects/`, terrain-objects page | Fixed, WIP note |
+| `Props-01_Toon-Main_BaseMap_1001.png` | 11,571,790 bytes, over the 10 MB texture limit: skipped in game, 7 of 9 models untextured | art.md 73, 79-81 |
+| `Flag-RAF_Toon-Main_BaseMap_1001.png` | the flag FBX material is `Flag-RAF_Toon-Cloth`, so the name does not match | objects.md 118 |
+| `_Readme.rtf` | "UDIM (not supported at the initial release)" - SRC supports UDIM | objects.md 160-183 |
+| `_Readme.rtf` | contains an Airtable shared-view link (`airtable.com/appvUVR7eS3bq1S8f/...`); the repo/site is public | - |
+| `Presets/Substance Painter/export-presets/Unity_GoA_UDIM.spexp` | exports `$textureSet_$udim` without `_BaseMap`, so the files are not found by the material-name rule | objects.md 118, 165-177 |
+| whole folder | loose asset pack, no `Objects/` folder or `config.json`; not installable as is | mods.md 47 |
 
-## 2. Mods basics, testing, start pages, Workshop
+---
 
-| Where | Modkit says | SRC says | Action |
-|---|---|---|---|
-| `index.md` 68, `basics/mods.md` 132, 138, 145, `basics/testing.md` 9, 21, 64, `start/index.md` 56, `start/first-mod.md` 71, 107, `start/without-ai.md` 105, 109, `start/troubleshooting.md` 28, `content/maps.md` 21, `CONTRIBUTING.md` 64, `AGENTS.md` 223, `templates/quest/README.md` 24 | Opening the Mods window rescans the Mods folder | The list of mods is read once at startup; a new mod folder needs **Refresh** in the Mods window (or a restart) (mainpage 35, mods.md 149-158, quests.md 63-64) | Fixed |
-| `basics/mods.md` 13 | Every change is picked up at the next level load | Art needs a restart (mods.md 160). *SRC mainpage 36 has the same simplification* | Fixed |
-| `basics/mods.md` 125-128, `content/maps.md` 157 | Maps: shipped, then your own `Maps` folder, then mods | Your own `Missions`/`Maps` folders are read after every mod and win over all (mods.md 144-145) | Fixed |
-| `basics/mods.md` 89 | Author/Version "kept for you and anyone reading the file" | "kept for you and for the Workshop page; the game does not read them" | Fixed |
-| `basics/mods.md` 114, `start/first-mod.md` 72 | Scripting switch only on mods with Python, asks to confirm | Switch on every mod, reserved for a coming opt-in, no effect (mods.md 126) | Fixed (confirm dialog left: unverifiable) |
-| `basics/security.md` 18 | "The game asks before you turn on scripting ... say no" | The switch has no effect; disable the mod to stop its scripts (mods.md 126, scripting.md 49-50) | Fixed |
-| `basics/testing.md` 66-67, 135, `start/troubleshooting.md` 34 | Player.log lists every loaded script / everything | Shipped game logs errors only; `[Mod ...]` lines only in development builds (mods.md 165) | Fixed |
-| `sharing/workshop.md` 15, `.agents/skills/publish-workshop` 28 | Button "Create new Workshop item..." | "New Workshop item" (mods.md 182-183) | Fixed |
-| `sharing/workshop.md` 17 | Progress percentage, button opens the item in the overlay | Progress bar, then the window shows the item's Workshop link (mods.md 185) | Fixed |
-| `sharing/workshop.md` 26 | An update also uploads `preview.png` | An update replaces files only; title, description and picture are edited on Steam (mods.md 191) | Fixed |
-| `.agents/skills/publish-workshop` 18 | Subscribers may have scripts switched off at first | Scripting switch has no effect | Fixed |
+## Open (SRC contradicts itself or needs a decision)
 
-## 3. Missions
+1. **`BarbedWireCorner`, `door_hangar`**: in `textures.md` (2026-09-29), not in `moddable-objects.md` (2026-10-01). Moddable or not?
+2. **Shared/shader textures** (`cracks`, `shading_map`, `Noise35`, `Texture2D_<guid>`): objects.md 151-153 says shared art keeps the built-in texture; textures.md 11-21 lists them as replaceable.
+3. **Art refusals in the shipped log**: art.md 93-95 "logs every file it refused" vs mods.md 155-156 "The shipped game logs errors only".
+4. **Missing text**: missions.md 199 "shows nothing" vs scripting.md 167 raw key in the event log (affects `start/troubleshooting.md` 26, `glossary.md` 81).
+5. **No-location fallback**: missions.md 190 "shipped list" vs locations.md 13-14 "plus any that enabled mods add".
+6. **Location fields read**: locations.md 33 "`_locationName` is the only field the game reads" vs locations.md 9-11, 186-187 coordinates from the mission file give the fuel.
+7. **"Everything on next level load"**: mainpage 38 vs art.md 18-20 restart (carried over).
+8. **Install folder name**: scripting.md 10 `GroundOfAces_Data` vs csv-data.md 202 `Ground Of Aces_Data` (carried over).
+9. **Which ending counts as success**: missions.md 128-129 fixed by position vs 296 `SetOutcome(..., is_success)` (carried over).
+10. **`SetAsPlannedChance` default / `CreateMission` checks requirements** (carried over).
+11. **Art WIP banner** (section 6) - needs the user's confirmation that art mods work.
+12. **Airtable link** in `examples/3d_assets/_Readme.rtf` - user decision before publishing.
 
-| Where | Modkit says | SRC says (`Modding/missions.md` unless noted) | Action |
-|---|---|---|---|
-| `missions/reference.md` 71, `chains.md` 65, `index.md` 75 | An undated historic mission takes the weekly slot | "appears alongside the next weekly mission and does not take up one of that week's slots" (147-148) | Fixed |
-| `chains.md` 64, 77, 88, `reference.md` 322, `index.md` 75 | A historic date is a floor ("on or after") | "With a date: it appears on that exact day" (146, 328-329) | Fixed |
-| `first-mission.md` 39, `chains.md` 90, `reference.md` 352-353 | Day requirements count from the start of the campaign | "counted from the map's starting date" (121) | Fixed |
-| `reference.md` 74 | Up to 5 tries to place a location | One draw plus up to five re-draws (locations.md 5-6) | Fixed |
-| `index.md` 100 | No locations: mission can never be placed | Placed at a random shipped location (180) | Fixed |
-| `index.md` 140 | Validate catches all three id problems | Catches the first two and a clash with a shipped id; not a clash with another mod or the Supporter Pack (172-174, 220-221) | Fixed |
-| `index.md` 161-162, `reference.md` 78, 127-128, 225, `chains.md` 26 | Result/cancel handlers named `send_mission_result_text`/`send_mission_cancelled_text`; result "always"; cancelled = player aborted | Handlers are `send_mission_result_event` / `send_mission_cancelled_event` (event strings `..._text`); result "always, except when cancelled"; cancelled = player aborts **or the mission expires** (252-253, getTimeToStart.md 17-18) | Fixed |
-| `index.md` 157 | `get_mission_id` always required | Required only for a mission without JSON (248) | Fixed |
-| `reference.md` 18, 138, 277 | `get_mission_result` only asked without outcome data | Required for every script-only mission; without it the mission throws (232-233, 263) | Fixed |
-| `first-mission.md` 174, `AGENTS.md` 104 | Missing text shows the raw key | "that slot shows nothing in game" (189) | Fixed |
-| `first-mission.md` 74, `reference.md` 387 | Damage rolled per plane | Rolled per flight (140-141) | Fixed (**Open**: confirm whether per flight means once per mission) |
-| `index.md` 73, `chains.md` 30, `reference.md` 105 | Outcome index 1 can count as a success if you mark it | Which ending counts as a success is fixed by position: 1 fail, 2 success, 3 fail, 4 success (128-136) | Fixed |
-| `index.md` 39-44 | Editor has no mission browser, always opens `new_mission` | Opens a mission list with Create/Edit (shipped ones too), delete, Refresh (58-67) | Hidden |
-| `index.md` 116, 118 | Editor cannot open/copy a shipped mission or build longer chains | Removed from the "cannot do" list (196-201) | Hidden |
-| `index.md` 63 | Enemy strength is under Difficulty | Moved to Text, flavour only (104-107) | Fixed |
-| `index.md` 75, 106 | "Historic day" | Renamed "Is Historic"; bad date = undated historic (143, 186) | Fixed |
-| `AGENTS.md` 116 | Roll in the first in-flight event only | Default script rolls as-planned at the first report, skill at the second (357, sendMissionEvent.md 23-24) | Fixed |
-| `AGENTS.md` 117 | A script-only mission never enters the random draw | After it was created once the weekly draw may hand it out (AddMissionRequirement doc); modkit `reference.md` 57 agrees | Fixed |
-| - | Missing: ids containing `test_`, `debug_`, `_debug`, `_test` are not loaded by the shipped game (51-52) | | Added to `AGENTS.md` §6 |
-| **Open** | `AGENTS.md` 119 "CreateMission ignores requirements" vs `api.md` 84 / `chains.md` 117 "checks requirements and tags". SRC doxygen says "bypassing ... the mission's own requirements"; the code checks them | | Open |
-| **Open** | `missions/locations.md` 49-62, 155, `reference.md` 430-438: flag values, "`_flags` is not read", test leftovers. SRC trimmed these on 2026-09-28 but they are still true per game data | | Open |
-| **Open** | `reference.md` ~376: JSON `_missionSuccess` "whether this ending counts as a success" - SRC says success is fixed by position in the editor, but `SetOutcome(..., is_success)` lets scripts set it. Does the JSON flag still matter? | | Open |
-| **Open** | A dated historic mission with a CompletedMission gate whose predecessor finishes *after* the date - SRC does not say what happens | | Open |
+## Unverifiable (SRC silent; left unchanged)
 
-## 4. Quests
+- Scripting: Python 3.6 syntax limit, missing stdlib modules, `logger.LogWarning/LogError(tag, text)`, forbidden-import list, event argument lists, API tables, language-code list, "Mods window shows which mods contain scripts".
+- Missions: Validate warning "Max Victory Points", Workshop-before-manual load order, `_enemyPlaneReport` max 18, `Luxury` icon, `SetMaxAirplaneSlots`/`SetDifficulty` defaults.
+- Quests: polled/event "Kind" column, "no type 14", requirement-type names, cheat button wording.
+- CSV: macOS template path, exact log wordings, "longer file skipped whole".
+- Mods/Workshop: Workshop button, details view, Scripting confirm dialog, DRM-free, preview >1 MB failing upload, upload error table, 512x512 recommendation, map editor details.
+- Art: biome surface detail/burnt look, `Terrain-Type_*` names, terrain variant meanings, `ocean`, readme "-Z forward", skin `Name` localization, Opaque base skins and tile 1002, Enabled toggle for skins.
 
-| Where | Modkit says | SRC says (`Modding/quests.md`) | Action |
-|---|---|---|---|
-| `quests/index.md` 574 | A file with no JSON object is skipped; broken JSON *can* break loading | "A quest file that is not valid JSON is **not** skipped - it breaks the loading of the level" (605) | Fixed |
-| `quests/index.md` 426 | Removed cheat lists are ignored with a log warning | Only development builds log a warning (535-536) | Fixed |
-| `templates/quest/README.md` 24 | Opening Mods rescans | Refresh (63-64) | Fixed (see §2) |
-| `quests/index.md` 416, `data/csv.md` 156, `scripting/index.md` 26 | Install folder `GroundOfAces_Data` / `GroundOfAces.app` | `Ground Of Aces_Data` (csv-data.md 202), `Ground of Aces.app` (scripting.md 11). **But** SRC scripting.md 11 itself writes `GroundOfAces_Data` for Windows | Fixed to `Ground Of Aces_Data` (**Open**: SRC is inconsistent - confirm against a real install) |
+---
 
-## 5. Scripting
+## Applied 2026-10-01
 
-| Where | Modkit says | SRC says (`scripting.md`) | Action |
-|---|---|---|---|
-| `scripting/localization.md` 105, 194, `AGENTS.md` 112 | SetTerm accepts any language, including ones the game does not ship | "The language code must be one the game offers in its options" (163); a shipped key is replaced, so prefix keys (169-172) | Fixed |
-| `scripting/localization.md` 147-153 | Three text tags | Four: also `[CharacterStat:<name>]` (298-309) | Fixed |
-| `scripting/localization.md` 180 | Fallback is English if defined | A missing language shows the text of a language you did register - always register `en`; no language at all = raw key (166-167) | Fixed |
-| `scripting/events.md` 35 | `max_occurrences` per playthrough, -1 unlimited | Per save game, keyed by `<module>.<function>`; negative = no limit, `0` = never runs; checked before the call (267-270) | Fixed |
-| **Open** | `scripting/api.md` 106: `SetAsPlannedChance` default 50 for script-only missions | SRC missions.md 291: without it the mission always counts as gone wrong. **Code** (`FlightMissionFactory.cs` 24, 129) uses 50 | Open |
-| **Open** | `scripting/localization.md` 32, 34, 218: SetTerm text in a separate store, removed when the mod is removed | SRC silent; code writes overrides of shipped keys into the game's own source | Open |
+All Wrong, Outdated, Missing and Less detailed findings above were applied in `docs/en/` and `docs/de/`, `AGENTS.md`,
+`CONTRIBUTING.md`, `.agents/skills/` (mirrored with `tools/sync_skills.py`), `templates/csv-tweak/README.md`,
+`examples/chain_*/README.md` and `examples/quests/Quests/` (two files now byte-identical to SRC). Decisions by the
+maintainer:
 
-## 6. CSV tables and table commands
+- **Art mods work**: every "work in progress / not supported by the current alpha" banner and note was removed.
+- **New pages** (in `nav`, German titles in `nav_translations`): `content/airplanes.md` (Airplane skins / Flugzeug-Skins),
+  `content/moddable-objects.md` (167 ids from SRC `moddable-objects.md`, without `BarbedWireCorner`/`door_hangar`),
+  `content/texture-names.md` (from SRC `textures.md`, filtered to `_BaseMap*`, `_SpecularMap*`, `_EmissiveMap*` slots).
+- `content/objects.md` and `content/biomes.md` were rewritten from SRC; their stale hidden blocks were deleted.
+  `content/terrain-objects.md` stays excluded.
+- `basics/cheats.md` `set_random_event_chance` row hidden (development builds only).
 
-Most drift comes from SRC commits 4fd53f06c5 and b87cf02a07 (2026-09-28), which replaced sample values with full
-built-in values and rewrote several mechanics notes.
-
-| Where (`data/csv.md` unless noted) | Modkit says | SRC says (`Modding/csv-data.md`) | Action |
-|---|---|---|---|
-| 150, `table-editor.md` 156 | The released game writes "mainly" errors | Logs errors only; the lines appear in a development build or the Unity editor (190-192) | Fixed |
-| 243, 323, 392, 464 (AirstripTiers, BuildingComponents, MapObjects, WorkbenchProjectData) | Build/farming/crafting time: two workers halve it | One crew member per tile/object at a time; more crew work in parallel, not faster (311, 399, 470, 542) | Fixed |
-| 201 | Manoeuvrability `2-10` ... `28-50` | min 2-28, max 8-50 (269) | Fixed |
-| 227-228 | Minimum Missions Per Week / Success Rate | Weekly HQ quota, what counts, halved shipment + strike, skipped in training (295-296) | Fixed |
-| 241 | Material names the ResourceCost row | ResourceCost accepts no new surfaces; keep to dirt/sand/gravel/concrete/tarmac; missing row = laying fails (309) | Fixed |
-| 278-279 | Special attack rows: `0-0` fighters | Row 99 has 8-8 fighters, 101 has 2-2 (350-355) | Fixed |
-| 299 | Damage `0` switches the weapon off | `0` makes a non-firing station (Searchlight, Lookout); every column from Fire Rate on is not read (375) | Fixed |
-| 357-358 | (missing) | Do not remove a surface row from ResourceCost - laying fails; set cells to `0` instead (434-436) | Fixed |
-| 372-373 | PropsInfluence Effect 1 `+10 Mood` etc. | Effect 1: `-1 Mood` to `+3 Mood`, `+1`-`+2 Energy`, `+0.5`-`+10 Confidence`, `-1 Accident`; Effect 2 list (450-451) | Fixed |
-| 399 | Fireproof trees remove fire spread from the map | `TRUE` makes a firebreak on the tiles it covers; fire still crosses open ground (477) | Fixed |
-| 584 | ModifierRange: bonus applied to the roll | Added to the lowest/highest stat roll; ignored by NoFlightModifier rows (661-662, 681) | Fixed |
-| 622-624 | DaySchedule table has a 4th cell in a 3-column table (broken) | | Fixed |
-| 628-629 | An uncovered hour has no phase, crew idle | Every hour must be covered by exactly one row; a gap or overlap throws and the phase is stuck (725-729) | Fixed |
-| 685-689, `docs/assets/csv/` | FeedbackVariables has no built-in file | SRC links `FeedbackVariables.csv` (787) | Fixed (file copied from the game) |
-| `table-editor.md` 47, 62 | Emptied cells are reset to the table default | Blanking a cell is refused except where the game already leaves some row empty; only ResourceCost (`0`) and `Associated Task` (`None`) are filled in (135-142) | Fixed |
-| `table-editor.md` 66 | Multi-line rows: ship the whole row as CSV | Refused; whole-row CSV works only in ResourceCost; MoraleInfluenceValues/TaskValues multi-line rows cannot be changed (160-167, 646, 703) | Fixed |
-| `table-editor.md` 99 | Removing a command restores the value at the next load | Aircraft already at the base keep their values; a save made with a mod keeps its numbers (278-281) | Fixed |
-| `table-editor.md` 128-130 | Log example: `PropsInfluence.json ... cells Tarp of row 'Chair'` | `Tarp` is a ResourceCost column (805) | Fixed |
-
-Less detailed than SRC but not wrong (left unchanged; worth a refresh later): sample values in VehicleData, ScrambleData,
-EquipmentData, BuildingComponents, PropsInfluence, MapObjects, GrowingData, GardeningData, WorkbenchProjectData,
-MoraleInfluenceValues, FlightMissionData, DaySchedule; the missing value legend (SRC 234-242); the FlightMissionData
-explanation (SRC 655-675).
-
-## 7. Unverifiable (SRC is silent, left unchanged)
-
-- Mods window: a **Workshop** button, the details view, the Scripting confirm dialog; DRM-free build behaviour;
-  preview over 1 MB failing; "512x512 recommended"; "Workshop mods without Name show a number".
-- Maps: the map list is re-read on save; a hand-edited `.goamap` needs a restart; uploading from the Map Editor.
-- Art: glb-over-fbx precedence, texture size limits, the terrain-object id/variant table, the 24 biome names.
-- Scripting: Python 3.6 syntax limit, available stdlib modules, `logger.LogWarning/LogError(tag, text)`, "no sandbox",
-  `GetScriptDataPath` id rules, several event-argument details, tutorial-only event arguments.
-- Missions: `_enemyPlaneReport` max 18, `_missionIcon` values (incl. `Luxury`), effect and skill type numbers,
-  MaxVictoryPoints crash, legacy fields, script-only data not surviving a save.
-- Quests: the "all types at a glance" internal names and polled/event column, requirement-type names, the cheat
-  button on the game screen.
-- CSV: exact log wordings, "a longer file is skipped whole", the validator not checking CSV.
+Not done: the validator still ignores `Missions/Locations/` and `Airplanes/` (noted in `AGENTS.md` section 13);
+`examples/3d_assets/` problems are left for the maintainer; Open and Unverifiable items unchanged.
+`mkdocs build --strict` was not run (mkdocs not installed; skipped at the maintainer's request).

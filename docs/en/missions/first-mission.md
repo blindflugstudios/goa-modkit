@@ -230,7 +230,7 @@ Mods/my_first_mod/Missions/mymod_coastal_patrol.py
 
 Where `Mods/` lives on your computer is explained in [How mods work](../basics/mods.md); in the game, **Main menu → Mods → Open folder** takes you there.
 
-Then start the game and load a save. The game reads mission files and scripts every time a save is loaded, so if the game was already running, go back to the main menu and load the save again.
+Then start the game and load a save. The game reads mission files and scripts every time a save is loaded, so if the game was already running, go back to the main menu and load the save again. If `my_first_mod` is a brand-new folder, press **Refresh** in the Mods window (main menu → **Mods**) first, so the game sees it. Saving a mission in the Mission Editor reloads the missions at once - no need to reload there.
 
 To see the mission without waiting for the weekly draw, open the cheat console (see [Cheat console](../basics/cheats.md)) and type:
 

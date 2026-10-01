@@ -7,17 +7,17 @@ Für Mods gibt es kein Vorschaufenster. Du testest eine Mod, indem du sie ins Sp
 1. Bearbeite deine Dateien im Mod-Ordner.
 2. Speichere im Spiel und geh dann auf **Einstellungen** (Options) **→ Verlassen zum Hauptmenü** (Quit to main menu).
 3. Wenn du einen neuen Mod-Ordner angelegt hast (oder einen Inhaltsordner wie `Quests/`, der beim Spielstart leer war), öffne im Hauptmenü **Mods** und drück auf **Refresh**. Das bloße Öffnen des Fensters durchsucht den `Mods`-Ordner nicht neu.
-4. Lade deinen Spielstand. Missionen, Skripte, Quests und CSV-Tabellen werden bei jedem Laden eines Spielstands frisch eingelesen. Nur Grafik braucht einen kompletten Neustart.
+4. Lade deinen Spielstand. Missionen, Skripte, Quests, CSV-Tabellen, Karten und Flugzeug-Skins werden bei jedem Laden eines Spielstands frisch eingelesen. Nur Grafik (`Objects/`, `Biomes/`) braucht einen kompletten Neustart.
 5. Für eine Mission öffnest du die Cheat-Konsole und tippst `create_mission <your_mission_id>`, damit sie sofort auf der Kriegskarte erscheint.
 6. Irgendwas stimmt nicht? Öffne `Player.log` (siehe [unten](#reading-playerlog)).
 
 ## Neu laden, ohne das Spiel neu zu starten { #reloading-without-restarting-the-game }
 
-Jedes Mal, wenn du einen Spielstand lädst, liest das Spiel die Inhalte deiner Mod neu ein: Missionsdateien, Python-Skripte, Quests und CSV-Tabellen, aus dem Spiel selbst und aus jeder aktivierten Mod. Deine Bearbeitungsschleife lautet also: Datei ändern, zurück ins Hauptmenü, **Mods** öffnen, Spielstand erneut laden.
+Jedes Mal, wenn du einen Spielstand lädst, liest das Spiel die Inhalte deiner Mod neu ein: Missionsdateien, Python-Skripte, Quests, CSV-Tabellen, Karten und Flugzeug-Skins, aus dem Spiel selbst und aus jeder aktivierten Mod. Deine Bearbeitungsschleife lautet also: Datei ändern, zurück ins Hauptmenü, **Mods** öffnen, Spielstand erneut laden.
 
 Zwei Dinge brauchen mehr:
 
-- **Grafik wird nur beim Spielstart importiert.** Modelle, Texturen und andere Dateien in `Objects/` und `Biomes/` brauchen einen kompletten Neustart des Spiels. (Grafik-Mods sind noch in Arbeit und werden von der aktuellen Alpha noch nicht unterstützt.)
+- **Grafik wird nur beim Spielstart importiert.** Modelle, Texturen und andere Dateien in `Objects/` und `Biomes/` brauchen einen kompletten Neustart des Spiels. Ein künftiges Update bringt eine Option, Mods im Hauptmenü neu zu laden; dann ist der Neustart nicht mehr nötig.
 - **Neue Mods**: Ein Mod-Ordner, den du gerade angelegt hast, taucht erst auf, wenn du im Mods-Fenster auf **Refresh** drückst (oder das Spiel neu startest). Dasselbe gilt für einen Inhaltsordner wie `Quests/`, der beim Spielstart leer war. Prüfe, dass die Mod eingeschaltet ist.
 
 Eine Mission, die in deinem Spielstand schon auf der Kriegskarte lag, behält die Werte, mit denen sie erstellt wurde. Wenn du das JSON einer Mission geändert hast, erstelle mit `create_mission` eine frische Kopie, um die Änderung zu sehen.
@@ -38,7 +38,7 @@ Weitere Cheats, die beim Testen von Missionen helfen:
 
 | Befehl | Wofür |
 |---|---|
-| `skip_day` | zum nächsten Tag springen; historische Missionen mit Datum werden bei jedem Tageswechsel geprüft |
+| `skip_day` | zum nächsten Tag springen; historische Missionen werden jede Spielstunde geprüft, eine für diesen Tag datierte erscheint also innerhalb der Stunde |
 | `freeze_time off` | falls die Uhr stehen geblieben ist (manche Cheats frieren die Zeit als Nebenwirkung ein) |
 
 Die vollständige Liste steht auf der Seite [Cheat-Konsole](cheats.md).
@@ -48,8 +48,8 @@ Die vollständige Liste steht auf der Seite [Cheat-Konsole](cheats.md).
 `create_mission` überspringt jede Sperre, kann also nicht zeigen, dass eine Kette freigeschaltet wird. So testest du das Freischalten:
 
 1. Senk die Sperren für den Test: `RunwayTier` 1 und `EarliestAppearanceDay` 1 räumen die zwei häufigsten Gründe aus dem Weg, warum eine Mission nie auftaucht.
-2. Mach die Folgemission historisch (`"_isHistoric": true`). Historische Missionen überspringen die Zufallsziehung und erscheinen im nächsten Wochen-Slot oder an ihrem Datum, sobald ihre Sperren erfüllt sind.
-3. Flieg die erste Mission bis zu dem Ausgang, den du testest, und warte auf den nächsten Slot.
+2. Mach die Folgemission historisch (`"_isHistoric": true`). Historische Missionen überspringen die Zufallsziehung. Das Spiel prüft sie jede Spielstunde, sie erscheinen also innerhalb der Stunde, nachdem ihre Sperren erfüllt sind (oder an ihrem Datum); auf einen Wochen-Slot warten sie nie.
+3. Flieg die erste Mission bis zu dem Ausgang, den du testest, und warte bis zu einer Spielstunde.
 
 Denk daran: Eine historische Mission gibt es nur einmal, sobald sie gewonnen wurde. Schalte `_isHistoric` danach wieder aus, wenn die Mission kein Story-Moment sein soll.
 
@@ -120,7 +120,7 @@ Ein sauberer Validator-Lauf heißt, dass die Mod korrekt aufgebaut ist, nicht, d
 
 ## Wo Text verloren geht { #where-text-goes-missing }
 
-Wenn die Mission erscheint, aber statt eines Namens einen rohen Schlüssel wie `missions/mymod_patrol/mission_name` zeigt, wurde dieser Text nie definiert. Drei Schlüssel baut das Spiel selbst und erwartet, dass es sie gibt:
+Wenn die Mission erscheint, aber ein Feld wie ihr Name im Missionsfenster leer bleibt, wurde dieser Text nie definiert. Drei Schlüssel baut das Spiel selbst und erwartet, dass es sie gibt:
 
 ```text
 missions/<id>/mission_name

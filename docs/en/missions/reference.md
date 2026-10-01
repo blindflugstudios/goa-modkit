@@ -67,16 +67,15 @@ What happens to one mission, from the week it is planned to the result window:
 | # | Step | What happens |
 |---|---|---|
 | 1 | Weekly schedule | At the start of each week the game spreads a number of mission slots across the week. The number depends on the base's rank. |
-| 2 | Historic missions with a date | At every day change, each historic mission with a `_historicDay` whose gates pass is created, outside the weekly slots. |
-| 3 | A slot comes due | Every historic mission without a date whose gates pass appears alongside this weekly mission and does not take up the slot. The slot itself is filled by the random draw. |
-| 4 | Random draw | All non-historic missions whose gates pass form a pool. One is drawn and removed from the pool. When the pool is empty it refills. |
-| 5 | Gates | A mission is eligible when all `_missionRequirements` pass, the current map shares one of its `_tags`, and (for historic missions) it has not been won yet and is not already on the map. |
-| 6 | Creation | The game picks a location (one draw, plus up to five re-draws to avoid two missions on the same spot), works out distance and fuel from it, and sets up the mission from JSON or script. Then it calls [`initialize_mission`](#initialize_mission). |
-| 7 | Waiting | The mission sits on the war map until the player sends planes or its start window runs out. Historic missions never run out. |
-| 8 | Flight | The clock starts once **all** assigned planes are airborne. [`send_mission_event`](#send_mission_event) fires each time the flight passes another step (by default at one third, two thirds and the end). |
-| 9 | Outcome | With data: the rolls pick one of the four outcomes, its effects are applied, then [`set_mission_impact`](#set_mission_impact) runs. Without data: [`get_mission_result`](#get_mission_result) decides, then `set_mission_impact` runs. |
-| 10 | Return | Planes land, crew records update, events fire. Then [`send_mission_result_event`](#send_mission_result_event), or [`send_mission_cancelled_event`](#send_mission_cancelled_event) if the player called the mission off or it expired. |
-| 11 | Result window | When the player opens it, [`get_mission_result_text`](#get_mission_result_text) supplies the text. |
+| 2 | Hourly historic check | Every in-game hour, each historic mission whose gates pass is created: one with a `_historicDay` on that day or, if its other gates only pass later, as soon as they do; one without a date right away. It never waits for the weekly schedule and never takes up a slot. A historic mission that failed or was cancelled is back at the next hourly check, even while its result report is still unread. |
+| 3 | Random draw | When one of the week's slots comes due, it is filled by the random draw. All non-historic missions whose gates pass form a pool. One is drawn and removed from the pool. When the pool is empty it refills. |
+| 4 | Gates | A mission is eligible when all `_missionRequirements` pass, the current map shares one of its `_tags`, and (for historic missions) it has not been won yet and is not already on the map. |
+| 5 | Creation | The game picks a location (one draw, plus up to five re-draws to avoid two missions on the same spot), works out distance and fuel from it, and sets up the mission from JSON or script. Then it calls [`initialize_mission`](#initialize_mission). |
+| 6 | Waiting | The mission sits on the war map until the player sends planes or its start window runs out. Historic missions never run out, and neither does a mission whose time-to-start maximum is `0`. |
+| 7 | Flight | The clock starts once **all** assigned planes are airborne. [`send_mission_event`](#send_mission_event) fires each time the flight passes another step (by default at one third, two thirds and the end). |
+| 8 | Outcome | With data: the rolls pick one of the four outcomes, its effects are applied, then [`set_mission_impact`](#set_mission_impact) runs. Without data: [`get_mission_result`](#get_mission_result) decides, then `set_mission_impact` runs. |
+| 9 | Return | Planes land, crew records update, events fire. Then [`send_mission_result_event`](#send_mission_result_event), or [`send_mission_cancelled_event`](#send_mission_cancelled_event) if the player called the mission off or it expired. |
+| 10 | Result window | When the player opens it, [`get_mission_result_text`](#get_mission_result_text) supplies the text. |
 
 ### The two rolls and the outcome index
 
@@ -115,6 +114,8 @@ from Blindflug.FlightMission import MissionEvent
 def send_mission_event(mission_entity_id):
     ...
 ```
+
+**Every mission script needs `from Blindflug.FlightMission import MissionEvent` at the top.** Scripts get no automatic imports, so without that line `MissionEvent` does not exist in your script.
 
 The function name is up to you; the decorator is what counts. Every handler receives exactly one argument, `mission_entity_id`: the number of the mission this call is about. Pass it on to every `missions_api` call. The same script can run for two flights of the same mission at once, so never store per-flight state in a module-level variable.
 
@@ -252,6 +253,8 @@ Script-only missions. Returns the text key of the description in the mission win
 
 Script-only missions. Returns how many in-game minutes the mission waits on the war map before it expires. Default when missing: 60.
 
+Returning `0` or a negative number cancels the mission at the next in-game minute. Unlike `_timeToStartRange` in a JSON file, there is no "never expires" value here.
+
 ### get_completion_time
 
 Script-only missions. Returns the flight time in in-game minutes. Default when missing: 120.
@@ -307,8 +310,8 @@ The mission file is read field by field. Field names start with an underscore an
 | Field | Type | Meaning |
 |---|---|---|
 | `_maxPlaneSlots` | int | How many planes the player may assign. |
-| `_timeToStartRange` | `{"x": min, "y": max}` | Minutes the mission waits on the war map before it expires, rolled between min and max. Ignored for historic missions. |
-| `_timeToCompleteRange` | `{"x": min, "y": max}` | Flight time in minutes, rolled between min and max. |
+| `_timeToStartRange` | `{"x": min, "y": max}` | Game minutes the mission waits on the war map before it expires, rolled between min and max. A maximum of `0` means it never expires. Ignored for historic missions, which never expire. |
+| `_timeToCompleteRange` | `{"x": min, "y": max}` | Flight time in game minutes, rolled between min and max. |
 | `_missionRequirements` | list | Gates that must all pass before the mission can appear. See [Requirements](#requirements). |
 | `_missionOutcomes` | list | **Required, exactly 4**, in the fixed order. See [Outcomes](#outcomes). |
 | `_asPlannedChance` | int | Chance in percent (0–100) that the mission goes as planned. |
@@ -319,7 +322,7 @@ The mission file is read field by field. Field names start with an underscore an
 | `_difficultyRating` | int | Stars shown to the player, 1–3. Default 1. |
 | `_tags` | list of strings | Which maps the mission belongs to. See [Map tags](#map-tags). |
 | `_isHistoric` | bool | Makes the mission a story beat. See [Chains and campaigns](chains.md#historic-missions). |
-| `_historicDay` | date | The exact day a historic mission appears. A year below 1900 counts as "no date". |
+| `_historicDay` | date | The earliest day a historic mission appears: on that day, or later if its other gates only pass later. A year below 1900 counts as "no date". |
 | `_rawMissionName` ... `_rawGwFailureTransmission` | string | Nine optional text fields. See [Localization](../scripting/localization.md#text-in-the-json-instead-of-a-term). |
 | `_distanceLocationDependant` | `{"x", "y"}` | Written by Blindflug's own mission tool. The game does not read it; leave it alone or leave it out. |
 
@@ -445,7 +448,7 @@ The list of places, with their coordinates, is on the [Locations](locations.md) 
 "_tags": ["campaign_debden"]
 ```
 
-A map lists the tags it supports in its `Metadata.json`, and a mission lists the tags it is written for. The mission can appear on a map only when the two lists share at least one tag (upper and lower case do not matter). An empty or missing list on either side counts as `["default"]`, and every built-in map supports `default`, so an untagged mission appears everywhere.
+A map lists the tags it supports in its `Metadata.json`, and a mission lists the tags it is written for. The mission can appear on a map only when the two lists share at least one tag (upper and lower case do not matter). An empty or missing list on either side counts as `["default"]`, and every built-in map supports `default`, so an untagged mission appears everywhere. Each built-in map also lists its own name (`debden`, `duxford`, `lichfield`, `perranporth`), so a mission tagged only `duxford` appears only on Duxford. See [Maps](../content/maps.md).
 
 A mission tagged only `campaign_debden` appears only on maps that list that tag. A mission that should appear on your campaign map and everywhere else lists both: `["campaign_debden", "default"]`.
 

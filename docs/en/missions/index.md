@@ -36,7 +36,12 @@ That third folder always wins, which makes it a good place to try changes out - 
 
 ## The Mission Editor
 
-Open the game and choose **Mission Editor** in the main menu. That opens the mission list: every shipped mission, every mission from an enabled mod, and every mission you saved yourself. **Create** starts a fresh mission with the id `new_mission` - rename it in the **Mission Id** field before saving. **Edit** opens any mission in the list, shipped ones included. A shipped mission cannot be saved under its own id, so give it a new id and it is saved as your own copy. Your own saved missions carry a delete button, and **Refresh** re-reads the list.
+Open the game and choose **Mission Editor** in the main menu. That opens the mission list: every shipped mission, every mission from an enabled mod, and every mission you saved yourself. **Create** starts a fresh mission with the id `new_mission` - rename it in the **Mission Id** field before saving. **Edit** opens any mission in the list, shipped ones included. A shipped mission cannot be saved under its own id, so give it a new id and it is saved as your own copy. Your own saved missions carry a delete button, **Refresh** re-reads the list, and the folder button opens your Missions folder in the file browser.
+
+!!! tip "Learn from the game's own missions"
+    The shipped missions make good examples, and the Mission Editor lists them all. `calm_supply_drop` is a whole mission in one file, with no script of its own. The four *Blitz* missions (`german_blitz_1_long_nights`, `german_blitz_2_aspirin`, `german_blitz_3_morning_after`, `german_blitz_4_answering_in_kind`) are a historic chain, each one waiting for the one before it to succeed. And `default_mission.py`, the script every mission without its own `.py` runs on, sits in the game's `Scripts/Mission` folder (see [Where scripts live](../scripting/index.md#where-scripts-live)). Open a shipped mission with **Edit** and save it under a new id to get your own copy.
+
+    A copy under a new id shows **no text** at first. A shipped mission keeps its text inside the game, filed under its own id (`missions/<id>/mission_name` and the other text slots), and your copy has a different id. Type the texts in (in the file they are the `_raw...` fields), or register them with `localization.SetTerm` in a script - see [Reference](reference.md). Keeping the shipped id instead replaces the shipped mission, text and all.
 
 <!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 !!! note
@@ -53,18 +58,18 @@ Open the game and choose **Mission Editor** in the main menu. That opens the mis
 
 Type them into the mission tags field as one comma-separated list without spaces: `naval,atlantic`. A tag follows the same rules as an id - lower-case letters, digits and underscores - and the field enforces that as you type, turning capitals into lower case and dropping anything else. The match against a map ignores capitalisation anyway, so a map that spells its tag `Campaign_Debden` still counts.
 
-Leaving the list empty is the normal case. An empty list on either side counts as the single tag `default`, and every shipped map lists `default`, so an untagged mission is available on all of them. Tag a mission `campaign_debden` and it appears only on maps that also list `campaign_debden` - and nowhere else, not even on the shipped maps, unless you add `default` alongside it. A map made for a campaign usually lists only its own tag, precisely to keep the regular missions out.
+Leaving the list empty is the normal case. An empty list on either side counts as the single tag `default`, and every shipped map lists `default`, so an untagged mission is available on all of them. Each shipped map also lists its own name (`debden`, `duxford`, `lichfield`, `perranporth`), so a mission tagged `debden` and nothing else appears only there - see [Maps](../content/maps.md). Tag a mission `campaign_debden` and it appears only on maps that also list `campaign_debden` - and nowhere else, not even on the shipped maps, unless you add `default` alongside it. A map made for a campaign usually lists only its own tag, precisely to keep the regular missions out.
 
 !!! note "Quests have no tags"
     Tags are for missions only. A quest has no tags field. A map picks its quests through the `StartingQuestIds` list in its `Metadata.json`; with none listed it starts the game's default quest line (`quest0`). See [Quests and maps](../quests/index.md#quests-and-maps).
 
 **Validate** warns you when a mission carries a tag that no known map declares. That mission can never appear anywhere, which is only what you want if a script hands it out directly.
 
-**Timing and size.** How many aircraft the player may send, how long the mission waits on the map before it expires, and how long the flight itself takes. Both times are ranges - the game rolls a value between the two numbers.
+**Timing and size.** How many aircraft the player may send, how long the mission waits on the map before it expires, and how long the flight itself takes. Both times are ranges in game minutes - the game rolls a value between the two numbers. A time-to-start maximum of `0` means the mission never expires, and a historic mission (below) never expires, whatever you enter.
 
 **Difficulty.** The chance the mission goes as planned and a difficulty rating from 1 to 3.
 
-**Text.** The mission name and description, the intel threat report with the enemy strength it shows the player (flavour only - it does not affect the outcome), and the radio transmissions for each ending. Type them straight in. A mission written in the editor does not need a script, because every mission without one runs on the game's shared default mission script.
+**Text.** The mission name and description, the intel threat report with the enemy strength it shows the player (flavour only - it does not affect the outcome), two radio messages during the flight (one for a flight going to plan, one for a flight that has gone wrong), and one closing message for each of the four endings. Type them straight in. A mission written in the editor does not need a script, because every mission without one runs on the game's shared default mission script.
 
 **Locations.** Where on the war map the mission can appear. Pick from the list and add as many as you like; the game chooses one when the mission is created. The full list, with coordinates, is on [Locations](locations.md).
 
@@ -72,9 +77,14 @@ Leaving the list empty is the normal case. An empty list on either side counts a
 
 **Stats.** The skills the mission rolls against. You need exactly two: the first is used when the flight goes to plan, the second when it does not.
 
-**Outcomes.** Exactly four endings, and what each one gives or costs - morale, victory points, damage. Which ending counts as a success is fixed by its position and cannot be edited: slot 1 (gone wrong, skill check failed) is a failure, slot 2 (gone wrong, skill check passed) a success, slot 3 (as planned, skill check failed) a failure, slot 4 (as planned, skill check passed) a success.
+**Outcomes.** Exactly four endings, and what each one gives or costs - morale, victory points, damage. The editor shows them from top to bottom from the best ending to the worst, not in the order of the slots below. Which ending counts as a success is fixed by its position and cannot be edited: slot 1 (gone wrong, skill check failed) is a failure, slot 2 (gone wrong, skill check passed) a success, slot 3 (as planned, skill check failed) a failure, slot 4 (as planned, skill check passed) a success.
 
-**Is Historic.** Tick this to make the mission part of the storyline. With a date, it appears on that exact day; without one, it appears alongside the next weekly mission and does not take up one of that week's slots. It is gone for good once it has succeeded.
+**Is Historic.** Tick this to make the mission part of the storyline. A historic mission is never part of the random weekly draw. The game checks every in-game hour, so it shows up within the hour after its requirements pass. It never waits for the weekly schedule and never takes up one of that week's slots.
+
+- **With a date**, it appears on that day - or later, if its other requirements only pass later.
+- **Without a date**, it appears as soon as its requirements pass. A follow-up that waits for another mission's success shows up within the hour after that success.
+
+A historic mission never expires. It is gone for good once it has succeeded. If it fails or is cancelled, it is back on the map at the next hourly check, even while its result report is still waiting to be read.
 
 ### Validate before you save
 
@@ -86,7 +96,7 @@ Leaving the list empty is the normal case. An empty list on either side counts a
 |---|---|
 | Mission id empty, or has characters other than `a-z`, `0-9` and `_` | |
 | Mission id is reserved | a shipped mission already uses it |
-| Mission with given ID already exists | saving would silently replace another mission you saved |
+| Mission id is in use | renaming onto another mission you saved would silently replace it |
 | A tag has invalid characters | tags follow the same rules as ids |
 | Not exactly four outcomes | the game picks one of four and never checks the count |
 | Not exactly two stats | the skill roll reads both |
@@ -119,6 +129,7 @@ The missing-text warning does not appear for shipped missions, which carry trans
 - Open or copy a shipped mission.
 -->
 - Write the Python side. Anything that has to *decide* something - react to the crew that flew, hand out a follow-up mission, change the text depending on what happened - needs a script.
+- Show a chain as a whole. Each mission only lists its own requirements; how several missions link up is easier to follow in the files. See [Chains and campaigns](chains.md).
 <!-- OUTDATED (docs audit 2026-09-28): see DOCS_AUDIT.md
 - Build a chain beyond a single "this mission must have been completed" requirement. Longer chains are easier to see and manage in the files. See [Chains and campaigns](chains.md).
 -->
