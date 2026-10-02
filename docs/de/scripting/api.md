@@ -12,7 +12,7 @@ Alles, was ein Mod-Skript aufrufen kann. Acht Objekte stehen in jedem Skript ohn
 | `airplanes_api` | Gesundheit, Strukturintegrität, Treibstoff und Pilot eines Flugzeugs |
 | `resources_api` | Ressourcen erzeugen und verderben lassen |
 | `game_api` | Identität des Spielstands und ein Ordner für deine eigenen Dateien |
-| `logger` | Debug-Zeilen in `Player.log` schreiben |
+| `logger` | Debug-Zeilen in [`Player.log`](../start/troubleshooting.md#find-the-playerlog) schreiben |
 
 Namen von Spielwerten kommen aus Imports:
 
@@ -81,9 +81,9 @@ missions_api.CreateMission("mymod_airfield_pursuit")
 
 Setzt eine Mission sofort auf die Kriegskarte und überspringt die wöchentliche Ziehung. Gibt `True` zurück, wenn eine Mission erstellt wurde.
 
-Die eigenen Voraussetzungen und die Karten-Tags der Zielmission werden trotzdem geprüft. Scheitert eins davon, wird nichts erstellt, es gibt `False` zurück, und eine Warnung mit dem Namen der Mission wird in `Player.log` geschrieben. Bei einer unbekannten Id gibt es ebenfalls `False` zurück. Eine reine Skript-Mission, die noch nie erstellt wurde, hat noch nichts zu prüfen und ist immer erlaubt.
+Die eigenen Voraussetzungen und die Karten-Tags der Zielmission werden trotzdem geprüft. Scheitert eins davon, wird nichts erstellt, es gibt `False` zurück, und eine Warnung mit dem Namen der Mission wird in [`Player.log`](../start/troubleshooting.md#find-the-playerlog) geschrieben. Bei einer unbekannten Id gibt es ebenfalls `False` zurück. Eine reine Skript-Mission, die noch nie erstellt wurde, hat noch nichts zu prüfen und ist immer erlaubt.
 
-Ruf es aus `set_mission_impact` auf, wo der Ausgang bekannt ist. Aus `initialize_mission` wird es abgelehnt und protokolliert, weil dieser Handler mitten in der Erstellung einer Mission läuft.
+Ruf es aus `set_mission_impact` auf, wo der Ausgang bekannt ist. Aus `initialize_mission` wird es abgelehnt und [protokolliert](../start/troubleshooting.md#find-the-playerlog), weil dieser Handler mitten in der Erstellung einer Mission läuft.
 
 ```python
 @event_handler(MissionEvent.SET_MISSION_IMPACT)
@@ -241,7 +241,7 @@ Das macht eine Kampagne erst möglich: Eine Mission kann fragen, wie viele Angri
 
 ## logger
 
-Schreibt in `Player.log` (wo du sie findest: [Testen und neu laden](../basics/testing.md#reading-playerlog)).
+Schreibt in [`Player.log`](../start/troubleshooting.md#find-the-playerlog).
 
 ```python
 logger.Log("mymod: campaign state loaded")

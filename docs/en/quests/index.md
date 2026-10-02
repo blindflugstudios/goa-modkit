@@ -153,7 +153,7 @@ Registering a key the game already ships - a building name, a shipped quest titl
 
 ### Icons
 
-`_genericIconKey` picks the step's icon from a fixed set built into the game. A key the game does not know simply shows no icon; nothing is logged. There is no way to add your own icons from a mod.
+`_genericIconKey` picks the step's icon from a fixed set built into the game. A key the game does not know simply shows no icon; nothing is [logged](../start/troubleshooting.md#find-the-playerlog). There is no way to add your own icons from a mod.
 
 | Kind | Keys |
 |---|---|
@@ -356,7 +356,7 @@ The button is drawn on the quest card of the quest that owns the step. Note that
 
 ### Types that do nothing
 
-`_type: 3` and `_type: 15` exist in old files but have no logic behind them; a step using either never progresses and nothing is logged. The same goes for any number outside the table. If a step sits at zero forever, check its `_type` first.
+`_type: 3` and `_type: 15` exist in old files but have no logic behind them; a step using either never progresses and nothing is [logged](../start/troubleshooting.md#find-the-playerlog). The same goes for any number outside the table. If a step sits at zero forever, check its `_type` first.
 
 ## How a quest starts
 
@@ -423,7 +423,7 @@ Changes reach **existing saves** too. When a save is loaded, every quest already
 
 **Tutorial quests (`2`)** additionally point the tutorial highlight at the buttons listed in `_highlightedUIElements`, one after the other, and can run console commands from `_cheatsOnStart` and `_completionCheats`. In a mod:
 
-- The **commands are removed**. A mod quest with either list still loads, but the lists are ignored (development builds log a warning) and nothing runs.
+- The **commands are removed**. A mod quest with either list still loads, but the lists are ignored (development builds [log](../start/troubleshooting.md#find-the-playerlog) a warning) and nothing runs.
 - The highlight ids are a fixed list inside the game - the ids in the shipped tutorial quests (`SawStation`, `Sickbed`, `ParkingSmall`, `CrewRoleDropdown`, ...) are the vocabulary. An unknown id does nothing.
 - The tutorial-only events (see [Events](#events)) fire only while the tutorial itself is running, which only the player can switch on (the checkbox in the new-game window), not a mod.
 
@@ -580,10 +580,10 @@ Load a level again after every edit (a new folder needs **Refresh** in the Mods 
 | `start_shipment <Resource> <amount> ...` | Puts resources on the base - `start_shipment Wood 12`. |
 | `create_mission <mission id>` | Puts a mission on the map to test a mission-return step. |
 
-When a quest does not show up, or a step does not move, read the game's log file `Player.log` (where it is: [How mods work](../basics/mods.md#seeing-your-changes)).
+When a quest does not show up, or a step does not move, read the game's [log](../start/troubleshooting.md#find-the-playerlog) file `Player.log`.
 
 - A quest file that is not valid JSON (a missing comma, an unclosed bracket) is **not** skipped - it breaks the loading of the level. Check your JSON in an editor before you test.
-- A map that lists an unknown quest id, and a step that never progresses because of a wrong `_type` or a misspelt id, get **no** line in the log - check the tables above.
+- A map that lists an unknown quest id, and a step that never progresses because of a wrong `_type` or a misspelt id, get **no** line in the [log](../start/troubleshooting.md#find-the-playerlog) - check the tables above.
 
 More testing tips: [Testing and reloading](../basics/testing.md).
 

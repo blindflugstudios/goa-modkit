@@ -23,12 +23,12 @@ Restart the game and load a save or start a map. Everywhere the map uses that gr
 ## How it works
 
 - `Biomes/` holds one PNG per ground type, named after its number: `8.png` repaints ground type 8, the first grass (see the [list](#biome-names)).
-- The number is written in plain digits without leading zeros: `8.png`, not `08.png`. A number outside `0` to `23` is reported in the log together with the valid range.
-- Only files directly inside `Biomes/` count. Subfolders, other file types and other names are reported in the log and ignored.
+- The number is written in plain digits without leading zeros: `8.png`, not `08.png`. A number outside `0` to `23` is reported in the [log](../start/troubleshooting.md#find-the-playerlog) together with the valid range.
+- Only files directly inside `Biomes/` count. Subfolders, other file types and other names are reported in the [log](../start/troubleshooting.md#find-the-playerlog) and ignored.
 - A mod cannot add new biomes, only repaint the 24 that exist. A map remembers which biome is painted where by number, so there is nothing a new one could be attached to.
 - The biome's surface detail and its burnt look after a fire are not replaced.
 - The game's own textures are untouched on disk. Switching the mod off (and restarting) brings the original ground back everywhere.
-- The repainted ground is put together on the graphics card. On a computer whose graphics card cannot copy textures there, biome PNGs are not applied and the log says so. There is nothing to fix in the mod then.
+- The repainted ground is put together on the graphics card. On a computer whose graphics card cannot copy textures there, biome PNGs are not applied and the [log](../start/troubleshooting.md#find-the-playerlog) says so. There is nothing to fix in the mod then.
 
 ### The texture
 
@@ -38,7 +38,7 @@ Restart the game and load a save or start a map. Everywhere the map uses that gr
 | Size | At most 4096 × 4096 pixels (each side on its own) |
 | File size | At most 10 MB |
 
-A PNG over a limit is **not scaled down**: it is skipped with a warning in the log, and the game's own ground stays. Within the limits, the game resizes your texture to the size of its own ground textures, so any size works; a square image avoids stretching. The texture repeats across the ground, so it should tile seamlessly: the left edge must continue into the right edge, the top into the bottom.
+A PNG over a limit is **not scaled down**: it is skipped with a warning in the [log](../start/troubleshooting.md#find-the-playerlog), and the game's own ground stays. Within the limits, the game resizes your texture to the size of its own ground textures, so any size works; a square image avoids stretching. The texture repeats across the ground, so it should tile seamlessly: the left edge must continue into the right edge, the top into the bottom.
 
 ## Biome names
 
@@ -85,7 +85,7 @@ The two are independent and combine freely:
 
 ## Several mods, same biome
 
-If two enabled mods repaint the same biome, the mod applied last wins, and the log notes which one overrode which. See [How mods work](../basics/mods.md#which-mod-wins) for the order.
+If two enabled mods repaint the same biome, the mod applied last wins, and the [log](../start/troubleshooting.md#find-the-playerlog) notes which one overrode which. See [How mods work](../basics/mods.md#which-mod-wins) for the order.
 
 ## When something does not show up
 
@@ -93,4 +93,4 @@ If two enabled mods repaint the same biome, the mod applied last wins, and the l
 - Is the file directly inside `Biomes/`, named with a number from `0` to `23` and no leading zero?
 - Is it a real PNG, at most 4096 × 4096 pixels and 10 MB?
 
-Problems are written to `Player.log` on lines that start with `[Mod <your mod id>]`. The detailed lines may only appear in development builds, so if the log is silent, go through the list above. The size limits for all art are also on [Objects and models](objects.md#file-limits).
+Problems are written to [`Player.log`](../start/troubleshooting.md#find-the-playerlog) on lines that start with `[Mod <your mod id>]`. The detailed lines may only appear in development builds, so if the log is silent, go through the list above. The size limits for all art are also on [Objects and models](objects.md#file-limits).

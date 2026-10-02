@@ -60,7 +60,7 @@ Mods/
 - PNGs dürfen in Unterordnern von `Airplanes/` liegen, du kannst sie also sortieren, wie du willst. Das Spiel erkennt eine Datei allein an ihrem Namen.
 - Groß- und Kleinschreibung spielt bei Dateinamen keine Rolle: `desertrat_basemap_1001.png` wird ebenfalls gefunden.
 - Gelesen wird nur die `config.json`, die direkt in `Airplanes/` liegt. Eine `config.json` in einem Unterordner nicht.
-- Jeder andere Dateityp wird ignoriert, mit einer Warnung im Log.
+- Jeder andere Dateityp wird ignoriert, mit einer Warnung im [Log](../start/troubleshooting.md#find-the-playerlog).
 
 ## `config.json` { #configjson }
 
@@ -90,7 +90,7 @@ Mods/
 
 ### Wann eine Lackierung übersprungen wird { #when-a-skin-is-skipped }
 
-Eine Lackierung wird weggelassen, mit einer Warnung im Log, wenn:
+Eine Lackierung wird weggelassen, mit einer Warnung im [Log](../start/troubleshooting.md#find-the-playerlog), wenn:
 
 - sie kein `Airplane` nennt,
 - das genannte `Airplane` nicht existiert,
@@ -109,7 +109,7 @@ Die Texturnamen folgen der Benennung der Spielgrafik, mit deiner Skin-Id davor. 
 - Pflicht ist nur die Grundfarbe von Kachel 1001.
 - Eine Kachel, die du weglässt, behält die Textur der Basis-Lackierung. So kannst du auch nur einen Teil eines Flugzeugs neu bemalen.
 - Eine Kachel, für die das Material der Basis-Lackierung keinen Platz hat, wird ignoriert.
-- Eine Textur darf höchstens 4096 × 4096 Pixel und 10 MB groß sein, dieselben Grenzen wie bei Objekt-Grafik (siehe [Objekte und Modelle](objects.md)). Eine Datei über der Grenze wird nicht verkleinert, sondern mit einer Warnung im Log übersprungen.
+- Eine Textur darf höchstens 4096 × 4096 Pixel und 10 MB groß sein, dieselben Grenzen wie bei Objekt-Grafik (siehe [Objekte und Modelle](objects.md)). Eine Datei über der Grenze wird nicht verkleinert, sondern mit einer Warnung im [Log](../start/troubleshooting.md#find-the-playerlog) übersprungen.
 
 ### Vorschaubild { #thumbnail }
 
@@ -161,7 +161,7 @@ Mehr zum Testablauf unter [Testen und neu laden](../basics/testing.md).
 
 ## Das Log prüfen { #checking-the-log }
 
-Das Spiel schreibt in `Player.log`, was es angenommen und was es abgelehnt hat (wo die Datei liegt: [So funktionieren Mods](../basics/mods.md)). Zeilen zu deiner Mod beginnen mit `[Mod <deine Mod-Id>]`. Taucht eine Lackierung nicht auf, such dort nach den oben beschriebenen Warnungen: eine übersprungene Lackierung, ein ignorierter Dateityp oder eine Textur über der Größengrenze.
+Das Spiel schreibt in [`Player.log`](../start/troubleshooting.md#find-the-playerlog), was es angenommen und was es abgelehnt hat. Zeilen zu deiner Mod beginnen mit `[Mod <deine Mod-Id>]`. Taucht eine Lackierung nicht auf, such dort nach den oben beschriebenen Warnungen: eine übersprungene Lackierung, ein ignorierter Dateityp oder eine Textur über der Größengrenze.
 
 !!! note
-    Das veröffentlichte Spiel schreibt nur Fehler ins Log. Die ausführlichen `[Mod ...]`-Zeilen erscheinen nur in Entwickler-Builds. Steht im Log also nichts zu deiner Mod, prüfe die Lackierungsauswahl direkt im Spiel.
+    Das veröffentlichte Spiel schreibt nur Fehler ins Log. Die ausführlichen `[Mod ...]`-Zeilen erscheinen nur in Entwickler-Builds. Steht im [Log](../start/troubleshooting.md#find-the-playerlog) also nichts zu deiner Mod, prüfe die Lackierungsauswahl direkt im Spiel.

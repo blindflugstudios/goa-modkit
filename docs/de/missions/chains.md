@@ -114,7 +114,7 @@ def set_mission_impact(mission_entity_id):
         missions_api.CreateMission("mymod_pursuit")
 ```
 
-`CreateMission` setzt die Mission sofort auf die Kriegskarte und überspringt die wöchentliche Ziehung. Die eigenen Voraussetzungen und Karten-Tags der Zielmission prüft es trotzdem: Sind sie nicht erfüllt, wird nichts erstellt und eine Warnung in `Player.log` geschrieben. Ruf es aus `set_mission_impact` auf, wo der Ausgang bekannt ist; aus `initialize_mission` wird es abgelehnt.
+`CreateMission` setzt die Mission sofort auf die Kriegskarte und überspringt die wöchentliche Ziehung. Die eigenen Voraussetzungen und Karten-Tags der Zielmission prüft es trotzdem: Sind sie nicht erfüllt, wird nichts erstellt und eine Warnung in [`Player.log`](../start/troubleshooting.md#find-the-playerlog) geschrieben. Ruf es aus `set_mission_impact` auf, wo der Ausgang bekannt ist; aus `initialize_mission` wird es abgelehnt.
 
 Wovor es dich nicht schützt: Nichts hindert ein Skript daran, dieselbe Mission zweimal zu vergeben, und eine historische Mission, die so erstellt wird, wird nicht so blockiert wie beim automatischen Erscheinen.
 

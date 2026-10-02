@@ -57,7 +57,7 @@ Mods/
 | `Missions/Locations/` | new mission locations (`.json`) | [Adding locations with a mod](../missions/locations.md#adding-locations-with-a-mod) |
 | `Quests/` | quests (`.json`) | [Quests](../quests/index.md) |
 | `Maps/` | maps (`.goamap`) | [Maps](../content/maps.md) |
-| `Objects/` | replacement models, textures and icons - buildings, workbenches, trainers and map objects alike | [Objects and models](../content/objects.md) |
+| `Objects/` | replacement models, textures and icons - buildings, workbenches and trainers | [Objects and models](../content/objects.md) |
 | `Biomes/` | replacement ground textures, one PNG per biome slot | [Biomes](../content/biomes.md) |
 | `Airplanes/` | new airplane skins: a `config.json` and the skins' PNGs | [Airplane skins](../content/airplanes.md) |
 
@@ -65,7 +65,7 @@ Three rules decide whether the game notices the folder at all:
 
 - A subfolder only counts when there is something in it. An empty `CSV/` folder is the same as no `CSV/` folder.
 - A mod folder with none of the subfolders above (or only empty ones) is ignored without a message.
-- Symbolic links and junctions (shortcuts that point to another folder) are never followed, neither as the mod folder nor as one of its subfolders. The game skips them with a warning in the log.
+- Symbolic links and junctions (shortcuts that point to another folder) are never followed, neither as the mod folder nor as one of its subfolders. The game skips them with a warning in the [log](../start/troubleshooting.md#find-the-playerlog).
 
 For `CSV`, `Missions`, `Quests` and `Maps` only files directly inside the subfolder are read; anything deeper is ignored, with one exception: `Missions/Locations/` is read as well. `Objects` and `Biomes` hold replacement art and follow their own rules: in `Objects/` a model's *file name* is the id of the object it replaces (`Chair.fbx` replaces the chair), and subfolder names mean nothing. `Biomes/` holds one PNG per biome slot, named after the slot's number (`8.png`), directly inside the folder. `Airplanes/` holds new airplane skins, described on [Airplane skins](../content/airplanes.md).
 
@@ -92,8 +92,8 @@ Optional. Without it, the folder name is shown as the mod's name, its id is made
 
 What happens when something is off:
 
-- An `Id` that breaks the rule is ignored without a message, and the folder name is used instead - lower-cased, with every character other than letters, digits, `_`, `.` and `-` replaced by `_`. Log lines about your mod are labelled with this id, so a rejected id shows up as a label you did not expect. The mod's details view in the Mods window also shows the id the game actually uses.
-- A `config.json` the game cannot read (a missing comma, a stray bracket) is reported in the log and treated as if it were absent.
+- An `Id` that breaks the rule is ignored without a message, and the folder name is used instead - lower-cased, with every character other than letters, digits, `_`, `.` and `-` replaced by `_`. [Log](../start/troubleshooting.md#find-the-playerlog) lines about your mod are labelled with this id, so a rejected id shows up as a label you did not expect. The mod's details view in the Mods window also shows the id the game actually uses.
+- A `config.json` the game cannot read (a missing comma, a stray bracket) is reported in the [log](../start/troubleshooting.md#find-the-playerlog) and treated as if it were absent.
 
 ### `preview.png`
 
@@ -120,7 +120,7 @@ Every mod also shows a **Scripting** switch. Turning it on asks you to confirm. 
 Mods are applied Workshop items first, then the ones in your `Mods` folder, and inside each group in `LoadOrder` order - lower numbers first, ties broken by id. When two mods provide the same thing - a row in the same table, a quest with the same file name, a mission with the same id - the one applied **last** wins. Two consequences:
 
 - Your own copy of a mod always beats the Workshop copy of the same mod. You can keep working on a mod you have already published and test your changes with the published version still subscribed.
-- Two mods from the same place (both Workshop, or both in your `Mods` folder) with the same id are not both loaded. The second one found is skipped with a warning in the log.
+- Two mods from the same place (both Workshop, or both in your `Mods` folder) with the same id are not both loaded. The second one found is skipped with a warning in the [log](../start/troubleshooting.md#find-the-playerlog).
 
 The practical rule that follows: **prefix every id you invent with your mod's name**, so you never replace something by accident.
 
@@ -154,12 +154,4 @@ The everyday loop while you work on a mod:
 
 [Testing and reloading](testing.md) has more on this loop and on the tools that help while testing.
 
-The game writes what it accepted and what it refused to its log file, `Player.log`:
-
-| Platform | Log file |
-|---|---|
-| Windows | `%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Player.log` |
-| macOS | `~/Library/Logs/Blindflug Studios/Ground Of Aces/Player.log` |
-| Linux | `~/.config/unity3d/Blindflug Studios/Ground Of Aces/Player.log` |
-
-The previous run's log is kept next to it as `Player-prev.log`. The released game logs errors only; the detailed `[Mod ...]` lines described on the category pages appear only in development builds. So when in doubt, check the effect in the game itself. More on this in [Testing and reloading](testing.md) and [When nothing happens](../start/troubleshooting.md).
+The game writes what it accepted and what it refused to its log file, `Player.log`. Where it is stored and how to open it: [Find the Player.log](../start/troubleshooting.md#find-the-playerlog). The released game logs errors only; the detailed `[Mod ...]` lines described on the category pages appear only in development builds. So when in doubt, check the effect in the game itself. More on this in [Testing and reloading](testing.md) and [When nothing happens](../start/troubleshooting.md).

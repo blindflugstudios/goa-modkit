@@ -114,7 +114,7 @@ def set_mission_impact(mission_entity_id):
         missions_api.CreateMission("mymod_pursuit")
 ```
 
-`CreateMission` puts the mission on the war map at once, skipping the weekly draw. It still checks the target mission's own requirements and map tags: if they do not pass, nothing is created and a warning is written to `Player.log`. Call it from `set_mission_impact`, where the outcome is known; from `initialize_mission` it is refused.
+`CreateMission` puts the mission on the war map at once, skipping the weekly draw. It still checks the target mission's own requirements and map tags: if they do not pass, nothing is created and a warning is written to [`Player.log`](../start/troubleshooting.md#find-the-playerlog). Call it from `set_mission_impact`, where the outcome is known; from `initialize_mission` it is refused.
 
 What it does not protect you from: nothing stops a script handing out the same mission twice, and a historic mission created this way is not blocked the way the automatic spawn blocks it.
 

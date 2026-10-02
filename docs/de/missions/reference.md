@@ -172,7 +172,7 @@ def initialize_mission(mission_entity_id):
         missions_api.SetAsPlannedChance(mission_entity_id, 35)
 ```
 
-`missions_api.CreateMission` von hier aus aufzurufen wird abgelehnt und protokolliert, weil dieser Handler mitten in der Erstellung einer Mission läuft.
+`missions_api.CreateMission` von hier aus aufzurufen wird abgelehnt und [protokolliert](../start/troubleshooting.md#find-the-playerlog), weil dieser Handler mitten in der Erstellung einer Mission läuft.
 
 !!! note
     Bei einer Mission mit JSON-Datei ändern `SetMissionStat`, `SetOutcome`, `AddOutcomeEffect`, `AddMissionRequirement` und `SetTags` die Daten, die das Spiel aus dieser Datei geladen hat, für den Rest der Sitzung. Jede spätere Kopie der Mission sieht die Änderung, und Effekte, die du hinzufügst, stapeln sich. Stats und Chancen kannst du frei anpassen; Effekte und Sperren fügst du nur in reinen Skript-Missionen hinzu.
@@ -394,7 +394,7 @@ Genau vier Einträge, in der Reihenfolge des [Ausgang-Index](#the-two-rolls-and-
 | 7 | `VictoryPoints` | Zahl | Siegpunkte, begrenzt auf das aktuelle Limit |
 | 8 | `MaxVictoryPoints` | - | **nicht verwenden.** Das Spiel nutzt ihn intern, um "Siegpunktlimit erreicht" anzuzeigen; in einer Missionsdatei bringt er die Mission beim Ende zum Absturz. |
 
-Eine Zahl, wo ein Bereich erwartet wird, oder umgekehrt, ist kein Absturz: Das Spiel schreibt einen Fehler in `Player.log` und überspringt diesen einen Effekt.
+Eine Zahl, wo ein Bereich erwartet wird, oder umgekehrt, ist kein Absturz: Das Spiel schreibt einen Fehler in [`Player.log`](../start/troubleshooting.md#find-the-playerlog) und überspringt diesen einen Effekt.
 
 ### Missions-Stats { #mission-stats }
 

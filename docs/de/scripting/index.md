@@ -46,7 +46,7 @@ Regeln, die du kennen solltest:
 
 - Nur `.py`-Dateien direkt in einem Ordner werden gelesen - Unterordner werden ignoriert.
 - Jede Datei wird zu einem Python-Modul, das nach der Datei benannt ist.
-- Eine Datei mit einem **Syntaxfehler** wird übersprungen, der Fehler landet im Log des Spiels, und die anderen Dateien laden trotzdem.
+- Eine Datei mit einem **Syntaxfehler** wird übersprungen, der Fehler landet im [Log](../start/troubleshooting.md#find-the-playerlog) des Spiels, und die anderen Dateien laden trotzdem.
 - Jeder **andere Fehler auf oberster Ebene** einer Datei (ein fehlschlagender Import, eine Exception beim Ausführen der Datei) wird nicht abgefangen und kann verhindern, dass die nachfolgenden Ordner geladen werden - auch die Skripte anderer Mods. Pack riskanten Code auf oberster Ebene in `try`/`except`.
 
 Jeder Handler wird über `<module>.<function>` erkannt, also Dateiname plus Funktionsname. Definieren zwei Dateien einen Handler mit demselben Modul- und Funktionsnamen, ersetzt der **später** geladene den früheren. So kann ein Mod eines der Zufallsereignisse des Spiels überschreiben: Kopiere `random_events.py` in den Ordner `Missions/` deines Mods und ändere die Funktionen, die du anders haben willst.

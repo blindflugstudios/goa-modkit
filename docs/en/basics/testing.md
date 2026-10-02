@@ -9,7 +9,7 @@ There is no preview window for mods. You test a mod by loading it into the game 
 3. If you created a new mod folder (or a content folder such as `Quests/` that was empty when the game started), open **Mods** from the main menu and press **Refresh**. Opening the window alone does not scan the `Mods` folder again.
 4. Load your save. Missions, scripts, quests, CSV tables, maps and airplane skins are read fresh every time a save is loaded. Only art (`Objects/`, `Biomes/`) needs a full restart.
 5. For a mission, open the cheat console and type `create_mission <your_mission_id>` to put it on the war map right now.
-6. Something wrong? Open `Player.log` (see [below](#reading-playerlog)).
+6. Something wrong? Open [`Player.log`](../start/troubleshooting.md#find-the-playerlog) (see [below](#reading-playerlog)).
 
 ## Reloading without restarting the game
 
@@ -64,10 +64,10 @@ Mission files, event scripts and helper modules all go into `Mods/<your_mod>/Mis
 A mod switched off in the Mods window is not loaded at all. A mod folder you created while the game was running appears only after you press **Refresh** in the Mods window (or restart the game).
 
 **3. Did the script load?**
-In development builds, every script that loads successfully is listed in `Player.log` with its file name, followed by the handlers it registered. The released game logs errors only, so there a missing line proves nothing: check instead whether the script's effect shows up in the game.
+In development builds, every script that loads successfully is listed in [`Player.log`](../start/troubleshooting.md#find-the-playerlog) with its file name, followed by the handlers it registered. The released game logs errors only, so there a missing line proves nothing: check instead whether the script's effect shows up in the game.
 
 **4. Is there a syntax error?**
-A Python syntax error shows up in `Player.log` as:
+A Python syntax error shows up in [`Player.log`](../start/troubleshooting.md#find-the-playerlog) as:
 
 ```text
 Python syntax error: <message> (line N, column M)
@@ -76,7 +76,7 @@ Python syntax error: <message> (line N, column M)
 The whole file is then skipped; nothing in it registers. Mods run on IronPython 3.4: stick to the Python features the [examples](../examples.md) use, and avoid anything newer than Python 3.6 (`:=`, `match`).
 
 **5. Did the JSON parse?**
-A broken mission file is skipped with this line in `Player.log`:
+A broken mission file is skipped with this line in [`Player.log`](../start/troubleshooting.md#find-the-playerlog):
 
 ```text
 Mission file at <path> could not be parsed, skipping it: <reason>
@@ -132,12 +132,6 @@ They cannot be renamed. Define them with `localization.SetTerm`, or fill the mat
 
 ## Reading Player.log
 
-The game writes what it notices into a text file called `Player.log`. The released game logs errors only; the detailed `[Mod ...]` lines appear only in development builds. It is rewritten each time the game starts, so look at it while the game is running or right after closing it.
-
-| Platform | Location |
-|---|---|
-| Windows | `%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Player.log` |
-| macOS | `~/Library/Logs/Blindflug Studios/Ground Of Aces/Player.log` |
-| Linux | `~/.config/unity3d/Blindflug Studios/Ground Of Aces/Player.log` |
+The game writes what it notices into a text file called `Player.log`. Where it is stored and how to open it: [Find the Player.log](../start/troubleshooting.md#find-the-playerlog). The released game logs errors only; the detailed `[Mod ...]` lines appear only in development builds. It is rewritten each time the game starts, so look at it while the game is running or right after closing it.
 
 Open it with any text editor and search for your mod name or mission id. Your own scripts can write to it with `logger.Log("...")`, see [API](../scripting/api.md#logger).

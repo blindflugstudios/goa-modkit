@@ -23,12 +23,12 @@ Starte das Spiel neu und lade einen Spielstand oder starte eine Karte. Überall,
 ## So funktioniert es { #how-it-works }
 
 - `Biomes/` enthält eine PNG pro Bodentyp, benannt nach seiner Nummer: `8.png` übermalt Bodentyp 8, das erste Gras (siehe die [Liste](#biome-names)).
-- Die Nummer schreibst du als einfache Ziffern ohne führende Nullen: `8.png`, nicht `08.png`. Eine Nummer außerhalb von `0` bis `23` wird im Log zusammen mit dem gültigen Bereich gemeldet.
-- Nur Dateien direkt in `Biomes/` zählen. Unterordner, andere Dateitypen und andere Namen werden im Log gemeldet und ignoriert.
+- Die Nummer schreibst du als einfache Ziffern ohne führende Nullen: `8.png`, nicht `08.png`. Eine Nummer außerhalb von `0` bis `23` wird im [Log](../start/troubleshooting.md#find-the-playerlog) zusammen mit dem gültigen Bereich gemeldet.
+- Nur Dateien direkt in `Biomes/` zählen. Unterordner, andere Dateitypen und andere Namen werden im [Log](../start/troubleshooting.md#find-the-playerlog) gemeldet und ignoriert.
 - Eine Mod kann keine neuen Biome hinzufügen, nur die 24 vorhandenen übermalen. Eine Karte merkt sich über eine Nummer, welches Biom wo gemalt ist, es gibt also nichts, woran ein neues angehängt werden könnte.
 - Die Oberflächendetails des Bioms und sein verbrannter Look nach einem Feuer werden nicht ersetzt.
 - Die Texturen des Spiels auf der Festplatte bleiben unangetastet. Wenn du die Mod ausschaltest (und neu startest), ist der Originalboden überall wieder da.
-- Der übermalte Boden wird auf der Grafikkarte zusammengesetzt. Auf einem Computer, dessen Grafikkarte dort keine Texturen kopieren kann, werden Biom-PNGs nicht angewendet, und das Log sagt das. An der Mod gibt es dann nichts zu reparieren.
+- Der übermalte Boden wird auf der Grafikkarte zusammengesetzt. Auf einem Computer, dessen Grafikkarte dort keine Texturen kopieren kann, werden Biom-PNGs nicht angewendet, und das [Log](../start/troubleshooting.md#find-the-playerlog) sagt das. An der Mod gibt es dann nichts zu reparieren.
 
 ### Die Textur { #the-texture }
 
@@ -38,7 +38,7 @@ Starte das Spiel neu und lade einen Spielstand oder starte eine Karte. Überall,
 | Größe | Höchstens 4096 × 4096 Pixel (jede Seite einzeln) |
 | Dateigröße | Höchstens 10 MB |
 
-Eine PNG über einer Grenze wird **nicht verkleinert**: Sie wird mit einer Warnung im Log übersprungen, und der Boden des Spiels bleibt. Innerhalb der Grenzen bringt das Spiel deine Textur auf die Größe seiner eigenen Bodentexturen, jede Größe funktioniert also; ein quadratisches Bild vermeidet Verzerrung. Die Textur wiederholt sich über den Boden, sie sollte also nahtlos kacheln: Der linke Rand muss in den rechten übergehen, der obere in den unteren.
+Eine PNG über einer Grenze wird **nicht verkleinert**: Sie wird mit einer Warnung im [Log](../start/troubleshooting.md#find-the-playerlog) übersprungen, und der Boden des Spiels bleibt. Innerhalb der Grenzen bringt das Spiel deine Textur auf die Größe seiner eigenen Bodentexturen, jede Größe funktioniert also; ein quadratisches Bild vermeidet Verzerrung. Die Textur wiederholt sich über den Boden, sie sollte also nahtlos kacheln: Der linke Rand muss in den rechten übergehen, der obere in den unteren.
 
 ## Biom-Namen { #biome-names }
 
@@ -85,7 +85,7 @@ Die beiden sind unabhängig und lassen sich frei kombinieren:
 
 ## Mehrere Mods, dasselbe Biom { #several-mods-same-biome }
 
-Übermalen zwei eingeschaltete Mods dasselbe Biom, gewinnt die zuletzt angewendete Mod, und das Log vermerkt, welche welche überschrieben hat. Die Reihenfolge steht unter [So funktionieren Mods](../basics/mods.md#which-mod-wins).
+Übermalen zwei eingeschaltete Mods dasselbe Biom, gewinnt die zuletzt angewendete Mod, und das [Log](../start/troubleshooting.md#find-the-playerlog) vermerkt, welche welche überschrieben hat. Die Reihenfolge steht unter [So funktionieren Mods](../basics/mods.md#which-mod-wins).
 
 ## Wenn etwas nicht auftaucht { #when-something-does-not-show-up }
 
@@ -93,4 +93,4 @@ Die beiden sind unabhängig und lassen sich frei kombinieren:
 - Liegt die Datei direkt in `Biomes/`, benannt mit einer Nummer von `0` bis `23` ohne führende Null?
 - Ist sie eine echte PNG, höchstens 4096 × 4096 Pixel und 10 MB groß?
 
-Probleme stehen in der `Player.log` in Zeilen, die mit `[Mod <your mod id>]` beginnen. Die ausführlichen Zeilen erscheinen eventuell nur in Entwicklungsversionen. Ist das Log still, geh die Liste oben durch. Die Größengrenzen für alle Grafik stehen auch unter [Objekte und Modelle](objects.md#file-limits).
+Probleme stehen in der [`Player.log`](../start/troubleshooting.md#find-the-playerlog) in Zeilen, die mit `[Mod <your mod id>]` beginnen. Die ausführlichen Zeilen erscheinen eventuell nur in Entwicklungsversionen. Ist das Log still, geh die Liste oben durch. Die Größengrenzen für alle Grafik stehen auch unter [Objekte und Modelle](objects.md#file-limits).

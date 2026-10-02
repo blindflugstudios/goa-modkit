@@ -5,7 +5,7 @@ Die meisten Zahlen, die Ground of Aces antreiben - was ein Gebäude kostet, wie 
 Diese Seite ist die vollständige Referenz: wohin die Dateien gehören, wie die beiden Dateiformate aussehen, was das Spiel prüft, bevor es einen Wert annimmt, und was jede Tabelle und jede Spalte bedeutet. Jeder Tabellenabschnitt unter [Die Tabellen](#the-tables) beginnt mit einem Link zur eingebauten Datei, sodass du das Original öffnen oder speichern und seine Kopfzeile kopieren kannst.
 
 !!! note
-    Nichts hiervon kann dein Spiel dauerhaft beschädigen. Einen Wert, mit dem das Spiel nichts anfangen kann, lehnt es ab und schreibt den Grund ins Log; der eingebaute Wert bleibt. Wenn du den Mod-Ordner entfernst, ist alles wieder wie vorher.
+    Nichts hiervon kann dein Spiel dauerhaft beschädigen. Einen Wert, mit dem das Spiel nichts anfangen kann, lehnt es ab und schreibt den Grund ins [Log](../start/troubleshooting.md#find-the-playerlog); der eingebaute Wert bleibt. Wenn du den Mod-Ordner entfernst, ist alles wieder wie vorher.
 
 !!! tip
     Die `<Table>.json`-Befehlsdateien für einzelne Zellen werden Schritt für Schritt und mit mehr Beispielen unter [Tabellen-Befehlsdateien](table-editor.md) erklärt.
@@ -41,7 +41,7 @@ Starte das Spiel, lade ein Level, und die Wand kostet eine Planke. Das ist schon
 
 ## Die beiden Dateiformate { #the-two-file-formats }
 
-Eine Datei ist nach der Tabelle benannt, die sie ändert, und zwar **exakt**, inklusive Großbuchstaben: `VehicleData.csv`, niemals `vehicledata.csv`. Eine Datei, deren Name keine existierende Tabelle ist, wird übersprungen, und das Log sagt dir das.
+Eine Datei ist nach der Tabelle benannt, die sie ändert, und zwar **exakt**, inklusive Großbuchstaben: `VehicleData.csv`, niemals `vehicledata.csv`. Eine Datei, deren Name keine existierende Tabelle ist, wird übersprungen, und das [Log](../start/troubleshooting.md#find-the-playerlog) sagt dir das.
 
 Du kannst eines der beiden Formate verwenden oder beide. Innerhalb einer Mod werden zuerst die `.csv`-Dateien angewendet und danach die `.json`-Dateien, sodass ein Befehl eine Zeile verfeinern kann, die eine CSV-Datei hinzugefügt hat.
 
@@ -131,7 +131,7 @@ Nur in `ResourceCost` tragen einige Zeilen eine übrig gebliebene Überschrift i
 
 ## Nachsehen, was passiert ist { #checking-what-happened }
 
-Jede angenommene Änderung und jede Ablehnung ist eine Zeile im Log des Spiels, `Player.log` (wo du es findest: [So funktionieren Mods](../basics/mods.md#seeing-your-changes)). Unter Windows gibt es im selben Ordner auch eine HTML-Version, die sich leichter lesen lässt. Die Kennung am Anfang jeder Zeile ist die Id der Mod.
+Jede angenommene Änderung und jede Ablehnung ist eine Zeile im [Log](../start/troubleshooting.md#find-the-playerlog) des Spiels, `Player.log`. Unter Windows gibt es im selben Ordner auch eine HTML-Version, die sich leichter lesen lässt. Die Kennung am Anfang jeder Zeile ist die Id der Mod.
 
 ```text
 [Mod my_balance_mod] CSV/ResourceCost.json command 1 replaced cells Planks of row 'wall_wood'.
@@ -147,13 +147,13 @@ Eine Ablehnung nennt die Datei, die Zeilen- oder Befehlsnummer und den Grund:
 ```
 
 !!! note
-    Diese Zeilen werden als Informationen und Warnungen geschrieben. Das veröffentlichte Spiel schreibt nur Fehler in sein Log, du siehst sie also nur in einem Entwickler-Build oder im Unity-Editor. Im veröffentlichten Spiel prüfst du stattdessen die Wirkung im Spiel - lade ein Level und schau dir den geänderten Wert an.
+    Diese Zeilen werden als Informationen und Warnungen geschrieben. Das veröffentlichte Spiel schreibt nur Fehler in sein [Log](../start/troubleshooting.md#find-the-playerlog), du siehst sie also nur in einem Entwickler-Build oder im Unity-Editor. Im veröffentlichten Spiel prüfst du stattdessen die Wirkung im Spiel - lade ein Level und schau dir den geänderten Wert an.
 
 Ein falsch geschriebener Tabellenname oder eine nicht passende Kopfzeile erzeugt trotzdem eine `skipped:`-Zeile mit dem Dateinamen. **Wenn du gar keine `[Mod ...]`-Zeilen siehst und die Änderung nicht auftaucht**, hat das Spiel die Mod nicht erkannt: Der `CSV/`-Ordner war beim Spielstart noch leer (drück **Refresh** im Mods-Fenster), die Mod ist im Mods-Fenster ausgeschaltet, oder der Mod-Ordner ist ein symbolischer Link oder eine Junction, denen das Spiel nie folgt.
 
 ### Die Spaltenüberschriften einer Tabelle finden { #finding-a-tables-column-headers }
 
-Das Spiel liefert Kopfzeilen-Vorlagen für vier Tabellen (`BuildingComponents`, `PropsInfluence`, `ResourceCost` und `VehicleData`) in `Ground Of Aces_Data/StreamingAssets/Modding/Templates/` im Installationsordner mit (unter macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/`). Für den Rest steht die Spaltenliste auf dieser Seite, und jeder Tabellenabschnitt verlinkt die eingebaute Datei. Oder frag das Spiel: Schreib absichtlich eine falsche Kopfzeile, lade einmal, und das Log gibt die erwarteten Spalten aus.
+Das Spiel liefert Kopfzeilen-Vorlagen für vier Tabellen (`BuildingComponents`, `PropsInfluence`, `ResourceCost` und `VehicleData`) in `Ground Of Aces_Data/StreamingAssets/Modding/Templates/` im Installationsordner mit (unter macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/`). Für den Rest steht die Spaltenliste auf dieser Seite, und jeder Tabellenabschnitt verlinkt die eingebaute Datei. Oder frag das Spiel: Schreib absichtlich eine falsche Kopfzeile, lade einmal, und das [Log](../start/troubleshooting.md#find-the-playerlog) gibt die erwarteten Spalten aus.
 
 ## Ladereihenfolge { #load-order }
 
@@ -703,7 +703,7 @@ Name und Wert, 86 Einträge, jeder gelesen von dem Teil des Spiels, der ihn brau
 
 Diese Spalte akzeptiert **alles**, weil ein paar Einträge Text oder einen `min-max`-Bereich statt einer Zahl enthalten.
 Schreibst du `abc`, wo eine Zahl hingehört, wird das angenommen und dann als `0` gelesen - die Funktion hört still auf zu arbeiten,
-und im Log steht ein Fehler. Bei dieser Tabelle solltest du am vorsichtigsten sein.
+und im [Log](../start/troubleshooting.md#find-the-playerlog) steht ein Fehler. Bei dieser Tabelle solltest du am vorsichtigsten sein.
 
 Einträge, die du kennen solltest, bevor du sie änderst:
 

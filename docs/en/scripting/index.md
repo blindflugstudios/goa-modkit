@@ -46,7 +46,7 @@ Rules worth knowing:
 
 - Only `.py` files directly inside a folder are read - subfolders are ignored.
 - Each file becomes a Python module named after the file.
-- A file with a **syntax error** is skipped, with the error in the game's log, and the other files still load.
+- A file with a **syntax error** is skipped, with the error in the game's [log](../start/troubleshooting.md#find-the-playerlog), and the other files still load.
 - Any **other error at the top level** of a file (a failing import, an exception while the file runs) is not caught and can stop the folders after it from loading - including other mods' scripts. Wrap risky top-level code in `try`/`except`.
 
 Every handler is identified by `<module>.<function>`, that is the file name plus the function name. If two files define a handler with the same module and function name, the one loaded **later** replaces the earlier one. This is how a mod can override one of the game's random events: copy `random_events.py` into your mod's `Missions/` folder and change the functions you want changed.
@@ -209,7 +209,7 @@ Every script can use a few ready-made objects, without importing anything, to ta
 
 | Name | What it is for |
 |---|---|
-| `logger` | the game's logger; `logger.Log("text")` writes a line to the game's log file |
+| `logger` | the game's logger; `logger.Log("text")` writes a line to the game's [log](../start/troubleshooting.md#find-the-playerlog) file |
 | `event_log` | create event log entries |
 | `localization` | add or change localization terms |
 | `resources_api` | spawn a resource pile next to an object, or spoil a pile |

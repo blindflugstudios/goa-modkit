@@ -46,7 +46,7 @@ Für jeden Befehl, in der Reihenfolge in der Datei, macht das Spiel Folgendes:
 2. Es baut die komplette Zeile so, wie sie nach der Änderung aussähe, nebenbei, ohne die echte Tabelle schon anzufassen.
 3. Die beiden Zellen, die das Spiel für dich ausfüllt, setzt es, falls deine Änderung sie leer gelassen hat: `0` in `ResourceCost`, `None` in `Associated Task` von `BuildingComponents`. Jede andere leere Zelle bleibt für die Prüfung leer.
 4. Es prüft die ganze Zeile gegen die Regeln der Tabelle (Werttypen, erlaubte Bereiche, Verweise auf andere Tabellen, siehe [CSV-Tabellen](csv.md)).
-5. Nur wenn alles passt, schreibt es die Zeile in die Tabelle. Sonst schreibt es nichts, protokolliert den Grund und macht mit dem nächsten Befehl weiter.
+5. Nur wenn alles passt, schreibt es die Zeile in die Tabelle. Sonst schreibt es nichts, [protokolliert](../start/troubleshooting.md#find-the-playerlog) den Grund und macht mit dem nächsten Befehl weiter.
 
 Ein abgelehnter Befehl hinterlässt also nie eine halb geänderte Zeile, und ein fehlerhafter Befehl hält die anderen nicht auf.
 
@@ -83,7 +83,7 @@ Ein abgelehnter Befehl hinterlässt also nie eine halb geänderte Zeile, und ein
 ```
 
 - Mit `Columns`: leert die aufgelisteten Zellen, genau wie ein `Replace` mit leeren Werten.
-- Ohne `Columns`: löscht die ganze Zeile. Nur in den Tabellen, die das erlauben; anderswo sagt das Log, dass die Zeilen nicht entfernt werden können, weil Spielstände und andere Inhalte ihre Ids verwenden.
+- Ohne `Columns`: löscht die ganze Zeile. Nur in den Tabellen, die das erlauben; anderswo sagt das [Log](../start/troubleshooting.md#find-the-playerlog), dass die Zeilen nicht entfernt werden können, weil Spielstände und andere Inhalte ihre Ids verwenden.
 - `Remove` nimmt nie `Cells`.
 
 ## Reihenfolge { #order }
@@ -153,4 +153,4 @@ Probleme mit einem Befehl (nur dieser Befehl wird übersprungen):
 | `rejected: '...' already exists; use Replace to change it.` | `Add` mit einer Id, die schon existiert. |
 | `rejected:` gefolgt von einer Regel | Der Wert bricht eine der Regeln der Tabelle, siehe [CSV-Tabellen](csv.md). |
 
-Das veröffentlichte Spiel schreibt nur Fehler in `Player.log`; die vollständige Liste der Zeilen erscheint in einem Entwickler-Build oder im Unity-Editor.
+Das veröffentlichte Spiel schreibt nur Fehler in [`Player.log`](../start/troubleshooting.md#find-the-playerlog); die vollständige Liste der Zeilen erscheint in einem Entwickler-Build oder im Unity-Editor.

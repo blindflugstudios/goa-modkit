@@ -46,7 +46,7 @@ For every command, in the order they appear in the file, the game:
 2. Builds the complete row as it would look after the change, on the side, without touching the real table yet.
 3. Fills in the two cells the game completes for you, if your change left them empty: `0` in `ResourceCost`, `None` in `Associated Task` of `BuildingComponents`. Any other empty cell is left empty for the check.
 4. Checks the whole row against the table's rules (value types, allowed ranges, references to other tables, see [CSV tables](csv.md)).
-5. Only if everything passes, writes the row into the table. Otherwise it writes nothing, logs the reason, and moves on to the next command.
+5. Only if everything passes, writes the row into the table. Otherwise it writes nothing, [logs](../start/troubleshooting.md#find-the-playerlog) the reason, and moves on to the next command.
 
 So a rejected command never leaves a half-changed row behind, and one bad command does not stop the others.
 
@@ -83,7 +83,7 @@ So a rejected command never leaves a half-changed row behind, and one bad comman
 ```
 
 - With `Columns`: clears the listed cells, exactly like a `Replace` with empty values.
-- Without `Columns`: deletes the whole row. Only in the tables that allow it; elsewhere the log says the rows cannot be removed because saves and other content use their ids.
+- Without `Columns`: deletes the whole row. Only in the tables that allow it; elsewhere the [log](../start/troubleshooting.md#find-the-playerlog) says the rows cannot be removed because saves and other content use their ids.
 - `Remove` never takes `Cells`.
 
 ## Order
@@ -153,4 +153,4 @@ Problems with one command (only that command is skipped):
 | `rejected: '...' already exists; use Replace to change it.` | `Add` of an id that exists. |
 | `rejected:` followed by a rule | The value breaks one of the table's rules, see [CSV tables](csv.md). |
 
-The released game logs only errors to `Player.log`; the full list of lines appears in a development build or in the Unity editor.
+The released game [logs](../start/troubleshooting.md#find-the-playerlog) only errors to `Player.log`; the full list of lines appears in a development build or in the Unity editor.

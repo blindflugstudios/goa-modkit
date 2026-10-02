@@ -9,7 +9,7 @@ Für Mods gibt es kein Vorschaufenster. Du testest eine Mod, indem du sie ins Sp
 3. Wenn du einen neuen Mod-Ordner angelegt hast (oder einen Inhaltsordner wie `Quests/`, der beim Spielstart leer war), öffne im Hauptmenü **Mods** und drück auf **Refresh**. Das bloße Öffnen des Fensters durchsucht den `Mods`-Ordner nicht neu.
 4. Lade deinen Spielstand. Missionen, Skripte, Quests, CSV-Tabellen, Karten und Flugzeug-Skins werden bei jedem Laden eines Spielstands frisch eingelesen. Nur Grafik (`Objects/`, `Biomes/`) braucht einen kompletten Neustart.
 5. Für eine Mission öffnest du die Cheat-Konsole und tippst `create_mission <your_mission_id>`, damit sie sofort auf der Kriegskarte erscheint.
-6. Irgendwas stimmt nicht? Öffne `Player.log` (siehe [unten](#reading-playerlog)).
+6. Irgendwas stimmt nicht? Öffne [`Player.log`](../start/troubleshooting.md#find-the-playerlog) (siehe [unten](#reading-playerlog)).
 
 ## Neu laden, ohne das Spiel neu zu starten { #reloading-without-restarting-the-game }
 
@@ -64,10 +64,10 @@ Missionsdateien, Event-Skripte und Hilfsmodule gehören alle nach `Mods/<your_mo
 Eine im Mods-Fenster ausgeschaltete Mod wird gar nicht geladen. Ein Mod-Ordner, den du angelegt hast, während das Spiel lief, erscheint erst, wenn du im Mods-Fenster auf **Refresh** drückst (oder das Spiel neu startest).
 
 **3. Wurde das Skript geladen?**
-In Entwicklungs-Builds steht jedes erfolgreich geladene Skript mit seinem Dateinamen in `Player.log`, gefolgt von den Handlern, die es registriert hat. Das veröffentlichte Spiel schreibt nur Fehler ins Log, dort beweist eine fehlende Zeile also nichts: Prüf stattdessen, ob die Wirkung des Skripts im Spiel sichtbar wird.
+In Entwicklungs-Builds steht jedes erfolgreich geladene Skript mit seinem Dateinamen in [`Player.log`](../start/troubleshooting.md#find-the-playerlog), gefolgt von den Handlern, die es registriert hat. Das veröffentlichte Spiel schreibt nur Fehler ins Log, dort beweist eine fehlende Zeile also nichts: Prüf stattdessen, ob die Wirkung des Skripts im Spiel sichtbar wird.
 
 **4. Gibt es einen Syntaxfehler?**
-Ein Python-Syntaxfehler erscheint in `Player.log` so:
+Ein Python-Syntaxfehler erscheint in [`Player.log`](../start/troubleshooting.md#find-the-playerlog) so:
 
 ```text
 Python syntax error: <message> (line N, column M)
@@ -76,7 +76,7 @@ Python syntax error: <message> (line N, column M)
 Dann wird die ganze Datei übersprungen; nichts darin wird registriert. Mods laufen auf IronPython 3.4: Halte dich an die Python-Features, die die [Beispiele](../examples.md) nutzen, und vermeide alles, was neuer als Python 3.6 ist (`:=`, `match`).
 
 **5. Wurde das JSON gelesen?**
-Eine kaputte Missionsdatei wird mit dieser Zeile in `Player.log` übersprungen:
+Eine kaputte Missionsdatei wird mit dieser Zeile in [`Player.log`](../start/troubleshooting.md#find-the-playerlog) übersprungen:
 
 ```text
 Mission file at <path> could not be parsed, skipping it: <reason>
@@ -132,12 +132,6 @@ Sie lassen sich nicht umbenennen. Definiere sie mit `localization.SetTerm` oder 
 
 ## Player.log lesen { #reading-playerlog }
 
-Das Spiel schreibt, was ihm auffällt, in eine Textdatei namens `Player.log`. Das veröffentlichte Spiel schreibt nur Fehler ins Log; die ausführlichen `[Mod ...]`-Zeilen erscheinen nur in Entwicklungs-Builds. Sie wird bei jedem Spielstart neu geschrieben, schau sie dir also an, während das Spiel läuft, oder direkt nachdem du es geschlossen hast.
-
-| Plattform | Ort |
-|---|---|
-| Windows | `%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Player.log` |
-| macOS | `~/Library/Logs/Blindflug Studios/Ground Of Aces/Player.log` |
-| Linux | `~/.config/unity3d/Blindflug Studios/Ground Of Aces/Player.log` |
+Das Spiel schreibt, was ihm auffällt, in eine Textdatei namens `Player.log`. Wo sie liegt und wie du sie öffnest: [Das Player.log finden](../start/troubleshooting.md#find-the-playerlog). Das veröffentlichte Spiel schreibt nur Fehler ins Log; die ausführlichen `[Mod ...]`-Zeilen erscheinen nur in Entwicklungs-Builds. Sie wird bei jedem Spielstart neu geschrieben, schau sie dir also an, während das Spiel läuft, oder direkt nachdem du es geschlossen hast.
 
 Öffne sie mit einem beliebigen Texteditor und such nach deinem Mod-Namen oder deiner Missions-Id. Deine eigenen Skripte können mit `logger.Log("...")` hineinschreiben, siehe [API](../scripting/api.md#logger).

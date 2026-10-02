@@ -109,7 +109,7 @@ The agent edits, checks and copies the mod again. Then in the game: **Options â†
 ## If something goes wrong
 
 - The mission does not show up, the texts look like `missions/...`, or the game complains: see [When nothing happens](troubleshooting.md).
-- Or just tell the agent: `read my Player.log and tell me what went wrong`. It knows where the game writes its log on your computer.
+- Or just tell the agent: `read my Player.log and tell me what went wrong`. It knows where the game writes its [log](troubleshooting.md#find-the-playerlog) on your computer.
 
 ## Using Codex or OpenCode instead
 

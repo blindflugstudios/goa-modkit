@@ -60,7 +60,7 @@ Mods/
 - PNGs may sit in subfolders of `Airplanes/`, so you can sort them however you like. The game knows a file by its name alone.
 - Capitalisation in file names does not matter: `desertrat_basemap_1001.png` is found as well.
 - Only the `config.json` directly inside `Airplanes/` is read. A `config.json` in a subfolder is not.
-- Any other file type is ignored, with a warning in the log.
+- Any other file type is ignored, with a warning in the [log](../start/troubleshooting.md#find-the-playerlog).
 
 ## `config.json`
 
@@ -90,7 +90,7 @@ Mods/
 
 ### When a skin is skipped
 
-A skin is left out, with a warning in the log, when:
+A skin is left out, with a warning in the [log](../start/troubleshooting.md#find-the-playerlog), when:
 
 - it names no `Airplane`,
 - the `Airplane` it names does not exist,
@@ -109,7 +109,7 @@ The texture names follow the naming of the game's own art, with your skin id in 
 - Only the base colour of tile 1001 is required.
 - A tile you leave out keeps the texture of the base skin. So you can repaint just part of an airplane.
 - A tile the base skin's material has no slot for is ignored.
-- A texture may be at most 4096 × 4096 pixels and 10 MB, the same limits as for object art (see [Objects and models](objects.md)). A file over the limit is not scaled down; it is skipped with a warning in the log.
+- A texture may be at most 4096 × 4096 pixels and 10 MB, the same limits as for object art (see [Objects and models](objects.md)). A file over the limit is not scaled down; it is skipped with a warning in the [log](../start/troubleshooting.md#find-the-playerlog).
 
 ### Thumbnail
 
@@ -161,7 +161,7 @@ More on the test loop in [Testing and reloading](../basics/testing.md).
 
 ## Checking the log
 
-The game writes what it accepted and what it refused to `Player.log` (where to find it: [How mods work](../basics/mods.md)). Lines about your mod start with `[Mod <your mod id>]`. When a skin does not show up, look there for the warnings described above: a skipped skin, an ignored file type or a texture over the size limit.
+The game writes what it accepted and what it refused to [`Player.log`](../start/troubleshooting.md#find-the-playerlog). Lines about your mod start with `[Mod <your mod id>]`. When a skin does not show up, look there for the warnings described above: a skipped skin, an ignored file type or a texture over the size limit.
 
 !!! note
-    The released game logs errors only. The detailed `[Mod ...]` lines appear only in development builds. So when the log shows nothing about your mod, check the skin selection in the game itself.
+    The released game [logs](../start/troubleshooting.md#find-the-playerlog) errors only. The detailed `[Mod ...]` lines appear only in development builds. So when the log shows nothing about your mod, check the skin selection in the game itself.

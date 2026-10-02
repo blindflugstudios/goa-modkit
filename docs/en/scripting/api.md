@@ -12,7 +12,7 @@ Everything a mod script can call. Eight objects are available in every script wi
 | `airplanes_api` | plane health, integrity, fuel, pilot |
 | `resources_api` | spawn and spoil resources |
 | `game_api` | save-game identity and a folder for your own files |
-| `logger` | write debug lines to `Player.log` |
+| `logger` | write debug lines to [`Player.log`](../start/troubleshooting.md#find-the-playerlog) |
 
 Names of game values come from imports:
 
@@ -81,9 +81,9 @@ missions_api.CreateMission("mymod_airfield_pursuit")
 
 Puts a mission on the war map immediately, skipping the weekly draw. Returns `True` if a mission was created.
 
-It still checks the target mission's own requirements and its map tags. If either fails, nothing is created, it returns `False`, and a warning naming the mission is written to `Player.log`. It also returns `False` for an unknown id. A script-only mission that has never been created has nothing to check yet and is always allowed.
+It still checks the target mission's own requirements and its map tags. If either fails, nothing is created, it returns `False`, and a warning naming the mission is written to [`Player.log`](../start/troubleshooting.md#find-the-playerlog). It also returns `False` for an unknown id. A script-only mission that has never been created has nothing to check yet and is always allowed.
 
-Call it from `set_mission_impact`, where the outcome is known. From `initialize_mission` it is refused and logged, because that handler runs in the middle of creating a mission.
+Call it from `set_mission_impact`, where the outcome is known. From `initialize_mission` it is refused and [logged](../start/troubleshooting.md#find-the-playerlog), because that handler runs in the middle of creating a mission.
 
 ```python
 @event_handler(MissionEvent.SET_MISSION_IMPACT)
@@ -241,7 +241,7 @@ This is what makes a campaign possible: a mission can ask how many raids have be
 
 ## logger
 
-Writes to `Player.log` (where to find it: [Testing and reloading](../basics/testing.md#reading-playerlog)).
+Writes to [`Player.log`](../start/troubleshooting.md#find-the-playerlog).
 
 ```python
 logger.Log("mymod: campaign state loaded")

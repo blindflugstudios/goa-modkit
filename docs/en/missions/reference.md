@@ -172,7 +172,7 @@ def initialize_mission(mission_entity_id):
         missions_api.SetAsPlannedChance(mission_entity_id, 35)
 ```
 
-Calling `missions_api.CreateMission` from here is refused and logged, because this handler runs in the middle of creating a mission.
+Calling `missions_api.CreateMission` from here is refused and [logged](../start/troubleshooting.md#find-the-playerlog), because this handler runs in the middle of creating a mission.
 
 !!! note
     On a mission with a JSON file, `SetMissionStat`, `SetOutcome`, `AddOutcomeEffect`, `AddMissionRequirement` and `SetTags` change the data the game loaded from that file, for the rest of the session. Every later copy of the mission sees the change, and effects you add pile up. Adjust stats and chances freely; add effects and gates only in script-only missions.
@@ -394,7 +394,7 @@ Exactly four entries, in the order of the [outcome index](#the-two-rolls-and-the
 | 7 | `VictoryPoints` | number | victory points, capped at the current limit |
 | 8 | `MaxVictoryPoints` | - | **do not use.** The game uses it internally to show "victory point limit reached"; in a mission file it crashes the mission when it ends. |
 
-A number where a range is expected, or the other way round, is not a crash: the game logs an error in `Player.log` and skips that one effect.
+A number where a range is expected, or the other way round, is not a crash: the game [logs](../start/troubleshooting.md#find-the-playerlog) an error in `Player.log` and skips that one effect.
 
 ### Mission stats
 

@@ -109,7 +109,7 @@ Der Agent bearbeitet, prüft und kopiert den Mod erneut. Dann im Spiel: **Einste
 ## Wenn etwas schiefgeht { #if-something-goes-wrong }
 
 - Die Mission taucht nicht auf, die Texte sehen aus wie `missions/...` oder das Spiel beschwert sich: siehe [Wenn nichts passiert](troubleshooting.md).
-- Oder sag dem Agenten einfach: `read my Player.log and tell me what went wrong`. Er weiß, wo das Spiel auf deinem Computer sein Log schreibt.
+- Oder sag dem Agenten einfach: `read my Player.log and tell me what went wrong`. Er weiß, wo das Spiel auf deinem Computer sein [Log](troubleshooting.md#find-the-playerlog) schreibt.
 
 ## Codex oder OpenCode statt Claude Code { #using-codex-or-opencode-instead }
 

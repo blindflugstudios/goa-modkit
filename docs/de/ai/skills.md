@@ -22,7 +22,7 @@ gespiegelt (liest Claude Code). Sie sind identisch.
 | `publish-workshop` | "Stell meinen Mod in den Workshop" | Prüft den Mod und führt dich durch den Upload im Spiel |
 | `validate` | "Prüf meinen Mod" | Startet den Validator und erklärt jeden Fund in einfachen Worten |
 | `install-mod` | "Pack meinen Mod ins Spiel" | Kopiert den Mod in den `Mods`-Ordner des Spiels |
-| `read-log` | "Irgendwas stimmt nicht, schau ins Log" | Liest dein `Player.log` und erklärt, was schiefgegangen ist |
+| `read-log` | "Irgendwas stimmt nicht, schau ins Log" | Liest dein [`Player.log`](../start/troubleshooting.md#find-the-playerlog) und erklärt, was schiefgegangen ist |
 | `update-kit` | "Aktualisier das Kit" | Holt die neuesten Regeln, Doku und Skills und sagt dir, was sich geändert hat |
 | `update-docs` | "/update-docs" | Für Kit-Maintainer: gleicht dieses Handbuch mit dem `Docs/`-Ordner des Spielteams ab (fragt nach einem GitHub-Link oder einem lokalen Pfad) |
 

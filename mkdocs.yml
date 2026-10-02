@@ -6,10 +6,6 @@ repo_name: blindflugstudios/goa-modkit
 edit_uri: edit/main/docs/
 copyright: Documentation CC-BY 4.0 - Ground of Aces and Blindflug Studios logos and names are trademarks and not covered by any license.
 
-# Hidden until rewritten: the TerrainObjects/ folder no longer exists (see DOCS_AUDIT.md).
-exclude_docs: |
-  **/content/terrain-objects.md
-
 theme:
   name: material
   custom_dir: overrides

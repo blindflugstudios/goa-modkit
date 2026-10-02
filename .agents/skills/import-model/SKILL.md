@@ -1,6 +1,6 @@
 ---
 name: import-model
-description: Bring a user's own 3D model, texture, build-menu icon, ground texture or airplane paint scheme into Ground of Aces as an art mod (Objects/, Biomes/, Airplanes/). Use when the user says "my own model", "import a 3D model", "reskin", "replace the look of", "custom object", "new icon", "FBX", "glTF", "tree model", "terrain object", "biome", "ground texture", "airplane skin", "paint scheme", "livery", "repaint a plane".
+description: Bring a user's own 3D model, texture, build-menu icon, ground texture or airplane paint scheme into Ground of Aces as an art mod (Objects/, Biomes/, Airplanes/). Use when the user says "my own model", "import a 3D model", "reskin", "replace the look of", "custom object", "new icon", "FBX", "glTF", "biome", "ground texture", "airplane skin", "paint scheme", "livery", "repaint a plane".
 ---
 
 # Import a model, texture or airplane skin
@@ -9,9 +9,9 @@ Art mods are the least forgiving mod type and the validator does not check them.
 
 ## 1. Read first
 
-- Objects (models, textures, icons, trees and rocks): `docs/en/content/objects.md`
+- Objects (models, textures, icons): `docs/en/content/objects.md`
 - Which ids can be changed: `docs/en/content/moddable-objects.md` (build menu, workbenches, training objects)
-- Built-in texture names (texture-only repaints, map object ids): `docs/en/content/texture-names.md`
+- Built-in texture names (texture-only repaints): `docs/en/content/texture-names.md`
 - Ground types: `docs/en/content/biomes.md`
 - Airplane paint schemes: `docs/en/content/airplanes.md`
 
@@ -19,18 +19,18 @@ If something the user wants is not on those pages, say so, do not guess, and poi
 
 ## 2. Understand the idea
 
-Ask one at a time: mod id; which game object, ground type or airplane the art is for; which file(s) they have (format, size, where they are). Check the id against `moddable-objects.md` (or the map objects on `texture-names.md`) before copying anything. Only the look changes: size on the grid, cost, crew spots and collision stay the game's.
+Ask one at a time: mod id; which game object, ground type or airplane the art is for; which file(s) they have (format, size, where they are). Check the id against `moddable-objects.md` before copying anything. Only the look changes: size on the grid, cost, crew spots and collision stay the game's.
 
 ## 3. Scaffold and write
 
 Create `mods/<mod_id>/` with `config.json` (from `templates/config.json`) and the art folder:
 
 - **`Objects/`** - one pool for all models, textures and thumbnails; subfolders allowed but their names mean nothing (a file is known by its name alone).
-  - Model: `<objectId>[.<variant>][.destroyed].glb|.fbx` - `Chair.glb`, `Chair.destroyed.fbx`, `tree.2.glb`. `.glb` beats `.fbx`. Variants only for map objects, counted from `0`, no leading zeros. Ids are case-insensitive.
-  - Textures, tried in this order: (1) `<material>_BaseMap_<tile>.png` / `<material>_Specular_<tile>.png` named after the model's material; (2) a PNG named like the image the material uses; (3) a PNG named like a built-in texture (repaints the game's model, no model needed). UDIM tiles `1001`-`1003`.
+  - Model: `<objectId>[.destroyed].glb|.fbx` - `Chair.glb`, `Chair.destroyed.fbx`. Every model needs its `.destroyed` model: the game always shows the destroyed look. `.glb` beats `.fbx`. Ids are case-insensitive.
+  - Textures, tried in this order: (1) `<material>_BaseMap_<UDIM-Tile>.png` / `<material>_Specular_<UDIM-Tile>.png` named after the model's material; (2) a PNG named like the image the material uses; (3) a PNG named like a built-in texture (repaints the game's model, no model needed). UDIM tiles `1001`-`1003`.
   - Thumbnail: `<objectId>.thumbnail.png`, only used next to a model of the same id.
   - Optional `Objects/config.json`: `{"Objects": {"Chair": {"UseGameMaterial": false}}}`. Default (game material) keeps battle damage; `false` keeps the user's own material but loses battle damage and uses only way (2) textures.
-  - Trees, rocks and other map objects go into `Objects/` too. There is no `TerrainObjects/` folder.
+  - Trees, rocks and other map objects (terrain objects) cannot be modded yet. If the user asks for that, say so plainly.
 - **`Biomes/<number>.png`** - `0` to `23`, no leading zeros, directly inside `Biomes/`.
 - **`Airplanes/`** - see section 4.
 
@@ -52,11 +52,12 @@ A skin is a new paint scheme for an existing airplane; it shows up in every skin
 - [ ] Model files at most **32 MB**.
 - [ ] Textures at most **4096 × 4096** px and **10 MB**; thumbnails at most **512 × 512** px and **10 MB**; biome PNGs at most **4096 × 4096** px and **10 MB**. Each side counts on its own. Oversized images are skipped, never scaled down.
 - [ ] Every image is a **real PNG** (check the file header, not just the extension; a renamed JPEG is refused).
-- [ ] No Blender duplicate names like `Chair.001.fbx` or `tree.02.glb` (no leading zeros in variants).
-- [ ] Every thumbnail sits next to a model with the same id (map objects have no thumbnail).
+- [ ] No Blender duplicate names like `Chair.001.fbx`.
+- [ ] Every model has a `.destroyed` model with the same id.
+- [ ] Every thumbnail sits next to a model with the same id.
 - [ ] Texture names match the material names in the model (`<material>_BaseMap_1001.png`) or the image names the materials use; for a texture-only repaint, the name is copied exactly from `texture-names.md`.
 - [ ] FBX files have no textures embedded that the user relies on: embedded FBX images are never read, so the PNGs must be in `Objects/`. Only the first UV map is read; triangulate concave faces.
-- [ ] Each object id exists in `moddable-objects.md` or the map objects on `texture-names.md`; biome numbers are `0`-`23`; skin `Airplane` ids are from `airplanes.md`.
+- [ ] Each object id exists in `moddable-objects.md`; biome numbers are `0`-`23`; skin `Airplane` ids are from `airplanes.md`.
 - [ ] No two files with the same name in different subfolders of `Objects/`.
 - [ ] `Objects/config.json` and `Airplanes/config.json` are valid JSON (no comments, no trailing commas).
 

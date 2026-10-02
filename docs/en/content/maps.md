@@ -42,7 +42,7 @@ The editor has a tool for each part of the map:
 | **Terrain Height** | Raise and lower the ground. |
 | **Biomes** | Paint the ground type: grass, dirt, road, rock, sand, gravel. The ground type also affects gameplay, see [Biomes](biomes.md). |
 | **Grass** | Paint grass on the ground, or remove it. |
-| **Terrain Objects** | Place trees, bushes, rocks, ponds and so on, one by one or with a brush. Their look can be changed with [Objects and models](objects.md). |
+| **Terrain Objects** | Place trees, bushes, rocks, ponds and so on, one by one or with a brush. |
 | **Map settings** | The name, description, tags, starting quests, start date and starting supplies of the map (see below). |
 
 **Undo** and **Redo** work as you would expect. The editor lists its keyboard shortcuts under **Shortcuts**.

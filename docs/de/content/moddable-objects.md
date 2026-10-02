@@ -4,7 +4,7 @@ Das sind die Objekte, die du aus dem Baumenü platzierst (Requisiten, Werkbänke
 
 - Bei den Ids spielt Groß- und Kleinschreibung keine Rolle: `chair.glb` funktioniert genauso wie `Chair.glb`.
 - Welche eingebauten Texturen jedes Objekt verwendet, steht unter [Eingebaute Texturnamen](texture-names.md).
-- Bäume, Felsen und die anderen Kartenobjekte stehen nicht in dieser Liste. Ihre Ids kommen aus der Tabelle `MapObjects` und stehen unter [Eingebaute Texturnamen](texture-names.md#map-objects).
+- Bäume, Felsen und die anderen Kartenobjekte stehen nicht in dieser Liste: Eine Mod kann sie noch nicht ändern.
 
 Diese Liste stammt aus der vom Spiel erzeugten Liste der veränderbaren Objekte, Stand 2026-10-01.
 

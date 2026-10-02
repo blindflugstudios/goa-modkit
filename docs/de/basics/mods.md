@@ -57,7 +57,7 @@ Mods/
 | `Missions/Locations/` | neue Missionsorte (`.json`) | [Orte mit einer Mod hinzufügen](../missions/locations.md#adding-locations-with-a-mod) |
 | `Quests/` | Quests (`.json`) | [Quests](../quests/index.md) |
 | `Maps/` | Karten (`.goamap`) | [Karten](../content/maps.md) |
-| `Objects/` | Ersatzmodelle, Texturen und Symbole - für Gebäude, Werkbänke, Trainer und Kartenobjekte gleichermaßen | [Objekte und Modelle](../content/objects.md) |
+| `Objects/` | Ersatzmodelle, Texturen und Symbole - für Gebäude, Werkbänke und Trainer | [Objekte und Modelle](../content/objects.md) |
 | `Biomes/` | Ersatztexturen für den Boden, ein PNG pro Biom-Slot | [Biome](../content/biomes.md) |
 | `Airplanes/` | neue Flugzeug-Skins: eine `config.json` und die PNGs der Skins | [Flugzeug-Skins](../content/airplanes.md) |
 
@@ -65,7 +65,7 @@ Drei Regeln entscheiden, ob das Spiel den Ordner überhaupt bemerkt:
 
 - Ein Unterordner zählt nur, wenn etwas darin liegt. Ein leerer `CSV/`-Ordner ist dasselbe wie gar kein `CSV/`-Ordner.
 - Ein Mod-Ordner ohne einen der obigen Unterordner (oder nur mit leeren) wird ohne Meldung ignoriert.
-- Symbolische Links und Junctions (Verknüpfungen, die auf einen anderen Ordner zeigen) werden nie verfolgt, weder als Mod-Ordner noch als einer seiner Unterordner. Das Spiel überspringt sie mit einer Warnung im Log.
+- Symbolische Links und Junctions (Verknüpfungen, die auf einen anderen Ordner zeigen) werden nie verfolgt, weder als Mod-Ordner noch als einer seiner Unterordner. Das Spiel überspringt sie mit einer Warnung im [Log](../start/troubleshooting.md#find-the-playerlog).
 
 Bei `CSV`, `Missions`, `Quests` und `Maps` werden nur Dateien gelesen, die direkt im Unterordner liegen; alles, was tiefer liegt, wird ignoriert, mit einer Ausnahme: `Missions/Locations/` wird ebenfalls gelesen. `Objects` und `Biomes` enthalten Ersatzgrafik und folgen eigenen Regeln: In `Objects/` ist der *Dateiname* eines Modells die Id des Objekts, das es ersetzt (`Chair.fbx` ersetzt den Stuhl), und die Namen von Unterordnern spielen keine Rolle. `Biomes/` enthält ein PNG pro Biom-Slot, benannt nach der Nummer des Slots (`8.png`), direkt im Ordner. `Airplanes/` enthält neue Flugzeug-Skins, beschrieben unter [Flugzeug-Skins](../content/airplanes.md).
 
@@ -92,8 +92,8 @@ Optional. Ohne sie wird der Ordnername als Name der Mod angezeigt, die Id wird a
 
 Was passiert, wenn etwas nicht stimmt:
 
-- Eine `Id`, die gegen die Regel verstößt, wird ohne Meldung ignoriert, und stattdessen wird der Ordnername verwendet - kleingeschrieben, wobei jedes Zeichen außer Buchstaben, Ziffern, `_`, `.` und `-` durch `_` ersetzt wird. Log-Zeilen zu deiner Mod sind mit dieser Id gekennzeichnet, eine abgelehnte Id fällt also als unerwartete Kennzeichnung auf. Die Detailansicht der Mod im Mods-Fenster zeigt außerdem die Id, die das Spiel tatsächlich verwendet.
-- Eine `config.json`, die das Spiel nicht lesen kann (ein fehlendes Komma, eine überzählige Klammer), wird im Log gemeldet und so behandelt, als gäbe es sie nicht.
+- Eine `Id`, die gegen die Regel verstößt, wird ohne Meldung ignoriert, und stattdessen wird der Ordnername verwendet - kleingeschrieben, wobei jedes Zeichen außer Buchstaben, Ziffern, `_`, `.` und `-` durch `_` ersetzt wird. [Log](../start/troubleshooting.md#find-the-playerlog)-Zeilen zu deiner Mod sind mit dieser Id gekennzeichnet, eine abgelehnte Id fällt also als unerwartete Kennzeichnung auf. Die Detailansicht der Mod im Mods-Fenster zeigt außerdem die Id, die das Spiel tatsächlich verwendet.
+- Eine `config.json`, die das Spiel nicht lesen kann (ein fehlendes Komma, eine überzählige Klammer), wird im [Log](../start/troubleshooting.md#find-the-playerlog) gemeldet und so behandelt, als gäbe es sie nicht.
 
 ### `preview.png`
 
@@ -120,7 +120,7 @@ Jede Mod zeigt außerdem einen Schalter **Scripting**. Wenn du ihn einschaltest,
 Zuerst werden die Workshop-Items angewendet, dann die Mods in deinem `Mods`-Ordner, und innerhalb jeder Gruppe in `LoadOrder`-Reihenfolge - kleinere Zahlen zuerst, bei Gleichstand entscheidet die Id. Wenn zwei Mods dasselbe liefern - eine Zeile in derselben Tabelle, eine Quest mit demselben Dateinamen, eine Mission mit derselben Id - gewinnt die, die **zuletzt** angewendet wird. Zwei Folgen daraus:
 
 - Deine eigene Kopie einer Mod schlägt immer die Workshop-Kopie derselben Mod. Du kannst also an einer bereits veröffentlichten Mod weiterarbeiten und deine Änderungen testen, während die veröffentlichte Version weiter abonniert ist.
-- Zwei Mods vom selben Ort (beide aus dem Workshop oder beide in deinem `Mods`-Ordner) mit derselben Id werden nicht beide geladen. Die zweite gefundene wird mit einer Warnung im Log übersprungen.
+- Zwei Mods vom selben Ort (beide aus dem Workshop oder beide in deinem `Mods`-Ordner) mit derselben Id werden nicht beide geladen. Die zweite gefundene wird mit einer Warnung im [Log](../start/troubleshooting.md#find-the-playerlog) übersprungen.
 
 Die praktische Regel daraus: **Stell jeder Id, die du dir ausdenkst, den Namen deiner Mod voran**, damit du nie versehentlich etwas ersetzt.
 
@@ -154,12 +154,4 @@ Der Alltagsablauf, während du an einer Mod arbeitest:
 
 [Testen und neu laden](testing.md) erklärt mehr zu diesem Ablauf und zu den Werkzeugen, die beim Testen helfen.
 
-Das Spiel schreibt in seine Log-Datei `Player.log`, was es angenommen und was es abgelehnt hat:
-
-| Plattform | Log-Datei |
-|---|---|
-| Windows | `%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Player.log` |
-| macOS | `~/Library/Logs/Blindflug Studios/Ground Of Aces/Player.log` |
-| Linux | `~/.config/unity3d/Blindflug Studios/Ground Of Aces/Player.log` |
-
-Das Log des vorherigen Durchlaufs bleibt daneben als `Player-prev.log` erhalten. Das veröffentlichte Spiel schreibt nur Fehler ins Log; die ausführlichen `[Mod ...]`-Zeilen, die auf den Themenseiten beschrieben sind, erscheinen nur in Entwicklungs-Builds. Prüf im Zweifel also die Wirkung direkt im Spiel. Mehr dazu in [Testen und neu laden](testing.md) und [Wenn nichts passiert](../start/troubleshooting.md).
+Das Spiel schreibt in seine Log-Datei `Player.log`, was es angenommen und was es abgelehnt hat. Wo sie liegt und wie du sie öffnest: [Das Player.log finden](../start/troubleshooting.md#find-the-playerlog). Das veröffentlichte Spiel schreibt nur Fehler ins Log; die ausführlichen `[Mod ...]`-Zeilen, die auf den Themenseiten beschrieben sind, erscheinen nur in Entwicklungs-Builds. Prüf im Zweifel also die Wirkung direkt im Spiel. Mehr dazu in [Testen und neu laden](testing.md) und [Wenn nichts passiert](../start/troubleshooting.md).

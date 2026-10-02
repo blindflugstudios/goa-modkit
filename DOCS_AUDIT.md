@@ -120,7 +120,7 @@ All 30 `docs/assets/csv/*.csv` files are byte-identical to the files SRC links (
 | `content/objects.md` 198-216 | hand list incl. `BarbedWireCorner`, `door_hangar`, `MetalFence`, `MetalFenceCorner`, `Siren`, `WoodenFenceSturdy`, `WoodenFenceSturdyPole` | moddable-objects.md 167 ids, none of these 7 | **Wrong** - use generated list (see Open 1) |
 | `content/objects.md` 219-256, 161-163 (hidden); `biomes.md` 181 (hidden) | log table; last mod wins; GPU copy note | art.md 87-95 last wins, objects decided as a whole, `[Mod <id>]` lines in dev builds; 61-62 GPU note | **Outdated** - short new log/conflict section; restore GPU note |
 | `content/biomes.md` | no leading-zero rule | art.md 55-56 "`8.png`, not `08.png`", out-of-range reported | **Missing** - add |
-| `content/terrain-objects.md` (excluded) | old `TerrainObjects/` page | objects.md 25, 48-54 map objects via `Objects/` | **Outdated** - stays excluded; map-object section goes into `objects.md` |
+| `content/terrain-objects.md` (excluded) | old `TerrainObjects/` page | objects.md 25, 48-54 map objects via `Objects/` | **Removed** (2026-10-01) - modding map/terrain objects is not supported yet; page deleted, map-object parts removed from `objects.md`, `texture-names.md`, `moddable-objects.md`, `maps.md`, `mods.md`, `import-model` skill |
 | none | - | `moddable-objects.md`, `textures.md` generated reference lists (no URLs or keys) | **Missing** - ask: generated reference page(s)? |
 | none (no page, nav, skill) | - | airplanes.md 1-109: `Airplanes/config.json` `{"Skins": {"<id>": {"Airplane", "Name", "BaseSkin"}}}`, `<id>_BaseMap_1001.png` required, 1002/1003 + `_Specular_` optional, thumbnail, 19 airplane ids, saved as `mod_<modId>_<skinId>`, read on level load, disabled mod falls back | **Missing** - new page `content/airplanes.md` (+ DE, nav), skill trigger |
 | `import-model` skill 29, 37 | old texture rule; manual name check | objects.md 113-183, art.md 66-81 | **Less detailed** - update + checklist |
@@ -176,7 +176,7 @@ maintainer:
   `content/moddable-objects.md` (167 ids from SRC `moddable-objects.md`, without `BarbedWireCorner`/`door_hangar`),
   `content/texture-names.md` (from SRC `textures.md`, filtered to `_BaseMap*`, `_SpecularMap*`, `_EmissiveMap*` slots).
 - `content/objects.md` and `content/biomes.md` were rewritten from SRC; their stale hidden blocks were deleted.
-  `content/terrain-objects.md` stays excluded.
+  `content/terrain-objects.md` was later deleted: map/terrain objects are not moddable yet.
 - `basics/cheats.md` `set_random_event_chance` row hidden (development builds only).
 
 Not done: the validator still ignores `Missions/Locations/` and `Airplanes/` (noted in `AGENTS.md` section 13);

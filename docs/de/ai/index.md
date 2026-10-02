@@ -35,7 +35,7 @@ Eine allgemeine KI weiß nichts über Ground of Aces. Dieses Repository bringt e
 3. Er schreibt den Mod nach `mods/<your mod>/` und lässt den Validator laufen, bis alles sauber ist.
 4. Er kopiert den Mod in den `Mods`-Ordner des Spiels.
 5. Du: Geh im Spiel zurück ins Hauptmenü, öffne einmal **Mods** und lade deinen Spielstand (siehe [Testen und neu laden](../basics/testing.md)). Der Befehl `create_mission <id>` in der [Cheat-Konsole](../basics/cheats.md) lässt eine neue Mission sofort erscheinen.
-6. Erzähl dem Agenten, was du siehst. Stimmt etwas nicht, liest er dein `Player.log` und behebt es.
+6. Erzähl dem Agenten, was du siehst. Stimmt etwas nicht, liest er dein [`Player.log`](../start/troubleshooting.md#find-the-playerlog) und behebt es.
 
 Der Agent kann im Spiel keine Knöpfe für dich drücken - Schritt 5 ist immer deiner.
 

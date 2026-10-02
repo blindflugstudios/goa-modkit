@@ -187,7 +187,7 @@ The `Locations` list holds as many places as you like. Each entry has the same f
 - **A place from a mod behaves like a shipped one.** It is offered in the Mission Editor's dropdown, works with `missions_api.SetMissionLocation`, can be drawn for a mission that lists no locations, and its flags are what quest location conditions see.
 - **Shipped names always win.** If your place uses a name the game already has, the shipped one is used. If two mods add the same name, the game uses one of them and does not tell you. So give every place your mod's prefix, as in `mymod_scapa_flow`.
 - **The player sees `_locationName` exactly as written**, underscores and all. Shipped places come with translations; yours has none until you register a term called `mission_location/<name>` - see [Location names](../scripting/localization.md#location-names).
-- **A file the game cannot read is skipped**, with a warning in `Player.log`. Your other location files still load.
+- **A file the game cannot read is skipped**, with a warning in [`Player.log`](../start/troubleshooting.md#find-the-playerlog). Your other location files still load.
 - Keep the coordinates inside the war map (see the next section).
 
 ## Using your own coordinates

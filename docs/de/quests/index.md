@@ -153,7 +153,7 @@ Registrierst du einen Schlüssel, den das Spiel schon mitbringt - einen Gebäude
 
 ### Symbole { #icons }
 
-`_genericIconKey` wählt das Symbol des Schritts aus einem festen Satz, der ins Spiel eingebaut ist. Ein Schlüssel, den das Spiel nicht kennt, zeigt einfach kein Symbol; nichts wird geloggt. Aus einer Mod kannst du keine eigenen Symbole hinzufügen.
+`_genericIconKey` wählt das Symbol des Schritts aus einem festen Satz, der ins Spiel eingebaut ist. Ein Schlüssel, den das Spiel nicht kennt, zeigt einfach kein Symbol; nichts wird [geloggt](../start/troubleshooting.md#find-the-playerlog). Aus einer Mod kannst du keine eigenen Symbole hinzufügen.
 
 | Art | Schlüssel |
 |---|---|
@@ -356,7 +356,7 @@ Der Button erscheint auf der Quest-Karte der Quest, zu der der Schritt gehört. 
 
 ### Typen, die nichts tun { #types-that-do-nothing }
 
-`_type: 3` und `_type: 15` stehen in alten Dateien, haben aber keine Logik dahinter; ein Schritt mit einem davon kommt nie voran, und nichts wird geloggt. Dasselbe gilt für jede Zahl, die nicht in der Tabelle steht. Wenn ein Schritt ewig bei null steht, prüf zuerst seinen `_type`.
+`_type: 3` und `_type: 15` stehen in alten Dateien, haben aber keine Logik dahinter; ein Schritt mit einem davon kommt nie voran, und nichts wird [geloggt](../start/troubleshooting.md#find-the-playerlog). Dasselbe gilt für jede Zahl, die nicht in der Tabelle steht. Wenn ein Schritt ewig bei null steht, prüf zuerst seinen `_type`.
 
 ## Wie eine Quest startet { #how-a-quest-starts }
 
@@ -423,7 +423,7 @@ Die mitgelieferten Dateien sind einfaches JSON im Installationsordner des Spiels
 
 **Tutorial-Quests (`2`)** lassen zusätzlich die Tutorial-Hervorhebung nacheinander auf die Buttons in `_highlightedUIElements` zeigen und können Konsolenbefehle aus `_cheatsOnStart` und `_completionCheats` ausführen. In einer Mod gilt:
 
-- Die **Befehle werden entfernt**. Eine Mod-Quest mit einer dieser Listen lädt trotzdem, aber die Listen werden ignoriert (Entwickler-Builds schreiben eine Warnung ins Log), und nichts wird ausgeführt.
+- Die **Befehle werden entfernt**. Eine Mod-Quest mit einer dieser Listen lädt trotzdem, aber die Listen werden ignoriert (Entwickler-Builds schreiben eine Warnung ins [Log](../start/troubleshooting.md#find-the-playerlog)), und nichts wird ausgeführt.
 - Die Hervorhebungs-ids sind eine feste Liste im Spiel - die ids in den mitgelieferten Tutorial-Quests (`SawStation`, `Sickbed`, `ParkingSmall`, `CrewRoleDropdown`, ...) sind das Vokabular. Eine unbekannte id bewirkt nichts.
 - Die Ereignisse nur im Tutorial (siehe [Ereignisse](#events)) treten nur auf, solange das Tutorial selbst läuft, und das kann nur der Spieler einschalten (das Häkchen im Fenster für ein neues Spiel), keine Mod.
 
@@ -580,10 +580,10 @@ Lade nach jeder Änderung erneut ein Level (ein neuer Ordner braucht zuerst **Re
 | `start_shipment <Resource> <amount> ...` | Bringt Ressourcen auf die Basis - `start_shipment Wood 12`. |
 | `create_mission <mission id>` | Setzt eine Mission auf die Karte, um einen Missions-Rückkehr-Schritt zu testen. |
 
-Wenn eine Quest nicht auftaucht oder ein Schritt sich nicht bewegt, lies die Log-Datei des Spiels, `Player.log` (wo sie liegt: [So funktionieren Mods](../basics/mods.md#seeing-your-changes)).
+Wenn eine Quest nicht auftaucht oder ein Schritt sich nicht bewegt, lies die [Log](../start/troubleshooting.md#find-the-playerlog)-Datei des Spiels, `Player.log`.
 
 - Eine Quest-Datei mit ungültigem JSON (ein fehlendes Komma, eine offene Klammer) wird **nicht** übersprungen - sie macht das Laden des Levels kaputt. Prüf dein JSON in einem Editor, bevor du testest.
-- Eine Karte, die eine unbekannte Quest-id aufführt, und ein Schritt, der wegen eines falschen `_type` oder einer falsch geschriebenen id nie vorankommt, bekommen **keine** Zeile im Log - prüf die Tabellen oben.
+- Eine Karte, die eine unbekannte Quest-id aufführt, und ein Schritt, der wegen eines falschen `_type` oder einer falsch geschriebenen id nie vorankommt, bekommen **keine** Zeile im [Log](../start/troubleshooting.md#find-the-playerlog) - prüf die Tabellen oben.
 
 Mehr Tipps zum Testen: [Testen und neu laden](../basics/testing.md).
 

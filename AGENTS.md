@@ -61,7 +61,7 @@ Mods/<mod_id>/
   Airplanes/         new airplane skins: config.json + PNGs
 ```
 
-- **Art mods** (`Objects/`, `Biomes/`) are imported once at game start: every art change needs a **full restart of the game**. Docs: `docs/en/content/objects.md`, `biomes.md`. There is no `TerrainObjects/` folder any more.
+- **Art mods** (`Objects/`, `Biomes/`) are imported once at game start: every art change needs a **full restart of the game**. Docs: `docs/en/content/objects.md`, `biomes.md`. Trees, rocks and other map objects (terrain objects) **cannot be modded yet**; tell the user so instead of building it.
 - **Airplane skins** (`Airplanes/`) are read each time a level is loaded. Docs: `docs/en/content/airplanes.md`.
 
 - The game decides what a mod contains from **which folders hold files**, not from `config.json`. Folder names are exact: `Missions`, not `Mission` or `missions`.

@@ -34,7 +34,7 @@ A general AI knows nothing about Ground of Aces. This repository teaches it:
 3. It writes the mod into `mods/<your mod>/` and runs the validator until it is clean.
 4. It copies the mod into the game's `Mods` folder.
 5. You: in the game, go back to the main menu, open **Mods** once and load your save (see [Testing and reloading](../basics/testing.md)). The [cheat console](../basics/cheats.md) command `create_mission <id>` makes a new mission appear right away.
-6. Tell the agent what you see. If something is off, it reads your `Player.log` and fixes it.
+6. Tell the agent what you see. If something is off, it reads your [`Player.log`](../start/troubleshooting.md#find-the-playerlog) and fixes it.
 
 The agent cannot press buttons in the game for you - step 5 is always yours.
 

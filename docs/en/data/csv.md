@@ -5,7 +5,7 @@ Most of the numbers that drive Ground of Aces - what a building costs, how fast 
 This page is the complete reference: where the files go, what the two file formats look like, what the game checks before it accepts a value, and what every table and column means. Every table section in [The tables](#the-tables) starts with a link to the built-in file, so you can open the real thing or save it and copy its header row.
 
 !!! note
-    Nothing here can permanently damage your game. A value the game cannot use is refused and written to the log with the reason; the built-in value stays. Removing the mod folder restores everything.
+    Nothing here can permanently damage your game. A value the game cannot use is refused and written to the [log](../start/troubleshooting.md#find-the-playerlog) with the reason; the built-in value stays. Removing the mod folder restores everything.
 
 !!! tip
     The single-cell `<Table>.json` command files are covered step by step, with more examples, on [Table command files](table-editor.md).
@@ -41,7 +41,7 @@ Start the game, load a level, and the wall costs one plank. That is the whole mo
 
 ## The two file formats
 
-A file is named after the table it changes, matched **exactly**, capital letters included: `VehicleData.csv`, never `vehicledata.csv`. A file naming a table that does not exist is skipped, and the log says so.
+A file is named after the table it changes, matched **exactly**, capital letters included: `VehicleData.csv`, never `vehicledata.csv`. A file naming a table that does not exist is skipped, and the [log](../start/troubleshooting.md#find-the-playerlog) says so.
 
 You may use either format, or both. Within one mod the `.csv` files are applied first and the `.json` files after, so a command can refine a row a CSV file added.
 
@@ -131,7 +131,7 @@ In `ResourceCost` only, some rows carry a leftover heading in their `Money` cell
 
 ## Checking what happened
 
-Every accepted change and every refusal is one line in the game's log, `Player.log` (where to find it: [How mods work](../basics/mods.md#seeing-your-changes)). On Windows there is also an HTML version in the same folder that is easier to read. The label at the start of each line is the mod's id.
+Every accepted change and every refusal is one line in the game's [log](../start/troubleshooting.md#find-the-playerlog), `Player.log`. On Windows there is also an HTML version in the same folder that is easier to read. The label at the start of each line is the mod's id.
 
 ```text
 [Mod my_balance_mod] CSV/ResourceCost.json command 1 replaced cells Planks of row 'wall_wood'.
@@ -147,13 +147,13 @@ A refusal names the file, the row or command number, and the reason:
 ```
 
 !!! note
-    These lines are written as information and warnings. The released game logs errors only, so you will see them only in a development build or in the Unity editor. In the released game, check the effect in the game instead - load a level and look at the value you changed.
+    These lines are written as information and warnings. The released game [logs](../start/troubleshooting.md#find-the-playerlog) errors only, so you will see them only in a development build or in the Unity editor. In the released game, check the effect in the game instead - load a level and look at the value you changed.
 
 A misspelled table name or a header row that does not match still produces a `skipped:` line naming the file. **If you see no `[Mod ...]` lines at all and the change does not show**, the game did not pick the mod up: the `CSV/` folder was still empty when the game started (press **Refresh** in the Mods window), the mod is switched off in the Mods window, or the mod folder is a symbolic link or junction, which is never followed.
 
 ### Finding a table's column headers
 
-The game ships header templates for four tables (`BuildingComponents`, `PropsInfluence`, `ResourceCost` and `VehicleData`) in `Ground Of Aces_Data/StreamingAssets/Modding/Templates/` inside the installation folder (on macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/`). For the rest, the column list is on this page, and every table section links the built-in file. Or ask the game: write a deliberately wrong header, load once, and the log prints the columns it expected.
+The game ships header templates for four tables (`BuildingComponents`, `PropsInfluence`, `ResourceCost` and `VehicleData`) in `Ground Of Aces_Data/StreamingAssets/Modding/Templates/` inside the installation folder (on macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/`). For the rest, the column list is on this page, and every table section links the built-in file. Or ask the game: write a deliberately wrong header, load once, and the [log](../start/troubleshooting.md#find-the-playerlog) prints the columns it expected.
 
 ## Load order
 
@@ -703,7 +703,7 @@ Name and value, 86 entries, each read by whichever part of the game needs it.
 
 This column accepts **anything**, because a few entries hold text or a `min-max` range rather than a number.
 Write `abc` where a number belongs and it is accepted, then read as `0` - the feature quietly stops working
-and the log carries an error. This is the table to be most careful with.
+and the [log](../start/troubleshooting.md#find-the-playerlog) carries an error. This is the table to be most careful with.
 
 Entries worth knowing before you change them:
 

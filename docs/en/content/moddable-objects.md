@@ -4,7 +4,7 @@ These are the objects you place from the build menu (props, workbenches and trai
 
 - Ids are matched without regard to capital letters: `chair.glb` works as well as `Chair.glb`.
 - The built-in textures each object uses are listed on [Built-in texture names](texture-names.md).
-- Trees, rocks and the other map objects are not in this list. Their ids come from the `MapObjects` table and are listed on [Built-in texture names](texture-names.md#map-objects).
+- Trees, rocks and the other map objects are not in this list: a mod cannot change them yet.
 
 This list was taken from the game's generated list of moddable objects on 2026-10-01.
 

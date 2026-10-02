@@ -187,7 +187,7 @@ Die Liste `Locations` fasst so viele Orte, wie du willst. Jeder Eintrag hat dies
 - **Ein Ort aus einem Mod verhält sich wie ein mitgelieferter.** Er wird im Dropdown des Mission Editors angeboten, funktioniert mit `missions_api.SetMissionLocation`, kann für eine Mission ohne Orte gezogen werden, und seine Flags sind das, was Ortsbedingungen in Quests sehen.
 - **Mitgelieferte Namen gewinnen immer.** Nutzt dein Ort einen Namen, den das Spiel schon hat, wird der mitgelieferte verwendet. Fügen zwei Mods denselben Namen hinzu, nimmt das Spiel einen davon und sagt dir nichts. Gib also jedem Ort das Präfix deines Mods, wie bei `mymod_scapa_flow`.
 - **Der Spieler sieht `_locationName` genau so, wie es dasteht**, samt Unterstrichen. Mitgelieferte Orte haben Übersetzungen; deiner hat keine, bis du einen Term namens `mission_location/<name>` registrierst - siehe [Ortsnamen](../scripting/localization.md#location-names).
-- **Eine Datei, die das Spiel nicht lesen kann, wird übersprungen**, mit einer Warnung in `Player.log`. Deine anderen Ortsdateien werden trotzdem geladen.
+- **Eine Datei, die das Spiel nicht lesen kann, wird übersprungen**, mit einer Warnung in [`Player.log`](../start/troubleshooting.md#find-the-playerlog). Deine anderen Ortsdateien werden trotzdem geladen.
 - Halte die Koordinaten innerhalb der Kriegskarte (siehe nächster Abschnitt).
 
 ## Eigene Koordinaten verwenden { #using-your-own-coordinates }
