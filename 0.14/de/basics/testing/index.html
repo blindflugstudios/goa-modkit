@@ -2580,7 +2580,7 @@
 <li>Wenn du einen neuen Mod-Ordner angelegt hast (oder einen Inhaltsordner wie <code>Quests/</code>, der beim Spielstart leer war), öffne im Hauptmenü <strong>Mods</strong> und drück auf <strong>Refresh</strong>. Das bloße Öffnen des Fensters durchsucht den <code>Mods</code>-Ordner nicht neu.</li>
 <li>Lade deinen Spielstand. Missionen, Skripte, Quests, CSV-Tabellen, Karten und Flugzeug-Skins werden bei jedem Laden eines Spielstands frisch eingelesen. Nur Grafik (<code>Objects/</code>, <code>Biomes/</code>) braucht einen kompletten Neustart.</li>
 <li>Für eine Mission öffnest du die Cheat-Konsole und tippst <code>create_mission &lt;your_mission_id&gt;</code>, damit sie sofort auf der Kriegskarte erscheint.</li>
-<li>Irgendwas stimmt nicht? Öffne <code>Player.log</code> (siehe <a href="#reading-playerlog">unten</a>).</li>
+<li>Irgendwas stimmt nicht? Öffne <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a> (siehe <a href="#reading-playerlog">unten</a>).</li>
 </ol>
 <h2 id="reloading-without-restarting-the-game">Neu laden, ohne das Spiel neu zu starten<a class="headerlink" href="#reloading-without-restarting-the-game" title="Permanent link">&para;</a></h2>
 <p>Jedes Mal, wenn du einen Spielstand lädst, liest das Spiel die Inhalte deiner Mod neu ein: Missionsdateien, Python-Skripte, Quests, CSV-Tabellen, Karten und Flugzeug-Skins, aus dem Spiel selbst und aus jeder aktivierten Mod. Deine Bearbeitungsschleife lautet also: Datei ändern, zurück ins Hauptmenü, <strong>Mods</strong> öffnen, Spielstand erneut laden.</p>
@@ -2631,14 +2631,14 @@ Missionsdateien, Event-Skripte und Hilfsmodule gehören alle nach <code>Mods/&lt
 <p><strong>2. Ist die Mod aktiviert?</strong>
 Eine im Mods-Fenster ausgeschaltete Mod wird gar nicht geladen. Ein Mod-Ordner, den du angelegt hast, während das Spiel lief, erscheint erst, wenn du im Mods-Fenster auf <strong>Refresh</strong> drückst (oder das Spiel neu startest).</p>
 <p><strong>3. Wurde das Skript geladen?</strong>
-In Entwicklungs-Builds steht jedes erfolgreich geladene Skript mit seinem Dateinamen in <code>Player.log</code>, gefolgt von den Handlern, die es registriert hat. Das veröffentlichte Spiel schreibt nur Fehler ins Log, dort beweist eine fehlende Zeile also nichts: Prüf stattdessen, ob die Wirkung des Skripts im Spiel sichtbar wird.</p>
+In Entwicklungs-Builds steht jedes erfolgreich geladene Skript mit seinem Dateinamen in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>, gefolgt von den Handlern, die es registriert hat. Das veröffentlichte Spiel schreibt nur Fehler ins Log, dort beweist eine fehlende Zeile also nichts: Prüf stattdessen, ob die Wirkung des Skripts im Spiel sichtbar wird.</p>
 <p><strong>4. Gibt es einen Syntaxfehler?</strong>
-Ein Python-Syntaxfehler erscheint in <code>Player.log</code> so:</p>
+Ein Python-Syntaxfehler erscheint in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a> so:</p>
 <div class="highlight"><pre><span></span><code>Python syntax error: &lt;message&gt; (line N, column M)
 </code></pre></div>
 <p>Dann wird die ganze Datei übersprungen; nichts darin wird registriert. Mods laufen auf IronPython 3.4: Halte dich an die Python-Features, die die <a href="../../examples/">Beispiele</a> nutzen, und vermeide alles, was neuer als Python 3.6 ist (<code>:=</code>, <code>match</code>).</p>
 <p><strong>5. Wurde das JSON gelesen?</strong>
-Eine kaputte Missionsdatei wird mit dieser Zeile in <code>Player.log</code> übersprungen:</p>
+Eine kaputte Missionsdatei wird mit dieser Zeile in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a> übersprungen:</p>
 <div class="highlight"><pre><span></span><code>Mission file at &lt;path&gt; could not be parsed, skipping it: &lt;reason&gt;
 </code></pre></div>
 <p>Meistens liegt es an einem fehlenden Komma oder einem überzähligen am Ende einer Liste.</p>
@@ -2677,29 +2677,7 @@ missions/&lt;id&gt;/intel_threat_report
 </code></pre></div>
 <p>Sie lassen sich nicht umbenennen. Definiere sie mit <code>localization.SetTerm</code> oder füll die passenden <code>_raw*</code>-Felder im JSON (siehe <a href="../../scripting/localization/">Lokalisierung</a>). Die anderen sechs Schlüssel verwendet dein eigenes Skript, ein Tippfehler dort zeigt sich also als roher Schlüssel im Ereignisprotokoll statt im Missionsfenster.</p>
 <h2 id="reading-playerlog">Player.log lesen<a class="headerlink" href="#reading-playerlog" title="Permanent link">&para;</a></h2>
-<p>Das Spiel schreibt, was ihm auffällt, in eine Textdatei namens <code>Player.log</code>. Das veröffentlichte Spiel schreibt nur Fehler ins Log; die ausführlichen <code>[Mod ...]</code>-Zeilen erscheinen nur in Entwicklungs-Builds. Sie wird bei jedem Spielstart neu geschrieben, schau sie dir also an, während das Spiel läuft, oder direkt nachdem du es geschlossen hast.</p>
-<table>
-<thead>
-<tr>
-<th>Plattform</th>
-<th>Ort</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Windows</td>
-<td><code>%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Player.log</code></td>
-</tr>
-<tr>
-<td>macOS</td>
-<td><code>~/Library/Logs/Blindflug Studios/Ground Of Aces/Player.log</code></td>
-</tr>
-<tr>
-<td>Linux</td>
-<td><code>~/.config/unity3d/Blindflug Studios/Ground Of Aces/Player.log</code></td>
-</tr>
-</tbody>
-</table>
+<p>Das Spiel schreibt, was ihm auffällt, in eine Textdatei namens <code>Player.log</code>. Wo sie liegt und wie du sie öffnest: <a href="../../start/troubleshooting/#find-the-playerlog">Das Player.log finden</a>. Das veröffentlichte Spiel schreibt nur Fehler ins Log; die ausführlichen <code>[Mod ...]</code>-Zeilen erscheinen nur in Entwicklungs-Builds. Sie wird bei jedem Spielstart neu geschrieben, schau sie dir also an, während das Spiel läuft, oder direkt nachdem du es geschlossen hast.</p>
 <p>Öffne sie mit einem beliebigen Texteditor und such nach deinem Mod-Namen oder deiner Missions-Id. Deine eigenen Skripte können mit <code>logger.Log("...")</code> hineinschreiben, siehe <a href="../../scripting/api/#logger">API</a>.</p>
 
 

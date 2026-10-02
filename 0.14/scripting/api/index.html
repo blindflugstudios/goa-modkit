@@ -2681,7 +2681,7 @@
 </tr>
 <tr>
 <td><code>logger</code></td>
-<td>write debug lines to <code>Player.log</code></td>
+<td>write debug lines to <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a></td>
 </tr>
 </tbody>
 </table>
@@ -2795,8 +2795,8 @@
 <div class="highlight"><pre><span></span><code><span class="n">missions_api</span><span class="o">.</span><span class="n">CreateMission</span><span class="p">(</span><span class="s2">"mymod_airfield_pursuit"</span><span class="p">)</span>
 </code></pre></div>
 <p>Puts a mission on the war map immediately, skipping the weekly draw. Returns <code>True</code> if a mission was created.</p>
-<p>It still checks the target mission's own requirements and its map tags. If either fails, nothing is created, it returns <code>False</code>, and a warning naming the mission is written to <code>Player.log</code>. It also returns <code>False</code> for an unknown id. A script-only mission that has never been created has nothing to check yet and is always allowed.</p>
-<p>Call it from <code>set_mission_impact</code>, where the outcome is known. From <code>initialize_mission</code> it is refused and logged, because that handler runs in the middle of creating a mission.</p>
+<p>It still checks the target mission's own requirements and its map tags. If either fails, nothing is created, it returns <code>False</code>, and a warning naming the mission is written to <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>. It also returns <code>False</code> for an unknown id. A script-only mission that has never been created has nothing to check yet and is always allowed.</p>
+<p>Call it from <code>set_mission_impact</code>, where the outcome is known. From <code>initialize_mission</code> it is refused and <a href="../../start/troubleshooting/#find-the-playerlog">logged</a>, because that handler runs in the middle of creating a mission.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">MissionEvent</span><span class="o">.</span><span class="n">SET_MISSION_IMPACT</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">set_mission_impact</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">missions_api</span><span class="o">.</span><span class="n">IsMissionSuccessful</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">):</span>
@@ -3057,7 +3057,7 @@
 </code></pre></div>
 <p>This is what makes a campaign possible: a mission can ask how many raids have been lost, who won the first one, or what the player chose two missions ago. <a href="../../missions/chains/#from-a-chain-to-a-campaign">Chains and campaigns</a> has the full pattern and the three ways to get it wrong.</p>
 <h2 id="logger">logger<a class="headerlink" href="#logger" title="Permanent link">&para;</a></h2>
-<p>Writes to <code>Player.log</code> (where to find it: <a href="../../basics/testing/#reading-playerlog">Testing and reloading</a>).</p>
+<p>Writes to <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">Log</span><span class="p">(</span><span class="s2">"mymod: campaign state loaded"</span><span class="p">)</span>
 </code></pre></div>
 <p>Use <code>event_log</code> for anything the player should see; <code>logger</code> is for you, while debugging. Prefix your lines with your mod name so you can search for them.</p>

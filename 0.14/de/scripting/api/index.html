@@ -2681,7 +2681,7 @@
 </tr>
 <tr>
 <td><code>logger</code></td>
-<td>Debug-Zeilen in <code>Player.log</code> schreiben</td>
+<td>Debug-Zeilen in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a> schreiben</td>
 </tr>
 </tbody>
 </table>
@@ -2795,8 +2795,8 @@
 <div class="highlight"><pre><span></span><code><span class="n">missions_api</span><span class="o">.</span><span class="n">CreateMission</span><span class="p">(</span><span class="s2">"mymod_airfield_pursuit"</span><span class="p">)</span>
 </code></pre></div>
 <p>Setzt eine Mission sofort auf die Kriegskarte und überspringt die wöchentliche Ziehung. Gibt <code>True</code> zurück, wenn eine Mission erstellt wurde.</p>
-<p>Die eigenen Voraussetzungen und die Karten-Tags der Zielmission werden trotzdem geprüft. Scheitert eins davon, wird nichts erstellt, es gibt <code>False</code> zurück, und eine Warnung mit dem Namen der Mission wird in <code>Player.log</code> geschrieben. Bei einer unbekannten Id gibt es ebenfalls <code>False</code> zurück. Eine reine Skript-Mission, die noch nie erstellt wurde, hat noch nichts zu prüfen und ist immer erlaubt.</p>
-<p>Ruf es aus <code>set_mission_impact</code> auf, wo der Ausgang bekannt ist. Aus <code>initialize_mission</code> wird es abgelehnt und protokolliert, weil dieser Handler mitten in der Erstellung einer Mission läuft.</p>
+<p>Die eigenen Voraussetzungen und die Karten-Tags der Zielmission werden trotzdem geprüft. Scheitert eins davon, wird nichts erstellt, es gibt <code>False</code> zurück, und eine Warnung mit dem Namen der Mission wird in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a> geschrieben. Bei einer unbekannten Id gibt es ebenfalls <code>False</code> zurück. Eine reine Skript-Mission, die noch nie erstellt wurde, hat noch nichts zu prüfen und ist immer erlaubt.</p>
+<p>Ruf es aus <code>set_mission_impact</code> auf, wo der Ausgang bekannt ist. Aus <code>initialize_mission</code> wird es abgelehnt und <a href="../../start/troubleshooting/#find-the-playerlog">protokolliert</a>, weil dieser Handler mitten in der Erstellung einer Mission läuft.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@event_handler</span><span class="p">(</span><span class="n">MissionEvent</span><span class="o">.</span><span class="n">SET_MISSION_IMPACT</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">set_mission_impact</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">missions_api</span><span class="o">.</span><span class="n">IsMissionSuccessful</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">):</span>
@@ -3057,7 +3057,7 @@
 </code></pre></div>
 <p>Das macht eine Kampagne erst möglich: Eine Mission kann fragen, wie viele Angriffe verloren gingen, wer den ersten gewonnen hat oder was der Spieler vor zwei Missionen gewählt hat. <a href="../../missions/chains/#from-a-chain-to-a-campaign">Ketten und Kampagnen</a> zeigt das vollständige Muster und die drei Arten, es falsch zu machen.</p>
 <h2 id="logger">logger<a class="headerlink" href="#logger" title="Permanent link">&para;</a></h2>
-<p>Schreibt in <code>Player.log</code> (wo du sie findest: <a href="../../basics/testing/#reading-playerlog">Testen und neu laden</a>).</p>
+<p>Schreibt in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">Log</span><span class="p">(</span><span class="s2">"mymod: campaign state loaded"</span><span class="p">)</span>
 </code></pre></div>
 <p>Nimm <code>event_log</code> für alles, was der Spieler sehen soll; <code>logger</code> ist für dich, beim Debuggen. Setz deinen Mod-Namen vor deine Zeilen, damit du nach ihnen suchen kannst.</p>

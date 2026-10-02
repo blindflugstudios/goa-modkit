@@ -2813,7 +2813,7 @@
 <p>The file needs no mission handlers; it exists only to run this block. Put it in <code>Missions/</code>, not in <code>Quests/</code> - <code>Quests/</code> is read for <code>.json</code> only, and <code>Missions/</code> is the one folder the game loads scripts from. Call <code>SetTerm</code> once per language you want to support (<code>"de"</code>, <code>"fr"</code>, ...). A language you leave out shows the text of a language you did register, so always register <code>en</code>. The <code>try</code>/<code>except</code> matters: a syntax error skips only your script, but any other error at the top level of a script can stop the loading of every script after it - yours and other mods'.</p>
 <p>Registering a key the game already ships - a building name, a shipped quest title - <em>replaces</em> the game's own text for that language. Prefix your keys with your mod name so this can never happen by accident. Shipped quests name their keys <code>quest/&lt;questId&gt;/title</code>, <code>quest/&lt;questId&gt;/subQuest0_title</code> and <code>quest/&lt;questId&gt;/subQuest0_description</code>; nothing enforces that shape for your quests. More on terms: <a href="../scripting/localization/">Localization</a>.</p>
 <h3 id="icons">Icons<a class="headerlink" href="#icons" title="Permanent link">&para;</a></h3>
-<p><code>_genericIconKey</code> picks the step's icon from a fixed set built into the game. A key the game does not know simply shows no icon; nothing is logged. There is no way to add your own icons from a mod.</p>
+<p><code>_genericIconKey</code> picks the step's icon from a fixed set built into the game. A key the game does not know simply shows no icon; nothing is <a href="../start/troubleshooting/#find-the-playerlog">logged</a>. There is no way to add your own icons from a mod.</p>
 <table>
 <thead>
 <tr>
@@ -3385,7 +3385,7 @@
 </table>
 <p>The button is drawn on the quest card of the quest that owns the step. Note that <em>any</em> such button on <em>any</em> quest advances every type-23 step that is currently open, so keep to one at a time. With an empty <code>_parameter</code> no button is drawn, but the step still completes when a button on another quest is clicked.</p>
 <h3 id="types-that-do-nothing">Types that do nothing<a class="headerlink" href="#types-that-do-nothing" title="Permanent link">&para;</a></h3>
-<p><code>_type: 3</code> and <code>_type: 15</code> exist in old files but have no logic behind them; a step using either never progresses and nothing is logged. The same goes for any number outside the table. If a step sits at zero forever, check its <code>_type</code> first.</p>
+<p><code>_type: 3</code> and <code>_type: 15</code> exist in old files but have no logic behind them; a step using either never progresses and nothing is <a href="../start/troubleshooting/#find-the-playerlog">logged</a>. The same goes for any number outside the table. If a step sits at zero forever, check its <code>_type</code> first.</p>
 <h2 id="how-a-quest-starts">How a quest starts<a class="headerlink" href="#how-a-quest-starts" title="Permanent link">&para;</a></h2>
 <p><code>_requirements</code> decides <em>when the quest is handed to the player</em>. It has nothing to do with progress. All entries must pass (they are combined with AND). The check runs when a game is loaded or started, and again every time any quest completes - at that point only quests with a type-1 entry are checked again.</p>
 <table>
@@ -3458,7 +3458,7 @@
 <p><code>_questType: 0</code> is a normal quest and the one you want. The other two exist for the game's own content, and both come with strings attached.</p>
 <p><strong>Tutorial quests (<code>2</code>)</strong> additionally point the tutorial highlight at the buttons listed in <code>_highlightedUIElements</code>, one after the other, and can run console commands from <code>_cheatsOnStart</code> and <code>_completionCheats</code>. In a mod:</p>
 <ul>
-<li>The <strong>commands are removed</strong>. A mod quest with either list still loads, but the lists are ignored (development builds log a warning) and nothing runs.</li>
+<li>The <strong>commands are removed</strong>. A mod quest with either list still loads, but the lists are ignored (development builds <a href="../start/troubleshooting/#find-the-playerlog">log</a> a warning) and nothing runs.</li>
 <li>The highlight ids are a fixed list inside the game - the ids in the shipped tutorial quests (<code>SawStation</code>, <code>Sickbed</code>, <code>ParkingSmall</code>, <code>CrewRoleDropdown</code>, ...) are the vocabulary. An unknown id does nothing.</li>
 <li>The tutorial-only events (see <a href="#events">Events</a>) fire only while the tutorial itself is running, which only the player can switch on (the checkbox in the new-game window), not a mod.</li>
 </ul>
@@ -3657,10 +3657,10 @@
 </tr>
 </tbody>
 </table>
-<p>When a quest does not show up, or a step does not move, read the game's log file <code>Player.log</code> (where it is: <a href="../basics/mods/#seeing-your-changes">How mods work</a>).</p>
+<p>When a quest does not show up, or a step does not move, read the game's <a href="../start/troubleshooting/#find-the-playerlog">log</a> file <code>Player.log</code>.</p>
 <ul>
 <li>A quest file that is not valid JSON (a missing comma, an unclosed bracket) is <strong>not</strong> skipped - it breaks the loading of the level. Check your JSON in an editor before you test.</li>
-<li>A map that lists an unknown quest id, and a step that never progresses because of a wrong <code>_type</code> or a misspelt id, get <strong>no</strong> line in the log - check the tables above.</li>
+<li>A map that lists an unknown quest id, and a step that never progresses because of a wrong <code>_type</code> or a misspelt id, get <strong>no</strong> line in the <a href="../start/troubleshooting/#find-the-playerlog">log</a> - check the tables above.</li>
 </ul>
 <p>More testing tips: <a href="../basics/testing/">Testing and reloading</a>.</p>
 <h3 id="checklist-before-you-ship">Checklist before you ship<a class="headerlink" href="#checklist-before-you-ship" title="Permanent link">&para;</a></h3>

@@ -3544,7 +3544,7 @@
         <span class="n">missions_api</span><span class="o">.</span><span class="n">SetMissionStat</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">,</span> <span class="s2">"Fight"</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">115</span><span class="p">)</span>
         <span class="n">missions_api</span><span class="o">.</span><span class="n">SetAsPlannedChance</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">,</span> <span class="mi">35</span><span class="p">)</span>
 </code></pre></div>
-<p>Calling <code>missions_api.CreateMission</code> from here is refused and logged, because this handler runs in the middle of creating a mission.</p>
+<p>Calling <code>missions_api.CreateMission</code> from here is refused and <a href="../../start/troubleshooting/#find-the-playerlog">logged</a>, because this handler runs in the middle of creating a mission.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>On a mission with a JSON file, <code>SetMissionStat</code>, <code>SetOutcome</code>, <code>AddOutcomeEffect</code>, <code>AddMissionRequirement</code> and <code>SetTags</code> change the data the game loaded from that file, for the rest of the session. Every later copy of the mission sees the change, and effects you add pile up. Adjust stats and chances freely; add effects and gates only in script-only missions.</p>
@@ -3873,7 +3873,7 @@
 </tr>
 </tbody>
 </table>
-<p>A number where a range is expected, or the other way round, is not a crash: the game logs an error in <code>Player.log</code> and skips that one effect.</p>
+<p>A number where a range is expected, or the other way round, is not a crash: the game <a href="../../start/troubleshooting/#find-the-playerlog">logs</a> an error in <code>Player.log</code> and skips that one effect.</p>
 <h3 id="mission-stats">Mission stats<a class="headerlink" href="#mission-stats" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">"_missionStats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recon"</span><span class="p">,</span><span class="w">           </span><span class="nt">"_missionSkillType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">"_statRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mf">45.0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>

@@ -2521,10 +2521,10 @@
 <tr>
 <td><strong>The mission never appears</strong></td>
 <td>Its appearance rules are not met yet: <code>_missionRequirements</code> such as a minimum day (<code>EarliestAppearanceDay</code>) or runway tier (<code>RunwayTier</code>), or the mission's <code>_tags</code> do not match the map you play. Or the game has simply not drawn it yet.</td>
-<td>Test with the console: <code>create_mission &lt;your_mission_id&gt;</code> creates it right away. If that says <code>Unknown mission ID</code>, the mission did not load: check the Player.log.</td>
+<td>Test with the console: <code>create_mission &lt;your_mission_id&gt;</code> creates it right away. If that says <code>Unknown mission ID</code>, the mission did not load: check the <a href="#find-the-playerlog">Player.log</a>.</td>
 </tr>
 <tr>
-<td><strong>The game breaks when my mission ends</strong> (error in the log, no result)</td>
+<td><strong>The game breaks when my mission ends</strong> (error in the <a href="#find-the-playerlog">log</a>, no result)</td>
 <td><code>_missionOutcomes</code> does not have <strong>exactly 4</strong> entries. The game only notices when it picks the result.</td>
 <td>Give it exactly 4 outcomes in the fixed order. The validator reports this as an error.</td>
 </tr>
@@ -2551,7 +2551,7 @@
 <tr>
 <td><strong>Texts show things like <code>missions/my_mission/mission_name</code>, or <code>null</code></strong></td>
 <td>The text for that key was never set: a typo in the key, a missing <code>localization.SetTerm</code> line, or the script did not load at all.</td>
-<td>Compare the key in the text with the key in <code>SetTerm</code>. If all texts are missing, the script failed to load: check the Player.log.</td>
+<td>Compare the key in the text with the key in <code>SetTerm</code>. If all texts are missing, the script failed to load: check the <a href="#find-the-playerlog">Player.log</a>.</td>
 </tr>
 <tr>
 <td><strong>The whole script seems to be skipped</strong></td>
@@ -2616,7 +2616,7 @@
 </code></pre></div>
 <p>The agent knows where the log lives on your system, finds the lines about your mod and suggests a fix.</p>
 <h2 id="still-stuck">Still stuck?<a class="headerlink" href="#still-stuck" title="Permanent link">&para;</a></h2>
-<p>Ask in the <a href="https://discord.com/channels/1006159027157356587/1551969822911242240">modding channel on Discord</a>. Attach your <code>Player.log</code>, the validator output, and your mod folder as a zip.</p>
+<p>Ask in the <a href="https://discord.com/channels/1006159027157356587/1551969822911242240">modding channel on Discord</a>. Attach your <a href="#find-the-playerlog"><code>Player.log</code></a>, the validator output, and your mod folder as a zip.</p>
 
 
 

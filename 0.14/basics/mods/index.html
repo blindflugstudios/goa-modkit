@@ -2642,7 +2642,7 @@
 </tr>
 <tr>
 <td><code>Objects/</code></td>
-<td>replacement models, textures and icons - buildings, workbenches, trainers and map objects alike</td>
+<td>replacement models, textures and icons - buildings, workbenches and trainers</td>
 <td><a href="../../content/objects/">Objects and models</a></td>
 </tr>
 <tr>
@@ -2661,7 +2661,7 @@
 <ul>
 <li>A subfolder only counts when there is something in it. An empty <code>CSV/</code> folder is the same as no <code>CSV/</code> folder.</li>
 <li>A mod folder with none of the subfolders above (or only empty ones) is ignored without a message.</li>
-<li>Symbolic links and junctions (shortcuts that point to another folder) are never followed, neither as the mod folder nor as one of its subfolders. The game skips them with a warning in the log.</li>
+<li>Symbolic links and junctions (shortcuts that point to another folder) are never followed, neither as the mod folder nor as one of its subfolders. The game skips them with a warning in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a>.</li>
 </ul>
 <p>For <code>CSV</code>, <code>Missions</code>, <code>Quests</code> and <code>Maps</code> only files directly inside the subfolder are read; anything deeper is ignored, with one exception: <code>Missions/Locations/</code> is read as well. <code>Objects</code> and <code>Biomes</code> hold replacement art and follow their own rules: in <code>Objects/</code> a model's <em>file name</em> is the id of the object it replaces (<code>Chair.fbx</code> replaces the chair), and subfolder names mean nothing. <code>Biomes/</code> holds one PNG per biome slot, named after the slot's number (<code>8.png</code>), directly inside the folder. <code>Airplanes/</code> holds new airplane skins, described on <a href="../../content/airplanes/">Airplane skins</a>.</p>
 <h3 id="configjson"><code>config.json</code><a class="headerlink" href="#configjson" title="Permanent link">&para;</a></h3>
@@ -2702,8 +2702,8 @@
 </table>
 <p>What happens when something is off:</p>
 <ul>
-<li>An <code>Id</code> that breaks the rule is ignored without a message, and the folder name is used instead - lower-cased, with every character other than letters, digits, <code>_</code>, <code>.</code> and <code>-</code> replaced by <code>_</code>. Log lines about your mod are labelled with this id, so a rejected id shows up as a label you did not expect. The mod's details view in the Mods window also shows the id the game actually uses.</li>
-<li>A <code>config.json</code> the game cannot read (a missing comma, a stray bracket) is reported in the log and treated as if it were absent.</li>
+<li>An <code>Id</code> that breaks the rule is ignored without a message, and the folder name is used instead - lower-cased, with every character other than letters, digits, <code>_</code>, <code>.</code> and <code>-</code> replaced by <code>_</code>. <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> lines about your mod are labelled with this id, so a rejected id shows up as a label you did not expect. The mod's details view in the Mods window also shows the id the game actually uses.</li>
+<li>A <code>config.json</code> the game cannot read (a missing comma, a stray bracket) is reported in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> and treated as if it were absent.</li>
 </ul>
 <h3 id="previewpng"><code>preview.png</code><a class="headerlink" href="#previewpng" title="Permanent link">&para;</a></h3>
 <p>Optional. A PNG at the root of the mod folder, at most 1 MB. The Mods window shows it next to the mod's name, and it becomes the item's picture when you upload the mod to the Workshop. Without one the Mods window shows a placeholder picture, and the Workshop item has no picture until you add one on its Steam page.</p>
@@ -2745,7 +2745,7 @@
 <p>Mods are applied Workshop items first, then the ones in your <code>Mods</code> folder, and inside each group in <code>LoadOrder</code> order - lower numbers first, ties broken by id. When two mods provide the same thing - a row in the same table, a quest with the same file name, a mission with the same id - the one applied <strong>last</strong> wins. Two consequences:</p>
 <ul>
 <li>Your own copy of a mod always beats the Workshop copy of the same mod. You can keep working on a mod you have already published and test your changes with the published version still subscribed.</li>
-<li>Two mods from the same place (both Workshop, or both in your <code>Mods</code> folder) with the same id are not both loaded. The second one found is skipped with a warning in the log.</li>
+<li>Two mods from the same place (both Workshop, or both in your <code>Mods</code> folder) with the same id are not both loaded. The second one found is skipped with a warning in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a>.</li>
 </ul>
 <p>The practical rule that follows: <strong>prefix every id you invent with your mod's name</strong>, so you never replace something by accident.</p>
 <p>Your own <code>Missions</code> and <code>Maps</code> folders next to <code>Mods</code> - where the in-game Mission Editor and the map editor save - are read after every mod and win over all of them:</p>
@@ -2801,30 +2801,7 @@
 <p>For now, any change to the 3D art in <code>Objects/</code> and <code>Biomes/</code> needs a restart of the game. A future update adds an option to reload mods from the main menu, which will make the restart unnecessary.</p>
 </div>
 <p><a href="../testing/">Testing and reloading</a> has more on this loop and on the tools that help while testing.</p>
-<p>The game writes what it accepted and what it refused to its log file, <code>Player.log</code>:</p>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Log file</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Windows</td>
-<td><code>%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Player.log</code></td>
-</tr>
-<tr>
-<td>macOS</td>
-<td><code>~/Library/Logs/Blindflug Studios/Ground Of Aces/Player.log</code></td>
-</tr>
-<tr>
-<td>Linux</td>
-<td><code>~/.config/unity3d/Blindflug Studios/Ground Of Aces/Player.log</code></td>
-</tr>
-</tbody>
-</table>
-<p>The previous run's log is kept next to it as <code>Player-prev.log</code>. The released game logs errors only; the detailed <code>[Mod ...]</code> lines described on the category pages appear only in development builds. So when in doubt, check the effect in the game itself. More on this in <a href="../testing/">Testing and reloading</a> and <a href="../../start/troubleshooting/">When nothing happens</a>.</p>
+<p>The game writes what it accepted and what it refused to its log file, <code>Player.log</code>. Where it is stored and how to open it: <a href="../../start/troubleshooting/#find-the-playerlog">Find the Player.log</a>. The released game logs errors only; the detailed <code>[Mod ...]</code> lines described on the category pages appear only in development builds. So when in doubt, check the effect in the game itself. More on this in <a href="../testing/">Testing and reloading</a> and <a href="../../start/troubleshooting/">When nothing happens</a>.</p>
 
 
 

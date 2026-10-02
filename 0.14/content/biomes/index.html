@@ -2548,12 +2548,12 @@
 <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>Biomes/</code> holds one PNG per ground type, named after its number: <code>8.png</code> repaints ground type 8, the first grass (see the <a href="#biome-names">list</a>).</li>
-<li>The number is written in plain digits without leading zeros: <code>8.png</code>, not <code>08.png</code>. A number outside <code>0</code> to <code>23</code> is reported in the log together with the valid range.</li>
-<li>Only files directly inside <code>Biomes/</code> count. Subfolders, other file types and other names are reported in the log and ignored.</li>
+<li>The number is written in plain digits without leading zeros: <code>8.png</code>, not <code>08.png</code>. A number outside <code>0</code> to <code>23</code> is reported in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> together with the valid range.</li>
+<li>Only files directly inside <code>Biomes/</code> count. Subfolders, other file types and other names are reported in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> and ignored.</li>
 <li>A mod cannot add new biomes, only repaint the 24 that exist. A map remembers which biome is painted where by number, so there is nothing a new one could be attached to.</li>
 <li>The biome's surface detail and its burnt look after a fire are not replaced.</li>
 <li>The game's own textures are untouched on disk. Switching the mod off (and restarting) brings the original ground back everywhere.</li>
-<li>The repainted ground is put together on the graphics card. On a computer whose graphics card cannot copy textures there, biome PNGs are not applied and the log says so. There is nothing to fix in the mod then.</li>
+<li>The repainted ground is put together on the graphics card. On a computer whose graphics card cannot copy textures there, biome PNGs are not applied and the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> says so. There is nothing to fix in the mod then.</li>
 </ul>
 <h3 id="the-texture">The texture<a class="headerlink" href="#the-texture" title="Permanent link">&para;</a></h3>
 <table>
@@ -2578,7 +2578,7 @@
 </tr>
 </tbody>
 </table>
-<p>A PNG over a limit is <strong>not scaled down</strong>: it is skipped with a warning in the log, and the game's own ground stays. Within the limits, the game resizes your texture to the size of its own ground textures, so any size works; a square image avoids stretching. The texture repeats across the ground, so it should tile seamlessly: the left edge must continue into the right edge, the top into the bottom.</p>
+<p>A PNG over a limit is <strong>not scaled down</strong>: it is skipped with a warning in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a>, and the game's own ground stays. Within the limits, the game resizes your texture to the size of its own ground textures, so any size works; a square image avoids stretching. The texture repeats across the ground, so it should tile seamlessly: the left edge must continue into the right edge, the top into the bottom.</p>
 <h2 id="biome-names">Biome names<a class="headerlink" href="#biome-names" title="Permanent link">&para;</a></h2>
 <p>The number is the biome's row in the <code>Biomes</code> table. Rows with the same number describe how that ground plays.</p>
 <table>
@@ -2738,14 +2738,14 @@
 </tbody>
 </table>
 <h2 id="several-mods-same-biome">Several mods, same biome<a class="headerlink" href="#several-mods-same-biome" title="Permanent link">&para;</a></h2>
-<p>If two enabled mods repaint the same biome, the mod applied last wins, and the log notes which one overrode which. See <a href="../../basics/mods/#which-mod-wins">How mods work</a> for the order.</p>
+<p>If two enabled mods repaint the same biome, the mod applied last wins, and the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> notes which one overrode which. See <a href="../../basics/mods/#which-mod-wins">How mods work</a> for the order.</p>
 <h2 id="when-something-does-not-show-up">When something does not show up<a class="headerlink" href="#when-something-does-not-show-up" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Did you <strong>restart the game</strong>? Biome textures are only imported at game start.</li>
 <li>Is the file directly inside <code>Biomes/</code>, named with a number from <code>0</code> to <code>23</code> and no leading zero?</li>
 <li>Is it a real PNG, at most 4096 × 4096 pixels and 10 MB?</li>
 </ul>
-<p>Problems are written to <code>Player.log</code> on lines that start with <code>[Mod &lt;your mod id&gt;]</code>. The detailed lines may only appear in development builds, so if the log is silent, go through the list above. The size limits for all art are also on <a href="../objects/#file-limits">Objects and models</a>.</p>
+<p>Problems are written to <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a> on lines that start with <code>[Mod &lt;your mod id&gt;]</code>. The detailed lines may only appear in development builds, so if the log is silent, go through the list above. The size limits for all art are also on <a href="../objects/#file-limits">Objects and models</a>.</p>
 
 
 

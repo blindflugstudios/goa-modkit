@@ -2682,7 +2682,7 @@
 <li>Builds the complete row as it would look after the change, on the side, without touching the real table yet.</li>
 <li>Fills in the two cells the game completes for you, if your change left them empty: <code>0</code> in <code>ResourceCost</code>, <code>None</code> in <code>Associated Task</code> of <code>BuildingComponents</code>. Any other empty cell is left empty for the check.</li>
 <li>Checks the whole row against the table's rules (value types, allowed ranges, references to other tables, see <a href="../csv/">CSV tables</a>).</li>
-<li>Only if everything passes, writes the row into the table. Otherwise it writes nothing, logs the reason, and moves on to the next command.</li>
+<li>Only if everything passes, writes the row into the table. Otherwise it writes nothing, <a href="../../start/troubleshooting/#find-the-playerlog">logs</a> the reason, and moves on to the next command.</li>
 </ol>
 <p>So a rejected command never leaves a half-changed row behind, and one bad command does not stop the others.</p>
 <h2 id="the-three-commands">The three commands<a class="headerlink" href="#the-three-commands" title="Permanent link">&para;</a></h2>
@@ -2711,7 +2711,7 @@
 </code></pre></div>
 <ul>
 <li>With <code>Columns</code>: clears the listed cells, exactly like a <code>Replace</code> with empty values.</li>
-<li>Without <code>Columns</code>: deletes the whole row. Only in the tables that allow it; elsewhere the log says the rows cannot be removed because saves and other content use their ids.</li>
+<li>Without <code>Columns</code>: deletes the whole row. Only in the tables that allow it; elsewhere the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> says the rows cannot be removed because saves and other content use their ids.</li>
 <li><code>Remove</code> never takes <code>Cells</code>.</li>
 </ul>
 <h2 id="order">Order<a class="headerlink" href="#order" title="Permanent link">&para;</a></h2>
@@ -2873,7 +2873,7 @@
 </tr>
 </tbody>
 </table>
-<p>The released game logs only errors to <code>Player.log</code>; the full list of lines appears in a development build or in the Unity editor.</p>
+<p>The released game <a href="../../start/troubleshooting/#find-the-playerlog">logs</a> only errors to <code>Player.log</code>; the full list of lines appears in a development build or in the Unity editor.</p>
 
 
 

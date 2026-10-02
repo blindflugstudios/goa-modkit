@@ -2580,7 +2580,7 @@
 <li>If you created a new mod folder (or a content folder such as <code>Quests/</code> that was empty when the game started), open <strong>Mods</strong> from the main menu and press <strong>Refresh</strong>. Opening the window alone does not scan the <code>Mods</code> folder again.</li>
 <li>Load your save. Missions, scripts, quests, CSV tables, maps and airplane skins are read fresh every time a save is loaded. Only art (<code>Objects/</code>, <code>Biomes/</code>) needs a full restart.</li>
 <li>For a mission, open the cheat console and type <code>create_mission &lt;your_mission_id&gt;</code> to put it on the war map right now.</li>
-<li>Something wrong? Open <code>Player.log</code> (see <a href="#reading-playerlog">below</a>).</li>
+<li>Something wrong? Open <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a> (see <a href="#reading-playerlog">below</a>).</li>
 </ol>
 <h2 id="reloading-without-restarting-the-game">Reloading without restarting the game<a class="headerlink" href="#reloading-without-restarting-the-game" title="Permanent link">&para;</a></h2>
 <p>Every time you load a save, the game reads your mod's content again: mission files, Python scripts, quests, CSV tables, maps and airplane skins, from the game itself and from every enabled mod. So the edit loop is: change a file, go back to the main menu, open <strong>Mods</strong>, load the save again.</p>
@@ -2631,14 +2631,14 @@ Mission files, event scripts and helper modules all go into <code>Mods/&lt;your_
 <p><strong>2. Is the mod enabled?</strong>
 A mod switched off in the Mods window is not loaded at all. A mod folder you created while the game was running appears only after you press <strong>Refresh</strong> in the Mods window (or restart the game).</p>
 <p><strong>3. Did the script load?</strong>
-In development builds, every script that loads successfully is listed in <code>Player.log</code> with its file name, followed by the handlers it registered. The released game logs errors only, so there a missing line proves nothing: check instead whether the script's effect shows up in the game.</p>
+In development builds, every script that loads successfully is listed in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a> with its file name, followed by the handlers it registered. The released game logs errors only, so there a missing line proves nothing: check instead whether the script's effect shows up in the game.</p>
 <p><strong>4. Is there a syntax error?</strong>
-A Python syntax error shows up in <code>Player.log</code> as:</p>
+A Python syntax error shows up in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a> as:</p>
 <div class="highlight"><pre><span></span><code>Python syntax error: &lt;message&gt; (line N, column M)
 </code></pre></div>
 <p>The whole file is then skipped; nothing in it registers. Mods run on IronPython 3.4: stick to the Python features the <a href="../../examples/">examples</a> use, and avoid anything newer than Python 3.6 (<code>:=</code>, <code>match</code>).</p>
 <p><strong>5. Did the JSON parse?</strong>
-A broken mission file is skipped with this line in <code>Player.log</code>:</p>
+A broken mission file is skipped with this line in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>:</p>
 <div class="highlight"><pre><span></span><code>Mission file at &lt;path&gt; could not be parsed, skipping it: &lt;reason&gt;
 </code></pre></div>
 <p>A missing comma or an extra one at the end of a list is the usual cause.</p>
@@ -2677,29 +2677,7 @@ missions/&lt;id&gt;/intel_threat_report
 </code></pre></div>
 <p>They cannot be renamed. Define them with <code>localization.SetTerm</code>, or fill the matching <code>_raw*</code> fields in the JSON (see <a href="../../scripting/localization/">Localization</a>). The other six keys are used by your own script, so a typo there shows up as a raw key in the event log rather than in the mission window.</p>
 <h2 id="reading-playerlog">Reading Player.log<a class="headerlink" href="#reading-playerlog" title="Permanent link">&para;</a></h2>
-<p>The game writes what it notices into a text file called <code>Player.log</code>. The released game logs errors only; the detailed <code>[Mod ...]</code> lines appear only in development builds. It is rewritten each time the game starts, so look at it while the game is running or right after closing it.</p>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Location</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Windows</td>
-<td><code>%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Player.log</code></td>
-</tr>
-<tr>
-<td>macOS</td>
-<td><code>~/Library/Logs/Blindflug Studios/Ground Of Aces/Player.log</code></td>
-</tr>
-<tr>
-<td>Linux</td>
-<td><code>~/.config/unity3d/Blindflug Studios/Ground Of Aces/Player.log</code></td>
-</tr>
-</tbody>
-</table>
+<p>The game writes what it notices into a text file called <code>Player.log</code>. Where it is stored and how to open it: <a href="../../start/troubleshooting/#find-the-playerlog">Find the Player.log</a>. The released game logs errors only; the detailed <code>[Mod ...]</code> lines appear only in development builds. It is rewritten each time the game starts, so look at it while the game is running or right after closing it.</p>
 <p>Open it with any text editor and search for your mod name or mission id. Your own scripts can write to it with <code>logger.Log("...")</code>, see <a href="../../scripting/api/#logger">API</a>.</p>
 
 

@@ -2682,7 +2682,7 @@
 <li>Es baut die komplette Zeile so, wie sie nach der Änderung aussähe, nebenbei, ohne die echte Tabelle schon anzufassen.</li>
 <li>Die beiden Zellen, die das Spiel für dich ausfüllt, setzt es, falls deine Änderung sie leer gelassen hat: <code>0</code> in <code>ResourceCost</code>, <code>None</code> in <code>Associated Task</code> von <code>BuildingComponents</code>. Jede andere leere Zelle bleibt für die Prüfung leer.</li>
 <li>Es prüft die ganze Zeile gegen die Regeln der Tabelle (Werttypen, erlaubte Bereiche, Verweise auf andere Tabellen, siehe <a href="../csv/">CSV-Tabellen</a>).</li>
-<li>Nur wenn alles passt, schreibt es die Zeile in die Tabelle. Sonst schreibt es nichts, protokolliert den Grund und macht mit dem nächsten Befehl weiter.</li>
+<li>Nur wenn alles passt, schreibt es die Zeile in die Tabelle. Sonst schreibt es nichts, <a href="../../start/troubleshooting/#find-the-playerlog">protokolliert</a> den Grund und macht mit dem nächsten Befehl weiter.</li>
 </ol>
 <p>Ein abgelehnter Befehl hinterlässt also nie eine halb geänderte Zeile, und ein fehlerhafter Befehl hält die anderen nicht auf.</p>
 <h2 id="the-three-commands">Die drei Befehle<a class="headerlink" href="#the-three-commands" title="Permanent link">&para;</a></h2>
@@ -2711,7 +2711,7 @@
 </code></pre></div>
 <ul>
 <li>Mit <code>Columns</code>: leert die aufgelisteten Zellen, genau wie ein <code>Replace</code> mit leeren Werten.</li>
-<li>Ohne <code>Columns</code>: löscht die ganze Zeile. Nur in den Tabellen, die das erlauben; anderswo sagt das Log, dass die Zeilen nicht entfernt werden können, weil Spielstände und andere Inhalte ihre Ids verwenden.</li>
+<li>Ohne <code>Columns</code>: löscht die ganze Zeile. Nur in den Tabellen, die das erlauben; anderswo sagt das <a href="../../start/troubleshooting/#find-the-playerlog">Log</a>, dass die Zeilen nicht entfernt werden können, weil Spielstände und andere Inhalte ihre Ids verwenden.</li>
 <li><code>Remove</code> nimmt nie <code>Cells</code>.</li>
 </ul>
 <h2 id="order">Reihenfolge<a class="headerlink" href="#order" title="Permanent link">&para;</a></h2>
@@ -2873,7 +2873,7 @@
 </tr>
 </tbody>
 </table>
-<p>Das veröffentlichte Spiel schreibt nur Fehler in <code>Player.log</code>; die vollständige Liste der Zeilen erscheint in einem Entwickler-Build oder im Unity-Editor.</p>
+<p>Das veröffentlichte Spiel schreibt nur Fehler in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>; die vollständige Liste der Zeilen erscheint in einem Entwickler-Build oder im Unity-Editor.</p>
 
 
 

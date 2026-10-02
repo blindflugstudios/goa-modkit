@@ -2667,7 +2667,7 @@
 <li>PNGs may sit in subfolders of <code>Airplanes/</code>, so you can sort them however you like. The game knows a file by its name alone.</li>
 <li>Capitalisation in file names does not matter: <code>desertrat_basemap_1001.png</code> is found as well.</li>
 <li>Only the <code>config.json</code> directly inside <code>Airplanes/</code> is read. A <code>config.json</code> in a subfolder is not.</li>
-<li>Any other file type is ignored, with a warning in the log.</li>
+<li>Any other file type is ignored, with a warning in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a>.</li>
 </ul>
 <h2 id="configjson"><code>config.json</code><a class="headerlink" href="#configjson" title="Permanent link">&para;</a></h2>
 <p><code>config.json</code> lists your skins under <code>Skins</code>. Each skin gets an entry, keyed by its <strong>skin id</strong>. The skin id also names the skin's textures and its thumbnail.</p>
@@ -2717,7 +2717,7 @@
 <p>Keep the file valid JSON: no comments, no trailing commas.</p>
 </div>
 <h3 id="when-a-skin-is-skipped">When a skin is skipped<a class="headerlink" href="#when-a-skin-is-skipped" title="Permanent link">&para;</a></h3>
-<p>A skin is left out, with a warning in the log, when:</p>
+<p>A skin is left out, with a warning in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a>, when:</p>
 <ul>
 <li>it names no <code>Airplane</code>,</li>
 <li>the <code>Airplane</code> it names does not exist,</li>
@@ -2751,7 +2751,7 @@
 <li>Only the base colour of tile 1001 is required.</li>
 <li>A tile you leave out keeps the texture of the base skin. So you can repaint just part of an airplane.</li>
 <li>A tile the base skin's material has no slot for is ignored.</li>
-<li>A texture may be at most 4096 × 4096 pixels and 10 MB, the same limits as for object art (see <a href="../objects/">Objects and models</a>). A file over the limit is not scaled down; it is skipped with a warning in the log.</li>
+<li>A texture may be at most 4096 × 4096 pixels and 10 MB, the same limits as for object art (see <a href="../objects/">Objects and models</a>). A file over the limit is not scaled down; it is skipped with a warning in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a>.</li>
 </ul>
 <h3 id="thumbnail">Thumbnail<a class="headerlink" href="#thumbnail" title="Permanent link">&para;</a></h3>
 <p><code>&lt;skinId&gt;.thumbnail.png</code> is the icon the skin selection shows for your skin, at most 512 × 512 pixels and 10 MB. It is optional: without one, the base skin's icon is shown.</p>
@@ -2871,10 +2871,10 @@
 </table>
 <p>More on the test loop in <a href="../../basics/testing/">Testing and reloading</a>.</p>
 <h2 id="checking-the-log">Checking the log<a class="headerlink" href="#checking-the-log" title="Permanent link">&para;</a></h2>
-<p>The game writes what it accepted and what it refused to <code>Player.log</code> (where to find it: <a href="../../basics/mods/">How mods work</a>). Lines about your mod start with <code>[Mod &lt;your mod id&gt;]</code>. When a skin does not show up, look there for the warnings described above: a skipped skin, an ignored file type or a texture over the size limit.</p>
+<p>The game writes what it accepted and what it refused to <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>. Lines about your mod start with <code>[Mod &lt;your mod id&gt;]</code>. When a skin does not show up, look there for the warnings described above: a skipped skin, an ignored file type or a texture over the size limit.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The released game logs errors only. The detailed <code>[Mod ...]</code> lines appear only in development builds. So when the log shows nothing about your mod, check the skin selection in the game itself.</p>
+<p>The released game <a href="../../start/troubleshooting/#find-the-playerlog">logs</a> errors only. The detailed <code>[Mod ...]</code> lines appear only in development builds. So when the log shows nothing about your mod, check the skin selection in the game itself.</p>
 </div>
 
 

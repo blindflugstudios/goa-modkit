@@ -2667,7 +2667,7 @@
 <li>PNGs dürfen in Unterordnern von <code>Airplanes/</code> liegen, du kannst sie also sortieren, wie du willst. Das Spiel erkennt eine Datei allein an ihrem Namen.</li>
 <li>Groß- und Kleinschreibung spielt bei Dateinamen keine Rolle: <code>desertrat_basemap_1001.png</code> wird ebenfalls gefunden.</li>
 <li>Gelesen wird nur die <code>config.json</code>, die direkt in <code>Airplanes/</code> liegt. Eine <code>config.json</code> in einem Unterordner nicht.</li>
-<li>Jeder andere Dateityp wird ignoriert, mit einer Warnung im Log.</li>
+<li>Jeder andere Dateityp wird ignoriert, mit einer Warnung im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a>.</li>
 </ul>
 <h2 id="configjson"><code>config.json</code><a class="headerlink" href="#configjson" title="Permanent link">&para;</a></h2>
 <p><code>config.json</code> listet deine Lackierungen unter <code>Skins</code>. Jede Lackierung bekommt einen Eintrag, benannt nach ihrer <strong>Skin-Id</strong>. Die Skin-Id gibt auch den Texturen und dem Vorschaubild der Lackierung ihren Namen.</p>
@@ -2717,7 +2717,7 @@
 <p>Die Datei muss gültiges JSON bleiben: keine Kommentare, keine Kommas am Ende.</p>
 </div>
 <h3 id="when-a-skin-is-skipped">Wann eine Lackierung übersprungen wird<a class="headerlink" href="#when-a-skin-is-skipped" title="Permanent link">&para;</a></h3>
-<p>Eine Lackierung wird weggelassen, mit einer Warnung im Log, wenn:</p>
+<p>Eine Lackierung wird weggelassen, mit einer Warnung im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a>, wenn:</p>
 <ul>
 <li>sie kein <code>Airplane</code> nennt,</li>
 <li>das genannte <code>Airplane</code> nicht existiert,</li>
@@ -2751,7 +2751,7 @@
 <li>Pflicht ist nur die Grundfarbe von Kachel 1001.</li>
 <li>Eine Kachel, die du weglässt, behält die Textur der Basis-Lackierung. So kannst du auch nur einen Teil eines Flugzeugs neu bemalen.</li>
 <li>Eine Kachel, für die das Material der Basis-Lackierung keinen Platz hat, wird ignoriert.</li>
-<li>Eine Textur darf höchstens 4096 × 4096 Pixel und 10 MB groß sein, dieselben Grenzen wie bei Objekt-Grafik (siehe <a href="../objects/">Objekte und Modelle</a>). Eine Datei über der Grenze wird nicht verkleinert, sondern mit einer Warnung im Log übersprungen.</li>
+<li>Eine Textur darf höchstens 4096 × 4096 Pixel und 10 MB groß sein, dieselben Grenzen wie bei Objekt-Grafik (siehe <a href="../objects/">Objekte und Modelle</a>). Eine Datei über der Grenze wird nicht verkleinert, sondern mit einer Warnung im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> übersprungen.</li>
 </ul>
 <h3 id="thumbnail">Vorschaubild<a class="headerlink" href="#thumbnail" title="Permanent link">&para;</a></h3>
 <p><code>&lt;skinId&gt;.thumbnail.png</code> ist das Symbol, das die Lackierungsauswahl für deine Lackierung zeigt, höchstens 512 × 512 Pixel und 10 MB. Es ist optional: Ohne eines wird das Symbol der Basis-Lackierung gezeigt.</p>
@@ -2871,10 +2871,10 @@
 </table>
 <p>Mehr zum Testablauf unter <a href="../../basics/testing/">Testen und neu laden</a>.</p>
 <h2 id="checking-the-log">Das Log prüfen<a class="headerlink" href="#checking-the-log" title="Permanent link">&para;</a></h2>
-<p>Das Spiel schreibt in <code>Player.log</code>, was es angenommen und was es abgelehnt hat (wo die Datei liegt: <a href="../../basics/mods/">So funktionieren Mods</a>). Zeilen zu deiner Mod beginnen mit <code>[Mod &lt;deine Mod-Id&gt;]</code>. Taucht eine Lackierung nicht auf, such dort nach den oben beschriebenen Warnungen: eine übersprungene Lackierung, ein ignorierter Dateityp oder eine Textur über der Größengrenze.</p>
+<p>Das Spiel schreibt in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>, was es angenommen und was es abgelehnt hat. Zeilen zu deiner Mod beginnen mit <code>[Mod &lt;deine Mod-Id&gt;]</code>. Taucht eine Lackierung nicht auf, such dort nach den oben beschriebenen Warnungen: eine übersprungene Lackierung, ein ignorierter Dateityp oder eine Textur über der Größengrenze.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Das veröffentlichte Spiel schreibt nur Fehler ins Log. Die ausführlichen <code>[Mod ...]</code>-Zeilen erscheinen nur in Entwickler-Builds. Steht im Log also nichts zu deiner Mod, prüfe die Lackierungsauswahl direkt im Spiel.</p>
+<p>Das veröffentlichte Spiel schreibt nur Fehler ins Log. Die ausführlichen <code>[Mod ...]</code>-Zeilen erscheinen nur in Entwickler-Builds. Steht im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> also nichts zu deiner Mod, prüfe die Lackierungsauswahl direkt im Spiel.</p>
 </div>
 
 

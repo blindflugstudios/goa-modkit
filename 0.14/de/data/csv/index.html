@@ -3608,7 +3608,7 @@
 <p>Diese Seite ist die vollständige Referenz: wohin die Dateien gehören, wie die beiden Dateiformate aussehen, was das Spiel prüft, bevor es einen Wert annimmt, und was jede Tabelle und jede Spalte bedeutet. Jeder Tabellenabschnitt unter <a href="#the-tables">Die Tabellen</a> beginnt mit einem Link zur eingebauten Datei, sodass du das Original öffnen oder speichern und seine Kopfzeile kopieren kannst.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Nichts hiervon kann dein Spiel dauerhaft beschädigen. Einen Wert, mit dem das Spiel nichts anfangen kann, lehnt es ab und schreibt den Grund ins Log; der eingebaute Wert bleibt. Wenn du den Mod-Ordner entfernst, ist alles wieder wie vorher.</p>
+<p>Nichts hiervon kann dein Spiel dauerhaft beschädigen. Einen Wert, mit dem das Spiel nichts anfangen kann, lehnt es ab und schreibt den Grund ins <a href="../../start/troubleshooting/#find-the-playerlog">Log</a>; der eingebaute Wert bleibt. Wenn du den Mod-Ordner entfernst, ist alles wieder wie vorher.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -3634,7 +3634,7 @@
 </code></pre></div>
 <p>Starte das Spiel, lade ein Level, und die Wand kostet eine Planke. Das ist schon die ganze Mod - kein Manifest, keine Registrierung.</p>
 <h2 id="the-two-file-formats">Die beiden Dateiformate<a class="headerlink" href="#the-two-file-formats" title="Permanent link">&para;</a></h2>
-<p>Eine Datei ist nach der Tabelle benannt, die sie ändert, und zwar <strong>exakt</strong>, inklusive Großbuchstaben: <code>VehicleData.csv</code>, niemals <code>vehicledata.csv</code>. Eine Datei, deren Name keine existierende Tabelle ist, wird übersprungen, und das Log sagt dir das.</p>
+<p>Eine Datei ist nach der Tabelle benannt, die sie ändert, und zwar <strong>exakt</strong>, inklusive Großbuchstaben: <code>VehicleData.csv</code>, niemals <code>vehicledata.csv</code>. Eine Datei, deren Name keine existierende Tabelle ist, wird übersprungen, und das <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> sagt dir das.</p>
 <p>Du kannst eines der beiden Formate verwenden oder beide. Innerhalb einer Mod werden zuerst die <code>.csv</code>-Dateien angewendet und danach die <code>.json</code>-Dateien, sodass ein Befehl eine Zeile verfeinern kann, die eine CSV-Datei hinzugefügt hat.</p>
 <h3 id="single-cells-json">Einzelne Zellen - <code>&lt;Table&gt;.json</code><a class="headerlink" href="#single-cells-json" title="Permanent link">&para;</a></h3>
 <p>Eine Liste von Befehlen, die von oben nach unten ausgeführt wird. Zu diesem Format solltest du greifen: Es ändert nur die Werte, die du nennst, und lässt alles andere in Ruhe.</p>
@@ -3743,7 +3743,7 @@ RandomActionChatProbability,0.6
 <p>Einige Tabellen verteilen eine Zeile auf mehrere Zeilen, weil diese Zeile eine Liste enthält - eine Aufgabe mit mehreren Einstellungen, ein Stimmungseffekt mit einer Variante pro Bettart. Eine einzelne Mod-Zeile kann keine Liste ausdrücken, deshalb werden solche Zeilen abgelehnt. Die Tabellenabschnitte weiter unten nennen sie.</p>
 <p>Nur in <code>ResourceCost</code> tragen einige Zeilen eine übrig gebliebene Überschrift in ihrer <code>Money</code>-Zelle und zählen deshalb als mehrere Zeilen. Dort hilft eine CSV mit der ganzen Zeile: Sie schreibt jede Zelle neu und räumt die Zeile dabei gleich auf. Betroffen sind die Ids <code>KickstarterCustomMonument</code>, <code>RadioTower</code>, <code>window_wood</code>, <code>window_tent</code>, <code>window_brick</code>, <code>window_hangar</code>, <code>window_concrete</code>, <code>Distillery</code>, <code>ParkingLarge</code> und <code>gravel</code>.</p>
 <h2 id="checking-what-happened">Nachsehen, was passiert ist<a class="headerlink" href="#checking-what-happened" title="Permanent link">&para;</a></h2>
-<p>Jede angenommene Änderung und jede Ablehnung ist eine Zeile im Log des Spiels, <code>Player.log</code> (wo du es findest: <a href="../../basics/mods/#seeing-your-changes">So funktionieren Mods</a>). Unter Windows gibt es im selben Ordner auch eine HTML-Version, die sich leichter lesen lässt. Die Kennung am Anfang jeder Zeile ist die Id der Mod.</p>
+<p>Jede angenommene Änderung und jede Ablehnung ist eine Zeile im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> des Spiels, <code>Player.log</code>. Unter Windows gibt es im selben Ordner auch eine HTML-Version, die sich leichter lesen lässt. Die Kennung am Anfang jeder Zeile ist die Id der Mod.</p>
 <div class="highlight"><pre><span></span><code>[Mod my_balance_mod] CSV/ResourceCost.json command 1 replaced cells Planks of row 'wall_wood'.
 [Mod my_balance_mod] CSV/VehicleData.csv overrides built-in row 'gladiator'.
 [Mod my_balance_mod] CSV/PropsInfluence.json command 4 removed row 'Drawer'.
@@ -3754,11 +3754,11 @@ RandomActionChatProbability,0.6
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Diese Zeilen werden als Informationen und Warnungen geschrieben. Das veröffentlichte Spiel schreibt nur Fehler in sein Log, du siehst sie also nur in einem Entwickler-Build oder im Unity-Editor. Im veröffentlichten Spiel prüfst du stattdessen die Wirkung im Spiel - lade ein Level und schau dir den geänderten Wert an.</p>
+<p>Diese Zeilen werden als Informationen und Warnungen geschrieben. Das veröffentlichte Spiel schreibt nur Fehler in sein <a href="../../start/troubleshooting/#find-the-playerlog">Log</a>, du siehst sie also nur in einem Entwickler-Build oder im Unity-Editor. Im veröffentlichten Spiel prüfst du stattdessen die Wirkung im Spiel - lade ein Level und schau dir den geänderten Wert an.</p>
 </div>
 <p>Ein falsch geschriebener Tabellenname oder eine nicht passende Kopfzeile erzeugt trotzdem eine <code>skipped:</code>-Zeile mit dem Dateinamen. <strong>Wenn du gar keine <code>[Mod ...]</code>-Zeilen siehst und die Änderung nicht auftaucht</strong>, hat das Spiel die Mod nicht erkannt: Der <code>CSV/</code>-Ordner war beim Spielstart noch leer (drück <strong>Refresh</strong> im Mods-Fenster), die Mod ist im Mods-Fenster ausgeschaltet, oder der Mod-Ordner ist ein symbolischer Link oder eine Junction, denen das Spiel nie folgt.</p>
 <h3 id="finding-a-tables-column-headers">Die Spaltenüberschriften einer Tabelle finden<a class="headerlink" href="#finding-a-tables-column-headers" title="Permanent link">&para;</a></h3>
-<p>Das Spiel liefert Kopfzeilen-Vorlagen für vier Tabellen (<code>BuildingComponents</code>, <code>PropsInfluence</code>, <code>ResourceCost</code> und <code>VehicleData</code>) in <code>Ground Of Aces_Data/StreamingAssets/Modding/Templates/</code> im Installationsordner mit (unter macOS: <code>Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/</code>). Für den Rest steht die Spaltenliste auf dieser Seite, und jeder Tabellenabschnitt verlinkt die eingebaute Datei. Oder frag das Spiel: Schreib absichtlich eine falsche Kopfzeile, lade einmal, und das Log gibt die erwarteten Spalten aus.</p>
+<p>Das Spiel liefert Kopfzeilen-Vorlagen für vier Tabellen (<code>BuildingComponents</code>, <code>PropsInfluence</code>, <code>ResourceCost</code> und <code>VehicleData</code>) in <code>Ground Of Aces_Data/StreamingAssets/Modding/Templates/</code> im Installationsordner mit (unter macOS: <code>Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/</code>). Für den Rest steht die Spaltenliste auf dieser Seite, und jeder Tabellenabschnitt verlinkt die eingebaute Datei. Oder frag das Spiel: Schreib absichtlich eine falsche Kopfzeile, lade einmal, und das <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> gibt die erwarteten Spalten aus.</p>
 <h2 id="load-order">Ladereihenfolge<a class="headerlink" href="#load-order" title="Permanent link">&para;</a></h2>
 <p>Mods werden in der Reihenfolge angewendet, die unter <a href="../../basics/mods/#which-mod-wins">Welche Mod gewinnt</a> beschrieben ist - zuerst Workshop, dann deine eigenen, niedrigere <code>LoadOrder</code> zuerst. Wenn zwei Mods dieselbe Zeile ändern, gewinnt die spätere bei den Zellen, die sie anfasst: Eine CSV mit der ganzen Zeile ersetzt alles, was eine frühere Mod an dieser Zeile gemacht hat, ein <code>Replace</code> nur die Zellen, die es nennt. Eine im Mods-Fenster ausgeschaltete Mod trägt nichts bei.</p>
 <h2 id="when-changes-take-effect">Wann Änderungen wirken<a class="headerlink" href="#when-changes-take-effect" title="Permanent link">&para;</a></h2>
@@ -5062,7 +5062,7 @@ vorher war - ein kaputter Zustand, kein definiertes "keine Phase". Eine Zeile mi
 <p>Name und Wert, 86 Einträge, jeder gelesen von dem Teil des Spiels, der ihn braucht.</p>
 <p>Diese Spalte akzeptiert <strong>alles</strong>, weil ein paar Einträge Text oder einen <code>min-max</code>-Bereich statt einer Zahl enthalten.
 Schreibst du <code>abc</code>, wo eine Zahl hingehört, wird das angenommen und dann als <code>0</code> gelesen - die Funktion hört still auf zu arbeiten,
-und im Log steht ein Fehler. Bei dieser Tabelle solltest du am vorsichtigsten sein.</p>
+und im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> steht ein Fehler. Bei dieser Tabelle solltest du am vorsichtigsten sein.</p>
 <p>Einträge, die du kennen solltest, bevor du sie änderst:</p>
 <ul>
 <li><code>TimeTickInterval</code> (0.6666) - echte Sekunden pro Spielminute. Halbierst du den Wert, läuft das ganze Spiel doppelt so schnell,

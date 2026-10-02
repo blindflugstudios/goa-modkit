@@ -1951,17 +1951,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#trees-rocks-and-other-map-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Bäume, Felsen und andere Kartenobjekte
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#file-limits" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2672,17 +2661,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#trees-rocks-and-other-map-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Bäume, Felsen und andere Kartenobjekte
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#file-limits" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2741,7 +2719,7 @@
 
 
 <h1 id="objekte-und-modelle">Objekte und Modelle<a class="headerlink" href="#objekte-und-modelle" title="Permanent link">&para;</a></h1>
-<p>Genug vom Standardfass? Eine Mod kann den Objekten des Spiels einen neuen Look geben: Möbeln, Zäunen, Geschützen, Schildern, Postern, Werkbänken, Trainingsgeräten und sogar den Bäumen, Büschen und Felsen auf der Karte. Entweder legst du ein eigenes 3D-Modell hinein, oder du behältst das Modell des Spiels und bemalst es mit einer neuen Textur. Außerdem kannst du einem Objekt ein neues Symbol im Baumenü geben.</p>
+<p>Genug vom Standardfass? Eine Mod kann den Objekten des Spiels einen neuen Look geben: Möbeln, Zäunen, Geschützen, Schildern, Postern, Werkbänken und Trainingsgeräten. Entweder legst du ein eigenes 3D-Modell hinein, oder du behältst das Modell des Spiels und bemalst es mit einer neuen Textur. Außerdem kannst du einem Objekt ein neues Symbol im Baumenü geben.</p>
 <p>Nur das Aussehen ändert sich. Größe im Raster, Kosten, Lebenspunkte, wo die Mannschaft steht, um es zu benutzen, und alle anderen Regeln bleiben so, wie das Spiel sie festlegt. Zahlen änderst du mit <a href="../../data/csv/">CSV-Tabellen</a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Beispieldateien</p>
@@ -2752,6 +2730,7 @@
   my_mod/
     Objects/
       Chair.glb               dein Modell für den Stuhl
+      Chair.destroyed.glb     der Stuhl, wenn er zerstört ist
       Chair.thumbnail.png     das neue Symbol des Stuhls im Baumenü
       Chair_BaseMap_1001.png  eine Textur dafür
       config.json             optionale Einstellungen
@@ -2763,50 +2742,18 @@
 <h2 id="quick-start">Schnellstart<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <p>Gib dem Stuhl ein neues Modell:</p>
 <ol>
-<li>Baue deinen Stuhl in deinem 3D-Programm in der Größe des Stuhls aus dem Spiel (in Metern) und exportiere ihn als <code>Chair.glb</code> (binäres glTF) oder <code>Chair.fbx</code>.</li>
+<li>Baue deinen Stuhl in deinem 3D-Programm in der Größe des Stuhls aus dem Spiel (in Metern) und exportiere ihn als <code>Chair.glb</code> (binäres glTF) oder <code>Chair.fbx</code>. Baue auch seinen zerstörten Look und exportiere ihn als <code>Chair.destroyed.glb</code> oder <code>Chair.destroyed.fbx</code>.</li>
 <li>Gib dem Material des Stuhls in deinem 3D-Programm einen Namen, zum Beispiel <code>MyChair</code>, und speichere seine Farbtextur als <code>MyChair_BaseMap_1001.png</code>.</li>
-<li>Lege beide Dateien in <code>Mods/my_mod/Objects/</code>.</li>
+<li>Lege alle drei Dateien in <code>Mods/my_mod/Objects/</code>.</li>
 <li>Starte das Spiel neu und lade einen Spielstand. Jeder Stuhl, die schon aufgestellten und neu gebaute, verwendet jetzt dein Modell.</li>
 </ol>
 <p>Willst du nur den Stuhl des Spiels umfärben? Dafür brauchst du gar kein Modell: siehe <a href="#re-painting-without-a-model">Übermalen ohne Modell</a>.</p>
 <h2 id="which-objects-can-be-changed">Welche Objekte sich ändern lassen<a class="headerlink" href="#which-objects-can-be-changed" title="Permanent link">&para;</a></h2>
-<p>Der <strong>Dateiname</strong> eines Modells ist die Id des Objekts, das es ersetzt. Vier Arten von Objekten teilen sich den einen Ordner, und ihre Ids überschneiden sich nie:</p>
-<table>
-<thead>
-<tr>
-<th>Art</th>
-<th>Woher die Ids kommen</th>
-<th>Beispiele</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Objekte, die du aus dem Baumenü platzierst</td>
-<td>die Spalte <code>ID</code> der Tabelle <code>BuildingComponents</code></td>
-<td><code>Chair</code>, <code>Shelf</code>, <code>WoodenChair</code></td>
-</tr>
-<tr>
-<td>Werkbänke</td>
-<td>die Liste unter <a href="../moddable-objects/">Veränderbare Objekte</a></td>
-<td><code>FieldKitchen</code>, <code>SawStation</code></td>
-</tr>
-<tr>
-<td>Trainingsobjekte</td>
-<td>die Liste unter <a href="../moddable-objects/">Veränderbare Objekte</a></td>
-<td><code>ShootingSimpleTargetRange</code></td>
-</tr>
-<tr>
-<td>Kartenobjekte: Bäume, Felsen, Teiche und andere Dinge, die du erntest</td>
-<td>die Spalte <code>ID</code> der Tabelle <code>MapObjects</code></td>
-<td><code>tree</code>, <code>bush_big</code>, <code>large_rock</code></td>
-</tr>
-</tbody>
-</table>
-<p>Jedes Objekt aus dem Baumenü, jede Werkbank und jedes Trainingsobjekt, das du ändern kannst, steht unter <a href="../moddable-objects/">Veränderbare Objekte</a>. Die Kartenobjekte stehen unter <a href="../texture-names/#map-objects">Eingebaute Texturnamen</a>.</p>
+<p>Der <strong>Dateiname</strong> eines Modells ist die Id des Objekts, das es ersetzt. Du kannst die Objekte ändern, die du aus dem Baumenü platzierst, auch Werkbänke und Trainingsobjekte, zum Beispiel <code>Chair</code>, <code>FieldKitchen</code> oder <code>ShootingSimpleTargetRange</code>. Jedes Objekt, das du ändern kannst, steht in unserer <a href="https://airtable.com/appvUVR7eS3bq1S8f/shrKPxjhkGlHRUmpO">Tabelle der veränderbaren Objekte</a>, zusammen mit dem, wie wir es selbst gebaut haben: Benennung und Verwendung der Materialien, Texturauflösung, UDIM-Angaben und seine zerstörte Ansicht.</p>
 <p>Bei den Ids spielt Groß- und Kleinschreibung keine Rolle, <code>chair.fbx</code> ändert also auch den Stuhl.</p>
-<p>Mit <code>Objects/</code> lassen sich nur diese vier Arten von Objekten neu gestalten. Flugzeuge bekommen neue Lackierungen auf anderem Weg: siehe <a href="../airplanes/">Flugzeug-Skins</a>. Den Boden änderst du mit <a href="../biomes/">Biomen</a>.</p>
+<p>Mit <code>Objects/</code> lassen sich nur diese Objekte neu gestalten. Bäume, Felsen und die anderen Dinge, die auf einer Karte platziert sind, kann eine Mod noch nicht ändern. Flugzeuge bekommen neue Lackierungen auf anderem Weg: siehe <a href="../airplanes/">Flugzeug-Skins</a>. Den Boden änderst du mit <a href="../biomes/">Biomen</a>.</p>
 <h2 id="file-names">Dateinamen<a class="headerlink" href="#file-names" title="Permanent link">&para;</a></h2>
-<p>Jede Datei, die zu einem Objekt gehört, heißt <code>&lt;objectId&gt;[.&lt;variant&gt;][.destroyed|.thumbnail]</code> plus Dateiendung. Die Teile in eckigen Klammern sind optional:</p>
+<p>Jede Datei, die zu einem Objekt gehört, heißt <code>&lt;objectId&gt;</code>, <code>&lt;objectId&gt;.destroyed</code> oder <code>&lt;objectId&gt;.thumbnail</code>, plus Dateiendung:</p>
 <table>
 <thead>
 <tr>
@@ -2827,22 +2774,13 @@
 <td><code>Chair.thumbnail.png</code></td>
 <td>das Symbol des Stuhls im Baumenü</td>
 </tr>
-<tr>
-<td><code>tree.2.glb</code></td>
-<td>nur Variante 2 des Kartenobjekts <code>tree</code></td>
-</tr>
-<tr>
-<td><code>tree.glb</code></td>
-<td>jede Variante von <code>tree</code>, die keine eigene Datei hat</td>
-</tr>
 </tbody>
 </table>
 <ul>
-<li><strong>Modelle</strong> dürfen <code>.glb</code> (binäres glTF) oder <code>.fbx</code> sein. Gibt es beide für dasselbe Objekt, wird die <code>.glb</code> verwendet und die <code>.fbx</code> im Log als ignoriert gemeldet.</li>
-<li><strong>Varianten</strong> gibt es nur bei Kartenobjekten, und sie werden ab <code>0</code> gezählt: <code>tree.0</code> ist die erste Variante von <code>tree</code>, <code>tree.1</code> die zweite.</li>
-<li><strong>Variantennummern</strong> sind einfache Ziffern ohne führende Nullen: <code>tree.2</code>, niemals <code>tree.02</code>. Deshalb werden auch Blenders Duplikatnamen wie <code>Chair.001.fbx</code> abgelehnt. Benenne die Datei um, bevor du sie hineinkopierst.</li>
-<li><strong>Ein zerstörtes Modell</strong> ist optional. Manche Objekte werden nie zerstört gezeigt; ein zerstörtes Modell für so ein Objekt wird mit einer Warnung im Log übersprungen.</li>
-<li><strong>Alles andere</strong> im Ordner, das weder Modell noch PNG noch die <code>config.json</code> direkt in <code>Objects/</code> ist, wird im Log gemeldet und ignoriert.</li>
+<li><strong>Modelle</strong> dürfen <code>.glb</code> (binäres glTF) oder <code>.fbx</code> sein. Gibt es beide für dasselbe Objekt, wird die <code>.glb</code> verwendet und die <code>.fbx</code> im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> als ignoriert gemeldet.</li>
+<li><strong>Blenders Duplikatnamen</strong> wie <code>Chair.001.fbx</code> werden abgelehnt. Benenne die Datei um, bevor du sie hineinkopierst.</li>
+<li><strong>Ein zerstörtes Modell</strong> ist Pflicht. Das Spiel zeigt immer den zerstörten Look eines Objekts, deshalb braucht jedes Modell, das du mitlieferst, ein <code>.destroyed</code>-Modell daneben. Die <a href="https://airtable.com/appvUVR7eS3bq1S8f/shrKPxjhkGlHRUmpO">Tabelle der veränderbaren Objekte</a> zeigt die zerstörte Ansicht jedes Objekts.</li>
+<li><strong>Alles andere</strong> im Ordner, das weder Modell noch PNG noch die <code>config.json</code> direkt in <code>Objects/</code> ist, wird im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> gemeldet und ignoriert.</li>
 </ul>
 <h2 id="subfolders">Unterordner<a class="headerlink" href="#subfolders" title="Permanent link">&para;</a></h2>
 <p>Du darfst deine Dateien beliebig in Unterordner von <code>Objects/</code> sortieren, aber <strong>die Namen der Unterordner bedeuten nichts</strong>: Eine Datei zählt nur über ihren Namen. <code>Objects/Chair/model.fbx</code> ist ein Modell für ein Objekt namens <code>model</code>, nicht für den Stuhl. Nenne sie stattdessen <code>Objects/Chair/Chair.fbx</code>.</p>
@@ -2851,8 +2789,7 @@
 <ul>
 <li><strong>Größe und Ausrichtung.</strong> Baue das Modell im Maßstab des Spiels, in Metern, und in dieselbe Richtung ausgerichtet wie das Objekt des Spiels. Dein Modell wird auf den Ursprung des Originals gesetzt und nicht passend skaliert, setze seinen Ursprung also dorthin, wo ihn das Original hat, meist auf den Boden in die Mitte des Objekts. Eine FBX wird beim Einlesen auf Y nach oben und Meter umgerechnet, und eine auf dem üblichen Weg aus Blender exportierte FBX schaut in dieselbe Richtung wie die Grafik des Spiels.</li>
 <li><strong>Nur das Aussehen ändert sich.</strong> Die Grundfläche des Objekts im Raster, wo die Mannschaft steht, um es zu benutzen, und womit es zusammenstößt, bleiben die des Spiels. Ein Modell, das viel größer ist als das Original, ragt durch Wände und Nachbarn.</li>
-<li><strong>Detailstufen.</strong> Nenne die Teile deines Modells <code>LOD0</code>, <code>LOD1</code>, <code>LOD2</code> und so weiter (Groß- und Kleinschreibung egal; <code>LOD1_Trunk</code> und <code>lod2.001</code> zählen auch). Sie werden zu seinen Detailstufen und wechseln bei denselben Entfernungen wie beim Original. Hast du weniger Stufen als das Original, bleibt deine letzte bis zu der Entfernung, in der das Objekt verschwindet. Ein Modell ohne <code>LOD</code>-Namen sieht in jeder Entfernung gleich aus. Stufen wechseln nur bei Objekten, die eingebaute Detailstufen haben. Bei allen anderen werden alle <code>LOD</code>-Teile gleichzeitig übereinander gezeichnet, gib so einem Objekt also nur eine Stufe.</li>
-<li><strong>Effekte</strong> des Originals, etwa das Sägemehl einer Werkbank oder die Blätter eines Baums, der gefällt wird, laufen auf deinem Modell weiter.</li>
+<li><strong>Effekte</strong> des Originals, etwa das Sägemehl einer Werkbank, laufen auf deinem Modell weiter.</li>
 <li><strong>Nur unbewegte Modelle.</strong> Animationen in einer FBX werden nicht eingelesen, und das Spiel animiert ein Mod-Modell nie.</li>
 <li><strong>Höchstens 32 MB</strong> pro Modelldatei. Eine größere Datei wird mit einer Warnung übersprungen, und das Objekt behält seinen eingebauten Look.</li>
 </ul>
@@ -2863,7 +2800,7 @@
 <li>Normalen so, wie sie exportiert wurden. Ein Mesh ohne Normalen bekommt weiche Normalen.</li>
 <li><strong>Nur die erste UV-Map.</strong> Jede weitere UV-Map wird ignoriert, lege die UVs, die deine Texturen verwenden, also auf die erste.</li>
 <li>Flächen mit mehr als drei Ecken werden in Dreiecke zerlegt. Das ist nur bei flachen, konvexen Flächen exakt. Trianguliere ungewöhnliche Flächen vor dem Export, oder setze im FBX-Export von Blender den Haken bei <strong>Triangulate Faces</strong>.</li>
-<li>Pro Material: die Grundfarbe und die Texturen, die an Grundfarbe, Normal Map (oder Bump) und Emission hängen. Vertex-Farben, Metallic, Roughness und alle anderen Slots werden nicht gelesen.</li>
+<li>Pro Material: nur die Grundfarbe. Texturen, die am Material hängen, Vertex-Farben und alle anderen Materialeinstellungen werden nicht gelesen.</li>
 <li><strong>In die FBX eingebettete Bilder werden nie gelesen.</strong> Liefere die Texturen als PNG-Dateien in <code>Objects/</code> mit (siehe <a href="#textures">Texturen</a>).</li>
 </ul>
 <h2 id="textures">Texturen<a class="headerlink" href="#textures" title="Permanent link">&para;</a></h2>
@@ -2880,7 +2817,7 @@
 <tbody>
 <tr>
 <td>1</td>
-<td>dem <strong>Material</strong> in deinem Modell: <code>&lt;material&gt;_BaseMap_&lt;tile&gt;</code> und <code>&lt;material&gt;_Specular_&lt;tile&gt;</code></td>
+<td>dem <strong>Material</strong> in deinem Modell: <code>&lt;material&gt;_BaseMap_&lt;UDIM-Tile&gt;</code> und <code>&lt;material&gt;_Specular_&lt;UDIM-Tile&gt;</code></td>
 <td><code>MyChair_BaseMap_1001.png</code> für ein Material namens <code>MyChair</code></td>
 <td>ja</td>
 </tr>
@@ -2913,13 +2850,13 @@
 <tbody>
 <tr>
 <td>Gelesene Textur-Slots</td>
-<td>Grundfarbe, Metallic-Roughness, Normal, Occlusion, Emissive</td>
-<td>Grundfarbe, Normal (oder Bump), Emissive</td>
+<td>Grundfarbe</td>
+<td>Grundfarbe</td>
 </tr>
 <tr>
 <td>Keine PNG mit diesem Namen in <code>Objects/</code></td>
 <td>das in die <code>.glb</code> eingebettete Bild wird verwendet</td>
-<td>der Slot bleibt ohne Textur, und das Log nennt die Textur, nach der gesucht wurde</td>
+<td>der Slot bleibt ohne Textur, und das <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> nennt die Textur, nach der gesucht wurde</td>
 </tr>
 <tr>
 <td>Bilder außerhalb der Datei</td>
@@ -2933,7 +2870,7 @@
 <p>Eine PNG, die genauso heißt wie eine der Texturen des Spiels, <strong>ersetzt diese Textur</strong>, ganz ohne Modell. <code>Objects/BedMetal_Toon-Main_BaseMap_1001.png</code> übermalt das Metallbett überall, wo es auftaucht, auch seinen zerstörten Look. Jedes Objekt, das dieselbe Textur verwendet, ändert sich mit.</p>
 <ul>
 <li>Male über das Originalbild in derselben Größe und Aufteilung, denn das Modell bleibt das des Spiels.</li>
-<li>Die Texturnamen des Spiels sehen meist so aus: <code>&lt;Material&gt;_Toon-Main_BaseMap_&lt;tile&gt;</code> und <code>&lt;Material&gt;_Toon-Main_Specular_&lt;tile&gt;</code>. Die Texturnamen jedes Objekts stehen unter <a href="../texture-names/">Eingebaute Texturnamen</a>.</li>
+<li>Die Texturnamen des Spiels sehen meist so aus: <code>&lt;Material&gt;_Toon-Main_BaseMap_&lt;UDIM-Tile&gt;</code> und <code>&lt;Material&gt;_Toon-Main_Specular_&lt;UDIM-Tile&gt;</code>. Die Texturnamen jedes Objekts stehen unter <a href="../texture-names/">Eingebaute Texturnamen</a>.</li>
 <li>Übermalt wird nur die Grafik des Objekts selbst. Was sich alle Objekte teilen, etwa die Baukiste, Platzierungsmarkierungen und Reichweitenanzeigen, behält seinen Look. Flugzeuge (siehe <a href="../airplanes/">Flugzeug-Skins</a>) und der Boden (siehe <a href="../biomes/">Biome</a>) werden so nicht geändert.</li>
 <li>Liefern zwei Mods denselben Texturnamen, gewinnt die, die später in der Ladereihenfolge kommt.</li>
 </ul>
@@ -2973,35 +2910,26 @@
 <li>Eine nach dem Material benannte Grundfarbe wird so gezeichnet, wie sie ist: Die Farbe, die das Material in deinem Modell hat, wird ignoriert, weil ein FBX-Material ohne Bild trotzdem Blenders graue Voreinstellung mitträgt.</li>
 </ul>
 <h2 id="game-material-or-your-own">Material des Spiels oder dein eigenes<a class="headerlink" href="#game-material-or-your-own" title="Permanent link">&para;</a></h2>
-<p>Standardmäßig wird dein Modell mit <strong>dem Material des Spiels</strong> für dieses Objekt gezeichnet, mit der Grundfarbtextur und der Grundfarbe deines Modells. Nur so zeigen sich Kampfschäden und die anderen Effekte, die das Spiel auf Objekte malt, auch auf deinem Modell. Normal-, Metallic-Roughness-, Occlusion- und Emissive-Maps deines Modells werden dabei nicht verwendet; Specular Maps und UDIM-Kacheln schon.</p>
+<p>Standardmäßig wird dein Modell mit <strong>dem Material des Spiels</strong> für dieses Objekt gezeichnet, mit der Grundfarbtextur und der Grundfarbe deines Modells. Nur so zeigen sich Kampfschäden und die anderen Effekte, die das Spiel auf Objekte malt, auch auf deinem Modell. Specular Maps und UDIM-Kacheln werden ebenfalls verwendet.</p>
 <p>Willst du das Material stattdessen genau so behalten, wie du es gebaut hast, schaltest du das Material des Spiels für dieses Objekt in <code>Objects/config.json</code> aus. Gelesen wird nur die <code>config.json</code> direkt in <code>Objects/</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">"Objects"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">"Chair"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"UseGameMaterial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">"tree"</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"UseGameMaterial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nt">"Chair"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"UseGameMaterial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>Die Schlüssel sind Objekt-Ids wie in den Dateinamen, Groß- und Kleinschreibung egal. Ein Eintrag für <code>tree</code> gilt auch für <code>tree.2</code>, außer <code>tree.2</code> hat einen eigenen Eintrag.</li>
+<li>Die Schlüssel sind Objekt-Ids wie in den Dateinamen, Groß- und Kleinschreibung egal.</li>
 <li>Ein Objekt mit <code>"UseGameMaterial": false</code> behält seinen vollen Look aus deinem 3D-Programm, <strong>zeigt aber keine Kampfschäden</strong>. Außerdem verwendet es nur die Textur, die sein Material nennt (Weg 2), ohne Specular Maps und UDIM-Kacheln.</li>
-<li>Auch mit <code>false</code> verwendet ein Material ohne Grundfarbtextur trotzdem das Material des Spiels und behält die Farbe, die du ihm gegeben hast. Genauso ein <code>.glb</code>-Material, das kein normales Metallic-Roughness-Material ist (ein unbeleuchtetes oder ein Specular-Glossiness-Material).</li>
-<li>Eine <code>config.json</code>, die das Spiel nicht lesen kann, wird im Log gemeldet, und jedes Objekt fällt auf die Voreinstellung zurück.</li>
+<li>Auch mit <code>false</code> verwendet ein Material ohne Grundfarbtextur trotzdem das Material des Spiels und behält die Farbe, die du ihm gegeben hast.</li>
+<li>Eine <code>config.json</code>, die das Spiel nicht lesen kann, wird im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> gemeldet, und jedes Objekt fällt auf die Voreinstellung zurück.</li>
 </ul>
 <h2 id="thumbnails">Vorschaubilder<a class="headerlink" href="#thumbnails" title="Permanent link">&para;</a></h2>
 <p><code>&lt;objectId&gt;.thumbnail.png</code> ersetzt das Symbol des Objekts im Baumenü und überall sonst, wo dieses Symbol gezeigt wird.</p>
 <ul>
-<li><strong>Höchstens 512 × 512 Pixel</strong> und höchstens 10 MB. Jede Seite zählt für sich, 512 × 256 geht also. Ein größeres Vorschaubild wird <strong>nicht verkleinert</strong>: Es wird mit einer Warnung im Log übersprungen, und das Symbol des Spiels bleibt.</li>
+<li><strong>Höchstens 512 × 512 Pixel</strong> und höchstens 10 MB. Jede Seite zählt für sich, 512 × 256 geht also. Ein größeres Vorschaubild wird <strong>nicht verkleinert</strong>: Es wird mit einer Warnung im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> übersprungen, und das Symbol des Spiels bleibt.</li>
 <li>Ein Vorschaubild wird nur <strong>neben einem Modell mit derselben Id</strong> verwendet. Es kann nicht das Symbol eines Objekts ändern, dem deine Mod kein neues Modell gibt; ein Vorschaubild allein wird gemeldet und ignoriert.</li>
 <li>Ein Vorschaubild pro Objekt. Eine zweite Datei mit demselben Namen in einem anderen Unterordner wird ignoriert.</li>
-<li>Kartenobjekte stehen nicht im Baumenü, ein Vorschaubild für eins kann also nirgends auftauchen.</li>
-</ul>
-<h2 id="trees-rocks-and-other-map-objects">Bäume, Felsen und andere Kartenobjekte<a class="headerlink" href="#trees-rocks-and-other-map-objects" title="Permanent link">&para;</a></h2>
-<p>Bäume, Büsche, Felsen, Teiche und die anderen Dinge, die auf einer Karte platziert sind, änderst du über <code>Objects/</code> genauso wie Objekte aus dem Baumenü. Einen eigenen Ordner <code>TerrainObjects/</code> gibt es nicht mehr; eine Mod, die nur einen Ordner <code>TerrainObjects/</code> hat, wird gar nicht bemerkt.</p>
-<ul>
-<li>Die Id kommt aus der Spalte <code>ID</code> der Tabelle <code>MapObjects</code>, zum Beispiel <code>tree</code>, <code>bush_big</code> oder <code>large_rock</code>. Alle stehen mit ihren Texturnamen unter <a href="../texture-names/#map-objects">Eingebaute Texturnamen</a>.</li>
-<li>Viele Kartenobjekte gibt es in mehreren Varianten. <code>tree.glb</code> ersetzt jede Variante des Baums; <code>tree.0.glb</code>, <code>tree.1.glb</code> und so weiter ersetzen nur eine, gezählt ab <code>0</code>.</li>
-<li>Was du von ihnen erntest, wie lange es dauert und wo sie wachsen, bleibt gleich.</li>
 </ul>
 <h2 id="file-limits">Dateigrenzen<a class="headerlink" href="#file-limits" title="Permanent link">&para;</a></h2>
 <p>Jede Datei in <code>Objects/</code> und <code>Biomes/</code> wird geprüft, bevor sie geladen wird:</p>
@@ -3039,10 +2967,10 @@
 <ul>
 <li>Jedes Bild muss eine echte PNG sein. Ein in <code>.png</code> umbenanntes JPEG wird abgelehnt.</li>
 <li>Die Bildgrenze gilt für jede Seite einzeln.</li>
-<li>Ein Bild über seiner Grenze wird <strong>nie verkleinert</strong>. Es wird mit einer Warnung im Log übersprungen, und das Spiel fällt zurück: Ein übersprungenes Vorschaubild lässt das Symbol des Spiels stehen, ein übersprungenes Biom den Boden des Spiels, und ein Material, dessen Textur übersprungen wurde, wird ohne sie gezeichnet.</li>
+<li>Ein Bild über seiner Grenze wird <strong>nie verkleinert</strong>. Es wird mit einer Warnung im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> übersprungen, und das Spiel fällt zurück: Ein übersprungenes Vorschaubild lässt das Symbol des Spiels stehen, ein übersprungenes Biom den Boden des Spiels, und ein Material, dessen Textur übersprungen wurde, wird ohne sie gezeichnet.</li>
 </ul>
 <h2 id="several-mods-changing-the-same-object">Mehrere Mods ändern dasselbe Objekt<a class="headerlink" href="#several-mods-changing-the-same-object" title="Permanent link">&para;</a></h2>
-<p>Ändern zwei eingeschaltete Mods dasselbe Objekt, gewinnt die Mod, die <strong>zuletzt</strong> angewendet wird, nach der Ladereihenfolge (siehe <a href="../../basics/mods/#which-mod-wins">So funktionieren Mods</a>). Das Log vermerkt, welche Mod welche überschrieben hat. Ein Objekt wird als Ganzes entschieden: Das Modell einer Mod wird nie mit dem Vorschaubild einer anderen Mod für dasselbe Objekt kombiniert.</p>
+<p>Ändern zwei eingeschaltete Mods dasselbe Objekt, gewinnt die Mod, die <strong>zuletzt</strong> angewendet wird, nach der Ladereihenfolge (siehe <a href="../../basics/mods/#which-mod-wins">So funktionieren Mods</a>). Das <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> vermerkt, welche Mod welche überschrieben hat. Ein Objekt wird als Ganzes entschieden: Das Modell einer Mod wird nie mit dem Vorschaubild einer anderen Mod für dasselbe Objekt kombiniert.</p>
 <h2 id="when-something-does-not-show-up">Wenn etwas nicht auftaucht<a class="headerlink" href="#when-something-does-not-show-up" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Hast du <strong>das Spiel neu gestartet</strong>? Grafik wird nur beim Spielstart eingelesen.</li>
@@ -3051,7 +2979,7 @@
 <li>Liegt jede Datei innerhalb der Grenzen oben, und ist jedes Bild eine echte PNG?</li>
 <li>Bei einer FBX: Liegen die Texturen als PNGs in <code>Objects/</code>, benannt nach dem Material oder nach dem Bild, das das Material verwendet?</li>
 </ul>
-<p>Das Spiel schreibt, was es abgelehnt hat und warum (ein falscher Name, eine fehlende Textur, ein zu großes Bild), in die <code>Player.log</code>, in Zeilen, die mit <code>[Mod &lt;your mod id&gt;]</code> beginnen. Wo das Log liegt, steht unter <a href="../../basics/mods/">So funktionieren Mods</a>. Die ausführlichen Zeilen erscheinen eventuell nur in Entwicklungsversionen. Ist das Log still, geh die Liste oben durch und schau dir das Objekt im Spiel an.</p>
+<p>Das Spiel schreibt, was es abgelehnt hat und warum (ein falscher Name, eine fehlende Textur, ein zu großes Bild), in die <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>, in Zeilen, die mit <code>[Mod &lt;your mod id&gt;]</code> beginnen. Die ausführlichen Zeilen erscheinen eventuell nur in Entwicklungsversionen. Ist das Log still, geh die Liste oben durch und schau dir das Objekt im Spiel an.</p>
 
 
 

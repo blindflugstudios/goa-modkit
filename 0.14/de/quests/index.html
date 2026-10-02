@@ -2813,7 +2813,7 @@
 <p>Die Datei braucht keine Missions-Handler; sie existiert nur, um diesen Block auszuführen. Leg sie in <code>Missions/</code>, nicht in <code>Quests/</code> - aus <code>Quests/</code> werden nur <code>.json</code>-Dateien gelesen, und <code>Missions/</code> ist der einzige Ordner, aus dem das Spiel Skripte lädt. Ruf <code>SetTerm</code> einmal pro Sprache auf, die du unterstützen willst (<code>"de"</code>, <code>"fr"</code>, ...). Eine Sprache, die du weglässt, zeigt den Text einer Sprache, die du registriert hast - registriere also immer <code>en</code>. Das <code>try</code>/<code>except</code> ist wichtig: Ein Syntaxfehler überspringt nur dein Skript, aber jeder andere Fehler auf der obersten Ebene eines Skripts kann das Laden aller folgenden Skripte stoppen - deiner und die anderer Mods.</p>
 <p>Registrierst du einen Schlüssel, den das Spiel schon mitbringt - einen Gebäudenamen, einen mitgelieferten Quest-Titel -, <em>ersetzt</em> du den Originaltext des Spiels für diese Sprache. Stell deinen Schlüsseln den Namen deiner Mod voran, damit das nie aus Versehen passiert. Mitgelieferte Quests benennen ihre Schlüssel <code>quest/&lt;questId&gt;/title</code>, <code>quest/&lt;questId&gt;/subQuest0_title</code> und <code>quest/&lt;questId&gt;/subQuest0_description</code>; für deine Quests ist diese Form nicht vorgeschrieben. Mehr zu Begriffen: <a href="../scripting/localization/">Lokalisierung</a>.</p>
 <h3 id="icons">Symbole<a class="headerlink" href="#icons" title="Permanent link">&para;</a></h3>
-<p><code>_genericIconKey</code> wählt das Symbol des Schritts aus einem festen Satz, der ins Spiel eingebaut ist. Ein Schlüssel, den das Spiel nicht kennt, zeigt einfach kein Symbol; nichts wird geloggt. Aus einer Mod kannst du keine eigenen Symbole hinzufügen.</p>
+<p><code>_genericIconKey</code> wählt das Symbol des Schritts aus einem festen Satz, der ins Spiel eingebaut ist. Ein Schlüssel, den das Spiel nicht kennt, zeigt einfach kein Symbol; nichts wird <a href="../start/troubleshooting/#find-the-playerlog">geloggt</a>. Aus einer Mod kannst du keine eigenen Symbole hinzufügen.</p>
 <table>
 <thead>
 <tr>
@@ -3385,7 +3385,7 @@
 </table>
 <p>Der Button erscheint auf der Quest-Karte der Quest, zu der der Schritt gehört. Beachte, dass <em>jeder</em> solche Button auf <em>jeder</em> Quest alle gerade offenen Typ-23-Schritte weiterschaltet - halte dich also an einen zur Zeit. Mit leerem <code>_parameter</code> wird kein Button gezeichnet, aber der Schritt wird trotzdem abgeschlossen, wenn ein Button auf einer anderen Quest angeklickt wird.</p>
 <h3 id="types-that-do-nothing">Typen, die nichts tun<a class="headerlink" href="#types-that-do-nothing" title="Permanent link">&para;</a></h3>
-<p><code>_type: 3</code> und <code>_type: 15</code> stehen in alten Dateien, haben aber keine Logik dahinter; ein Schritt mit einem davon kommt nie voran, und nichts wird geloggt. Dasselbe gilt für jede Zahl, die nicht in der Tabelle steht. Wenn ein Schritt ewig bei null steht, prüf zuerst seinen <code>_type</code>.</p>
+<p><code>_type: 3</code> und <code>_type: 15</code> stehen in alten Dateien, haben aber keine Logik dahinter; ein Schritt mit einem davon kommt nie voran, und nichts wird <a href="../start/troubleshooting/#find-the-playerlog">geloggt</a>. Dasselbe gilt für jede Zahl, die nicht in der Tabelle steht. Wenn ein Schritt ewig bei null steht, prüf zuerst seinen <code>_type</code>.</p>
 <h2 id="how-a-quest-starts">Wie eine Quest startet<a class="headerlink" href="#how-a-quest-starts" title="Permanent link">&para;</a></h2>
 <p><code>_requirements</code> entscheidet, <em>wann die Quest dem Spieler gegeben wird</em>. Mit Fortschritt hat das nichts zu tun. Alle Einträge müssen erfüllt sein (sie sind mit UND verknüpft). Die Prüfung läuft, wenn ein Spiel geladen oder gestartet wird, und erneut jedes Mal, wenn irgendeine Quest abgeschlossen wird - dann werden nur Quests mit einem Eintrag vom Typ 1 erneut geprüft.</p>
 <table>
@@ -3458,7 +3458,7 @@
 <p><code>_questType: 0</code> ist eine normale Quest und genau die, die du willst. Die anderen beiden gibt es für die eigenen Inhalte des Spiels, und beide haben einen Haken.</p>
 <p><strong>Tutorial-Quests (<code>2</code>)</strong> lassen zusätzlich die Tutorial-Hervorhebung nacheinander auf die Buttons in <code>_highlightedUIElements</code> zeigen und können Konsolenbefehle aus <code>_cheatsOnStart</code> und <code>_completionCheats</code> ausführen. In einer Mod gilt:</p>
 <ul>
-<li>Die <strong>Befehle werden entfernt</strong>. Eine Mod-Quest mit einer dieser Listen lädt trotzdem, aber die Listen werden ignoriert (Entwickler-Builds schreiben eine Warnung ins Log), und nichts wird ausgeführt.</li>
+<li>Die <strong>Befehle werden entfernt</strong>. Eine Mod-Quest mit einer dieser Listen lädt trotzdem, aber die Listen werden ignoriert (Entwickler-Builds schreiben eine Warnung ins <a href="../start/troubleshooting/#find-the-playerlog">Log</a>), und nichts wird ausgeführt.</li>
 <li>Die Hervorhebungs-ids sind eine feste Liste im Spiel - die ids in den mitgelieferten Tutorial-Quests (<code>SawStation</code>, <code>Sickbed</code>, <code>ParkingSmall</code>, <code>CrewRoleDropdown</code>, ...) sind das Vokabular. Eine unbekannte id bewirkt nichts.</li>
 <li>Die Ereignisse nur im Tutorial (siehe <a href="#events">Ereignisse</a>) treten nur auf, solange das Tutorial selbst läuft, und das kann nur der Spieler einschalten (das Häkchen im Fenster für ein neues Spiel), keine Mod.</li>
 </ul>
@@ -3657,10 +3657,10 @@
 </tr>
 </tbody>
 </table>
-<p>Wenn eine Quest nicht auftaucht oder ein Schritt sich nicht bewegt, lies die Log-Datei des Spiels, <code>Player.log</code> (wo sie liegt: <a href="../basics/mods/#seeing-your-changes">So funktionieren Mods</a>).</p>
+<p>Wenn eine Quest nicht auftaucht oder ein Schritt sich nicht bewegt, lies die <a href="../start/troubleshooting/#find-the-playerlog">Log</a>-Datei des Spiels, <code>Player.log</code>.</p>
 <ul>
 <li>Eine Quest-Datei mit ungültigem JSON (ein fehlendes Komma, eine offene Klammer) wird <strong>nicht</strong> übersprungen - sie macht das Laden des Levels kaputt. Prüf dein JSON in einem Editor, bevor du testest.</li>
-<li>Eine Karte, die eine unbekannte Quest-id aufführt, und ein Schritt, der wegen eines falschen <code>_type</code> oder einer falsch geschriebenen id nie vorankommt, bekommen <strong>keine</strong> Zeile im Log - prüf die Tabellen oben.</li>
+<li>Eine Karte, die eine unbekannte Quest-id aufführt, und ein Schritt, der wegen eines falschen <code>_type</code> oder einer falsch geschriebenen id nie vorankommt, bekommen <strong>keine</strong> Zeile im <a href="../start/troubleshooting/#find-the-playerlog">Log</a> - prüf die Tabellen oben.</li>
 </ul>
 <p>Mehr Tipps zum Testen: <a href="../basics/testing/">Testen und neu laden</a>.</p>
 <h3 id="checklist-before-you-ship">Checkliste vor der Veröffentlichung<a class="headerlink" href="#checklist-before-you-ship" title="Permanent link">&para;</a></h3>

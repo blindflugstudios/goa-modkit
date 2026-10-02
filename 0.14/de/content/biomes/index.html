@@ -2548,12 +2548,12 @@
 <h2 id="how-it-works">So funktioniert es<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>Biomes/</code> enthält eine PNG pro Bodentyp, benannt nach seiner Nummer: <code>8.png</code> übermalt Bodentyp 8, das erste Gras (siehe die <a href="#biome-names">Liste</a>).</li>
-<li>Die Nummer schreibst du als einfache Ziffern ohne führende Nullen: <code>8.png</code>, nicht <code>08.png</code>. Eine Nummer außerhalb von <code>0</code> bis <code>23</code> wird im Log zusammen mit dem gültigen Bereich gemeldet.</li>
-<li>Nur Dateien direkt in <code>Biomes/</code> zählen. Unterordner, andere Dateitypen und andere Namen werden im Log gemeldet und ignoriert.</li>
+<li>Die Nummer schreibst du als einfache Ziffern ohne führende Nullen: <code>8.png</code>, nicht <code>08.png</code>. Eine Nummer außerhalb von <code>0</code> bis <code>23</code> wird im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> zusammen mit dem gültigen Bereich gemeldet.</li>
+<li>Nur Dateien direkt in <code>Biomes/</code> zählen. Unterordner, andere Dateitypen und andere Namen werden im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> gemeldet und ignoriert.</li>
 <li>Eine Mod kann keine neuen Biome hinzufügen, nur die 24 vorhandenen übermalen. Eine Karte merkt sich über eine Nummer, welches Biom wo gemalt ist, es gibt also nichts, woran ein neues angehängt werden könnte.</li>
 <li>Die Oberflächendetails des Bioms und sein verbrannter Look nach einem Feuer werden nicht ersetzt.</li>
 <li>Die Texturen des Spiels auf der Festplatte bleiben unangetastet. Wenn du die Mod ausschaltest (und neu startest), ist der Originalboden überall wieder da.</li>
-<li>Der übermalte Boden wird auf der Grafikkarte zusammengesetzt. Auf einem Computer, dessen Grafikkarte dort keine Texturen kopieren kann, werden Biom-PNGs nicht angewendet, und das Log sagt das. An der Mod gibt es dann nichts zu reparieren.</li>
+<li>Der übermalte Boden wird auf der Grafikkarte zusammengesetzt. Auf einem Computer, dessen Grafikkarte dort keine Texturen kopieren kann, werden Biom-PNGs nicht angewendet, und das <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> sagt das. An der Mod gibt es dann nichts zu reparieren.</li>
 </ul>
 <h3 id="the-texture">Die Textur<a class="headerlink" href="#the-texture" title="Permanent link">&para;</a></h3>
 <table>
@@ -2578,7 +2578,7 @@
 </tr>
 </tbody>
 </table>
-<p>Eine PNG über einer Grenze wird <strong>nicht verkleinert</strong>: Sie wird mit einer Warnung im Log übersprungen, und der Boden des Spiels bleibt. Innerhalb der Grenzen bringt das Spiel deine Textur auf die Größe seiner eigenen Bodentexturen, jede Größe funktioniert also; ein quadratisches Bild vermeidet Verzerrung. Die Textur wiederholt sich über den Boden, sie sollte also nahtlos kacheln: Der linke Rand muss in den rechten übergehen, der obere in den unteren.</p>
+<p>Eine PNG über einer Grenze wird <strong>nicht verkleinert</strong>: Sie wird mit einer Warnung im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> übersprungen, und der Boden des Spiels bleibt. Innerhalb der Grenzen bringt das Spiel deine Textur auf die Größe seiner eigenen Bodentexturen, jede Größe funktioniert also; ein quadratisches Bild vermeidet Verzerrung. Die Textur wiederholt sich über den Boden, sie sollte also nahtlos kacheln: Der linke Rand muss in den rechten übergehen, der obere in den unteren.</p>
 <h2 id="biome-names">Biom-Namen<a class="headerlink" href="#biome-names" title="Permanent link">&para;</a></h2>
 <p>Die Nummer ist die Zeile des Bioms in der Tabelle <code>Biomes</code>. Zeilen mit derselben Nummer beschreiben, wie sich dieser Boden spielt.</p>
 <table>
@@ -2738,14 +2738,14 @@
 </tbody>
 </table>
 <h2 id="several-mods-same-biome">Mehrere Mods, dasselbe Biom<a class="headerlink" href="#several-mods-same-biome" title="Permanent link">&para;</a></h2>
-<p>Übermalen zwei eingeschaltete Mods dasselbe Biom, gewinnt die zuletzt angewendete Mod, und das Log vermerkt, welche welche überschrieben hat. Die Reihenfolge steht unter <a href="../../basics/mods/#which-mod-wins">So funktionieren Mods</a>.</p>
+<p>Übermalen zwei eingeschaltete Mods dasselbe Biom, gewinnt die zuletzt angewendete Mod, und das <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> vermerkt, welche welche überschrieben hat. Die Reihenfolge steht unter <a href="../../basics/mods/#which-mod-wins">So funktionieren Mods</a>.</p>
 <h2 id="when-something-does-not-show-up">Wenn etwas nicht auftaucht<a class="headerlink" href="#when-something-does-not-show-up" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Hast du <strong>das Spiel neu gestartet</strong>? Biom-Texturen werden nur beim Spielstart eingelesen.</li>
 <li>Liegt die Datei direkt in <code>Biomes/</code>, benannt mit einer Nummer von <code>0</code> bis <code>23</code> ohne führende Null?</li>
 <li>Ist sie eine echte PNG, höchstens 4096 × 4096 Pixel und 10 MB groß?</li>
 </ul>
-<p>Probleme stehen in der <code>Player.log</code> in Zeilen, die mit <code>[Mod &lt;your mod id&gt;]</code> beginnen. Die ausführlichen Zeilen erscheinen eventuell nur in Entwicklungsversionen. Ist das Log still, geh die Liste oben durch. Die Größengrenzen für alle Grafik stehen auch unter <a href="../objects/#file-limits">Objekte und Modelle</a>.</p>
+<p>Probleme stehen in der <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a> in Zeilen, die mit <code>[Mod &lt;your mod id&gt;]</code> beginnen. Die ausführlichen Zeilen erscheinen eventuell nur in Entwicklungsversionen. Ist das Log still, geh die Liste oben durch. Die Größengrenzen für alle Grafik stehen auch unter <a href="../objects/#file-limits">Objekte und Modelle</a>.</p>
 
 
 

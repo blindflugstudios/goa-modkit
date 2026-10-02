@@ -3544,7 +3544,7 @@
         <span class="n">missions_api</span><span class="o">.</span><span class="n">SetMissionStat</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">,</span> <span class="s2">"Fight"</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">115</span><span class="p">)</span>
         <span class="n">missions_api</span><span class="o">.</span><span class="n">SetAsPlannedChance</span><span class="p">(</span><span class="n">mission_entity_id</span><span class="p">,</span> <span class="mi">35</span><span class="p">)</span>
 </code></pre></div>
-<p><code>missions_api.CreateMission</code> von hier aus aufzurufen wird abgelehnt und protokolliert, weil dieser Handler mitten in der Erstellung einer Mission läuft.</p>
+<p><code>missions_api.CreateMission</code> von hier aus aufzurufen wird abgelehnt und <a href="../../start/troubleshooting/#find-the-playerlog">protokolliert</a>, weil dieser Handler mitten in der Erstellung einer Mission läuft.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Bei einer Mission mit JSON-Datei ändern <code>SetMissionStat</code>, <code>SetOutcome</code>, <code>AddOutcomeEffect</code>, <code>AddMissionRequirement</code> und <code>SetTags</code> die Daten, die das Spiel aus dieser Datei geladen hat, für den Rest der Sitzung. Jede spätere Kopie der Mission sieht die Änderung, und Effekte, die du hinzufügst, stapeln sich. Stats und Chancen kannst du frei anpassen; Effekte und Sperren fügst du nur in reinen Skript-Missionen hinzu.</p>
@@ -3873,7 +3873,7 @@
 </tr>
 </tbody>
 </table>
-<p>Eine Zahl, wo ein Bereich erwartet wird, oder umgekehrt, ist kein Absturz: Das Spiel schreibt einen Fehler in <code>Player.log</code> und überspringt diesen einen Effekt.</p>
+<p>Eine Zahl, wo ein Bereich erwartet wird, oder umgekehrt, ist kein Absturz: Das Spiel schreibt einen Fehler in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a> und überspringt diesen einen Effekt.</p>
 <h3 id="mission-stats">Missions-Stats<a class="headerlink" href="#mission-stats" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">"_missionStats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recon"</span><span class="p">,</span><span class="w">           </span><span class="nt">"_missionSkillType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">"_statRange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mf">45.0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>

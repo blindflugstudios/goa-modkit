@@ -2642,7 +2642,7 @@
 </tr>
 <tr>
 <td><code>Objects/</code></td>
-<td>Ersatzmodelle, Texturen und Symbole - für Gebäude, Werkbänke, Trainer und Kartenobjekte gleichermaßen</td>
+<td>Ersatzmodelle, Texturen und Symbole - für Gebäude, Werkbänke und Trainer</td>
 <td><a href="../../content/objects/">Objekte und Modelle</a></td>
 </tr>
 <tr>
@@ -2661,7 +2661,7 @@
 <ul>
 <li>Ein Unterordner zählt nur, wenn etwas darin liegt. Ein leerer <code>CSV/</code>-Ordner ist dasselbe wie gar kein <code>CSV/</code>-Ordner.</li>
 <li>Ein Mod-Ordner ohne einen der obigen Unterordner (oder nur mit leeren) wird ohne Meldung ignoriert.</li>
-<li>Symbolische Links und Junctions (Verknüpfungen, die auf einen anderen Ordner zeigen) werden nie verfolgt, weder als Mod-Ordner noch als einer seiner Unterordner. Das Spiel überspringt sie mit einer Warnung im Log.</li>
+<li>Symbolische Links und Junctions (Verknüpfungen, die auf einen anderen Ordner zeigen) werden nie verfolgt, weder als Mod-Ordner noch als einer seiner Unterordner. Das Spiel überspringt sie mit einer Warnung im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a>.</li>
 </ul>
 <p>Bei <code>CSV</code>, <code>Missions</code>, <code>Quests</code> und <code>Maps</code> werden nur Dateien gelesen, die direkt im Unterordner liegen; alles, was tiefer liegt, wird ignoriert, mit einer Ausnahme: <code>Missions/Locations/</code> wird ebenfalls gelesen. <code>Objects</code> und <code>Biomes</code> enthalten Ersatzgrafik und folgen eigenen Regeln: In <code>Objects/</code> ist der <em>Dateiname</em> eines Modells die Id des Objekts, das es ersetzt (<code>Chair.fbx</code> ersetzt den Stuhl), und die Namen von Unterordnern spielen keine Rolle. <code>Biomes/</code> enthält ein PNG pro Biom-Slot, benannt nach der Nummer des Slots (<code>8.png</code>), direkt im Ordner. <code>Airplanes/</code> enthält neue Flugzeug-Skins, beschrieben unter <a href="../../content/airplanes/">Flugzeug-Skins</a>.</p>
 <h3 id="configjson"><code>config.json</code><a class="headerlink" href="#configjson" title="Permanent link">&para;</a></h3>
@@ -2702,8 +2702,8 @@
 </table>
 <p>Was passiert, wenn etwas nicht stimmt:</p>
 <ul>
-<li>Eine <code>Id</code>, die gegen die Regel verstößt, wird ohne Meldung ignoriert, und stattdessen wird der Ordnername verwendet - kleingeschrieben, wobei jedes Zeichen außer Buchstaben, Ziffern, <code>_</code>, <code>.</code> und <code>-</code> durch <code>_</code> ersetzt wird. Log-Zeilen zu deiner Mod sind mit dieser Id gekennzeichnet, eine abgelehnte Id fällt also als unerwartete Kennzeichnung auf. Die Detailansicht der Mod im Mods-Fenster zeigt außerdem die Id, die das Spiel tatsächlich verwendet.</li>
-<li>Eine <code>config.json</code>, die das Spiel nicht lesen kann (ein fehlendes Komma, eine überzählige Klammer), wird im Log gemeldet und so behandelt, als gäbe es sie nicht.</li>
+<li>Eine <code>Id</code>, die gegen die Regel verstößt, wird ohne Meldung ignoriert, und stattdessen wird der Ordnername verwendet - kleingeschrieben, wobei jedes Zeichen außer Buchstaben, Ziffern, <code>_</code>, <code>.</code> und <code>-</code> durch <code>_</code> ersetzt wird. <a href="../../start/troubleshooting/#find-the-playerlog">Log</a>-Zeilen zu deiner Mod sind mit dieser Id gekennzeichnet, eine abgelehnte Id fällt also als unerwartete Kennzeichnung auf. Die Detailansicht der Mod im Mods-Fenster zeigt außerdem die Id, die das Spiel tatsächlich verwendet.</li>
+<li>Eine <code>config.json</code>, die das Spiel nicht lesen kann (ein fehlendes Komma, eine überzählige Klammer), wird im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> gemeldet und so behandelt, als gäbe es sie nicht.</li>
 </ul>
 <h3 id="previewpng"><code>preview.png</code><a class="headerlink" href="#previewpng" title="Permanent link">&para;</a></h3>
 <p>Optional. Ein PNG im Hauptverzeichnis des Mod-Ordners, höchstens 1 MB groß. Das Mods-Fenster zeigt es neben dem Namen der Mod an, und es wird zum Bild des Items, wenn du die Mod in den Workshop hochlädst. Ohne Vorschaubild zeigt das Mods-Fenster ein Platzhalterbild, und das Workshop-Item hat kein Bild, bis du auf seiner Steam-Seite eins hinzufügst.</p>
@@ -2745,7 +2745,7 @@
 <p>Zuerst werden die Workshop-Items angewendet, dann die Mods in deinem <code>Mods</code>-Ordner, und innerhalb jeder Gruppe in <code>LoadOrder</code>-Reihenfolge - kleinere Zahlen zuerst, bei Gleichstand entscheidet die Id. Wenn zwei Mods dasselbe liefern - eine Zeile in derselben Tabelle, eine Quest mit demselben Dateinamen, eine Mission mit derselben Id - gewinnt die, die <strong>zuletzt</strong> angewendet wird. Zwei Folgen daraus:</p>
 <ul>
 <li>Deine eigene Kopie einer Mod schlägt immer die Workshop-Kopie derselben Mod. Du kannst also an einer bereits veröffentlichten Mod weiterarbeiten und deine Änderungen testen, während die veröffentlichte Version weiter abonniert ist.</li>
-<li>Zwei Mods vom selben Ort (beide aus dem Workshop oder beide in deinem <code>Mods</code>-Ordner) mit derselben Id werden nicht beide geladen. Die zweite gefundene wird mit einer Warnung im Log übersprungen.</li>
+<li>Zwei Mods vom selben Ort (beide aus dem Workshop oder beide in deinem <code>Mods</code>-Ordner) mit derselben Id werden nicht beide geladen. Die zweite gefundene wird mit einer Warnung im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> übersprungen.</li>
 </ul>
 <p>Die praktische Regel daraus: <strong>Stell jeder Id, die du dir ausdenkst, den Namen deiner Mod voran</strong>, damit du nie versehentlich etwas ersetzt.</p>
 <p>Deine eigenen Ordner <code>Missions</code> und <code>Maps</code> neben <code>Mods</code> - dort speichern der Missionseditor im Spiel und der Karteneditor - werden nach allen Mods gelesen und gewinnen gegen alle:</p>
@@ -2801,30 +2801,7 @@
 <p>Im Moment braucht jede Änderung an der 3D-Grafik in <code>Objects/</code> und <code>Biomes/</code> einen Neustart des Spiels. Ein künftiges Update bringt eine Option, Mods im Hauptmenü neu zu laden; dann ist der Neustart nicht mehr nötig.</p>
 </div>
 <p><a href="../testing/">Testen und neu laden</a> erklärt mehr zu diesem Ablauf und zu den Werkzeugen, die beim Testen helfen.</p>
-<p>Das Spiel schreibt in seine Log-Datei <code>Player.log</code>, was es angenommen und was es abgelehnt hat:</p>
-<table>
-<thead>
-<tr>
-<th>Plattform</th>
-<th>Log-Datei</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Windows</td>
-<td><code>%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Player.log</code></td>
-</tr>
-<tr>
-<td>macOS</td>
-<td><code>~/Library/Logs/Blindflug Studios/Ground Of Aces/Player.log</code></td>
-</tr>
-<tr>
-<td>Linux</td>
-<td><code>~/.config/unity3d/Blindflug Studios/Ground Of Aces/Player.log</code></td>
-</tr>
-</tbody>
-</table>
-<p>Das Log des vorherigen Durchlaufs bleibt daneben als <code>Player-prev.log</code> erhalten. Das veröffentlichte Spiel schreibt nur Fehler ins Log; die ausführlichen <code>[Mod ...]</code>-Zeilen, die auf den Themenseiten beschrieben sind, erscheinen nur in Entwicklungs-Builds. Prüf im Zweifel also die Wirkung direkt im Spiel. Mehr dazu in <a href="../testing/">Testen und neu laden</a> und <a href="../../start/troubleshooting/">Wenn nichts passiert</a>.</p>
+<p>Das Spiel schreibt in seine Log-Datei <code>Player.log</code>, was es angenommen und was es abgelehnt hat. Wo sie liegt und wie du sie öffnest: <a href="../../start/troubleshooting/#find-the-playerlog">Das Player.log finden</a>. Das veröffentlichte Spiel schreibt nur Fehler ins Log; die ausführlichen <code>[Mod ...]</code>-Zeilen, die auf den Themenseiten beschrieben sind, erscheinen nur in Entwicklungs-Builds. Prüf im Zweifel also die Wirkung direkt im Spiel. Mehr dazu in <a href="../testing/">Testen und neu laden</a> und <a href="../../start/troubleshooting/">Wenn nichts passiert</a>.</p>
 
 
 

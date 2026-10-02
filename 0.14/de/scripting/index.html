@@ -2585,7 +2585,7 @@
 <ul>
 <li>Nur <code>.py</code>-Dateien direkt in einem Ordner werden gelesen - Unterordner werden ignoriert.</li>
 <li>Jede Datei wird zu einem Python-Modul, das nach der Datei benannt ist.</li>
-<li>Eine Datei mit einem <strong>Syntaxfehler</strong> wird übersprungen, der Fehler landet im Log des Spiels, und die anderen Dateien laden trotzdem.</li>
+<li>Eine Datei mit einem <strong>Syntaxfehler</strong> wird übersprungen, der Fehler landet im <a href="../start/troubleshooting/#find-the-playerlog">Log</a> des Spiels, und die anderen Dateien laden trotzdem.</li>
 <li>Jeder <strong>andere Fehler auf oberster Ebene</strong> einer Datei (ein fehlschlagender Import, eine Exception beim Ausführen der Datei) wird nicht abgefangen und kann verhindern, dass die nachfolgenden Ordner geladen werden - auch die Skripte anderer Mods. Pack riskanten Code auf oberster Ebene in <code>try</code>/<code>except</code>.</li>
 </ul>
 <p>Jeder Handler wird über <code>&lt;module&gt;.&lt;function&gt;</code> erkannt, also Dateiname plus Funktionsname. Definieren zwei Dateien einen Handler mit demselben Modul- und Funktionsnamen, ersetzt der <strong>später</strong> geladene den früheren. So kann ein Mod eines der Zufallsereignisse des Spiels überschreiben: Kopiere <code>random_events.py</code> in den Ordner <code>Missions/</code> deines Mods und ändere die Funktionen, die du anders haben willst.</p>

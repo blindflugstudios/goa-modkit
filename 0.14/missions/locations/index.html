@@ -3120,7 +3120,7 @@
 <li><strong>A place from a mod behaves like a shipped one.</strong> It is offered in the Mission Editor's dropdown, works with <code>missions_api.SetMissionLocation</code>, can be drawn for a mission that lists no locations, and its flags are what quest location conditions see.</li>
 <li><strong>Shipped names always win.</strong> If your place uses a name the game already has, the shipped one is used. If two mods add the same name, the game uses one of them and does not tell you. So give every place your mod's prefix, as in <code>mymod_scapa_flow</code>.</li>
 <li><strong>The player sees <code>_locationName</code> exactly as written</strong>, underscores and all. Shipped places come with translations; yours has none until you register a term called <code>mission_location/&lt;name&gt;</code> - see <a href="../../scripting/localization/#location-names">Location names</a>.</li>
-<li><strong>A file the game cannot read is skipped</strong>, with a warning in <code>Player.log</code>. Your other location files still load.</li>
+<li><strong>A file the game cannot read is skipped</strong>, with a warning in <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>. Your other location files still load.</li>
 <li>Keep the coordinates inside the war map (see the next section).</li>
 </ul>
 <h2 id="using-your-own-coordinates">Using your own coordinates<a class="headerlink" href="#using-your-own-coordinates" title="Permanent link">&para;</a></h2>

@@ -2521,10 +2521,10 @@
 <tr>
 <td><strong>Die Mission erscheint nie</strong></td>
 <td>Ihre Erscheinungsregeln sind noch nicht erfüllt: <code>_missionRequirements</code> wie ein Mindesttag (<code>EarliestAppearanceDay</code>) oder eine Startbahn-Stufe (<code>RunwayTier</code>), oder die <code>_tags</code> der Mission passen nicht zur Karte, die du spielst. Oder das Spiel hat sie einfach noch nicht gezogen.</td>
-<td>Teste mit der Konsole: <code>create_mission &lt;your_mission_id&gt;</code> erzeugt sie sofort. Kommt dabei <code>Unknown mission ID</code>, wurde die Mission nicht geladen: Schau ins Player.log.</td>
+<td>Teste mit der Konsole: <code>create_mission &lt;your_mission_id&gt;</code> erzeugt sie sofort. Kommt dabei <code>Unknown mission ID</code>, wurde die Mission nicht geladen: Schau ins <a href="#find-the-playerlog">Player.log</a>.</td>
 </tr>
 <tr>
-<td><strong>Das Spiel gerät ins Stolpern, wenn meine Mission endet</strong> (Fehler im Log, kein Ergebnis)</td>
+<td><strong>Das Spiel gerät ins Stolpern, wenn meine Mission endet</strong> (Fehler im <a href="#find-the-playerlog">Log</a>, kein Ergebnis)</td>
 <td><code>_missionOutcomes</code> hat nicht <strong>genau 4</strong> Einträge. Das merkt das Spiel erst, wenn es das Ergebnis auswählt.</td>
 <td>Gib ihr genau 4 Ausgänge in der festen Reihenfolge. Der Validator meldet das als Fehler.</td>
 </tr>
@@ -2551,7 +2551,7 @@
 <tr>
 <td><strong>Texte zeigen Dinge wie <code>missions/my_mission/mission_name</code> oder <code>null</code></strong></td>
 <td>Der Text für diesen Schlüssel wurde nie gesetzt: ein Tippfehler im Schlüssel, eine fehlende <code>localization.SetTerm</code>-Zeile, oder das Skript wurde gar nicht geladen.</td>
-<td>Vergleiche den Schlüssel im Text mit dem Schlüssel in <code>SetTerm</code>. Fehlen alle Texte, konnte das Skript nicht geladen werden: Schau ins Player.log.</td>
+<td>Vergleiche den Schlüssel im Text mit dem Schlüssel in <code>SetTerm</code>. Fehlen alle Texte, konnte das Skript nicht geladen werden: Schau ins <a href="#find-the-playerlog">Player.log</a>.</td>
 </tr>
 <tr>
 <td><strong>Das ganze Skript scheint übersprungen zu werden</strong></td>
@@ -2616,7 +2616,7 @@
 </code></pre></div>
 <p>Der Agent weiß, wo das Log auf deinem System liegt, findet die Zeilen zu deinem Mod und schlägt eine Lösung vor.</p>
 <h2 id="still-stuck">Immer noch festgefahren?<a class="headerlink" href="#still-stuck" title="Permanent link">&para;</a></h2>
-<p>Frag im <a href="https://discord.com/channels/1006159027157356587/1551969822911242240">Modding-Kanal auf Discord</a>. Häng dein <code>Player.log</code>, die Ausgabe des Validators und deinen Mod-Ordner als Zip an.</p>
+<p>Frag im <a href="https://discord.com/channels/1006159027157356587/1551969822911242240">Modding-Kanal auf Discord</a>. Häng dein <a href="#find-the-playerlog"><code>Player.log</code></a>, die Ausgabe des Validators und deinen Mod-Ordner als Zip an.</p>
 
 
 

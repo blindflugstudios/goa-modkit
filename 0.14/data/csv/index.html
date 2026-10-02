@@ -3608,7 +3608,7 @@
 <p>This page is the complete reference: where the files go, what the two file formats look like, what the game checks before it accepts a value, and what every table and column means. Every table section in <a href="#the-tables">The tables</a> starts with a link to the built-in file, so you can open the real thing or save it and copy its header row.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Nothing here can permanently damage your game. A value the game cannot use is refused and written to the log with the reason; the built-in value stays. Removing the mod folder restores everything.</p>
+<p>Nothing here can permanently damage your game. A value the game cannot use is refused and written to the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> with the reason; the built-in value stays. Removing the mod folder restores everything.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -3634,7 +3634,7 @@
 </code></pre></div>
 <p>Start the game, load a level, and the wall costs one plank. That is the whole mod - no manifest, no registration.</p>
 <h2 id="the-two-file-formats">The two file formats<a class="headerlink" href="#the-two-file-formats" title="Permanent link">&para;</a></h2>
-<p>A file is named after the table it changes, matched <strong>exactly</strong>, capital letters included: <code>VehicleData.csv</code>, never <code>vehicledata.csv</code>. A file naming a table that does not exist is skipped, and the log says so.</p>
+<p>A file is named after the table it changes, matched <strong>exactly</strong>, capital letters included: <code>VehicleData.csv</code>, never <code>vehicledata.csv</code>. A file naming a table that does not exist is skipped, and the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> says so.</p>
 <p>You may use either format, or both. Within one mod the <code>.csv</code> files are applied first and the <code>.json</code> files after, so a command can refine a row a CSV file added.</p>
 <h3 id="single-cells-tablejson">Single cells - <code>&lt;Table&gt;.json</code><a class="headerlink" href="#single-cells-tablejson" title="Permanent link">&para;</a></h3>
 <p>A list of commands, run top to bottom. This is the format to reach for: it touches only the values you name and leaves everything else alone.</p>
@@ -3743,7 +3743,7 @@ RandomActionChatProbability,0.6
 <p>A few tables spread one row over several lines, because that row holds a list - a task with several settings, a mood effect with one variant per bed type. A single mod row cannot express a list, so those rows are refused. The table sections below name them.</p>
 <p>In <code>ResourceCost</code> only, some rows carry a leftover heading in their <code>Money</code> cell and so count as several lines. There a whole-row CSV is the fix: it rewrites every cell and tidies the row up at the same time. The affected ids are <code>KickstarterCustomMonument</code>, <code>RadioTower</code>, <code>window_wood</code>, <code>window_tent</code>, <code>window_brick</code>, <code>window_hangar</code>, <code>window_concrete</code>, <code>Distillery</code>, <code>ParkingLarge</code> and <code>gravel</code>.</p>
 <h2 id="checking-what-happened">Checking what happened<a class="headerlink" href="#checking-what-happened" title="Permanent link">&para;</a></h2>
-<p>Every accepted change and every refusal is one line in the game's log, <code>Player.log</code> (where to find it: <a href="../../basics/mods/#seeing-your-changes">How mods work</a>). On Windows there is also an HTML version in the same folder that is easier to read. The label at the start of each line is the mod's id.</p>
+<p>Every accepted change and every refusal is one line in the game's <a href="../../start/troubleshooting/#find-the-playerlog">log</a>, <code>Player.log</code>. On Windows there is also an HTML version in the same folder that is easier to read. The label at the start of each line is the mod's id.</p>
 <div class="highlight"><pre><span></span><code>[Mod my_balance_mod] CSV/ResourceCost.json command 1 replaced cells Planks of row 'wall_wood'.
 [Mod my_balance_mod] CSV/VehicleData.csv overrides built-in row 'gladiator'.
 [Mod my_balance_mod] CSV/PropsInfluence.json command 4 removed row 'Drawer'.
@@ -3754,11 +3754,11 @@ RandomActionChatProbability,0.6
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>These lines are written as information and warnings. The released game logs errors only, so you will see them only in a development build or in the Unity editor. In the released game, check the effect in the game instead - load a level and look at the value you changed.</p>
+<p>These lines are written as information and warnings. The released game <a href="../../start/troubleshooting/#find-the-playerlog">logs</a> errors only, so you will see them only in a development build or in the Unity editor. In the released game, check the effect in the game instead - load a level and look at the value you changed.</p>
 </div>
 <p>A misspelled table name or a header row that does not match still produces a <code>skipped:</code> line naming the file. <strong>If you see no <code>[Mod ...]</code> lines at all and the change does not show</strong>, the game did not pick the mod up: the <code>CSV/</code> folder was still empty when the game started (press <strong>Refresh</strong> in the Mods window), the mod is switched off in the Mods window, or the mod folder is a symbolic link or junction, which is never followed.</p>
 <h3 id="finding-a-tables-column-headers">Finding a table's column headers<a class="headerlink" href="#finding-a-tables-column-headers" title="Permanent link">&para;</a></h3>
-<p>The game ships header templates for four tables (<code>BuildingComponents</code>, <code>PropsInfluence</code>, <code>ResourceCost</code> and <code>VehicleData</code>) in <code>Ground Of Aces_Data/StreamingAssets/Modding/Templates/</code> inside the installation folder (on macOS: <code>Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/</code>). For the rest, the column list is on this page, and every table section links the built-in file. Or ask the game: write a deliberately wrong header, load once, and the log prints the columns it expected.</p>
+<p>The game ships header templates for four tables (<code>BuildingComponents</code>, <code>PropsInfluence</code>, <code>ResourceCost</code> and <code>VehicleData</code>) in <code>Ground Of Aces_Data/StreamingAssets/Modding/Templates/</code> inside the installation folder (on macOS: <code>Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Modding/Templates/</code>). For the rest, the column list is on this page, and every table section links the built-in file. Or ask the game: write a deliberately wrong header, load once, and the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> prints the columns it expected.</p>
 <h2 id="load-order">Load order<a class="headerlink" href="#load-order" title="Permanent link">&para;</a></h2>
 <p>Mods are applied in the order described on <a href="../../basics/mods/#which-mod-wins">Which mod wins</a> - Workshop first, then your own, lower <code>LoadOrder</code> first. When two mods change the same row, the later one wins for the cells it touches: a whole-row CSV replaces everything an earlier mod did to that row, a <code>Replace</code> only the cells it names. A mod switched off in the Mods window contributes nothing.</p>
 <h2 id="when-changes-take-effect">When changes take effect<a class="headerlink" href="#when-changes-take-effect" title="Permanent link">&para;</a></h2>
@@ -5062,7 +5062,7 @@ warning, which leaves a gap. Keep the spans continuous from 0 to 24, without ove
 <p>Name and value, 86 entries, each read by whichever part of the game needs it.</p>
 <p>This column accepts <strong>anything</strong>, because a few entries hold text or a <code>min-max</code> range rather than a number.
 Write <code>abc</code> where a number belongs and it is accepted, then read as <code>0</code> - the feature quietly stops working
-and the log carries an error. This is the table to be most careful with.</p>
+and the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> carries an error. This is the table to be most careful with.</p>
 <p>Entries worth knowing before you change them:</p>
 <ul>
 <li><code>TimeTickInterval</code> (0.6666) - real seconds per in-game minute. Halving it doubles the speed of the entire
