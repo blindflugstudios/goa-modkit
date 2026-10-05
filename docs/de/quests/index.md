@@ -2,7 +2,7 @@
 
 Eine Quest ist eine Liste von Zielen, die der Spieler in der Quest-Leiste sieht - im deutschen Spiel heißen Quests "Aufgaben" (Quests): *Bau eine Startbahn, bestell ein Flugzeug, flieg fünf Missionen*. Jedes Ziel (ein **Schritt**) ist ein Zähler, der sich füllt, während der Spieler die Sache erledigt. Sind alle Pflichtschritte voll, ist die Quest abgeschlossen, und die nächste in der Kette kann starten.
 
-Quests sind keine Missionen. Eine Mission ist ein Flug mit Würfelwürfen und einem Skript; eine Quest ist eine Checkliste, die das Spiel beobachtet und Häkchen setzt. In einer Quest gibt es kein Python und nichts, was "läuft" - eine Quest ist eine einzige `.json`-Datei, und alles, worauf sie achten kann, ist fest ins Spiel eingebaut.
+Quests sind keine Missionen. Eine Mission ist ein Flug, dessen Ausgang Würfelwürfe entscheiden; eine Quest ist eine Checkliste, die das Spiel beobachtet und Häkchen setzt. Eine Quest ist eine einzige `.json`-Datei, in der nichts "läuft", und die Arten von Zielen, die sie verfolgen kann, sind fest ins Spiel eingebaut - ein Ziel kann aber auf deine eigenen Inhalte zeigen, etwa auf eine Mission aus deiner Mod.
 
 !!! note "Kein Quest-Editor"
     Quests schreibst und änderst du nur in einem Texteditor. Der Mission Editor öffnet sie nicht, und das Spiel prüft sie vor dem Laden nicht - die [Checkliste](#checklist-before-you-ship) am Ende dieser Seite ist deine Prüfung.
@@ -26,7 +26,7 @@ Anders als bei Missionen gibt es **keinen persönlichen Quest-Ordner** außerhal
 ```text
 Mods/
   my_campaign/
-    config.json                  optional
+    config.json                  required - its "Name" is what the Mods screen shows
     Quests/
       mycampaign_first_steps.json
       mycampaign_first_patrol.json

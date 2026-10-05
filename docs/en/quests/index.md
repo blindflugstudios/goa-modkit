@@ -2,7 +2,7 @@
 
 A quest is a list of goals the player sees in the quest panel: *build an airstrip, order an aircraft, fly five missions*. Each goal (a **step**) is a counter that fills up as the player does the thing, and when every required step is full the quest is complete and the next one in the chain can start.
 
-Quests are not missions. A mission is a flight with dice rolls and a script; a quest is a checklist that watches the game and ticks boxes. There is no Python in a quest and nothing to "run" - a quest is a single `.json` file, and everything it can watch for is built into the game.
+Quests are not missions. A mission is a flight whose outcome is decided by dice rolls; a quest is a checklist that watches the game and ticks boxes. A quest is a single `.json` file with nothing to "run", and the kinds of goals it can track are a fixed set built into the game - though a goal can point at your own content, such as a mission from your mod.
 
 !!! note "No quest editor"
     Quests are written and changed in a text editor only. The Mission Editor does not open them, and the game does not check them before loading - the [checklist](#checklist-before-you-ship) near the end of this page is your check.
@@ -26,7 +26,7 @@ Unlike missions, there is **no personal quests folder** outside a mod. To try a 
 ```text
 Mods/
   my_campaign/
-    config.json                  optional
+    config.json                  required - its "Name" is what the Mods screen shows
     Quests/
       mycampaign_first_steps.json
       mycampaign_first_patrol.json
