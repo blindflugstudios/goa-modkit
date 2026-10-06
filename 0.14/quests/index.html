@@ -2593,7 +2593,7 @@
 
 <h1 id="quests">Quests<a class="headerlink" href="#quests" title="Permanent link">&para;</a></h1>
 <p>A quest is a list of goals the player sees in the quest panel: <em>build an airstrip, order an aircraft, fly five missions</em>. Each goal (a <strong>step</strong>) is a counter that fills up as the player does the thing, and when every required step is full the quest is complete and the next one in the chain can start.</p>
-<p>Quests are not missions. A mission is a flight with dice rolls and a script; a quest is a checklist that watches the game and ticks boxes. There is no Python in a quest and nothing to "run" - a quest is a single <code>.json</code> file, and everything it can watch for is built into the game.</p>
+<p>Quests are not missions. A mission is a flight whose outcome is decided by dice rolls; a quest is a checklist that watches the game and ticks boxes. A quest is a single <code>.json</code> file with nothing to "run", and the kinds of goals it can track are a fixed set built into the game - though a goal can point at your own content, such as a mission from your mod.</p>
 <div class="admonition note">
 <p class="admonition-title">No quest editor</p>
 <p>Quests are written and changed in a text editor only. The Mission Editor does not open them, and the game does not check them before loading - the <a href="#checklist-before-you-ship">checklist</a> near the end of this page is your check.</p>
@@ -2633,7 +2633,7 @@
 <p>Unlike missions, there is <strong>no personal quests folder</strong> outside a mod. To try a quest, put it in a mod folder (<a href="../basics/mods/">How mods work</a> explains where that folder is and how the Mods window works). The quests go into a <code>Quests</code> subfolder next to the other content types:</p>
 <div class="highlight"><pre><span></span><code>Mods/
   my_campaign/
-    config.json                  optional
+    config.json                  required - its "Name" is what the Mods screen shows
     Quests/
       mycampaign_first_steps.json
       mycampaign_first_patrol.json
