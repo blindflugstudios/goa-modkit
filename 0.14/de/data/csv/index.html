@@ -3617,7 +3617,7 @@
 <p>Eine Mod ist ein Ordner in deinem <code>Mods</code>-Ordner, und die Datentabellen kommen in dessen Unterordner <code>CSV/</code>:</p>
 <div class="highlight"><pre><span></span><code>Mods/
   my_balance_mod/
-    config.json          optional
+    config.json
     CSV/
       VehicleData.csv    whole rows
       Variables.json     single cells
@@ -3819,7 +3819,7 @@ besondere Regel hat, gelten nur die allgemeinen Regeln von oben.</p>
 </tr>
 <tr>
 <td><code>Parking Size</code></td>
-<td>ganze Zahl</td>
+<td>Größe des Parkplatzes: <code>0</code> klein, <code>1</code> mittel, <code>2</code> groß</td>
 <td>0–2</td>
 <td>über 2 kann es nie parken</td>
 </tr>
@@ -3839,7 +3839,7 @@ besondere Regel hat, gelten nur die allgemeinen Regeln von oben.</p>
 <td><code>Landing Length</code></td>
 <td>ganze Zahl</td>
 <td>60–170</td>
-<td>länger als jede baubare Bahn, und es kann nie landen</td>
+<td>länger als die Bahn, und das Flugzeug schießt bei der Landung über sie hinaus</td>
 </tr>
 <tr>
 <td><code>Health</code></td>
@@ -3869,37 +3869,37 @@ besondere Regel hat, gelten nur die allgemeinen Regeln von oben.</p>
 <td><code>Fight Power</code></td>
 <td><code>min-max</code></td>
 <td>min 0–43, max 0–60</td>
-<td><code>0 ≤ min ≤ max</code>, und <code>max</code> höchstens <strong>doppelt so hoch wie der höchste eingebaute Wert</strong></td>
+<td><code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Bomb Power</code></td>
 <td><code>min-max</code></td>
 <td>min 0–50, max 0–80</td>
-<td><code>0 ≤ min ≤ max</code>, und <code>max</code> höchstens <strong>doppelt so hoch wie der höchste eingebaute Wert</strong></td>
+<td><code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Recon Power</code></td>
 <td><code>min-max</code></td>
 <td>min 5–42, max 10–60</td>
-<td><code>0 ≤ min ≤ max</code>, und <code>max</code> höchstens <strong>doppelt so hoch wie der höchste eingebaute Wert</strong></td>
+<td><code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Manoeuvrability</code></td>
 <td><code>min-max</code></td>
 <td>min 2–28, max 8–50</td>
-<td><code>0 ≤ min ≤ max</code>, und <code>max</code> höchstens <strong>doppelt so hoch wie der höchste eingebaute Wert</strong></td>
+<td><code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Transport Capacity</code></td>
 <td><code>min-max</code></td>
 <td>min 1–60, max 5–90</td>
-<td><code>0 ≤ min ≤ max</code>, und <code>max</code> höchstens <strong>doppelt so hoch wie der höchste eingebaute Wert</strong></td>
+<td><code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Stealthiness</code></td>
 <td><code>min-max</code></td>
 <td>min 10–88, max 48–98</td>
-<td><code>0 ≤ min ≤ max</code>, und <code>max</code> höchstens <strong>doppelt so hoch wie der höchste eingebaute Wert</strong></td>
+<td><code>0 ≤ min ≤ max</code>; <strong>feste Obergrenze: <code>max</code> höchstens 100, ein höherer Wert führt zu Fehlern im Spiel</strong>. Bei 100 ist das Flugzeug für den Feind unsichtbar.</td>
 </tr>
 <tr>
 <td><code>Wreck Resource Type</code></td>
@@ -4025,7 +4025,7 @@ die Zahlen dieser Mod, auch nachdem du sie entfernt hast.</p>
 <td><code>Material</code></td>
 <td>Text</td>
 <td>pro Zeile: <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code>, <code>tarmac</code></td>
-<td><strong>darf das Material einer anderen Stufe nicht wiederholen</strong> und muss eine vorhandene <code>ResourceCost</code>-Zeile nennen - diese Zeile bestimmt, was jede Kachel dieser Startbahn kostet. <code>ResourceCost</code> nimmt keine neuen Belagszeilen an, bleib also in der Praxis bei <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code> und <code>tarmac</code> (sie zwischen den Stufen zu tauschen, ist in Ordnung). Ein Material ohne <code>ResourceCost</code>-Zeile wird hier angenommen, und dann schlägt das Verlegen einer Startbahn dieser Stufe mit einem Fehler fehl</td>
+<td>muss eine vorhandene <code>ResourceCost</code>-Zeile nennen - diese Zeile bestimmt, was jede Kachel dieser Startbahn kostet. <code>ResourceCost</code> nimmt keine neuen Belagszeilen an, bleib also in der Praxis bei <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code> und <code>tarmac</code> (sie zwischen den Stufen zu tauschen, ist in Ordnung). Ein Material ohne <code>ResourceCost</code>-Zeile wird hier angenommen, und dann schlägt das Verlegen einer Startbahn dieser Stufe mit einem Fehler fehl</td>
 </tr>
 <tr>
 <td><code>Biome Id</code></td>

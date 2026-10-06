@@ -2503,10 +2503,7 @@
 <p><strong>Im Mission Editor</strong> öffnest du den Abschnitt <strong>Locations</strong>, wählst einen Ort aus dem Dropdown und fügst ihn hinzu. Füge so viele hinzu, wie du willst; derselbe Ort kann nicht zweimal hinzugefügt werden.</p>
 <p><strong>In einer Missions-<code>.json</code></strong> sieht jeder Eintrag von <code>_potentialLocations</code> so aus:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">"_locationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dover"</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"_locationName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dover"</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"_coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.13512</span><span class="p">,</span><span class="w"> </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.312756</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">"_flags"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">    </span><span class="nt">"_locationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dover"</span>
 <span class="p">}</span>
 </code></pre></div>
 <table>
@@ -2531,15 +2528,15 @@
 </tr>
 <tr>
 <td><code>_flags</code></td>
-<td>Eine Zahl, die den Ort beschreibt (siehe unten). Muss eine Zahl sein - <code>"Sea"</code> wird nicht akzeptiert.</td>
+<td>Eine Zahl, die den Ort beschreibt (siehe unten). Muss eine Zahl sein - <code>"Sea"</code> wird nicht akzeptiert. <strong>Missionen nutzen sie nicht</strong>: In einer Missionsdatei wird der Wert ignoriert, lass ihn auf <code>0</code>. Er zählt nur in der Datei <code>Missions/Locations/</code> eines Mods.</td>
 </tr>
 </tbody>
 </table>
 <p>Mit einer Liste mehrerer Orte kann dieselbe Mission an verschiedenen Stellen auftauchen:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">"_potentialLocations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"_locationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dover_strait"</span><span class="p">,</span><span class="w"> </span><span class="nt">"_locationName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dover_strait"</span><span class="p">,</span><span class="w"> </span><span class="nt">"_coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.0598</span><span class="p">,</span><span class="w"> </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5825</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">"_flags"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"_locationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"english_channel"</span><span class="p">,</span><span class="w"> </span><span class="nt">"_locationName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"english_channel"</span><span class="p">,</span><span class="w"> </span><span class="nt">"_coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.166</span><span class="p">,</span><span class="w"> </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mf">-1.7013</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">"_flags"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"_locationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"seine_bay"</span><span class="p">,</span><span class="w"> </span><span class="nt">"_locationName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"seine_bay"</span><span class="p">,</span><span class="w"> </span><span class="nt">"_coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mf">49.7154</span><span class="p">,</span><span class="w"> </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.672</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">"_flags"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"_locationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dover_strait"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"_locationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"english_channel"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"_locationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"seine_bay"</span><span class="w"> </span><span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
 <p><strong>Aus einem Skript</strong> wird eine reine Skript-Mission (eine ohne <code>.json</code>) mit <code>missions_api.SetMissionLocation(mission_entity_id, location_name)</code> platziert, meist in <code>initialize_mission</code>. Die Funktion akzeptiert nur einen Namen aus der Liste unten oder einen, den ein aktivierter Mod hinzufügt (siehe <a href="#adding-locations-with-a-mod">Orte mit einem Mod hinzufügen</a>), nie eigene Koordinaten, und gibt bei einem unbekannten Namen <code>False</code> zurück. Ohne Ort sitzt eine reine Skript-Mission am Ursprung der Karte. Siehe <a href="../reference/">Referenz</a>.</p>
@@ -2580,7 +2577,43 @@
 </tr>
 </tbody>
 </table>
-<p>Sie werden addiert: <code>10</code> ist also Meer + feindliches Gebiet (2 + 8) - der häufigste Wert für ein Küstenziel auf der anderen Seite des Ärmelkanals.</p>
+<p>Sie werden addiert: <code>10</code> ist also Meer + feindliches Gebiet (2 + 8) - der häufigste Wert für ein Küstenziel auf der anderen Seite des Ärmelkanals. Einige Kombinationen:</p>
+<table>
+<thead>
+<tr>
+<th>Wert</th>
+<th>Flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>Land + Sea</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Land + OwnTerritory</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Sea + OwnTerritory</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Land + EnemyTerritory</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Sea + EnemyTerritory</td>
+</tr>
+<tr>
+<td>12</td>
+<td>OwnTerritory + EnemyTerritory</td>
+</tr>
+</tbody>
+</table>
+<p>Ein Ort mit mehreren Flags erfüllt die Quest-Bedingung für jedes davon: Ein Ort mit <code>10</code> zählt sowohl für <code>location,sea</code> als auch für <code>location,enemyterritory</code>.</p>
+<p>Im mitgelieferten Spiel werden Orts-Flags nur genutzt, um <strong>die eingebauten Flugzeug-Lackierungen freizuschalten</strong>: Versteckte Lackierungs-Quests wie "fliege 20 Missionen über dem Meer mit einer Beaufighter" nutzen <code>location,sea</code>, <code>location,ownterritory</code> und <code>location,enemyterritory</code>. Keine andere mitgelieferte Quest prüft sie.</p>
 <div class="admonition warning">
 <p class="admonition-title">Die Flags in deiner Missionsdatei werden nicht gelesen</p>
 <p>Der Wert <code>_flags</code> in einer Missionsdatei ist nur der Vollständigkeit halber da, aber <strong>das Spiel liest ihn nicht</strong>. Jede mitgelieferte Mission lässt ihn auf <code>0</code>. Quest-Schritte wie "fliege eine Mission über dem Meer" schlagen den <strong>Namen</strong> des Missionsorts in der Ortsliste nach - den Orten unten plus allen, die aktivierte Mods hinzufügen - und nutzen die dort hinterlegten Flags. Der Quest-Schritt schreibt den <strong>Namen</strong> des Flags, nicht die Zahl: <code>location,sea</code>, <code>location,ownterritory</code>, <code>location,enemyterritory</code> (siehe <a href="../../quests/#aircraft-and-missions">Quests</a>).</p>

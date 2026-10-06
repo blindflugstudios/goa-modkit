@@ -3617,7 +3617,7 @@
 <p>One mod is one folder in your <code>Mods</code> folder, and the data tables go into its <code>CSV/</code> subfolder:</p>
 <div class="highlight"><pre><span></span><code>Mods/
   my_balance_mod/
-    config.json          optional
+    config.json
     CSV/
       VehicleData.csv    whole rows
       Variables.json     single cells
@@ -3819,7 +3819,7 @@ special rule, only the generic ones above apply.</p>
 </tr>
 <tr>
 <td><code>Parking Size</code></td>
-<td>whole number</td>
+<td>parking spot size: <code>0</code> small, <code>1</code> medium, <code>2</code> large</td>
 <td>0–2</td>
 <td>above 2 and it can never park</td>
 </tr>
@@ -3839,7 +3839,7 @@ special rule, only the generic ones above apply.</p>
 <td><code>Landing Length</code></td>
 <td>whole number</td>
 <td>60–170</td>
-<td>longer than any buildable strip and it can never land</td>
+<td>longer than the strip and the plane overshoots it on landing</td>
 </tr>
 <tr>
 <td><code>Health</code></td>
@@ -3869,37 +3869,37 @@ special rule, only the generic ones above apply.</p>
 <td><code>Fight Power</code></td>
 <td><code>min-max</code></td>
 <td>min 0–43, max 0–60</td>
-<td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
+<td><code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Bomb Power</code></td>
 <td><code>min-max</code></td>
 <td>min 0–50, max 0–80</td>
-<td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
+<td><code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Recon Power</code></td>
 <td><code>min-max</code></td>
 <td>min 5–42, max 10–60</td>
-<td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
+<td><code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Manoeuvrability</code></td>
 <td><code>min-max</code></td>
 <td>min 2–28, max 8–50</td>
-<td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
+<td><code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Transport Capacity</code></td>
 <td><code>min-max</code></td>
 <td>min 1–60, max 5–90</td>
-<td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
+<td><code>0 ≤ min ≤ max</code></td>
 </tr>
 <tr>
 <td><code>Stealthiness</code></td>
 <td><code>min-max</code></td>
 <td>min 10–88, max 48–98</td>
-<td><code>0 ≤ min ≤ max</code>, and <code>max</code> at most <strong>twice the highest built-in value</strong></td>
+<td><code>0 ≤ min ≤ max</code>; <strong>hard cap: <code>max</code> at most 100, a higher value breaks the game</strong>. At 100 the plane is invisible to the enemy.</td>
 </tr>
 <tr>
 <td><code>Wreck Resource Type</code></td>
@@ -4025,7 +4025,7 @@ mod's numbers even after you remove it.</p>
 <td><code>Material</code></td>
 <td>text</td>
 <td>by row: <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code>, <code>tarmac</code></td>
-<td><strong>must not repeat another tier's material</strong>, and must name an existing <code>ResourceCost</code> row - that row is what each tile of this runway costs. <code>ResourceCost</code> does not accept new surface rows, so in practice keep to <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code> and <code>tarmac</code> (swapping them between tiers is fine). A material with no <code>ResourceCost</code> row is accepted here, and then laying a runway of that tier fails with an error</td>
+<td>must name an existing <code>ResourceCost</code> row - that row is what each tile of this runway costs. <code>ResourceCost</code> does not accept new surface rows, so in practice keep to <code>dirt</code>, <code>sand</code>, <code>gravel</code>, <code>concrete</code> and <code>tarmac</code> (swapping them between tiers is fine). A material with no <code>ResourceCost</code> row is accepted here, and then laying a runway of that tier fails with an error</td>
 </tr>
 <tr>
 <td><code>Biome Id</code></td>
