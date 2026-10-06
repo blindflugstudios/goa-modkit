@@ -440,6 +440,8 @@ Every place on the war map carries flags that describe it. They are a bitmask: a
 | 4 | `OwnTerritory` |
 | 8 | `EnemyTerritory` |
 
+**Missions do not use these flags.** The `_flags` value in a mission's location entry is ignored; leave it at `0`, as every shipped mission does. Only quest location conditions read flags, and they take them from the location list, not from your mission (see [Locations](locations.md#location-flags)).
+
 The list of places, with their coordinates, is on the [Locations](locations.md) page. Copy the coordinates exactly: the game measures distance and fuel from the coordinates in your file, not from the name.
 
 ### Map tags

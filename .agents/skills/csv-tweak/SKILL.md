@@ -21,7 +21,7 @@ Copy `templates/csv-tweak/` to `mods/<mod_id>/`. Set `Id` and `Name` in `config.
 - Prefer the `.json` command format: `{"Commands": [{"Command": "Replace", "Id": "<row>", "Cells": {"<Column>": <value>}}]}`.
 - File name = table name, exact capitals. Column names exact, spaces included.
 - `Add` and whole-row `Remove` only in `ResourceCost` and `PropsInfluence`.
-- Values must have the kind the column already holds (number, `TRUE`/`FALSE`, `min-max`). Respect the limits in the docs (e.g. power ranges max twice the highest built-in value).
+- Values must have the kind the column already holds (number, `TRUE`/`FALSE`, `min-max`). Respect the limits in the docs (e.g. `Stealthiness` max at most 100).
 - Plain JSON: no comments, no trailing commas, max 200 commands.
 - Only use `.csv` whole rows when the user wants to edit in a spreadsheet; the header must list exactly the table's columns.
 

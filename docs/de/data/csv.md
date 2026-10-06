@@ -15,7 +15,7 @@ Eine Mod ist ein Ordner in deinem `Mods`-Ordner, und die Datentabellen kommen in
 ```text
 Mods/
   my_balance_mod/
-    config.json          optional
+    config.json
     CSV/
       VehicleData.csv    whole rows
       Variables.json     single cells
@@ -197,20 +197,20 @@ Eine Zeile pro Flugzeug. Zeilen können nicht hinzugefügt oder entfernt werden.
 | `Type` | `Fighter`, `Bomber`, `MultiRole`, `Special` | | |
 | `Crew` | Kommaliste der Sitze; wiederhole eine Rolle für zwei Sitze | 1–8 Sitze, von `Pilot` allein bis `Pilot,Pilot,BombAimer,Navigator,FlightEngineer,RadioOperator,Gunner,Gunner`; jede Zeile beginnt mit `Pilot`, und alle sechs Rollen kommen vor | in einer CSV-Datei setzt du eine Zelle mit mehr als einem Sitz in Anführungszeichen: `"Pilot,Gunner,Navigator"`. Rollen: `Pilot`, `Gunner`, `Navigator`, `BombAimer`, `FlightEngineer`, `RadioOperator` |
 | `Runway Tier` | ganze Zahl | 1–5 | über 5 kann keine Startbahn es bedienen |
-| `Parking Size` | ganze Zahl | 0–2 | über 2 kann es nie parken |
+| `Parking Size` | Größe des Parkplatzes: `0` klein, `1` mittel, `2` groß | 0–2 | über 2 kann es nie parken |
 | `Victory Points Cost` | ganze Zahl | 0–12 | 0 macht es kostenlos |
 | `Movement Speed` | ganze Zahl | 5 in jeder Zeile | Rollgeschwindigkeit; bei 0 erreicht es nie die Startbahn |
-| `Landing Length` | ganze Zahl | 60–170 | länger als jede baubare Bahn, und es kann nie landen |
+| `Landing Length` | ganze Zahl | 60–170 | länger als die Bahn, und das Flugzeug schießt bei der Landung über sie hinaus |
 | `Health` | ganze Zahl | 100 in jeder Zeile | |
 | `Initial Integrity` | ganze Zahl | 1000 in jeder Zeile | Stunden Verschleiß, die das Flugzeug aushält, bevor es verbraucht ist (1000 h ≈ 41 Tage) |
 | `Fuel Capacity` | ganze Zahl | 200–1260 | |
 | `Voxel Size` | `AxBxC` | `10x0x10` in jeder Zeile | |
-| `Fight Power` | `min-max` | min 0–43, max 0–60 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
-| `Bomb Power` | `min-max` | min 0–50, max 0–80 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
-| `Recon Power` | `min-max` | min 5–42, max 10–60 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
-| `Manoeuvrability` | `min-max` | min 2–28, max 8–50 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
-| `Transport Capacity` | `min-max` | min 1–60, max 5–90 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
-| `Stealthiness` | `min-max` | min 10–88, max 48–98 | `0 ≤ min ≤ max`, und `max` höchstens **doppelt so hoch wie der höchste eingebaute Wert** |
+| `Fight Power` | `min-max` | min 0–43, max 0–60 | `0 ≤ min ≤ max` |
+| `Bomb Power` | `min-max` | min 0–50, max 0–80 | `0 ≤ min ≤ max` |
+| `Recon Power` | `min-max` | min 5–42, max 10–60 | `0 ≤ min ≤ max` |
+| `Manoeuvrability` | `min-max` | min 2–28, max 8–50 | `0 ≤ min ≤ max` |
+| `Transport Capacity` | `min-max` | min 1–60, max 5–90 | `0 ≤ min ≤ max` |
+| `Stealthiness` | `min-max` | min 10–88, max 48–98 | `0 ≤ min ≤ max`; **feste Obergrenze: `max` höchstens 100, ein höherer Wert führt zu Fehlern im Spiel**. Bei 100 ist das Flugzeug für den Feind unsichtbar. |
 | `Wreck Resource Type` | `/`-Liste von Ressourcen | `Metal/RepairParts` in jeder Zeile | beide Wrack-Spalten gesetzt oder beide leer |
 | `Wreck Resource Amount` | `/`-Liste ganzer Zahlen | `10/5` in jeder Zeile | eine Menge pro Eintrag in `Wreck Resource Type`, in der dort aufgeführten Reihenfolge |
 | `Low Caliber Ammo Capacity` | ganze Zahl | 0–3300 | mitgeführte `GunAmmo`; 0 = keine |
@@ -248,7 +248,7 @@ Zeilen `1`–`5`.
 |---|---|---|---|
 | `Length` | ganze Zahl | pro Zeile: 80, 120, 140, 160, 200 | Stufen gelten nach "Länge oder mehr", halte sie also aufsteigend |
 | `Width` | ganze Zahl | pro Zeile: 12, 14, 18, 22, 26 | Stufen gelten nach "Breite oder mehr", halte sie also aufsteigend |
-| `Material` | Text | pro Zeile: `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | **darf das Material einer anderen Stufe nicht wiederholen** und muss eine vorhandene `ResourceCost`-Zeile nennen - diese Zeile bestimmt, was jede Kachel dieser Startbahn kostet. `ResourceCost` nimmt keine neuen Belagszeilen an, bleib also in der Praxis bei `dirt`, `sand`, `gravel`, `concrete` und `tarmac` (sie zwischen den Stufen zu tauschen, ist in Ordnung). Ein Material ohne `ResourceCost`-Zeile wird hier angenommen, und dann schlägt das Verlegen einer Startbahn dieser Stufe mit einem Fehler fehl |
+| `Material` | Text | pro Zeile: `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | muss eine vorhandene `ResourceCost`-Zeile nennen - diese Zeile bestimmt, was jede Kachel dieser Startbahn kostet. `ResourceCost` nimmt keine neuen Belagszeilen an, bleib also in der Praxis bei `dirt`, `sand`, `gravel`, `concrete` und `tarmac` (sie zwischen den Stufen zu tauschen, ist in Ordnung). Ein Material ohne `ResourceCost`-Zeile wird hier angenommen, und dann schlägt das Verlegen einer Startbahn dieser Stufe mit einem Fehler fehl |
 | `Biome Id` | ganze Zahl | pro Zeile: 6, 20, 22, 15, 13 | Boden, der unter die fertige Bahn gemalt wird |
 | `Build Time` | ganze Zahl | pro Zeile: 5, 2, 2, 2, 2 | Spielminuten Arbeit pro Kachel. An jeder Kachel arbeitet immer nur ein Crewmitglied, mehr Crew verlegt also mehr Kacheln gleichzeitig, aber keine Kachel schneller |
 

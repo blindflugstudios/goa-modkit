@@ -18,10 +18,7 @@ Distance is not decoration: the fuel a flight costs is worked out from the great
 
 ```json
 {
-    "_locationId": "dover",
-    "_locationName": "dover",
-    "_coordinates": { "x": 51.13512, "y": 1.312756 },
-    "_flags": 4
+    "_locationId": "dover"
 }
 ```
 
@@ -30,15 +27,15 @@ Distance is not decoration: the fuel a flight costs is worked out from the great
 | `_locationName` | The name of the place. This is the field the game actually uses: to tell whether a spot is already taken, and to look up the place's flags. |
 | `_locationId` | Informational only. Keep it identical to the name. |
 | `_coordinates` | `x` is **latitude**, `y` is **longitude**, in degrees. Used for the marker on the war map and for the distance (and so the fuel cost). |
-| `_flags` | A number describing the place (see below). Must be a number - `"Sea"` is not accepted. |
+| `_flags` | A number describing the place (see below). Must be a number - `"Sea"` is not accepted. **Missions do not use it**: in a mission file it is ignored, leave it at `0`. It only counts in a mod's `Missions/Locations/` file. |
 
 A list with several places lets the same mission turn up in different spots:
 
 ```json
 "_potentialLocations": [
-    { "_locationId": "dover_strait", "_locationName": "dover_strait", "_coordinates": { "x": 51.0598, "y": 1.5825 }, "_flags": 2 },
-    { "_locationId": "english_channel", "_locationName": "english_channel", "_coordinates": { "x": 50.166, "y": -1.7013 }, "_flags": 2 },
-    { "_locationId": "seine_bay", "_locationName": "seine_bay", "_coordinates": { "x": 49.7154, "y": -0.672 }, "_flags": 2 }
+    { "_locationId": "dover_strait" },
+    { "_locationId": "english_channel" },
+    { "_locationId": "seine_bay" }
 ]
 ```
 
@@ -54,7 +51,20 @@ A list with several places lets the same mission turn up in different spots:
 | 4 | `OwnTerritory` | over friendly territory |
 | 8 | `EnemyTerritory` | over enemy territory |
 
-They add up, so `10` is Sea + Enemy territory (2 + 8) - the most common value for a coastal target on the far side of the Channel.
+They add up, so `10` is Sea + Enemy territory (2 + 8) - the most common value for a coastal target on the far side of the Channel. Some combinations:
+
+| Value | Flags |
+|---|---|
+| 3 | Land + Sea |
+| 5 | Land + OwnTerritory |
+| 6 | Sea + OwnTerritory |
+| 9 | Land + EnemyTerritory |
+| 10 | Sea + EnemyTerritory |
+| 12 | OwnTerritory + EnemyTerritory |
+
+A place with several flags passes a quest condition for each of them: a `10` place counts for both `location,sea` and `location,enemyterritory`.
+
+In the shipped game, location flags are used only to **unlock the built-in airplane skins**: hidden skin quests such as "fly 20 missions over the sea with a Beaufighter" use `location,sea`, `location,ownterritory` and `location,enemyterritory`. No other shipped quest checks them.
 
 !!! warning "The flags in your mission file are not read"
     The `_flags` value in a mission file is kept for completeness, but **the game does not read it**. Every shipped mission leaves it at `0`. Quest steps such as "fly a mission over the sea" look the mission's location **name** up in the location list - the places below plus any that enabled mods add - and use the flags recorded there. The quest step writes the flag **name**, not the number: `location,sea`, `location,ownterritory`, `location,enemyterritory` (see [Quests](../quests/index.md#aircraft-and-missions)).

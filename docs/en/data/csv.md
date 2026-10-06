@@ -15,7 +15,7 @@ One mod is one folder in your `Mods` folder, and the data tables go into its `CS
 ```text
 Mods/
   my_balance_mod/
-    config.json          optional
+    config.json
     CSV/
       VehicleData.csv    whole rows
       Variables.json     single cells
@@ -197,20 +197,20 @@ One row per aircraft. Rows cannot be added or removed.
 | `Type` | `Fighter`, `Bomber`, `MultiRole`, `Special` | | |
 | `Crew` | comma list of seats; repeat a role for two seats | 1–8 seats, from `Pilot` alone to `Pilot,Pilot,BombAimer,Navigator,FlightEngineer,RadioOperator,Gunner,Gunner`; every row starts with `Pilot` and all six roles are used | in a CSV file, wrap a cell with more than one seat in quotes: `"Pilot,Gunner,Navigator"`. Roles: `Pilot`, `Gunner`, `Navigator`, `BombAimer`, `FlightEngineer`, `RadioOperator` |
 | `Runway Tier` | whole number | 1–5 | above 5 and no airstrip can serve it |
-| `Parking Size` | whole number | 0–2 | above 2 and it can never park |
+| `Parking Size` | parking spot size: `0` small, `1` medium, `2` large | 0–2 | above 2 and it can never park |
 | `Victory Points Cost` | whole number | 0–12 | 0 makes it free |
 | `Movement Speed` | whole number | 5 on every row | taxi speed; 0 and it never reaches the runway |
-| `Landing Length` | whole number | 60–170 | longer than any buildable strip and it can never land |
+| `Landing Length` | whole number | 60–170 | longer than the strip and the plane overshoots it on landing |
 | `Health` | whole number | 100 on every row | |
 | `Initial Integrity` | whole number | 1000 on every row | hours of wear the aircraft can take before it is worn out (1000 h ≈ 41 days) |
 | `Fuel Capacity` | whole number | 200–1260 | |
 | `Voxel Size` | `AxBxC` | `10x0x10` on every row | |
-| `Fight Power` | `min-max` | min 0–43, max 0–60 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
-| `Bomb Power` | `min-max` | min 0–50, max 0–80 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
-| `Recon Power` | `min-max` | min 5–42, max 10–60 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
-| `Manoeuvrability` | `min-max` | min 2–28, max 8–50 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
-| `Transport Capacity` | `min-max` | min 1–60, max 5–90 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
-| `Stealthiness` | `min-max` | min 10–88, max 48–98 | `0 ≤ min ≤ max`, and `max` at most **twice the highest built-in value** |
+| `Fight Power` | `min-max` | min 0–43, max 0–60 | `0 ≤ min ≤ max` |
+| `Bomb Power` | `min-max` | min 0–50, max 0–80 | `0 ≤ min ≤ max` |
+| `Recon Power` | `min-max` | min 5–42, max 10–60 | `0 ≤ min ≤ max` |
+| `Manoeuvrability` | `min-max` | min 2–28, max 8–50 | `0 ≤ min ≤ max` |
+| `Transport Capacity` | `min-max` | min 1–60, max 5–90 | `0 ≤ min ≤ max` |
+| `Stealthiness` | `min-max` | min 10–88, max 48–98 | `0 ≤ min ≤ max`; **hard cap: `max` at most 100, a higher value breaks the game**. At 100 the plane is invisible to the enemy. |
 | `Wreck Resource Type` | `/`-list of resources | `Metal/RepairParts` on every row | both wreck columns set, or both empty |
 | `Wreck Resource Amount` | `/`-list of whole numbers | `10/5` on every row | one amount per entry in `Wreck Resource Type`, in the order listed there |
 | `Low Caliber Ammo Capacity` | whole number | 0–3300 | `GunAmmo` carried; 0 = none |
@@ -248,7 +248,7 @@ Rows `1`–`5`.
 |---|---|---|---|
 | `Length` | whole number | by row: 80, 120, 140, 160, 200 | tiers match on "length or more", so keep them ascending |
 | `Width` | whole number | by row: 12, 14, 18, 22, 26 | tiers match on "width or more", so keep them ascending |
-| `Material` | text | by row: `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | **must not repeat another tier's material**, and must name an existing `ResourceCost` row - that row is what each tile of this runway costs. `ResourceCost` does not accept new surface rows, so in practice keep to `dirt`, `sand`, `gravel`, `concrete` and `tarmac` (swapping them between tiers is fine). A material with no `ResourceCost` row is accepted here, and then laying a runway of that tier fails with an error |
+| `Material` | text | by row: `dirt`, `sand`, `gravel`, `concrete`, `tarmac` | must name an existing `ResourceCost` row - that row is what each tile of this runway costs. `ResourceCost` does not accept new surface rows, so in practice keep to `dirt`, `sand`, `gravel`, `concrete` and `tarmac` (swapping them between tiers is fine). A material with no `ResourceCost` row is accepted here, and then laying a runway of that tier fails with an error |
 | `Biome Id` | whole number | by row: 6, 20, 22, 15, 13 | ground painted under the finished strip |
 | `Build Time` | whole number | by row: 5, 2, 2, 2, 2 | in-game minutes of work per tile. Each tile is worked by one crew member at a time, so more crew lay more tiles in parallel, not one tile faster |
 

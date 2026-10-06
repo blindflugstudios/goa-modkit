@@ -440,6 +440,8 @@ Jeder Ort auf der Kriegskarte trägt Flags, die ihn beschreiben. Sie sind eine B
 | 4 | `OwnTerritory` |
 | 8 | `EnemyTerritory` |
 
+**Missionen nutzen diese Flags nicht.** Der Wert `_flags` im Ortseintrag einer Mission wird ignoriert; lass ihn auf `0`, wie es jede mitgelieferte Mission tut. Nur Ortsbedingungen in Quests lesen Flags, und die holen sie aus der Ortsliste, nicht aus deiner Mission (siehe [Einsatzorte](locations.md#location-flags)).
+
 Die Liste der Orte mit ihren Koordinaten steht auf der Seite [Einsatzorte](locations.md). Kopier die Koordinaten exakt: Das Spiel misst Entfernung und Treibstoff an den Koordinaten in deiner Datei, nicht am Namen.
 
 ### Karten-Tags { #map-tags }

@@ -18,10 +18,7 @@ Die Entfernung ist keine Deko: Der Treibstoff, den ein Flug kostet, wird aus der
 
 ```json
 {
-    "_locationId": "dover",
-    "_locationName": "dover",
-    "_coordinates": { "x": 51.13512, "y": 1.312756 },
-    "_flags": 4
+    "_locationId": "dover"
 }
 ```
 
@@ -30,15 +27,15 @@ Die Entfernung ist keine Deko: Der Treibstoff, den ein Flug kostet, wird aus der
 | `_locationName` | Der Name des Orts. Das ist das Feld, das das Spiel tatsächlich nutzt: um zu erkennen, ob ein Platz schon belegt ist, und um die Flags des Orts nachzuschlagen. |
 | `_locationId` | Nur zur Information. Halte ihn identisch mit dem Namen. |
 | `_coordinates` | `x` ist der **Breitengrad**, `y` der **Längengrad**, in Grad. Wird für die Markierung auf der Kriegskarte und für die Entfernung (und damit die Treibstoffkosten) genutzt. |
-| `_flags` | Eine Zahl, die den Ort beschreibt (siehe unten). Muss eine Zahl sein - `"Sea"` wird nicht akzeptiert. |
+| `_flags` | Eine Zahl, die den Ort beschreibt (siehe unten). Muss eine Zahl sein - `"Sea"` wird nicht akzeptiert. **Missionen nutzen sie nicht**: In einer Missionsdatei wird der Wert ignoriert, lass ihn auf `0`. Er zählt nur in der Datei `Missions/Locations/` eines Mods. |
 
 Mit einer Liste mehrerer Orte kann dieselbe Mission an verschiedenen Stellen auftauchen:
 
 ```json
 "_potentialLocations": [
-    { "_locationId": "dover_strait", "_locationName": "dover_strait", "_coordinates": { "x": 51.0598, "y": 1.5825 }, "_flags": 2 },
-    { "_locationId": "english_channel", "_locationName": "english_channel", "_coordinates": { "x": 50.166, "y": -1.7013 }, "_flags": 2 },
-    { "_locationId": "seine_bay", "_locationName": "seine_bay", "_coordinates": { "x": 49.7154, "y": -0.672 }, "_flags": 2 }
+    { "_locationId": "dover_strait" },
+    { "_locationId": "english_channel" },
+    { "_locationId": "seine_bay" }
 ]
 ```
 
@@ -54,7 +51,20 @@ Mit einer Liste mehrerer Orte kann dieselbe Mission an verschiedenen Stellen auf
 | 4 | `OwnTerritory` | über eigenem Gebiet |
 | 8 | `EnemyTerritory` | über feindlichem Gebiet |
 
-Sie werden addiert: `10` ist also Meer + feindliches Gebiet (2 + 8) - der häufigste Wert für ein Küstenziel auf der anderen Seite des Ärmelkanals.
+Sie werden addiert: `10` ist also Meer + feindliches Gebiet (2 + 8) - der häufigste Wert für ein Küstenziel auf der anderen Seite des Ärmelkanals. Einige Kombinationen:
+
+| Wert | Flags |
+|---|---|
+| 3 | Land + Sea |
+| 5 | Land + OwnTerritory |
+| 6 | Sea + OwnTerritory |
+| 9 | Land + EnemyTerritory |
+| 10 | Sea + EnemyTerritory |
+| 12 | OwnTerritory + EnemyTerritory |
+
+Ein Ort mit mehreren Flags erfüllt die Quest-Bedingung für jedes davon: Ein Ort mit `10` zählt sowohl für `location,sea` als auch für `location,enemyterritory`.
+
+Im mitgelieferten Spiel werden Orts-Flags nur genutzt, um **die eingebauten Flugzeug-Lackierungen freizuschalten**: Versteckte Lackierungs-Quests wie "fliege 20 Missionen über dem Meer mit einer Beaufighter" nutzen `location,sea`, `location,ownterritory` und `location,enemyterritory`. Keine andere mitgelieferte Quest prüft sie.
 
 !!! warning "Die Flags in deiner Missionsdatei werden nicht gelesen"
     Der Wert `_flags` in einer Missionsdatei ist nur der Vollständigkeit halber da, aber **das Spiel liest ihn nicht**. Jede mitgelieferte Mission lässt ihn auf `0`. Quest-Schritte wie "fliege eine Mission über dem Meer" schlagen den **Namen** des Missionsorts in der Ortsliste nach - den Orten unten plus allen, die aktivierte Mods hinzufügen - und nutzen die dort hinterlegten Flags. Der Quest-Schritt schreibt den **Namen** des Flags, nicht die Zahl: `location,sea`, `location,ownterritory`, `location,enemyterritory` (siehe [Quests](../quests/index.md#aircraft-and-missions)).
