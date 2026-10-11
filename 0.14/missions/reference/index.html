@@ -3681,7 +3681,7 @@
 <tr>
 <td><code>_potentialLocations</code></td>
 <td>list</td>
-<td>Candidate places on the war map; one is drawn per mission. Distance and fuel follow from it. With an empty list the game picks a random location. See <a href="../locations/">Locations</a>.</td>
+<td>Candidate places on the war map as <code>{ "_locationId": "..." }</code> entries; one is drawn per mission. Distance and fuel follow from it. With an empty list, or when the drawn ID is missing or unknown, the game picks a random location. See <a href="../locations/">Locations</a>.</td>
 </tr>
 <tr>
 <td><code>_difficultyRating</code></td>
@@ -3972,8 +3972,8 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Missions do not use these flags.</strong> The <code>_flags</code> value in a mission's location entry is ignored; leave it at <code>0</code>, as every shipped mission does. Only quest location conditions read flags, and they take them from the location list, not from your mission (see <a href="../locations/#location-flags">Locations</a>).</p>
-<p>The list of places, with their coordinates, is on the <a href="../locations/">Locations</a> page. Copy the coordinates exactly: the game measures distance and fuel from the coordinates in your file, not from the name.</p>
+<p><strong>Missions do not set these flags.</strong> A mission's location entry carries only <code>_locationId</code>; a <code>_flags</code> value left on it is ignored. Only quest location conditions read flags, and they take them from the location list, not from your mission (see <a href="../locations/#location-flags">Locations</a>).</p>
+<p>The list of places, with their IDs and coordinates, is on the <a href="../locations/">Locations</a> page. Refer to a place by its ID: the game takes the coordinates (and so distance and fuel) from the location list, not from your file.</p>
 <h3 id="map-tags">Map tags<a class="headerlink" href="#map-tags" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">"_tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"campaign_debden"</span><span class="p">]</span>
 </code></pre></div>
@@ -4021,9 +4021,9 @@
 <td>use <code>VictoryPoints</code></td>
 </tr>
 <tr>
-<td><code>_coordinates</code> left at 0, 0</td>
-<td>the mission is placed far away, with a huge fuel cost</td>
-<td>copy coordinates from <a href="../locations/">Locations</a></td>
+<td><code>_locationId</code> missing, empty or not a known place</td>
+<td>the mission is placed at a random location</td>
+<td>use an ID from <a href="../locations/">Locations</a>, or add the place with a mod</td>
 </tr>
 <tr>
 <td>Old field <code>_mapTags</code> instead of <code>_tags</code></td>

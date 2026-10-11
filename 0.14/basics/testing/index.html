@@ -2663,6 +2663,7 @@ A mission only enters the pool when all its requirements pass. Check <code>Runwa
 <li>at least 2 mission stats</li>
 <li><code>_missionIcon</code> is one of <code>Fight</code>, <code>Recon</code>, <code>Bomb</code>, <code>Transport</code>, <code>Maneuverability</code>, <code>Stealth</code>, <code>Luxury</code>, <code>Success</code>, <code>Failure</code>, <code>Cancel</code></li>
 <li><code>_enemyPlaneReport</code> is 18 or lower</li>
+<li>every <code>_potentialLocations</code> entry has a <code>_locationId</code>, and that ID is a shipped place (any other ID is only a warning, because a mod may add the place in <code>Missions/Locations/</code>)</li>
 <li><code>.py</code> and <code>.json</code> share a name, and <code>get_mission_id</code> returns that name</li>
 <li>the id does not duplicate an existing mission id</li>
 <li>every text key the script writes follows <code>missions/&lt;id&gt;/&lt;slot&gt;</code></li>

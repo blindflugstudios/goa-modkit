@@ -2684,7 +2684,7 @@
 <span class="w">    </span><span class="nt">"_questType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Reading it top to bottom: the quest has two steps. The first waits until a sickbed has been <em>finished</em> building - once. The second counts beds standing on the base and is full at four, but it is optional, so the quest completes as soon as the sickbed is done. <code>_requirements</code> is empty, which means the quest starts on every map the moment the game loads.</p>
+<p>Reading it top to bottom: the quest has two steps. The first waits until a sickbed has been <em>finished</em> building - once. The second counts beds standing on the base and is full at four, but it is optional, so the quest completes as soon as the sickbed is done. <code>_requirements</code> is empty, which means the quest starts on every map that lists it in its <code>StartingQuestIds</code> - see <a href="#quests-and-maps">Quests and maps</a>.</p>
 <p>The titles are <strong>localization keys</strong>, not text - until you register them, the player sees no title at all. The section <a href="#text">Text</a> explains how to give them words.</p>
 <h2 id="the-file-field-by-field">The file, field by field<a class="headerlink" href="#the-file-field-by-field" title="Permanent link">&para;</a></h2>
 <table>
@@ -3321,11 +3321,11 @@
 </tr>
 <tr>
 <td><code>mission_started</code>, <code>mission_success</code>, <code>mission_failed</code></td>
-<td>the mission's location name</td>
+<td>the mission's location ID</td>
 </tr>
 <tr>
 <td><code>airplane_on_mission_succeed</code>, <code>airplane_on_mission_failed</code></td>
-<td>aircraft id, aircraft, <strong>mission id</strong>, skill, went-as-planned, location name, forecast</td>
+<td>aircraft id, aircraft, <strong>mission id</strong>, skill, went-as-planned, location ID, forecast</td>
 </tr>
 <tr>
 <td><code>airplane_took_part_in_scramble</code>, <code>airplane_scramble_fly_to_safety</code>, <code>airplane_scramble_airplane_destroyed</code></td>
@@ -3387,7 +3387,7 @@
 <h3 id="types-that-do-nothing">Types that do nothing<a class="headerlink" href="#types-that-do-nothing" title="Permanent link">&para;</a></h3>
 <p><code>_type: 3</code> and <code>_type: 15</code> exist in old files but have no logic behind them; a step using either never progresses and nothing is <a href="../start/troubleshooting/#find-the-playerlog">logged</a>. The same goes for any number outside the table. If a step sits at zero forever, check its <code>_type</code> first.</p>
 <h2 id="how-a-quest-starts">How a quest starts<a class="headerlink" href="#how-a-quest-starts" title="Permanent link">&para;</a></h2>
-<p><code>_requirements</code> decides <em>when the quest is handed to the player</em>. It has nothing to do with progress. All entries must pass (they are combined with AND). The check runs when a game is loaded or started, and again every time any quest completes - at that point only quests with a type-1 entry are checked again.</p>
+<p><code>_requirements</code> decides <em>when the quest is handed to the player</em>. It has nothing to do with progress. All entries must pass (they are combined with AND), and the check runs every time any quest completes - only quests with a type-1 entry are checked.</p>
 <table>
 <thead>
 <tr>
@@ -3411,38 +3411,33 @@
 <td>the other quest's id</td>
 </tr>
 <tr>
-<td>2</td>
-<td>MinimumDate</td>
-<td><strong>Not implemented.</strong> The entry is skipped, so the quest starts as if it were not there. Do not use it.</td>
+<td>2, 3</td>
+<td>MinimumDate, MapDependent</td>
+<td><strong>Removed.</strong> The entry is skipped, so the quest behaves as if it were not there. Do not use them.</td>
 <td></td>
-</tr>
-<tr>
-<td>3</td>
-<td>MapDependent</td>
-<td>Start <strong>only</strong> when the loaded map names this quest in <code>StartingQuestIds</code> - see <a href="#quests-and-maps">Quests and maps</a>.</td>
-<td><code>""</code></td>
 </tr>
 </tbody>
 </table>
-<p>With an <strong>empty list</strong>, the quest starts on every map as soon as the game loads. That is right for a side quest or an achievement-like quest, and wrong for anything that belongs to a story or a map.</p>
+<p>A quest reaches the player in one of three ways only:</p>
+<ul>
+<li>the loaded map lists it in its <code>StartingQuestIds</code> - see <a href="#quests-and-maps">Quests and maps</a>;</li>
+<li>it has a type-1 entry and the quest it names completes;</li>
+<li>it is an aircraft skin quest (<code>_questType: 1</code>), which is handed out on every map.</li>
+</ul>
+<p>A quest with an <strong>empty list</strong> that no map lists never starts.</p>
 <p>A <strong>chain</strong> is a series of quests, each requiring the one before it:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycampaign_first_steps"</span><span class="w"> </span><span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
-<p>A quest is handed out at most once per playthrough - once it exists in the save, complete or not, it is not created again, and a completed quest stays completed. Requiring a quest that never starts on this map (because that quest carries requirement type 3 and the map does not list it) is a convenient way to keep a whole chain off a map: only the first link needs the map, the rest follow through requirement type 1.</p>
+<p>A quest is handed out at most once per playthrough - once it exists in the save, complete or not, it is not created again, and a completed quest stays completed. A chain follows its first link: only the first quest needs to be in the map's list, the rest follow through requirement type 1, and on a map that does not list the first quest the whole chain stays away.</p>
 <h3 id="quests-and-maps">Quests and maps<a class="headerlink" href="#quests-and-maps" title="Permanent link">&para;</a></h3>
 <p>Every map names the quests it starts, in the <code>Metadata.json</code> inside its <code>.goamap</code> file:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">"StartingQuestIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"mycampaign_first_steps"</span><span class="p">]</span>
 </code></pre></div>
 <p>Those quests are handed out when the map is loaded, whatever their <code>_requirements</code> say. A map that names none - an older map, or one whose field was left empty - starts the game's default quest line, <code>quest0</code>, so no map is ever without quests.</p>
-<p>The shipped <code>quest0</code> carries requirement type 3, and every later <code>questN</code> requires the one before it. So the moment a map lists <em>your</em> quest instead of <code>quest0</code>, the whole shipped main line stays away from that map - which is usually what a campaign wants. If you want both, list both: <code>["quest0", "mycampaign_first_steps"]</code>.</p>
-<p>To make a quest belong to a map, and <em>only</em> to that map, do both halves:</p>
-<ol>
-<li>Put the quest id in the map's <code>StartingQuestIds</code>.</li>
-<li>Give the quest the requirement <code>{ "_requirementType": 3, "_value": "" }</code> so no other path - not an empty requirement list, not another quest completing - can start it elsewhere.</li>
-</ol>
-<p>A quest with an empty requirement list still starts everywhere, listed or not. A quest with only type 1 still starts wherever its predecessor completes. Type 3 is the only thing that says "here and nowhere else".</p>
+<p>The shipped <code>quest0</code> has no requirements, and every later <code>questN</code> requires the one before it. So the moment a map lists <em>your</em> quest instead of <code>quest0</code>, the whole shipped main line stays away from that map - which is usually what a campaign wants. If you want both, list both: <code>["quest0", "mycampaign_first_steps"]</code>.</p>
+<p>To make a quest belong to a map, put its id in that map's <code>StartingQuestIds</code> and leave its <code>_requirements</code> empty. No other map starts it.</p>
 <div class="admonition note">
 <p class="admonition-title">Missions use tags, quests do not</p>
 <p>Missions are tied to maps through <strong>tags</strong> (the <code>_tags</code> field, see <a href="../missions/">Missions</a>). Quests are not: a quest has no tags field, and the map's <code>StartingQuestIds</code> list is the whole story. The two mechanisms are independent - a campaign map typically uses both, tags for its missions and <code>StartingQuestIds</code> for its quests.</p>
@@ -3476,7 +3471,7 @@
 <tbody>
 <tr>
 <td><code>example_first_steps.json</code></td>
-<td>The quest from <a href="#a-first-quest">A first quest</a>: one required step waiting for a finished sickbed, one optional step counting beds. Starts on every map.</td>
+<td>The quest from <a href="#a-first-quest">A first quest</a>: one required step waiting for a finished sickbed, one optional step counting beds. Starts on every map that lists it in <code>StartingQuestIds</code>.</td>
 </tr>
 <tr>
 <td><code>example_patrol_chain.json</code></td>
@@ -3484,7 +3479,7 @@
 </tr>
 <tr>
 <td><code>example_map_campaign.json</code></td>
-<td>A quest that belongs to one map. Requirement type 3 keeps it off every other map; the map lists it in <code>StartingQuestIds</code> (see <a href="#quests-and-maps">Quests and maps</a>). Its steps use the counted-state types: an airstrip of tier 1, two parking spots, a storage zone of twenty tiles.</td>
+<td>A quest that belongs to one map: it has no requirements, and only that map lists it in <code>StartingQuestIds</code> (see <a href="#quests-and-maps">Quests and maps</a>). Its steps use the counted-state types: an airstrip of tier 1, two parking spots, a storage zone of twenty tiles.</td>
 </tr>
 </tbody>
 </table>
@@ -3583,13 +3578,7 @@
 <span class="w">            </span><span class="nt">"_genericIconKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui_functionarea_resources"</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
 <span class="w">    </span><span class="nt">"_isHiddenInUI"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">"_questType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">"_highlightedUIElements"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
@@ -3609,7 +3598,7 @@
 <tbody>
 <tr>
 <td><code>quest0.json</code></td>
-<td>The first quest of the main line: requirement type 3, so it only starts on maps that list it in <code>StartingQuestIds</code>. Its steps are the counted-state types - an airstrip of tier 1, a parking spot, a Gladiator, beds.</td>
+<td>The first quest of the main line: no requirements, so it only starts on maps that list it in <code>StartingQuestIds</code> (or name no starting quest at all). Its steps are the counted-state types - an airstrip of tier 1, a parking spot, a Gladiator, beds.</td>
 </tr>
 <tr>
 <td><code>quest1.json</code></td>
@@ -3671,8 +3660,8 @@
 <li>Types 0, 1 and 21 have a number in <code>_parameter</code>; types 20 and 24 have their second part.</li>
 <li>Types 12 and 17 include a skill or <code>any_skill_type</code>; any of 12, 13, 17 that is not empty includes at least one aircraft <strong>id</strong>.</li>
 <li>No tutorial-only event outside a tutorial.</li>
-<li>No <code>_requirementType: 2</code>.</li>
-<li>Story quests carry <code>_requirementType: 3</code> and the map lists them; side quests that should start everywhere have an empty list on purpose.</li>
+<li>No <code>_requirementType: 2</code> or <code>3</code>.</li>
+<li>Every quest without a type-1 requirement is listed in the <code>StartingQuestIds</code> of each map it should run on.</li>
 <li>Every localization key is either a shipped key or registered by your script - load the game and look at the panel.</li>
 <li>No spaces inside <code>_parameter</code>.</li>
 </ul>

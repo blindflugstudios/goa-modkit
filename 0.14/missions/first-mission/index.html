@@ -2828,7 +2828,7 @@ index 3   as planned,  skill passed
 </code></pre></div>
 <p>The first entry is used when the mission goes as planned, the second when it goes wrong. The range is the difficulty: the game rolls a target inside it, and the squadron's combined skill has to reach that target. With fewer than two entries the skill roll crashes.</p>
 <h3 id="where-it-happens">Where it happens<a class="headerlink" href="#where-it-happens" title="Permanent link">&para;</a></h3>
-<p><code>_potentialLocations</code> lists candidate places on the war map. One is drawn each time the mission appears. Copy entries from the <a href="../locations/">Locations</a> page, including the coordinates: the game works out distance and fuel from the coordinates in your file.</p>
+<p><code>_potentialLocations</code> lists candidate places on the war map. One is drawn each time the mission appears. Each entry names a place by its ID, such as <code>{ "_locationId": "dover" }</code>; pick IDs from the <a href="../locations/">Locations</a> page. The game takes the coordinates from its location list and works out distance and fuel from them. An ID it does not know sends the mission to a random location.</p>
 <h2 id="how-a-mission-script-actually-runs">How a mission script actually runs<a class="headerlink" href="#how-a-mission-script-actually-runs" title="Permanent link">&para;</a></h2>
 <p>Before any code, one idea that makes everything else simple: a mission script is <strong>not a program that runs from top to bottom</strong>. It is a set of functions the game calls at fixed moments. You never call them yourself, and you never write a loop that waits for something.</p>
 <p>The <code>@event_handler(...)</code> line above a function says <em>when</em> the game should call it:</p>

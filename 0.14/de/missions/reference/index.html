@@ -3681,7 +3681,7 @@
 <tr>
 <td><code>_potentialLocations</code></td>
 <td>Liste</td>
-<td>Mögliche Orte auf der Kriegskarte; pro Mission wird einer gezogen. Entfernung und Treibstoff ergeben sich daraus. Bei einer leeren Liste wählt das Spiel einen zufälligen Ort. Siehe <a href="../locations/">Einsatzorte</a>.</td>
+<td>Mögliche Orte auf der Kriegskarte als Einträge <code>{ "_locationId": "..." }</code>; pro Mission wird einer gezogen. Entfernung und Treibstoff ergeben sich daraus. Bei einer leeren Liste, oder wenn die gezogene ID fehlt oder unbekannt ist, wählt das Spiel einen zufälligen Ort. Siehe <a href="../locations/">Einsatzorte</a>.</td>
 </tr>
 <tr>
 <td><code>_difficultyRating</code></td>
@@ -3972,8 +3972,8 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Missionen nutzen diese Flags nicht.</strong> Der Wert <code>_flags</code> im Ortseintrag einer Mission wird ignoriert; lass ihn auf <code>0</code>, wie es jede mitgelieferte Mission tut. Nur Ortsbedingungen in Quests lesen Flags, und die holen sie aus der Ortsliste, nicht aus deiner Mission (siehe <a href="../locations/#location-flags">Einsatzorte</a>).</p>
-<p>Die Liste der Orte mit ihren Koordinaten steht auf der Seite <a href="../locations/">Einsatzorte</a>. Kopier die Koordinaten exakt: Das Spiel misst Entfernung und Treibstoff an den Koordinaten in deiner Datei, nicht am Namen.</p>
+<p><strong>Missionen legen diese Flags nicht fest.</strong> Der Ortseintrag einer Mission trägt nur <code>_locationId</code>; ein <code>_flags</code>, das dort noch steht, wird ignoriert. Nur Ortsbedingungen in Quests lesen Flags, und die holen sie aus der Ortsliste, nicht aus deiner Mission (siehe <a href="../locations/#location-flags">Einsatzorte</a>).</p>
+<p>Die Liste der Orte mit ihren IDs und Koordinaten steht auf der Seite <a href="../locations/">Einsatzorte</a>. Sprich einen Ort über seine ID an: Das Spiel nimmt die Koordinaten (und damit Entfernung und Treibstoff) aus der Ortsliste, nicht aus deiner Datei.</p>
 <h3 id="map-tags">Karten-Tags<a class="headerlink" href="#map-tags" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">"_tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"campaign_debden"</span><span class="p">]</span>
 </code></pre></div>
@@ -4021,9 +4021,9 @@
 <td><code>VictoryPoints</code> verwenden</td>
 </tr>
 <tr>
-<td><code>_coordinates</code> auf 0, 0 gelassen</td>
-<td>die Mission liegt weit weg, mit riesigen Treibstoffkosten</td>
-<td>Koordinaten von <a href="../locations/">Einsatzorte</a> kopieren</td>
+<td><code>_locationId</code> fehlt, ist leer oder kein bekannter Ort</td>
+<td>die Mission landet an einem zufälligen Ort</td>
+<td>eine ID von <a href="../locations/">Einsatzorte</a> verwenden oder den Ort mit einem Mod hinzufügen</td>
 </tr>
 <tr>
 <td>Altes Feld <code>_mapTags</code> statt <code>_tags</code></td>

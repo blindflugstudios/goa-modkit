@@ -2684,7 +2684,7 @@
 <span class="w">    </span><span class="nt">"_questType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Von oben nach unten gelesen: Die Quest hat zwei Schritte. Der erste wartet, bis ein Krankenbett <em>fertig gebaut</em> ist - einmal. Der zweite zählt die Betten auf der Basis und ist bei vier voll, ist aber optional, also ist die Quest abgeschlossen, sobald das Krankenbett steht. <code>_requirements</code> ist leer, das heißt, die Quest startet auf jeder Karte, sobald das Spiel lädt.</p>
+<p>Von oben nach unten gelesen: Die Quest hat zwei Schritte. Der erste wartet, bis ein Krankenbett <em>fertig gebaut</em> ist - einmal. Der zweite zählt die Betten auf der Basis und ist bei vier voll, ist aber optional, also ist die Quest abgeschlossen, sobald das Krankenbett steht. <code>_requirements</code> ist leer, das heißt, die Quest startet auf jeder Karte, die sie in ihren <code>StartingQuestIds</code> aufführt - siehe <a href="#quests-and-maps">Quests und Karten</a>.</p>
 <p>Die Titel sind <strong>Lokalisierungsschlüssel</strong>, kein Text - solange du sie nicht registrierst, sieht der Spieler überhaupt keinen Titel. Der Abschnitt <a href="#text">Text</a> erklärt, wie du ihnen Worte gibst.</p>
 <h2 id="the-file-field-by-field">Die Datei, Feld für Feld<a class="headerlink" href="#the-file-field-by-field" title="Permanent link">&para;</a></h2>
 <table>
@@ -3321,11 +3321,11 @@
 </tr>
 <tr>
 <td><code>mission_started</code>, <code>mission_success</code>, <code>mission_failed</code></td>
-<td>der Ortsname der Mission</td>
+<td>die Orts-ID der Mission</td>
 </tr>
 <tr>
 <td><code>airplane_on_mission_succeed</code>, <code>airplane_on_mission_failed</code></td>
-<td>Flugzeug-id, Flugzeug, <strong>Missions-id</strong>, Fähigkeit, nach Plan gelaufen, Ortsname, Prognose</td>
+<td>Flugzeug-id, Flugzeug, <strong>Missions-id</strong>, Fähigkeit, nach Plan gelaufen, Orts-ID, Prognose</td>
 </tr>
 <tr>
 <td><code>airplane_took_part_in_scramble</code>, <code>airplane_scramble_fly_to_safety</code>, <code>airplane_scramble_airplane_destroyed</code></td>
@@ -3387,7 +3387,7 @@
 <h3 id="types-that-do-nothing">Typen, die nichts tun<a class="headerlink" href="#types-that-do-nothing" title="Permanent link">&para;</a></h3>
 <p><code>_type: 3</code> und <code>_type: 15</code> stehen in alten Dateien, haben aber keine Logik dahinter; ein Schritt mit einem davon kommt nie voran, und nichts wird <a href="../start/troubleshooting/#find-the-playerlog">geloggt</a>. Dasselbe gilt für jede Zahl, die nicht in der Tabelle steht. Wenn ein Schritt ewig bei null steht, prüf zuerst seinen <code>_type</code>.</p>
 <h2 id="how-a-quest-starts">Wie eine Quest startet<a class="headerlink" href="#how-a-quest-starts" title="Permanent link">&para;</a></h2>
-<p><code>_requirements</code> entscheidet, <em>wann die Quest dem Spieler gegeben wird</em>. Mit Fortschritt hat das nichts zu tun. Alle Einträge müssen erfüllt sein (sie sind mit UND verknüpft). Die Prüfung läuft, wenn ein Spiel geladen oder gestartet wird, und erneut jedes Mal, wenn irgendeine Quest abgeschlossen wird - dann werden nur Quests mit einem Eintrag vom Typ 1 erneut geprüft.</p>
+<p><code>_requirements</code> entscheidet, <em>wann die Quest dem Spieler gegeben wird</em>. Mit Fortschritt hat das nichts zu tun. Alle Einträge müssen erfüllt sein (sie sind mit UND verknüpft), und die Prüfung läuft jedes Mal, wenn irgendeine Quest abgeschlossen wird - geprüft werden nur Quests mit einem Eintrag vom Typ 1.</p>
 <table>
 <thead>
 <tr>
@@ -3411,38 +3411,33 @@
 <td>die id der anderen Quest</td>
 </tr>
 <tr>
-<td>2</td>
-<td>MinimumDate</td>
-<td><strong>Nicht umgesetzt.</strong> Der Eintrag wird übersprungen, die Quest startet also, als wäre er nicht da. Nicht verwenden.</td>
+<td>2, 3</td>
+<td>MinimumDate, MapDependent</td>
+<td><strong>Entfernt.</strong> Der Eintrag wird übersprungen, die Quest verhält sich also, als wäre er nicht da. Nicht verwenden.</td>
 <td></td>
-</tr>
-<tr>
-<td>3</td>
-<td>MapDependent</td>
-<td>Startet <strong>nur</strong>, wenn die geladene Karte diese Quest in <code>StartingQuestIds</code> nennt - siehe <a href="#quests-and-maps">Quests und Karten</a>.</td>
-<td><code>""</code></td>
 </tr>
 </tbody>
 </table>
-<p>Mit einer <strong>leeren Liste</strong> startet die Quest auf jeder Karte, sobald das Spiel lädt. Das passt für eine Nebenquest oder eine Art Erfolg, und es passt nicht für alles, was zu einer Geschichte oder einer Karte gehört.</p>
+<p>Eine Quest erreicht den Spieler nur auf einem von drei Wegen:</p>
+<ul>
+<li>die geladene Karte führt sie in ihren <code>StartingQuestIds</code> auf - siehe <a href="#quests-and-maps">Quests und Karten</a>;</li>
+<li>sie hat einen Eintrag vom Typ 1, und die genannte Quest wird abgeschlossen;</li>
+<li>sie ist eine Flugzeug-Skin-Quest (<code>_questType: 1</code>), die auf jeder Karte vergeben wird.</li>
+</ul>
+<p>Eine Quest mit <strong>leerer Liste</strong>, die keine Karte aufführt, startet nie.</p>
 <p>Eine <strong>Kette</strong> ist eine Reihe von Quests, von denen jede die vorige voraussetzt:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycampaign_first_steps"</span><span class="w"> </span><span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
-<p>Eine Quest wird pro Durchgang höchstens einmal vergeben - sobald sie im Spielstand existiert, abgeschlossen oder nicht, wird sie nicht erneut erzeugt, und eine abgeschlossene Quest bleibt abgeschlossen. Eine Quest vorauszusetzen, die auf dieser Karte nie startet (weil sie Bedingungstyp 3 hat und die Karte sie nicht aufführt), ist ein bequemer Weg, eine ganze Kette von einer Karte fernzuhalten: Nur das erste Glied braucht die Karte, der Rest folgt über Bedingungstyp 1.</p>
+<p>Eine Quest wird pro Durchgang höchstens einmal vergeben - sobald sie im Spielstand existiert, abgeschlossen oder nicht, wird sie nicht erneut erzeugt, und eine abgeschlossene Quest bleibt abgeschlossen. Eine Kette folgt ihrem ersten Glied: Nur die erste Quest muss in der Liste der Karte stehen, der Rest folgt über Bedingungstyp 1, und auf einer Karte, die die erste Quest nicht aufführt, bleibt die ganze Kette fern.</p>
 <h3 id="quests-and-maps">Quests und Karten<a class="headerlink" href="#quests-and-maps" title="Permanent link">&para;</a></h3>
 <p>Jede Karte nennt die Quests, die sie startet, in der <code>Metadata.json</code> in ihrer <code>.goamap</code>-Datei:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">"StartingQuestIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"mycampaign_first_steps"</span><span class="p">]</span>
 </code></pre></div>
 <p>Diese Quests werden beim Laden der Karte vergeben, egal was ihre <code>_requirements</code> sagen. Eine Karte, die keine nennt - eine ältere Karte oder eine, deren Feld leer geblieben ist -, startet die Standard-Questreihe des Spiels, <code>quest0</code>, damit keine Karte je ohne Quests ist.</p>
-<p>Die mitgelieferte <code>quest0</code> hat Bedingungstyp 3, und jede spätere <code>questN</code> setzt die vorige voraus. Sobald eine Karte also <em>deine</em> Quest statt <code>quest0</code> aufführt, bleibt die komplette mitgelieferte Hauptreihe dieser Karte fern - und genau das will eine Kampagne meistens. Wenn du beides willst, führ beides auf: <code>["quest0", "mycampaign_first_steps"]</code>.</p>
-<p>Damit eine Quest zu einer Karte gehört, und <em>nur</em> zu dieser Karte, brauchst du beide Hälften:</p>
-<ol>
-<li>Trag die Quest-id in <code>StartingQuestIds</code> der Karte ein.</li>
-<li>Gib der Quest die Bedingung <code>{ "_requirementType": 3, "_value": "" }</code>, damit kein anderer Weg - weder eine leere Bedingungsliste noch der Abschluss einer anderen Quest - sie anderswo starten kann.</li>
-</ol>
-<p>Eine Quest mit leerer Bedingungsliste startet trotzdem überall, aufgeführt oder nicht. Eine Quest nur mit Typ 1 startet trotzdem überall, wo ihre Vorgängerin abgeschlossen wird. Typ 3 ist das Einzige, was "hier und nirgendwo sonst" sagt.</p>
+<p>Die mitgelieferte <code>quest0</code> hat keine Bedingungen, und jede spätere <code>questN</code> setzt die vorige voraus. Sobald eine Karte also <em>deine</em> Quest statt <code>quest0</code> aufführt, bleibt die komplette mitgelieferte Hauptreihe dieser Karte fern - und genau das will eine Kampagne meistens. Wenn du beides willst, führ beides auf: <code>["quest0", "mycampaign_first_steps"]</code>.</p>
+<p>Damit eine Quest zu einer Karte gehört, trag ihre id in <code>StartingQuestIds</code> dieser Karte ein und lass ihre <code>_requirements</code> leer. Keine andere Karte startet sie.</p>
 <div class="admonition note">
 <p class="admonition-title">Missionen nutzen Tags, Quests nicht</p>
 <p>Missionen hängen über <strong>Tags</strong> an Karten (das Feld <code>_tags</code>, siehe <a href="../missions/">Missionen</a>). Quests nicht: Eine Quest hat kein Tags-Feld, und die Liste <code>StartingQuestIds</code> der Karte ist alles, was zählt. Die beiden Mechanismen sind unabhängig voneinander - eine Kampagnenkarte nutzt typischerweise beide, Tags für ihre Missionen und <code>StartingQuestIds</code> für ihre Quests.</p>
@@ -3476,7 +3471,7 @@
 <tbody>
 <tr>
 <td><code>example_first_steps.json</code></td>
-<td>Die Quest aus <a href="#a-first-quest">Eine erste Quest</a>: ein Pflichtschritt, der auf ein fertiges Krankenbett wartet, ein optionaler Schritt, der Betten zählt. Startet auf jeder Karte.</td>
+<td>Die Quest aus <a href="#a-first-quest">Eine erste Quest</a>: ein Pflichtschritt, der auf ein fertiges Krankenbett wartet, ein optionaler Schritt, der Betten zählt. Startet auf jeder Karte, die sie in <code>StartingQuestIds</code> aufführt.</td>
 </tr>
 <tr>
 <td><code>example_patrol_chain.json</code></td>
@@ -3484,7 +3479,7 @@
 </tr>
 <tr>
 <td><code>example_map_campaign.json</code></td>
-<td>Eine Quest, die zu einer Karte gehört. Bedingungstyp 3 hält sie von allen anderen Karten fern; die Karte führt sie in <code>StartingQuestIds</code> auf (siehe <a href="#quests-and-maps">Quests und Karten</a>). Ihre Schritte nutzen die Zustands-Typen: eine Startbahn der Stufe 1, zwei Parkplätze, eine Lagerzone mit zwanzig Feldern.</td>
+<td>Eine Quest, die zu einer Karte gehört: Sie hat keine Bedingungen, und nur diese Karte führt sie in <code>StartingQuestIds</code> auf (siehe <a href="#quests-and-maps">Quests und Karten</a>). Ihre Schritte nutzen die Zustands-Typen: eine Startbahn der Stufe 1, zwei Parkplätze, eine Lagerzone mit zwanzig Feldern.</td>
 </tr>
 </tbody>
 </table>
@@ -3583,13 +3578,7 @@
 <span class="w">            </span><span class="nt">"_genericIconKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui_functionarea_resources"</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">"_requirementType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">"_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"_requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
 <span class="w">    </span><span class="nt">"_isHiddenInUI"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">"_questType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">"_highlightedUIElements"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
@@ -3609,7 +3598,7 @@
 <tbody>
 <tr>
 <td><code>quest0.json</code></td>
-<td>Die erste Quest der Hauptreihe: Bedingungstyp 3, sie startet also nur auf Karten, die sie in <code>StartingQuestIds</code> aufführen. Ihre Schritte sind die Typen mit gezähltem Zustand - eine Startbahn der Stufe 1, ein Parkplatz, eine Gladiator, Betten.</td>
+<td>Die erste Quest der Hauptreihe: keine Bedingungen, sie startet also nur auf Karten, die sie in <code>StartingQuestIds</code> aufführen (oder gar keine Start-Quest nennen). Ihre Schritte sind die Typen mit gezähltem Zustand - eine Startbahn der Stufe 1, ein Parkplatz, eine Gladiator, Betten.</td>
 </tr>
 <tr>
 <td><code>quest1.json</code></td>
@@ -3671,8 +3660,8 @@
 <li>Die Typen 0, 1 und 21 haben eine Zahl in <code>_parameter</code>; die Typen 20 und 24 haben ihren zweiten Teil.</li>
 <li>Die Typen 12 und 17 enthalten eine Fähigkeit oder <code>any_skill_type</code>; jeder nicht leere Typ 12, 13 oder 17 enthält mindestens eine Flugzeug-<strong>id</strong>.</li>
 <li>Kein Tutorial-Ereignis außerhalb eines Tutorials.</li>
-<li>Kein <code>_requirementType: 2</code>.</li>
-<li>Story-Quests haben <code>_requirementType: 3</code>, und die Karte führt sie auf; Nebenquests, die überall starten sollen, haben absichtlich eine leere Liste.</li>
+<li>Kein <code>_requirementType: 2</code> oder <code>3</code>.</li>
+<li>Jede Quest ohne Bedingung vom Typ 1 steht in den <code>StartingQuestIds</code> jeder Karte, auf der sie laufen soll.</li>
 <li>Jeder Lokalisierungsschlüssel ist entweder ein mitgelieferter Schlüssel oder von deinem Skript registriert - lade das Spiel und schau in die Leiste.</li>
 <li>Keine Leerzeichen in <code>_parameter</code>.</li>
 </ul>
