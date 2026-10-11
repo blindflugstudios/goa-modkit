@@ -128,19 +128,9 @@
     "_missionIcon": "Bomb",
     "_potentialLocations": [
         {
-            "_locationName": "amiens",
-            "_coordinates": {
-                "x": 49.89795,
-                "y": 2.32859
-            },
             "_locationId": "amiens"
         },
         {
-            "_locationName": "lille",
-            "_coordinates": {
-                "x": 50.62518,
-                "y": 3.0551
-            },
             "_locationId": "lille"
         }
     ],

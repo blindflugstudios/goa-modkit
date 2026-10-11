@@ -110,7 +110,7 @@ A historic mission never expires. It is gone for good once it has succeeded. If 
 | Warning | Meaning |
 |---|---|
 | No locations | the game places the mission at a random location from the shipped list |
-| Duplicate location names | |
+| Duplicate location IDs | |
 | Unknown map tag | no known map carries this tag, so the mission is unavailable everywhere - intended only if a script hands it out |
 | Difficulty rating outside 1–3 | |
 | Fewer than one aircraft slot | nobody can fly it |

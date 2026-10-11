@@ -26,9 +26,7 @@
             "_genericIconKey": "ui_functionarea_parking"
         }
     ],
-    "_requirements": [
-        { "_requirementType": 3, "_value": "" }
-    ],
+    "_requirements": [],
     "_isHiddenInUI": false,
     "_questType": 0
 }

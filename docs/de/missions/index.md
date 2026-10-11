@@ -110,7 +110,7 @@ Eine historische Mission verfällt nie. Sobald sie erfolgreich war, verschwindet
 | Warnung | Bedeutung |
 |---|---|
 | Keine Orte | das Spiel setzt die Mission an einen zufälligen Ort aus der mitgelieferten Liste |
-| Doppelte Ortsnamen | |
+| Doppelte Orts-IDs | |
 | Unbekannter Karten-Tag | keine bekannte Karte trägt diesen Tag, die Mission ist also nirgends verfügbar - nur gewollt, wenn ein Skript sie vergibt |
 | Schwierigkeitsstufe außerhalb von 1–3 | |
 | Weniger als ein Flugzeugplatz | niemand kann sie fliegen |

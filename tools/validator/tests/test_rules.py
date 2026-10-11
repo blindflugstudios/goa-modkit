@@ -20,6 +20,8 @@ EXPECTED = {
 	"outcomes_five": ("mission.outcomes.count", Severity.ERROR),
 	"stats_one": ("mission.stats.count", Severity.ERROR),
 	"enemy_report_20": ("mission.enemyreport.high", Severity.WARNING),
+	# The game looks a mission location up by _locationId alone; without one it is never found.
+	"location_id_missing": ("mission.location.id", Severity.ERROR),
 	"id_mismatch": ("mission.id.mismatch", Severity.ERROR),
 	"dead_handler": ("mission.handler.dead", Severity.WARNING),
 	# A mission with data but no script of its own is normal - it runs on the

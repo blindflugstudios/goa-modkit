@@ -81,7 +81,7 @@ Das hier ist eine vollständige, funktionierende Quest. Speichere sie als `Mods/
 }
 ```
 
-Von oben nach unten gelesen: Die Quest hat zwei Schritte. Der erste wartet, bis ein Krankenbett *fertig gebaut* ist - einmal. Der zweite zählt die Betten auf der Basis und ist bei vier voll, ist aber optional, also ist die Quest abgeschlossen, sobald das Krankenbett steht. `_requirements` ist leer, das heißt, die Quest startet auf jeder Karte, sobald das Spiel lädt.
+Von oben nach unten gelesen: Die Quest hat zwei Schritte. Der erste wartet, bis ein Krankenbett *fertig gebaut* ist - einmal. Der zweite zählt die Betten auf der Basis und ist bei vier voll, ist aber optional, also ist die Quest abgeschlossen, sobald das Krankenbett steht. `_requirements` ist leer, das heißt, die Quest startet auf jeder Karte, die sie in ihren `StartingQuestIds` aufführt - siehe [Quests und Karten](#quests-and-maps).
 
 Die Titel sind **Lokalisierungsschlüssel**, kein Text - solange du sie nicht registrierst, sieht der Spieler überhaupt keinen Titel. Der Abschnitt [Text](#text) erklärt, wie du ihnen Worte gibst.
 
@@ -330,8 +330,8 @@ Ereignisse, die im normalen Spiel verfügbar sind, mit den Details, die jedes tr
 | `training_started`, `training_finished` | Crewmitglied, Trainingsobjekt |
 | `task_started`, `task_completed` | Crewmitglied, Aufgabenname (z. B. `Harvest`, `Build`, `Repair`, `RepairAirplane`, `Refuel`, `Recover`) |
 | `chat_started`, `chat_finished` | die beiden Crewmitglieder |
-| `mission_started`, `mission_success`, `mission_failed` | der Ortsname der Mission |
-| `airplane_on_mission_succeed`, `airplane_on_mission_failed` | Flugzeug-id, Flugzeug, **Missions-id**, Fähigkeit, nach Plan gelaufen, Ortsname, Prognose |
+| `mission_started`, `mission_success`, `mission_failed` | die Orts-ID der Mission |
+| `airplane_on_mission_succeed`, `airplane_on_mission_failed` | Flugzeug-id, Flugzeug, **Missions-id**, Fähigkeit, nach Plan gelaufen, Orts-ID, Prognose |
 | `airplane_took_part_in_scramble`, `airplane_scramble_fly_to_safety`, `airplane_scramble_airplane_destroyed` | Flugzeug-id |
 | `plane_takeoff`, `plane_landing` | die interne Nummer des Flugzeugs (nicht seine id - hier kannst du nicht nach `spitfire` filtern), Pilot |
 | `storage_resource_enabled`, `function_area_placed` | Ressourcenname / Zonentyp |
@@ -360,16 +360,21 @@ Der Button erscheint auf der Quest-Karte der Quest, zu der der Schritt gehört. 
 
 ## Wie eine Quest startet { #how-a-quest-starts }
 
-`_requirements` entscheidet, *wann die Quest dem Spieler gegeben wird*. Mit Fortschritt hat das nichts zu tun. Alle Einträge müssen erfüllt sein (sie sind mit UND verknüpft). Die Prüfung läuft, wenn ein Spiel geladen oder gestartet wird, und erneut jedes Mal, wenn irgendeine Quest abgeschlossen wird - dann werden nur Quests mit einem Eintrag vom Typ 1 erneut geprüft.
+`_requirements` entscheidet, *wann die Quest dem Spieler gegeben wird*. Mit Fortschritt hat das nichts zu tun. Alle Einträge müssen erfüllt sein (sie sind mit UND verknüpft), und die Prüfung läuft jedes Mal, wenn irgendeine Quest abgeschlossen wird - geprüft werden nur Quests mit einem Eintrag vom Typ 1.
 
 | `_requirementType` | Name | Bedeutung | `_value` |
 |---|---|---|---|
 | 0 | None | Keine Bedingung. | `""` |
 | 1 | CompletedQuestId | Startet, sobald die genannte Quest abgeschlossen ist. | die id der anderen Quest |
-| 2 | MinimumDate | **Nicht umgesetzt.** Der Eintrag wird übersprungen, die Quest startet also, als wäre er nicht da. Nicht verwenden. | |
-| 3 | MapDependent | Startet **nur**, wenn die geladene Karte diese Quest in `StartingQuestIds` nennt - siehe [Quests und Karten](#quests-and-maps). | `""` |
+| 2, 3 | MinimumDate, MapDependent | **Entfernt.** Der Eintrag wird übersprungen, die Quest verhält sich also, als wäre er nicht da. Nicht verwenden. | |
 
-Mit einer **leeren Liste** startet die Quest auf jeder Karte, sobald das Spiel lädt. Das passt für eine Nebenquest oder eine Art Erfolg, und es passt nicht für alles, was zu einer Geschichte oder einer Karte gehört.
+Eine Quest erreicht den Spieler nur auf einem von drei Wegen:
+
+- die geladene Karte führt sie in ihren `StartingQuestIds` auf - siehe [Quests und Karten](#quests-and-maps);
+- sie hat einen Eintrag vom Typ 1, und die genannte Quest wird abgeschlossen;
+- sie ist eine Flugzeug-Skin-Quest (`_questType: 1`), die auf jeder Karte vergeben wird.
+
+Eine Quest mit **leerer Liste**, die keine Karte aufführt, startet nie.
 
 Eine **Kette** ist eine Reihe von Quests, von denen jede die vorige voraussetzt:
 
@@ -379,7 +384,7 @@ Eine **Kette** ist eine Reihe von Quests, von denen jede die vorige voraussetzt:
 ]
 ```
 
-Eine Quest wird pro Durchgang höchstens einmal vergeben - sobald sie im Spielstand existiert, abgeschlossen oder nicht, wird sie nicht erneut erzeugt, und eine abgeschlossene Quest bleibt abgeschlossen. Eine Quest vorauszusetzen, die auf dieser Karte nie startet (weil sie Bedingungstyp 3 hat und die Karte sie nicht aufführt), ist ein bequemer Weg, eine ganze Kette von einer Karte fernzuhalten: Nur das erste Glied braucht die Karte, der Rest folgt über Bedingungstyp 1.
+Eine Quest wird pro Durchgang höchstens einmal vergeben - sobald sie im Spielstand existiert, abgeschlossen oder nicht, wird sie nicht erneut erzeugt, und eine abgeschlossene Quest bleibt abgeschlossen. Eine Kette folgt ihrem ersten Glied: Nur die erste Quest muss in der Liste der Karte stehen, der Rest folgt über Bedingungstyp 1, und auf einer Karte, die die erste Quest nicht aufführt, bleibt die ganze Kette fern.
 
 ### Quests und Karten { #quests-and-maps }
 
@@ -391,14 +396,9 @@ Jede Karte nennt die Quests, die sie startet, in der `Metadata.json` in ihrer `.
 
 Diese Quests werden beim Laden der Karte vergeben, egal was ihre `_requirements` sagen. Eine Karte, die keine nennt - eine ältere Karte oder eine, deren Feld leer geblieben ist -, startet die Standard-Questreihe des Spiels, `quest0`, damit keine Karte je ohne Quests ist.
 
-Die mitgelieferte `quest0` hat Bedingungstyp 3, und jede spätere `questN` setzt die vorige voraus. Sobald eine Karte also *deine* Quest statt `quest0` aufführt, bleibt die komplette mitgelieferte Hauptreihe dieser Karte fern - und genau das will eine Kampagne meistens. Wenn du beides willst, führ beides auf: `["quest0", "mycampaign_first_steps"]`.
+Die mitgelieferte `quest0` hat keine Bedingungen, und jede spätere `questN` setzt die vorige voraus. Sobald eine Karte also *deine* Quest statt `quest0` aufführt, bleibt die komplette mitgelieferte Hauptreihe dieser Karte fern - und genau das will eine Kampagne meistens. Wenn du beides willst, führ beides auf: `["quest0", "mycampaign_first_steps"]`.
 
-Damit eine Quest zu einer Karte gehört, und *nur* zu dieser Karte, brauchst du beide Hälften:
-
-1. Trag die Quest-id in `StartingQuestIds` der Karte ein.
-2. Gib der Quest die Bedingung `{ "_requirementType": 3, "_value": "" }`, damit kein anderer Weg - weder eine leere Bedingungsliste noch der Abschluss einer anderen Quest - sie anderswo starten kann.
-
-Eine Quest mit leerer Bedingungsliste startet trotzdem überall, aufgeführt oder nicht. Eine Quest nur mit Typ 1 startet trotzdem überall, wo ihre Vorgängerin abgeschlossen wird. Typ 3 ist das Einzige, was "hier und nirgendwo sonst" sagt.
+Damit eine Quest zu einer Karte gehört, trag ihre id in `StartingQuestIds` dieser Karte ein und lass ihre `_requirements` leer. Keine andere Karte startet sie.
 
 !!! note "Missionen nutzen Tags, Quests nicht"
     Missionen hängen über **Tags** an Karten (das Feld `_tags`, siehe [Missionen](../missions/index.md)). Quests nicht: Eine Quest hat kein Tags-Feld, und die Liste `StartingQuestIds` der Karte ist alles, was zählt. Die beiden Mechanismen sind unabhängig voneinander - eine Kampagnenkarte nutzt typischerweise beide, Tags für ihre Missionen und `StartingQuestIds` für ihre Quests.
@@ -437,9 +437,9 @@ Drei vollständige Quest-Dateien zum Öffnen, Kopieren und Ändern. Sie liegen i
 
 | Datei | Was sie zeigt |
 |---|---|
-| `example_first_steps.json` | Die Quest aus [Eine erste Quest](#a-first-quest): ein Pflichtschritt, der auf ein fertiges Krankenbett wartet, ein optionaler Schritt, der Betten zählt. Startet auf jeder Karte. |
+| `example_first_steps.json` | Die Quest aus [Eine erste Quest](#a-first-quest): ein Pflichtschritt, der auf ein fertiges Krankenbett wartet, ein optionaler Schritt, der Betten zählt. Startet auf jeder Karte, die sie in `StartingQuestIds` aufführt. |
 | `example_patrol_chain.json` | Eine Folgequest. Sie startet, sobald `example_first_steps` abgeschlossen ist, wartet darauf, dass eine Spitfire im Besitz ist, dann darauf, dass die mitgelieferte Mission `calm_supply_drop` erfolgreich zurückkommt, und zählt optional drei gewonnene Einsätze von Spitfires oder Hurricanes. `calm_supply_drop` taucht erst ab Tag 20 mit einer Startbahn der Stufe 3 auf, der Missionsschritt kann also vorher nicht vorankommen. |
-| `example_map_campaign.json` | Eine Quest, die zu einer Karte gehört. Bedingungstyp 3 hält sie von allen anderen Karten fern; die Karte führt sie in `StartingQuestIds` auf (siehe [Quests und Karten](#quests-and-maps)). Ihre Schritte nutzen die Zustands-Typen: eine Startbahn der Stufe 1, zwei Parkplätze, eine Lagerzone mit zwanzig Feldern. |
+| `example_map_campaign.json` | Eine Quest, die zu einer Karte gehört: Sie hat keine Bedingungen, und nur diese Karte führt sie in `StartingQuestIds` auf (siehe [Quests und Karten](#quests-and-maps)). Ihre Schritte nutzen die Zustands-Typen: eine Startbahn der Stufe 1, zwei Parkplätze, eine Lagerzone mit zwanzig Feldern. |
 
 Installier alle drei zusammen, und du hast eine Kette aus zwei Quests plus eine kartengebundene Quest zum Vergleichen. Benenn die ids um, bevor du darauf aufbaust - `example_` ist nur ein Platzhalter-Präfix.
 
@@ -542,13 +542,7 @@ Und die kartengebundene:
             "_genericIconKey": "ui_functionarea_resources"
         }
     ],
-    "_requirements": [
-        {
-            "Name": "",
-            "_requirementType": 3,
-            "_value": ""
-        }
-    ],
+    "_requirements": [],
     "_isHiddenInUI": false,
     "_questType": 0,
     "_highlightedUIElements": [],
@@ -563,7 +557,7 @@ Auch die Quest-Dateien des Spiels selbst lohnen einen Blick: Sie zeigen, wie das
 
 | Datei | Was sie zeigt |
 |---|---|
-| `quest0.json` | Die erste Quest der Hauptreihe: Bedingungstyp 3, sie startet also nur auf Karten, die sie in `StartingQuestIds` aufführen. Ihre Schritte sind die Typen mit gezähltem Zustand - eine Startbahn der Stufe 1, ein Parkplatz, eine Gladiator, Betten. |
+| `quest0.json` | Die erste Quest der Hauptreihe: keine Bedingungen, sie startet also nur auf Karten, die sie in `StartingQuestIds` aufführen (oder gar keine Start-Quest nennen). Ihre Schritte sind die Typen mit gezähltem Zustand - eine Startbahn der Stufe 1, ein Parkplatz, eine Gladiator, Betten. |
 | `quest1.json` | Die zweite Quest, mit Bedingungstyp 1 an `quest0` gehängt. Sie mischt Event-Schritte (`harvesting_finished`, `project_finished`) mit einer Werkbank-Zählung und hat einen optionalen Schritt. |
 | `fighter_day_skin_unlock.json` | Eine Errungenschaft für eine Flugzeug-Lackierung: `_questType: 1`, im Quest-Panel versteckt, und die einzige Stelle, an der ein Rollenname (`fighter`) dort stehen darf, wo sonst eine Flugzeug-Id steht - siehe [Quest-Typen](#quest-types). |
 | `tutorial_building.json` | Eine Tutorial-Quest: `_questType: 2` mit `_highlightedUIElements`, die den Spieler auf die Oberfläche hinweisen, solange die Schritte offen sind. |
@@ -595,8 +589,8 @@ Mehr Tipps zum Testen: [Testen und neu laden](../basics/testing.md).
 - Die Typen 0, 1 und 21 haben eine Zahl in `_parameter`; die Typen 20 und 24 haben ihren zweiten Teil.
 - Die Typen 12 und 17 enthalten eine Fähigkeit oder `any_skill_type`; jeder nicht leere Typ 12, 13 oder 17 enthält mindestens eine Flugzeug-**id**.
 - Kein Tutorial-Ereignis außerhalb eines Tutorials.
-- Kein `_requirementType: 2`.
-- Story-Quests haben `_requirementType: 3`, und die Karte führt sie auf; Nebenquests, die überall starten sollen, haben absichtlich eine leere Liste.
+- Kein `_requirementType: 2` oder `3`.
+- Jede Quest ohne Bedingung vom Typ 1 steht in den `StartingQuestIds` jeder Karte, auf der sie laufen soll.
 - Jeder Lokalisierungsschlüssel ist entweder ein mitgelieferter Schlüssel oder von deinem Skript registriert - lade das Spiel und schau in die Leiste.
 - Keine Leerzeichen in `_parameter`.
 

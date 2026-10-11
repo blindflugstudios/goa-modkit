@@ -111,6 +111,7 @@ Alles hier kannst du prüfen, ohne das Spiel zu starten, und es lohnt sich nach 
 - mindestens 2 Missions-Stats
 - `_missionIcon` ist einer von `Fight`, `Recon`, `Bomb`, `Transport`, `Maneuverability`, `Stealth`, `Luxury`, `Success`, `Failure`, `Cancel`
 - `_enemyPlaneReport` ist 18 oder kleiner
+- jeder Eintrag in `_potentialLocations` hat eine `_locationId`, und diese ID ist ein mitgelieferter Ort (jede andere ID ist nur eine Warnung, weil ein Mod den Ort in `Missions/Locations/` hinzufügen kann)
 - `.py` und `.json` haben denselben Namen, und `get_mission_id` gibt diesen Namen zurück
 - die Id doppelt keine vorhandene Missions-Id
 - jeder Textschlüssel, den das Skript schreibt, folgt `missions/<id>/<slot>`

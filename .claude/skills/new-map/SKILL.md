@@ -22,7 +22,7 @@ Copy `templates/map-quest-line/` to `mods/<mod_id>/`. Ask the user to copy their
 
 ## 3. Write
 
-- **Quests:** first quest gets `{"_requirementType": 3, "_value": ""}`; later ones chain with type `1`. Text keys registered in the text script.
+- **Quests:** first quest gets `"_requirements": []` and is listed in the map's `StartingQuestIds` (that list alone ties it to the map); later ones chain with type `1`. Text keys registered in the text script.
 - **Map metadata:** a `.goamap` is a zip archive with `Metadata.json` inside. The keys that matter here:
   - `StartingQuestIds`: e.g. `["<mod_id>_campaign_start"]`, or `["quest0", "<mod_id>_campaign_start"]` for both.
   - `_tags`: e.g. `["<mod_id>_campaign"]` to keep ordinary missions away; add `"default"` to keep them.

@@ -117,27 +117,12 @@
     "_missionIcon": "Fight",
     "_potentialLocations": [
         {
-            "_locationName": "high_weald",
-            "_coordinates": {
-                "x": 51.05633,
-                "y": 0.439808
-            },
             "_locationId": "high_weald"
         },
         {
-            "_locationName": "south_downs",
-            "_coordinates": {
-                "x": 50.94501,
-                "y": -0.664285
-            },
             "_locationId": "south_downs"
         },
         {
-            "_locationName": "canterbury",
-            "_coordinates": {
-                "x": 51.27332,
-                "y": 1.085454
-            },
             "_locationId": "canterbury"
         }
     ],

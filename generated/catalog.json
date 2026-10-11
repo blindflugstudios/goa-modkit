@@ -1,18 +1,17 @@
 {
   "schema_version": 1,
-  "game_version": "0.14",
-  "generated_at": "2026-09-25",
+  "game_version": "0.14.3",
+  "generated_at": "2026-10-11",
   "source_hashes": {
     "mission_event": "a9fc8ac2b380cfdb",
     "minor_event": "34961d4da460637c",
-    "icons": "4231bc84ec445d7a",
-    "locations": "92d410534808341f",
+    "icons": "98160109e5e3c1c1",
+    "locations": "eb5cf4dd899e015e",
     "skill_type": "d563648ffbb30ff6",
     "outcome_effect": "462466b81c8024aa",
     "mission_requirement": "49c5750583ef652a",
     "location_flags": "df585efac13957a4",
-    "subquest_requirement": "e5129f06a6031b3b",
-    "project_settings": "608f8d6a4149c738"
+    "subquest_requirement": "a993a33c0cd4cc86"
   },
   "mission_handlers": [
     {
@@ -1092,22 +1091,6 @@
       "test_data": false
     },
     {
-      "id": "test123",
-      "name": "ireland",
-      "latitude": 55.505787,
-      "longitude": -1.087641,
-      "flags": 0,
-      "test_data": true
-    },
-    {
-      "id": "test",
-      "name": "test1",
-      "latitude": 54.30419,
-      "longitude": -1.836393,
-      "flags": 0,
-      "test_data": true
-    },
-    {
       "id": "north_channel",
       "name": "north_channel",
       "latitude": 55.1,
@@ -1339,6 +1322,11 @@
         "name": "FlownMission",
         "value": 13,
         "has_validator": true
+      },
+      {
+        "name": "Unused",
+        "value": 14,
+        "has_validator": false
       },
       {
         "name": "UnluckyMission",

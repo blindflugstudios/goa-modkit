@@ -37,13 +37,7 @@
             "_genericIconKey": "ui_functionarea_resources"
         }
     ],
-    "_requirements": [
-        {
-            "Name": "",
-            "_requirementType": 3,
-            "_value": ""
-        }
-    ],
+    "_requirements": [],
     "_isHiddenInUI": false,
     "_questType": 0,
     "_highlightedUIElements": [],

@@ -30,7 +30,7 @@ class Catalog:
 	mission_ids: tuple = ()
 	quest_ids: tuple = ()
 	icons: dict = dataclasses.field(default_factory=dict)      # name -> is result marker
-	locations: set = dataclasses.field(default_factory=set)
+	locations: set = dataclasses.field(default_factory=set)  # location IDs
 	minor_events: dict = dataclasses.field(default_factory=dict)  # constant -> tutorial_only
 	dead_handlers: dict = dataclasses.field(default_factory=dict)  # constant -> event name
 	unbound_quest_types: dict = dataclasses.field(default_factory=dict)  # value -> name
@@ -64,7 +64,7 @@ def load(path=None):
 		mission_ids=tuple(data.get("mission_ids", ())),
 		quest_ids=tuple(data.get("quest_ids", ())),
 		icons={entry["name"]: entry.get("result_marker", False) for entry in data.get("icons", [])},
-		locations={entry["name"] for entry in data.get("locations", []) if not entry.get("test_data")},
+		locations={entry["id"] for entry in data.get("locations", []) if not entry.get("test_data")},
 		minor_events={entry["constant"]: entry.get("tutorial_only", False) for entry in data.get("minor_events", [])},
 		dead_handlers={entry["constant"]: entry["event"] for entry in data.get("mission_handlers", []) if entry.get("dead")},
 		unbound_quest_types={entry["value"]: entry["name"] for entry in subquest if not entry.get("has_validator")},

@@ -318,7 +318,7 @@ The mission file is read field by field. Field names start with an underscore an
 | `_missionStats` | list | **Required, at least 2.** The first is rolled when the mission goes as planned, the second when it does not. See [Mission stats](#mission-stats). |
 | `_enemyPlaneReport` | int | Enemy planes shown in the mission window. Keep it at 18 or below; the validator warns above that. |
 | `_missionIcon` | string | The icon on the war map. See [Icons](#icons). |
-| `_potentialLocations` | list | Candidate places on the war map; one is drawn per mission. Distance and fuel follow from it. With an empty list the game picks a random location. See [Locations](locations.md). |
+| `_potentialLocations` | list | Candidate places on the war map as `{ "_locationId": "..." }` entries; one is drawn per mission. Distance and fuel follow from it. With an empty list, or when the drawn ID is missing or unknown, the game picks a random location. See [Locations](locations.md). |
 | `_difficultyRating` | int | Stars shown to the player, 1–3. Default 1. |
 | `_tags` | list of strings | Which maps the mission belongs to. See [Map tags](#map-tags). |
 | `_isHistoric` | bool | Makes the mission a story beat. See [Chains and campaigns](chains.md#historic-missions). |
@@ -440,9 +440,9 @@ Every place on the war map carries flags that describe it. They are a bitmask: a
 | 4 | `OwnTerritory` |
 | 8 | `EnemyTerritory` |
 
-**Missions do not use these flags.** The `_flags` value in a mission's location entry is ignored; leave it at `0`, as every shipped mission does. Only quest location conditions read flags, and they take them from the location list, not from your mission (see [Locations](locations.md#location-flags)).
+**Missions do not set these flags.** A mission's location entry carries only `_locationId`; a `_flags` value left on it is ignored. Only quest location conditions read flags, and they take them from the location list, not from your mission (see [Locations](locations.md#location-flags)).
 
-The list of places, with their coordinates, is on the [Locations](locations.md) page. Copy the coordinates exactly: the game measures distance and fuel from the coordinates in your file, not from the name.
+The list of places, with their IDs and coordinates, is on the [Locations](locations.md) page. Refer to a place by its ID: the game takes the coordinates (and so distance and fuel) from the location list, not from your file.
 
 ### Map tags
 
@@ -466,6 +466,6 @@ Tags are checked by the weekly draw, by the historic spawn and by `missions_api.
 | Id already used by a built-in or another mod | one mission silently replaces the other | prefix ids with your mod name |
 | A never-called handler implemented | nothing happens | delete it |
 | `MaxVictoryPoints` in an outcome | crash when the mission ends | use `VictoryPoints` |
-| `_coordinates` left at 0, 0 | the mission is placed far away, with a huge fuel cost | copy coordinates from [Locations](locations.md) |
+| `_locationId` missing, empty or not a known place | the mission is placed at a random location | use an ID from [Locations](locations.md), or add the place with a mod |
 | Old field `_mapTags` instead of `_tags` | map restriction silently lost | rename to `_tags` |
 | Script-only mission without gates | appears anywhere once it has been created | `AddMissionRequirement` in `initialize_mission` |

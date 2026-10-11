@@ -139,22 +139,10 @@
     "_missionIcon": "Recon",
     "_potentialLocations": [
         {
-            "_locationId": "dover",
-            "_locationName": "dover",
-            "_coordinates": {
-                "x": 51.12788,
-                "y": 1.31257
-            },
-            "_flags": 0
+            "_locationId": "dover"
         },
         {
-            "_locationId": "eastbourne_bay",
-            "_locationName": "eastbourne_bay",
-            "_coordinates": {
-                "x": 50.75,
-                "y": 0.28
-            },
-            "_flags": 0
+            "_locationId": "eastbourne_bay"
         }
     ],
     "_difficultyRating": 1,

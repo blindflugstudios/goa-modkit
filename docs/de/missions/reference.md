@@ -318,7 +318,7 @@ Die Missionsdatei wird Feld für Feld gelesen. Feldnamen beginnen mit einem Unte
 | `_missionStats` | Liste | **Pflicht, mindestens 2.** Der erste wird gewürfelt, wenn die Mission wie geplant läuft, der zweite, wenn nicht. Siehe [Missions-Stats](#mission-stats). |
 | `_enemyPlaneReport` | int | Feindliche Flugzeuge, die im Missionsfenster angezeigt werden. Bleib bei 18 oder darunter; darüber warnt der Validator. |
 | `_missionIcon` | String | Das Symbol auf der Kriegskarte. Siehe [Symbole](#icons). |
-| `_potentialLocations` | Liste | Mögliche Orte auf der Kriegskarte; pro Mission wird einer gezogen. Entfernung und Treibstoff ergeben sich daraus. Bei einer leeren Liste wählt das Spiel einen zufälligen Ort. Siehe [Einsatzorte](locations.md). |
+| `_potentialLocations` | Liste | Mögliche Orte auf der Kriegskarte als Einträge `{ "_locationId": "..." }`; pro Mission wird einer gezogen. Entfernung und Treibstoff ergeben sich daraus. Bei einer leeren Liste, oder wenn die gezogene ID fehlt oder unbekannt ist, wählt das Spiel einen zufälligen Ort. Siehe [Einsatzorte](locations.md). |
 | `_difficultyRating` | int | Sterne, die dem Spieler angezeigt werden, 1–3. Standard 1. |
 | `_tags` | Liste von Strings | Zu welchen Karten die Mission gehört. Siehe [Karten-Tags](#map-tags). |
 | `_isHistoric` | bool | Macht die Mission zu einem Story-Moment. Siehe [Ketten und Kampagnen](chains.md#historic-missions). |
@@ -440,9 +440,9 @@ Jeder Ort auf der Kriegskarte trägt Flags, die ihn beschreiben. Sie sind eine B
 | 4 | `OwnTerritory` |
 | 8 | `EnemyTerritory` |
 
-**Missionen nutzen diese Flags nicht.** Der Wert `_flags` im Ortseintrag einer Mission wird ignoriert; lass ihn auf `0`, wie es jede mitgelieferte Mission tut. Nur Ortsbedingungen in Quests lesen Flags, und die holen sie aus der Ortsliste, nicht aus deiner Mission (siehe [Einsatzorte](locations.md#location-flags)).
+**Missionen legen diese Flags nicht fest.** Der Ortseintrag einer Mission trägt nur `_locationId`; ein `_flags`, das dort noch steht, wird ignoriert. Nur Ortsbedingungen in Quests lesen Flags, und die holen sie aus der Ortsliste, nicht aus deiner Mission (siehe [Einsatzorte](locations.md#location-flags)).
 
-Die Liste der Orte mit ihren Koordinaten steht auf der Seite [Einsatzorte](locations.md). Kopier die Koordinaten exakt: Das Spiel misst Entfernung und Treibstoff an den Koordinaten in deiner Datei, nicht am Namen.
+Die Liste der Orte mit ihren IDs und Koordinaten steht auf der Seite [Einsatzorte](locations.md). Sprich einen Ort über seine ID an: Das Spiel nimmt die Koordinaten (und damit Entfernung und Treibstoff) aus der Ortsliste, nicht aus deiner Datei.
 
 ### Karten-Tags { #map-tags }
 
@@ -466,6 +466,6 @@ Tags werden von der wöchentlichen Ziehung, vom historischen Erscheinen und von 
 | Id schon von einer eingebauten Mission oder einer anderen Mod belegt | eine Mission ersetzt die andere stillschweigend | Ids mit deinem Mod-Namen versehen |
 | Ein nie aufgerufener Handler ist implementiert | nichts passiert | lösch ihn |
 | `MaxVictoryPoints` in einem Ausgang | Absturz, wenn die Mission endet | `VictoryPoints` verwenden |
-| `_coordinates` auf 0, 0 gelassen | die Mission liegt weit weg, mit riesigen Treibstoffkosten | Koordinaten von [Einsatzorte](locations.md) kopieren |
+| `_locationId` fehlt, ist leer oder kein bekannter Ort | die Mission landet an einem zufälligen Ort | eine ID von [Einsatzorte](locations.md) verwenden oder den Ort mit einem Mod hinzufügen |
 | Altes Feld `_mapTags` statt `_tags` | Kartenbeschränkung geht stillschweigend verloren | in `_tags` umbenennen |
 | Reine Skript-Mission ohne Sperren | erscheint überall, sobald sie einmal erstellt wurde | `AddMissionRequirement` in `initialize_mission` |

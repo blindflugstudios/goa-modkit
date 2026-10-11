@@ -123,27 +123,12 @@
     "_missionIcon": "Fight",
     "_potentialLocations": [
         {
-            "_locationName": "dover_strait",
-            "_coordinates": {
-                "x": 51.05976,
-                "y": 1.582498
-            },
             "_locationId": "dover_strait"
         },
         {
-            "_locationName": "dover",
-            "_coordinates": {
-                "x": 51.13512,
-                "y": 1.312756
-            },
             "_locationId": "dover"
         },
         {
-            "_locationName": "canterbury",
-            "_coordinates": {
-                "x": 51.27332,
-                "y": 1.085454
-            },
             "_locationId": "canterbury"
         }
     ],

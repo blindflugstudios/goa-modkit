@@ -27,8 +27,8 @@ localization.SetTerm(
 # mission it reacts to - without owning that mission.
 @event_handler(MinorEvent.AIRPLANE_ON_MISSION_SUCCEED)
 def on_mission_success(airplane_id, entity_id, mission_id, skill_type,
-                       going_as_planned, location_name, success_estimate):
-    if location_name != "dover":
+                       going_as_planned, location_id, success_estimate):
+    if location_id != "dover":
         return False   # not counted against max_occurrences
 
     event_log.Create("convoy_reactions/dover_relief")
@@ -36,7 +36,7 @@ def on_mission_success(airplane_id, entity_id, mission_id, skill_type,
 
 @event_handler(MinorEvent.AIRPLANE_ON_MISSION_FAILED, chance=0.5, max_occurrences=3)
 def on_mission_failure(airplane_id, entity_id, mission_id, skill_type,
-                       going_as_planned, location_name, success_estimate):
+                       going_as_planned, location_id, success_estimate):
     # A failure that was predicted to go well stings more.
     if success_estimate < 60:
         return False

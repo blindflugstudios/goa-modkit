@@ -21,7 +21,7 @@ def on_midnight(year, month, day):
 # Seven arguments arrive with this event, in this order.
 @event_handler(MinorEvent.AIRPLANE_ON_MISSION_SUCCEED, chance=0.25, max_occurrences=5)
 def on_mission_success(airplane_id, entity_id, mission_id, skill_type,
-                       going_as_planned, location_name, success_estimate):
+                       going_as_planned, location_id, success_estimate):
     if going_as_planned:
         return False   # returning False does not count against max_occurrences
 

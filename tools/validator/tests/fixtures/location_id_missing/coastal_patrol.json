@@ -1,0 +1,178 @@
+{
+    "_maxPlaneSlots": 2,
+    "_timeToStartRange": {
+        "x": 360.0,
+        "y": 720.0
+    },
+    "_timeToCompleteRange": {
+        "x": 240.0,
+        "y": 360.0
+    },
+    "_distanceRange": 80,
+    "_distanceLocationDependant": {
+        "x": 0,
+        "y": 0
+    },
+    "_missionRequirements": [
+        {
+            "Name": "RunwayTier",
+            "_requirementType": 0,
+            "_value": "1"
+        },
+        {
+            "Name": "EarliestAppearanceDay",
+            "_requirementType": 1,
+            "_value": "3"
+        }
+    ],
+    "_missionOutcomes": [
+        {
+            "Name": "0 - gone wrong, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "Name": "3:20-60",
+                    "_outcomeEffectType": 3,
+                    "_effectValue": "20-60",
+                    "_effectIcon": "ui_health_poor_injured"
+                },
+                {
+                    "Name": "5:-20",
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "-20",
+                    "_effectIcon": "ui_confidence"
+                },
+                {
+                    "Name": "4:-10",
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-10",
+                    "_effectIcon": "ui_mood"
+                }
+            ]
+        },
+        {
+            "Name": "1 - gone wrong, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "Name": "7:1",
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "1",
+                    "_effectIcon": "ui_resource_victoryPoints"
+                },
+                {
+                    "Name": "5:-5",
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "-5",
+                    "_effectIcon": "ui_confidence"
+                },
+                {
+                    "Name": "4:5",
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "5",
+                    "_effectIcon": "ui_mood"
+                }
+            ]
+        },
+        {
+            "Name": "2 - as planned, skill failed",
+            "_missionSuccess": false,
+            "_outcomeEffect": [
+                {
+                    "Name": "5:-15",
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "-15",
+                    "_effectIcon": "ui_confidence"
+                },
+                {
+                    "Name": "4:-5",
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "-5",
+                    "_effectIcon": "ui_mood"
+                }
+            ]
+        },
+        {
+            "Name": "3 - as planned, skill passed",
+            "_missionSuccess": true,
+            "_outcomeEffect": [
+                {
+                    "Name": "7:1",
+                    "_outcomeEffectType": 7,
+                    "_effectValue": "1",
+                    "_effectIcon": "ui_resource_victoryPoints"
+                },
+                {
+                    "Name": "5:15",
+                    "_outcomeEffectType": 5,
+                    "_effectValue": "15",
+                    "_effectIcon": "ui_confidence"
+                },
+                {
+                    "Name": "4:10",
+                    "_outcomeEffectType": 4,
+                    "_effectValue": "10",
+                    "_effectIcon": "ui_mood"
+                }
+            ]
+        }
+    ],
+    "_asPlannedChance": 80,
+    "_missionStats": [
+        {
+            "Name": "Recon",
+            "_missionSkillType": 2,
+            "_statRange": {
+                "x": 10.0,
+                "y": 45.0
+            }
+        },
+        {
+            "Name": "Maneuverability",
+            "_missionSkillType": 4,
+            "_statRange": {
+                "x": 20.0,
+                "y": 60.0
+            }
+        }
+    ],
+    "_enemyPlaneReport": 0,
+    "_missionIcon": "Recon",
+    "_potentialLocations": [
+        {
+            "_locationName": "dover",
+            "_coordinates": {
+                "x": 51.12788,
+                "y": 1.31257
+            },
+            "_flags": 0
+        },
+        {
+            "_locationId": "eastbourne_bay",
+            "_locationName": "eastbourne_bay",
+            "_coordinates": {
+                "x": 50.75,
+                "y": 0.28
+            },
+            "_flags": 0
+        }
+    ],
+    "_difficultyRating": 1,
+    "_hasMaximumDay": false,
+    "_maximumDay": {
+        "Year": 1,
+        "Month": 1,
+        "Day": 1,
+        "Hour": 1,
+        "Minute": 1
+    },
+    "_isHistoric": false,
+    "_historicDay": {
+        "Year": 1,
+        "Month": 1,
+        "Day": 1,
+        "Hour": 1,
+        "Minute": 1
+    },
+    "_tags": []
+}

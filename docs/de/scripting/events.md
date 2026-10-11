@@ -71,10 +71,10 @@ from Blindflug.Tasks import Task
 
 | Event | Argumente |
 |---|---|
-| `mission_started` | `locationName` |
-| `mission_success` | `locationName` |
-| `mission_failed` | `locationName` |
-| `airplane_on_mission_succeed` | `airplaneId, airplaneEntityId, missionId, skillType, isGoingAsPlanned, locationName, successEstimate` |
+| `mission_started` | `locationId` |
+| `mission_success` | `locationId` |
+| `mission_failed` | `locationId` |
+| `airplane_on_mission_succeed` | `airplaneId, airplaneEntityId, missionId, skillType, isGoingAsPlanned, locationId, successEstimate` |
 | `airplane_on_mission_failed` | dieselben sieben |
 | `plane_takeoff` | `airplaneEntityId, characterId` |
 | `plane_landing` | `airplaneEntityId, characterId` |

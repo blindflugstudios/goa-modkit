@@ -86,7 +86,7 @@ The first entry is used when the mission goes as planned, the second when it goe
 
 ### Where it happens
 
-`_potentialLocations` lists candidate places on the war map. One is drawn each time the mission appears. Copy entries from the [Locations](locations.md) page, including the coordinates: the game works out distance and fuel from the coordinates in your file.
+`_potentialLocations` lists candidate places on the war map. One is drawn each time the mission appears. Each entry names a place by its ID, such as `{ "_locationId": "dover" }`; pick IDs from the [Locations](locations.md) page. The game takes the coordinates from its location list and works out distance and fuel from them. An ID it does not know sends the mission to a random location.
 
 ## How a mission script actually runs
 

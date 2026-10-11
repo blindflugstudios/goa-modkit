@@ -104,7 +104,7 @@ Diese Aufrufe schreiben, was sonst das JSON einer Mission festlegen würde. Eine
 |---|---|
 | `SetMissionStat(id, skill, min, max)` | den Zielbereich einer Fertigkeit. `skill` ist `"Fight"`, `"Bomb"`, `"Recon"`, `"Transport"`, `"Maneuverability"` oder `"Stealthiness"`. Die erste Fertigkeit, die du setzt, wird gewürfelt, wenn die Mission wie geplant läuft, die zweite, wenn nicht. Setzt du dieselbe Fertigkeit erneut, wird ihr Bereich ersetzt. |
 | `SetAsPlannedChance(id, chance)` | 0–100. Standard für eine reine Skript-Mission: 50. |
-| `SetMissionLocation(id, name)` | platziert die Mission auf der Kriegskarte und berechnet Entfernung und Treibstoff. `name` ist ein Ort aus [Einsatzorte](../missions/locations.md). |
+| `SetMissionLocation(id, location_id)` | platziert die Mission auf der Kriegskarte und berechnet Entfernung und Treibstoff. `location_id` ist die ID eines mitgelieferten Orts aus [Einsatzorte](../missions/locations.md) oder eines Orts, den ein aktivierter Mod hinzufügt, nie Koordinaten. |
 | `SetMaxAirplaneSlots(id, slots)` | wie viele Flugzeuge zugewiesen werden dürfen, mindestens 1. Standard: 1. |
 | `SetDifficulty(id, rating)` | die Sternebewertung, 1–3. Standard: 1. |
 | `SetOutcome(id, index, is_success)` | ob Ausgang `index` (0–3, in der [vorgeschriebenen Reihenfolge](../missions/reference.md#the-two-rolls-and-the-outcome-index)) als Erfolg zählt |

@@ -90,6 +90,27 @@ def check_mission_json(unit, data, positions):
 			unit=unit.stem,
 		)
 
+	locations = data.get("_potentialLocations")
+
+	for index, entry in enumerate(locations if isinstance(locations, list) else []):
+		location_id = entry.get("_locationId") if isinstance(entry, dict) else None
+
+		if not isinstance(location_id, str) or not location_id.strip():
+			yield Finding(
+				rule="mission.location.id",
+				severity=Severity.ERROR,
+				path=path,
+				line=positions.get("_potentialLocations"),
+				message=f"entry {index} of _potentialLocations has no _locationId",
+				hint=(
+					"The game finds a location by its _locationId alone; _locationName and coordinates "
+					"in a mission are ignored.\n"
+					"Without an ID the entry is never found, and the mission "
+					"is placed at a random location."
+				),
+				unit=unit.stem,
+			)
+
 	enemies = data.get("_enemyPlaneReport")
 
 	if isinstance(enemies, int) and enemies > 18:
@@ -303,16 +324,19 @@ def check_mission_catalog(unit, data, positions, catalog, local_ids=()):
 		if not isinstance(entry, dict):
 			continue
 
-		name = entry.get("_locationName")
+		location_id = entry.get("_locationId")
 
-		if name and name not in catalog.locations:
+		if isinstance(location_id, str) and location_id and location_id not in catalog.locations:
 			yield Finding(
 				rule="mission.location.unknown",
-				severity=Severity.NOTE,
+				severity=Severity.WARNING,
 				path=path,
 				line=positions.get("_potentialLocations"),
-				message=f'location "{name}" is not one of the predefined places',
-				hint="Custom coordinates are allowed; keep them inside the war map area.",
+				message=f'_locationId "{location_id}" is not one of the predefined places',
+				hint=(
+					"Unless a mod defines it in Missions/Locations/, the game does not find it and "
+					"places the mission at a random location."
+				),
 				unit=unit.stem,
 			)
 

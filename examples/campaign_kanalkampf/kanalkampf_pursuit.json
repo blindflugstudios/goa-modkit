@@ -118,27 +118,12 @@
     "_missionIcon": "Fight",
     "_potentialLocations": [
         {
-            "_locationName": "calais",
-            "_coordinates": {
-                "x": 50.95873,
-                "y": 1.85522
-            },
             "_locationId": "calais"
         },
         {
-            "_locationName": "boulogne-sur-mer",
-            "_coordinates": {
-                "x": 50.72455,
-                "y": 1.60192
-            },
             "_locationId": "boulogne-sur-mer"
         },
         {
-            "_locationName": "dover_strait",
-            "_coordinates": {
-                "x": 51.05976,
-                "y": 1.582498
-            },
             "_locationId": "dover_strait"
         }
     ],

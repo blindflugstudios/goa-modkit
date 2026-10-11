@@ -40,9 +40,9 @@ JSON (field meanings in `docs/en/missions/reference.md`):
 Locations of the mod's own (only when the user wants a place the catalog lacks; `docs/en/missions/locations.md`, section "Adding locations with a mod"):
 
 - One or more `.json` files directly in `mods/<mod_id>/Missions/Locations/` (no deeper folders), e.g. `<mod_id>_locations.json`: `{"Locations": [{"_locationId": "<mod_id>_scapa_flow", "_locationName": "<mod_id>_scapa_flow", "_coordinates": {"x": <latitude>, "y": <longitude>}, "_flags": 2}]}`.
-- Same fields as a `_potentialLocations` entry; `_flags` a number (only read here; in a mission's own location entry it is ignored, leave it at `0`); keep id and name identical and prefixed with the mod id (shipped names win, a clash between two mods is silent). Keep coordinates inside the war map (latitude 40.75-61.25, longitude -11.75-21.64).
-- Use the same entry in the mission's `_potentialLocations`. The player sees the raw `_locationName` unless a script registers `mission_location/<name>` with `localization.SetTerm`.
-- The validator only knows the catalog's places and may warn about the new name; tell the user that warning is expected.
+- `_locationId` is required and is the lookup key; `_flags` a number. Keep id and name identical and prefixed with the mod id (shipped IDs win, a clash between two mods is silent). Keep coordinates inside the war map (latitude 40.75-61.25, longitude -11.75-21.64).
+- In the mission's `_potentialLocations`, refer to it by ID only: `{"_locationId": "<mod_id>_scapa_flow"}`. A mission entry never carries coordinates, name or flags. The player sees the raw `_locationName` unless a script registers `mission_location/<name>` with `localization.SetTerm`.
+- The validator only knows the catalog's places and warns about the new ID; tell the user that warning is expected.
 
 Python (optional; delete it and use the `_raw...` JSON fields for a text-only mission):
 

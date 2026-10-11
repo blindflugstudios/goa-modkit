@@ -81,7 +81,7 @@ This is a complete, working quest. Save it as `Mods/my_campaign/Quests/mycampaig
 }
 ```
 
-Reading it top to bottom: the quest has two steps. The first waits until a sickbed has been *finished* building - once. The second counts beds standing on the base and is full at four, but it is optional, so the quest completes as soon as the sickbed is done. `_requirements` is empty, which means the quest starts on every map the moment the game loads.
+Reading it top to bottom: the quest has two steps. The first waits until a sickbed has been *finished* building - once. The second counts beds standing on the base and is full at four, but it is optional, so the quest completes as soon as the sickbed is done. `_requirements` is empty, which means the quest starts on every map that lists it in its `StartingQuestIds` - see [Quests and maps](#quests-and-maps).
 
 The titles are **localization keys**, not text - until you register them, the player sees no title at all. The section [Text](#text) explains how to give them words.
 
@@ -330,8 +330,8 @@ Events available in normal play, with the details each one carries:
 | `training_started`, `training_finished` | crew member, training object |
 | `task_started`, `task_completed` | crew member, task name (e.g. `Harvest`, `Build`, `Repair`, `RepairAirplane`, `Refuel`, `Recover`) |
 | `chat_started`, `chat_finished` | the two crew members |
-| `mission_started`, `mission_success`, `mission_failed` | the mission's location name |
-| `airplane_on_mission_succeed`, `airplane_on_mission_failed` | aircraft id, aircraft, **mission id**, skill, went-as-planned, location name, forecast |
+| `mission_started`, `mission_success`, `mission_failed` | the mission's location ID |
+| `airplane_on_mission_succeed`, `airplane_on_mission_failed` | aircraft id, aircraft, **mission id**, skill, went-as-planned, location ID, forecast |
 | `airplane_took_part_in_scramble`, `airplane_scramble_fly_to_safety`, `airplane_scramble_airplane_destroyed` | aircraft id |
 | `plane_takeoff`, `plane_landing` | the aircraft's internal number (not its id - you cannot filter for `spitfire` here), pilot |
 | `storage_resource_enabled`, `function_area_placed` | resource name / zone type |
@@ -360,16 +360,21 @@ The button is drawn on the quest card of the quest that owns the step. Note that
 
 ## How a quest starts
 
-`_requirements` decides *when the quest is handed to the player*. It has nothing to do with progress. All entries must pass (they are combined with AND). The check runs when a game is loaded or started, and again every time any quest completes - at that point only quests with a type-1 entry are checked again.
+`_requirements` decides *when the quest is handed to the player*. It has nothing to do with progress. All entries must pass (they are combined with AND), and the check runs every time any quest completes - only quests with a type-1 entry are checked.
 
 | `_requirementType` | Name | Meaning | `_value` |
 |---|---|---|---|
 | 0 | None | No condition. | `""` |
 | 1 | CompletedQuestId | Start once the named quest is complete. | the other quest's id |
-| 2 | MinimumDate | **Not implemented.** The entry is skipped, so the quest starts as if it were not there. Do not use it. | |
-| 3 | MapDependent | Start **only** when the loaded map names this quest in `StartingQuestIds` - see [Quests and maps](#quests-and-maps). | `""` |
+| 2, 3 | MinimumDate, MapDependent | **Removed.** The entry is skipped, so the quest behaves as if it were not there. Do not use them. | |
 
-With an **empty list**, the quest starts on every map as soon as the game loads. That is right for a side quest or an achievement-like quest, and wrong for anything that belongs to a story or a map.
+A quest reaches the player in one of three ways only:
+
+- the loaded map lists it in its `StartingQuestIds` - see [Quests and maps](#quests-and-maps);
+- it has a type-1 entry and the quest it names completes;
+- it is an aircraft skin quest (`_questType: 1`), which is handed out on every map.
+
+A quest with an **empty list** that no map lists never starts.
 
 A **chain** is a series of quests, each requiring the one before it:
 
@@ -379,7 +384,7 @@ A **chain** is a series of quests, each requiring the one before it:
 ]
 ```
 
-A quest is handed out at most once per playthrough - once it exists in the save, complete or not, it is not created again, and a completed quest stays completed. Requiring a quest that never starts on this map (because that quest carries requirement type 3 and the map does not list it) is a convenient way to keep a whole chain off a map: only the first link needs the map, the rest follow through requirement type 1.
+A quest is handed out at most once per playthrough - once it exists in the save, complete or not, it is not created again, and a completed quest stays completed. A chain follows its first link: only the first quest needs to be in the map's list, the rest follow through requirement type 1, and on a map that does not list the first quest the whole chain stays away.
 
 ### Quests and maps
 
@@ -391,14 +396,9 @@ Every map names the quests it starts, in the `Metadata.json` inside its `.goamap
 
 Those quests are handed out when the map is loaded, whatever their `_requirements` say. A map that names none - an older map, or one whose field was left empty - starts the game's default quest line, `quest0`, so no map is ever without quests.
 
-The shipped `quest0` carries requirement type 3, and every later `questN` requires the one before it. So the moment a map lists *your* quest instead of `quest0`, the whole shipped main line stays away from that map - which is usually what a campaign wants. If you want both, list both: `["quest0", "mycampaign_first_steps"]`.
+The shipped `quest0` has no requirements, and every later `questN` requires the one before it. So the moment a map lists *your* quest instead of `quest0`, the whole shipped main line stays away from that map - which is usually what a campaign wants. If you want both, list both: `["quest0", "mycampaign_first_steps"]`.
 
-To make a quest belong to a map, and *only* to that map, do both halves:
-
-1. Put the quest id in the map's `StartingQuestIds`.
-2. Give the quest the requirement `{ "_requirementType": 3, "_value": "" }` so no other path - not an empty requirement list, not another quest completing - can start it elsewhere.
-
-A quest with an empty requirement list still starts everywhere, listed or not. A quest with only type 1 still starts wherever its predecessor completes. Type 3 is the only thing that says "here and nowhere else".
+To make a quest belong to a map, put its id in that map's `StartingQuestIds` and leave its `_requirements` empty. No other map starts it.
 
 !!! note "Missions use tags, quests do not"
     Missions are tied to maps through **tags** (the `_tags` field, see [Missions](../missions/index.md)). Quests are not: a quest has no tags field, and the map's `StartingQuestIds` list is the whole story. The two mechanisms are independent - a campaign map typically uses both, tags for its missions and `StartingQuestIds` for its quests.
@@ -437,9 +437,9 @@ Three complete quest files to open, copy and change. They live in the modkit rep
 
 | File | What it shows |
 |---|---|
-| `example_first_steps.json` | The quest from [A first quest](#a-first-quest): one required step waiting for a finished sickbed, one optional step counting beds. Starts on every map. |
+| `example_first_steps.json` | The quest from [A first quest](#a-first-quest): one required step waiting for a finished sickbed, one optional step counting beds. Starts on every map that lists it in `StartingQuestIds`. |
 | `example_patrol_chain.json` | A follow-up quest. It starts once `example_first_steps` is complete, waits for a Spitfire to be owned, then for the shipped mission `calm_supply_drop` to come back a success, and optionally counts three winning sorties by Spitfires or Hurricanes. `calm_supply_drop` only appears from day 20 with a tier-3 runway, so the mission step cannot progress before that. |
-| `example_map_campaign.json` | A quest that belongs to one map. Requirement type 3 keeps it off every other map; the map lists it in `StartingQuestIds` (see [Quests and maps](#quests-and-maps)). Its steps use the counted-state types: an airstrip of tier 1, two parking spots, a storage zone of twenty tiles. |
+| `example_map_campaign.json` | A quest that belongs to one map: it has no requirements, and only that map lists it in `StartingQuestIds` (see [Quests and maps](#quests-and-maps)). Its steps use the counted-state types: an airstrip of tier 1, two parking spots, a storage zone of twenty tiles. |
 
 Install all three together and you have a two-quest chain plus a map-bound quest to compare against. Rename the ids before you build on them - `example_` is only a placeholder prefix.
 
@@ -542,13 +542,7 @@ And the map-bound one:
             "_genericIconKey": "ui_functionarea_resources"
         }
     ],
-    "_requirements": [
-        {
-            "Name": "",
-            "_requirementType": 3,
-            "_value": ""
-        }
-    ],
+    "_requirements": [],
     "_isHiddenInUI": false,
     "_questType": 0,
     "_highlightedUIElements": [],
@@ -563,7 +557,7 @@ The game's own quest files are worth reading too: they show what the real thing 
 
 | File | What it shows |
 |---|---|
-| `quest0.json` | The first quest of the main line: requirement type 3, so it only starts on maps that list it in `StartingQuestIds`. Its steps are the counted-state types - an airstrip of tier 1, a parking spot, a Gladiator, beds. |
+| `quest0.json` | The first quest of the main line: no requirements, so it only starts on maps that list it in `StartingQuestIds` (or name no starting quest at all). Its steps are the counted-state types - an airstrip of tier 1, a parking spot, a Gladiator, beds. |
 | `quest1.json` | The second quest, chained on `quest0` with requirement type 1. It mixes event steps (`harvesting_finished`, `project_finished`) with a workbench count, and has an optional step. |
 | `fighter_day_skin_unlock.json` | An aircraft skin achievement: `_questType: 1`, hidden from the quest panel, and the only place where a role name (`fighter`) is allowed where an aircraft id normally goes - see [Quest types](#quest-types). |
 | `tutorial_building.json` | A tutorial quest: `_questType: 2` with `_highlightedUIElements` that point the player at the interface while the steps are open. |
@@ -595,8 +589,8 @@ More testing tips: [Testing and reloading](../basics/testing.md).
 - Types 0, 1 and 21 have a number in `_parameter`; types 20 and 24 have their second part.
 - Types 12 and 17 include a skill or `any_skill_type`; any of 12, 13, 17 that is not empty includes at least one aircraft **id**.
 - No tutorial-only event outside a tutorial.
-- No `_requirementType: 2`.
-- Story quests carry `_requirementType: 3` and the map lists them; side quests that should start everywhere have an empty list on purpose.
+- No `_requirementType: 2` or `3`.
+- Every quest without a type-1 requirement is listed in the `StartingQuestIds` of each map it should run on.
 - Every localization key is either a shipped key or registered by your script - load the game and look at the panel.
 - No spaces inside `_parameter`.
 

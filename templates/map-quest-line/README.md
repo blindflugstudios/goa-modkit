@@ -24,7 +24,7 @@ map-quest-line/
 
     You can also type the ids into the *Starting quest* field in the map editor's map settings. With the list empty the map starts `quest0`. List both (`["quest0", "my_mod_campaign_start"]`) to keep the main line too.
 
-2. **The first quest only starts where a map lists it.** `{"_requirementType": 3, "_value": ""}` in its `_requirements` keeps it off every other map.
+2. **The first quest only starts where a map lists it.** Leave its `_requirements` empty; no map that leaves it out of `StartingQuestIds` starts it.
 
 3. **Later quests follow the chain.** `{"_requirementType": 1, "_value": "my_mod_campaign_start"}` starts the next quest when the first is complete.
 

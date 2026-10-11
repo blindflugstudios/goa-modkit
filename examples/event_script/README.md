@@ -14,7 +14,7 @@ No JSON, no matching file names, no `get_mission_id`: the game runs every script
 
 ## What to look at
 
-- **`airplane_on_mission_succeed` and `airplane_on_mission_failed` carry seven arguments:** plane type, plane number, mission id, skill type, the as-planned flag, location name and the success estimate the player was shown. That is enough to react to a specific mission, a specific location, or a specific kind of disappointment, without owning any of it.
+- **`airplane_on_mission_succeed` and `airplane_on_mission_failed` carry seven arguments:** plane type, plane number, mission id, skill type, the as-planned flag, location ID and the success estimate the player was shown. That is enough to react to a specific mission, a specific location, or a specific kind of disappointment, without owning any of it.
 - **`return False` does not count against `max_occurrences`.** Both mission handlers here bail out early on the wrong location or the wrong estimate, so the budget is only spent on calls that actually produced something.
 - **`chance` and `max_occurrences`** keep a reaction from becoming wallpaper. `quiet_night` fires at most twice in a playthrough, at 2% of midnights.
 

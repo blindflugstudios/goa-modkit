@@ -104,7 +104,7 @@ These calls write what a mission's JSON would otherwise declare. A script-only m
 |---|---|
 | `SetMissionStat(id, skill, min, max)` | one skill's target range. `skill` is `"Fight"`, `"Bomb"`, `"Recon"`, `"Transport"`, `"Maneuverability"` or `"Stealthiness"`. The first skill you set is rolled when the mission goes as planned, the second when it does not. Setting the same skill again replaces its range. |
 | `SetAsPlannedChance(id, chance)` | 0–100. Default for a script-only mission: 50. |
-| `SetMissionLocation(id, name)` | places the mission on the war map and works out distance and fuel. `name` is a location from [Locations](../missions/locations.md). |
+| `SetMissionLocation(id, location_id)` | places the mission on the war map and works out distance and fuel. `location_id` is the ID of a shipped place from [Locations](../missions/locations.md) or of one an enabled mod adds, never coordinates. |
 | `SetMaxAirplaneSlots(id, slots)` | how many planes may be assigned, at least 1. Default: 1. |
 | `SetDifficulty(id, rating)` | the star rating, 1–3. Default: 1. |
 | `SetOutcome(id, index, is_success)` | whether outcome `index` (0–3, in the [mandatory order](../missions/reference.md#the-two-rolls-and-the-outcome-index)) counts as a success |

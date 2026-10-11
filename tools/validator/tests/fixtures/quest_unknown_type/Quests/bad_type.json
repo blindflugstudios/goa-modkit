@@ -11,7 +11,7 @@
 			"_subQuestDescription": "",
 			"_isOptional": false,
 			"_genericIconKey": "",
-			"_subQuestRequirement": { "_type": 14, "_parameter": "", "_amount": 1 }
+			"_subQuestRequirement": { "_type": 99, "_parameter": "", "_amount": 1 }
 		}
 	]
 }

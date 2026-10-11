@@ -86,7 +86,7 @@ Der erste Eintrag gilt, wenn die Mission wie geplant läuft, der zweite, wenn si
 
 ### Wo sie stattfindet { #where-it-happens }
 
-`_potentialLocations` listet mögliche Orte auf der Kriegskarte. Jedes Mal, wenn die Mission erscheint, wird einer davon gezogen. Kopier die Einträge von der Seite [Einsatzorte](locations.md), inklusive der Koordinaten: Das Spiel berechnet Entfernung und Treibstoff aus den Koordinaten in deiner Datei.
+`_potentialLocations` listet mögliche Orte auf der Kriegskarte. Jedes Mal, wenn die Mission erscheint, wird einer davon gezogen. Jeder Eintrag nennt einen Ort über seine ID, etwa `{ "_locationId": "dover" }`; die IDs findest du auf der Seite [Einsatzorte](locations.md). Das Spiel nimmt die Koordinaten aus seiner Ortsliste und berechnet daraus Entfernung und Treibstoff. Eine ID, die es nicht kennt, schickt die Mission an einen zufälligen Ort.
 
 ## Wie ein Missionsskript wirklich läuft { #how-a-mission-script-actually-runs }
 
