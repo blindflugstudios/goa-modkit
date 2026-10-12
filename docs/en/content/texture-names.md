@@ -362,3 +362,69 @@ These tables were taken from the game's generated texture list on 2026-10-01.
 | `ShootingAdvancedTurret` | `M_Shooting Advvanced Turret_AlbedoTransparency` | `_BaseMap` |
 | `ShootingSimpleTargetRange` | `Batch_03_1` | `_BaseMap` |
 | `ShootingSimpleTargetRange` | `M_Rifle_LeeEnfield_AlbedoTransparency` | `_BaseMap` |
+
+## Map objects
+
+Trees, rocks, ponds and the other objects on a map. Several of them share one texture, `T_PP_ResourceMap_O4` above all: replacing it changes every map object listed with it. To change one of them alone, give it a model (see [Map objects](objects.md#map-objects)).
+
+| Object | Texture | Slot |
+|---|---|---|
+| `berry_bush` | `T_PP_ResourceMap_O4` | `_BaseMap` |
+| `berry_bush` | `leaf` | `_BaseMap` |
+| `bush` | `Bush07-Cowparsley_Toon-Opaque_1001` | `_BaseMap` |
+| `bush` | `T_Bush01_d` | `_BaseMap` |
+| `bush` | `T_Bush02_d` | `_BaseMap` |
+| `bush` | `T_Bush03_d` | `_BaseMap` |
+| `bush` | `T_Bush04_d` | `_BaseMap` |
+| `bush` | `T_Bush05_d` | `_BaseMap` |
+| `bush` | `T_Bush05_s` | `_SpecularMap` |
+| `bush_big` | `Bush06-Blackthorn_Toon-Opaque_1001` | `_BaseMap` |
+| `clay_pit` | `T_PP_ResourceMap_O4` | `_BaseMap` |
+| `damaged_car` | `M_TO_Car-Damaged_Base_color` | `_BaseMap` |
+| `flowers` | `Flowers-02_Toon-Opaque_BaseMap_1001` | `_BaseMap` |
+| `flowers` | `Flowers-03_Toon-Opaque_BaseMap_1001` | `_BaseMap` |
+| `herbs_plant` | `T_PP_ResourceMap_O4` | `_BaseMap` |
+| `herbs_plant` | `leaf` | `_BaseMap` |
+| `large_rock` | `Rock-Large-Round-Moss_Toon-Opaque_1001` | `_BaseMap` |
+| `large_rock` | `Rock-Large-Round_Toon-Opaque_1001` | `_BaseMap` |
+| `large_rock` | `T_PP_Cosmetic_O4` | `_BaseMap` |
+| `long_rock` | `Rocks-Moss_Toon-Opaque_1001` | `_BaseMap` |
+| `long_rock` | `T_PP_Cosmetic_O4` | `_BaseMap` |
+| `mushroom_patch` | `T_PP_ResourceMap_O4` | `_BaseMap` |
+| `mushroom_patch` | `leaf` | `_BaseMap` |
+| `old_fence` | `M_TO_Old-Fence_Base_color` | `_BaseMap` |
+| `old_fence_pole` | `M_TO_Old-Fence_Base_color` | `_BaseMap` |
+| `old_grave` | `Batch_03_1` | `_BaseMap` |
+| `old_grave` | `Props-01_AlbedoTransparency` | `_BaseMap` |
+| `old_headstone` | `Batch_03_1` | `_BaseMap` |
+| `old_headstone` | `GraveStone-White-RAF_Toon-Opaque_BaseMap_1001` | `_BaseMap` |
+| `sand_pit` | `T_PP_ResourceMap_O4` | `_BaseMap` |
+| `small_rock` | `Rock-Standard-Round_Toon-UDIM_BaseMap_1001` | `_BaseMap` |
+| `small_rock` | `Rock-Standard-Round_Toon-UDIM_BaseMap_1002` | `_BaseMap1002` |
+| `small_rock` | `Rocks-Moss_Toon-Opaque_1001` | `_BaseMap` |
+| `tree` | `Broadleaf_Mobile_Atlas 1` | `_BaseMap` |
+| `tree` | `Broadleaf_Mobile_Atlas Low` | `_BaseMap` |
+| `tree` | `Conifer_Desktop_Atlas` | `_BaseMap` |
+| `tree_big` | `OakTree-01-Bark_Toon-Opaque_1001` | `_BaseMap` |
+| `tree_big` | `OakTree-02-Bark_Toon-Opaque_1001` | `_BaseMap` |
+| `tree_big` | `OakTree-Leaf_Toon-Opaque_1001` | `_BaseMap` |
+| `tree_big_log` | `TreeLog-01_Toon-Opaque_BaseMap_1001` | `_BaseMap` |
+| `tree_big_log` | `TreeLog-02_Toon-Opaque_BaseMap_1001` | `_BaseMap` |
+| `tree_big_stump` | `TreeStump-01_Toon-Opaque_BaseMap_1001` | `_BaseMap` |
+| `tree_big_stump` | `TreeStump-02_Toon-Opaque_BaseMap_1001` | `_BaseMap` |
+| `water_pond` | `T_PP_ResourceMap_O4` | `_BaseMap` |
+| `wild_beans` | `Batch_03_1` | `_BaseMap` |
+| `wild_beans` | `T_Batch_02_2_BC` | `_BaseMap` |
+| `wild_beans` | `leaf` | `_BaseMap` |
+| `wild_grain` | `T_Batch_02_2_BC` | `_BaseMap` |
+| `wild_grain` | `leaf` | `_BaseMap` |
+| `wild_potato` | `T_Batch_02_2_BC` | `_BaseMap` |
+| `wild_potato` | `leaf` | `_BaseMap` |
+| `wild_tomato` | `T_Batch_02_2_BC` | `_BaseMap` |
+| `wild_tomato` | `leaf` | `_BaseMap` |
+| `young_tree` | `Broadleaf_Mobile_Atlas 1` | `_BaseMap` |
+| `young_tree` | `Broadleaf_Mobile_Atlas Low` | `_BaseMap` |
+| `young_tree` | `Conifer_Desktop_Atlas` | `_BaseMap` |
+| `young_tree_big` | `OakTree-01-Bark_Toon-Opaque_1001` | `_BaseMap` |
+| `young_tree_big` | `OakTree-02-Bark_Toon-Opaque_1001` | `_BaseMap` |
+| `young_tree_big` | `OakTree-Leaf_Toon-Opaque_1001` | `_BaseMap` |

@@ -30,7 +30,7 @@ Create `mods/<mod_id>/` with `config.json` (from `templates/config.json`) and th
   - Textures, tried in this order: (1) `<material>_BaseMap_<UDIM-Tile>.png` / `<material>_Specular_<UDIM-Tile>.png` named after the model's material; (2) a PNG named like the image the material uses; (3) a PNG named like a built-in texture (repaints the game's model, no model needed). UDIM tiles `1001`-`1003`.
   - Thumbnail: `<objectId>.thumbnail.png`, only used next to a model of the same id.
   - Optional `Objects/config.json`: `{"Objects": {"Chair": {"UseGameMaterial": false}}}`. Default (game material) keeps battle damage; `false` keeps the user's own material but loses battle damage and uses only way (2) textures.
-  - Trees, rocks and other map objects (terrain objects) cannot be modded yet. If the user asks for that, say so plainly.
+  - Map objects (trees, rocks, ponds, terrain objects) work the same way, named after their id from the "Map objects" table in `docs/en/content/moddable-objects.md` (`sand_pit.fbx`, not `sandpit.fbx` or a `TerrainObjects/` folder). `<id>.<variant>` changes one variant alone (`tree.2.glb` is the broadleaf tree). A map object never shows a thumbnail, and a model replaces both the full and the empty look of a harvestable such as `sand_pit`. A wrong id is silently ignored, so check the name against the table.
 - **`Biomes/<number>.png`** - `0` to `23`, no leading zeros, directly inside `Biomes/`.
 - **`Airplanes/`** - see section 4.
 

@@ -1,6 +1,6 @@
 # Objekte und Modelle
 
-Genug vom Standardfass? Eine Mod kann den Objekten des Spiels einen neuen Look geben: Möbeln, Zäunen, Geschützen, Schildern, Postern, Werkbänken und Trainingsgeräten. Entweder legst du ein eigenes 3D-Modell hinein, oder du behältst das Modell des Spiels und bemalst es mit einer neuen Textur. Außerdem kannst du einem Objekt ein neues Symbol im Baumenü geben.
+Genug vom Standardfass? Eine Mod kann den Objekten des Spiels einen neuen Look geben: Möbeln, Zäunen, Geschützen, Schildern, Postern, Werkbänken und Trainingsgeräten, und auch den Bäumen, Felsen und Teichen auf der Karte. Entweder legst du ein eigenes 3D-Modell hinein, oder du behältst das Modell des Spiels und bemalst es mit einer neuen Textur. Außerdem kannst du einem Objekt ein neues Symbol im Baumenü geben.
 
 Nur das Aussehen ändert sich. Größe im Raster, Kosten, Lebenspunkte, wo die Mannschaft steht, um es zu benutzen, und alle anderen Regeln bleiben so, wie das Spiel sie festlegt. Zahlen änderst du mit [CSV-Tabellen](../data/csv.md).
 
@@ -40,17 +40,23 @@ Der **Dateiname** eines Modells ist die Id des Objekts, das es ersetzt. Du kanns
 
 Bei den Ids spielt Groß- und Kleinschreibung keine Rolle, `chair.fbx` ändert also auch den Stuhl.
 
-Mit `Objects/` lassen sich nur diese Objekte neu gestalten. Bäume, Felsen und die anderen Dinge, die auf einer Karte platziert sind, kann eine Mod noch nicht ändern. Flugzeuge bekommen neue Lackierungen auf anderem Weg: siehe [Flugzeug-Skins](airplanes.md). Den Boden änderst du mit [Biomen](biomes.md).
+Die Bäume, Felsen, Teiche und anderen Dinge, die auf einer Karte platziert sind, änderst du auf dieselbe Weise, zum Beispiel `tree`, `sand_pit` oder `large_rock`. Für sie gelten ein paar eigene Regeln: siehe [Kartenobjekte](#map-objects). Die Id jedes Objekts, das du ändern kannst, Kartenobjekte eingeschlossen, steht unter [Veränderbare Objekte](moddable-objects.md).
+
+Flugzeuge bekommen neue Lackierungen auf anderem Weg: siehe [Flugzeug-Skins](airplanes.md). Den Boden änderst du mit [Biomen](biomes.md).
 
 ## Dateinamen { #file-names }
 
-Jede Datei, die zu einem Objekt gehört, heißt `<objectId>`, `<objectId>.destroyed` oder `<objectId>.thumbnail`, plus Dateiendung:
+Jede Datei, die zu einem Objekt gehört, heißt `<objectId>`, `<objectId>.destroyed` oder `<objectId>.thumbnail`, plus Dateiendung. Ein Kartenobjekt kann zusätzlich eine Variantennummer tragen: `<objectId>.<variant>`.
 
 | Datei | Was sie ist |
 |---|---|
 | `Chair.fbx` oder `Chair.glb` | das Modell des Stuhls |
 | `Chair.destroyed.fbx` | das Modell, zu dem der Stuhl wechselt, wenn er zerstört wird |
 | `Chair.thumbnail.png` | das Symbol des Stuhls im Baumenü |
+| `tree.glb` | jede Variante des Kartenobjekts `tree`, die keine eigene Datei hat |
+| `tree.2.glb` | nur Variante 2 von `tree` |
+
+- **Varianten** gibt es nur bei Kartenobjekten. Sie werden ab `0` gezählt und ohne führende Nullen geschrieben: `tree.2`, nie `tree.02`.
 
 - **Modelle** dürfen `.glb` (binäres glTF) oder `.fbx` sein. Gibt es beide für dasselbe Objekt, wird die `.glb` verwendet und die `.fbx` im [Log](../start/troubleshooting.md#find-the-playerlog) als ignoriert gemeldet.
 - **Blenders Duplikatnamen** wie `Chair.001.fbx` werden abgelehnt. Benenne die Datei um, bevor du sie hineinkopierst.
@@ -67,7 +73,8 @@ Weil `Objects/` mit allen Unterordnern als ein einziger Topf zählt, kollidieren
 
 - **Größe und Ausrichtung.** Baue das Modell im Maßstab des Spiels, in Metern, und in dieselbe Richtung ausgerichtet wie das Objekt des Spiels. Dein Modell wird auf den Ursprung des Originals gesetzt und nicht passend skaliert, setze seinen Ursprung also dorthin, wo ihn das Original hat, meist auf den Boden in die Mitte des Objekts. Eine FBX wird beim Einlesen auf Y nach oben und Meter umgerechnet, und eine auf dem üblichen Weg aus Blender exportierte FBX schaut in dieselbe Richtung wie die Grafik des Spiels.
 - **Nur das Aussehen ändert sich.** Die Grundfläche des Objekts im Raster, wo die Mannschaft steht, um es zu benutzen, und womit es zusammenstößt, bleiben die des Spiels. Ein Modell, das viel größer ist als das Original, ragt durch Wände und Nachbarn.
-- **Effekte** des Originals, etwa das Sägemehl einer Werkbank, laufen auf deinem Modell weiter.
+- **Detailstufen.** Nenne die Teile deines Modells `LOD0`, `LOD1`, `LOD2` und so weiter (`LOD1_Trunk` zählt auch), dann wechselt das Spiel bei denselben Entfernungen zwischen ihnen wie beim Original. Hast du weniger Stufen als das Original, bleibt deine letzte stehen, bis das Objekt verschwindet. Ein Modell ohne `LOD`-Namen sieht auf jede Entfernung gleich aus. Stufen wechseln nur bei Objekten, die selbst welche haben, etwa Bäumen; bei jedem anderen Objekt werden alle `LOD`-Teile gleichzeitig gezeichnet, gib ihm also nur eine Stufe.
+- **Effekte** des Originals, etwa das Sägemehl einer Werkbank oder die Blätter eines Baums, der gefällt wird, laufen auf deinem Modell weiter.
 - **Nur unbewegte Modelle.** Animationen in einer FBX werden nicht eingelesen, und das Spiel animiert ein Mod-Modell nie.
 - **Höchstens 32 MB** pro Modelldatei. Eine größere Datei wird mit einer Warnung übersprungen, und das Objekt behält seinen eingebauten Look.
 
@@ -159,6 +166,17 @@ Willst du das Material stattdessen genau so behalten, wie du es gebaut hast, sch
 - **Höchstens 512 × 512 Pixel** und höchstens 10 MB. Jede Seite zählt für sich, 512 × 256 geht also. Ein größeres Vorschaubild wird **nicht verkleinert**: Es wird mit einer Warnung im [Log](../start/troubleshooting.md#find-the-playerlog) übersprungen, und das Symbol des Spiels bleibt.
 - Ein Vorschaubild wird nur **neben einem Modell mit derselben Id** verwendet. Es kann nicht das Symbol eines Objekts ändern, dem deine Mod kein neues Modell gibt; ein Vorschaubild allein wird gemeldet und ignoriert.
 - Ein Vorschaubild pro Objekt. Eine zweite Datei mit demselben Namen in einem anderen Unterordner wird ignoriert.
+- Kartenobjekte stehen nicht im Baumenü, und der Karteneditor behält die Symbole des Spiels. Ein Vorschaubild für ein Kartenobjekt wird deshalb nicht verwendet.
+
+## Kartenobjekte { #map-objects }
+
+Bäume, Felsen, Teiche und die anderen Objekte auf einer Karte bekommen einen neuen Look wie jedes andere Objekt: mit einer Datei in `Objects/`, die nach der Id des Objekts benannt ist. Jede Id eines Kartenobjekts und wie viele Varianten es hat, steht unter [Veränderbare Objekte](moddable-objects.md#map-objects). Ein paar Dinge laufen anders:
+
+- **Varianten.** `flowers.glb` ändert alle drei Blumenbeete, `flowers.1.glb` nur das zweite. Varianten können ganz verschieden aussehen: `tree` umfasst die Nadelbäume und den Laubbaum gleichermaßen, und `tree.2` ist nur der Laubbaum.
+- **Jede Baumgröße ist ein eigenes Objekt.** `tree_big`, `young_tree`, `young_tree_big`, `tree_big_log` und `tree_big_stump` brauchen jeweils eine eigene Datei. Ein junger Baum, der heranwächst, wird zu einem `tree` oder `tree_big` und trägt ab dann den Look dieses Objekts.
+- **Ein Look für voll und leer.** `sand_pit`, `clay_pit`, `water_pond`, `berry_bush`, `herbs_plant`, `wild_grain`, `wild_beans`, `wild_potato` und `wild_tomato` wechseln zwischen einem vollen und einem leeren Modell, während deine Mannschaft sie aberntet. Dein Modell ersetzt beide, es sieht also gleich aus, egal wie viel noch übrig ist.
+- **Geteilte Texturen.** Viele Kartenobjekte sind mit einer gemeinsamen Textur bemalt. Sandgrube, Lehmgrube, Teich, Beerenstrauch und andere verwenden alle `T_PP_ResourceMap_O4`. Wenn du eine geteilte Textur [übermalst](#re-painting-without-a-model), änderst du jedes Objekt, das sie verwendet. Um nur ein Objekt zu ändern, gib ihm ein Modell. Welche Texturen jedes Kartenobjekt verwendet, steht unter [Eingebaute Texturnamen](texture-names.md#map-objects).
+- **Kein Ordner `TerrainObjects/`.** Kartenobjekte kommen wie alles andere in `Objects/`, und der Name des Unterordners bedeutet dort nichts: `Objects/sand_pit/model.fbx` ist ein Modell für ein Objekt namens `model`. Nenne es `sand_pit.fbx`.
 
 ## Dateigrenzen { #file-limits }
 
@@ -188,3 +206,5 @@ Jede Datei in `Objects/` und `Biomes/` wird geprüft, bevor sie geladen wird:
 - Bei einer FBX: Liegen die Texturen als PNGs in `Objects/`, benannt nach dem Material oder nach dem Bild, das das Material verwendet?
 
 Das Spiel schreibt, was es abgelehnt hat und warum (ein falscher Name, eine fehlende Textur, ein zu großes Bild), in die [`Player.log`](../start/troubleshooting.md#find-the-playerlog), in Zeilen, die mit `[Mod <your mod id>]` beginnen. Die ausführlichen Zeilen erscheinen eventuell nur in Entwicklungsversionen. Ist das Log still, geh die Liste oben durch und schau dir das Objekt im Spiel an.
+
+Ein Modell, das nach einer Id benannt ist, die es nicht gibt (`sandpit.fbx` statt `sand_pit.fbx`), wird geladen, aber nie verwendet, und im Log steht nichts dazu. Bekommt ein Objekt dein Modell, steht im Log eine Zeile wie `[Mod my_mod] Objects/sand_pit: replaced 2 built-in renderer(s) on the regular view with ...`, sobald das erste davon im Spiel auftaucht. Fehlt diese Zeile, prüfe den Dateinamen anhand von [Veränderbare Objekte](moddable-objects.md).

@@ -1,6 +1,6 @@
 # Objects and models
 
-Tired of the standard-issue barrel? A mod can give the game's objects a new look: furniture, fences, guns, signs, posters, workbenches and training equipment. You either drop in your own 3D model, or keep the game's model and paint it with a new texture. You can also give an object a new icon in the build menu.
+Tired of the standard-issue barrel? A mod can give the game's objects a new look: furniture, fences, guns, signs, posters, workbenches and training equipment, and the trees, rocks and ponds on the map. You either drop in your own 3D model, or keep the game's model and paint it with a new texture. You can also give an object a new icon in the build menu.
 
 Only the look changes. Size on the grid, cost, health, where crew stand to use it, and every other rule stay as the game defines them. Changing numbers is done with [CSV tables](../data/csv.md).
 
@@ -40,17 +40,23 @@ A model's **file name** is the id of the object it replaces. You can change the 
 
 Ids are matched without regard to capital letters, so `chair.fbx` changes the chair too.
 
-Only these objects can be re-dressed with `Objects/`. Trees, rocks and the other things placed on a map cannot be changed by a mod yet. Airplanes get new paint schemes another way: see [Airplane skins](airplanes.md). The ground is changed with [biomes](biomes.md).
+The trees, rocks, ponds and other things placed on a map can be changed the same way, for example `tree`, `sand_pit` or `large_rock`. They have a few rules of their own: see [Map objects](#map-objects). The id of every object you can change, map objects included, is on [Moddable objects](moddable-objects.md).
+
+Airplanes get new paint schemes another way: see [Airplane skins](airplanes.md). The ground is changed with [biomes](biomes.md).
 
 ## File names
 
-Every file that belongs to one object is named `<objectId>`, `<objectId>.destroyed` or `<objectId>.thumbnail`, plus its extension:
+Every file that belongs to one object is named `<objectId>`, `<objectId>.destroyed` or `<objectId>.thumbnail`, plus its extension. A map object can also take a variant number: `<objectId>.<variant>`.
 
 | File | What it is |
 |---|---|
 | `Chair.fbx` or `Chair.glb` | the chair's model |
 | `Chair.destroyed.fbx` | the model the chair switches to when it is destroyed |
 | `Chair.thumbnail.png` | the chair's icon in the build menu |
+| `tree.glb` | every variant of the map object `tree` that has no file of its own |
+| `tree.2.glb` | variant 2 of `tree` only |
+
+- **Variants** belong to map objects only. They are counted from `0` and written without leading zeros: `tree.2`, never `tree.02`.
 
 - **Models** may be `.glb` (binary glTF) or `.fbx`. If both exist for the same object, the `.glb` is used and the `.fbx` is reported in the [log](../start/troubleshooting.md#find-the-playerlog) as ignored.
 - **Blender's duplicate names** such as `Chair.001.fbx` are refused. Rename the file before you copy it in.
@@ -67,7 +73,8 @@ Because `Objects/` and all its subfolders count as one pool, two files with the 
 
 - **Size and facing.** Build the model at the game's scale, in metres, facing the same way as the game's own object. Your model is placed at the original object's origin and is not scaled to fit, so put its origin where the original has it, usually on the ground at the object's centre. An FBX is converted to Y-up and metres on import, and an FBX exported from Blender the usual way faces the same direction as the game's own art.
 - **Only the look changes.** The object's footprint on the grid, where crew stand to use it and what it bumps into all stay the game's. A model much larger than the original pokes through walls and neighbours.
-- **Effects** of the original object, such as a workbench's sawdust, keep playing on your model.
+- **Levels of detail.** Name the parts of your model `LOD0`, `LOD1`, `LOD2` and so on (`LOD1_Trunk` counts too) and the game switches between them at the same distances as the original object. With fewer levels than the original, your last one is kept until the object disappears. A model without `LOD` names looks the same at every distance. Levels only switch on objects that have them built in, such as trees; on any other object every `LOD` part is drawn at once, so give it a single level.
+- **Effects** of the original object, such as a workbench's sawdust or the leaves of a tree being felled, keep playing on your model.
 - **Static models only.** Animation in an FBX is not imported, and the game never animates a mod model.
 - **At most 32 MB** per model file. A larger file is skipped with a warning, and the object keeps its built-in look.
 
@@ -159,6 +166,17 @@ To keep the material exactly as you made it instead, switch the game's material 
 - **At most 512 × 512 pixels**, and at most 10 MB. Each side counts on its own, so 512 × 256 is fine. A larger thumbnail is **not scaled down**: it is skipped with a warning in the [log](../start/troubleshooting.md#find-the-playerlog), and the game's own icon stays.
 - A thumbnail is only used **next to a model with the same id**. It cannot change the icon of an object your mod does not give a new model; a thumbnail on its own is reported and ignored.
 - One thumbnail per object. A second file with the same name in another subfolder is ignored.
+- Map objects are not in the build menu, and the Map Editor keeps the game's own icons, so a thumbnail for a map object is not used.
+
+## Map objects
+
+Trees, rocks, ponds and the other objects on a map get a new look like any other object: a file in `Objects/` named after the object's id. Every map object id, and how many variants each has, is on [Moddable objects](moddable-objects.md#map-objects). A few things work differently:
+
+- **Variants.** `flowers.glb` changes all three flower patches; `flowers.1.glb` only the second one. Variants can look quite different: `tree` covers the conifers and the broadleaf tree alike, and `tree.2` is the broadleaf one alone.
+- **Every size of tree is an object of its own.** `tree_big`, `young_tree`, `young_tree_big`, `tree_big_log` and `tree_big_stump` each need their own file. A young tree that grows up becomes a `tree` or a `tree_big` and from then on wears that object's look.
+- **One look for full and empty.** `sand_pit`, `clay_pit`, `water_pond`, `berry_bush`, `herbs_plant`, `wild_grain`, `wild_beans`, `wild_potato` and `wild_tomato` switch between a full and an empty model as your crew harvests them. Your model replaces both, so it looks the same however much is left.
+- **Shared textures.** Many map objects are painted from one shared texture. The sand pit, clay pit, pond, berry bush and others all use `T_PP_ResourceMap_O4`. [Re-painting](#re-painting-without-a-model) a shared texture changes every object that uses it. To change one object alone, give it a model. Which textures each map object uses is on [Built-in texture names](texture-names.md#map-objects).
+- **No `TerrainObjects/` folder.** Map objects go into `Objects/` like everything else, and the subfolder name means nothing there: `Objects/sand_pit/model.fbx` is a model for an object called `model`. Name it `sand_pit.fbx`.
 
 ## File limits
 
@@ -188,3 +206,5 @@ If two enabled mods change the same object, the mod applied **last** wins, follo
 - For an FBX: are the textures shipped as PNGs in `Objects/`, named after the material or the image the material uses?
 
 The game writes what it refused and why (a wrong name, a missing texture, an image that is too big) to [`Player.log`](../start/troubleshooting.md#find-the-playerlog), on lines that start with `[Mod <your mod id>]`. The detailed lines may only appear in development builds, so if the log is silent, check the list above and look at the object in the game.
+
+A model named after an id that does not exist (`sandpit.fbx` instead of `sand_pit.fbx`) is loaded but never used, and nothing in the log says so. When an object does get your model, the log has a line like `[Mod my_mod] Objects/sand_pit: replaced 2 built-in renderer(s) on the regular view with ...` once the first one appears in the game. If there is no such line, check the file name against [Moddable objects](moddable-objects.md).

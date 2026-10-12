@@ -401,7 +401,7 @@ ein erfundener Name wird angenommen und bewirkt nichts.
 
 Eingebaute Datei: [MapObjects.csv](../assets/csv/MapObjects.csv)
 
-Eine Zeile pro Weltobjekt. Die Ids werden von Kartendateien verwendet und können nicht geändert werden.
+Eine Zeile pro Weltobjekt. Die Ids werden von Kartendateien verwendet und können nicht geändert werden. Wie du einem Kartenobjekt statt neuer Zahlen einen neuen Look gibst, steht unter [Kartenobjekte](../content/objects.md#map-objects).
 
 | Spalte | Wert | Eingebaut | Hinweise |
 |---|---|---|---|

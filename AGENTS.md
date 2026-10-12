@@ -61,7 +61,7 @@ Mods/<mod_id>/
   Airplanes/         new airplane skins: config.json + PNGs
 ```
 
-- **Art mods** (`Objects/`, `Biomes/`) are imported once at game start: every art change needs a **full restart of the game**. Docs: `docs/en/content/objects.md`, `biomes.md`. Trees, rocks and other map objects (terrain objects) **cannot be modded yet**; tell the user so instead of building it.
+- **Art mods** (`Objects/`, `Biomes/`) are imported once at game start: every art change needs a **full restart of the game**. Docs: `docs/en/content/objects.md`, `biomes.md`. Trees, rocks, ponds and other map objects (terrain objects) are re-dressed from `Objects/` too, named after their id (`sand_pit.fbx`, `tree.2.glb` for one variant); ids and variants are in `docs/en/content/moddable-objects.md`, their special rules under "Map objects" in `objects.md`.
 - **Airplane skins** (`Airplanes/`) are read each time a level is loaded. Docs: `docs/en/content/airplanes.md`.
 
 - The game decides what a mod contains from **which folders hold files**, not from `config.json`. Folder names are exact: `Missions`, not `Mission` or `missions`.

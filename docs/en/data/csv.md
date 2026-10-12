@@ -401,7 +401,7 @@ towers); an invented name is accepted and does nothing.
 
 Built-in file: [MapObjects.csv](../assets/csv/MapObjects.csv)
 
-One row per world object. Ids are used by map files and cannot change.
+One row per world object. Ids are used by map files and cannot change. To give a map object a new look rather than new numbers, see [Map objects](../content/objects.md#map-objects).
 
 | Column | Value | Built-in | Notes |
 |---|---|---|---|
