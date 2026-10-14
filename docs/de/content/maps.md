@@ -9,24 +9,24 @@ Karten baust du mit dem **Karten Editor** (Map Editor), der im Spiel enthalten i
 1. Klicke im Hauptmenü (Main menu) auf **Karten Editor**, dann auf **Neue Karte** (New Map). Forme das Gelände, bemale es, setze ein paar Bäume.
 2. Öffne die **Karteneinstellungen** (Map settings) und fülle mindestens **Ortsname:** (Name of Location) aus. Speichere die Karte mit **Speichern als...** (Save as...) und nenne sie `my_airfield`.
 3. Der Editor schreibt `my_airfield.goamap` in den Ordner `Maps` in deinem Spieldatenordner (dem Ordner, in dem auch `Mods/` liegt, siehe Tabelle unten).
-4. Kopiere diese Datei in eine Mod:
+4. Kopiere diese Datei in eine Mod mit einer `config.json`:
 
     ```text
     Mods/
       my_map_mod/
+        config.json
         Maps/
           my_airfield.goamap
     ```
 
 5. Öffne **Hauptmenü → Mods** und drücke **Refresh**, damit das Spiel den neuen Mod-Ordner findet. Prüfe, dass **my_map_mod** eingeschaltet ist, und starte ein neues Spiel. Deine Karte steht unter **Custom maps**.
 
-Das ist schon eine vollständige Karten-Mod. Eine `config.json` brauchst du nicht, du kannst aber eine hinzufügen (siehe [So funktionieren Mods](../basics/mods.md)).
+Das ist schon eine vollständige Karten-Mod. Die `config.json` gibt der Mod ihre Id und ihren Namen, wie jede Mod sie braucht (siehe [So funktionieren Mods](../basics/mods.md#configjson)).
 
 | Plattform | Spieldatenordner (enthält `Mods/` und `Maps/`) |
 |---|---|
 | Windows | `%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\` |
 | macOS | `~/Library/Application Support/Blindflug Studios/Ground Of Aces/` |
-| Linux | `~/.config/unity3d/Blindflug Studios/Ground Of Aces/` |
 
 !!! tip
     Gib der Datei einen Namen, den sonst niemand wählt, zum Beispiel mit dem Namen deiner Mod davor: `my_map_mod_airfield.goamap`. Der Dateiname ist die Id der Karte (siehe [Karten-Ids](#map-ids)).
@@ -191,4 +191,4 @@ Der Editor schreibt außerdem Schlüssel wie `CreatedDatetime`, `ModifiedDatetim
 
 ### Eine Karte teilen { #sharing-a-map }
 
-Eigene Karten kannst du direkt aus der Kartenliste im Karten Editor in den Steam Workshop hochladen, ganze Mods aus dem Mods-Fenster. Siehe [Steam Workshop](../sharing/workshop.md).
+Eigene Karten kannst du direkt aus der Kartenliste im Karten Editor in den Steam Workshop hochladen. Einen Mod-Ordner brauchst du dafür nicht: Das Spiel legt die `config.json` beim Hochladen der Karte selbst an. Eine Karte mit eigenen Missionen, Quests oder anderen Inhalten lädst du als ganze Mod aus dem Mods-Fenster hoch. Siehe [Steam Workshop](../sharing/workshop.md).

@@ -37,8 +37,7 @@ Arguments in `[brackets]` are placeholders: replace them, without the brackets. 
 | ★ | `create_mission [mission_id]` | Creates that mission right away, so it shows up on the war map without waiting. Answers `Unknown mission ID` if the game did not load it. | `create_mission coastal_patrol` |
 | ★ | `quest [quest_id]` | Starts the quest with that id. | `quest quest3` |
 | ★ | `go_to_quest [quest_id]` | Completes quests one after another until that quest is reached. | `go_to_quest quest5` |
-| ★ | `complete_current_quests` | Completes the running quests (not tutorial or skin quests). | `complete_current_quests` |
-| | `enable_tutorial [true/false]` | Turns the tutorial on or off. | `enable_tutorial false` |
+| ★ | `complete_current_quests` | Completes the running quests (not skin quests). | `complete_current_quests` |
 | | `set_game_goals_visibility [ShowAll/ShowPriority/Minimized]` | Changes how the goals panel is shown. | `set_game_goals_visibility ShowAll` |
 
 ### Time and days
@@ -150,7 +149,7 @@ Use these only if you know why. `enable_system` and `enable_input_action` can le
 | | `enable_input_action [map/action] [true/false]` | Turns one input action on or off. | `enable_input_action Game/TimeScalePause false` |
 | | `enable_system [name] [true/false]` | Turns one internal game process on or off. | `enable_system [name] false` |
 
-## A typical test run
+## Examples
 
 ```text
 create_mission coastal_patrol

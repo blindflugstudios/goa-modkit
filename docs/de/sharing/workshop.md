@@ -10,7 +10,7 @@ Workshop-Seite von Ground of Aces: <https://steamcommunity.com/app/2308690/works
 ## Deine Mod hochladen { #uploading-your-mod }
 
 1. **Bring den Ordner genau in den Zustand, den du ausliefern willst.** Der *ganze* Mod-Ordner wird so hochgeladen, wie er ist - `config.json`, `preview.png` und jeder Inhaltsunterordner. Entferne vorher Testdateien, Backups und Notizen, die du nicht veröffentlichen willst.
-2. **Gib ihr einen Namen und ein Bild.** Der `Name` in der `config.json` wird beim ersten Upload zum Workshop-Titel (ohne `config.json` wird der Ordnername verwendet). Die `preview.png` im Hauptverzeichnis des Mod-Ordners wird beim ersten Upload zum Workshop-Bild. Sie muss ein PNG mit **höchstens 1 MB** sein; eine größere Datei lässt den Upload mit einem Fehler scheitern.
+2. **Gib ihr einen Namen und ein Bild.** Der `Name` in der `config.json` wird beim ersten Upload zum Workshop-Titel. Die `preview.png` im Hauptverzeichnis des Mod-Ordners wird beim ersten Upload zum Workshop-Bild. Sie muss ein PNG mit **höchstens 1 MB** sein; eine größere Datei lässt den Upload mit einem Fehler scheitern.
 3. **Öffne Hauptmenü (Main menu) → Mods** und drück bei der Mod auf **Upload**. Nur deine eigenen Mods (aus deinem `Mods`-Ordner) haben diesen Button; abonnierte Workshop-Items nicht.
 4. **Wähl das Ziel.** Ein Fenster listet **New Workshop item** und darunter jedes Workshop-Item, das du bisher veröffentlicht hast. Wähl **New Workshop item** für einen ersten Upload oder eines deiner bestehenden Items, um dessen Inhalt durch diese Version zu ersetzen.
 5. **Bestätige.** Das Spiel fragt noch einmal nach - "Do you want to create a new Workshop item for ...?" oder, bei einem Update, ob das bestehende Item verwendet werden soll - und du antwortest mit **Ja (Yes)**.
@@ -31,6 +31,10 @@ Die Beschreibung schreibst du immer auf der Steam-Seite des Items; das Spiel sch
 
 !!! tip
     Beim ersten Veröffentlichen bittet dich Steam eventuell, der rechtlichen Vereinbarung für den Workshop zuzustimmen. Bis du das tust, bleibt das Item versteckt. Öffne die Steam-Seite des Items und stimm dort zu, dann wird das Item sichtbar.
+
+### Eine einzelne Karte hochladen { #uploading-a-single-map }
+
+Eine Karte allein braucht keinen Mod-Ordner. Lade sie direkt aus der Kartenliste im **Karten Editor** hoch; das Spiel legt die `config.json` beim Hochladen selbst an. Eine Mod baust und lädst du über das Mods-Fenster nur dann hoch, wenn die Karte eigene Missionen, Quests oder andere Inhalte mitbringt - siehe [Karten](../content/maps.md#sharing-a-map).
 
 ### Nach dem Veröffentlichen weiterarbeiten { #keep-working-after-you-publish }
 

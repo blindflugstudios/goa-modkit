@@ -1,4 +1,4 @@
-# Your first mod in 10 minutes
+# Your first AI mod in 10 minutes
 
 You will describe a mission in plain English, let the agent build it, and fly it in your own game. The clock starts now, with the tools already installed ([Windows](install-windows.md) / [Mac](install-mac.md)).
 

@@ -18,15 +18,15 @@ hide:
 ![Ground of Aces](assets/logos/goa-logo-colored.png)
 
 Bau deine eigenen Missionen, Quests, Ereignisse, Karten und vieles mehr für Ground of Aces.
-Kein Unity, kein Compiler - ein Mod ist ein Ordner voller Textdateien. Und wenn du magst, schreibt ein KI-Agent sie für dich.
+Kein Unity, kein Compiler - ein Mod ist ein Ordner mit ganz normalen Dateien: JSON, CSV, Python, Modelle und Bilder. Und wenn du magst, schreibt ein KI-Agent sie für dich.
 
 </div>
 
 <div class="doors" markdown>
 
-<a class="door" href="start/">
+<a class="door" href="basics/first-mod/">
 <strong>Ich habe noch nie programmiert</strong>
-Fang hier an. Wir installieren alles gemeinsam, Schritt für Schritt, und zehn Minuten später ist dein erster Mod im Spiel.
+Fang hier an. Dein erster Mod dauert fünf Minuten und braucht nur das Spiel und einen Texteditor. Werkzeuge und KI kommen später, wenn du sie willst.
 </a>
 
 <a class="door" href="missions/first-mission/">
@@ -34,7 +34,7 @@ Fang hier an. Wir installieren alles gemeinsam, Schritt für Schritt, und zehn M
 Du kennst dich mit Dateien und Ordnern aus. Beispiel kopieren, ändern, neu laden - fertig.
 </a>
 
-<a class="door" href="ai/">
+<a class="door" href="start/">
 <strong>Ich nutze einen KI-Agenten</strong>
 Claude Code, Codex oder das quelloffene OpenCode: Klone dieses Repository, starte deinen Agenten darin und beschreib den Mod, den du willst. Der Agent kennt die Regeln.
 </a>

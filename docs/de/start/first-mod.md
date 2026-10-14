@@ -1,4 +1,4 @@
-# Dein erster Mod in 10 Minuten
+# Dein erster KI-Mod in 10 Minuten
 
 Du beschreibst eine Mission in ganz normaler Sprache, lässt den Agenten sie bauen und fliegst sie in deinem eigenen Spiel. Die Uhr läuft ab jetzt, die Werkzeuge sind schon installiert ([Windows](install-windows.md) / [Mac](install-mac.md)).
 

@@ -9,24 +9,24 @@ You build maps with the **Map Editor** that comes with the game, and you ship th
 1. In the main menu, click **Map Editor**, then **New Map**. Shape the ground, paint it, place some trees.
 2. Open **Map settings** and fill in at least **Name of Location**. Save the map with **Save as...** and call it `my_airfield`.
 3. The editor writes `my_airfield.goamap` into the `Maps` folder inside your game data folder (the folder that also holds `Mods/`, see the table below).
-4. Copy that file into a mod:
+4. Copy that file into a mod with a `config.json`:
 
     ```text
     Mods/
       my_map_mod/
+        config.json
         Maps/
           my_airfield.goamap
     ```
 
 5. Open **Main menu → Mods** and press **Refresh** so the game finds the new mod folder, make sure **my_map_mod** is switched on, then start a new game. Your map is listed under **Custom maps**.
 
-That is a complete map mod. No `config.json` is needed, although you may add one (see [How mods work](../basics/mods.md)).
+That is a complete map mod. The `config.json` gives the mod its id and name, as every mod needs (see [How mods work](../basics/mods.md#configjson)).
 
 | Platform | Game data folder (holds `Mods/` and `Maps/`) |
 |---|---|
 | Windows | `%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\` |
 | macOS | `~/Library/Application Support/Blindflug Studios/Ground Of Aces/` |
-| Linux | `~/.config/unity3d/Blindflug Studios/Ground Of Aces/` |
 
 !!! tip
     Give the file a name nobody else will pick, for example with your mod's name in front: `my_map_mod_airfield.goamap`. The file name is the map's id (see [Map ids](#map-ids)).
@@ -191,4 +191,4 @@ The editor also writes keys such as `CreatedDatetime`, `ModifiedDatetime`, `AirC
 
 ### Sharing a map
 
-Your own maps can be uploaded to the Steam Workshop straight from the map list in the Map Editor, and whole mods from the Mods window. See [Steam Workshop](../sharing/workshop.md).
+Your own maps can be uploaded to the Steam Workshop straight from the map list in the Map Editor. You do not need to build a mod folder for that: the game creates the `config.json` for you when it uploads the map. A map that ships with missions, quests or other content goes up as a whole mod from the Mods window. See [Steam Workshop](../sharing/workshop.md).

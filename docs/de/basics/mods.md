@@ -7,15 +7,15 @@ Diese Seite behandelt, was alle Mods gemeinsam haben: wo sie liegen, wie das Spi
 ## Eine Mod in einer Minute { #a-mod-in-one-minute }
 
 1. Finde deinen `Mods`-Ordner: **Hauptmenü (Main menu) → Mods → Open folder**. Unter Windows ist das `%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Mods\`; die anderen Plattformen findest du [weiter unten](#where-mods-live).
-2. Leg darin einen Ordner an, zum Beispiel `my_mod`, und darin einen der Inhaltsordner: `CSV/`, `Missions/`, `Quests/`, `Maps/`, `Objects/`, `Biomes/` oder `Airplanes/`. Leg mindestens eine Datei hinein.
-3. Optional: Füge eine `config.json` mit Name und Id der Mod hinzu und eine `preview.png` (höchstens 1 MB) als Vorschaubild.
+2. Leg darin einen Ordner an, zum Beispiel `my_mod`, und leg eine `config.json` mit Name und Id der Mod hinein (siehe [unten](#configjson)).
+3. Leg im Mod-Ordner einen der Inhaltsordner an: `CSV/`, `Missions/`, `Quests/`, `Maps/`, `Objects/`, `Biomes/` oder `Airplanes/`. Leg mindestens eine Datei hinein. Optional kommt eine `preview.png` (höchstens 1 MB) als Vorschaubild dazu.
 4. Drück im Mods-Fenster auf **Refresh**, damit das Spiel den neuen Ordner bemerkt, und lade dann ein Level.
 5. Ab dann wird jede Änderung an einer Datei in der Mod beim nächsten Laden eines Levels übernommen. Nur Ersatzgrafik (`Objects/`, `Biomes/`) braucht einen Neustart des Spiels.
 
-Der Ordner darf beliebig heißen - `MyMod` funktioniert genauso wie `my_mod`. Nur die optionale `Id` in der `config.json` muss kleingeschrieben sein (`my_mod`, nicht `MyMod`). Stell jeder Id, die du dir ausdenkst, den Namen deiner Mod voran, damit du nie versehentlich etwas ersetzt.
+Der Ordner darf beliebig heißen - `MyMod` funktioniert genauso wie `my_mod`. Nur die `Id` in der `config.json` muss kleingeschrieben sein (`my_mod`, nicht `MyMod`). Stell jeder Id, die du dir ausdenkst, den Namen deiner Mod voran, damit du nie versehentlich etwas ersetzt.
 
 !!! tip
-    Wenn das deine erste Mod ist, führt der kürzeste Weg vom leeren Ordner zu einer sichtbaren Änderung über eine einzeilige Änderung an einer [CSV-Tabelle](../data/csv.md). Die [Anleitung zur ersten Mod](../start/first-mod.md) führt dich Schritt für Schritt hindurch.
+    Wenn das deine erste Mod ist, führt der kürzeste Weg vom leeren Ordner zu einer sichtbaren Änderung über eine einzeilige Änderung an einer [CSV-Tabelle](../data/csv.md). Die [Anleitung zur ersten Mod](first-mod.md) führt dich Schritt für Schritt hindurch.
 
 ## Wo Mods liegen { #where-mods-live }
 
@@ -31,14 +31,14 @@ Der Ordner wird beim ersten Spielstart angelegt. Am schnellsten erreichst du ihn
 
 ### Eine Mod ist ein Ordner { #one-mod-is-one-folder }
 
-Der Ordner darf heißen, wie du willst - `MyMod`, `my_mod` oder `My Campaign` funktionieren alle. Die Kleinschreibungsregel weiter unten gilt nur für die optionale `Id` in der `config.json`, nicht für den Ordner.
+Der Ordner darf heißen, wie du willst - `MyMod`, `my_mod` oder `My Campaign` funktionieren alle. Die Kleinschreibungsregel weiter unten gilt nur für die `Id` in der `config.json`, nicht für den Ordner.
 
 In deinem Mod-Ordner hat jede Art von Inhalt einen festen Unterordner. Es müssen nur die existieren, die du brauchst:
 
 ```text
 Mods/
   my_mod/
-    config.json        optional - name, id, load order
+    config.json        required - name, id, load order
     preview.png        optional - the picture shown in the Mods window and on the Workshop
     CSV/               data tables
     Missions/          mission .json files and Python .py scripts
@@ -71,7 +71,7 @@ Bei `CSV`, `Missions`, `Quests` und `Maps` werden nur Dateien gelesen, die direk
 
 ### `config.json`
 
-Optional. Ohne sie wird der Ordnername als Name der Mod angezeigt, die Id wird aus dem Ordnernamen gebildet, und die Ladereihenfolge ist 100.
+Pflicht. Jeder Mod-Ordner braucht eine `config.json` neben seinen Inhaltsordnern.
 
 ```json
 {

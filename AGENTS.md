@@ -50,7 +50,7 @@ Every skill in `.agents/skills/` follows this order. Use the matching skill when
 
 ```
 Mods/<mod_id>/
-  config.json        optional but recommended; "Name" is what the Mods screen shows
+  config.json        required; "Name" is what the Mods screen shows
   preview.png        optional; Workshop preview, PNG, max 1 MB, 512x512 recommended
   Missions/          mission .json + .py, event scripts, helper scripts (the ONLY script folder)
     Locations/       new mission locations, .json (the one subfolder that is read)
@@ -150,7 +150,7 @@ Reference: `docs/en/quests/index.md`. Templates: `templates/quest/`, `templates/
 - Step `_type` `3` and `15`, or any number not in the catalog, **never progress and log nothing**.
 - Types `0`, `1`, `21` need a number in `_parameter`; types `20`, `24` need their second token. Otherwise the game errors on every check and stalls other quests' steps too.
 - Types `12` and `17` need a skill or `any_skill_type`; a non-empty `12`/`13`/`17` filter needs at least one aircraft id. Progress counts **per aircraft**.
-- No spaces around commas in `_parameter`. `_cheatsOnStart` / `_completionCheats` are stripped from mod quests. A mod quest cannot give rewards.
+- No spaces around commas in `_parameter`. A mod quest cannot give rewards.
 - **Invalid quest JSON breaks loading the level.** Validate before every test.
 - To wait for one specific mission: `_type` `7`, `_parameter` `"airplane_on_mission_succeed,<mission_id>"`.
 

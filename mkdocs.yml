@@ -75,7 +75,8 @@ plugins:
           build: true
           nav_translations:
             Home: Start
-            Get started: Loslegen
+            Get started with AI modding: Loslegen mit KI-Modding
+            Your first mod: Dein erster Mod
             Basics: Grundlagen
             Missions: Missionen
             Quests: Quests
@@ -88,7 +89,7 @@ plugins:
             Examples: Beispiele
             Install on Windows: Installation unter Windows
             Install on Mac: Installation auf dem Mac
-            Your first mod in 10 minutes: Deine erste Mod in 10 Minuten
+            Your first AI mod in 10 minutes: Dein erster KI-Mod in 10 Minuten
             Without an AI agent: Ohne KI-Agent
             When nothing happens: Wenn nichts passiert
             Glossary: Glossar
@@ -122,8 +123,7 @@ plugins:
 # heading anchors on translations). Everything else is standard Markdown.
 markdown_extensions:
   - tables
-  - toc:
-      permalink: true
+  - toc
   - admonition
   - pymdownx.details
   - pymdownx.superfences
@@ -136,19 +136,15 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Get started:
-      - start/index.md
-      - Install on Windows: start/install-windows.md
-      - Install on Mac: start/install-mac.md
-      - Your first mod in 10 minutes: start/first-mod.md
-      - Without an AI agent: start/without-ai.md
-      - When nothing happens: start/troubleshooting.md
-      - Glossary: start/glossary.md
   - Basics:
+      - Your first mod: basics/first-mod.md
       - How mods work: basics/mods.md
       - Testing and reloading: basics/testing.md
       - Cheat console: basics/cheats.md
       - Python mods and safety: basics/security.md
+      - Without an AI agent: start/without-ai.md
+      - When nothing happens: start/troubleshooting.md
+      - Glossary: start/glossary.md
   - Missions:
       - missions/index.md
       - Write your first mission: missions/first-mission.md
@@ -176,6 +172,11 @@ nav:
           - Airplane skins: content/airplanes.md
   - Sharing:
       - Steam Workshop: sharing/workshop.md
+  - Get started with AI modding:
+      - start/index.md
+      - Install on Windows: start/install-windows.md
+      - Install on Mac: start/install-mac.md
+      - Your first AI mod in 10 minutes: start/first-mod.md
   - AI agents:
       - ai/index.md
       - Claude Code: ai/claude-code.md

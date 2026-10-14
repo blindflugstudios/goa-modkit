@@ -7,15 +7,15 @@ This page covers what every mod has in common: where it lives, how the game find
 ## A mod in one minute
 
 1. Find your `Mods` folder: **Main menu → Mods → Open folder**. On Windows that is `%USERPROFILE%\AppData\LocalLow\Blindflug Studios\Ground Of Aces\Mods\`; the other platforms are listed [below](#where-mods-live).
-2. Create a folder in it, for example `my_mod`, and inside it one of the content folders: `CSV/`, `Missions/`, `Quests/`, `Maps/`, `Objects/`, `Biomes/` or `Airplanes/`. Put at least one file in it.
-3. Optionally add a `config.json` with the mod's name and id, and a `preview.png` (at most 1 MB) as its picture.
+2. Create a folder in it, for example `my_mod`, and put a `config.json` with the mod's name and id in it (see [below](#configjson)).
+3. Inside the mod folder, create one of the content folders: `CSV/`, `Missions/`, `Quests/`, `Maps/`, `Objects/`, `Biomes/` or `Airplanes/`. Put at least one file in it. Optionally add a `preview.png` (at most 1 MB) as the mod's picture.
 4. Press **Refresh** in the Mods window so the game notices the new folder, then load a level.
 5. From then on, every change to a file inside the mod is picked up the next time you load a level. Only replacement art (`Objects/`, `Biomes/`) needs a restart of the game.
 
-The folder can have any name - `MyMod` works as well as `my_mod`. Only the optional `Id` inside `config.json` has to be lower-case (`my_mod`, not `MyMod`). Prefix every id you invent with your mod's name, so you never replace something by accident.
+The folder can have any name - `MyMod` works as well as `my_mod`. Only the `Id` inside `config.json` has to be lower-case (`my_mod`, not `MyMod`). Prefix every id you invent with your mod's name, so you never replace something by accident.
 
 !!! tip
-    If this is your first mod, the shortest path from an empty folder to a visible change is a one-line [CSV table](../data/csv.md) change. The [first mod walkthrough](../start/first-mod.md) takes you through it step by step.
+    If this is your first mod, the shortest path from an empty folder to a visible change is a one-line [CSV table](../data/csv.md) change. The [first mod walkthrough](first-mod.md) takes you through it step by step.
 
 ## Where mods live
 
@@ -31,14 +31,14 @@ The folder is created the first time the game starts. The quickest way to reach 
 
 ### One mod is one folder
 
-The folder can have any name you like - `MyMod`, `my_mod` or `My Campaign` all work. The lower-case rule further down applies only to the optional `Id` inside `config.json`, not to the folder.
+The folder can have any name you like - `MyMod`, `my_mod` or `My Campaign` all work. The lower-case rule further down applies only to the `Id` inside `config.json`, not to the folder.
 
 Inside your mod's folder, each kind of content has a fixed subfolder. Only the ones you need have to exist:
 
 ```text
 Mods/
   my_mod/
-    config.json        optional - name, id, load order
+    config.json        required - name, id, load order
     preview.png        optional - the picture shown in the Mods window and on the Workshop
     CSV/               data tables
     Missions/          mission .json files and Python .py scripts
@@ -71,7 +71,7 @@ For `CSV`, `Missions`, `Quests` and `Maps` only files directly inside the subfol
 
 ### `config.json`
 
-Optional. Without it, the folder name is shown as the mod's name, its id is made from the folder name, and the load order is 100.
+Required. Every mod folder needs a `config.json` next to its content folders.
 
 ```json
 {

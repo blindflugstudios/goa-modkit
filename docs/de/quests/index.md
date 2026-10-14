@@ -95,9 +95,7 @@ Die Titel sind **Lokalisierungsschlüssel**, kein Text - solange du sie nicht re
 | `_subQuests` | Die Schritte, in der Reihenfolge, in der sie in der Leiste stehen. Mindestens einer. |
 | `_requirements` | Wann die Quest vergeben wird - siehe [Wie eine Quest startet](#how-a-quest-starts). Kein Fortschritt. |
 | `_isHiddenInUI` | `true` blendet die Quest in der Leiste aus, während sie weiterläuft. Wird von den mitgelieferten Skin-Freischalt-Quests genutzt. |
-| `_questType` | `0` eine normale Quest, `1` eine Flugzeug-Skin-Quest, `2` eine Tutorial-Quest. Nimm `0` - siehe [Quest-Typen](#quest-types). |
-| `_highlightedUIElements` | Nur Tutorial-Quests: Buttons, auf die das Tutorial zeigt. Wird bei Typ `0` ignoriert. |
-| `_cheatsOnStart`, `_completionCheats` | Nur Tutorial-Quests, und **in jeder Mod-Quest ignoriert** - siehe [Quest-Typen](#quest-types). |
+| `_questType` | `0` eine normale Quest, `1` eine Flugzeug-Skin-Quest. Nimm `0` - siehe [Quest-Typen](#quest-types). |
 
 Felder, die du weglässt, bekommen ihren Standardwert: `false`, `0` oder leer. Zusätzliche Felder (die mitgelieferten Dateien enthalten ein `"Name"`, das das Spiel nicht mehr liest) werden ignoriert. Es gibt kein Tags-Feld: Quests hängen anders an Karten als Missionen, siehe [Quests und Karten](#quests-and-maps).
 
@@ -128,7 +126,7 @@ Jedes Textfeld einer Quest ist ein **Lokalisierungsschlüssel** - ein Name, den 
 
 Missionen können ihren Text direkt im JSON tragen. **Quests können das nicht** - es gibt keine Felder für Rohtext, und eine Quest hat kein eigenes Skript. Du hast zwei Möglichkeiten:
 
-**Einen mitgelieferten Schlüssel wiederverwenden.** Die Tutorial- und Hauptquests haben schon übersetzte Titel für Dinge wie "Baue eine Startbahn" oder "Bestelle ein Flugzeug". Öffne die passende mitgelieferte Quest und kopiere ihren Schlüssel. Das kostet nichts und ist in jede Sprache übersetzt, die das Spiel mitbringt, aber du bist auf Sätze beschränkt, die es schon gibt.
+**Einen mitgelieferten Schlüssel wiederverwenden.** Die Hauptquests haben schon übersetzte Titel für Dinge wie "Baue eine Startbahn" oder "Bestelle ein Flugzeug". Öffne die passende mitgelieferte Quest und kopiere ihren Schlüssel. Das kostet nichts und ist in jede Sprache übersetzt, die das Spiel mitbringt, aber du bist auf Sätze beschränkt, die es schon gibt.
 
 **Eigene Schlüssel aus einem Skript registrieren.** Eine `.py`-Datei im Ordner `Missions/` deiner Mod läuft beim Laden eines Levels, für jede aktivierte Mod, und ihre oberste Ebene kann Begriffe registrieren:
 
@@ -344,7 +342,7 @@ Ereignisse, die im normalen Spiel verfügbar sind, mit den Details, die jedes tr
 !!! warning "Ereignisse nur im Tutorial"
     Eine zweite Gruppe von Ereignissen gibt es **nur, solange das Tutorial läuft**: `camera_moved`, `camera_zoomed`, `camera_rotated`, `character_selected`, `task_created`, `tooltip_shown`, `preview_created`, `building_placed`, `state_entered`, `time_scale_changed`, `window_opened`, `character_job_assigned`, `day_phase_ended`, `plane_ordered`, `plane_selected`, `plane_assigned_to_mission`, `shipment_item_added`, `scramble_started`, `attack_finished`, `storage_resource_disabled`, `button_clicked`, `plane_back_from_mission`, `hour_changed`, `workbench_selected`, `project_planned`.
 
-    Die mitgelieferten Tutorial-Quests nutzen sie ausgiebig, was dazu verleitet, sie zu kopieren. Außerhalb des Tutorials sind sie abgeschaltet, und ein Schritt, der auf eines davon wartet, bewegt sich nie. Nimm lieber `building_finished` statt `building_placed` und `airplane_on_mission_succeed` statt `plane_back_from_mission`.
+    Außerhalb des Tutorials sind sie abgeschaltet, und ein Schritt, der auf eines davon wartet, bewegt sich nie. Nimm lieber `building_finished` statt `building_placed` und `airplane_on_mission_succeed` statt `plane_back_from_mission`.
 
 ### Ein Button auf der Quest-Karte { #a-button-on-the-quest-card }
 
@@ -413,19 +411,13 @@ Eine id in der Liste, für die es keine Quest-Datei gibt, wird im veröffentlich
 
 Um eine Quest zu ändern, die das Spiel mitbringt, leg eine Datei mit **demselben Namen** in den Ordner `Quests/` deiner Mod. Deine Kopie ersetzt die mitgelieferte vollständig, also starte mit einer vollständigen Kopie des Originals und ändere, was du brauchst: einen `_amount`, einen `_parameter`, einen Schritt optional machen, einen Schritt hinzufügen oder entfernen.
 
-Die mitgelieferten Dateien sind einfaches JSON im Installationsordner des Spiels, unter `Ground Of Aces_Data/StreamingAssets/Scripts/Quest/` (auf macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Scripts/Quest/`) - `quest0` bis `quest14`, die `tutorial_*`-Quests und die `*_skin_unlock`-Quests. Kopier sie von dort; bearbeite sie nie direkt, denn ein Spiel-Update überschreibt diesen Ordner. Die mitgelieferten Karten liegen gleich daneben in `StreamingAssets/Maps/` - dort findest du auch eine echte `Metadata.json` zum Anschauen.
+Die mitgelieferten Dateien sind einfaches JSON im Installationsordner des Spiels, unter `Ground Of Aces_Data/StreamingAssets/Scripts/Quest/` (auf macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Scripts/Quest/`) - `quest0` bis `quest14` und die `*_skin_unlock`-Quests. Kopier sie von dort; bearbeite sie nie direkt, denn ein Spiel-Update überschreibt diesen Ordner. Die mitgelieferten Karten liegen gleich daneben in `StreamingAssets/Maps/` - dort findest du auch eine echte `Metadata.json` zum Anschauen.
 
 Änderungen erreichen auch **bestehende Spielstände**. Beim Laden eines Spielstands wird jede Quest darin mit der aktuellen Datei verglichen: Schritt-Titel, Schritt-Beschreibungen, Bedingungstypen, Parameter und Mengen werden an Ort und Stelle aktualisiert, neue Schritte werden angehängt, entfernte Schritte gelöscht, und ein Schritt, dessen Fortschritt die neue Menge schon erreicht, wird sofort abgeschlossen. Schritte werden **nach Position** zugeordnet, ein Schritt in der Mitte verschiebt also in einem laufenden Spielstand die Bedeutung aller folgenden - häng neue Schritte ans Ende, wenn eine Quest schon im Umlauf ist. Nicht aktualisiert werden in einem laufenden Spielstand: `_questTitle`, `_questDescription` und `_isHiddenInUI` der Quest selbst sowie `_isOptional` und `_genericIconKey` eines Schritts - die werden festgelegt, wenn die Quest zum ersten Mal vergeben wird.
 
 ## Quest-Typen { #quest-types }
 
-`_questType: 0` ist eine normale Quest und genau die, die du willst. Die anderen beiden gibt es für die eigenen Inhalte des Spiels, und beide haben einen Haken.
-
-**Tutorial-Quests (`2`)** lassen zusätzlich die Tutorial-Hervorhebung nacheinander auf die Buttons in `_highlightedUIElements` zeigen und können Konsolenbefehle aus `_cheatsOnStart` und `_completionCheats` ausführen. In einer Mod gilt:
-
-- Die **Befehle werden entfernt**. Eine Mod-Quest mit einer dieser Listen lädt trotzdem, aber die Listen werden ignoriert (Entwickler-Builds schreiben eine Warnung ins [Log](../start/troubleshooting.md#find-the-playerlog)), und nichts wird ausgeführt.
-- Die Hervorhebungs-ids sind eine feste Liste im Spiel - die ids in den mitgelieferten Tutorial-Quests (`SawStation`, `Sickbed`, `ParkingSmall`, `CrewRoleDropdown`, ...) sind das Vokabular. Eine unbekannte id bewirkt nichts.
-- Die Ereignisse nur im Tutorial (siehe [Ereignisse](#events)) treten nur auf, solange das Tutorial selbst läuft, und das kann nur der Spieler einschalten (das Häkchen im Fenster für ein neues Spiel), keine Mod.
+`_questType: 0` ist eine normale Quest und genau die, die du willst. Den anderen Typ gibt es für die eigenen Inhalte des Spiels, und er hat einen Haken.
 
 **Flugzeug-Skin-Quests (`1`)** werden einmal pro Flugzeug angelegt, dessen Rolle oder id im `_parameter` des ersten Schritts steht, und die id des Flugzeugs wird an den Parameter jedes Schritts angehängt. Beim Abschluss schalten sie einen Skin frei - aber *welchen* Skin, steht in einer Tabelle im Spiel, die nach den mitgelieferten Quest-ids sortiert ist. Eine neue Quest dieses Typs schaltet also nichts frei.
 
@@ -493,10 +485,7 @@ Hier die verkettete Quest vollständig:
         }
     ],
     "_isHiddenInUI": false,
-    "_questType": 0,
-    "_highlightedUIElements": [],
-    "_cheatsOnStart": [],
-    "_completionCheats": []
+    "_questType": 0
 }
 ```
 
@@ -544,10 +533,7 @@ Und die kartengebundene:
     ],
     "_requirements": [],
     "_isHiddenInUI": false,
-    "_questType": 0,
-    "_highlightedUIElements": [],
-    "_cheatsOnStart": [],
-    "_completionCheats": []
+    "_questType": 0
 }
 ```
 
@@ -560,7 +546,6 @@ Auch die Quest-Dateien des Spiels selbst lohnen einen Blick: Sie zeigen, wie das
 | `quest0.json` | Die erste Quest der Hauptreihe: keine Bedingungen, sie startet also nur auf Karten, die sie in `StartingQuestIds` aufführen (oder gar keine Start-Quest nennen). Ihre Schritte sind die Typen mit gezähltem Zustand - eine Startbahn der Stufe 1, ein Parkplatz, eine Gladiator, Betten. |
 | `quest1.json` | Die zweite Quest, mit Bedingungstyp 1 an `quest0` gehängt. Sie mischt Event-Schritte (`harvesting_finished`, `project_finished`) mit einer Werkbank-Zählung und hat einen optionalen Schritt. |
 | `fighter_day_skin_unlock.json` | Eine Errungenschaft für eine Flugzeug-Lackierung: `_questType: 1`, im Quest-Panel versteckt, und die einzige Stelle, an der ein Rollenname (`fighter`) dort stehen darf, wo sonst eine Flugzeug-Id steht - siehe [Quest-Typen](#quest-types). |
-| `tutorial_building.json` | Eine Tutorial-Quest: `_questType: 2` mit `_highlightedUIElements`, die den Spieler auf die Oberfläche hinweisen, solange die Schritte offen sind. |
 
 ## Eine Quest testen { #testing-a-quest }
 
@@ -588,7 +573,7 @@ Mehr Tipps zum Testen: [Testen und neu laden](../basics/testing.md).
 - Jeder `_amount` ist mindestens 1.
 - Die Typen 0, 1 und 21 haben eine Zahl in `_parameter`; die Typen 20 und 24 haben ihren zweiten Teil.
 - Die Typen 12 und 17 enthalten eine Fähigkeit oder `any_skill_type`; jeder nicht leere Typ 12, 13 oder 17 enthält mindestens eine Flugzeug-**id**.
-- Kein Tutorial-Ereignis außerhalb eines Tutorials.
+- Kein Tutorial-Ereignis.
 - Kein `_requirementType: 2` oder `3`.
 - Jede Quest ohne Bedingung vom Typ 1 steht in den `StartingQuestIds` jeder Karte, auf der sie laufen soll.
 - Jeder Lokalisierungsschlüssel ist entweder ein mitgelieferter Schlüssel oder von deinem Skript registriert - lade das Spiel und schau in die Leiste.

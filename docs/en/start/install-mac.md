@@ -216,7 +216,7 @@ The first time:
 
 ## Done
 
-You are ready for [Your first mod in 10 minutes](first-mod.md).
+You are ready for [Your first AI mod in 10 minutes](first-mod.md).
 
 ## Keeping tools up to date
 

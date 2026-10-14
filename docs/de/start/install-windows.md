@@ -235,7 +235,7 @@ Beim ersten Mal:
 
 ## Fertig { #done }
 
-Du bist bereit für [Dein erster Mod in 10 Minuten](first-mod.md).
+Du bist bereit für [Dein erster KI-Mod in 10 Minuten](first-mod.md).
 
 ## Werkzeuge aktuell halten { #keeping-tools-up-to-date }
 

@@ -95,9 +95,7 @@ The titles are **localization keys**, not text - until you register them, the pl
 | `_subQuests` | The steps, in the order they are listed in the panel. At least one. |
 | `_requirements` | When the quest is handed out - see [How a quest starts](#how-a-quest-starts). Not progress. |
 | `_isHiddenInUI` | `true` hides the quest from the panel while it still runs. Used by the shipped skin-unlock quests. |
-| `_questType` | `0` a normal quest, `1` an aircraft-skin quest, `2` a tutorial quest. Use `0` - see [Quest types](#quest-types). |
-| `_highlightedUIElements` | Tutorial quests only: buttons the tutorial points at. Ignored for type `0`. |
-| `_cheatsOnStart`, `_completionCheats` | Tutorial quests only, and **ignored in every mod quest** - see [Quest types](#quest-types). |
+| `_questType` | `0` a normal quest, `1` an aircraft-skin quest. Use `0` - see [Quest types](#quest-types). |
 
 Fields you leave out take their default: `false`, `0`, or empty. Extra fields (the shipped files carry a `"Name"` the game no longer reads) are ignored. There is no tags field: quests are tied to maps differently from missions, see [Quests and maps](#quests-and-maps).
 
@@ -128,7 +126,7 @@ Every text field of a quest is a **localization key** - a name the game looks up
 
 Missions can carry their text directly in the JSON. **Quests cannot** - there are no raw-text fields, and a quest has no script of its own. You have two options:
 
-**Reuse a shipped key.** The tutorial and main-line quests already have translated titles for things like "Build an airstrip" or "Order an aircraft". Open the matching shipped quest and copy its key. This costs nothing and is translated into every language the game ships, but you are limited to sentences that already exist.
+**Reuse a shipped key.** The main-line quests already have translated titles for things like "Build an airstrip" or "Order an aircraft". Open the matching shipped quest and copy its key. This costs nothing and is translated into every language the game ships, but you are limited to sentences that already exist.
 
 **Register your own keys from a script.** A `.py` file in your mod's `Missions/` folder runs when a level loads, for every enabled mod, and its top level can register terms:
 
@@ -344,7 +342,7 @@ Events available in normal play, with the details each one carries:
 !!! warning "Tutorial-only events"
     A second group of events exists **only while the tutorial is running**: `camera_moved`, `camera_zoomed`, `camera_rotated`, `character_selected`, `task_created`, `tooltip_shown`, `preview_created`, `building_placed`, `state_entered`, `time_scale_changed`, `window_opened`, `character_job_assigned`, `day_phase_ended`, `plane_ordered`, `plane_selected`, `plane_assigned_to_mission`, `shipment_item_added`, `scramble_started`, `attack_finished`, `storage_resource_disabled`, `button_clicked`, `plane_back_from_mission`, `hour_changed`, `workbench_selected`, `project_planned`.
 
-    The shipped tutorial quests use them freely, which makes them tempting to copy. Outside the tutorial they are switched off and a step waiting for one never moves. Prefer `building_finished` over `building_placed`, and `airplane_on_mission_succeed` over `plane_back_from_mission`.
+    Outside the tutorial they are switched off and a step waiting for one never moves. Prefer `building_finished` over `building_placed`, and `airplane_on_mission_succeed` over `plane_back_from_mission`.
 
 ### A button on the quest card
 
@@ -413,19 +411,13 @@ An id in the list that no quest file provides is skipped without a message in th
 
 To change a quest the game ships with, drop a file with **the same name** into your mod's `Quests/`. Your copy replaces the shipped one entirely, so start from a full copy of the original and change what you need: an `_amount`, a `_parameter`, a step made optional, a step added or removed.
 
-The shipped files are plain JSON inside the game's installation folder, under `Ground Of Aces_Data/StreamingAssets/Scripts/Quest/` (on macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Scripts/Quest/`) - `quest0` to `quest14`, the `tutorial_*` quests and the `*_skin_unlock` quests. Copy from there; never edit them in place, because a game update overwrites that folder. The shipped maps sit nearby in `StreamingAssets/Maps/`, which is also the place to look at a real `Metadata.json`.
+The shipped files are plain JSON inside the game's installation folder, under `Ground Of Aces_Data/StreamingAssets/Scripts/Quest/` (on macOS: `Ground of Aces.app/Contents/Resources/Data/StreamingAssets/Scripts/Quest/`) - `quest0` to `quest14` and the `*_skin_unlock` quests. Copy from there; never edit them in place, because a game update overwrites that folder. The shipped maps sit nearby in `StreamingAssets/Maps/`, which is also the place to look at a real `Metadata.json`.
 
 Changes reach **existing saves** too. When a save is loaded, every quest already in it is compared with the current file: step titles, step descriptions, requirement types, parameters and amounts are updated in place, steps you added are appended, steps you removed are deleted, and a step whose progress already meets the new amount completes right away. Steps are matched **by position**, so inserting a step in the middle re-labels everything after it in a running save - append new steps at the end when a quest is already out in the wild. Not updated in a running save: the quest's own `_questTitle`, `_questDescription` and `_isHiddenInUI`, and a step's `_isOptional` and `_genericIconKey` - those are fixed when the quest is first handed out.
 
 ## Quest types
 
-`_questType: 0` is a normal quest and the one you want. The other two exist for the game's own content, and both come with strings attached.
-
-**Tutorial quests (`2`)** additionally point the tutorial highlight at the buttons listed in `_highlightedUIElements`, one after the other, and can run console commands from `_cheatsOnStart` and `_completionCheats`. In a mod:
-
-- The **commands are removed**. A mod quest with either list still loads, but the lists are ignored (development builds [log](../start/troubleshooting.md#find-the-playerlog) a warning) and nothing runs.
-- The highlight ids are a fixed list inside the game - the ids in the shipped tutorial quests (`SawStation`, `Sickbed`, `ParkingSmall`, `CrewRoleDropdown`, ...) are the vocabulary. An unknown id does nothing.
-- The tutorial-only events (see [Events](#events)) fire only while the tutorial itself is running, which only the player can switch on (the checkbox in the new-game window), not a mod.
+`_questType: 0` is a normal quest and the one you want. The other type exists for the game's own content and comes with strings attached.
 
 **Aircraft-skin quests (`1`)** are created once per aircraft whose role or id appears in the first step's `_parameter`, and the aircraft's id is appended to every step's parameter. On completion they unlock a skin - but *which* skin is a table inside the game keyed by the shipped quest ids, so a new quest of this type unlocks nothing.
 
@@ -493,10 +485,7 @@ Here is the chained quest in full:
         }
     ],
     "_isHiddenInUI": false,
-    "_questType": 0,
-    "_highlightedUIElements": [],
-    "_cheatsOnStart": [],
-    "_completionCheats": []
+    "_questType": 0
 }
 ```
 
@@ -544,10 +533,7 @@ And the map-bound one:
     ],
     "_requirements": [],
     "_isHiddenInUI": false,
-    "_questType": 0,
-    "_highlightedUIElements": [],
-    "_cheatsOnStart": [],
-    "_completionCheats": []
+    "_questType": 0
 }
 ```
 
@@ -560,7 +546,6 @@ The game's own quest files are worth reading too: they show what the real thing 
 | `quest0.json` | The first quest of the main line: no requirements, so it only starts on maps that list it in `StartingQuestIds` (or name no starting quest at all). Its steps are the counted-state types - an airstrip of tier 1, a parking spot, a Gladiator, beds. |
 | `quest1.json` | The second quest, chained on `quest0` with requirement type 1. It mixes event steps (`harvesting_finished`, `project_finished`) with a workbench count, and has an optional step. |
 | `fighter_day_skin_unlock.json` | An aircraft skin achievement: `_questType: 1`, hidden from the quest panel, and the only place where a role name (`fighter`) is allowed where an aircraft id normally goes - see [Quest types](#quest-types). |
-| `tutorial_building.json` | A tutorial quest: `_questType: 2` with `_highlightedUIElements` that point the player at the interface while the steps are open. |
 
 ## Testing a quest
 
@@ -588,7 +573,7 @@ More testing tips: [Testing and reloading](../basics/testing.md).
 - Every `_amount` is at least 1.
 - Types 0, 1 and 21 have a number in `_parameter`; types 20 and 24 have their second part.
 - Types 12 and 17 include a skill or `any_skill_type`; any of 12, 13, 17 that is not empty includes at least one aircraft **id**.
-- No tutorial-only event outside a tutorial.
+- No tutorial-only event.
 - No `_requirementType: 2` or `3`.
 - Every quest without a type-1 requirement is listed in the `StartingQuestIds` of each map it should run on.
 - Every localization key is either a shipped key or registered by your script - load the game and look at the panel.

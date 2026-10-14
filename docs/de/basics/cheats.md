@@ -37,8 +37,7 @@ Argumente in `[eckigen Klammern]` sind Platzhalter: Ersetze sie, ohne die Klamme
 | ★ | `create_mission [mission_id]` | Erstellt diese Mission sofort, sodass sie ohne Wartezeit auf der Kriegskarte erscheint. Antwortet mit `Unknown mission ID`, wenn das Spiel sie nicht geladen hat. | `create_mission coastal_patrol` |
 | ★ | `quest [quest_id]` | Startet die Quest mit dieser Id. | `quest quest3` |
 | ★ | `go_to_quest [quest_id]` | Schließt Quests nacheinander ab, bis diese Quest erreicht ist. | `go_to_quest quest5` |
-| ★ | `complete_current_quests` | Schließt die laufenden Quests ab (keine Tutorial- oder Skin-Quests). | `complete_current_quests` |
-| | `enable_tutorial [true/false]` | Schaltet das Tutorial ein oder aus. | `enable_tutorial false` |
+| ★ | `complete_current_quests` | Schließt die laufenden Quests ab (keine Skin-Quests). | `complete_current_quests` |
 | | `set_game_goals_visibility [ShowAll/ShowPriority/Minimized]` | Ändert, wie die Zielanzeige dargestellt wird. | `set_game_goals_visibility ShowAll` |
 
 ### Zeit und Tage { #time-and-days }
@@ -150,7 +149,7 @@ Nutze diese nur, wenn du weißt, warum. `enable_system` und `enable_input_action
 | | `enable_input_action [map/action] [true/false]` | Schaltet eine Eingabeaktion ein oder aus. | `enable_input_action Game/TimeScalePause false` |
 | | `enable_system [name] [true/false]` | Schaltet einen internen Spielprozess ein oder aus. | `enable_system [name] false` |
 
-## Ein typischer Testlauf { #a-typical-test-run }
+## Beispiele { #examples }
 
 ```text
 create_mission coastal_patrol

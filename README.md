@@ -26,7 +26,7 @@
 
 ## Start here
 
-- **Never programmed?** Follow [Get started](https://blindflugstudios.github.io/goa-modkit/start/). We install everything step by step, and ten minutes after that your first mod is in the game.
+- **Never programmed?** Follow [Your first mod](https://blindflugstudios.github.io/goa-modkit/basics/first-mod/). It takes five minutes and needs nothing but the game and a text editor. To let an AI agent build mods for you, continue with [Get started with AI modding](https://blindflugstudios.github.io/goa-modkit/start/).
 - **Know your way around files?** Pick one from [`examples/`](examples/), copy its files into `Mods/<your_mod>/Missions/` in the game's data folder, change them, and load your save again from the main menu. [Examples](https://blindflugstudios.github.io/goa-modkit/examples/) explains each one.
 - **Using an AI agent?** Claude Code, Codex, or the open-source [OpenCode](https://blindflugstudios.github.io/goa-modkit/ai/opencode/) (free to install; its AI models are mostly paid per use, the few free ones are limited-time and weaker).
 
