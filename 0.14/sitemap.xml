@@ -57,6 +57,13 @@
         <xhtml:link rel="alternate" hreflang="de" href="https://blindflugstudios.github.io/goa-modkit/0.14de/basics/cheats/"/>
     </url>
     <url>
+        <loc>https://blindflugstudios.github.io/goa-modkit/0.14/basics/first-mod/</loc>
+        <lastmod>2026-10-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://blindflugstudios.github.io/goa-modkit/0.14/basics/first-mod/"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://blindflugstudios.github.io/goa-modkit/0.14de/basics/first-mod/"/>
+    </url>
+    <url>
         <loc>https://blindflugstudios.github.io/goa-modkit/0.14/basics/mods/</loc>
         <lastmod>2026-10-14</lastmod>
         <changefreq>daily</changefreq>
@@ -314,6 +321,13 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="de" href="https://blindflugstudios.github.io/goa-modkit/0.14/de/basics/cheats/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://blindflugstudios.github.io/goa-modkit/0.14basics/cheats/"/>
+    </url>
+    <url>
+        <loc>https://blindflugstudios.github.io/goa-modkit/0.14/de/basics/first-mod/</loc>
+        <lastmod>2026-10-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="de" href="https://blindflugstudios.github.io/goa-modkit/0.14/de/basics/first-mod/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://blindflugstudios.github.io/goa-modkit/0.14basics/first-mod/"/>
     </url>
     <url>
         <loc>https://blindflugstudios.github.io/goa-modkit/0.14/de/basics/mods/</loc>
