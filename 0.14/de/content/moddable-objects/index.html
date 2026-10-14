@@ -1835,10 +1835,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#all-ids" class="md-nav__link">
+  <a href="#build-menu-objects" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Alle Ids
+        Objekte aus dem Baumenü
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#map-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kartenobjekte
       
     </span>
   </a>
@@ -2351,10 +2362,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#all-ids" class="md-nav__link">
+  <a href="#build-menu-objects" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Alle Ids
+        Objekte aus dem Baumenü
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#map-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kartenobjekte
       
     </span>
   </a>
@@ -2387,14 +2409,13 @@
 
 
 <h1 id="veranderbare-objekte">Veränderbare Objekte<a class="headerlink" href="#veranderbare-objekte" title="Permanent link">&para;</a></h1>
-<p>Das sind die Objekte, die du aus dem Baumenü platzierst (Requisiten, Werkbänke und Trainingsobjekte) und denen eine Mod ein neues Modell, neue Texturen und ein neues Symbol im Baumenü geben kann. Um eins zu ändern, benennst du eine Datei im Ordner <code>Objects/</code> deiner Mod nach seiner Id, zum Beispiel <code>Chair.glb</code> oder <code>Chair.thumbnail.png</code>. Wie die Dateinamen funktionieren, steht unter <a href="../objects/#file-names">Objekte und Modelle</a>.</p>
+<p>Das sind die Objekte, denen eine Mod ein neues Modell und neue Texturen geben kann: die, die du aus dem Baumenü platzierst (Requisiten, Werkbänke und Trainingsobjekte), die außerdem ein neues Symbol im Baumenü bekommen können, und die <a href="#map-objects">Kartenobjekte</a> wie Bäume und Felsen. Um eins zu ändern, benennst du eine Datei im Ordner <code>Objects/</code> deiner Mod nach seiner Id, zum Beispiel <code>Chair.glb</code> oder <code>Chair.thumbnail.png</code>. Wie die Dateinamen funktionieren, steht unter <a href="../objects/#file-names">Objekte und Modelle</a>.</p>
 <ul>
 <li>Bei den Ids spielt Groß- und Kleinschreibung keine Rolle: <code>chair.glb</code> funktioniert genauso wie <code>Chair.glb</code>.</li>
-<li>Welche eingebauten Texturen jedes Objekt verwendet, steht unter <a href="../texture-names/">Eingebaute Texturnamen</a>.</li>
-<li>Bäume, Felsen und die anderen Kartenobjekte stehen nicht in dieser Liste: Eine Mod kann sie noch nicht ändern.</li>
+<li>Welche eingebauten Texturen jedes Objekt verwendet, steht unter <a href="../texture-names/">Eingebaute Texturnamen</a>.
+Diese Liste stammt aus der vom Spiel erzeugten Liste der veränderbaren Objekte, Stand 2026-10-01, die Kartenobjekte Stand 2026-10-12.</li>
 </ul>
-<p>Diese Liste stammt aus der vom Spiel erzeugten Liste der veränderbaren Objekte, Stand 2026-10-01.</p>
-<h2 id="all-ids">Alle Ids<a class="headerlink" href="#all-ids" title="Permanent link">&para;</a></h2>
+<h2 id="build-menu-objects">Objekte aus dem Baumenü<a class="headerlink" href="#build-menu-objects" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2656,6 +2677,130 @@
 <td><code>Poster02</code></td>
 <td><code>ShootingSimpleTargetRange</code></td>
 <td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="map-objects">Kartenobjekte<a class="headerlink" href="#map-objects" title="Permanent link">&para;</a></h2>
+<p>Bäume, Felsen, Teiche und die anderen Objekte, die auf einer Karte platziert sind. Eine Datei, die nach der Id benannt ist, ändert jede Variante; <code>&lt;id&gt;.&lt;variant&gt;</code> ändert nur eine Variante, gezählt ab <code>0</code>. Für Kartenobjekte gelten ein paar eigene Regeln, siehe <a href="../objects/#map-objects">Kartenobjekte</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Id</th>
+<th>Varianten</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>berry_bush</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>bush</code></td>
+<td>6: <code>bush.0</code> bis <code>bush.5</code></td>
+</tr>
+<tr>
+<td><code>bush_big</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>clay_pit</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>damaged_car</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>flowers</code></td>
+<td>3: <code>flowers.0</code> bis <code>flowers.2</code></td>
+</tr>
+<tr>
+<td><code>herbs_plant</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>large_rock</code></td>
+<td>2: <code>large_rock.0</code> bis <code>large_rock.1</code></td>
+</tr>
+<tr>
+<td><code>long_rock</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>mushroom_patch</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>ocean</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>old_fence</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>old_fence_pole</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>old_grave</code></td>
+<td>2: <code>old_grave.0</code> bis <code>old_grave.1</code></td>
+</tr>
+<tr>
+<td><code>old_headstone</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>sand_pit</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>small_rock</code></td>
+<td>2: <code>small_rock.0</code> bis <code>small_rock.1</code></td>
+</tr>
+<tr>
+<td><code>tree</code></td>
+<td>5: <code>tree.0</code> bis <code>tree.4</code></td>
+</tr>
+<tr>
+<td><code>tree_big</code></td>
+<td>2: <code>tree_big.0</code> bis <code>tree_big.1</code></td>
+</tr>
+<tr>
+<td><code>tree_big_log</code></td>
+<td>2: <code>tree_big_log.0</code> bis <code>tree_big_log.1</code></td>
+</tr>
+<tr>
+<td><code>tree_big_stump</code></td>
+<td>2: <code>tree_big_stump.0</code> bis <code>tree_big_stump.1</code></td>
+</tr>
+<tr>
+<td><code>water_pond</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>wild_beans</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>wild_grain</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>wild_potato</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>wild_tomato</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>young_tree</code></td>
+<td>2: <code>young_tree.0</code> bis <code>young_tree.1</code></td>
+</tr>
+<tr>
+<td><code>young_tree_big</code></td>
+<td>2: <code>young_tree_big.0</code> bis <code>young_tree_big.1</code></td>
 </tr>
 </tbody>
 </table>

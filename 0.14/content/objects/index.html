@@ -1951,6 +1951,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#map-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#file-limits" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2661,6 +2672,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#map-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#file-limits" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2719,7 +2741,7 @@
 
 
 <h1 id="objects-and-models">Objects and models<a class="headerlink" href="#objects-and-models" title="Permanent link">&para;</a></h1>
-<p>Tired of the standard-issue barrel? A mod can give the game's objects a new look: furniture, fences, guns, signs, posters, workbenches and training equipment. You either drop in your own 3D model, or keep the game's model and paint it with a new texture. You can also give an object a new icon in the build menu.</p>
+<p>Tired of the standard-issue barrel? A mod can give the game's objects a new look: furniture, fences, guns, signs, posters, workbenches and training equipment, and the trees, rocks and ponds on the map. You either drop in your own 3D model, or keep the game's model and paint it with a new texture. You can also give an object a new icon in the build menu.</p>
 <p>Only the look changes. Size on the grid, cost, health, where crew stand to use it, and every other rule stay as the game defines them. Changing numbers is done with <a href="../../data/csv/">CSV tables</a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Example files</p>
@@ -2751,9 +2773,10 @@
 <h2 id="which-objects-can-be-changed">Which objects can be changed<a class="headerlink" href="#which-objects-can-be-changed" title="Permanent link">&para;</a></h2>
 <p>A model's <strong>file name</strong> is the id of the object it replaces. You can change the objects you place from the build menu, including workbenches and training objects, for example <code>Chair</code>, <code>FieldKitchen</code> or <code>ShootingSimpleTargetRange</code>. Every object you can change is listed in our <a href="https://airtable.com/appvUVR7eS3bq1S8f/shrKPxjhkGlHRUmpO">moddable objects table</a>, together with how we built it ourselves: material naming and usage, texture resolution, UDIM information and its destroyed view.</p>
 <p>Ids are matched without regard to capital letters, so <code>chair.fbx</code> changes the chair too.</p>
-<p>Only these objects can be re-dressed with <code>Objects/</code>. Trees, rocks and the other things placed on a map cannot be changed by a mod yet. Airplanes get new paint schemes another way: see <a href="../airplanes/">Airplane skins</a>. The ground is changed with <a href="../biomes/">biomes</a>.</p>
+<p>The trees, rocks, ponds and other things placed on a map can be changed the same way, for example <code>tree</code>, <code>sand_pit</code> or <code>large_rock</code>. They have a few rules of their own: see <a href="#map-objects">Map objects</a>. The id of every object you can change, map objects included, is on <a href="../moddable-objects/">Moddable objects</a>.</p>
+<p>Airplanes get new paint schemes another way: see <a href="../airplanes/">Airplane skins</a>. The ground is changed with <a href="../biomes/">biomes</a>.</p>
 <h2 id="file-names">File names<a class="headerlink" href="#file-names" title="Permanent link">&para;</a></h2>
-<p>Every file that belongs to one object is named <code>&lt;objectId&gt;</code>, <code>&lt;objectId&gt;.destroyed</code> or <code>&lt;objectId&gt;.thumbnail</code>, plus its extension:</p>
+<p>Every file that belongs to one object is named <code>&lt;objectId&gt;</code>, <code>&lt;objectId&gt;.destroyed</code> or <code>&lt;objectId&gt;.thumbnail</code>, plus its extension. A map object can also take a variant number: <code>&lt;objectId&gt;.&lt;variant&gt;</code>.</p>
 <table>
 <thead>
 <tr>
@@ -2774,10 +2797,23 @@
 <td><code>Chair.thumbnail.png</code></td>
 <td>the chair's icon in the build menu</td>
 </tr>
+<tr>
+<td><code>tree.glb</code></td>
+<td>every variant of the map object <code>tree</code> that has no file of its own</td>
+</tr>
+<tr>
+<td><code>tree.2.glb</code></td>
+<td>variant 2 of <code>tree</code> only</td>
+</tr>
 </tbody>
 </table>
 <ul>
-<li><strong>Models</strong> may be <code>.glb</code> (binary glTF) or <code>.fbx</code>. If both exist for the same object, the <code>.glb</code> is used and the <code>.fbx</code> is reported in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> as ignored.</li>
+<li>
+<p><strong>Variants</strong> belong to map objects only. They are counted from <code>0</code> and written without leading zeros: <code>tree.2</code>, never <code>tree.02</code>.</p>
+</li>
+<li>
+<p><strong>Models</strong> may be <code>.glb</code> (binary glTF) or <code>.fbx</code>. If both exist for the same object, the <code>.glb</code> is used and the <code>.fbx</code> is reported in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> as ignored.</p>
+</li>
 <li><strong>Blender's duplicate names</strong> such as <code>Chair.001.fbx</code> are refused. Rename the file before you copy it in.</li>
 <li><strong>A destroyed model</strong> is required. The game always shows an object's destroyed look, so every model you ship needs a <code>.destroyed</code> model next to it. The <a href="https://airtable.com/appvUVR7eS3bq1S8f/shrKPxjhkGlHRUmpO">moddable objects table</a> shows the destroyed view of each object.</li>
 <li><strong>Anything else</strong> in the folder that is not a model, a PNG or the <code>config.json</code> directly inside <code>Objects/</code> is reported in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a> and ignored.</li>
@@ -2789,7 +2825,8 @@
 <ul>
 <li><strong>Size and facing.</strong> Build the model at the game's scale, in metres, facing the same way as the game's own object. Your model is placed at the original object's origin and is not scaled to fit, so put its origin where the original has it, usually on the ground at the object's centre. An FBX is converted to Y-up and metres on import, and an FBX exported from Blender the usual way faces the same direction as the game's own art.</li>
 <li><strong>Only the look changes.</strong> The object's footprint on the grid, where crew stand to use it and what it bumps into all stay the game's. A model much larger than the original pokes through walls and neighbours.</li>
-<li><strong>Effects</strong> of the original object, such as a workbench's sawdust, keep playing on your model.</li>
+<li><strong>Levels of detail.</strong> Name the parts of your model <code>LOD0</code>, <code>LOD1</code>, <code>LOD2</code> and so on (<code>LOD1_Trunk</code> counts too) and the game switches between them at the same distances as the original object. With fewer levels than the original, your last one is kept until the object disappears. A model without <code>LOD</code> names looks the same at every distance. Levels only switch on objects that have them built in, such as trees; on any other object every <code>LOD</code> part is drawn at once, so give it a single level.</li>
+<li><strong>Effects</strong> of the original object, such as a workbench's sawdust or the leaves of a tree being felled, keep playing on your model.</li>
 <li><strong>Static models only.</strong> Animation in an FBX is not imported, and the game never animates a mod model.</li>
 <li><strong>At most 32 MB</strong> per model file. A larger file is skipped with a warning, and the object keeps its built-in look.</li>
 </ul>
@@ -2930,6 +2967,16 @@
 <li><strong>At most 512 × 512 pixels</strong>, and at most 10 MB. Each side counts on its own, so 512 × 256 is fine. A larger thumbnail is <strong>not scaled down</strong>: it is skipped with a warning in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a>, and the game's own icon stays.</li>
 <li>A thumbnail is only used <strong>next to a model with the same id</strong>. It cannot change the icon of an object your mod does not give a new model; a thumbnail on its own is reported and ignored.</li>
 <li>One thumbnail per object. A second file with the same name in another subfolder is ignored.</li>
+<li>Map objects are not in the build menu, and the Map Editor keeps the game's own icons, so a thumbnail for a map object is not used.</li>
+</ul>
+<h2 id="map-objects">Map objects<a class="headerlink" href="#map-objects" title="Permanent link">&para;</a></h2>
+<p>Trees, rocks, ponds and the other objects on a map get a new look like any other object: a file in <code>Objects/</code> named after the object's id. Every map object id, and how many variants each has, is on <a href="../moddable-objects/#map-objects">Moddable objects</a>. A few things work differently:</p>
+<ul>
+<li><strong>Variants.</strong> <code>flowers.glb</code> changes all three flower patches; <code>flowers.1.glb</code> only the second one. Variants can look quite different: <code>tree</code> covers the conifers and the broadleaf tree alike, and <code>tree.2</code> is the broadleaf one alone.</li>
+<li><strong>Every size of tree is an object of its own.</strong> <code>tree_big</code>, <code>young_tree</code>, <code>young_tree_big</code>, <code>tree_big_log</code> and <code>tree_big_stump</code> each need their own file. A young tree that grows up becomes a <code>tree</code> or a <code>tree_big</code> and from then on wears that object's look.</li>
+<li><strong>One look for full and empty.</strong> <code>sand_pit</code>, <code>clay_pit</code>, <code>water_pond</code>, <code>berry_bush</code>, <code>herbs_plant</code>, <code>wild_grain</code>, <code>wild_beans</code>, <code>wild_potato</code> and <code>wild_tomato</code> switch between a full and an empty model as your crew harvests them. Your model replaces both, so it looks the same however much is left.</li>
+<li><strong>Shared textures.</strong> Many map objects are painted from one shared texture. The sand pit, clay pit, pond, berry bush and others all use <code>T_PP_ResourceMap_O4</code>. <a href="#re-painting-without-a-model">Re-painting</a> a shared texture changes every object that uses it. To change one object alone, give it a model. Which textures each map object uses is on <a href="../texture-names/#map-objects">Built-in texture names</a>.</li>
+<li><strong>No <code>TerrainObjects/</code> folder.</strong> Map objects go into <code>Objects/</code> like everything else, and the subfolder name means nothing there: <code>Objects/sand_pit/model.fbx</code> is a model for an object called <code>model</code>. Name it <code>sand_pit.fbx</code>.</li>
 </ul>
 <h2 id="file-limits">File limits<a class="headerlink" href="#file-limits" title="Permanent link">&para;</a></h2>
 <p>Every file in <code>Objects/</code> and <code>Biomes/</code> is checked before it is loaded:</p>
@@ -2980,6 +3027,7 @@
 <li>For an FBX: are the textures shipped as PNGs in <code>Objects/</code>, named after the material or the image the material uses?</li>
 </ul>
 <p>The game writes what it refused and why (a wrong name, a missing texture, an image that is too big) to <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>, on lines that start with <code>[Mod &lt;your mod id&gt;]</code>. The detailed lines may only appear in development builds, so if the log is silent, check the list above and look at the object in the game.</p>
+<p>A model named after an id that does not exist (<code>sandpit.fbx</code> instead of <code>sand_pit.fbx</code>) is loaded but never used, and nothing in the log says so. When an object does get your model, the log has a line like <code>[Mod my_mod] Objects/sand_pit: replaced 2 built-in renderer(s) on the regular view with ...</code> once the first one appears in the game. If there is no such line, check the file name against <a href="../moddable-objects/">Moddable objects</a>.</p>
 
 
 

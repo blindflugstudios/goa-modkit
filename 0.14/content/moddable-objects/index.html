@@ -1835,10 +1835,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#all-ids" class="md-nav__link">
+  <a href="#build-menu-objects" class="md-nav__link">
     <span class="md-ellipsis">
       
-        All ids
+        Build menu objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#map-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map objects
       
     </span>
   </a>
@@ -2351,10 +2362,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#all-ids" class="md-nav__link">
+  <a href="#build-menu-objects" class="md-nav__link">
     <span class="md-ellipsis">
       
-        All ids
+        Build menu objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#map-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map objects
       
     </span>
   </a>
@@ -2387,14 +2409,13 @@
 
 
 <h1 id="moddable-objects">Moddable objects<a class="headerlink" href="#moddable-objects" title="Permanent link">&para;</a></h1>
-<p>These are the objects you place from the build menu (props, workbenches and training objects) that a mod can give a new model, new textures and a new build-menu icon. To change one, name a file in your mod's <code>Objects/</code> folder after its id, for example <code>Chair.glb</code> or <code>Chair.thumbnail.png</code>. How the file names work is explained on <a href="../objects/#file-names">Objects and models</a>.</p>
+<p>These are the objects a mod can give a new model and new textures: the ones you place from the build menu (props, workbenches and training objects), which can also get a new build-menu icon, and the <a href="#map-objects">map objects</a> such as trees and rocks. To change one, name a file in your mod's <code>Objects/</code> folder after its id, for example <code>Chair.glb</code> or <code>Chair.thumbnail.png</code>. How the file names work is explained on <a href="../objects/#file-names">Objects and models</a>.</p>
 <ul>
 <li>Ids are matched without regard to capital letters: <code>chair.glb</code> works as well as <code>Chair.glb</code>.</li>
-<li>The built-in textures each object uses are listed on <a href="../texture-names/">Built-in texture names</a>.</li>
-<li>Trees, rocks and the other map objects are not in this list: a mod cannot change them yet.</li>
+<li>The built-in textures each object uses are listed on <a href="../texture-names/">Built-in texture names</a>.
+This list was taken from the game's generated list of moddable objects on 2026-10-01, and the map objects on 2026-10-12.</li>
 </ul>
-<p>This list was taken from the game's generated list of moddable objects on 2026-10-01.</p>
-<h2 id="all-ids">All ids<a class="headerlink" href="#all-ids" title="Permanent link">&para;</a></h2>
+<h2 id="build-menu-objects">Build menu objects<a class="headerlink" href="#build-menu-objects" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2656,6 +2677,130 @@
 <td><code>Poster02</code></td>
 <td><code>ShootingSimpleTargetRange</code></td>
 <td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="map-objects">Map objects<a class="headerlink" href="#map-objects" title="Permanent link">&para;</a></h2>
+<p>Trees, rocks, ponds and the other objects placed on a map. A file named after the id changes every variant; <code>&lt;id&gt;.&lt;variant&gt;</code> changes one variant alone, counted from <code>0</code>. Map objects have a few rules of their own, see <a href="../objects/#map-objects">Map objects</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Id</th>
+<th>Variants</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>berry_bush</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>bush</code></td>
+<td>6: <code>bush.0</code> to <code>bush.5</code></td>
+</tr>
+<tr>
+<td><code>bush_big</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>clay_pit</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>damaged_car</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>flowers</code></td>
+<td>3: <code>flowers.0</code> to <code>flowers.2</code></td>
+</tr>
+<tr>
+<td><code>herbs_plant</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>large_rock</code></td>
+<td>2: <code>large_rock.0</code> to <code>large_rock.1</code></td>
+</tr>
+<tr>
+<td><code>long_rock</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>mushroom_patch</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>ocean</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>old_fence</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>old_fence_pole</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>old_grave</code></td>
+<td>2: <code>old_grave.0</code> to <code>old_grave.1</code></td>
+</tr>
+<tr>
+<td><code>old_headstone</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>sand_pit</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>small_rock</code></td>
+<td>2: <code>small_rock.0</code> to <code>small_rock.1</code></td>
+</tr>
+<tr>
+<td><code>tree</code></td>
+<td>5: <code>tree.0</code> to <code>tree.4</code></td>
+</tr>
+<tr>
+<td><code>tree_big</code></td>
+<td>2: <code>tree_big.0</code> to <code>tree_big.1</code></td>
+</tr>
+<tr>
+<td><code>tree_big_log</code></td>
+<td>2: <code>tree_big_log.0</code> to <code>tree_big_log.1</code></td>
+</tr>
+<tr>
+<td><code>tree_big_stump</code></td>
+<td>2: <code>tree_big_stump.0</code> to <code>tree_big_stump.1</code></td>
+</tr>
+<tr>
+<td><code>water_pond</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>wild_beans</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>wild_grain</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>wild_potato</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>wild_tomato</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>young_tree</code></td>
+<td>2: <code>young_tree.0</code> to <code>young_tree.1</code></td>
+</tr>
+<tr>
+<td><code>young_tree_big</code></td>
+<td>2: <code>young_tree_big.0</code> to <code>young_tree_big.1</code></td>
 </tr>
 </tbody>
 </table>

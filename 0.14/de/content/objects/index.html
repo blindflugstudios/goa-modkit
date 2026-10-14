@@ -1951,6 +1951,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#map-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kartenobjekte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#file-limits" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2661,6 +2672,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#map-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kartenobjekte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#file-limits" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2719,7 +2741,7 @@
 
 
 <h1 id="objekte-und-modelle">Objekte und Modelle<a class="headerlink" href="#objekte-und-modelle" title="Permanent link">&para;</a></h1>
-<p>Genug vom Standardfass? Eine Mod kann den Objekten des Spiels einen neuen Look geben: Möbeln, Zäunen, Geschützen, Schildern, Postern, Werkbänken und Trainingsgeräten. Entweder legst du ein eigenes 3D-Modell hinein, oder du behältst das Modell des Spiels und bemalst es mit einer neuen Textur. Außerdem kannst du einem Objekt ein neues Symbol im Baumenü geben.</p>
+<p>Genug vom Standardfass? Eine Mod kann den Objekten des Spiels einen neuen Look geben: Möbeln, Zäunen, Geschützen, Schildern, Postern, Werkbänken und Trainingsgeräten, und auch den Bäumen, Felsen und Teichen auf der Karte. Entweder legst du ein eigenes 3D-Modell hinein, oder du behältst das Modell des Spiels und bemalst es mit einer neuen Textur. Außerdem kannst du einem Objekt ein neues Symbol im Baumenü geben.</p>
 <p>Nur das Aussehen ändert sich. Größe im Raster, Kosten, Lebenspunkte, wo die Mannschaft steht, um es zu benutzen, und alle anderen Regeln bleiben so, wie das Spiel sie festlegt. Zahlen änderst du mit <a href="../../data/csv/">CSV-Tabellen</a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Beispieldateien</p>
@@ -2751,9 +2773,10 @@
 <h2 id="which-objects-can-be-changed">Welche Objekte sich ändern lassen<a class="headerlink" href="#which-objects-can-be-changed" title="Permanent link">&para;</a></h2>
 <p>Der <strong>Dateiname</strong> eines Modells ist die Id des Objekts, das es ersetzt. Du kannst die Objekte ändern, die du aus dem Baumenü platzierst, auch Werkbänke und Trainingsobjekte, zum Beispiel <code>Chair</code>, <code>FieldKitchen</code> oder <code>ShootingSimpleTargetRange</code>. Jedes Objekt, das du ändern kannst, steht in unserer <a href="https://airtable.com/appvUVR7eS3bq1S8f/shrKPxjhkGlHRUmpO">Tabelle der veränderbaren Objekte</a>, zusammen mit dem, wie wir es selbst gebaut haben: Benennung und Verwendung der Materialien, Texturauflösung, UDIM-Angaben und seine zerstörte Ansicht.</p>
 <p>Bei den Ids spielt Groß- und Kleinschreibung keine Rolle, <code>chair.fbx</code> ändert also auch den Stuhl.</p>
-<p>Mit <code>Objects/</code> lassen sich nur diese Objekte neu gestalten. Bäume, Felsen und die anderen Dinge, die auf einer Karte platziert sind, kann eine Mod noch nicht ändern. Flugzeuge bekommen neue Lackierungen auf anderem Weg: siehe <a href="../airplanes/">Flugzeug-Skins</a>. Den Boden änderst du mit <a href="../biomes/">Biomen</a>.</p>
+<p>Die Bäume, Felsen, Teiche und anderen Dinge, die auf einer Karte platziert sind, änderst du auf dieselbe Weise, zum Beispiel <code>tree</code>, <code>sand_pit</code> oder <code>large_rock</code>. Für sie gelten ein paar eigene Regeln: siehe <a href="#map-objects">Kartenobjekte</a>. Die Id jedes Objekts, das du ändern kannst, Kartenobjekte eingeschlossen, steht unter <a href="../moddable-objects/">Veränderbare Objekte</a>.</p>
+<p>Flugzeuge bekommen neue Lackierungen auf anderem Weg: siehe <a href="../airplanes/">Flugzeug-Skins</a>. Den Boden änderst du mit <a href="../biomes/">Biomen</a>.</p>
 <h2 id="file-names">Dateinamen<a class="headerlink" href="#file-names" title="Permanent link">&para;</a></h2>
-<p>Jede Datei, die zu einem Objekt gehört, heißt <code>&lt;objectId&gt;</code>, <code>&lt;objectId&gt;.destroyed</code> oder <code>&lt;objectId&gt;.thumbnail</code>, plus Dateiendung:</p>
+<p>Jede Datei, die zu einem Objekt gehört, heißt <code>&lt;objectId&gt;</code>, <code>&lt;objectId&gt;.destroyed</code> oder <code>&lt;objectId&gt;.thumbnail</code>, plus Dateiendung. Ein Kartenobjekt kann zusätzlich eine Variantennummer tragen: <code>&lt;objectId&gt;.&lt;variant&gt;</code>.</p>
 <table>
 <thead>
 <tr>
@@ -2774,10 +2797,23 @@
 <td><code>Chair.thumbnail.png</code></td>
 <td>das Symbol des Stuhls im Baumenü</td>
 </tr>
+<tr>
+<td><code>tree.glb</code></td>
+<td>jede Variante des Kartenobjekts <code>tree</code>, die keine eigene Datei hat</td>
+</tr>
+<tr>
+<td><code>tree.2.glb</code></td>
+<td>nur Variante 2 von <code>tree</code></td>
+</tr>
 </tbody>
 </table>
 <ul>
-<li><strong>Modelle</strong> dürfen <code>.glb</code> (binäres glTF) oder <code>.fbx</code> sein. Gibt es beide für dasselbe Objekt, wird die <code>.glb</code> verwendet und die <code>.fbx</code> im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> als ignoriert gemeldet.</li>
+<li>
+<p><strong>Varianten</strong> gibt es nur bei Kartenobjekten. Sie werden ab <code>0</code> gezählt und ohne führende Nullen geschrieben: <code>tree.2</code>, nie <code>tree.02</code>.</p>
+</li>
+<li>
+<p><strong>Modelle</strong> dürfen <code>.glb</code> (binäres glTF) oder <code>.fbx</code> sein. Gibt es beide für dasselbe Objekt, wird die <code>.glb</code> verwendet und die <code>.fbx</code> im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> als ignoriert gemeldet.</p>
+</li>
 <li><strong>Blenders Duplikatnamen</strong> wie <code>Chair.001.fbx</code> werden abgelehnt. Benenne die Datei um, bevor du sie hineinkopierst.</li>
 <li><strong>Ein zerstörtes Modell</strong> ist Pflicht. Das Spiel zeigt immer den zerstörten Look eines Objekts, deshalb braucht jedes Modell, das du mitlieferst, ein <code>.destroyed</code>-Modell daneben. Die <a href="https://airtable.com/appvUVR7eS3bq1S8f/shrKPxjhkGlHRUmpO">Tabelle der veränderbaren Objekte</a> zeigt die zerstörte Ansicht jedes Objekts.</li>
 <li><strong>Alles andere</strong> im Ordner, das weder Modell noch PNG noch die <code>config.json</code> direkt in <code>Objects/</code> ist, wird im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> gemeldet und ignoriert.</li>
@@ -2789,7 +2825,8 @@
 <ul>
 <li><strong>Größe und Ausrichtung.</strong> Baue das Modell im Maßstab des Spiels, in Metern, und in dieselbe Richtung ausgerichtet wie das Objekt des Spiels. Dein Modell wird auf den Ursprung des Originals gesetzt und nicht passend skaliert, setze seinen Ursprung also dorthin, wo ihn das Original hat, meist auf den Boden in die Mitte des Objekts. Eine FBX wird beim Einlesen auf Y nach oben und Meter umgerechnet, und eine auf dem üblichen Weg aus Blender exportierte FBX schaut in dieselbe Richtung wie die Grafik des Spiels.</li>
 <li><strong>Nur das Aussehen ändert sich.</strong> Die Grundfläche des Objekts im Raster, wo die Mannschaft steht, um es zu benutzen, und womit es zusammenstößt, bleiben die des Spiels. Ein Modell, das viel größer ist als das Original, ragt durch Wände und Nachbarn.</li>
-<li><strong>Effekte</strong> des Originals, etwa das Sägemehl einer Werkbank, laufen auf deinem Modell weiter.</li>
+<li><strong>Detailstufen.</strong> Nenne die Teile deines Modells <code>LOD0</code>, <code>LOD1</code>, <code>LOD2</code> und so weiter (<code>LOD1_Trunk</code> zählt auch), dann wechselt das Spiel bei denselben Entfernungen zwischen ihnen wie beim Original. Hast du weniger Stufen als das Original, bleibt deine letzte stehen, bis das Objekt verschwindet. Ein Modell ohne <code>LOD</code>-Namen sieht auf jede Entfernung gleich aus. Stufen wechseln nur bei Objekten, die selbst welche haben, etwa Bäumen; bei jedem anderen Objekt werden alle <code>LOD</code>-Teile gleichzeitig gezeichnet, gib ihm also nur eine Stufe.</li>
+<li><strong>Effekte</strong> des Originals, etwa das Sägemehl einer Werkbank oder die Blätter eines Baums, der gefällt wird, laufen auf deinem Modell weiter.</li>
 <li><strong>Nur unbewegte Modelle.</strong> Animationen in einer FBX werden nicht eingelesen, und das Spiel animiert ein Mod-Modell nie.</li>
 <li><strong>Höchstens 32 MB</strong> pro Modelldatei. Eine größere Datei wird mit einer Warnung übersprungen, und das Objekt behält seinen eingebauten Look.</li>
 </ul>
@@ -2930,6 +2967,16 @@
 <li><strong>Höchstens 512 × 512 Pixel</strong> und höchstens 10 MB. Jede Seite zählt für sich, 512 × 256 geht also. Ein größeres Vorschaubild wird <strong>nicht verkleinert</strong>: Es wird mit einer Warnung im <a href="../../start/troubleshooting/#find-the-playerlog">Log</a> übersprungen, und das Symbol des Spiels bleibt.</li>
 <li>Ein Vorschaubild wird nur <strong>neben einem Modell mit derselben Id</strong> verwendet. Es kann nicht das Symbol eines Objekts ändern, dem deine Mod kein neues Modell gibt; ein Vorschaubild allein wird gemeldet und ignoriert.</li>
 <li>Ein Vorschaubild pro Objekt. Eine zweite Datei mit demselben Namen in einem anderen Unterordner wird ignoriert.</li>
+<li>Kartenobjekte stehen nicht im Baumenü, und der Karteneditor behält die Symbole des Spiels. Ein Vorschaubild für ein Kartenobjekt wird deshalb nicht verwendet.</li>
+</ul>
+<h2 id="map-objects">Kartenobjekte<a class="headerlink" href="#map-objects" title="Permanent link">&para;</a></h2>
+<p>Bäume, Felsen, Teiche und die anderen Objekte auf einer Karte bekommen einen neuen Look wie jedes andere Objekt: mit einer Datei in <code>Objects/</code>, die nach der Id des Objekts benannt ist. Jede Id eines Kartenobjekts und wie viele Varianten es hat, steht unter <a href="../moddable-objects/#map-objects">Veränderbare Objekte</a>. Ein paar Dinge laufen anders:</p>
+<ul>
+<li><strong>Varianten.</strong> <code>flowers.glb</code> ändert alle drei Blumenbeete, <code>flowers.1.glb</code> nur das zweite. Varianten können ganz verschieden aussehen: <code>tree</code> umfasst die Nadelbäume und den Laubbaum gleichermaßen, und <code>tree.2</code> ist nur der Laubbaum.</li>
+<li><strong>Jede Baumgröße ist ein eigenes Objekt.</strong> <code>tree_big</code>, <code>young_tree</code>, <code>young_tree_big</code>, <code>tree_big_log</code> und <code>tree_big_stump</code> brauchen jeweils eine eigene Datei. Ein junger Baum, der heranwächst, wird zu einem <code>tree</code> oder <code>tree_big</code> und trägt ab dann den Look dieses Objekts.</li>
+<li><strong>Ein Look für voll und leer.</strong> <code>sand_pit</code>, <code>clay_pit</code>, <code>water_pond</code>, <code>berry_bush</code>, <code>herbs_plant</code>, <code>wild_grain</code>, <code>wild_beans</code>, <code>wild_potato</code> und <code>wild_tomato</code> wechseln zwischen einem vollen und einem leeren Modell, während deine Mannschaft sie aberntet. Dein Modell ersetzt beide, es sieht also gleich aus, egal wie viel noch übrig ist.</li>
+<li><strong>Geteilte Texturen.</strong> Viele Kartenobjekte sind mit einer gemeinsamen Textur bemalt. Sandgrube, Lehmgrube, Teich, Beerenstrauch und andere verwenden alle <code>T_PP_ResourceMap_O4</code>. Wenn du eine geteilte Textur <a href="#re-painting-without-a-model">übermalst</a>, änderst du jedes Objekt, das sie verwendet. Um nur ein Objekt zu ändern, gib ihm ein Modell. Welche Texturen jedes Kartenobjekt verwendet, steht unter <a href="../texture-names/#map-objects">Eingebaute Texturnamen</a>.</li>
+<li><strong>Kein Ordner <code>TerrainObjects/</code>.</strong> Kartenobjekte kommen wie alles andere in <code>Objects/</code>, und der Name des Unterordners bedeutet dort nichts: <code>Objects/sand_pit/model.fbx</code> ist ein Modell für ein Objekt namens <code>model</code>. Nenne es <code>sand_pit.fbx</code>.</li>
 </ul>
 <h2 id="file-limits">Dateigrenzen<a class="headerlink" href="#file-limits" title="Permanent link">&para;</a></h2>
 <p>Jede Datei in <code>Objects/</code> und <code>Biomes/</code> wird geprüft, bevor sie geladen wird:</p>
@@ -2980,6 +3027,7 @@
 <li>Bei einer FBX: Liegen die Texturen als PNGs in <code>Objects/</code>, benannt nach dem Material oder nach dem Bild, das das Material verwendet?</li>
 </ul>
 <p>Das Spiel schreibt, was es abgelehnt hat und warum (ein falscher Name, eine fehlende Textur, ein zu großes Bild), in die <a href="../../start/troubleshooting/#find-the-playerlog"><code>Player.log</code></a>, in Zeilen, die mit <code>[Mod &lt;your mod id&gt;]</code> beginnen. Die ausführlichen Zeilen erscheinen eventuell nur in Entwicklungsversionen. Ist das Log still, geh die Liste oben durch und schau dir das Objekt im Spiel an.</p>
+<p>Ein Modell, das nach einer Id benannt ist, die es nicht gibt (<code>sandpit.fbx</code> statt <code>sand_pit.fbx</code>), wird geladen, aber nie verwendet, und im Log steht nichts dazu. Bekommt ein Objekt dein Modell, steht im Log eine Zeile wie <code>[Mod my_mod] Objects/sand_pit: replaced 2 built-in renderer(s) on the regular view with ...</code>, sobald das erste davon im Spiel auftaucht. Fehlt diese Zeile, prüfe den Dateinamen anhand von <a href="../moddable-objects/">Veränderbare Objekte</a>.</p>
 
 
 
