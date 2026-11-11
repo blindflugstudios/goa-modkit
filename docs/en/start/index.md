@@ -12,16 +12,6 @@ The modkit is a download that holds:
 
 A mod made with the modkit is the same folder of files as one made by hand. The examples and the validator are useful without an AI too: see [Without an AI agent](without-ai.md).
 
-## Get access first { #get-access-first }
-
-During the developer preview the modkit is private. These pages are open to everyone; the download is not. To get it, email your
-**GitHub username** to [jan@blindflugstudios.com](mailto:jan@blindflugstudios.com) or
-[moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com) (no GitHub account yet? The
-install pages show how to make one - it is free). You will get an invitation email from GitHub;
-accept it, and the download step on the install pages works. GitHub asks you to switch on
-**two-factor authentication** before you can accept - the install pages walk you through it. Without the invitation, GitHub
-answers "Could not resolve to a Repository".
-
 ## What you need
 
 - **Ground of Aces** on Steam, on Windows or Mac.

@@ -12,16 +12,6 @@ Das Modkit ist ein Download. Darin sind:
 
 Ein Mod aus dem Modkit ist derselbe Ordner mit Dateien wie einer von Hand. Die Beispiele und der Validator helfen auch ohne KI: siehe [Ohne KI-Agent](without-ai.md).
 
-## Zuerst Zugang holen { #get-access-first }
-
-Während der Developer Preview ist das Modkit privat. Diese Seiten kann jeder lesen, den Download nicht. Um ihn zu bekommen, schick deinen
-**GitHub-Benutzernamen** per Mail an [jan@blindflugstudios.com](mailto:jan@blindflugstudios.com)
-oder [moritz@blindflugstudios.com](mailto:moritz@blindflugstudios.com) (noch kein GitHub-Konto?
-Die Installationsseiten zeigen, wie du eins anlegst - es ist kostenlos). Du bekommst dann eine
-Einladung von GitHub per Mail; nimm sie an, und der Download-Schritt auf den Installationsseiten
-funktioniert. Vor dem Annehmen verlangt GitHub, dass du die **Zwei-Faktor-Anmeldung**
-einschaltest - die Installationsseiten führen dich durch. Ohne Einladung antwortet GitHub mit "Could not resolve to a Repository".
-
 ## Was du brauchst { #what-you-need }
 
 - **Ground of Aces** auf Steam, unter Windows oder auf dem Mac.
