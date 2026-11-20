@@ -1,0 +1,21 @@
+{
+  "Airplanes": {
+    "Bf109": {
+      "BasedOn": "spitfire",
+      "Name": "Captured Bf 109",
+      "FullName": "Messerschmitt Bf 109 E (captured)",
+      "ShortName": "Bf 109",
+      "Manufacturer": "Messerschmitt AG",
+      "Armament": "2 x 7.92 mm MG 17, 2 x 20 mm MG FF",
+      "MaximumSpeed": "570 km/h",
+      "Engine": "Daimler-Benz DB 601 A",
+      "Range": "660 km",
+      "Ceiling": "10,500 m",
+      "Dimensions": "8.8 m long, 9.9 m wingspan",
+      "Stats": {
+        "Health": "90"
+      },
+      "CrewSlots": [[0.45, 0.48]]
+    }
+  }
+}

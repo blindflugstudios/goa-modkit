@@ -1,4 +1,4 @@
-# Flugzeug-Skins
+# Flugzeug-Skins und neue Flugzeuge
 
 Eine Lackierung (Skin) ist ein neuer Anstrich für ein Flugzeug, das es im Spiel schon gibt. Das Modell bleibt genau gleich; deine Mod bringt nur neue Bilder mit, die darauf gemalt werden. Du malst also auf das vorhandene UV-Layout des Flugzeugs (die flache Abwicklung, die festlegt, welcher Teil des Bildes wo auf dem Modell landet), dasselbe, das auch die eingebauten Lackierungen nutzen.
 
@@ -141,11 +141,88 @@ Diese Ids trägst du bei `Airplane` ein. Die zweite Spalte ist die erste Lackier
 | `typhoon` | `Hawker-Typhoon_MK01B_Day-Fighter_Toon-UDIM` |
 | `vampire` | `DeHavilland-Vampire_MK01_Day-Fighter_Toon-Opaque` |
 
+## Neue Flugzeuge { #new-airplanes }
+
+Eine Mod kann auch einen ganz neuen Flugzeugtyp hinzufügen: mit eigenem Modell, eigener Lackierung, eigenem Namen, eigenen Werten und eigener Zeichnung im Crew-Fenster. Jedes neue Flugzeug ist **an eines der Flugzeuge des Spiels angelehnt** und übernimmt von diesem alles, was du ihm nicht mitgibst: Werte, Besatzung, Absturzanimation, das Aussehen im Scramble-Ergebnis und die Seriennummern-Blöcke. Mitgeben musst du nur das Modell.
+
+!!! tip "Beispiel-Mod"
+    `examples/airplane_captured_bf109` fügt eine erbeutete Bf 109 hinzu, angelehnt an die Spitfire. Kopiere sie in deinen Ordner `Mods/`, um ein vollständiges neues Flugzeug im Spiel zu sehen.
+
+### Der Ordner des Flugzeugs { #the-airplanes-own-folder }
+
+Jedes neue Flugzeug bekommt in `Airplanes/` einen Ordner, der nach der Id des Flugzeugs heißt:
+
+```text
+Mods/
+  my_mod/
+    Airplanes/
+      config.json
+      Bf109/
+        Bf109.fbx                 Pflicht - das Modell (.fbx oder .glb)
+        Bf109.destroyed.fbx       optional - das Wrack
+        Bf109_BaseMap_1001.png    optional - die Lackierung, weitere Kacheln und Specular wie bei einem Skin
+        Bf109.thumbnail.png       optional - das Bild im Bestellfenster und in den Flugzeuglisten
+        Bf109.blueprint.png       optional - die Zeichnung im Crew-Fenster
+```
+
+Ohne Lackierung zeigt das Modell die erste Lackierung des Vorbilds; ohne Wrack wird das Wrack des Vorbilds verwendet; ohne Vorschaubild oder Zeichnung werden die des Vorbilds gezeigt.
+
+### `config.json` { #airplane-configjson }
+
+Neue Flugzeuge stehen unter `Airplanes` in derselben `Airplanes/config.json` wie deine Lackierungen:
+
+```json
+{
+  "Airplanes": {
+    "Bf109": {
+      "BasedOn": "spitfire",
+      "Name": "Captured Bf 109",
+      "FullName": "Messerschmitt Bf 109 E (captured)",
+      "Stats": { "Health": "90" },
+      "CrewSlots": [[0.45, 0.48]]
+    }
+  }
+}
+```
+
+| Schlüssel | Pflicht | Was er bewirkt |
+|---|---|---|
+| `BasedOn` | ja | Das Flugzeug des Spiels, an das das neue angelehnt ist. Eine Id aus den [Flugzeug-Ids](#airplane-ids). |
+| `Name` | nein | Der Name, den das Spiel zeigt. Ein Text für alle Sprachen. Ohne ihn wird die Id des Flugzeugs gezeigt. |
+| `FullName`, `ShortName` | nein | Langer und kurzer Name, gezeigt im Bestell- und im Crew-Fenster. Ohne sie wird `Name` verwendet. |
+| `Manufacturer`, `Armament`, `MaximumSpeed`, `Engine`, `Range`, `Ceiling`, `Dimensions` | nein | Die Angaben, die das Bestellfenster auflistet. Ohne Angabe leer. |
+| `Stats` | nein | Werte, die vom Vorbild abweichen, mit den Spaltennamen der Flugzeugtabelle des Spiels als Schlüssel (`Health`, `Crew`, `Fuel Capacity`, ...). Die Werte sind Text: `"Health": "90"`, `"Crew": "Pilot,Gunner"`. |
+| `CrewSlots` | nein | Wo der Platz jedes Besatzungsmitglieds auf der Zeichnung liegt, in Besatzungsreihenfolge, als `[x, y]`-Anteile der Zeichnung: `[0, 0]` ist die Ecke unten links, `[1, 1]` die oben rechts. Plätze, die du weglässt, werden in der Mitte verteilt. |
+
+Auch eine Lackierung kann für dein neues Flugzeug gelten: Schreib die Id des Flugzeugs aus `Airplanes` (hier `Bf109`) als `Airplane` der Lackierung.
+
+### Die Teile des Modells benennen { #naming-the-parts-of-the-model }
+
+Das Spiel findet die Teile deines Modells über die Namen der Knoten. Groß- und Kleinschreibung, `-`, `_`, `.` und Leerzeichen spielen keine Rolle, `Air-Pivot`, `air_pivot` und `AirPivot` sind also dasselbe. Die Flugzeuge des Spiels verwenden genau diese Namen, du kannst dir also eines in deinem 3D-Programm ansehen.
+
+| Knotenname | Was das Spiel damit macht | Ohne ihn |
+|---|---|---|
+| `Air-Pivot` | Der Teil, der sich im Flug neigt. Hänge alles darunter, was sich mit dem Flugzeug bewegt. | Dein Modell neigt sich mit dem Pivot des Vorbilds. |
+| `Propeller-Pivot` (einer pro Propeller, z. B. `Propeller-Left-Pivot`) | Dreht sich um seine eigene Vorwärtsachse, solange der Motor läuft. | Kein Propeller dreht sich. |
+| `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | Aus der Stelle, an der sie den Boden berühren, wird der Winkel berechnet, in dem das Flugzeug am Boden steht. | Der Winkel des Vorbilds wird verwendet. |
+| `1-Interaction-Pilot`, `2-Interaction-Gunner`, ... | Die Sitze der Besatzung, in der Reihenfolge der vorangestellten Zahl. | Die Sitze des Vorbilds. |
+| `Interaction-Paint` | Wo die Crew steht, um das Flugzeug zu lackieren und zu betanken. | Die Stelle des Vorbilds. |
+| `FireEmitter` | Das Mesh, auf dem Feuer brennt. | Das größte Teil direkt unter `Air-Pivot`, das weder Glas noch Innenraum ist. |
+
+- **Größe und Ausrichtung.** Baue das Flugzeug in Metern in seiner echten Größe, am Ursprung auf dem Boden stehend, wie die Flugzeuge des Spiels. In welche Richtung die Nase zeigt, ist egal, wenn das Modell einen Knoten `Propeller...` und einen Knoten `Wheel-Tail` hat: Ein Flugzeug, dessen Propeller hinter dem Spornrad liegt, wird umgedreht.
+- **Das Fahrwerk** bleibt ausgefahren. Animationen in der Modelldatei werden noch nicht abgespielt.
+- **Markierungs-Decals** (Staffelkennungen, Kokarden) werden auf neue Flugzeuge nicht gezeichnet; male die Markierungen in deine Textur.
+
+### Wo ein neues Flugzeug auftaucht { #where-a-new-airplane-shows-up }
+
+Das Spiel kennt ein neues Flugzeug als `mod_<modId>_<id>`, in Kleinbuchstaben: Die `Bf109` der Mod `captured_bf109` ist `mod_captured_bf109_bf109`. Es ist von Anfang an freigeschaltet, erscheint im Bestellfenster und ist bei Absturzstellen, im Crew-Fenster und bei Scrambles dabei wie jedes andere Flugzeug. Quests und Promo-Codes kennen es nicht.
+
 ## Spielstände und ausgeschaltete Mods { #saves-and-disabled-mods }
 
 Das Spiel speichert eine Mod-Lackierung unter der Id `mod_<modId>_<skinId>`, in Kleinbuchstaben. Dein `DesertRat` in der Mod `my_mod` wird also als `mod_my_mod_desertrat` gespeichert. Weil die Mod-Id darin steckt, kommen sich zwei Mods nie in die Quere, und deine Skin-Id braucht kein eigenes Präfix.
 
 - Nennt ein Spielstand eine Lackierung, deren Mod nicht mehr eingeschaltet ist, bekommt das Flugzeug wieder seine erste Lackierung, und die Lackierung verschwindet aus den Standard- und Zufallseinstellungen der Flotte.
+- Enthält ein Spielstand ein neues Flugzeug, dessen Mod nicht mehr eingeschaltet ist, wird daraus das Flugzeug, an das es angelehnt war. Schaltest du die Mod später wieder ein, wird es nicht zurückverwandelt.
 - Szenen, die ein Flugzeug außerhalb deines Stützpunkts zeigen, also das Abfangen beim Scramble und Absturzstellen, zeigen das eingebaute Aussehen des Flugzeugs. Das gilt genauso für die eingebauten Lackierungen.
 
 ## Änderungen sehen { #seeing-your-changes }

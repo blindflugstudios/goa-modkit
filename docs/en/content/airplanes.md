@@ -1,4 +1,4 @@
-# Airplane skins
+# Airplane skins and new airplanes
 
 A skin is a new paint scheme for an airplane the game already has. The model stays exactly the same; your mod only brings new pictures that are painted onto it. So you paint on the airplane's existing UV layout (the flat map that says which part of the picture lands where on the model), the same one the built-in skins use.
 
@@ -141,11 +141,88 @@ Use these ids for `Airplane`. The second column is the airplane's first skin, wh
 | `typhoon` | `Hawker-Typhoon_MK01B_Day-Fighter_Toon-UDIM` |
 | `vampire` | `DeHavilland-Vampire_MK01_Day-Fighter_Toon-Opaque` |
 
+## New airplanes
+
+A mod can also add a whole new airplane type: its own model, paint, name, stats and crew window drawing. Each new airplane is **based on** one of the game's airplanes and copies everything you do not give it from that airplane: stats, crew, crash animation, the look in the scramble result and the serial number blocks. The only thing you must give is the model.
+
+!!! tip "Example mod"
+    `examples/airplane_captured_bf109` adds a captured Bf 109 based on the Spitfire. Copy it into your `Mods/` folder to see a complete new airplane in the game.
+
+### The airplane's folder
+
+Every new airplane gets a folder inside `Airplanes/`, named after the airplane's id:
+
+```text
+Mods/
+  my_mod/
+    Airplanes/
+      config.json
+      Bf109/
+        Bf109.fbx                 required - the model (.fbx or .glb)
+        Bf109.destroyed.fbx       optional - the wreck
+        Bf109_BaseMap_1001.png    optional - the paint, more tiles and specular like a skin
+        Bf109.thumbnail.png       optional - the picture in the order window and the airplane lists
+        Bf109.blueprint.png       optional - the drawing in the crew window
+```
+
+Without a paint the model shows the based-on airplane's first skin; without a wreck, the based-on airplane's wreck is used; without a thumbnail or a blueprint, the based-on airplane's are shown.
+
+### `config.json`
+
+New airplanes go under `Airplanes` in the same `Airplanes/config.json` as your skins:
+
+```json
+{
+  "Airplanes": {
+    "Bf109": {
+      "BasedOn": "spitfire",
+      "Name": "Captured Bf 109",
+      "FullName": "Messerschmitt Bf 109 E (captured)",
+      "Stats": { "Health": "90" },
+      "CrewSlots": [[0.45, 0.48]]
+    }
+  }
+}
+```
+
+| Key | Required | What it does |
+|---|---|---|
+| `BasedOn` | yes | The game's airplane the new one copies. An id from [Airplane ids](#airplane-ids). |
+| `Name` | no | The name the game shows. One text for all languages. Without it, the airplane's id is shown. |
+| `FullName`, `ShortName` | no | Longer and shorter name, shown in the order window and the crew window. Without them, `Name` is used. |
+| `Manufacturer`, `Armament`, `MaximumSpeed`, `Engine`, `Range`, `Ceiling`, `Dimensions` | no | The details the order window lists. Empty when left out. |
+| `Stats` | no | Stats that differ from the based-on airplane, keyed by the column names of the game's airplane table (`Health`, `Crew`, `Fuel Capacity`, ...). Values are text: `"Health": "90"`, `"Crew": "Pilot,Gunner"`. |
+| `CrewSlots` | no | Where each crew member's slot sits on the blueprint, in crew order, as `[x, y]` fractions of the drawing: `[0, 0]` is the bottom left corner, `[1, 1]` the top right. Slots you leave out are spread across the middle. |
+
+A skin may be painted on your new airplane too: write the airplane's id from `Airplanes` (here `Bf109`) as the skin's `Airplane`.
+
+### Naming the parts of the model
+
+The game finds the parts of your model by their node names. Capital letters, `-`, `_`, `.` and spaces do not matter, so `Air-Pivot`, `air_pivot` and `AirPivot` are the same. The game's own airplanes use exactly these names, so you can look at one in your 3D program.
+
+| Node name | What the game does with it | Without it |
+|---|---|---|
+| `Air-Pivot` | The part that tilts in flight. Put everything that moves with the airplane under it. | Your model tilts with the based-on airplane's pivot. |
+| `Propeller-Pivot` (one per propeller, e.g. `Propeller-Left-Pivot`) | Spins around its own forward axis while the engine runs. | No propeller spins. |
+| `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | The angle the airplane rests at on the ground is worked out from where these touch the ground. | The based-on airplane's angle is used. |
+| `1-Interaction-Pilot`, `2-Interaction-Gunner`, ... | The crew seats, in the order of the number in front. | The based-on airplane's seats. |
+| `Interaction-Paint` | Where the crew stand to paint and refuel the airplane. | The based-on airplane's spot. |
+| `FireEmitter` | The mesh fire burns on. | The largest part directly under `Air-Pivot` that is not glass or the inside. |
+
+- **Size and facing.** Build the airplane in metres at its real size, standing on the ground at the origin, like the game's own airplanes. Which way the nose points does not matter if the model has a `Propeller...` node and a `Wheel-Tail` node: an airplane whose propeller sits behind its tail wheel is turned around.
+- **Landing gear** stays down. Animations in the model file are not played yet.
+- **Marking decals** (squadron codes, roundels) are not drawn on new airplanes; paint the markings into your texture.
+
+### Where a new airplane shows up
+
+The game knows a new airplane as `mod_<modId>_<id>`, in lower case: the `Bf109` of the mod `captured_bf109` is `mod_captured_bf109_bf109`. It is unlocked from the start, appears in the order window, and is part of crash sites, the crew window and scrambles like any other airplane. Quests and promo codes do not know it.
+
 ## Saves and disabled mods
 
 The game saves a mod skin under the id `mod_<modId>_<skinId>`, in lower case. Your `DesertRat` in the mod `my_mod` is saved as `mod_my_mod_desertrat`. Because the mod id is part of it, two mods never clash, and your skin id needs no prefix of its own.
 
 - When a save names a skin whose mod is no longer switched on, the airplane falls back to its first skin, and the skin disappears from the fleet's default and randomize settings.
+- When a save holds a new airplane whose mod is no longer switched on, the airplane becomes the airplane it was based on. Switching the mod back on later does not turn it back.
 - Scenes that show an airplane away from your base, the scramble interception and crash sites, show the airplane's built-in look. That is the same for the built-in skins.
 
 ## Seeing your changes
