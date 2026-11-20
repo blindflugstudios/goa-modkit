@@ -145,8 +145,8 @@ Diese Ids trägst du bei `Airplane` ein. Die zweite Spalte ist die erste Lackier
 
 Eine Mod kann auch einen ganz neuen Flugzeugtyp hinzufügen: mit eigenem Modell, eigener Lackierung, eigenem Namen, eigenen Werten und eigener Zeichnung im Crew-Fenster. Jedes neue Flugzeug ist **an eines der Flugzeuge des Spiels angelehnt** und übernimmt von diesem alles, was du ihm nicht mitgibst: Werte, Besatzung, Absturzanimation, das Aussehen im Scramble-Ergebnis und die Seriennummern-Blöcke. Mitgeben musst du nur das Modell.
 
-!!! tip "Beispiel-Mod"
-    `examples/airplane_captured_bf109` fügt eine erbeutete Bf 109 hinzu, angelehnt an die Spitfire. Kopiere sie in deinen Ordner `Mods/`, um ein vollständiges neues Flugzeug im Spiel zu sehen.
+!!! tip "Beispiel-Mods"
+    `examples/airplane_captured_bf109` fügt einen erbeuteten Jäger Bf 109 hinzu, angelehnt an die Spitfire. `examples/airplane_captured_he111` fügt einen erbeuteten Bomber He 111 hinzu, angelehnt an die Stirling, mit zwei Propellern und einer fünfköpfigen Besatzung, die `Crew` und `CrewSlots` festlegen. Kopiere eine davon in deinen Ordner `Mods/`, um ein vollständiges neues Flugzeug im Spiel zu sehen.
 
 ### Der Ordner des Flugzeugs { #the-airplanes-own-folder }
 
@@ -165,7 +165,7 @@ Mods/
         Bf109.blueprint.png       optional - die Zeichnung im Crew-Fenster
 ```
 
-Ohne Lackierung zeigt das Modell die erste Lackierung des Vorbilds; ohne Wrack wird das Wrack des Vorbilds verwendet; ohne Vorschaubild oder Zeichnung werden die des Vorbilds gezeigt.
+Ohne Lackierung zeigt das Modell die erste Lackierung des Vorbilds; ohne Wrack wird das Wrack des Vorbilds verwendet; ohne Vorschaubild oder Zeichnung werden die des Vorbilds gezeigt. Das Vorschaubild darf höchstens 512 × 512 Pixel und 10 MB groß sein; ein größeres wird mit einer Warnung im [Log](../start/troubleshooting.md#find-the-playerlog) übersprungen, und das Bild des Vorbilds wird gezeigt.
 
 ### `config.json` { #airplane-configjson }
 

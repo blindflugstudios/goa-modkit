@@ -145,8 +145,8 @@ Use these ids for `Airplane`. The second column is the airplane's first skin, wh
 
 A mod can also add a whole new airplane type: its own model, paint, name, stats and crew window drawing. Each new airplane is **based on** one of the game's airplanes and copies everything you do not give it from that airplane: stats, crew, crash animation, the look in the scramble result and the serial number blocks. The only thing you must give is the model.
 
-!!! tip "Example mod"
-    `examples/airplane_captured_bf109` adds a captured Bf 109 based on the Spitfire. Copy it into your `Mods/` folder to see a complete new airplane in the game.
+!!! tip "Example mods"
+    `examples/airplane_captured_bf109` adds a captured Bf 109 fighter based on the Spitfire. `examples/airplane_captured_he111` adds a captured He 111 bomber based on the Stirling, with two propellers and a crew of five set through `Crew` and `CrewSlots`. Copy one into your `Mods/` folder to see a complete new airplane in the game.
 
 ### The airplane's folder
 
@@ -165,7 +165,7 @@ Mods/
         Bf109.blueprint.png       optional - the drawing in the crew window
 ```
 
-Without a paint the model shows the based-on airplane's first skin; without a wreck, the based-on airplane's wreck is used; without a thumbnail or a blueprint, the based-on airplane's are shown.
+Without a paint the model shows the based-on airplane's first skin; without a wreck, the based-on airplane's wreck is used; without a thumbnail or a blueprint, the based-on airplane's are shown. The thumbnail may be at most 512 × 512 pixels and 10 MB; a larger one is skipped with a warning in the [log](../start/troubleshooting.md#find-the-playerlog) and the based-on airplane's picture is shown.
 
 ### `config.json`
 
