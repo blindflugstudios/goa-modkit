@@ -109,7 +109,7 @@ plugins:
             Maps: Karten
             Objects and models: Objekte und Modelle
             Biomes: Biome
-            Airplane skins: Flugzeug-Skins
+            Skins: Skins
             New airplanes (in progress): Neue Flugzeuge (in Arbeit)
             Moddable objects: Veränderbare Objekte
             Built-in texture names: Eingebaute Texturnamen
@@ -170,7 +170,7 @@ nav:
       - Built-in texture names: content/texture-names.md
       - Biomes: content/biomes.md
       - Airplanes:
-          - Airplane skins: content/airplanes.md
+          - Skins: content/airplanes.md
           - New airplanes (in progress): content/new-airplanes.md
   - Sharing:
       - Steam Workshop: sharing/workshop.md
