@@ -32,10 +32,12 @@ The node names in `He111.fbx` tell the game which part is which. The game's own 
 | `Propeller-Left-Pivot`, `Propeller-Right-Pivot` | One per engine; each spins when the engines run. |
 | `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | The angle the airplane rests at on the ground is worked out from them. |
 | `1-Interaction-Pilot` ... `5-Interaction-Gunner` | The five crew seats, in the order of the number in front. |
-| `Interaction-Paint` | Where the crew stand to paint and refuel the airplane. |
+| `Interaction-Paint` | Where the crew stand to paint and refuel the airplane: on the ground below it, facing the fuselage. |
 | `He111-Mesh` | The largest part, so fire burns on it. |
 
 The model and the wreck were made from the game's placeholder He 111; they are rough on purpose. The placeholder flies with its main gear retracted, so the main wheels are simple added cylinders. Replace them with your own and keep the names.
+
+The model has no effect points and no marking points yet. Its effects (wheel dust, smoke, sparks, explosion) sit where the Stirling has them, and it shows no marking decals: its crosses are painted into the texture. The Stirling has no wing trails, so neither does this airplane. To place the effects and markings on your model, add `Effect-...` and `Marking-<Port|Starboard>-<slot>` nodes; the airplanes page of the docs lists them.
 
 ## Based on and crew
 

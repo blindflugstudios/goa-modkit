@@ -141,14 +141,14 @@ Use these ids for `Airplane`. The second column is the airplane's first skin, wh
 | `typhoon` | `Hawker-Typhoon_MK01B_Day-Fighter_Toon-UDIM` |
 | `vampire` | `DeHavilland-Vampire_MK01_Day-Fighter_Toon-Opaque` |
 
-## New airplanes
+## New airplanes (in progress) { #new-airplanes }
 
 A mod can also add a whole new airplane type: its own model, paint, name, stats and crew window drawing. Each new airplane is **based on** one of the game's airplanes and copies everything you do not give it from that airplane: stats, crew, crash animation, the look in the scramble result and the serial number blocks. The only thing you must give is the model.
 
 !!! tip "Example mods"
     `examples/airplane_captured_bf109` adds a captured Bf 109 fighter based on the Spitfire. `examples/airplane_captured_he111` adds a captured He 111 bomber based on the Stirling, with two propellers and a crew of five set through `Crew` and `CrewSlots`. Copy one into your `Mods/` folder to see a complete new airplane in the game.
 
-### The airplane's folder
+### The airplane's folder { #the-airplanes-own-folder }
 
 Every new airplane gets a folder inside `Airplanes/`, named after the airplane's id:
 
@@ -167,7 +167,7 @@ Mods/
 
 Without a paint the model shows the based-on airplane's first skin; without a wreck, the based-on airplane's wreck is used; without a thumbnail or a blueprint, the based-on airplane's are shown. The thumbnail may be at most 512 × 512 pixels and 10 MB; a larger one is skipped with a warning in the [log](../start/troubleshooting.md#find-the-playerlog) and the based-on airplane's picture is shown.
 
-### `config.json`
+### `config.json` { #airplane-configjson }
 
 New airplanes go under `Airplanes` in the same `Airplanes/config.json` as your skins:
 
@@ -206,12 +206,52 @@ The game finds the parts of your model by their node names. Capital letters, `-`
 | `Propeller-Pivot` (one per propeller, e.g. `Propeller-Left-Pivot`) | Spins around its own forward axis while the engine runs. | No propeller spins. |
 | `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | The angle the airplane rests at on the ground is worked out from where these touch the ground. | The based-on airplane's angle is used. |
 | `1-Interaction-Pilot`, `2-Interaction-Gunner`, ... | The crew seats, in the order of the number in front. | The based-on airplane's seats. |
-| `Interaction-Paint` | Where the crew stand to paint and refuel the airplane. | The based-on airplane's spot. |
+| `Interaction-Paint` | Where the crew stand to paint and refuel the airplane. Put it beside the fuselage. Only its spot on the ground counts: the crew stand on the ground below it, facing the fuselage, however far the airplane tilts back on its wheels when parked. Its height and rotation do not matter. | The based-on airplane's spot. |
 | `FireEmitter` | The mesh fire burns on. | The largest part directly under `Air-Pivot` that is not glass or the inside. |
 
 - **Size and facing.** Build the airplane in metres at its real size, standing on the ground at the origin, like the game's own airplanes. Which way the nose points does not matter if the model has a `Propeller...` node and a `Wheel-Tail` node: an airplane whose propeller sits behind its tail wheel is turned around.
-- **Landing gear** stays down. Animations in the model file are not played yet.
-- **Marking decals** (squadron codes, roundels) are not drawn on new airplanes; paint the markings into your texture.
+- **Landing gear.** A retractable gear needs one animation (take) in the model file that keys only the gear parts. Its first frame is the gear down, as modelled; its last frame is the gear fully up. The game holds the take between the two by the airplane's height: down on the ground, up from 10 m. Do not key the propellers or `Air-Pivot`; the game moves them itself. Fixed gear: no animation.
+- **Marking decals** (squadron codes, roundels, serial number) show only where your model has marking points, see [Marking points](#marking-points).
+
+### Effect points
+
+The airplane's effects come from the based-on airplane, and they sit where they sit on that airplane. On a model of a different size, wheel dust ends up beside the wheels and smoke away from the engine. Put an empty node (no mesh) in your model at each spot where an effect belongs and name it as below; the game moves the effect there. All of them are optional: an effect without a point stays where the based-on airplane has it. Only the position counts, so the node's rotation and its place in the hierarchy do not matter: the effects always move with `Air-Pivot`.
+
+| Node name | Effect | When it shows | One or many |
+|---|---|---|---|
+| `Effect-WheelDust-...` (e.g. `Effect-WheelDust-Left`, `-Right`, `-Tail`) | Dust thrown up by a wheel. Put it where the tyre touches the ground. | While the airplane rolls on the ground. | One per point |
+| `Effect-WingTrail-...` (e.g. `Effect-WingTrail-Left`, `-Right`) | The thin trail behind a wing tip. | In flight. | One per point |
+| `Effect-Exhaust-...` | Jet engine exhaust. Put it at the nozzle. Only shows when the based-on airplane is a jet (`meteor`, `vampire`). | While the engine runs. | One per point |
+| `Effect-Sparks` | Sparks of a damaged airplane. | Below half health. | One |
+| `Effect-Smoke` | Smoke from a hit engine. | On a landing with a smoking engine. | One |
+| `Effect-SmokeTrail` | A thick smoke trail. | While the airplane is disabled. | One |
+| `Effect-Explosion` | The explosion of a crash. Put it on the ground in front of the airplane. | When the airplane crashes on landing or while being moved. | One |
+| `Effect-FireSmoke` | The smoke above a burning airplane. | While the airplane burns. | One |
+
+- **One per point:** the game makes one copy of the effect for every point you give, so a twin-engine airplane can have `Effect-Exhaust-Left` and `Effect-Exhaust-Right`. All copies are the same effect: the based-on airplane's first one of that kind.
+- **One:** only the first node with exactly that name is used.
+- **Fire** needs no point: it burns on the `FireEmitter` mesh (see the table above).
+- **Only the based-on airplane's effects.** The points move effects; they cannot add one. A new airplane has exactly the effects of the airplane it is based on: jet exhaust only when it is based on `meteor` or `vampire`, wing trails only when the based-on airplane has them. Choose `BasedOn` with this in mind.
+
+### Marking points
+
+A new airplane carries the marking decals of the airplane it is based on, in that airplane's style, sizes and colours: the squadron code, the airplane's own letter, the roundels, the fin flash and the serial number. The game cannot know where they belong on your model, so it shows a marking only where your model names a spot for it. Put an empty node (no mesh) in your model for each marking you want and name it `Marking-<side>-<slot>`, for example `Marking-Port-Image`. Every point is optional: a marking without a point is not shown, and a model without any marking point shows no markings at all. Painting the markings into your texture instead still works.
+
+| Slot | What it shows |
+|---|---|
+| `LeftText` | The squadron code, the part of the designation before the `-` (`U5` of `U5-G`). |
+| `Image` | The roundel on the fuselage. |
+| `RightText` | The airplane's own letter, the part of the designation after the `-` (`G` of `U5-G`). |
+| `Nose` | The style's nose image, if it has one. |
+| `Wing` | The roundel on top of the wing. |
+| `UnderWing` | The roundel under the wing. |
+| `FinFlash` | The fin flash on the tail fin. |
+| `SerialNumber` | The airplane's serial number, e.g. `PT255`. |
+
+- **Sides.** `<side>` is `Port` (the left side, seen from the pilot's seat) or `Starboard` (the right side). Each side needs its own points: `Marking-Port-Wing` and `Marking-Starboard-Wing` for the two wings.
+- **Placing a point.** Put the point on the surface. Its forward axis (Unity's +Z) points into the airplane, along the direction the marking is projected; its right axis (Unity's +X) is the direction the text reads. For `Wing` the forward axis points down into the wing, for `UnderWing` up into it. Your 3D program may name these axes differently, so check the result in the game.
+- **Size.** The markings keep the based-on airplane's sizes; the point's scale does not change them.
+- **Codes and serial numbers** come from the game: every airplane gets its squadron code, its letter and a serial number when it arrives. If you give points for them, do not also paint them into your texture, or both show.
 
 ### Where a new airplane shows up
 
