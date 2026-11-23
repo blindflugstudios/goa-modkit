@@ -59,7 +59,7 @@ Mods/
 | `Maps/` | maps (`.goamap`) | [Maps](../content/maps.md) |
 | `Objects/` | replacement models, textures and icons - buildings, workbenches and trainers | [Objects and models](../content/objects.md) |
 | `Biomes/` | replacement ground textures, one PNG per biome slot | [Biomes](../content/biomes.md) |
-| `Airplanes/` | new airplane skins: a `config.json` and the skins' PNGs | [Airplane skins](../content/airplanes.md) |
+| `Airplanes/` | new airplane skins: a `config.json` and the skins' PNGs; new airplanes (in progress): a folder per airplane with its model | [Airplane skins](../content/airplanes.md), [New airplanes](../content/new-airplanes.md) |
 
 Three rules decide whether the game notices the folder at all:
 

@@ -62,7 +62,7 @@ Mods/<mod_id>/
 ```
 
 - **Art mods** (`Objects/`, `Biomes/`) are imported once at game start: every art change needs a **full restart of the game**. Docs: `docs/en/content/objects.md`, `biomes.md`. Trees, rocks, ponds and other map objects (terrain objects) are re-dressed from `Objects/` too, named after their id (`sand_pit.fbx`, `tree.2.glb` for one variant); ids and variants are in `docs/en/content/moddable-objects.md`, their special rules under "Map objects" in `objects.md`.
-- **Airplane skins** (`Airplanes/`) are read each time a level is loaded. Docs: `docs/en/content/airplanes.md`.
+- **Airplane skins** (`Airplanes/`) are read each time a level is loaded. Docs: `docs/en/content/airplanes.md`. New airplane types (in progress, not in the public game yet): `docs/en/content/new-airplanes.md`.
 
 - The game decides what a mod contains from **which folders hold files**, not from `config.json`. Folder names are exact: `Missions`, not `Mission` or `missions`.
 - There is **no `Events/` or `Scripts/` folder**. A `.py` anywhere except `Missions/` never runs, and nothing tells you.
@@ -267,7 +267,7 @@ Quote the relevant lines to the user, explain them in one plain sentence, fix, v
 | Quests | `docs/en/quests/index.md` |
 | Scripting | `docs/en/scripting/` (`events.md`, `api.md`, `localization.md`) |
 | Data tables | `docs/en/data/csv.md`, `docs/en/data/table-editor.md` |
-| Maps, art and airplane skins | `docs/en/content/` (`maps.md`, `objects.md`, `biomes.md`, `airplanes.md`) |
+| Maps, art and airplane skins | `docs/en/content/` (`maps.md`, `objects.md`, `biomes.md`, `airplanes.md`, `new-airplanes.md`) |
 | Workshop | `docs/en/sharing/workshop.md` |
 
 If the docs do not answer something, check `templates/`, `examples/` and `generated/catalog.json`, and tell the user what you could not confirm.

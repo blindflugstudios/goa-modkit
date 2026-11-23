@@ -59,7 +59,7 @@ Mods/
 | `Maps/` | Karten (`.goamap`) | [Karten](../content/maps.md) |
 | `Objects/` | Ersatzmodelle, Texturen und Symbole - für Gebäude, Werkbänke und Trainer | [Objekte und Modelle](../content/objects.md) |
 | `Biomes/` | Ersatztexturen für den Boden, ein PNG pro Biom-Slot | [Biome](../content/biomes.md) |
-| `Airplanes/` | neue Flugzeug-Skins: eine `config.json` und die PNGs der Skins | [Flugzeug-Skins](../content/airplanes.md) |
+| `Airplanes/` | neue Flugzeug-Skins: eine `config.json` und die PNGs der Skins; neue Flugzeuge (in Arbeit): ein Ordner pro Flugzeug mit seinem Modell | [Flugzeug-Skins](../content/airplanes.md), [Neue Flugzeuge](../content/new-airplanes.md) |
 
 Drei Regeln entscheiden, ob das Spiel den Ordner überhaupt bemerkt:
 
