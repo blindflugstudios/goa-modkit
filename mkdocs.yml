@@ -171,8 +171,7 @@ nav:
       - Biomes: content/biomes.md
       - Airplanes:
           - Airplane skins: content/airplanes.md
-  - New airplanes (in progress):
-      - content/new-airplanes.md
+          - New airplanes (in progress): content/new-airplanes.md
   - Sharing:
       - Steam Workshop: sharing/workshop.md
   - Get started with AI modding:
