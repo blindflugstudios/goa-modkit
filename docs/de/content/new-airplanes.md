@@ -66,14 +66,44 @@ Das Spiel findet die Teile deines Modells über die Namen der Knoten. Groß- und
 |---|---|---|
 | `Air-Pivot` | Der Teil, der sich im Flug neigt. Hänge alles darunter, was sich mit dem Flugzeug bewegt. | Dein Modell neigt sich mit dem Pivot des Vorbilds. |
 | `Propeller-Pivot` (einer pro Propeller, z. B. `Propeller-Left-Pivot`) | Dreht sich um seine eigene Vorwärtsachse, solange der Motor läuft. | Kein Propeller dreht sich. |
-| `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | Aus der Stelle, an der sie den Boden berühren, wird der Winkel berechnet, in dem das Flugzeug am Boden steht. | Der Winkel des Vorbilds wird verwendet. |
-| `1-Interaction-Pilot`, `2-Interaction-Gunner`, ... | Die Sitze der Besatzung, in der Reihenfolge der vorangestellten Zahl. | Die Sitze des Vorbilds. |
+| `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | Aus der Stelle, an der sie den Boden berühren, wird der Winkel berechnet, in dem das Flugzeug am Boden steht. Für ein Bugrad nimm `Wheel-Front` statt `Wheel-Tail`: Das Flugzeug steht dann waagerecht, so wie modelliert. | Der Winkel des Vorbilds wird verwendet. |
+| `1-Interaction-Pilot`, `2-Interaction-Gunner`, ... | Die Sitze der Besatzung, einer pro Besatzungsmitglied. Siehe [Sitze der Besatzung](#crew-seats). | Die Sitze des Vorbilds. |
 | `Interaction-Paint` | Wo die Crew steht, um das Flugzeug zu lackieren und zu betanken. Setze ihn neben den Rumpf. Nur seine Stelle am Boden zählt: Die Crew steht auf dem Boden darunter, zum Rumpf gewandt, egal wie weit sich das Flugzeug geparkt auf seinen Rädern nach hinten neigt. Seine Höhe und Drehung spielen keine Rolle. | Die Stelle des Vorbilds. |
 | `FireEmitter` | Das Mesh, auf dem Feuer brennt. | Das größte Teil direkt unter `Air-Pivot`, das weder Glas noch Innenraum ist. |
 
-- **Größe und Ausrichtung.** Baue das Flugzeug in Metern in seiner echten Größe, am Ursprung auf dem Boden stehend, wie die Flugzeuge des Spiels. In welche Richtung die Nase zeigt, ist egal, wenn das Modell einen Knoten `Propeller...` und einen Knoten `Wheel-Tail` hat: Ein Flugzeug, dessen Propeller hinter dem Spornrad liegt, wird umgedreht.
+- **Größe und Ausrichtung.** Baue das Flugzeug in Metern in seiner echten Größe, am Ursprung auf dem Boden stehend, wie die Flugzeuge des Spiels. Exportiere es so wie sie: mit dem Standard-FBX-Export von Blender, die Nase entlang Blenders +Y, oben entlang +Z. Dann kommt jeder Knoten mit den Achsen im Spiel an, die du ihm gegeben hast. In welche Richtung die Nase zeigt, ist egal, wenn das Modell einen Knoten `Propeller...` und einen Knoten `Wheel-Tail` hat: Ein Flugzeug, dessen Propeller hinter dem Spornrad liegt, wird umgedreht. Ein Modell ohne diese Knoten, etwa ein Düsenflugzeug, muss so ausgerichtet sein.
 - **Fahrwerk.** Ein einziehbares Fahrwerk braucht eine Animation (Take) in der Modelldatei, die nur die Fahrwerksteile animiert. Ihr erstes Bild ist das ausgefahrene Fahrwerk, so wie modelliert; ihr letztes Bild das ganz eingezogene. Das Spiel hält die Animation je nach Flughöhe dazwischen: am Boden ausgefahren, ab 10 m eingezogen. Animiere weder die Propeller noch `Air-Pivot`; die bewegt das Spiel selbst. Festes Fahrwerk: keine Animation.
 - **Markierungs-Decals** (Staffelkennungen, Kokarden, Seriennummer) erscheinen nur, wo dein Modell Markierungspunkte hat, siehe [Markierungspunkte](#marking-points).
+
+## Sitze der Besatzung { #crew-seats }
+
+Jedes Besatzungsmitglied sitzt auf einem Sitzknoten, solange das Flugzeug fliegt, auf der Startbahn wartet oder im Bestellfenster gezeigt wird. Setze pro Besatzungsmitglied einen leeren Knoten (ohne Mesh) in dein Modell, dorthin, wo es sitzt, und nenne ihn `<Nummer>-Interaction-<Rolle>`:
+
+```text
+1-Interaction-Pilot
+2-Interaction-BombAimer
+3-Interaction-Navigator
+4-Interaction-RadioOperator
+5-Interaction-Gunner
+```
+
+- **Die Nummer entscheidet, wer wo sitzt.** Sitz `1` gehört dem ersten Besatzungsmitglied in der Liste `Crew` des Flugzeugs, Sitz `2` dem zweiten und so weiter. Die Liste ist die Besatzung des Vorbilds oder die, die du unter `Stats` setzt (`"Crew": "Pilot,BombAimer,Navigator,RadioOperator,Gunner"`). Nummeriere die Sitze in derselben Reihenfolge wie diese Liste.
+- **Das Rollenwort ist nur für dich.** Das Spiel liest es nicht: `3-Interaction-Navigator` ist einfach Sitz 3. Schreib die Rolle hin, die dort sitzt, damit das Modell lesbar bleibt.
+- **Ein Sitz pro Besatzungsmitglied.** Gibt es weniger Sitze als Besatzungsmitglieder, kommen alle ohne eigenen Sitz an eine einzige Stelle aus dem Vorbild, statt im Modell zu sitzen. Überzählige Sitze werden nicht benutzt.
+- **Die Nummern zählen, Lücken nicht.** Die Sitze werden nach ihrer Nummer sortiert, `1`, `2`, `5` wirken also wie `1`, `2`, `3`. Ein Sitz ohne Nummer kommt nach den nummerierten.
+- **Namen, die du meiden solltest.** Jeder Knoten mit `Interaction` im Namen ist ein Sitz, außer `Interaction-Paint` (die Stelle zum Lackieren, siehe Tabelle oben) und Namen, die `Main` enthalten. Verwende `Interaction` in keinem anderen Namen.
+- **Blickrichtung.** Lass die Drehung eines Sitzes auf null, dann sitzt das Besatzungsmitglied aufrecht und schaut zur Nase. Dreh den Sitz nur um die senkrechte Achse für ein Besatzungsmitglied, das woanders hinschaut: eine halbe Drehung für einen Heckschützen, eine Vierteldrehung für einen Navigator an einem seitlichen Tisch. Das gilt für ein Modell, das wie oben unter **Größe und Ausrichtung** beschrieben exportiert ist.
+- **Neigung.** Hänge die Sitze unter `Air-Pivot`, damit sich die Besatzung im Flug mit dem Flugzeug neigt.
+- **Crew-Fenster.** Die Zeichnung im Crew-Fenster setzt ihre Plätze über `CrewSlots`, in derselben Reihenfolge wie die Sitze (siehe [`config.json`](#configjson)).
+
+## Düsenflugzeuge { #jets }
+
+Ein Düsenflugzeug funktioniert wie jedes andere neue Flugzeug, mit diesen Unterschieden:
+
+- **Lehne es an `meteor` oder `vampire` an.** Nur sie haben den Abgasstrahl (siehe [Effektpunkte](#effect-points)), und ein daran angelehntes Düsenflugzeug steht auch ohne `Wheel-Front` im Winkel eines Düsenflugzeugs.
+- **Keine Propellerknoten.** Lass jeden `Propeller-...-Pivot` weg. Nichts dreht sich, und sonst braucht sie nichts.
+- **Bugrad.** Nenne es `Wheel-Front` und lass `Wheel-Tail` weg, dann steht das Flugzeug waagerecht auf allen Rädern, so wie modelliert. Ohne beide steht es im Winkel des Vorbilds.
+- **Ausrichtung.** Ohne Propeller kann das Spiel Nase und Heck nicht unterscheiden, baue das Flugzeug also so ausgerichtet wie die Flugzeuge des Spiels (siehe oben unter **Größe und Ausrichtung**).
 
 ## Effektpunkte { #effect-points }
 
@@ -111,7 +141,7 @@ Ein neues Flugzeug trägt die Markierungs-Decals des Flugzeugs, auf dem es basie
 | `SerialNumber` | Die Seriennummer des Flugzeugs, z. B. `PT255`. |
 
 - **Seiten.** `<Seite>` ist `Port` (die linke Seite, vom Pilotensitz aus gesehen) oder `Starboard` (die rechte Seite). Jede Seite braucht eigene Punkte: `Marking-Port-Wing` und `Marking-Starboard-Wing` für die beiden Flügel.
-- **Einen Punkt setzen.** Setze den Punkt auf die Oberfläche. Seine Vorwärtsachse (+Z in Unity) zeigt ins Flugzeug hinein, in die Richtung, in die die Markierung projiziert wird; seine rechte Achse (+X in Unity) ist die Leserichtung des Textes. Bei `Wing` zeigt die Vorwärtsachse nach unten in den Flügel, bei `UnderWing` nach oben hinein. Dein 3D-Programm benennt diese Achsen womöglich anders, prüfe das Ergebnis daher im Spiel.
+- **Einen Punkt setzen.** Setze den Punkt auf die Oberfläche. Seine Vorwärtsachse (Blenders +Y beim Export wie unter **Größe und Ausrichtung** beschrieben, +Z in Unity) zeigt ins Flugzeug hinein, in die Richtung, in die die Markierung projiziert wird; seine +X-Achse ist die Leserichtung des Textes. Bei `Wing` zeigt die Vorwärtsachse nach unten in den Flügel, bei `UnderWing` nach oben hinein. Prüfe das Ergebnis im Spiel.
 - **Größe.** Die Markierungen behalten die Größen des Vorbilds; die Skalierung des Punkts ändert sie nicht.
 - **Kennungen und Seriennummern** kommen vom Spiel: Jedes Flugzeug bekommt bei seiner Ankunft seine Staffelkennung, seinen Buchstaben und eine Seriennummer. Wenn du Punkte dafür setzt, male sie nicht zusätzlich in deine Textur, sonst erscheinen beide.
 

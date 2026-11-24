@@ -66,14 +66,44 @@ The game finds the parts of your model by their node names. Capital letters, `-`
 |---|---|---|
 | `Air-Pivot` | The part that tilts in flight. Put everything that moves with the airplane under it. | Your model tilts with the based-on airplane's pivot. |
 | `Propeller-Pivot` (one per propeller, e.g. `Propeller-Left-Pivot`) | Spins around its own forward axis while the engine runs. | No propeller spins. |
-| `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | The angle the airplane rests at on the ground is worked out from where these touch the ground. | The based-on airplane's angle is used. |
-| `1-Interaction-Pilot`, `2-Interaction-Gunner`, ... | The crew seats, in the order of the number in front. | The based-on airplane's seats. |
+| `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | The angle the airplane rests at on the ground is worked out from where these touch the ground. For a nose wheel, use `Wheel-Front` instead of `Wheel-Tail`: the airplane then rests level, as modelled. | The based-on airplane's angle is used. |
+| `1-Interaction-Pilot`, `2-Interaction-Gunner`, ... | The crew seats, one per crew member. See [Crew seats](#crew-seats). | The based-on airplane's seats. |
 | `Interaction-Paint` | Where the crew stand to paint and refuel the airplane. Put it beside the fuselage. Only its spot on the ground counts: the crew stand on the ground below it, facing the fuselage, however far the airplane tilts back on its wheels when parked. Its height and rotation do not matter. | The based-on airplane's spot. |
 | `FireEmitter` | The mesh fire burns on. | The largest part directly under `Air-Pivot` that is not glass or the inside. |
 
-- **Size and facing.** Build the airplane in metres at its real size, standing on the ground at the origin, like the game's own airplanes. Which way the nose points does not matter if the model has a `Propeller...` node and a `Wheel-Tail` node: an airplane whose propeller sits behind its tail wheel is turned around.
+- **Size and facing.** Build the airplane in metres at its real size, standing on the ground at the origin, like the game's own airplanes. Export it the way they are made: Blender's default FBX export, with the nose along Blender's +Y and up along +Z. Then every node reaches the game with the axes you gave it. Which way the nose points does not matter if the model has a `Propeller...` node and a `Wheel-Tail` node: an airplane whose propeller sits behind its tail wheel is turned around. A model without them, such as a jet, must face that way.
 - **Landing gear.** A retractable gear needs one animation (take) in the model file that keys only the gear parts. Its first frame is the gear down, as modelled; its last frame is the gear fully up. The game holds the take between the two by the airplane's height: down on the ground, up from 10 m. Do not key the propellers or `Air-Pivot`; the game moves them itself. Fixed gear: no animation.
 - **Marking decals** (squadron codes, roundels, serial number) show only where your model has marking points, see [Marking points](#marking-points).
+
+## Crew seats
+
+Every crew member sits on a seat node while the airplane flies, waits on the runway or is shown in the order window. Put one empty node (no mesh) in your model per crew member, where that crew member sits, and name it `<number>-Interaction-<role>`:
+
+```text
+1-Interaction-Pilot
+2-Interaction-BombAimer
+3-Interaction-Navigator
+4-Interaction-RadioOperator
+5-Interaction-Gunner
+```
+
+- **The number decides who sits where.** Seat `1` belongs to the first crew member in the airplane's `Crew` list, seat `2` to the second, and so on. The list is the based-on airplane's crew, or the one you set under `Stats` (`"Crew": "Pilot,BombAimer,Navigator,RadioOperator,Gunner"`). Number the seats in the same order as that list.
+- **The role word is only for you.** The game does not read it: `3-Interaction-Navigator` is simply seat 3. Write the role that sits there, so the model stays readable.
+- **One seat per crew member.** With fewer seats than crew members, the crew members without a seat of their own are all put at one spot taken from the based-on airplane instead of sitting in the model. Extra seats are not used.
+- **Numbers count, gaps do not.** The seats are sorted by their number, so `1`, `2`, `5` work like `1`, `2`, `3`. A seat without a number comes after the numbered ones.
+- **Names to avoid.** Every node with `Interaction` in its name is a seat, except `Interaction-Paint` (the paint spot, see the table above) and names that contain `Main`. Do not use `Interaction` in the name of anything else.
+- **Facing.** Leave a seat's rotation at zero and the crew member sits upright, facing the nose. Turn the seat only around the vertical axis for a crew member who faces elsewhere: half a turn for a tail gunner, a quarter turn for a navigator at a side table. This holds for a model exported as described under **Size and facing** above.
+- **Tilting.** Put the seats under `Air-Pivot`, so the crew tilt with the airplane in flight.
+- **Crew window.** The crew window drawing places its slots through `CrewSlots`, in the same order as the seats (see [`config.json`](#configjson)).
+
+## Jets
+
+A jet works like any other new airplane, with these differences:
+
+- **Base it on `meteor` or `vampire`.** Only they have the jet exhaust (see [Effect points](#effect-points)), and a jet based on them also rests at a jet's angle when it has no `Wheel-Front`.
+- **No propeller nodes.** Leave out every `Propeller-...-Pivot`. Nothing spins, and nothing else needs them.
+- **Nose wheel.** Name it `Wheel-Front` and leave out `Wheel-Tail`, so the jet rests level, standing on all its wheels as modelled. Without either, it rests at the based-on airplane's angle.
+- **Facing.** Without a propeller the game cannot tell the nose from the tail, so build the jet facing like the game's own airplanes (see **Size and facing** above).
 
 ## Effect points
 
@@ -111,7 +141,7 @@ A new airplane carries the marking decals of the airplane it is based on, in tha
 | `SerialNumber` | The airplane's serial number, e.g. `PT255`. |
 
 - **Sides.** `<side>` is `Port` (the left side, seen from the pilot's seat) or `Starboard` (the right side). Each side needs its own points: `Marking-Port-Wing` and `Marking-Starboard-Wing` for the two wings.
-- **Placing a point.** Put the point on the surface. Its forward axis (Unity's +Z) points into the airplane, along the direction the marking is projected; its right axis (Unity's +X) is the direction the text reads. For `Wing` the forward axis points down into the wing, for `UnderWing` up into it. Your 3D program may name these axes differently, so check the result in the game.
+- **Placing a point.** Put the point on the surface. Its forward axis (Blender's +Y with the export described under **Size and facing**, Unity's +Z) points into the airplane, along the direction the marking is projected; its +X axis is the direction the text reads. For `Wing` the forward axis points down into the wing, for `UnderWing` up into it. Check the result in the game.
 - **Size.** The markings keep the based-on airplane's sizes; the point's scale does not change them.
 - **Codes and serial numbers** come from the game: every airplane gets its squadron code, its letter and a serial number when it arrives. If you give points for them, do not also paint them into your texture, or both show.
 
