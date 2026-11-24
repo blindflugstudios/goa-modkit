@@ -155,7 +155,7 @@ A new airplane carries the marking decals of the airplane it is based on, in tha
 | `LeftText` | The squadron code, the part of the designation before the `-` (`U5` of `U5-G`). |
 | `Image` | The roundel on the fuselage. |
 | `RightText` | The airplane's own letter, the part of the designation after the `-` (`G` of `U5-G`). |
-| `Nose` | The style's nose image, if it has one. |
+| `Nose` | Nothing on a new airplane yet: nose art comes from the skin of a built-in airplane, not from the based-on airplane. Paint nose art into your texture. |
 | `Wing` | The roundel on top of the wing. |
 | `UnderWing` | The roundel under the wing. |
 | `FinFlash` | The fin flash on the tail fin. |
@@ -164,6 +164,7 @@ A new airplane carries the marking decals of the airplane it is based on, in tha
 - **Sides.** `<side>` is `Port` (the left side, seen from the pilot's seat) or `Starboard` (the right side). Each side needs its own points: `Marking-Port-Wing` and `Marking-Starboard-Wing` for the two wings.
 - **Placing a point.** Put the point on the surface. With Blender's default FBX export, the point's local **-Z** axis points into the airplane, along the direction the marking is projected; its local **+X** axis is the direction the text reads and its local **+Y** axis is up for the text. An empty left at zero rotation therefore projects straight down: turn it so -Z points into the surface. For the fuselage on the `Port` side that is -Z toward the pilot's right with +X toward the tail; on the `Starboard` side -Z toward the pilot's left with +X toward the nose. For `Wing`, -Z points down into the wing, for `UnderWing` up into it. Blender's "Apply Transform" export option does not help: it moves every empty to the origin. Check the result in the game.
 - **Size.** The markings keep the based-on airplane's sizes; the point's scale does not change them.
+- **Depth.** A marking is projected through a box a few tens of centimetres deep, centred on the point, and paints everything inside it, a crew member standing next to the fuselage included. Put the point exactly on the surface, so the box reaches the skin and as little else as possible.
 - **Codes and serial numbers** come from the game: every airplane gets its squadron code, its letter and a serial number when it arrives. If you give points for them, do not also paint them into your texture, or both show.
 
 ## Where a new airplane shows up

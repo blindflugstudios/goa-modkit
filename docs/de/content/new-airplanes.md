@@ -155,7 +155,7 @@ Ein neues Flugzeug trägt die Markierungs-Decals des Flugzeugs, auf dem es basie
 | `LeftText` | Die Staffelkennung, der Teil der Kennung vor dem `-` (`U5` von `U5-G`). |
 | `Image` | Die Kokarde am Rumpf. |
 | `RightText` | Den eigenen Buchstaben des Flugzeugs, der Teil der Kennung nach dem `-` (`G` von `U5-G`). |
-| `Nose` | Das Nasenbild des Stils, falls er eines hat. |
+| `Nose` | Bei einem neuen Flugzeug vorerst nichts: Nasenbilder gehören zur Lackierung eines Flugzeugs des Spiels, nicht zum Vorbild. Male Nasenbilder in deine Textur. |
 | `Wing` | Die Kokarde oben auf dem Flügel. |
 | `UnderWing` | Die Kokarde unter dem Flügel. |
 | `FinFlash` | Den Streifen am Seitenleitwerk. |
@@ -164,6 +164,7 @@ Ein neues Flugzeug trägt die Markierungs-Decals des Flugzeugs, auf dem es basie
 - **Seiten.** `<Seite>` ist `Port` (die linke Seite, vom Pilotensitz aus gesehen) oder `Starboard` (die rechte Seite). Jede Seite braucht eigene Punkte: `Marking-Port-Wing` und `Marking-Starboard-Wing` für die beiden Flügel.
 - **Einen Punkt setzen.** Setze den Punkt auf die Oberfläche. Beim Standard-FBX-Export von Blender zeigt die lokale **-Z**-Achse des Punkts ins Flugzeug hinein, in die Richtung, in die die Markierung projiziert wird; seine lokale **+X**-Achse ist die Leserichtung des Textes und seine lokale **+Y**-Achse ist oben für den Text. Ein Empty ohne Drehung projiziert also senkrecht nach unten: Dreh es so, dass -Z in die Oberfläche zeigt. Am Rumpf auf der Seite `Port` heißt das -Z zur rechten Seite des Piloten und +X zum Heck; auf der Seite `Starboard` -Z zur linken Seite des Piloten und +X zur Nase. Bei `Wing` zeigt -Z nach unten in den Flügel, bei `UnderWing` nach oben hinein. Die Export-Option "Apply Transform" von Blender hilft nicht: Sie schiebt jedes Empty in den Ursprung. Prüfe das Ergebnis im Spiel.
 - **Größe.** Die Markierungen behalten die Größen des Vorbilds; die Skalierung des Punkts ändert sie nicht.
+- **Tiefe.** Eine Markierung wird durch einen einige Dutzend Zentimeter tiefen Kasten projiziert, der am Punkt zentriert ist, und bemalt alles darin, auch ein Besatzungsmitglied, das neben dem Rumpf steht. Setze den Punkt genau auf die Oberfläche, damit der Kasten die Haut erreicht und möglichst wenig sonst.
 - **Kennungen und Seriennummern** kommen vom Spiel: Jedes Flugzeug bekommt bei seiner Ankunft seine Staffelkennung, seinen Buchstaben und eine Seriennummer. Wenn du Punkte dafür setzt, male sie nicht zusätzlich in deine Textur, sonst erscheinen beide.
 
 ## Wo ein neues Flugzeug auftaucht { #where-a-new-airplane-shows-up }
