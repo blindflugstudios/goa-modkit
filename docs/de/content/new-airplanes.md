@@ -66,7 +66,7 @@ Das Spiel findet die Teile deines Modells über die Namen der Knoten. Groß- und
 |---|---|---|
 | `Air-Pivot` | Der Teil, der sich im Flug neigt. Hänge alles darunter, was sich mit dem Flugzeug bewegt. | Dein Modell neigt sich mit dem Pivot des Vorbilds. |
 | `Propeller-Pivot` (einer pro Propeller, z. B. `Propeller-Left-Pivot`) | Dreht sich um die Längsachse des Flugzeugs, solange der Motor läuft. Seine Drehung spielt keine Rolle. | Kein Propeller dreht sich. |
-| `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | Aus der Stelle, an der sie den Boden berühren, wird der Winkel berechnet, in dem das Flugzeug am Boden steht. Für ein Bugrad nimm `Wheel-Front` statt `Wheel-Tail`: Das Flugzeug steht dann waagerecht, so wie modelliert. | Der Winkel des Vorbilds wird verwendet. |
+| `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | Aus der Stelle, an der sie den Boden berühren, wird der Winkel berechnet, in dem das Flugzeug am Boden steht. Für ein Bugrad nimm `Wheel-Front` statt `Wheel-Tail`: Das Flugzeug steht dann waagerecht, so wie modelliert. Die Räder rollen außerdem, solange sich das Flugzeug am Boden bewegt: siehe [Rad-Pivots](#wheel-pivots). | Der Winkel des Vorbilds wird verwendet, und kein Rad rollt. |
 | `1-Interaction-Pilot`, `2-Interaction-Gunner`, ... | Die Sitze der Besatzung, einer pro Besatzungsmitglied. Siehe [Sitze der Besatzung](#crew-seats). | Die Sitze des Vorbilds. |
 | `Interaction-Paint` | Wo die Crew steht, um das Flugzeug zu lackieren und zu betanken. Setze ihn neben den Rumpf. Nur seine Stelle am Boden zählt: Die Crew steht auf dem Boden darunter, zum Rumpf gewandt, egal wie weit sich das Flugzeug geparkt auf seinen Rädern nach hinten neigt. Seine Höhe und Drehung spielen keine Rolle. | Die Stelle des Vorbilds. |
 | `FireEmitter` | Das Mesh, auf dem Feuer brennt. | Das größte Teil direkt unter `Air-Pivot`, das weder Glas noch Innenraum ist. |
@@ -95,6 +95,27 @@ Jedes Besatzungsmitglied sitzt auf einem Sitzknoten, solange das Flugzeug fliegt
 - **Blickrichtung.** Jedes Besatzungsmitglied sitzt aufrecht und schaut zur Nase, egal wie der Sitz gedreht ist. Nur die Position des Sitzes zählt.
 - **Neigung.** Hänge die Sitze unter `Air-Pivot`, damit sich die Besatzung im Flug mit dem Flugzeug neigt.
 - **Crew-Fenster.** Die Zeichnung im Crew-Fenster setzt ihre Plätze über `CrewSlots`, in derselben Reihenfolge wie die Sitze (siehe [`config.json`](#configjson)).
+
+## Rad-Pivots { #wheel-pivots }
+
+Jedes Rad rollt, solange sich das Flugzeug am Boden bewegt: beim Rollen zur Piste, beim Start- und Landelauf und wenn die Crew es schiebt. Gib jedem Rad einen eigenen Pivot-Knoten, unter dem nur das Rad hängt:
+
+```text
+Air-Pivot
+  Wheel-Retractor-Left-Pivot      Fahrwerksbein, rollt nicht
+    Wheel-Retractor-Left-Mesh
+    Wheel-Left-Pivot              rollt
+      Wheel-Left-Mesh             Reifen und Felge
+  Wheel-Tail-Pivot                rollt
+    Wheel-Tail-Mesh
+```
+
+- **Nur das Rad unter dem Pivot.** Ein Rad rollt, wenn der Name seines Knotens mit `Wheel` beginnt und jedes Mesh darunter rund ist, wie ein Reifen von der Seite. Ein Fahrwerksbein, eine Gabel, ein Schutzblech oder eine Fahrwerksklappe unter demselben Knoten verhindert, dass dieser Knoten rollt: Hänge sie neben den Rad-Pivot, nicht darunter. Heißt das Reifen-Mesh selbst `Wheel-...` (z. B. `Wheel-Tail-Mesh` neben einer `Wheel-Tail-Fork`), rollt dieses Mesh für sich.
+- **Namen, die nie rollen.** Knoten mit `Retractor` oder `Flapdoor` im Namen sind Fahrwerksbeine und Klappen; sie bewegen sich nur mit der Fahrwerksanimation.
+- **Drehung und Ursprung spielen keine Rolle.** Das Spiel dreht jedes Rad um die Querachse des Flugzeugs durch die Mitte des Reifen-Meshes, die eigenen Achsen des Pivots und seine genaue Lage auf der Achse zählen also nicht.
+- **Die Größe zählt.** Wie schnell sich ein Rad dreht, ergibt sich aus der Größe seines Reifen-Meshes; ein kleines Spornrad dreht sich also schneller als die Haupträder, wie es sein soll.
+- **Einziehfahrwerk.** Die Räder rollen nur am Boden. Die Fahrwerksanimation kann sie trotzdem einklappen: Animiere die Rad-Pivots wie bisher im Fahrwerks-Take (siehe **Fahrwerk** unter [Die Teile des Modells benennen](#naming-the-parts-of-the-model)).
+- **Ohne Rad-Pivots** fährt das Flugzeug trotzdem am Boden, nur seine Räder drehen sich nicht.
 
 ## Düsenflugzeuge { #jets }
 

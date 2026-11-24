@@ -66,7 +66,7 @@ The game finds the parts of your model by their node names. Capital letters, `-`
 |---|---|---|
 | `Air-Pivot` | The part that tilts in flight. Put everything that moves with the airplane under it. | Your model tilts with the based-on airplane's pivot. |
 | `Propeller-Pivot` (one per propeller, e.g. `Propeller-Left-Pivot`) | Spins around the airplane's nose axis while the engine runs. Its rotation does not matter. | No propeller spins. |
-| `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | The angle the airplane rests at on the ground is worked out from where these touch the ground. For a nose wheel, use `Wheel-Front` instead of `Wheel-Tail`: the airplane then rests level, as modelled. | The based-on airplane's angle is used. |
+| `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | The angle the airplane rests at on the ground is worked out from where these touch the ground. For a nose wheel, use `Wheel-Front` instead of `Wheel-Tail`: the airplane then rests level, as modelled. The wheels also roll while the airplane moves on the ground: see [Wheel pivots](#wheel-pivots). | The based-on airplane's angle is used, and no wheel rolls. |
 | `1-Interaction-Pilot`, `2-Interaction-Gunner`, ... | The crew seats, one per crew member. See [Crew seats](#crew-seats). | The based-on airplane's seats. |
 | `Interaction-Paint` | Where the crew stand to paint and refuel the airplane. Put it beside the fuselage. Only its spot on the ground counts: the crew stand on the ground below it, facing the fuselage, however far the airplane tilts back on its wheels when parked. Its height and rotation do not matter. | The based-on airplane's spot. |
 | `FireEmitter` | The mesh fire burns on. | The largest part directly under `Air-Pivot` that is not glass or the inside. |
@@ -95,6 +95,27 @@ Every crew member sits on a seat node while the airplane flies, waits on the run
 - **Facing.** Every crew member sits upright and faces the nose, whatever the seat's rotation. Only the seat's position counts.
 - **Tilting.** Put the seats under `Air-Pivot`, so the crew tilt with the airplane in flight.
 - **Crew window.** The crew window drawing places its slots through `CrewSlots`, in the same order as the seats (see [`config.json`](#configjson)).
+
+## Wheel pivots
+
+Every wheel rolls while the airplane moves on the ground: taxiing, the take-off and landing roll, being pushed by the crew. Give each wheel a pivot node of its own, with only the wheel under it:
+
+```text
+Air-Pivot
+  Wheel-Retractor-Left-Pivot      gear leg, does not roll
+    Wheel-Retractor-Left-Mesh
+    Wheel-Left-Pivot              rolls
+      Wheel-Left-Mesh             tyre and hub
+  Wheel-Tail-Pivot                rolls
+    Wheel-Tail-Mesh
+```
+
+- **Only the wheel under the pivot.** A wheel rolls when its node's name starts with `Wheel` and every mesh under it is round, like a tyre seen from the side. A gear leg, a fork, a mudguard or a gear door under the same node stops that node from rolling: put them next to the wheel pivot, not under it. If the tyre mesh itself is named `Wheel-...` (e.g. `Wheel-Tail-Mesh` beside a `Wheel-Tail-Fork`), that mesh rolls on its own.
+- **Names that never roll.** Nodes with `Retractor` or `Flapdoor` in their name are gear legs and doors; they move only with the gear animation.
+- **Rotation and origin do not matter.** The game turns each wheel around the airplane's side axis through the middle of the tyre mesh, so the pivot's own axes and its exact position on the axle do not count.
+- **Size counts.** How fast a wheel turns comes from the size of its tyre mesh, so a small tail wheel turns faster than the main wheels, as it should.
+- **Retractable gear.** The wheels roll only on the ground. The gear animation can still fold them away: key the wheel pivots in the gear take as before (see **Landing gear** under [Naming the parts of the model](#naming-the-parts-of-the-model)).
+- **Without wheel pivots** the airplane still drives on the ground, its wheels just do not turn.
 
 ## Jets
 
