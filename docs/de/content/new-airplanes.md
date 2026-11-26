@@ -56,6 +56,7 @@ Neue Flugzeuge stehen unter `Airplanes` in der `Airplanes/config.json` der Mod, 
 | `Stats` | nein | Werte, die vom Vorbild abweichen, mit den Spaltennamen der Flugzeugtabelle des Spiels als Schlüssel (`Health`, `Crew`, `Fuel Capacity`, ...). Die Werte sind Text: `"Health": "90"`, `"Crew": "Pilot,Gunner"`. |
 | `CrewSlots` | nein | Wo der Platz jedes Besatzungsmitglieds auf der Zeichnung liegt, in Besatzungsreihenfolge, als `[x, y]`-Anteile der Zeichnung: `[0, 0]` ist die Ecke unten links, `[1, 1]` die oben rechts. Plätze, die du weglässt, werden in der Mitte verteilt. |
 | `HiddenMarkings` | nein | Die Markierungen, die das Spiel auf den eigenen Lackierungen des Flugzeugs nicht zeichnen soll, weil ihre Texturen sie schon malen, z. B. `["LeftText", "RightText"]`. Dieselben Namen wie bei einer Lackierung, siehe [Markierungen des Spiels ausblenden](airplanes.md#hiding-the-games-markings). Ohne ihn wird jede Markierung gezeigt, die einen [Markierungspunkt](#marking-points) hat. |
+| `PropellerDirection` | nein | Die Drehrichtung der Propeller, vom Pilotensitz aus gesehen. `"CounterClockwise"` dreht sie gegen den Uhrzeigersinn; jeder andere Wert oder gar keiner dreht sie im Uhrzeigersinn. Sie wird nicht vom Vorbild übernommen. |
 
 Auch eine Lackierung kann für dein neues Flugzeug gelten: Schreib die Id des Flugzeugs aus `Airplanes` (hier `Bf109`) als `Airplane` der Lackierung.
 
@@ -66,7 +67,7 @@ Das Spiel findet die Teile deines Modells über die Namen der Knoten. Groß- und
 | Knotenname | Was das Spiel damit macht | Ohne ihn |
 |---|---|---|
 | `Air-Pivot` | Der Teil, der sich im Flug neigt. Hänge alles darunter, was sich mit dem Flugzeug bewegt. | Dein Modell neigt sich mit dem Pivot des Vorbilds. |
-| `Propeller-Pivot` (einer pro Propeller, z. B. `Propeller-Left-Pivot`) | Dreht sich um die Längsachse des Flugzeugs, solange der Motor läuft. Seine Drehung spielt keine Rolle. | Kein Propeller dreht sich. |
+| `Propeller-Pivot` (einer pro Propeller, z. B. `Propeller-Left-Pivot`) | Dreht sich um die Längsachse des Flugzeugs, solange der Motor läuft. In welche Richtung, legt `PropellerDirection` in `config.json` fest. Seine Drehung spielt keine Rolle. | Kein Propeller dreht sich. |
 | `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | Aus der Stelle, an der sie den Boden berühren, wird der Winkel berechnet, in dem das Flugzeug am Boden steht. Für ein Bugrad nimm `Wheel-Front` statt `Wheel-Tail`: Das Flugzeug steht dann waagerecht, so wie modelliert. Die Räder rollen außerdem, solange sich das Flugzeug am Boden bewegt: siehe [Rad-Pivots](#wheel-pivots). | Der Winkel des Vorbilds wird verwendet, und kein Rad rollt. |
 | `1-Interaction-Pilot`, `2-Interaction-Gunner`, ... | Die Sitze der Besatzung, einer pro Besatzungsmitglied. Siehe [Sitze der Besatzung](#crew-seats). | Die Sitze des Vorbilds. |
 | `Interaction-Paint` | Wo die Crew steht, um das Flugzeug zu lackieren und zu betanken. Setze ihn neben den Rumpf. Nur seine Stelle am Boden zählt: Die Crew steht auf dem Boden darunter, zum Rumpf gewandt, egal wie weit sich das Flugzeug geparkt auf seinen Rädern nach hinten neigt. Seine Höhe und Drehung spielen keine Rolle. | Die Stelle des Vorbilds. |

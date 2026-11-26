@@ -56,6 +56,7 @@ New airplanes go under `Airplanes` in the mod's `Airplanes/config.json`, the sam
 | `Stats` | no | Stats that differ from the based-on airplane, keyed by the column names of the game's airplane table (`Health`, `Crew`, `Fuel Capacity`, ...). Values are text: `"Health": "90"`, `"Crew": "Pilot,Gunner"`. |
 | `CrewSlots` | no | Where each crew member's slot sits on the blueprint, in crew order, as `[x, y]` fractions of the drawing: `[0, 0]` is the bottom left corner, `[1, 1]` the top right. Slots you leave out are spread across the middle. |
 | `HiddenMarkings` | no | The markings the game should not draw on the airplane's own skins, because their textures already paint them, e.g. `["LeftText", "RightText"]`. Same names as for a skin, see [Hiding the game's markings](airplanes.md#hiding-the-games-markings). Without it, every marking that has a [marking point](#marking-points) is shown. |
+| `PropellerDirection` | no | The way the propellers turn, as seen from the pilot's seat. `"CounterClockwise"` turns them counter-clockwise; any other value, or none, turns them clockwise. It is not taken from the based-on airplane. |
 
 A skin may be painted on your new airplane too: write the airplane's id from `Airplanes` (here `Bf109`) as the skin's `Airplane`.
 
@@ -66,7 +67,7 @@ The game finds the parts of your model by their node names. Capital letters, `-`
 | Node name | What the game does with it | Without it |
 |---|---|---|
 | `Air-Pivot` | The part that tilts in flight. Put everything that moves with the airplane under it. | Your model tilts with the based-on airplane's pivot. |
-| `Propeller-Pivot` (one per propeller, e.g. `Propeller-Left-Pivot`) | Spins around the airplane's nose axis while the engine runs. Its rotation does not matter. | No propeller spins. |
+| `Propeller-Pivot` (one per propeller, e.g. `Propeller-Left-Pivot`) | Spins around the airplane's nose axis while the engine runs. Which way it turns is set by `PropellerDirection` in `config.json`. Its rotation does not matter. | No propeller spins. |
 | `Wheel-Left`, `Wheel-Right`, `Wheel-Tail` | The angle the airplane rests at on the ground is worked out from where these touch the ground. For a nose wheel, use `Wheel-Front` instead of `Wheel-Tail`: the airplane then rests level, as modelled. The wheels also roll while the airplane moves on the ground: see [Wheel pivots](#wheel-pivots). | The based-on airplane's angle is used, and no wheel rolls. |
 | `1-Interaction-Pilot`, `2-Interaction-Gunner`, ... | The crew seats, one per crew member. See [Crew seats](#crew-seats). | The based-on airplane's seats. |
 | `Interaction-Paint` | Where the crew stand to paint and refuel the airplane. Put it beside the fuselage. Only its spot on the ground counts: the crew stand on the ground below it, facing the fuselage, however far the airplane tilts back on its wheels when parked. Its height and rotation do not matter. | The based-on airplane's spot. |
