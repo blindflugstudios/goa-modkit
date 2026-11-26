@@ -84,9 +84,39 @@ Mods/
 | `Airplane` | ja | Das Flugzeug, auf das die Lackierung gemalt wird. Eine Id aus [Flugzeug-Ids](#airplane-ids). |
 | `Name` | nein | Der Name, den die Lackierungsauswahl zeigt. Ein Text für alle Sprachen. Ohne ihn wird die Skin-Id angezeigt. |
 | `BaseSkin` | nein | Die eingebaute Lackierung, von der deine ausgeht. Ihr Material wird kopiert, und jede Textur, die deine Mod nicht mitbringt, bleibt die dieser Lackierung. Ohne ihn wird die erste Lackierung des Flugzeugs genommen (siehe [Flugzeug-Ids](#airplane-ids)). |
+| `HiddenMarkings` | nein | Die Markierungen, die das Spiel auf deiner Lackierung nicht zeichnen soll, weil deine Textur sie schon malt. Siehe [Markierungen des Spiels ausblenden](#hiding-the-games-markings). Ohne ihn werden alle Markierungen gezeigt. |
 
 !!! warning
     Die Datei muss gültiges JSON bleiben: keine Kommentare, keine Kommas am Ende.
+
+### Markierungen des Spiels ausblenden { #hiding-the-games-markings }
+
+Das Spiel zeichnet auf jedes Flugzeug Markierungen: den Staffelcode und den Buchstaben des Flugzeugs neben der Kokarde, die Seriennummer, die Kokarden und den Seitenleitwerk-Streifen. Code, Buchstabe und Seriennummer denkt sich das Spiel für jedes Flugzeug aus. Malt deine Textur zum Beispiel schon einen eigenen Staffelcode, wären beide zu sehen. Trag die Markierungen, die deine Textur malt, in `HiddenMarkings` ein, dann lässt das Spiel sie auf beiden Seiten des Flugzeugs weg:
+
+```json
+{
+  "Skins": {
+    "Squadron92": {
+      "Airplane": "spitfire",
+      "Name": "92 Squadron",
+      "HiddenMarkings": ["LeftText", "RightText", "SerialNumber"]
+    }
+  }
+}
+```
+
+| Markierung | Was sie ist |
+|---|---|
+| `LeftText` | Der Staffelcode, der Teil der Kennung vor dem `-` (`U5` von `U5-G`). |
+| `Image` | Die Kokarde am Rumpf. |
+| `RightText` | Der eigene Buchstabe des Flugzeugs, der Teil der Kennung nach dem `-` (`G` von `U5-G`). |
+| `Nose` | Die Nose-Art, die manche eingebauten Lackierungen tragen. |
+| `Wing` | Die Kokarde oben auf dem Flügel. |
+| `UnderWing` | Die Kokarde unter dem Flügel. |
+| `FinFlash` | Der Streifen am Seitenleitwerk. |
+| `SerialNumber` | Die Seriennummer des Flugzeugs, z. B. `PT255`. |
+
+Groß- und Kleinschreibung spielen keine Rolle. Ein Name, der nicht in dieser Liste steht, wird übersprungen, mit einer Warnung im [Log](../start/troubleshooting.md#find-the-playerlog). Ein [neues Flugzeug](new-airplanes.md) nimmt denselben Schlüssel in seinem Eintrag unter `Airplanes` an, für die Lackierungen in seinem eigenen Ordner.
 
 ### Wann eine Lackierung übersprungen wird { #when-a-skin-is-skipped }
 

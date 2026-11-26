@@ -55,6 +55,7 @@ New airplanes go under `Airplanes` in the mod's `Airplanes/config.json`, the sam
 | `Manufacturer`, `Armament`, `MaximumSpeed`, `Engine`, `Range`, `Ceiling`, `Dimensions` | no | The details the order window lists. Empty when left out. |
 | `Stats` | no | Stats that differ from the based-on airplane, keyed by the column names of the game's airplane table (`Health`, `Crew`, `Fuel Capacity`, ...). Values are text: `"Health": "90"`, `"Crew": "Pilot,Gunner"`. |
 | `CrewSlots` | no | Where each crew member's slot sits on the blueprint, in crew order, as `[x, y]` fractions of the drawing: `[0, 0]` is the bottom left corner, `[1, 1]` the top right. Slots you leave out are spread across the middle. |
+| `HiddenMarkings` | no | The markings the game should not draw on the airplane's own skins, because their textures already paint them, e.g. `["LeftText", "RightText"]`. Same names as for a skin, see [Hiding the game's markings](airplanes.md#hiding-the-games-markings). Without it, every marking that has a [marking point](#marking-points) is shown. |
 
 A skin may be painted on your new airplane too: write the airplane's id from `Airplanes` (here `Bf109`) as the skin's `Airplane`.
 

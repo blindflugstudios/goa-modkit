@@ -55,6 +55,7 @@ Neue Flugzeuge stehen unter `Airplanes` in der `Airplanes/config.json` der Mod, 
 | `Manufacturer`, `Armament`, `MaximumSpeed`, `Engine`, `Range`, `Ceiling`, `Dimensions` | nein | Die Angaben, die das Bestellfenster auflistet. Ohne Angabe leer. |
 | `Stats` | nein | Werte, die vom Vorbild abweichen, mit den Spaltennamen der Flugzeugtabelle des Spiels als Schlüssel (`Health`, `Crew`, `Fuel Capacity`, ...). Die Werte sind Text: `"Health": "90"`, `"Crew": "Pilot,Gunner"`. |
 | `CrewSlots` | nein | Wo der Platz jedes Besatzungsmitglieds auf der Zeichnung liegt, in Besatzungsreihenfolge, als `[x, y]`-Anteile der Zeichnung: `[0, 0]` ist die Ecke unten links, `[1, 1]` die oben rechts. Plätze, die du weglässt, werden in der Mitte verteilt. |
+| `HiddenMarkings` | nein | Die Markierungen, die das Spiel auf den eigenen Lackierungen des Flugzeugs nicht zeichnen soll, weil ihre Texturen sie schon malen, z. B. `["LeftText", "RightText"]`. Dieselben Namen wie bei einer Lackierung, siehe [Markierungen des Spiels ausblenden](airplanes.md#hiding-the-games-markings). Ohne ihn wird jede Markierung gezeigt, die einen [Markierungspunkt](#marking-points) hat. |
 
 Auch eine Lackierung kann für dein neues Flugzeug gelten: Schreib die Id des Flugzeugs aus `Airplanes` (hier `Bf109`) als `Airplane` der Lackierung.
 

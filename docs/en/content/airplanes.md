@@ -84,9 +84,39 @@ Mods/
 | `Airplane` | yes | The airplane the skin is painted on. An id from [Airplane ids](#airplane-ids). |
 | `Name` | no | The name the skin selection shows. It is one text for all languages. Without it, the skin id is shown. |
 | `BaseSkin` | no | The built-in skin your skin starts from. Its material is copied, and every texture your mod does not ship stays that skin's. Without it, the airplane's first skin is used (see [Airplane ids](#airplane-ids)). |
+| `HiddenMarkings` | no | The markings the game should not draw on your skin, because your texture already paints them. See [Hiding the game's markings](#hiding-the-games-markings). Without it, every marking is shown. |
 
 !!! warning
     Keep the file valid JSON: no comments, no trailing commas.
+
+### Hiding the game's markings
+
+The game draws markings on every airplane: the squadron code and the airplane's letter beside the roundel, the serial number, the roundels and the fin flash. The code, letter and serial number are made up by the game for each airplane. If your texture already paints its own squadron code, for example, both would show. List the markings your texture paints in `HiddenMarkings`, and the game leaves them out on both sides of the airplane:
+
+```json
+{
+  "Skins": {
+    "Squadron92": {
+      "Airplane": "spitfire",
+      "Name": "92 Squadron",
+      "HiddenMarkings": ["LeftText", "RightText", "SerialNumber"]
+    }
+  }
+}
+```
+
+| Marking | What it is |
+|---|---|
+| `LeftText` | The squadron code, the part of the designation before the `-` (`U5` of `U5-G`). |
+| `Image` | The roundel on the fuselage. |
+| `RightText` | The airplane's own letter, the part of the designation after the `-` (`G` of `U5-G`). |
+| `Nose` | The nose art some built-in skins carry. |
+| `Wing` | The roundel on top of the wing. |
+| `UnderWing` | The roundel under the wing. |
+| `FinFlash` | The fin flash on the tail fin. |
+| `SerialNumber` | The airplane's serial number, e.g. `PT255`. |
+
+Upper and lower case do not matter. A name that is not in this list is skipped, with a warning in the [log](../start/troubleshooting.md#find-the-playerlog). A [new airplane](new-airplanes.md) takes the same key in its `Airplanes` entry, for the skins in its own folder.
 
 ### When a skin is skipped
 
