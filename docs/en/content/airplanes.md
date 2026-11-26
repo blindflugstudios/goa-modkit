@@ -108,7 +108,7 @@ The game draws markings on every airplane: the squadron code and the airplane's 
 | Marking | What it is |
 |---|---|
 | `LeftText` | The squadron code, the part of the designation before the `-` (`U5` of `U5-G`). |
-| `Image` | The roundel on the fuselage. |
+| `Image` | The decal image: the roundel on the fuselage. |
 | `RightText` | The airplane's own letter, the part of the designation after the `-` (`G` of `U5-G`). |
 | `Nose` | The nose art some built-in skins carry. |
 | `Wing` | The roundel on top of the wing. |
@@ -116,7 +116,7 @@ The game draws markings on every airplane: the squadron code and the airplane's 
 | `FinFlash` | The fin flash on the tail fin. |
 | `SerialNumber` | The airplane's serial number, e.g. `PT255`. |
 
-Upper and lower case do not matter. A name that is not in this list is skipped, with a warning in the [log](../start/troubleshooting.md#find-the-playerlog). A [new airplane](new-airplanes.md) takes the same key in its `Airplanes` entry, for the skins in its own folder.
+Every name hides that marking on both sides of the airplane, port and starboard together; one side cannot be hidden alone. Upper and lower case do not matter. A name that is not in this list is skipped, with a warning in the [log](../start/troubleshooting.md#find-the-playerlog). A [new airplane](new-airplanes.md) takes the same key in its `Airplanes` entry, for the skins in its own folder.
 
 ### When a skin is skipped
 

@@ -108,7 +108,7 @@ Das Spiel zeichnet auf jedes Flugzeug Markierungen: den Staffelcode und den Buch
 | Markierung | Was sie ist |
 |---|---|
 | `LeftText` | Der Staffelcode, der Teil der Kennung vor dem `-` (`U5` von `U5-G`). |
-| `Image` | Die Kokarde am Rumpf. |
+| `Image` | Das Decal-Bild: die Kokarde am Rumpf. |
 | `RightText` | Der eigene Buchstabe des Flugzeugs, der Teil der Kennung nach dem `-` (`G` von `U5-G`). |
 | `Nose` | Die Nose-Art, die manche eingebauten Lackierungen tragen. |
 | `Wing` | Die Kokarde oben auf dem Flügel. |
@@ -116,7 +116,7 @@ Das Spiel zeichnet auf jedes Flugzeug Markierungen: den Staffelcode und den Buch
 | `FinFlash` | Der Streifen am Seitenleitwerk. |
 | `SerialNumber` | Die Seriennummer des Flugzeugs, z. B. `PT255`. |
 
-Groß- und Kleinschreibung spielen keine Rolle. Ein Name, der nicht in dieser Liste steht, wird übersprungen, mit einer Warnung im [Log](../start/troubleshooting.md#find-the-playerlog). Ein [neues Flugzeug](new-airplanes.md) nimmt denselben Schlüssel in seinem Eintrag unter `Airplanes` an, für die Lackierungen in seinem eigenen Ordner.
+Jeder Name blendet die Markierung auf beiden Seiten des Flugzeugs aus, Backbord und Steuerbord zusammen; eine Seite allein lässt sich nicht ausblenden. Groß- und Kleinschreibung spielen keine Rolle. Ein Name, der nicht in dieser Liste steht, wird übersprungen, mit einer Warnung im [Log](../start/troubleshooting.md#find-the-playerlog). Ein [neues Flugzeug](new-airplanes.md) nimmt denselben Schlüssel in seinem Eintrag unter `Airplanes` an, für die Lackierungen in seinem eigenen Ordner.
 
 ### Wann eine Lackierung übersprungen wird { #when-a-skin-is-skipped }
 
