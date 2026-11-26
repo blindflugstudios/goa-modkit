@@ -3,7 +3,7 @@
 !!! warning "In Arbeit"
     Neue Flugzeuge sind noch im Bau. Sie sind noch nicht im veröffentlichten Spiel, und Einzelheiten auf dieser Seite können sich ändern.
 
-Eine Mod kann einen ganz neuen Flugzeugtyp hinzufügen: mit eigenem Modell, eigener Lackierung, eigenem Namen, eigenen Werten und eigener Zeichnung im Crew-Fenster. Jedes neue Flugzeug ist **an eines der Flugzeuge des Spiels angelehnt** und übernimmt von diesem alles, was du ihm nicht mitgibst: Werte, Besatzung, Absturzanimation, das Aussehen im Scramble-Ergebnis und die Seriennummern-Blöcke. Mitgeben musst du nur das Modell.
+Eine Mod kann einen ganz neuen Flugzeugtyp hinzufügen: mit eigenem Modell, eigener Lackierung, eigenem Namen, eigenen Werten und eigener Zeichnung im Crew-Fenster. Jedes neue Flugzeug ist **an eines der Flugzeuge des Spiels angelehnt** und übernimmt von diesem alles, was du ihm nicht mitgibst: Werte, Besatzung, Absturzanimation, die Flugbahn im Scramble-Ergebnis und die Seriennummern-Blöcke. Das Scramble-Ergebnis zeigt dein Modell auf der Flugbahn des Vorbilds. Mitgeben musst du nur das Modell.
 
 Ein neuer Anstrich für ein Flugzeug, das es im Spiel schon gibt, ist eine Lackierung, kein neues Flugzeug: siehe [Flugzeug-Skins](airplanes.md).
 

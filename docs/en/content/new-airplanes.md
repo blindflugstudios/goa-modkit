@@ -3,7 +3,7 @@
 !!! warning "In progress"
     New airplanes are still being built. They are not in the public game yet, and details on this page may change.
 
-A mod can add a whole new airplane type: its own model, paint, name, stats and crew window drawing. Each new airplane is **based on** one of the game's airplanes and copies everything you do not give it from that airplane: stats, crew, crash animation, the look in the scramble result and the serial number blocks. The only thing you must give is the model.
+A mod can add a whole new airplane type: its own model, paint, name, stats and crew window drawing. Each new airplane is **based on** one of the game's airplanes and copies everything you do not give it from that airplane: stats, crew, crash animation, the flight path in the scramble result and the serial number blocks. The scramble result shows your model, flying the based-on airplane's path. The only thing you must give is the model.
 
 A new paint scheme for an airplane the game already has is a skin, not a new airplane: see [Airplane skins](airplanes.md).
 
