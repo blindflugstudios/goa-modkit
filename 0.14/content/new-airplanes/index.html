@@ -2746,6 +2746,11 @@
 <td>no</td>
 <td>Where each crew member's slot sits on the blueprint, in crew order, as <code>[x, y]</code> fractions of the drawing: <code>[0, 0]</code> is the bottom left corner, <code>[1, 1]</code> the top right. Slots you leave out are spread across the middle.</td>
 </tr>
+<tr>
+<td><code>HiddenMarkings</code></td>
+<td>no</td>
+<td>The markings the game should not draw on the airplane's own skins, because their textures already paint them, e.g. <code>["LeftText", "RightText"]</code>. Same names as for a skin, see <a href="../airplanes/#hiding-the-games-markings">Hiding the game's markings</a>. Without it, every marking that has a <a href="#marking-points">marking point</a> is shown.</td>
+</tr>
 </tbody>
 </table>
 <p>A skin may be painted on your new airplane too: write the airplane's id from <code>Airplanes</code> (here <code>Bf109</code>) as the skin's <code>Airplane</code>.</p>

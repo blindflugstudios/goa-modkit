@@ -2746,6 +2746,11 @@
 <td>nein</td>
 <td>Wo der Platz jedes Besatzungsmitglieds auf der Zeichnung liegt, in Besatzungsreihenfolge, als <code>[x, y]</code>-Anteile der Zeichnung: <code>[0, 0]</code> ist die Ecke unten links, <code>[1, 1]</code> die oben rechts. Plätze, die du weglässt, werden in der Mitte verteilt.</td>
 </tr>
+<tr>
+<td><code>HiddenMarkings</code></td>
+<td>nein</td>
+<td>Die Markierungen, die das Spiel auf den eigenen Lackierungen des Flugzeugs nicht zeichnen soll, weil ihre Texturen sie schon malen, z. B. <code>["LeftText", "RightText"]</code>. Dieselben Namen wie bei einer Lackierung, siehe <a href="../airplanes/#hiding-the-games-markings">Markierungen des Spiels ausblenden</a>. Ohne ihn wird jede Markierung gezeigt, die einen <a href="#marking-points">Markierungspunkt</a> hat.</td>
+</tr>
 </tbody>
 </table>
 <p>Auch eine Lackierung kann für dein neues Flugzeug gelten: Schreib die Id des Flugzeugs aus <code>Airplanes</code> (hier <code>Bf109</code>) als <code>Airplane</code> der Lackierung.</p>

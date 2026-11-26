@@ -1882,6 +1882,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#hiding-the-games-markings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hiding the game's markings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#when-a-skin-is-skipped" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2558,6 +2569,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#hiding-the-games-markings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hiding the game's markings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#when-a-skin-is-skipped" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2770,12 +2792,72 @@
 <td>no</td>
 <td>The built-in skin your skin starts from. Its material is copied, and every texture your mod does not ship stays that skin's. Without it, the airplane's first skin is used (see <a href="#airplane-ids">Airplane ids</a>).</td>
 </tr>
+<tr>
+<td><code>HiddenMarkings</code></td>
+<td>no</td>
+<td>The markings the game should not draw on your skin, because your texture already paints them. See <a href="#hiding-the-games-markings">Hiding the game's markings</a>. Without it, every marking is shown.</td>
+</tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Keep the file valid JSON: no comments, no trailing commas.</p>
 </div>
+<h3 id="hiding-the-games-markings">Hiding the game's markings</h3>
+<p>The game draws markings on every airplane: the squadron code and the airplane's letter beside the roundel, the serial number, the roundels and the fin flash. The code, letter and serial number are made up by the game for each airplane. If your texture already paints its own squadron code, for example, both would show. List the markings your texture paints in <code>HiddenMarkings</code>, and the game leaves them out on both sides of the airplane:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"Skins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"Squadron92"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"Airplane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spitfire"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"92 Squadron"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"HiddenMarkings"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"LeftText"</span><span class="p">,</span><span class="w"> </span><span class="s2">"RightText"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SerialNumber"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Marking</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LeftText</code></td>
+<td>The squadron code, the part of the designation before the <code>-</code> (<code>U5</code> of <code>U5-G</code>).</td>
+</tr>
+<tr>
+<td><code>Image</code></td>
+<td>The roundel on the fuselage.</td>
+</tr>
+<tr>
+<td><code>RightText</code></td>
+<td>The airplane's own letter, the part of the designation after the <code>-</code> (<code>G</code> of <code>U5-G</code>).</td>
+</tr>
+<tr>
+<td><code>Nose</code></td>
+<td>The nose art some built-in skins carry.</td>
+</tr>
+<tr>
+<td><code>Wing</code></td>
+<td>The roundel on top of the wing.</td>
+</tr>
+<tr>
+<td><code>UnderWing</code></td>
+<td>The roundel under the wing.</td>
+</tr>
+<tr>
+<td><code>FinFlash</code></td>
+<td>The fin flash on the tail fin.</td>
+</tr>
+<tr>
+<td><code>SerialNumber</code></td>
+<td>The airplane's serial number, e.g. <code>PT255</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Upper and lower case do not matter. A name that is not in this list is skipped, with a warning in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a>. A <a href="../new-airplanes/">new airplane</a> takes the same key in its <code>Airplanes</code> entry, for the skins in its own folder.</p>
 <h3 id="when-a-skin-is-skipped">When a skin is skipped</h3>
 <p>A skin is left out, with a warning in the <a href="../../start/troubleshooting/#find-the-playerlog">log</a>, when:</p>
 <ul>
