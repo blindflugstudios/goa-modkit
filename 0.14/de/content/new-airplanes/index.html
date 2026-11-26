@@ -1909,6 +1909,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#crew-seats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sitze der Besatzung
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wheel-pivots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rad-Pivots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Düsenflugzeuge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#effect-points" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2523,6 +2556,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#crew-seats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sitze der Besatzung
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wheel-pivots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rad-Pivots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Düsenflugzeuge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#effect-points" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2607,7 +2673,7 @@
 <p class="admonition-title">In Arbeit</p>
 <p>Neue Flugzeuge sind noch im Bau. Sie sind noch nicht im veröffentlichten Spiel, und Einzelheiten auf dieser Seite können sich ändern.</p>
 </div>
-<p>Eine Mod kann einen ganz neuen Flugzeugtyp hinzufügen: mit eigenem Modell, eigener Lackierung, eigenem Namen, eigenen Werten und eigener Zeichnung im Crew-Fenster. Jedes neue Flugzeug ist <strong>an eines der Flugzeuge des Spiels angelehnt</strong> und übernimmt von diesem alles, was du ihm nicht mitgibst: Werte, Besatzung, Absturzanimation, das Aussehen im Scramble-Ergebnis und die Seriennummern-Blöcke. Mitgeben musst du nur das Modell.</p>
+<p>Eine Mod kann einen ganz neuen Flugzeugtyp hinzufügen: mit eigenem Modell, eigener Lackierung, eigenem Namen, eigenen Werten und eigener Zeichnung im Crew-Fenster. Jedes neue Flugzeug ist <strong>an eines der Flugzeuge des Spiels angelehnt</strong> und übernimmt von diesem alles, was du ihm nicht mitgibst: Werte, Besatzung, Absturzanimation, die Flugbahn im Scramble-Ergebnis und die Seriennummern-Blöcke. Das Scramble-Ergebnis zeigt dein Modell auf der Flugbahn des Vorbilds. Mitgeben musst du nur das Modell.</p>
 <p>Ein neuer Anstrich für ein Flugzeug, das es im Spiel schon gibt, ist eine Lackierung, kein neues Flugzeug: siehe <a href="../airplanes/">Flugzeug-Skins</a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Beispiel-Mods</p>
@@ -2701,17 +2767,17 @@
 </tr>
 <tr>
 <td><code>Propeller-Pivot</code> (einer pro Propeller, z. B. <code>Propeller-Left-Pivot</code>)</td>
-<td>Dreht sich um seine eigene Vorwärtsachse, solange der Motor läuft.</td>
+<td>Dreht sich um die Längsachse des Flugzeugs, solange der Motor läuft. Seine Drehung spielt keine Rolle.</td>
 <td>Kein Propeller dreht sich.</td>
 </tr>
 <tr>
 <td><code>Wheel-Left</code>, <code>Wheel-Right</code>, <code>Wheel-Tail</code></td>
-<td>Aus der Stelle, an der sie den Boden berühren, wird der Winkel berechnet, in dem das Flugzeug am Boden steht.</td>
-<td>Der Winkel des Vorbilds wird verwendet.</td>
+<td>Aus der Stelle, an der sie den Boden berühren, wird der Winkel berechnet, in dem das Flugzeug am Boden steht. Für ein Bugrad nimm <code>Wheel-Front</code> statt <code>Wheel-Tail</code>: Das Flugzeug steht dann waagerecht, so wie modelliert. Die Räder rollen außerdem, solange sich das Flugzeug am Boden bewegt: siehe <a href="#wheel-pivots">Rad-Pivots</a>.</td>
+<td>Der Winkel des Vorbilds wird verwendet, und kein Rad rollt.</td>
 </tr>
 <tr>
 <td><code>1-Interaction-Pilot</code>, <code>2-Interaction-Gunner</code>, ...</td>
-<td>Die Sitze der Besatzung, in der Reihenfolge der vorangestellten Zahl.</td>
+<td>Die Sitze der Besatzung, einer pro Besatzungsmitglied. Siehe <a href="#crew-seats">Sitze der Besatzung</a>.</td>
 <td>Die Sitze des Vorbilds.</td>
 </tr>
 <tr>
@@ -2727,9 +2793,53 @@
 </tbody>
 </table>
 <ul>
-<li><strong>Größe und Ausrichtung.</strong> Baue das Flugzeug in Metern in seiner echten Größe, am Ursprung auf dem Boden stehend, wie die Flugzeuge des Spiels. In welche Richtung die Nase zeigt, ist egal, wenn das Modell einen Knoten <code>Propeller...</code> und einen Knoten <code>Wheel-Tail</code> hat: Ein Flugzeug, dessen Propeller hinter dem Spornrad liegt, wird umgedreht.</li>
+<li><strong>Größe und Ausrichtung.</strong> Baue das Flugzeug in Metern in seiner echten Größe, am Ursprung auf dem Boden stehend, wie die Flugzeuge des Spiels. Exportiere es so wie sie: mit dem Standard-FBX-Export von Blender, die Nase entlang Blenders +Y, oben entlang +Z. Die Drehung von <code>Air-Pivot</code>, den Propeller-Pivots und den Sitzen spielt keine Rolle: Das Spiel richtet sie an den Achsen des Flugzeugs aus. Nur Markierungspunkte verwenden ihre eigene Drehung (siehe <a href="#marking-points">Markierungspunkte</a>). In welche Richtung die Nase zeigt, ist egal, wenn das Modell einen Knoten <code>Propeller...</code> und einen Knoten <code>Wheel-Tail</code> hat: Ein Flugzeug, dessen Propeller hinter dem Spornrad liegt, wird umgedreht. Ein Modell ohne diese Knoten, etwa ein Düsenflugzeug, muss so ausgerichtet sein.</li>
 <li><strong>Fahrwerk.</strong> Ein einziehbares Fahrwerk braucht eine Animation (Take) in der Modelldatei, die nur die Fahrwerksteile animiert. Ihr erstes Bild ist das ausgefahrene Fahrwerk, so wie modelliert; ihr letztes Bild das ganz eingezogene. Das Spiel hält die Animation je nach Flughöhe dazwischen: am Boden ausgefahren, ab 10 m eingezogen. Animiere weder die Propeller noch <code>Air-Pivot</code>; die bewegt das Spiel selbst. Festes Fahrwerk: keine Animation.</li>
 <li><strong>Markierungs-Decals</strong> (Staffelkennungen, Kokarden, Seriennummer) erscheinen nur, wo dein Modell Markierungspunkte hat, siehe <a href="#marking-points">Markierungspunkte</a>.</li>
+</ul>
+<h2 id="crew-seats">Sitze der Besatzung</h2>
+<p>Jedes Besatzungsmitglied sitzt auf einem Sitzknoten, solange das Flugzeug fliegt, auf der Startbahn wartet oder im Bestellfenster gezeigt wird. Setze pro Besatzungsmitglied einen leeren Knoten (ohne Mesh) in dein Modell, dorthin, wo es sitzt, und nenne ihn <code>&lt;Nummer&gt;-Interaction-&lt;Rolle&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code>1-Interaction-Pilot
+2-Interaction-BombAimer
+3-Interaction-Navigator
+4-Interaction-RadioOperator
+5-Interaction-Gunner
+</code></pre></div>
+<ul>
+<li><strong>Die Nummer entscheidet, wer wo sitzt.</strong> Sitz <code>1</code> gehört dem ersten Besatzungsmitglied in der Liste <code>Crew</code> des Flugzeugs, Sitz <code>2</code> dem zweiten und so weiter. Die Liste ist die Besatzung des Vorbilds oder die, die du unter <code>Stats</code> setzt (<code>"Crew": "Pilot,BombAimer,Navigator,RadioOperator,Gunner"</code>). Nummeriere die Sitze in derselben Reihenfolge wie diese Liste.</li>
+<li><strong>Das Rollenwort ist nur für dich.</strong> Das Spiel liest es nicht: <code>3-Interaction-Navigator</code> ist einfach Sitz 3. Schreib die Rolle hin, die dort sitzt, damit das Modell lesbar bleibt.</li>
+<li><strong>Ein Sitz pro Besatzungsmitglied.</strong> Gibt es weniger Sitze als Besatzungsmitglieder, kommen alle ohne eigenen Sitz an eine einzige Stelle aus dem Vorbild, statt im Modell zu sitzen. Überzählige Sitze werden nicht benutzt.</li>
+<li><strong>Die Nummern zählen, Lücken nicht.</strong> Die Sitze werden nach ihrer Nummer sortiert, <code>1</code>, <code>2</code>, <code>5</code> wirken also wie <code>1</code>, <code>2</code>, <code>3</code>. Ein Sitz ohne Nummer kommt nach den nummerierten.</li>
+<li><strong>Namen, die du meiden solltest.</strong> Jeder Knoten mit <code>Interaction</code> im Namen ist ein Sitz, außer <code>Interaction-Paint</code> (die Stelle zum Lackieren, siehe Tabelle oben) und Namen, die <code>Main</code> enthalten. Verwende <code>Interaction</code> in keinem anderen Namen.</li>
+<li><strong>Blickrichtung.</strong> Jedes Besatzungsmitglied sitzt aufrecht und schaut zur Nase, egal wie der Sitz gedreht ist. Nur die Position des Sitzes zählt.</li>
+<li><strong>Neigung.</strong> Hänge die Sitze unter <code>Air-Pivot</code>, damit sich die Besatzung im Flug mit dem Flugzeug neigt.</li>
+<li><strong>Crew-Fenster.</strong> Die Zeichnung im Crew-Fenster setzt ihre Plätze über <code>CrewSlots</code>, in derselben Reihenfolge wie die Sitze (siehe <a href="#configjson"><code>config.json</code></a>).</li>
+</ul>
+<h2 id="wheel-pivots">Rad-Pivots</h2>
+<p>Jedes Rad rollt, solange sich das Flugzeug am Boden bewegt: beim Rollen zur Piste, beim Start- und Landelauf und wenn die Crew es schiebt. Gib jedem Rad einen eigenen Pivot-Knoten, unter dem nur das Rad hängt:</p>
+<div class="highlight"><pre><span></span><code>Air-Pivot
+  Wheel-Retractor-Left-Pivot      Fahrwerksbein, rollt nicht
+    Wheel-Retractor-Left-Mesh
+    Wheel-Left-Pivot              rollt
+      Wheel-Left-Mesh             Reifen und Felge
+  Wheel-Tail-Pivot                rollt
+    Wheel-Tail-Mesh
+</code></pre></div>
+<ul>
+<li><strong>Nur das Rad unter dem Pivot.</strong> Ein Rad rollt, wenn der Name seines Knotens mit <code>Wheel</code> beginnt und jedes Mesh darunter rund ist, wie ein Reifen von der Seite. Ein Fahrwerksbein, eine Gabel, ein Schutzblech oder eine Fahrwerksklappe unter demselben Knoten verhindert, dass dieser Knoten rollt: Hänge sie neben den Rad-Pivot, nicht darunter. Heißt das Reifen-Mesh selbst <code>Wheel-...</code> (z. B. <code>Wheel-Tail-Mesh</code> neben einer <code>Wheel-Tail-Fork</code>), rollt dieses Mesh für sich.</li>
+<li><strong>Namen, die nie rollen.</strong> Knoten mit <code>Retractor</code> oder <code>Flapdoor</code> im Namen sind Fahrwerksbeine und Klappen; sie bewegen sich nur mit der Fahrwerksanimation.</li>
+<li><strong>Drehung und Ursprung spielen keine Rolle.</strong> Das Spiel dreht jedes Rad um die Querachse des Flugzeugs durch die Mitte des Reifen-Meshes, die eigenen Achsen des Pivots und seine genaue Lage auf der Achse zählen also nicht.</li>
+<li><strong>Die Größe zählt.</strong> Wie schnell sich ein Rad dreht, ergibt sich aus der Größe seines Reifen-Meshes; ein kleines Spornrad dreht sich also schneller als die Haupträder, wie es sein soll.</li>
+<li><strong>Einziehfahrwerk.</strong> Die Räder rollen nur am Boden. Die Fahrwerksanimation kann sie trotzdem einklappen: Animiere die Rad-Pivots wie bisher im Fahrwerks-Take (siehe <strong>Fahrwerk</strong> unter <a href="#naming-the-parts-of-the-model">Die Teile des Modells benennen</a>).</li>
+<li><strong>Ohne Rad-Pivots</strong> fährt das Flugzeug trotzdem am Boden, nur seine Räder drehen sich nicht.</li>
+</ul>
+<h2 id="jets">Düsenflugzeuge</h2>
+<p>Ein Düsenflugzeug funktioniert wie jedes andere neue Flugzeug, mit diesen Unterschieden:</p>
+<ul>
+<li><strong>Lehne es an <code>meteor</code> oder <code>vampire</code> an.</strong> Nur sie haben den Abgasstrahl (siehe <a href="#effect-points">Effektpunkte</a>), und ein daran angelehntes Düsenflugzeug steht auch ohne <code>Wheel-Front</code> im Winkel eines Düsenflugzeugs.</li>
+<li><strong>Keine Propellerknoten.</strong> Lass jeden <code>Propeller-...-Pivot</code> weg. Nichts dreht sich, und sonst braucht sie nichts.</li>
+<li><strong>Bugrad.</strong> Nenne es <code>Wheel-Front</code> und lass <code>Wheel-Tail</code> weg, dann steht das Flugzeug waagerecht auf allen Rädern, so wie modelliert. Ohne beide steht es im Winkel des Vorbilds.</li>
+<li><strong>Ausrichtung.</strong> Ohne Propeller kann das Spiel Nase und Heck nicht unterscheiden, baue das Flugzeug also so ausgerichtet wie die Flugzeuge des Spiels (siehe oben unter <strong>Größe und Ausrichtung</strong>).</li>
 </ul>
 <h2 id="effect-points">Effektpunkte</h2>
 <p>Die Effekte des Flugzeugs kommen vom Vorbild und sitzen dort, wo sie am Vorbild sitzen. Bei einem Modell anderer Größe landet der Radstaub neben den Rädern und der Rauch weit weg vom Motor. Setze an jede Stelle, an die ein Effekt gehört, einen leeren Knoten (ohne Mesh) in dein Modell und benenne ihn wie unten; das Spiel verschiebt den Effekt dorthin. Alle sind optional: Ein Effekt ohne Punkt bleibt, wo das Vorbild ihn hat. Nur die Position zählt, die Drehung des Knotens und seine Stelle in der Hierarchie spielen keine Rolle: Die Effekte bewegen sich immer mit <code>Air-Pivot</code>.</p>
@@ -2823,7 +2933,7 @@
 </tr>
 <tr>
 <td><code>Nose</code></td>
-<td>Das Nasenbild des Stils, falls er eines hat.</td>
+<td>Bei einem neuen Flugzeug vorerst nichts: Nasenbilder gehören zur Lackierung eines Flugzeugs des Spiels, nicht zum Vorbild. Male Nasenbilder in deine Textur.</td>
 </tr>
 <tr>
 <td><code>Wing</code></td>
@@ -2845,8 +2955,9 @@
 </table>
 <ul>
 <li><strong>Seiten.</strong> <code>&lt;Seite&gt;</code> ist <code>Port</code> (die linke Seite, vom Pilotensitz aus gesehen) oder <code>Starboard</code> (die rechte Seite). Jede Seite braucht eigene Punkte: <code>Marking-Port-Wing</code> und <code>Marking-Starboard-Wing</code> für die beiden Flügel.</li>
-<li><strong>Einen Punkt setzen.</strong> Setze den Punkt auf die Oberfläche. Seine Vorwärtsachse (+Z in Unity) zeigt ins Flugzeug hinein, in die Richtung, in die die Markierung projiziert wird; seine rechte Achse (+X in Unity) ist die Leserichtung des Textes. Bei <code>Wing</code> zeigt die Vorwärtsachse nach unten in den Flügel, bei <code>UnderWing</code> nach oben hinein. Dein 3D-Programm benennt diese Achsen womöglich anders, prüfe das Ergebnis daher im Spiel.</li>
+<li><strong>Einen Punkt setzen.</strong> Setze den Punkt auf die Oberfläche. Beim Standard-FBX-Export von Blender zeigt die lokale <strong>-Z</strong>-Achse des Punkts ins Flugzeug hinein, in die Richtung, in die die Markierung projiziert wird; seine lokale <strong>+X</strong>-Achse ist die Leserichtung des Textes und seine lokale <strong>+Y</strong>-Achse ist oben für den Text. Ein Empty ohne Drehung projiziert also senkrecht nach unten: Dreh es so, dass -Z in die Oberfläche zeigt. Am Rumpf auf der Seite <code>Port</code> heißt das -Z zur rechten Seite des Piloten und +X zum Heck; auf der Seite <code>Starboard</code> -Z zur linken Seite des Piloten und +X zur Nase. Bei <code>Wing</code> zeigt -Z nach unten in den Flügel, bei <code>UnderWing</code> nach oben hinein. Die Export-Option "Apply Transform" von Blender hilft nicht: Sie schiebt jedes Empty in den Ursprung. Prüfe das Ergebnis im Spiel.</li>
 <li><strong>Größe.</strong> Die Markierungen behalten die Größen des Vorbilds; die Skalierung des Punkts ändert sie nicht.</li>
+<li><strong>Tiefe.</strong> Eine Markierung wird durch einen einige Dutzend Zentimeter tiefen Kasten projiziert, der am Punkt zentriert ist, und bemalt alles darin, auch ein Besatzungsmitglied, das neben dem Rumpf steht. Setze den Punkt genau auf die Oberfläche, damit der Kasten die Haut erreicht und möglichst wenig sonst.</li>
 <li><strong>Kennungen und Seriennummern</strong> kommen vom Spiel: Jedes Flugzeug bekommt bei seiner Ankunft seine Staffelkennung, seinen Buchstaben und eine Seriennummer. Wenn du Punkte dafür setzt, male sie nicht zusätzlich in deine Textur, sonst erscheinen beide.</li>
 </ul>
 <h2 id="where-a-new-airplane-shows-up">Wo ein neues Flugzeug auftaucht</h2>

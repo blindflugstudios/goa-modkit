@@ -1909,6 +1909,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#crew-seats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crew seats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wheel-pivots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wheel pivots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#effect-points" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2523,6 +2556,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#crew-seats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crew seats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wheel-pivots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wheel pivots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#effect-points" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2607,7 +2673,7 @@
 <p class="admonition-title">In progress</p>
 <p>New airplanes are still being built. They are not in the public game yet, and details on this page may change.</p>
 </div>
-<p>A mod can add a whole new airplane type: its own model, paint, name, stats and crew window drawing. Each new airplane is <strong>based on</strong> one of the game's airplanes and copies everything you do not give it from that airplane: stats, crew, crash animation, the look in the scramble result and the serial number blocks. The only thing you must give is the model.</p>
+<p>A mod can add a whole new airplane type: its own model, paint, name, stats and crew window drawing. Each new airplane is <strong>based on</strong> one of the game's airplanes and copies everything you do not give it from that airplane: stats, crew, crash animation, the flight path in the scramble result and the serial number blocks. The scramble result shows your model, flying the based-on airplane's path. The only thing you must give is the model.</p>
 <p>A new paint scheme for an airplane the game already has is a skin, not a new airplane: see <a href="../airplanes/">Airplane skins</a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Example mods</p>
@@ -2701,17 +2767,17 @@
 </tr>
 <tr>
 <td><code>Propeller-Pivot</code> (one per propeller, e.g. <code>Propeller-Left-Pivot</code>)</td>
-<td>Spins around its own forward axis while the engine runs.</td>
+<td>Spins around the airplane's nose axis while the engine runs. Its rotation does not matter.</td>
 <td>No propeller spins.</td>
 </tr>
 <tr>
 <td><code>Wheel-Left</code>, <code>Wheel-Right</code>, <code>Wheel-Tail</code></td>
-<td>The angle the airplane rests at on the ground is worked out from where these touch the ground.</td>
-<td>The based-on airplane's angle is used.</td>
+<td>The angle the airplane rests at on the ground is worked out from where these touch the ground. For a nose wheel, use <code>Wheel-Front</code> instead of <code>Wheel-Tail</code>: the airplane then rests level, as modelled. The wheels also roll while the airplane moves on the ground: see <a href="#wheel-pivots">Wheel pivots</a>.</td>
+<td>The based-on airplane's angle is used, and no wheel rolls.</td>
 </tr>
 <tr>
 <td><code>1-Interaction-Pilot</code>, <code>2-Interaction-Gunner</code>, ...</td>
-<td>The crew seats, in the order of the number in front.</td>
+<td>The crew seats, one per crew member. See <a href="#crew-seats">Crew seats</a>.</td>
 <td>The based-on airplane's seats.</td>
 </tr>
 <tr>
@@ -2727,9 +2793,53 @@
 </tbody>
 </table>
 <ul>
-<li><strong>Size and facing.</strong> Build the airplane in metres at its real size, standing on the ground at the origin, like the game's own airplanes. Which way the nose points does not matter if the model has a <code>Propeller...</code> node and a <code>Wheel-Tail</code> node: an airplane whose propeller sits behind its tail wheel is turned around.</li>
+<li><strong>Size and facing.</strong> Build the airplane in metres at its real size, standing on the ground at the origin, like the game's own airplanes. Export it the way they are made: Blender's default FBX export, with the nose along Blender's +Y and up along +Z. The rotation of <code>Air-Pivot</code>, the propeller pivots and the seats does not matter: the game puts them on the airplane's own axes. Only marking points use their own rotation (see <a href="#marking-points">Marking points</a>). Which way the nose points does not matter if the model has a <code>Propeller...</code> node and a <code>Wheel-Tail</code> node: an airplane whose propeller sits behind its tail wheel is turned around. A model without them, such as a jet, must face that way.</li>
 <li><strong>Landing gear.</strong> A retractable gear needs one animation (take) in the model file that keys only the gear parts. Its first frame is the gear down, as modelled; its last frame is the gear fully up. The game holds the take between the two by the airplane's height: down on the ground, up from 10 m. Do not key the propellers or <code>Air-Pivot</code>; the game moves them itself. Fixed gear: no animation.</li>
 <li><strong>Marking decals</strong> (squadron codes, roundels, serial number) show only where your model has marking points, see <a href="#marking-points">Marking points</a>.</li>
+</ul>
+<h2 id="crew-seats">Crew seats</h2>
+<p>Every crew member sits on a seat node while the airplane flies, waits on the runway or is shown in the order window. Put one empty node (no mesh) in your model per crew member, where that crew member sits, and name it <code>&lt;number&gt;-Interaction-&lt;role&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code>1-Interaction-Pilot
+2-Interaction-BombAimer
+3-Interaction-Navigator
+4-Interaction-RadioOperator
+5-Interaction-Gunner
+</code></pre></div>
+<ul>
+<li><strong>The number decides who sits where.</strong> Seat <code>1</code> belongs to the first crew member in the airplane's <code>Crew</code> list, seat <code>2</code> to the second, and so on. The list is the based-on airplane's crew, or the one you set under <code>Stats</code> (<code>"Crew": "Pilot,BombAimer,Navigator,RadioOperator,Gunner"</code>). Number the seats in the same order as that list.</li>
+<li><strong>The role word is only for you.</strong> The game does not read it: <code>3-Interaction-Navigator</code> is simply seat 3. Write the role that sits there, so the model stays readable.</li>
+<li><strong>One seat per crew member.</strong> With fewer seats than crew members, the crew members without a seat of their own are all put at one spot taken from the based-on airplane instead of sitting in the model. Extra seats are not used.</li>
+<li><strong>Numbers count, gaps do not.</strong> The seats are sorted by their number, so <code>1</code>, <code>2</code>, <code>5</code> work like <code>1</code>, <code>2</code>, <code>3</code>. A seat without a number comes after the numbered ones.</li>
+<li><strong>Names to avoid.</strong> Every node with <code>Interaction</code> in its name is a seat, except <code>Interaction-Paint</code> (the paint spot, see the table above) and names that contain <code>Main</code>. Do not use <code>Interaction</code> in the name of anything else.</li>
+<li><strong>Facing.</strong> Every crew member sits upright and faces the nose, whatever the seat's rotation. Only the seat's position counts.</li>
+<li><strong>Tilting.</strong> Put the seats under <code>Air-Pivot</code>, so the crew tilt with the airplane in flight.</li>
+<li><strong>Crew window.</strong> The crew window drawing places its slots through <code>CrewSlots</code>, in the same order as the seats (see <a href="#configjson"><code>config.json</code></a>).</li>
+</ul>
+<h2 id="wheel-pivots">Wheel pivots</h2>
+<p>Every wheel rolls while the airplane moves on the ground: taxiing, the take-off and landing roll, being pushed by the crew. Give each wheel a pivot node of its own, with only the wheel under it:</p>
+<div class="highlight"><pre><span></span><code>Air-Pivot
+  Wheel-Retractor-Left-Pivot      gear leg, does not roll
+    Wheel-Retractor-Left-Mesh
+    Wheel-Left-Pivot              rolls
+      Wheel-Left-Mesh             tyre and hub
+  Wheel-Tail-Pivot                rolls
+    Wheel-Tail-Mesh
+</code></pre></div>
+<ul>
+<li><strong>Only the wheel under the pivot.</strong> A wheel rolls when its node's name starts with <code>Wheel</code> and every mesh under it is round, like a tyre seen from the side. A gear leg, a fork, a mudguard or a gear door under the same node stops that node from rolling: put them next to the wheel pivot, not under it. If the tyre mesh itself is named <code>Wheel-...</code> (e.g. <code>Wheel-Tail-Mesh</code> beside a <code>Wheel-Tail-Fork</code>), that mesh rolls on its own.</li>
+<li><strong>Names that never roll.</strong> Nodes with <code>Retractor</code> or <code>Flapdoor</code> in their name are gear legs and doors; they move only with the gear animation.</li>
+<li><strong>Rotation and origin do not matter.</strong> The game turns each wheel around the airplane's side axis through the middle of the tyre mesh, so the pivot's own axes and its exact position on the axle do not count.</li>
+<li><strong>Size counts.</strong> How fast a wheel turns comes from the size of its tyre mesh, so a small tail wheel turns faster than the main wheels, as it should.</li>
+<li><strong>Retractable gear.</strong> The wheels roll only on the ground. The gear animation can still fold them away: key the wheel pivots in the gear take as before (see <strong>Landing gear</strong> under <a href="#naming-the-parts-of-the-model">Naming the parts of the model</a>).</li>
+<li><strong>Without wheel pivots</strong> the airplane still drives on the ground, its wheels just do not turn.</li>
+</ul>
+<h2 id="jets">Jets</h2>
+<p>A jet works like any other new airplane, with these differences:</p>
+<ul>
+<li><strong>Base it on <code>meteor</code> or <code>vampire</code>.</strong> Only they have the jet exhaust (see <a href="#effect-points">Effect points</a>), and a jet based on them also rests at a jet's angle when it has no <code>Wheel-Front</code>.</li>
+<li><strong>No propeller nodes.</strong> Leave out every <code>Propeller-...-Pivot</code>. Nothing spins, and nothing else needs them.</li>
+<li><strong>Nose wheel.</strong> Name it <code>Wheel-Front</code> and leave out <code>Wheel-Tail</code>, so the jet rests level, standing on all its wheels as modelled. Without either, it rests at the based-on airplane's angle.</li>
+<li><strong>Facing.</strong> Without a propeller the game cannot tell the nose from the tail, so build the jet facing like the game's own airplanes (see <strong>Size and facing</strong> above).</li>
 </ul>
 <h2 id="effect-points">Effect points</h2>
 <p>The airplane's effects come from the based-on airplane, and they sit where they sit on that airplane. On a model of a different size, wheel dust ends up beside the wheels and smoke away from the engine. Put an empty node (no mesh) in your model at each spot where an effect belongs and name it as below; the game moves the effect there. All of them are optional: an effect without a point stays where the based-on airplane has it. Only the position counts, so the node's rotation and its place in the hierarchy do not matter: the effects always move with <code>Air-Pivot</code>.</p>
@@ -2823,7 +2933,7 @@
 </tr>
 <tr>
 <td><code>Nose</code></td>
-<td>The style's nose image, if it has one.</td>
+<td>Nothing on a new airplane yet: nose art comes from the skin of a built-in airplane, not from the based-on airplane. Paint nose art into your texture.</td>
 </tr>
 <tr>
 <td><code>Wing</code></td>
@@ -2845,8 +2955,9 @@
 </table>
 <ul>
 <li><strong>Sides.</strong> <code>&lt;side&gt;</code> is <code>Port</code> (the left side, seen from the pilot's seat) or <code>Starboard</code> (the right side). Each side needs its own points: <code>Marking-Port-Wing</code> and <code>Marking-Starboard-Wing</code> for the two wings.</li>
-<li><strong>Placing a point.</strong> Put the point on the surface. Its forward axis (Unity's +Z) points into the airplane, along the direction the marking is projected; its right axis (Unity's +X) is the direction the text reads. For <code>Wing</code> the forward axis points down into the wing, for <code>UnderWing</code> up into it. Your 3D program may name these axes differently, so check the result in the game.</li>
+<li><strong>Placing a point.</strong> Put the point on the surface. With Blender's default FBX export, the point's local <strong>-Z</strong> axis points into the airplane, along the direction the marking is projected; its local <strong>+X</strong> axis is the direction the text reads and its local <strong>+Y</strong> axis is up for the text. An empty left at zero rotation therefore projects straight down: turn it so -Z points into the surface. For the fuselage on the <code>Port</code> side that is -Z toward the pilot's right with +X toward the tail; on the <code>Starboard</code> side -Z toward the pilot's left with +X toward the nose. For <code>Wing</code>, -Z points down into the wing, for <code>UnderWing</code> up into it. Blender's "Apply Transform" export option does not help: it moves every empty to the origin. Check the result in the game.</li>
 <li><strong>Size.</strong> The markings keep the based-on airplane's sizes; the point's scale does not change them.</li>
+<li><strong>Depth.</strong> A marking is projected through a box a few tens of centimetres deep, centred on the point, and paints everything inside it, a crew member standing next to the fuselage included. Put the point exactly on the surface, so the box reaches the skin and as little else as possible.</li>
 <li><strong>Codes and serial numbers</strong> come from the game: every airplane gets its squadron code, its letter and a serial number when it arrives. If you give points for them, do not also paint them into your texture, or both show.</li>
 </ul>
 <h2 id="where-a-new-airplane-shows-up">Where a new airplane shows up</h2>
