@@ -2751,6 +2751,11 @@
 <td>no</td>
 <td>The markings the game should not draw on the airplane's own skins, because their textures already paint them, e.g. <code>["LeftText", "RightText"]</code>. Same names as for a skin, see <a href="../airplanes/#hiding-the-games-markings">Hiding the game's markings</a>. Without it, every marking that has a <a href="#marking-points">marking point</a> is shown.</td>
 </tr>
+<tr>
+<td><code>PropellerDirection</code></td>
+<td>no</td>
+<td>The way the propellers turn, as seen from the pilot's seat. <code>"CounterClockwise"</code> turns them counter-clockwise; any other value, or none, turns them clockwise. It is not taken from the based-on airplane.</td>
+</tr>
 </tbody>
 </table>
 <p>A skin may be painted on your new airplane too: write the airplane's id from <code>Airplanes</code> (here <code>Bf109</code>) as the skin's <code>Airplane</code>.</p>
@@ -2772,7 +2777,7 @@
 </tr>
 <tr>
 <td><code>Propeller-Pivot</code> (one per propeller, e.g. <code>Propeller-Left-Pivot</code>)</td>
-<td>Spins around the airplane's nose axis while the engine runs. Its rotation does not matter.</td>
+<td>Spins around the airplane's nose axis while the engine runs. Which way it turns is set by <code>PropellerDirection</code> in <code>config.json</code>. Its rotation does not matter.</td>
 <td>No propeller spins.</td>
 </tr>
 <tr>

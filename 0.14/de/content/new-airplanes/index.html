@@ -2751,6 +2751,11 @@
 <td>nein</td>
 <td>Die Markierungen, die das Spiel auf den eigenen Lackierungen des Flugzeugs nicht zeichnen soll, weil ihre Texturen sie schon malen, z. B. <code>["LeftText", "RightText"]</code>. Dieselben Namen wie bei einer Lackierung, siehe <a href="../airplanes/#hiding-the-games-markings">Markierungen des Spiels ausblenden</a>. Ohne ihn wird jede Markierung gezeigt, die einen <a href="#marking-points">Markierungspunkt</a> hat.</td>
 </tr>
+<tr>
+<td><code>PropellerDirection</code></td>
+<td>nein</td>
+<td>Die Drehrichtung der Propeller, vom Pilotensitz aus gesehen. <code>"CounterClockwise"</code> dreht sie gegen den Uhrzeigersinn; jeder andere Wert oder gar keiner dreht sie im Uhrzeigersinn. Sie wird nicht vom Vorbild übernommen.</td>
+</tr>
 </tbody>
 </table>
 <p>Auch eine Lackierung kann für dein neues Flugzeug gelten: Schreib die Id des Flugzeugs aus <code>Airplanes</code> (hier <code>Bf109</code>) als <code>Airplane</code> der Lackierung.</p>
@@ -2772,7 +2777,7 @@
 </tr>
 <tr>
 <td><code>Propeller-Pivot</code> (einer pro Propeller, z. B. <code>Propeller-Left-Pivot</code>)</td>
-<td>Dreht sich um die Längsachse des Flugzeugs, solange der Motor läuft. Seine Drehung spielt keine Rolle.</td>
+<td>Dreht sich um die Längsachse des Flugzeugs, solange der Motor läuft. In welche Richtung, legt <code>PropellerDirection</code> in <code>config.json</code> fest. Seine Drehung spielt keine Rolle.</td>
 <td>Kein Propeller dreht sich.</td>
 </tr>
 <tr>
